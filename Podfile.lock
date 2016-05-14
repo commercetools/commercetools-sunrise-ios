@@ -1,0 +1,34 @@
+PODS:
+  - Alamofire (3.4.0)
+  - Commercetools (0.1.0):
+    - Alamofire (~> 3.3)
+  - Nimble (4.0.1)
+  - Quick (0.9.2)
+  - ReactiveCocoa (4.1.0):
+    - ReactiveCocoa/UI (= 4.1.0)
+    - Result (~> 2.0)
+  - ReactiveCocoa/Core (4.1.0):
+    - ReactiveCocoa/no-arc
+    - Result (~> 2.0)
+  - ReactiveCocoa/no-arc (4.1.0):
+    - Result (~> 2.0)
+  - ReactiveCocoa/UI (4.1.0):
+    - ReactiveCocoa/Core
+    - Result (~> 2.0)
+  - Result (2.0.0)
+
+DEPENDENCIES:
+  - Commercetools (~> 0.1)
+  - Nimble
+  - Quick
+  - ReactiveCocoa (~> 4.1)
+
+SPEC CHECKSUMS:
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  Commercetools: ca92be720da1d4c2e4afce759b74967576931585
+  Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
+  Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
+  ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
+  Result: 9e75e1111c774c6ac594e14907b15057053a7959
+
+COCOAPODS: 0.39.0
