@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import Commercetools
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Configure Commercetools SDK depending on target
+#if PROD
+        let configPath = "CommercetoolsProdConfig"
+#else
+        let configPath = "CommercetoolsStagingConfig"
+#endif
+        
+        if let configuration = Config(path: configPath) {
+            Commercetools.config = configuration
+
+        } else {
+            // Inform user about the configuration error
+        }
+
         return true
     }
 
