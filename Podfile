@@ -4,6 +4,10 @@ use_frameworks!
 target 'Sunrise' do
     pod 'Commercetools', '~> 0.1'
     pod 'ReactiveCocoa', '~> 4.1'
+    pod 'ObjectMapper', '~> 1.3'
+    pod 'IQKeyboardManagerSwift', '4.0.3'
+    pod 'IQDropDownTextField'
+    pod 'SDWebImage', '~> 3.7'
 end
 
 def testing_pods

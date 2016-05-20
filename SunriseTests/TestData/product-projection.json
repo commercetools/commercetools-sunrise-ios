@@ -1,0 +1,4723 @@
+{
+  "id": "273bdb43-7475-4ee8-ab54-d0398d79327f",
+  "version": 5,
+  "productType": {
+    "typeId": "product-type",
+    "id": "dd53c13f-baf6-4466-87cf-ff138fa8c040"
+  },
+  "name": {
+    "en": "Sneakers ”Tokyo” Lotto grey",
+    "it": "Sneakers ”Tokyo” Lotto grigio",
+    "de": "Sneakers „Tokyo” Lotto grau"
+  },
+  "categories": [
+    {
+      "typeId": "category",
+      "id": "5741b75c-8651-4b27-960b-14e5136a3d79"
+    },
+    {
+      "typeId": "category",
+      "id": "d77afaa8-cb52-4a22-a67e-c14230703925"
+    }
+  ],
+  "categoryOrderHints": {},
+  "slug": {
+    "it": "lotto-MEN-sneaker-tokyo-grigio",
+    "en": "lotto-man-sneaker-tokyo-grey",
+    "de": "lotto-herren-sneaker-tokyo-grau"
+  },
+  "masterVariant": {
+    "id": 1,
+    "sku": "M0E20000000E7W1",
+    "prices": [
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 13750
+        },
+        "id": "3bb8e9cf-9d18-474a-a7f1-a23d6f00b5a4",
+        "discounted": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9625
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+          }
+        }
+      },
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 9016
+        },
+        "id": "a8e2eef9-e392-4909-838c-76dd35b58247",
+        "customerGroup": {
+          "typeId": "customer-group",
+          "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+        },
+        "discounted": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 6311
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+          }
+        }
+      },
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 11000
+        },
+        "id": "346049b9-460e-482a-bb25-0d2039d63f1f",
+        "country": "DE",
+        "discounted": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 7700
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+          }
+        }
+      },
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 11000
+        },
+        "id": "de889d2b-68a8-4725-a7a2-b78c2957e11c",
+        "country": "IT",
+        "discounted": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 7700
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+          }
+        }
+      },
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 11000
+        },
+        "id": "a494a8eb-051c-412b-876b-074883a62a43",
+        "country": "GB",
+        "discounted": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 7700
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+          }
+        }
+      }
+    ],
+    "images": [
+      {
+        "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+        "dimensions": {
+          "w": 0,
+          "h": 0
+        }
+      }
+    ],
+    "attributes": [
+      {
+        "name": "articleNumberManufacturer",
+        "value": "7041 TOKYO"
+      },
+      {
+        "name": "articleNumberMax",
+        "value": "80534"
+      },
+      {
+        "name": "matrixId",
+        "value": "M0E20000000E7W1"
+      },
+      {
+        "name": "baseId",
+        "value": "80534"
+      },
+      {
+        "name": "designer",
+        "value": {
+          "label": "Lotto",
+          "key": "lotto"
+        }
+      },
+      {
+        "name": "madeInItaly",
+        "value": {
+          "label": "no",
+          "key": "no"
+        }
+      },
+      {
+        "name": "commonSize",
+        "value": {
+          "key": "34",
+          "label": "34"
+        }
+      },
+      {
+        "name": "size",
+        "value": "34"
+      },
+      {
+        "name": "color",
+        "value": {
+          "label": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          },
+          "key": "grey"
+        }
+      },
+      {
+        "name": "colorFreeDefinition",
+        "value": {
+          "de": "grau",
+          "en": "grey",
+          "it": "grigio"
+        }
+      },
+      {
+        "name": "style",
+        "value": {
+          "key": "sporty",
+          "label": "sporty"
+        }
+      },
+      {
+        "name": "gender",
+        "value": {
+          "label": "Herren",
+          "key": "men"
+        }
+      },
+      {
+        "name": "season",
+        "value": "s15"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "id": 2,
+      "sku": "M0E20000000E7W2",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "12140e8e-9931-4c7a-b089-96bb3a0de93c",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "9c67cbca-0057-4a3a-ad4e-27d41083f3a1",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "46804748-cc85-43f2-b9f8-22f1b125126e",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "d02d4f7b-23c7-4192-bfa3-ee3e11770ab8",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "89ace2e2-d647-4eec-a974-13213b4bad83",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W2"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "34.5",
+            "label": "34.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "34.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sku": "M0E20000000E7W3",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "5d176e89-2f63-4e2f-ab13-9ee55005b462",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "91e8e1f0-5777-412d-b31b-d6bad7b61c97",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "c707bb43-e3f4-45d3-b7bf-e9f38349cf3f",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "d4ebaa3e-f4ec-4f67-9f36-a0ceec3cbb5a",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "cd996e54-11b7-437e-b9a2-13cd4b42152a",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W3"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "35",
+            "label": "35"
+          }
+        },
+        {
+          "name": "size",
+          "value": "35"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sku": "M0E20000000E7W4",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "0008850c-137d-4e65-9a73-4f8eee79bc45",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "ff775d67-c1da-4022-9c03-5c36416549e1",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "5436ae96-7c90-40a2-aa67-8868a1a15a6e",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "b7ce6267-0164-4f15-8621-4f409992abf4",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "a0db1354-dda7-4934-b983-e39ddeace08c",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W4"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "35.5",
+            "label": "35.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "35.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "M0E20000000E7W5",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "0fc041ea-e842-4ed8-84e8-d47d73600e16",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "b0c51264-7f54-44f0-9a1e-f9f95901cc95",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "26460547-218e-4a12-9fa3-dc6432a5c99e",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "f0ac1381-6ae4-4dff-8014-e37daf28ca66",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "9bed3054-65d2-4fac-bce3-ae148b3b810a",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W5"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "36",
+            "key": "36"
+          }
+        },
+        {
+          "name": "size",
+          "value": "36"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "sku": "M0E20000000E7W6",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "89c0522b-0dac-45df-a1b4-c10639af5b0d",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "85c5dcce-e000-46ed-9358-d7d0beef53ed",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "6203aa8e-9fe4-45c2-8593-435d4f936ecb",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "fe1c825a-b60f-44a7-a862-2fc05dc16b8d",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "bb0bc894-4133-43c3-8b17-8ac4565945fb",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W6"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "36.5",
+            "key": "36.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "36.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "sku": "M0E20000000E7W7",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "fdc83649-23af-455b-8900-a36107bd587c",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "1c958b07-88cc-43e8-9bd1-5e9cb859c553",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "139ae644-34dd-4976-84aa-020fb179bafe",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "64bb25c0-7a23-4e49-b89e-1cf9fe93dea7",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "ad7b1bd5-87b1-4278-9df0-825f8652c6c1",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W7"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "37",
+            "key": "37"
+          }
+        },
+        {
+          "name": "size",
+          "value": "37"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "sku": "M0E20000000E7W8",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "4bc4fa0f-2562-44ce-a8c6-5c205f388af6",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "93fe18ae-066d-4e7c-8481-7c54553a5416",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "c62180b9-c4bc-47e0-ab35-e7f6561917f1",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "2727a678-d67e-463f-a1c4-a102ea99ab2c",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "330c6e03-e20e-4917-9552-2b8d259c11bc",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W8"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "37.5",
+            "label": "37.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "37.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "sku": "M0E20000000E7W9",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "3306fe8c-f936-4918-a83b-fd34fc68f01a",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "19d5dc25-95f2-4ade-9c9f-34e4b780385b",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "d4056327-ba42-4268-b12f-923ac4f6d086",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "2938e21b-eca2-431a-b380-095b24a15297",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "ba84b797-e4e7-4a99-a583-1bb0bde24b95",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7W9"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "38",
+            "label": "38"
+          }
+        },
+        {
+          "name": "size",
+          "value": "38"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "sku": "M0E20000000E7WA",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "5e0534bf-51d2-43b9-9e5a-d493da02c5f4",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "e4ae69ed-458f-44b6-bdb0-b43f402928c4",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "5c884aa8-89ff-4674-a3c8-ad243187edcb",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "38d4f24b-29e9-4a55-8d3c-c15b4a9e6d75",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "b4c6c741-37cc-4d38-b17f-49634b809d0d",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WA"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "38.5",
+            "key": "38.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "38.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "sku": "M0E20000000E7WB",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "4e5a5ad5-c2b0-488e-b969-c041cd20b979",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "8053b687-0a0c-46d9-b33d-7f9ba1fbd5ef",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "ceeecb6e-ede8-423a-a8ff-5f7dcc8d48ee",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "ec8c14f6-a6c8-4e7c-9945-6ac8bba02984",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "d26e48df-4680-4525-b616-81f22134b216",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WB"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "39",
+            "label": "39"
+          }
+        },
+        {
+          "name": "size",
+          "value": "39"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "sku": "M0E20000000E7WC",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "18c0cafc-4bc2-48d3-bdae-2ae1ce9bb746",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "fdc34403-0d05-48d8-954b-6e86d922a281",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "e35c4327-c636-4f63-90cb-ec70f91daf70",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "b7c400ca-b3fa-4a91-a8ac-cb3867b0495e",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "967c8b60-b820-40eb-8bf0-36eb92dea037",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WC"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "39.5",
+            "key": "39.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "39.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "sku": "M0E20000000E7WD",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "22c58f9a-eb4e-4025-b1da-e5b7b4aac42b",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "4d8d85ae-457e-4583-a710-3c783e0f642f",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "4f70f5ff-5c6b-44aa-9cd9-ca32082dafc3",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "bc7597c0-833e-472b-9b31-d05b1e532168",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "0679e4f0-d6f6-496e-bf37-5dc1e495403d",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WD"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "40",
+            "label": "40"
+          }
+        },
+        {
+          "name": "size",
+          "value": "40"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "sku": "M0E20000000E7WE",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "2c07f8e3-4287-425b-a0db-4192498f3fa3",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "8f64b3be-549a-4d04-a875-8c3a0cb59d09",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "946c2edb-b929-425e-82d3-6e118bc7b5f7",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "2bb9068d-250c-4165-b1d2-e14a65729c2b",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "df7f2393-89b2-4b76-b8e4-66a7e937f3df",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WE"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "40.5",
+            "label": "40.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "40.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "sku": "M0E20000000E7WF",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "0ca1bdb5-f33f-4f39-9cf6-34fc08b15557",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "b606fb8c-122e-4315-a252-334a3151b9ef",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "be58a04b-e544-4c59-8b0d-b47ef4ca27f6",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "e18f8ea4-66c2-4214-90af-df454cca51b2",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "46580f72-d420-4cbf-9390-572cfd046e78",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WF"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "41",
+            "key": "41"
+          }
+        },
+        {
+          "name": "size",
+          "value": "41"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "sku": "M0E20000000E7WG",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "d6833be5-7434-43b9-a8c8-3a61e715c46c",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "28bf1c23-d456-425f-a72f-4cceb4a76234",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "b0353bbc-2318-4c25-bb38-f0b19836f1d0",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "57032d43-321e-4e92-8bf1-7b433392e0a6",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "bb9ba139-ce49-461f-988c-42ea207db839",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WG"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "41.5",
+            "label": "41.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "41.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "sku": "M0E20000000E7WH",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "85ad1d91-1221-48ce-b7d5-d605b03fcb8c",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "c1ae1c11-9e87-46a5-91a4-6ff806be2fe3",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "16665c15-0513-4154-a62b-3762affb2a49",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "214dbe72-a36e-436f-b01a-6516055ba907",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "f26e1abf-c3d9-410e-932d-ac643d7053bf",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WH"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "42",
+            "label": "42"
+          }
+        },
+        {
+          "name": "size",
+          "value": "42"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "sku": "M0E20000000E7WI",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "4c985699-9592-47f4-99fc-902b0a83f4df",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "1b6a9bd7-d59f-4c46-9561-677b7ff870a3",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "a722cc77-b59c-4cfb-be23-92e5684d2056",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "cae0ffb0-8b76-4b30-8267-3f3a81d69c7f",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "ec3d21b9-5f64-4811-b62e-397ed46d223b",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WI"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "42.5",
+            "key": "42.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "42.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "sku": "M0E20000000E7WJ",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "8c908598-4884-40bb-b33c-782e51a75bbf",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "afd02272-dc88-4eeb-a5b9-c116ae683041",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "44d80b2a-6850-4e2c-8fc8-551ccab7e38e",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "01820f10-d092-4aa7-819f-c9a124e0e693",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "70d622fc-ee8b-4314-83d4-8f92e685b117",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WJ"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "label": "43",
+            "key": "43"
+          }
+        },
+        {
+          "name": "size",
+          "value": "43"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "sku": "M0E20000000E7WK",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "40659fc9-d2bd-42e6-ac37-c7d604df0f41",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "75c91a11-94cc-4099-8970-1e8f68875ccf",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "971f1024-36ce-44ce-9f92-85b7a336b475",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "1e980306-6eb8-4aa2-b1fa-2348969ad226",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "804a934f-dc55-455e-9065-c989c378fbcd",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WK"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "43.5",
+            "label": "43.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "43.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "sku": "M0E20000000E7WL",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "29d8916e-6694-449b-b4ff-d5520f3e47ca",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "872f6b62-1d26-420d-9ef0-671fce00910b",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "98d71f83-60bc-4844-b80b-c8b3caf42300",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "f608220a-ab08-4d57-b354-9ed765b7d3ca",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "d90dd38e-4f8e-49f3-a2bf-fe0bbc3e6031",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WL"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "44",
+            "label": "44"
+          }
+        },
+        {
+          "name": "size",
+          "value": "44"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        },
+        {
+          "name": "isOnStock",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "sku": "M0E20000000E7WM",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "2ee926ab-42d0-4d07-a737-f0e206eb2eb1",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "02d408d1-6b74-40f2-85d2-d76d7012f1b5",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "1ef77dd6-8c9c-41c1-b0fd-fb5aa6ffd109",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "a15a2d68-477b-4e0f-8114-aa45c9e9b3aa",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "eb9b7941-e4ca-4e63-9c70-d8de0b40b84e",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WM"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "44.5",
+            "label": "44.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "44.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "sku": "M0E20000000E7WN",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "34b6da72-688b-46be-b476-5a1b11e6fc66",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "f1826599-02f6-4d15-9877-b85a9268195f",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "8d5261d1-30b5-4bb1-be7d-826d1994da27",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "e565d638-c961-40ba-ad61-cbd583dd6178",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "e55e8224-47eb-4382-bfcd-f522c7cf4af0",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WN"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "45",
+            "label": "45"
+          }
+        },
+        {
+          "name": "size",
+          "value": "45"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "sku": "M0E20000000E7WO",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "98a8c32b-1687-4620-9370-85c09a92fff6",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "9e6529d0-0d48-4d24-a06a-4a8485adf27b",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "990bdf1b-beca-4e17-ac0a-99100df34cdb",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "840cba7a-d9bc-4ad3-bd24-8e4bad54c28c",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "7906c754-c26f-4bfe-ab0b-208acc25193b",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WO"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "45.5",
+            "label": "45.5"
+          }
+        },
+        {
+          "name": "size",
+          "value": "45.5"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "sku": "M0E20000000E7WP",
+      "prices": [
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 13750
+          },
+          "id": "9ae1bf63-0521-4938-b879-406e4d99df87",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 9625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 9016
+          },
+          "id": "a539b6ad-792f-4c44-974b-41b916154ac7",
+          "customerGroup": {
+            "typeId": "customer-group",
+            "id": "ed3969eb-9ed7-4667-aa91-2d67e65b0b7a"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 6311
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "6c062bc9-a913-4ed8-b4a5-043c862d28ec",
+          "country": "DE",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "f87e5889-9248-4511-910f-84968d1ec3bd",
+          "country": "IT",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 11000
+          },
+          "id": "502100fc-d30e-4fa4-b8a6-b942c268bb59",
+          "country": "GB",
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 7700
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        }
+      ],
+      "images": [
+        {
+          "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg",
+          "dimensions": {
+            "w": 0,
+            "h": 0
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "articleNumberManufacturer",
+          "value": "7041 TOKYO"
+        },
+        {
+          "name": "articleNumberMax",
+          "value": "80534"
+        },
+        {
+          "name": "matrixId",
+          "value": "M0E20000000E7WP"
+        },
+        {
+          "name": "baseId",
+          "value": "80534"
+        },
+        {
+          "name": "designer",
+          "value": {
+            "label": "Lotto",
+            "key": "lotto"
+          }
+        },
+        {
+          "name": "madeInItaly",
+          "value": {
+            "label": "no",
+            "key": "no"
+          }
+        },
+        {
+          "name": "commonSize",
+          "value": {
+            "key": "46",
+            "label": "46"
+          }
+        },
+        {
+          "name": "size",
+          "value": "46"
+        },
+        {
+          "name": "color",
+          "value": {
+            "label": {
+              "de": "grau",
+              "en": "grey",
+              "it": "grigio"
+            },
+            "key": "grey"
+          }
+        },
+        {
+          "name": "colorFreeDefinition",
+          "value": {
+            "de": "grau",
+            "en": "grey",
+            "it": "grigio"
+          }
+        },
+        {
+          "name": "style",
+          "value": {
+            "key": "sporty",
+            "label": "sporty"
+          }
+        },
+        {
+          "name": "gender",
+          "value": {
+            "label": "Herren",
+            "key": "men"
+          }
+        },
+        {
+          "name": "season",
+          "value": "s15"
+        },
+        {
+          "name": "isOnStock",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "searchKeywords": {},
+  "hasStagedChanges": false,
+  "published": true,
+  "taxCategory": {
+    "typeId": "tax-category",
+    "id": "e674c7bf-2cd6-4f4e-84b8-d6302670b635"
+  },
+  "createdAt": "2015-09-08T07:54:48.633Z",
+  "lastModifiedAt": "2015-11-12T03:22:42.492Z"
+}
