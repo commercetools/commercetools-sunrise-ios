@@ -2,6 +2,7 @@
 
 [![][travis img]][travis]
 [![][license img]][license]
+[![Stories in Ready](https://badge.waffle.io/commercetools/commercetools-sunrise-ios.svg?label=ready&title=Ready)](http://waffle.io/commercetools/commercetools-sunrise-ios)
 
 The mobile shop template using the latest version of [Commercetools SDK](https://github.com/sphereio/commercetools-ios-sdk), and providing you with the best and quickest way to get up and running with the Commercetools platform.  
 
