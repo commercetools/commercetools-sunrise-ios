@@ -12,6 +12,16 @@ struct ProductProjection: Mappable {
     var name: [String: String]?
     var masterVariant: ProductVariant?
     var variants: [ProductVariant]?
+    var allVariants: [ProductVariant] {
+        var allVariants = [ProductVariant]()
+        if let masterVariant = masterVariant {
+            allVariants.append(masterVariant)
+        }
+        if let otherVariants = variants {
+            allVariants += otherVariants
+        }
+        return allVariants
+    }
 
     init?(_ map: Map) {}
 

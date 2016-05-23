@@ -12,7 +12,7 @@ extension Dictionary where Key: StringLiteralConvertible, Value: StringLiteralCo
         if let key = currentLocaleIdentifier as? Key, localizedString = self[key] {
             return localizedString
 
-        } else if let key = NSLocale.componentsFromLocaleIdentifier(currentLocaleIdentifier)["kCFLocaleLanguageCodeKey"] as? Key, localizedString = self[key] {
+        } else if let key = NSLocale.componentsFromLocaleIdentifier(currentLocaleIdentifier)[NSLocaleLanguageCode] as? Key, localizedString = self[key] {
             return localizedString
 
         } else {

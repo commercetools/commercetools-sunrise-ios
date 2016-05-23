@@ -42,13 +42,7 @@ class ProductViewModel {
         self.sizes = sizes
         size.value = sizes.first ?? "N/A"
 
-        var allVariants = [ProductVariant]()
-        if let masterVariant = product.masterVariant {
-            allVariants.append(masterVariant)
-        }
-        if let otherVariants = product.variants {
-            allVariants += otherVariants
-        }
+        let allVariants = product.allVariants
 
         sku <~ size.producer.map { size in
             return allVariants.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.sku ?? ""
