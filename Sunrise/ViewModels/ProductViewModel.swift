@@ -8,7 +8,6 @@ class ProductViewModel {
 
     // Inputs
     let size = MutableProperty("")
-//    let size: MutableProperty<String>
 
     // Outputs
     let name: String
@@ -17,14 +16,6 @@ class ProductViewModel {
     let price = MutableProperty("")
     let oldPrice = MutableProperty("")
     let imageUrl = MutableProperty("")
-
-    // Actions
-//    lazy var addToCartAction: Action<NSIndexPath, Bool, NSError> = { [unowned self] in
-//        return Action({ indexPath in
-//            let match = self.matchAtIndexPath(indexPath)
-//            return self.store.deleteMatch(match)
-//        })
-//    }()
 
     private let product: ProductProjection
 
@@ -90,7 +81,7 @@ class ProductViewModel {
                         .prices?.filter({ price in
                             // Always pick the price without channel, customerGroup, country and validUntil/validFrom
                             if price.channel == nil && price.customerGroup == nil && price.country == nil
-                                    && price.validUntil == nil && price.validUntil == nil {
+                                    && price.validFrom == nil && price.validUntil == nil {
                                 return true
                             }
                             return false
