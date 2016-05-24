@@ -8,6 +8,7 @@
 
 import UIKit
 import Commercetools
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Inform user about the configuration error
         }
+
+        IQKeyboardManager.sharedManager().enable = true
 
         return true
     }

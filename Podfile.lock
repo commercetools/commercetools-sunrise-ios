@@ -2,7 +2,10 @@ PODS:
   - Alamofire (3.4.0)
   - Commercetools (0.1.0):
     - Alamofire (~> 3.3)
+  - IQDropDownTextField (1.1.0)
+  - IQKeyboardManagerSwift (4.0.3)
   - Nimble (4.0.1)
+  - ObjectMapper (1.3.0)
   - Quick (0.9.2)
   - ReactiveCocoa (4.1.0):
     - ReactiveCocoa/UI (= 4.1.0)
@@ -16,19 +19,30 @@ PODS:
     - ReactiveCocoa/Core
     - Result (~> 2.0)
   - Result (2.0.0)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
 
 DEPENDENCIES:
   - Commercetools (~> 0.1)
+  - IQDropDownTextField
+  - IQKeyboardManagerSwift (= 4.0.3)
   - Nimble
+  - ObjectMapper (~> 1.3)
   - Quick
   - ReactiveCocoa (~> 4.1)
+  - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   Commercetools: ca92be720da1d4c2e4afce759b74967576931585
+  IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
+  IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
+  ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   Quick: 18d057bc66451eedd5d1c8dc99ba2a5db6e60226
   ReactiveCocoa: d70004d7a366a7b8e87e60ce2347182c77701949
   Result: 9e75e1111c774c6ac594e14907b15057053a7959
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
 COCOAPODS: 0.39.0

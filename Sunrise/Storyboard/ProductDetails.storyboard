@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ixJ-Ux-evy">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Product View Controller-->
+        <scene sceneID="wgc-qa-N3a">
+            <objects>
+                <viewController id="ixJ-Ux-evy" customClass="ProductViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xe5-1V-oRP"/>
+                        <viewControllerLayoutGuide type="bottom" id="caV-va-Wgi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dK5-5U-Ry8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kWt-U0-Kl8">
+                                <rect key="frame" x="0.0" y="84" width="600" height="210"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQx-F2-Vf6">
+                                        <rect key="frame" x="190" y="0.0" width="220" height="210"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="260" id="3l4-UU-7nw"/>
+                                            <constraint firstAttribute="width" constant="220" id="4Ju-ZG-i0L"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="3l4-UU-7nw"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="Yvh-bq-ug1"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Yvh-bq-ug1"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wns-pL-fEs">
+                                <rect key="frame" x="10" y="314" width="580" height="131"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-GT-kre">
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.15294117647058825" green="0.15294117647058825" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1df-TV-Xit">
+                                        <rect key="frame" x="0.0" y="30" width="580" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sFA-hk-Jfp">
+                                        <rect key="frame" x="0.0" y="56" width="580" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" misplaced="YES" text="BeforeDiscountPrice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3n7-OD-cao">
+                                                <rect key="frame" x="0.0" y="0.0" width="158" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ActivePrice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igd-ff-OMm">
+                                                <rect key="frame" x="158" y="0.0" width="423" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yxf-5i-5nR">
+                                        <rect key="frame" x="0.0" y="84" width="580" height="47"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIZE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxq-5c-O74">
+                                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="34.5" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lI4-iG-erI" customClass="IQDropDownTextField">
+                                                <rect key="frame" x="0.0" y="17" width="60" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="aMd-Yx-3YH"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kWt-U0-Kl8" firstAttribute="leading" secondItem="dK5-5U-Ry8" secondAttribute="leading" id="06V-gC-DFN"/>
+                            <constraint firstItem="wns-pL-fEs" firstAttribute="leading" secondItem="dK5-5U-Ry8" secondAttribute="leading" constant="10" id="9QI-qk-ruz"/>
+                            <constraint firstItem="wQx-F2-Vf6" firstAttribute="height" secondItem="dK5-5U-Ry8" secondAttribute="height" multiplier="0.35" id="QIA-Lm-ZjO"/>
+                            <constraint firstItem="kWt-U0-Kl8" firstAttribute="top" secondItem="Xe5-1V-oRP" secondAttribute="bottom" constant="20" id="UxR-0p-9Qx"/>
+                            <constraint firstAttribute="trailing" secondItem="kWt-U0-Kl8" secondAttribute="trailing" id="nYH-wP-KGl"/>
+                            <constraint firstAttribute="trailing" secondItem="wns-pL-fEs" secondAttribute="trailing" constant="10" id="pGk-9p-eQj"/>
+                            <constraint firstItem="wns-pL-fEs" firstAttribute="top" secondItem="kWt-U0-Kl8" secondAttribute="bottom" constant="20" id="swP-X0-fAH"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activePriceLabel" destination="igd-ff-OMm" id="msK-Zb-YQa"/>
+                        <outlet property="priceBeforeDiscount" destination="3n7-OD-cao" id="rDj-El-0dF"/>
+                        <outlet property="productImageView" destination="wQx-F2-Vf6" id="Ztc-kM-IzU"/>
+                        <outlet property="productNameLabel" destination="jLh-GT-kre" id="lbh-9D-gFf"/>
+                        <outlet property="sizeField" destination="lI4-iG-erI" id="eh2-RL-Hev"/>
+                        <outlet property="skuLabel" destination="1df-TV-Xit" id="XfE-Zt-bmx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mT2-YH-nbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="834" y="-995"/>
+        </scene>
+    </scenes>
+</document>
