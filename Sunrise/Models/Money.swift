@@ -21,3 +21,20 @@ struct Money: Mappable {
     }
 
 }
+
+// MARK: - CustomStringConvertible
+
+extension Money: CustomStringConvertible {
+    /// The textual representation used when written to an output stream, with locale based format
+    var description: String {
+        if let centAmount = centAmount, currencyCode = currencyCode,
+        currencySymbol = NSLocale(localeIdentifier: currencyCode).displayNameForKey(NSLocaleCurrencySymbol, value: currencyCode) {
+            let currencyFormatter = NSNumberFormatter()
+            currencyFormatter.numberStyle = .CurrencyStyle
+            currencyFormatter.currencySymbol = currencySymbol
+            currencyFormatter.locale = NSLocale.currentLocale()
+            return currencyFormatter.stringFromNumber(centAmount / 100) ?? ""
+        }
+        return ""
+    }
+}

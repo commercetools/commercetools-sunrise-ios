@@ -15,6 +15,16 @@ struct ProductVariant: Mappable {
     var images: [Image]?
     var availability: ProductVariantAvailability?
     var isMatchingVariant: Bool?
+    /// The price without channel, customerGroup, country and validUntil/validFrom
+    var independentPrice: Price? {
+        return prices?.filter({ price in
+            if price.channel == nil && price.customerGroup == nil && price.country == nil
+                    && price.validFrom == nil && price.validUntil == nil {
+                return true
+            }
+            return false
+        }).first
+    }
 
     init?(_ map: Map) {}
 
