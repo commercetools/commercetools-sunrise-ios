@@ -19,9 +19,7 @@ class ProductViewController: UIViewController {
     
     var viewModel: ProductViewModel? {
         didSet {
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                self.bindViewModel()
-            }
+            self.bindViewModel()
         }
     }
 
@@ -30,12 +28,16 @@ class ProductViewController: UIViewController {
 
         sizeField.isOptionalDropDown = false
         sizeField.dropDownMode = .TextPicker
+
+        if viewModel != nil {
+            bindViewModel()
+        }
     }
 
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel = viewModel where isViewLoaded() else { return }
 
         productNameLabel.text = viewModel.name
         sizeField.itemList = viewModel.sizes

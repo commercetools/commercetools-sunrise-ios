@@ -11,9 +11,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
     var viewModel: ProductOverviewViewModel? {
         didSet {
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                self.bindViewModel()
-            }
+            self.bindViewModel()
         }
     }
 
@@ -27,7 +25,7 @@ class ProductOverviewViewController: UICollectionViewController {
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel = viewModel where isViewLoaded() else { return }
 
         navigationItem.title = viewModel.title
 
@@ -62,7 +60,6 @@ class ProductOverviewViewController: UICollectionViewController {
             productViewController.viewModel = productDetailsViewModel
         }
     }
-
 
     // MARK: UICollectionViewDataSource
 
