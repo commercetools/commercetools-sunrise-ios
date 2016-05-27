@@ -84,9 +84,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="34.5" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lI4-iG-erI" customClass="IQDropDownTextField">
-                                                <rect key="frame" x="0.0" y="17" width="60" height="30"/>
+                                                <rect key="frame" x="0.0" y="17" width="80" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="aMd-Yx-3YH"/>
+                                                    <constraint firstAttribute="width" constant="80" id="aMd-Yx-3YH"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
