@@ -19,7 +19,7 @@ class ProductOverviewViewController: UICollectionViewController {
         super.viewDidLoad()
 
         // After implementing POP search, view model will be instantiated with initial query
-        viewModel = ProductOverviewViewModel(limit: 15)
+        viewModel = ProductOverviewViewModel()
     }
 
     // MARK: - Bindings
@@ -48,8 +48,9 @@ class ProductOverviewViewController: UICollectionViewController {
             alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
             self?.presentViewController(alertController, animated: true, completion: nil)
         })
-    }
 
+        viewModel.refreshObserver.sendNext()
+    }
 
     // MARK: - Navigation
 
@@ -83,6 +84,19 @@ class ProductOverviewViewController: UICollectionViewController {
         cell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.productImageUrlAtIndexPath(indexPath)))
 
         return cell
+    }
+
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath: NSIndexPath) -> CGSize {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let cellWidth = (screenSize.width - 26) / 2
+        return CGSize(width: cellWidth, height: 270
+        )
     }
 
 }

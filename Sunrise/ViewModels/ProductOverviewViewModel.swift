@@ -9,49 +9,37 @@ import Commercetools
 
 class ProductOverviewViewModel {
 
+    // Inputs
+    let refreshObserver: Observer<Void, NoError>
+
     // Outputs
     let title: String
     let isLoading: MutableProperty<Bool>
     let alertMessageSignal: Signal<String, NoError>
 
     private let alertMessageObserver: Observer<String, NoError>
-    private var products: [ProductProjection]
+    var products: [ProductProjection]
 
     // MARK: Lifecycle
 
-    // After implementing POP search, view model will be instantiated with initial query
-    init(limit: UInt) {
+    init() {
         products = []
 
         title = NSLocalizedString("Products", comment: "POP Title")
 
-        self.isLoading = MutableProperty(true)
+        self.isLoading = MutableProperty(false)
 
         let (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
         self.alertMessageSignal = alertMessageSignal
         self.alertMessageObserver = alertMessageObserver
 
-        // After implementing POP search, view model will be instantiated with initial query
-        Commercetools.ProductProjection.query(limit: limit, result: { [weak self] result in
-            if let results = result.response?["results"] as? [[String: AnyObject]],
-                    products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
-                self?.products = products
-                self?.isLoading.value = false
+        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
+        self.refreshObserver = refreshObserver
 
-            } else if let errors = result.errors where result.isFailure {
-                let alertMessage = errors.map({
-                    var alertMessage = ""
-                    if let failureReason = $0.userInfo[NSLocalizedFailureReasonErrorKey] as? String {
-                        alertMessage += failureReason
-                    }
-                    if let localizedDescription = $0.userInfo[NSLocalizedDescriptionKey] as? String {
-                        alertMessage += ": \(localizedDescription)"
-                    }
-                    return alertMessage
-                }).joinWithSeparator("\n")
-                alertMessageObserver.sendNext(alertMessage)
-            }
-        })
+        refreshSignal
+        .observeNext { [weak self] in
+            self?.queryForProductProjections()
+        }
     }
 
     func productDetailsViewModelForProductAtIndexPath(indexPath: NSIndexPath) -> ProductViewModel {
@@ -89,5 +77,35 @@ class ProductOverviewViewModel {
 
         return "\(value)"
     }
+
+    // MARK: - Commercetools product projections querying
+
+    private func queryForProductProjections() {
+        isLoading.value = true
+
+        // After implementing POP search, view model will be instantiated with initial query
+        Commercetools.ProductProjection.query(limit: 15, result: { [weak self] result in
+            if let results = result.response?["results"] as? [[String: AnyObject]],
+            products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
+                self?.products = products
+
+            } else if let errors = result.errors where result.isFailure {
+                let alertMessage = errors.map({
+                    var alertMessage = ""
+                    if let failureReason = $0.userInfo[NSLocalizedFailureReasonErrorKey] as? String {
+                        alertMessage += failureReason
+                    }
+                    if let localizedDescription = $0.userInfo[NSLocalizedDescriptionKey] as? String {
+                        alertMessage += ": \(localizedDescription)"
+                    }
+                    return alertMessage
+                }).joinWithSeparator("\n")
+                self?.alertMessageObserver.sendNext(alertMessage)
+            }
+            self?.isLoading.value = false
+        })
+    }
+
+
 
 }
