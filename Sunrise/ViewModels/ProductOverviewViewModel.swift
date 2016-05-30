@@ -49,7 +49,7 @@ class ProductOverviewViewModel {
         nextPageSignal
         .observeNext { [weak self] in
             if let productCount = self?.products.count where productCount > 0 {
-                self?.queryForProductProjections(offset: UInt(productCount - 1))
+                self?.queryForProductProjections(offset: UInt(productCount))
             }
         }
     }

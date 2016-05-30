@@ -5,6 +5,13 @@
 import UIKit
 
 class ProductOverviewCell: UICollectionViewCell {
+    
+    @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        layer.borderColor = borderColor.CGColor
+    }
 
     // MARK: - Outlets
 
