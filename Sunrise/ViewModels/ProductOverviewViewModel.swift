@@ -11,6 +11,7 @@ class ProductOverviewViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
+    let nextPageObserver: Observer<Void, NoError>
 
     // Outputs
     let title: String
@@ -18,6 +19,7 @@ class ProductOverviewViewModel {
     let alertMessageSignal: Signal<String, NoError>
 
     private let alertMessageObserver: Observer<String, NoError>
+    let pageSize: UInt = 16
     var products: [ProductProjection]
 
     // MARK: Lifecycle
@@ -36,9 +38,19 @@ class ProductOverviewViewModel {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
+        let (nextPageSignal, nextPageObserver) = Signal<Void, NoError>.pipe()
+        self.nextPageObserver = nextPageObserver
+
         refreshSignal
         .observeNext { [weak self] in
-            self?.queryForProductProjections()
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        nextPageSignal
+        .observeNext { [weak self] in
+            if let productCount = self?.products.count where productCount > 0 {
+                self?.queryForProductProjections(offset: UInt(productCount - 1))
+            }
         }
     }
 
@@ -80,14 +92,15 @@ class ProductOverviewViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections() {
+    private func queryForProductProjections(offset offset: UInt) {
         isLoading.value = true
 
         // After implementing POP search, view model will be instantiated with initial query
-        Commercetools.ProductProjection.query(limit: 15, result: { [weak self] result in
+        Commercetools.ProductProjection.query(sort: ["createdAt desc"], limit: pageSize, offset: offset,
+                result: { [weak self] result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
-            products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
-                self?.products = products
+                    products = Mapper<ProductProjection>().mapArray(results), unwrappedSelf = self where result.isSuccess {
+                unwrappedSelf.products = offset == 0 ? products : unwrappedSelf.products + products
 
             } else if let errors = result.errors where result.isFailure {
                 let alertMessage = errors.map({
