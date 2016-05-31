@@ -77,9 +77,9 @@ class ProductOverviewViewModel {
         guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
-            return "\(discounted)"
+            return String(discounted)
         } else {
-            return "\(value)"
+            return String(value)
         }
     }
 
