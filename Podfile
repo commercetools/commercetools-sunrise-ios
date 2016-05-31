@@ -6,8 +6,9 @@ target 'Sunrise' do
     pod 'ReactiveCocoa', '~> 4.1'
     pod 'ObjectMapper', '~> 1.3'
     pod 'IQKeyboardManagerSwift', '4.0.3'
-    pod 'IQDropDownTextField'
     pod 'SDWebImage', '~> 3.7'
+    pod 'IQDropDownTextField'
+    pod 'SVProgressHUD'
 end
 
 def testing_pods
