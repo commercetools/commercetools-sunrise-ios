@@ -32,7 +32,7 @@ class ProductOverviewViewModelSpec: QuickSpec {
                 expect(overviewViewModel.numberOfProductsInSection(0)).to(equal(1))
             }
 
-            context("retrieving data for first cell") {
+            context("retrieving data for the first cell") {
                 let indexPath = NSIndexPath(forItem: 0, inSection: 0)
 
                 it("product name is properly extracted") {

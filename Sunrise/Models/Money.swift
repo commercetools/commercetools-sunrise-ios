@@ -9,7 +9,7 @@ struct Money: Mappable {
     // MARK: - Properties
 
     var currencyCode: String?
-    var centAmount: Int?
+    var centAmount: Double?
 
     init?(_ map: Map) {}
 
@@ -19,7 +19,6 @@ struct Money: Mappable {
         currencyCode       <- map["currencyCode"]
         centAmount         <- map["centAmount"]
     }
-
 }
 
 // MARK: - CustomStringConvertible

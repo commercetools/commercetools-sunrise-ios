@@ -7,7 +7,7 @@ import Result
 import ObjectMapper
 import Commercetools
 
-class ProductOverviewViewModel {
+class ProductOverviewViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
@@ -16,30 +16,26 @@ class ProductOverviewViewModel {
     // Outputs
     let title: String
     let isLoading: MutableProperty<Bool>
-    let alertMessageSignal: Signal<String, NoError>
 
-    private let alertMessageObserver: Observer<String, NoError>
     let pageSize: UInt = 16
     var products: [ProductProjection]
 
     // MARK: Lifecycle
 
-    init() {
+    override init() {
         products = []
 
         title = NSLocalizedString("Products", comment: "POP Title")
 
-        self.isLoading = MutableProperty(false)
+        isLoading = MutableProperty(false)
 
-        let (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
-        self.alertMessageSignal = alertMessageSignal
-        self.alertMessageObserver = alertMessageObserver
+        let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
+        refreshObserver = observer
 
-        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
-        self.refreshObserver = refreshObserver
+        let (nextPageSignal, pageObserver) = Signal<Void, NoError>.pipe()
+        nextPageObserver = pageObserver
 
-        let (nextPageSignal, nextPageObserver) = Signal<Void, NoError>.pipe()
-        self.nextPageObserver = nextPageObserver
+        super.init()
 
         refreshSignal
         .observeNext { [weak self] in
@@ -97,25 +93,16 @@ class ProductOverviewViewModel {
 
         // After implementing POP search, view model will be instantiated with initial query
         Commercetools.ProductProjection.query(sort: ["createdAt desc"], limit: pageSize, offset: offset,
-                result: { [weak self] result in
+                result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
-                    products = Mapper<ProductProjection>().mapArray(results), unwrappedSelf = self where result.isSuccess {
-                unwrappedSelf.products = offset == 0 ? products : unwrappedSelf.products + products
+                    products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
+                    self.products = offset == 0 ? products : self.products + products
 
             } else if let errors = result.errors where result.isFailure {
-                let alertMessage = errors.map({
-                    var alertMessage = ""
-                    if let failureReason = $0.userInfo[NSLocalizedFailureReasonErrorKey] as? String {
-                        alertMessage += failureReason
-                    }
-                    if let localizedDescription = $0.userInfo[NSLocalizedDescriptionKey] as? String {
-                        alertMessage += ": \(localizedDescription)"
-                    }
-                    return alertMessage
-                }).joinWithSeparator("\n")
-                self?.alertMessageObserver.sendNext(alertMessage)
+                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+
             }
-            self?.isLoading.value = false
+            self.isLoading.value = false
         })
     }
 

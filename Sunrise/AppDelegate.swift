@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #else
         let configPath = "CommercetoolsStagingConfig"
 #endif
-        
+
         if let configuration = Config(path: configPath) {
             Commercetools.config = configuration
 

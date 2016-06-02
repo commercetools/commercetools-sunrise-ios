@@ -14,7 +14,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
     var viewModel: ProductOverviewViewModel? {
         didSet {
-            self.bindViewModel()
+            bindViewModel()
         }
     }
 
@@ -41,17 +41,7 @@ class ProductOverviewViewController: UICollectionViewController {
             }
         })
 
-        viewModel.alertMessageSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] alertMessage in
-            let alertController = UIAlertController(
-            title: "Oops!",
-                    message: alertMessage,
-                    preferredStyle: .Alert
-            )
-            alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-            self?.presentViewController(alertController, animated: true, completion: nil)
-        })
+        observeAlertMessageSignal(viewModel: viewModel)
 
         viewModel.refreshObserver.sendNext()
     }
