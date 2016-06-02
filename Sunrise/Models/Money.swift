@@ -9,7 +9,7 @@ struct Money: Mappable {
     // MARK: - Properties
 
     var currencyCode: String?
-    var centAmount: Double?
+    var centAmount: Int?
 
     init?(_ map: Map) {}
 
@@ -32,7 +32,7 @@ extension Money: CustomStringConvertible {
             currencyFormatter.numberStyle = .CurrencyStyle
             currencyFormatter.currencySymbol = currencySymbol
             currencyFormatter.locale = NSLocale.currentLocale()
-            return currencyFormatter.stringFromNumber(centAmount / 100) ?? ""
+            return currencyFormatter.stringFromNumber(Double(centAmount) / 100) ?? ""
         }
         return ""
     }

@@ -39,31 +39,35 @@ class CartViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
-    func numberOfItemsInSection(section: Int) -> Int {
+    func numberOfRowsInSection(section: Int) -> Int {
         return cart.value?.lineItems?.count ?? 0
     }
 
-    func itemNameAtIndexPath(indexPath: NSIndexPath) -> String {
+    func cartItemNameAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].name?.localizedString ?? ""
     }
 
-    func itemSkuAtIndexPath(indexPath: NSIndexPath) -> String {
+    func cartItemSkuAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].variant?.sku ?? ""
     }
 
-    func itemSizeAtIndexPath(indexPath: NSIndexPath) -> String {
+    func cartItemSizeAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].variant?.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
     }
 
-    func itemImageUrlAtIndexPath(indexPath: NSIndexPath) -> String {
+    func cartItemImageUrlAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].variant?.images?.first?.url ?? ""
     }
 
-    func itemPriceAtIndexPath(indexPath: NSIndexPath) -> String {
+    func cartItemPriceAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].price?.value?.description ?? "N/A"
     }
 
-    func itemTotalPriceAtIndexPath(indexPath: NSIndexPath) -> String {
+    func cartItemQuantityAtIndexPath(indexPath: NSIndexPath) -> String {
+        return cart.value?.lineItems?[indexPath.row].quantity?.description ?? "0"
+    }
+
+    func cartItemTotalPriceAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
     }
 

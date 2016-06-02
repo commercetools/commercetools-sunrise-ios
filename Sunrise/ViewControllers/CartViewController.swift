@@ -1,9 +1,5 @@
 //
-//  CartViewController.swift
-//  Sunrise
-//
-//  Created by Nikola Mladenovic on 5/30/16.
-//  Copyright © 2016 Commercetools. All rights reserved.
+// Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
 import UIKit
@@ -66,20 +62,21 @@ extension CartViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        return viewModel.numberOfItemsInSection(section)
+        return viewModel.numberOfRowsInSection(section)
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CartItemCell", forIndexPath: indexPath) as! CartItemCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CartItemCell", forIndexPath: indexPath) as! CartLineItemCell
 
         guard let viewModel = viewModel else { return cell }
 
-        cell.productNameLabel.text = viewModel.itemNameAtIndexPath(indexPath)
-        cell.skuLabel.text = viewModel.itemSkuAtIndexPath(indexPath)
-        cell.sizeLabel.text = viewModel.itemSizeAtIndexPath(indexPath)
-        cell.priceLabel.text = viewModel.itemPriceAtIndexPath(indexPath)
-        cell.totalPriceLabel.text = viewModel.itemTotalPriceAtIndexPath(indexPath)
-        cell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.itemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
+        cell.productNameLabel.text = viewModel.cartItemNameAtIndexPath(indexPath)
+        cell.skuLabel.text = viewModel.cartItemSkuAtIndexPath(indexPath)
+        cell.sizeLabel.text = viewModel.cartItemSizeAtIndexPath(indexPath)
+        cell.priceLabel.text = viewModel.cartItemPriceAtIndexPath(indexPath)
+        cell.quantityLabel.text = viewModel.cartItemQuantityAtIndexPath(indexPath)
+        cell.totalPriceLabel.text = viewModel.cartItemTotalPriceAtIndexPath(indexPath)
+        cell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.cartItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
         return cell
     }
