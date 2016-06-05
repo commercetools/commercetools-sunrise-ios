@@ -15,21 +15,23 @@ struct LineItem: Mappable {
     var variant: ProductVariant?
     var price: Price?
     var totalPrice: Money?
-    var quantity: UInt?
+    var discountedPricePerQuantity: [DiscountedLineItemPriceForQuantity]?
+    var quantity: Int?
 
     init?(_ map: Map) {}
 
     // MARK: - Mappable
 
     mutating func mapping(map: Map) {
-        id               <- map["id"]
-        productId        <- map["productId"]
-        name             <- map["name"]
-        productSlug      <- map["productSlug"]
-        variant          <- map["variant"]
-        price            <- map["price"]
-        totalPrice       <- map["totalPrice"]
-        quantity         <- map["quantity"]
+        id                         <- map["id"]
+        productId                  <- map["productId"]
+        name                       <- map["name"]
+        productSlug                <- map["productSlug"]
+        variant                    <- map["variant"]
+        price                      <- map["price"]
+        totalPrice                 <- map["totalPrice"]
+        discountedPricePerQuantity <- map["discountedPricePerQuantity"]
+        quantity                   <- map["quantity"]
     }
 
 }

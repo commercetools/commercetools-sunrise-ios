@@ -13,6 +13,11 @@ struct Money: Mappable {
 
     init?(_ map: Map) {}
 
+    init(currencyCode: String? = nil, centAmount: Int? = nil) {
+        self.currencyCode = currencyCode
+        self.centAmount = centAmount
+    }
+
     // MARK: - Mappable
 
     mutating func mapping(map: Map) {

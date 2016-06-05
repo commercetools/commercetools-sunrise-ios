@@ -56,7 +56,7 @@ class ProductOverviewViewController: UICollectionViewController {
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
@@ -80,7 +80,7 @@ class ProductOverviewViewController: UICollectionViewController {
         return cell
     }
 
-    // MARK: UIScrollViewDelegate
+    // MARK: - UIScrollViewDelegate
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         guard let viewModel = viewModel else { return }
@@ -102,7 +102,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
 

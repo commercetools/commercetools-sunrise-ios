@@ -24,8 +24,8 @@ class CartViewModelSpec: QuickSpec {
                 cartViewModel.cart.value = cart
             }
 
-            it("has the correct number of cells") {
-                expect(cartViewModel.numberOfRowsInSection(0)).to(equal(3))
+            it("has the correct number of cells line items + summary") {
+                expect(cartViewModel.numberOfRowsInSection(0)).to(equal(4))
             }
 
             it("has the correct number of items") {
@@ -36,27 +36,31 @@ class CartViewModelSpec: QuickSpec {
                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
 
                 it("product name is properly extracted") {
-                    expect(cartViewModel.cartItemNameAtIndexPath(indexPath)).to(equal("Dress “Olivia“ Polo Ralph Lauren blue"))
+                    expect(cartViewModel.lineItemNameAtIndexPath(indexPath)).to(equal("Dress “Olivia“ Polo Ralph Lauren blue"))
                 }
 
                 it("imageUrl selected from variant") {
-                    expect(cartViewModel.cartItemImageUrlAtIndexPath(indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/078990_1_medium.jpg"))
+                    expect(cartViewModel.lineItemImageUrlAtIndexPath(indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/078990_1_medium.jpg"))
                 }
 
                 it("sku is properly extracted") {
-                    expect(cartViewModel.cartItemSkuAtIndexPath(indexPath)).to(equal("M0E20000000DVL9"))
+                    expect(cartViewModel.lineItemSkuAtIndexPath(indexPath)).to(equal("M0E20000000DVL9"))
                 }
 
-                it("has correct item price") {
-                    expect(cartViewModel.cartItemPriceAtIndexPath(indexPath)).to(equal("€175.00"))
+                it("has correct price before discount") {
+                    expect(cartViewModel.lineItemPriceAtIndexPath(indexPath)).to(equal("€87.50"))
+                }
+
+                it("has correct discounted price") {
+                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal("€175.00"))
                 }
 
                 it("has correct quantity") {
-                    expect(cartViewModel.cartItemQuantityAtIndexPath(indexPath)).to(equal("2"))
+                    expect(cartViewModel.lineItemQuantityAtIndexPath(indexPath)).to(equal("2"))
                 }
 
                 it("has correct total item price") {
-                    expect(cartViewModel.cartItemTotalPriceAtIndexPath(indexPath)).to(equal("€350.00"))
+                    expect(cartViewModel.lineItemTotalPriceAtIndexPath(indexPath)).to(equal("€175.00"))
                 }
             }
 
@@ -64,27 +68,31 @@ class CartViewModelSpec: QuickSpec {
                 let indexPath = NSIndexPath(forRow: 1, inSection: 0)
 
                 it("product name is properly extracted") {
-                    expect(cartViewModel.cartItemNameAtIndexPath(indexPath)).to(equal("Pumps ”Flex” Michael Kors red"))
+                    expect(cartViewModel.lineItemNameAtIndexPath(indexPath)).to(equal("Pumps ”Flex” Michael Kors red"))
                 }
 
                 it("imageUrl selected from variant") {
-                    expect(cartViewModel.cartItemImageUrlAtIndexPath(indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/073017_1_medium.jpg"))
+                    expect(cartViewModel.lineItemImageUrlAtIndexPath(indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/073017_1_medium.jpg"))
                 }
 
                 it("sku is properly extracted") {
-                    expect(cartViewModel.cartItemSkuAtIndexPath(indexPath)).to(equal("M0E20000000DMV1"))
+                    expect(cartViewModel.lineItemSkuAtIndexPath(indexPath)).to(equal("M0E20000000DMV1"))
                 }
 
                 it("has correct item price") {
-                    expect(cartViewModel.cartItemPriceAtIndexPath(indexPath)).to(equal("€137.50"))
+                    expect(cartViewModel.lineItemPriceAtIndexPath(indexPath)).to(equal("€137.50"))
+                }
+
+                it("doesn't show discount when there's no any") {
+                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal(""))
                 }
 
                 it("has correct quantity") {
-                    expect(cartViewModel.cartItemQuantityAtIndexPath(indexPath)).to(equal("1"))
+                    expect(cartViewModel.lineItemQuantityAtIndexPath(indexPath)).to(equal("1"))
                 }
 
                 it("has correct total item price") {
-                    expect(cartViewModel.cartItemTotalPriceAtIndexPath(indexPath)).to(equal("€127.50"))
+                    expect(cartViewModel.lineItemTotalPriceAtIndexPath(indexPath)).to(equal("€127.50"))
                 }
             }
         }

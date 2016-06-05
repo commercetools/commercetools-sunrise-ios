@@ -50,10 +50,53 @@ class CartViewController: UIViewController {
             if !isLoading {
                 self?.tableView.reloadData()
                 SVProgressHUD.dismiss()
+            } else {
+                SVProgressHUD.show()
             }
         })
 
+        viewModel.cart.producer
+        .observeOn(UIScheduler())
+        .startWithNext { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+
         observeAlertMessageSignal(viewModel: viewModel)
+    }
+
+    private var cartSummaryCell: CartSummaryCell? {
+        get {
+            guard let viewModel = viewModel else { return nil }
+            let numberOfRows = viewModel.numberOfRowsInSection(0)
+            return numberOfRows > 0 ? tableView.cellForRowAtIndexPath(NSIndexPath(forRow: numberOfRows - 1, inSection: 0)) as? CartSummaryCell : nil
+        }
+    }
+
+    private func bindCartSummaryCell(summaryCell: CartSummaryCell) {
+        guard let viewModel = viewModel else { return }
+
+        summaryCell.subtotalLabel.text = viewModel.subtotal.value
+        summaryCell.orderDiscountLabel.text = viewModel.orderDiscount.value
+        summaryCell.taxLabel.text = viewModel.tax.value
+        summaryCell.taxLabel.hidden = viewModel.taxRowHidden.value
+        summaryCell.taxDescriptionLabel.hidden = viewModel.taxRowHidden.value
+        summaryCell.orderTotalLabel.text = viewModel.orderTotal.value
+    }
+
+    private func bindLineItemCell(lineItemCell: CartLineItemCell, indexPath: NSIndexPath) {
+        guard let viewModel = viewModel else { return }
+
+        lineItemCell.productNameLabel.text = viewModel.lineItemNameAtIndexPath(indexPath)
+        lineItemCell.skuLabel.text = viewModel.lineItemSkuAtIndexPath(indexPath)
+        lineItemCell.sizeLabel.text = viewModel.lineItemSizeAtIndexPath(indexPath)
+        lineItemCell.priceLabel.text = viewModel.lineItemPriceAtIndexPath(indexPath)
+        lineItemCell.quantityLabel.text = viewModel.lineItemQuantityAtIndexPath(indexPath)
+        lineItemCell.totalPriceLabel.text = viewModel.lineItemTotalPriceAtIndexPath(indexPath)
+        lineItemCell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
+
+        let priceBeforeDiscount =  NSMutableAttributedString(string: viewModel.lineItemOldPriceAtIndexPath(indexPath))
+        priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
+        lineItemCell.oldPriceLabel.attributedText = priceBeforeDiscount
     }
 
 }
@@ -66,19 +109,19 @@ extension CartViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CartItemCell", forIndexPath: indexPath) as! CartLineItemCell
+        let lineItemCell = tableView.dequeueReusableCellWithIdentifier("CartItemCell") as! CartLineItemCell
 
-        guard let viewModel = viewModel else { return cell }
+        guard let viewModel = viewModel else { return lineItemCell }
 
-        cell.productNameLabel.text = viewModel.cartItemNameAtIndexPath(indexPath)
-        cell.skuLabel.text = viewModel.cartItemSkuAtIndexPath(indexPath)
-        cell.sizeLabel.text = viewModel.cartItemSizeAtIndexPath(indexPath)
-        cell.priceLabel.text = viewModel.cartItemPriceAtIndexPath(indexPath)
-        cell.quantityLabel.text = viewModel.cartItemQuantityAtIndexPath(indexPath)
-        cell.totalPriceLabel.text = viewModel.cartItemTotalPriceAtIndexPath(indexPath)
-        cell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.cartItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
+        if indexPath.row == viewModel.numberOfRowsInSection(0) - 1 {
+            let summaryCell = tableView.dequeueReusableCellWithIdentifier("CartSummaryCell") as! CartSummaryCell
+            bindCartSummaryCell(summaryCell)
+            return summaryCell
 
-        return cell
+        } else {
+            bindLineItemCell(lineItemCell, indexPath: indexPath)
+            return lineItemCell
+        }
     }
 
 }

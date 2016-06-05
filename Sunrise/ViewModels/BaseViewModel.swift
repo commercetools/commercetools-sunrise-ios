@@ -14,7 +14,7 @@ class BaseViewModel {
 
     let alertMessageObserver: Observer<String, NoError>
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     init() {
         let (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
@@ -26,15 +26,11 @@ class BaseViewModel {
         return errors.map({
             var alertMessage = ""
             if let failureReason = $0.userInfo[NSLocalizedFailureReasonErrorKey] as? String {
-                alertMessage += failureReason
+                alertMessage += "\(failureReason) :"
             }
-            if let localizedDescription = $0.userInfo[NSLocalizedDescriptionKey] as? String {
-                alertMessage += ": \(localizedDescription)"
-            }
+            alertMessage += $0.localizedDescription
             return alertMessage
         }).joinWithSeparator("\n")
     }
-
-
 
 }

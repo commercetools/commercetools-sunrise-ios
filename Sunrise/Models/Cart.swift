@@ -13,6 +13,8 @@ struct Cart: Mappable {
     var createdAt: NSDate?
     var lastModifiedAt: NSDate?
     var lineItems: [LineItem]?
+    var totalPrice: Money?
+    var taxedPrice: TaxedPrice?
     var country: String?
 
     init?(_ map: Map) {}
@@ -25,6 +27,8 @@ struct Cart: Mappable {
         createdAt        <- (map["createdAt"], DateTransform())
         lastModifiedAt   <- (map["lastModifiedAt"], DateTransform())
         lineItems        <- map["lineItems"]
+        totalPrice       <- map["totalPrice"]
+        taxedPrice       <- map["taxedPrice"]
         country          <- map["country"]
     }
 

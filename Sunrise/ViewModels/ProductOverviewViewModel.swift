@@ -20,7 +20,7 @@ class ProductOverviewViewModel: BaseViewModel {
     let pageSize: UInt = 16
     var products: [ProductProjection]
 
-    // MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override init() {
         products = []
@@ -73,9 +73,9 @@ class ProductOverviewViewModel: BaseViewModel {
         guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
-            return String(discounted)
+            return discounted.description
         } else {
-            return String(value)
+            return value.description
         }
     }
 
@@ -83,7 +83,7 @@ class ProductOverviewViewModel: BaseViewModel {
         guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, value = price.value,
         _ = price.discounted?.value else { return "" }
 
-        return "\(value)"
+        return value.description
     }
 
     // MARK: - Commercetools product projections querying

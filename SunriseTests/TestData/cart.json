@@ -199,6 +199,16 @@
           "currencyCode": "EUR",
           "centAmount": 17500
         },
+        "discounted": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 8750
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+          }
+        },
         "id": "fa4fd56d-781e-4421-8b2f-613f02604ae5",
         "channel": {
           "typeId": "channel",
@@ -226,7 +236,7 @@
       ],
       "totalPrice": {
         "currencyCode": "EUR",
-        "centAmount": 35000
+        "centAmount": 17500
       }
     },
     {
