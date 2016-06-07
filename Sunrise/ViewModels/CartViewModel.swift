@@ -143,13 +143,13 @@ class CartViewModel: BaseViewModel {
     private func calculateCartDiscountForLineItem(lineItem: LineItem) -> Int {
         guard let discountedPricePerQuantity = lineItem.discountedPricePerQuantity, quantity = lineItem.quantity else { return 0 }
 
-        let discountedAmount = discountedPricePerQuantity.reduce(0, combine: {
+        let discountedPriceAmount = discountedPricePerQuantity.reduce(0, combine: {
             if let quantity = $1.quantity, discountedAmount = $1.discountedPrice?.value?.centAmount {
                 return $0 + quantity * discountedAmount
             }
             return $0
         })
-        return discountedAmount > 0 ? quantity * calculateAmountForOneLineItem(lineItem) - discountedAmount : 0
+        return discountedPriceAmount > 0 ? quantity * calculateAmountForOneLineItem(lineItem) - discountedPriceAmount : 0
     }
 
     private func calculateTax() -> String {

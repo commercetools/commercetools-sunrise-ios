@@ -21,12 +21,17 @@ class CartViewController: UIViewController {
         }
     }
 
+    private let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         viewModel = CartViewModel()
-        tableView?.layer.borderColor = borderColor.CGColor
-        tableView?.tableFooterView = UIView()
+        tableView.layer.borderColor = borderColor.CGColor
+        tableView.tableFooterView = UIView()
+
+        refreshControl.addTarget(self, action: #selector(CartViewController.refresh), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -49,9 +54,9 @@ class CartViewController: UIViewController {
         .startWithNext({ [weak self] isLoading in
             if !isLoading {
                 self?.tableView.reloadData()
-                SVProgressHUD.dismiss()
+                self?.refreshControl.endRefreshing()
             } else {
-                SVProgressHUD.show()
+                self?.refreshControl.beginRefreshing()
             }
         })
 
@@ -64,12 +69,8 @@ class CartViewController: UIViewController {
         observeAlertMessageSignal(viewModel: viewModel)
     }
 
-    private var cartSummaryCell: CartSummaryCell? {
-        get {
-            guard let viewModel = viewModel else { return nil }
-            let numberOfRows = viewModel.numberOfRowsInSection(0)
-            return numberOfRows > 0 ? tableView.cellForRowAtIndexPath(NSIndexPath(forRow: numberOfRows - 1, inSection: 0)) as? CartSummaryCell : nil
-        }
+    @objc private func refresh() {
+        viewModel?.refreshObserver.sendNext()
     }
 
     private func bindCartSummaryCell(summaryCell: CartSummaryCell) {
