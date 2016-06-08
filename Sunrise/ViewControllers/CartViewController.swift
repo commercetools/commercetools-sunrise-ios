@@ -6,7 +6,6 @@ import UIKit
 import ReactiveCocoa
 import Result
 import SDWebImage
-import SVProgressHUD
 
 class CartViewController: UIViewController {
 

@@ -107,14 +107,21 @@ class CartViewModel: BaseViewModel {
         Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1,
                 result: { result in
                     if let results = result.response?["results"] as? [[String: AnyObject]],
-                    carts = Mapper<Cart>().mapArray(results) where result.isSuccess {
-                        self.cart.value = carts.first
-
+                            carts = Mapper<Cart>().mapArray(results), cartId = carts.first?.id,
+                            version = carts.first?.version where result.isSuccess {
+                        // Run recalculation before we present the refreshed cart
+                        Commercetools.Cart.update(cartId, version: version, actions: [["action": "recalculate"]], result: { result in
+                            if let cart = Mapper<Cart>().map(result.response) where result.isSuccess {
+                                self.cart.value = cart
+                            } else if let errors = result.errors where result.isFailure {
+                                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                            }
+                            self.isLoading.value = false
+                        })
                     } else if let errors = result.errors where result.isFailure {
                         super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
-
+                        self.isLoading.value = false
                     }
-                    self.isLoading.value = false
                 })
     }
 
