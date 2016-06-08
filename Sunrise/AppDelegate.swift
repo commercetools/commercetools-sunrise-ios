@@ -1,9 +1,5 @@
 //
-//  AppDelegate.swift
-//  Sunrise
-//
-//  Created by Nikola Mladenovic on 5/15/16.
-//  Copyright © 2016 Commercetools. All rights reserved.
+// Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
 import UIKit
@@ -23,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #else
         let configPath = "CommercetoolsStagingConfig"
 #endif
-        
+
         if let configuration = Config(path: configPath) {
             Commercetools.config = configuration
 

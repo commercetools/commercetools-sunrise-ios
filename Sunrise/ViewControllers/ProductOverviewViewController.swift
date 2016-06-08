@@ -14,7 +14,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
     var viewModel: ProductOverviewViewModel? {
         didSet {
-            self.bindViewModel()
+            bindViewModel()
         }
     }
 
@@ -41,17 +41,7 @@ class ProductOverviewViewController: UICollectionViewController {
             }
         })
 
-        viewModel.alertMessageSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] alertMessage in
-            let alertController = UIAlertController(
-            title: "Oops!",
-                    message: alertMessage,
-                    preferredStyle: .Alert
-            )
-            alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-            self?.presentViewController(alertController, animated: true, completion: nil)
-        })
+        observeAlertMessageSignal(viewModel: viewModel)
 
         viewModel.refreshObserver.sendNext()
     }
@@ -66,7 +56,7 @@ class ProductOverviewViewController: UICollectionViewController {
         }
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
@@ -90,7 +80,7 @@ class ProductOverviewViewController: UICollectionViewController {
         return cell
     }
 
-    // MARK: UIScrollViewDelegate
+    // MARK: - UIScrollViewDelegate
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         guard let viewModel = viewModel else { return }
@@ -112,7 +102,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
 

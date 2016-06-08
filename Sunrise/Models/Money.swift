@@ -13,13 +13,17 @@ struct Money: Mappable {
 
     init?(_ map: Map) {}
 
+    init(currencyCode: String? = nil, centAmount: Int? = nil) {
+        self.currencyCode = currencyCode
+        self.centAmount = centAmount
+    }
+
     // MARK: - Mappable
 
     mutating func mapping(map: Map) {
         currencyCode       <- map["currencyCode"]
         centAmount         <- map["centAmount"]
     }
-
 }
 
 // MARK: - CustomStringConvertible
@@ -33,7 +37,7 @@ extension Money: CustomStringConvertible {
             currencyFormatter.numberStyle = .CurrencyStyle
             currencyFormatter.currencySymbol = currencySymbol
             currencyFormatter.locale = NSLocale.currentLocale()
-            return currencyFormatter.stringFromNumber(centAmount / 100) ?? ""
+            return currencyFormatter.stringFromNumber(Double(centAmount) / 100) ?? ""
         }
         return ""
     }
