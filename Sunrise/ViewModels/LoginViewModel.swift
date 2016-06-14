@@ -5,6 +5,9 @@
 import Commercetools
 import ReactiveCocoa
 
+/// The key used for storing logged in username.
+let kLoggedInUsername = "LoggedInUsername"
+
 class LoginViewModel: BaseViewModel {
 
     // Inputs
@@ -46,6 +49,9 @@ class LoginViewModel: BaseViewModel {
                     observer.sendFailed(error)
                 } else {
                     observer.sendCompleted()
+                    // Save username to user defaults for displaying it later on in the app
+                    NSUserDefaults.standardUserDefaults().setObject(username, forKey: kLoggedInUsername)
+                    NSUserDefaults.standardUserDefaults().synchronize()
                 }
                 self.isLoading.value = false
             })
