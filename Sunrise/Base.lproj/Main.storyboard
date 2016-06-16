@@ -105,7 +105,7 @@
         <scene sceneID="aDl-cT-hkj">
             <objects>
                 <navigationController id="HlC-be-hcu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="first" id="a3f-PP-Bfo"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home-tab-icon" id="a3f-PP-Bfo"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="qPZ-3V-MKv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -146,7 +146,7 @@
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Categories" image="first" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Categories" image="filter-tab-icon" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,7 +205,7 @@
                             <constraint firstAttribute="centerX" secondItem="imj-DJ-tJH" secondAttribute="centerX" id="q8M-pA-mRm"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="first" id="fgX-VM-1zG"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search-tab-icon" id="fgX-VM-1zG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0s-1r-K7Z" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,7 +215,7 @@
         <scene sceneID="EEC-G1-NCI">
             <objects>
                 <navigationController storyboardIdentifier="LoginViewController" id="rgd-hg-sWA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Account" image="first" id="GOd-ZP-QoJ"/>
+                    <tabBarItem key="tabBarItem" title="My Account" image="myaccount-tab-icon" id="GOd-ZP-QoJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ioP-A7-lxK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -911,7 +911,7 @@ fields*</string>
         <scene sceneID="cYz-Z4-5gl">
             <objects>
                 <navigationController id="1jB-PC-SmE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cart" image="first" id="OgF-cK-sdh"/>
+                    <tabBarItem key="tabBarItem" title="Cart" image="cart-tab-icon" id="OgF-cK-sdh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="al3-BN-dno">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -962,6 +962,11 @@ fields*</string>
     </scenes>
     <resources>
         <image name="barcode-scanner" width="42" height="33"/>
+        <image name="cart-tab-icon" width="23" height="25"/>
+        <image name="filter-tab-icon" width="25" height="25"/>
         <image name="first" width="30" height="30"/>
+        <image name="home-tab-icon" width="26" height="25"/>
+        <image name="myaccount-tab-icon" width="25" height="25"/>
+        <image name="search-tab-icon" width="25" height="25"/>
     </resources>
 </document>
