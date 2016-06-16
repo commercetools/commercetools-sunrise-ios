@@ -122,8 +122,8 @@ class ProductOverviewViewController: UICollectionViewController {
     }
 
     @objc private func performSearch() {
-        SVProgressHUD.show()
-        if let searchText = searchController.searchBar.text {
+        if let searchText = searchController.searchBar.text where searchText != viewModel?.searchText.value {
+            SVProgressHUD.show()
             viewModel?.searchText.value = searchText
         }
     }
