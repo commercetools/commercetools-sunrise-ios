@@ -12,6 +12,7 @@ class ProductOverviewViewModel: BaseViewModel {
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let nextPageObserver: Observer<Void, NoError>
+    let searchText = MutableProperty("")
 
     // Outputs
     let title: String
@@ -27,7 +28,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
         title = NSLocalizedString("Products", comment: "POP Title")
 
-        isLoading = MutableProperty(false)
+        isLoading = MutableProperty(true)
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -45,9 +46,14 @@ class ProductOverviewViewModel: BaseViewModel {
         nextPageSignal
         .observeNext { [weak self] in
             if let productCount = self?.products.count where productCount > 0 {
-                self?.queryForProductProjections(offset: UInt(productCount))
+                self?.queryForProductProjections(offset: UInt(productCount), text: self?.searchText.value ?? "")
             }
         }
+
+        searchText.signal
+        .observeNext({ [weak self] searchText in
+            self?.queryForProductProjections(offset: 0, text: searchText)
+        })
     }
 
     func productDetailsViewModelForProductAtIndexPath(indexPath: NSIndexPath) -> ProductViewModel {
@@ -88,15 +94,14 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections(offset offset: UInt) {
+    private func queryForProductProjections(offset offset: UInt, text: String = "") {
         isLoading.value = true
 
-        // After implementing POP search, view model will be instantiated with initial query
-        Commercetools.ProductProjection.query(sort: ["createdAt desc"], limit: pageSize, offset: offset,
-                result: { result in
+        Commercetools.ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, lang: NSLocale(localeIdentifier: "en"),
+                text: text, result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
-                    products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
-                    self.products = offset == 0 ? products : self.products + products
+            products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
+                self.products = offset == 0 ? products : self.products + products
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))

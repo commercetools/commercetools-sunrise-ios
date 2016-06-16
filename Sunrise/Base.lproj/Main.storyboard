@@ -10,7 +10,7 @@
             <objects>
                 <collectionViewController id="uQS-sw-UU6" customClass="ProductOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vIp-Xt-nMU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UCF-qa-LSO">
@@ -21,7 +21,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductOverviewCell" id="v0H-ge-AMn" customClass="ProductOverviewCell" customModule="Sunrise" customModuleProvider="target">
-                                <rect key="frame" x="8" y="72" width="173" height="270"/>
+                                <rect key="frame" x="8" y="8" width="173" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="173" height="270"/>
@@ -93,7 +93,9 @@
                             <outlet property="delegate" destination="uQS-sw-UU6" id="I4h-Aq-YTS"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="vvd-2n-TRB"/>
+                    <navigationItem key="navigationItem" id="vvd-2n-TRB">
+                        <barButtonItem key="rightBarButtonItem" image="barcode-scanner" style="plain" id="33O-6R-uha"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4o4-HJ-0i8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -104,9 +106,11 @@
             <objects>
                 <navigationController id="HlC-be-hcu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="first" id="a3f-PP-Bfo"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qPZ-3V-MKv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="qPZ-3V-MKv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.9882352941176471" green="0.73333333333333328" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="uQS-sw-UU6" kind="relationship" relationship="rootViewController" id="EpW-pS-zhR"/>
@@ -125,11 +129,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Categories View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5" userLabel="Categories View">
-                                <rect key="frame" x="170" y="279" width="261" height="42"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Categories View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5" userLabel="Categories View">
+                                <rect key="frame" x="170" y="278" width="261" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -153,10 +157,15 @@
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.9882352941176471" green="0.73333333333333328" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="HlC-be-hcu" kind="relationship" relationship="viewControllers" id="PqD-qt-SAa"/>
@@ -179,11 +188,11 @@
                         <viewControllerLayoutGuide type="bottom" id="jWB-f7-lrI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LgG-tQ-i6Q">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Search View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="imj-DJ-tJH">
-                                <rect key="frame" x="200" y="279" width="201" height="42"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Search View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="imj-DJ-tJH">
+                                <rect key="frame" x="200" y="278" width="201" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,11 +214,16 @@
         <!--My Account-->
         <scene sceneID="EEC-G1-NCI">
             <objects>
-                <navigationController id="rgd-hg-sWA" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginViewController" id="rgd-hg-sWA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Account" image="first" id="GOd-ZP-QoJ"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ioP-A7-lxK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ioP-A7-lxK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.9882352941176471" green="0.73333333333333328" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.98823529409999999" green="0.73333333329999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Lb3-Wa-75F" kind="relationship" relationship="rootViewController" id="WIh-in-XwJ"/>
@@ -219,16 +233,16 @@
             </objects>
             <point key="canvasLocation" x="-668" y="1044"/>
         </scene>
-        <!--My Account-->
+        <!--Sign in-->
         <scene sceneID="3Qe-sI-m5P">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="Lb3-Wa-75F" customClass="LoginViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Lb3-Wa-75F" customClass="LoginViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AOz-Wk-r44"/>
                         <viewControllerLayoutGuide type="bottom" id="HsO-SD-s03"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CO6-1G-Z6W">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CF9-u8-FN8">
@@ -391,7 +405,7 @@ fields*</string>
                             <constraint firstItem="CF9-u8-FN8" firstAttribute="leading" secondItem="CO6-1G-Z6W" secondAttribute="leading" constant="8" id="zTt-SR-Y8D"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Account" id="EKH-g1-MyU"/>
+                    <navigationItem key="navigationItem" title="Sign in" id="EKH-g1-MyU"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                             <color key="value" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
@@ -408,20 +422,20 @@ fields*</string>
             </objects>
             <point key="canvasLocation" x="30" y="1044"/>
         </scene>
-        <!--View Controller-->
+        <!--My Orders-->
         <scene sceneID="YY1-m3-sjp">
             <objects>
-                <viewController storyboardIdentifier="OrdersViewController" id="bdE-OR-Vht" sceneMemberID="viewController">
+                <viewController id="bdE-OR-Vht" customClass="OrdersViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xX3-FV-3zZ"/>
                         <viewControllerLayoutGuide type="bottom" id="c7J-pC-DQs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4gV-F4-u5N">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="My Orders" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZHa-Ad-QZ0">
-                                <rect key="frame" x="217" y="279" width="168" height="42"/>
+                                <rect key="frame" x="217" y="222" width="168" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -434,10 +448,19 @@ fields*</string>
                             <constraint firstItem="ZHa-Ad-QZ0" firstAttribute="centerX" secondItem="4gV-F4-u5N" secondAttribute="centerX" id="ecF-vb-aDz"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="My Orders" id="OXb-k8-599">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="DiF-ec-Qwy">
+                            <connections>
+                                <action selector="logout:" destination="bdE-OR-Vht" id="fAM-wK-LLC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FOE-Pn-6ME" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="1044"/>
+            <point key="canvasLocation" x="1505" y="1044"/>
         </scene>
         <!--Cart-->
         <scene sceneID="3dP-Sg-1eB">
@@ -448,10 +471,10 @@ fields*</string>
                         <viewControllerLayoutGuide type="bottom" id="VSs-dg-w3e"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rSD-Vh-JXp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LnC-z8-fcR">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LnC-z8-fcR">
                                 <rect key="frame" x="8" y="72" width="584" height="471"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="P7E-O5-fi2">
@@ -889,9 +912,14 @@ fields*</string>
             <objects>
                 <navigationController id="1jB-PC-SmE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Cart" image="first" id="OgF-cK-sdh"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="al3-BN-dno">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="al3-BN-dno">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.9882352941176471" green="0.73333333333333328" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.98823529409999999" green="0.73333333329999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="M1X-40-gbr" kind="relationship" relationship="rootViewController" id="nWB-dp-7fk"/>
@@ -909,8 +937,31 @@ fields*</string>
             </objects>
             <point key="canvasLocation" x="834" y="-995"/>
         </scene>
+        <!--My Account-->
+        <scene sceneID="cIS-vI-kbe">
+            <objects>
+                <navigationController storyboardIdentifier="OrdersViewController" id="6ZO-WD-GqO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Account" image="first" id="bn1-vC-P3f"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="c4k-0y-Mc4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.98823529409999999" green="0.73333333329999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.98823529409999999" green="0.73333333329999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bdE-OR-Vht" kind="relationship" relationship="rootViewController" id="U9v-Nm-pmR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qcz-WB-I6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="782" y="1044"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="barcode-scanner" width="42" height="33"/>
         <image name="first" width="30" height="30"/>
     </resources>
 </document>

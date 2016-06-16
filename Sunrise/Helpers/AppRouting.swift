@@ -24,8 +24,7 @@ class AppRouting {
         - parameter isLoggedIn:               Indicator whether the user is logged in.
     */
     static func setupMyAccountRootViewController(isLoggedIn isLoggedIn: Bool) {
-        guard let tabBarController = tabBarController,
-                let myAccountNavigationController = tabBarController.viewControllers?[3] as? UINavigationController else { return }
+        guard let tabBarController = tabBarController where tabBarController.viewControllers?.count > 3 else { return }
 
         let newAccountRootViewController: UIViewController
         if isLoggedIn {
@@ -34,7 +33,7 @@ class AppRouting {
             newAccountRootViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginViewController")
         }
 
-        myAccountNavigationController.viewControllers = [newAccountRootViewController]
+        tabBarController.viewControllers?[3] = newAccountRootViewController
     }
 
 }
