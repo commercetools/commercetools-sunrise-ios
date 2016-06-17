@@ -802,11 +802,14 @@
 			baseConfigurationReference = 3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sunrise/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.Sunrise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = "Debug Staging";
 		};
@@ -880,11 +883,14 @@
 			baseConfigurationReference = 3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sunrise/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.Sunrise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = "Release Staging";
 		};
@@ -1005,11 +1011,14 @@
 			baseConfigurationReference = 5BE041370A3BD096E67F065F /* Pods-Sunrise.debug prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sunrise/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.Sunrise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = "Debug Prod";
 		};
@@ -1018,11 +1027,14 @@
 			baseConfigurationReference = 1FBFF28843B465BB315D9FFC /* Pods-Sunrise.release prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sunrise/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.Sunrise;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = "Release Prod";
 		};
