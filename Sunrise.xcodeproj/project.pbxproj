@@ -30,6 +30,7 @@
 		210BEA1E54411B936F8EFC3B /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE332CD12BB27B91DECA0 /* Cart.swift */; };
 		210BECAE13938A21A393C37E /* ProductProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEEC91A5A9FD1BB6B87A8 /* ProductProjection.swift */; };
 		210BEDB86468757333A2BF3D /* UITextField+SignalProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECFF754F592E22066C90 /* UITextField+SignalProducer.swift */; };
+		210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */; };
 		210BEE156F121F695E9A9063 /* DiscountedLineItemPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE43439B05958D1D34363 /* DiscountedLineItemPrice.swift */; };
 		210BEEE397C180AA40D0724D /* Dictionary+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */; };
 		210BEEFB2F4B848FD02FC2E6 /* DiscountedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE07D571738D36AF37F5B /* DiscountedPrice.swift */; };
@@ -85,6 +86,7 @@
 		210BE09BDDBB63DD98464192 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		210BE0EB8BF3DF720B62490C /* Money.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		210BE1786F78A2DADF4CE9BB /* Price.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
+		210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		210BE332CD12BB27B91DECA0 /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewBinding.swift; sourceTree = "<group>"; };
 		210BE43439B05958D1D34363 /* DiscountedLineItemPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountedLineItemPrice.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				21B1D8261CFCAE930005848C /* CartViewController.swift */,
 				210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */,
 				2147E6601D07860100EB21AE /* LoginViewController.swift */,
+				210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				210BEE156F121F695E9A9063 /* DiscountedLineItemPrice.swift in Sources */,
 				210BE6B5006B9DD2CC047578 /* LoginViewModel.swift in Sources */,
 				210BE8603FFDCB26D5443788 /* AppRouting.swift in Sources */,
+				210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

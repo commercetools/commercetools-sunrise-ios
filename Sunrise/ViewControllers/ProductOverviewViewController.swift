@@ -11,6 +11,10 @@ import SVProgressHUD
 class ProductOverviewViewController: UICollectionViewController {
 
     @IBInspectable var cellHeight: CGFloat = 270
+    
+    let searchController = UISearchController(searchResultsController:  nil)
+
+    private var idleTimer: NSTimer?
 
     var viewModel: ProductOverviewViewModel? {
         didSet {
@@ -21,8 +25,12 @@ class ProductOverviewViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // After implementing POP search, view model will be instantiated with initial query
         viewModel = ProductOverviewViewModel()
+        
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        navigationItem.titleView = searchController.searchBar
     }
 
     // MARK: - Bindings
@@ -43,6 +51,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
         observeAlertMessageSignal(viewModel: viewModel)
 
+        SVProgressHUD.show()
         viewModel.refreshObserver.sendNext()
     }
 
@@ -100,6 +109,25 @@ class ProductOverviewViewController: UICollectionViewController {
         }
     }
 
+    // MARK: - Search
+
+    /**
+        In order to avoid fetching search results on each change, we use the idleTimer to trigger search action.
+    */
+    private func resetIdleTimer() {
+        if let idleTimer = idleTimer {
+            idleTimer.invalidate()
+        }
+        idleTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(performSearch), userInfo: nil, repeats: false)
+    }
+
+    @objc private func performSearch() {
+        if let searchText = searchController.searchBar.text where searchText != viewModel?.searchText.value {
+            SVProgressHUD.show()
+            viewModel?.searchText.value = searchText
+        }
+    }
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -110,6 +138,16 @@ extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let cellWidth = (screenSize.width - 26) / 2
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension ProductOverviewViewController: UISearchResultsUpdating {
+
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        resetIdleTimer()
     }
 
 }
