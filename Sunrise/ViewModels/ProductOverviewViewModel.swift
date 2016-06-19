@@ -97,8 +97,8 @@ class ProductOverviewViewModel: BaseViewModel {
     private func queryForProductProjections(offset offset: UInt, text: String = "") {
         isLoading.value = true
 
-        Commercetools.ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, lang: NSLocale(localeIdentifier: "en"),
-                text: text, result: { result in
+        Commercetools.ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, offset: offset,
+                lang: NSLocale(localeIdentifier: "en"), text: text, result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
             products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
