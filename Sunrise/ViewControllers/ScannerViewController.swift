@@ -59,7 +59,7 @@ class ScannerViewController: UIViewController {
         captureSession.addOutput(metadataOutput)
 
         metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-        metadataOutput.metadataObjectTypes = [AVMetadataObjectTypePDF417Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code]
+        metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 

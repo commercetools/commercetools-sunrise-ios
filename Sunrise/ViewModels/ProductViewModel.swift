@@ -44,6 +44,12 @@ class ProductViewModel {
 
         let allVariants = product.allVariants
 
+        if let matchingVariant = allVariants.filter({ $0.isMatchingVariant ?? false }).first,
+                matchingSize = matchingVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String {
+            size.value = matchingSize
+        }
+
+
         sku <~ size.producer.map { size in
             return allVariants.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.sku ?? ""
         }
