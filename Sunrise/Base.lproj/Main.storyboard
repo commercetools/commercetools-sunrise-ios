@@ -94,7 +94,12 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="vvd-2n-TRB">
-                        <barButtonItem key="rightBarButtonItem" image="barcode-scanner" style="plain" id="33O-6R-uha"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="Gac-dK-JJQ"/>
+                        <barButtonItem key="rightBarButtonItem" image="barcode-scanner" id="33O-6R-uha">
+                            <connections>
+                                <segue destination="L9a-Lh-4Vn" kind="show" identifier="" id="IlA-iI-0eB"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4o4-HJ-0i8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -111,6 +116,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.9882352941176471" green="0.73333333333333328" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.98823529409999999" green="0.73333333329999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="uQS-sw-UU6" kind="relationship" relationship="rootViewController" id="EpW-pS-zhR"/>
@@ -935,7 +943,31 @@ fields*</string>
                 <viewControllerPlaceholder storyboardName="ProductDetails" id="PJV-Mu-UkS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ni4-Uc-TSp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="834" y="-995"/>
+            <point key="canvasLocation" x="1306.5" y="-971"/>
+        </scene>
+        <!--Scan a product-->
+        <scene sceneID="eLs-5Q-Gnc">
+            <objects>
+                <viewController id="L9a-Lh-4Vn" customClass="ScannerViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MZ0-3T-x3W"/>
+                        <viewControllerLayoutGuide type="bottom" id="J6D-zd-OfU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kWc-RG-4ic">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Scan a product" id="SSV-40-ZHv">
+                        <barButtonItem key="backBarButtonItem" title=" " id="dHW-KN-M9E"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="PJV-Mu-UkS" kind="show" identifier="showScannedProduct" id="kl4-r7-DEW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c99-yq-e3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="794" y="-995"/>
         </scene>
         <!--My Account-->
         <scene sceneID="cIS-vI-kbe">
@@ -969,4 +1001,7 @@ fields*</string>
         <image name="myaccount-tab-icon" width="25" height="25"/>
         <image name="search-tab-icon" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="weO-a3-oIl"/>
+    </inferredMetricsTieBreakers>
 </document>
