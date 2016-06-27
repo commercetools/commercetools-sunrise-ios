@@ -29,7 +29,7 @@ class CartViewController: UIViewController {
         tableView.layer.borderColor = borderColor.CGColor
         tableView.tableFooterView = UIView()
 
-        refreshControl.addTarget(self, action: #selector(CartViewController.refresh), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
     }
 

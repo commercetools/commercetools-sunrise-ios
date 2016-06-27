@@ -6,7 +6,6 @@ import UIKit
 import Commercetools
 import ReactiveCocoa
 import Result
-import SVProgressHUD
 
 class OrdersViewController: UIViewController {
 
@@ -15,6 +14,8 @@ class OrdersViewController: UIViewController {
     var ordersHeader = NSBundle.mainBundle().loadNibNamed("OrdersHeaderView", owner: nil, options: nil).first as! OrdersHeaderView
 
     var reservationsHeader = NSBundle.mainBundle().loadNibNamed("OrdersHeaderView", owner: nil, options: nil).first as! OrdersHeaderView
+
+    private let refreshControl = UIRefreshControl()
 
     var viewModel: OrdersViewModel? {
         didSet {
@@ -29,14 +30,15 @@ class OrdersViewController: UIViewController {
         tableView.tableFooterView = UIView()
 
         configureHeaderViews()
+
+        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
     }
 
-    private func configureHeaderViews() {
-        var recognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
-        ordersHeader.addGestureRecognizer(recognizer)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
-        recognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
-        reservationsHeader.addGestureRecognizer(recognizer)
+        viewModel?.refreshObserver.sendNext()
     }
 
     // MARK: - Bindings
@@ -48,8 +50,10 @@ class OrdersViewController: UIViewController {
         .observeOn(UIScheduler())
         .startWithNext({ [weak self] isLoading in
             if !isLoading {
-                self?.tableView?.reloadData()
-                SVProgressHUD.dismiss()
+                self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
+            } else {
+                self?.refreshControl.beginRefreshing()
             }
         })
 
@@ -90,7 +94,6 @@ class OrdersViewController: UIViewController {
 
         observeAlertMessageSignal(viewModel: viewModel)
 
-        SVProgressHUD.show()
         viewModel.refreshObserver.sendNext()
     }
 
@@ -104,7 +107,21 @@ class OrdersViewController: UIViewController {
         }
     }
 
-    // MARK: - Headers tap recognizer
+    // MARK: - Refreshing
+
+    @objc private func refresh() {
+        viewModel?.refreshObserver.sendNext()
+    }
+
+    // MARK: - Headers configuration
+
+    private func configureHeaderViews() {
+        var recognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
+        ordersHeader.addGestureRecognizer(recognizer)
+
+        recognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
+        reservationsHeader.addGestureRecognizer(recognizer)
+    }
 
     func handleTap(recognizer: UITapGestureRecognizer) {
         if let headerView = recognizer.view, viewModel = viewModel {
