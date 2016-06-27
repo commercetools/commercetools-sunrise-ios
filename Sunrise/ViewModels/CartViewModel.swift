@@ -124,73 +124,38 @@ class CartViewModel: BaseViewModel {
                     }
                 })
     }
-
+    
     // MARK: - Cart overview calculations
-
-    private func calculateOrderTotal() -> String {
+    
+    func calculateOrderTotal() -> String {
         guard let cart = cart.value, totalPrice = cart.totalPrice else { return "" }
-
+        
         if let totalGross = cart.taxedPrice?.totalGross {
             return totalGross.description
-
+            
         } else {
             return totalPrice.description
         }
     }
 
-    private func calculateOrderDiscount() -> String {
+    func calculateSubtotal() -> String {
         guard let lineItems = cart.value?.lineItems else { return "" }
-
-        let totalOrderDiscountAmount = lineItems.reduce(0, combine: { $0 + calculateCartDiscountForLineItem($1) })
-        return Money(currencyCode: lineItems.first?.totalPrice?.currencyCode ?? "",
-                     centAmount: totalOrderDiscountAmount).description
-
+        return calculateSubtotal(lineItems)
     }
 
-    private func calculateCartDiscountForLineItem(lineItem: LineItem) -> Int {
-        guard let discountedPricePerQuantity = lineItem.discountedPricePerQuantity, quantity = lineItem.quantity else { return 0 }
-
-        let discountedPriceAmount = discountedPricePerQuantity.reduce(0, combine: {
-            if let quantity = $1.quantity, discountedAmount = $1.discountedPrice?.value?.centAmount {
-                return $0 + quantity * discountedAmount
-            }
-            return $0
-        })
-        return discountedPriceAmount > 0 ? quantity * calculateAmountForOneLineItem(lineItem) - discountedPriceAmount : 0
-    }
-
-    private func calculateTax() -> String {
+    func calculateTax() -> String {
         guard let cart = cart.value, totalGrossAmount = cart.taxedPrice?.totalGross?.centAmount,
         totalNetAmount = cart.taxedPrice?.totalNet?.centAmount else { return "" }
 
         return Money(currencyCode: cart.lineItems?.first?.totalPrice?.currencyCode ?? "",
-                     centAmount: totalGrossAmount - totalNetAmount).description
+                centAmount: totalGrossAmount - totalNetAmount).description
     }
 
-    private func calculateSubtotal() -> String {
+    func calculateOrderDiscount() -> String {
         guard let lineItems = cart.value?.lineItems else { return "" }
-
-        var money = Money(currencyCode: lineItems.first?.totalPrice?.currencyCode ?? "")
-
-        let subtotal = lineItems.map {
-            let quantity = $0.quantity ?? 0
-            let amount = calculateAmountForOneLineItem($0)
-            return quantity * amount
-        }.reduce(0, combine: { $0 + $1 }) ?? 0
-
-        money.centAmount = subtotal
-        return money.description
+        return calculateOrderDiscount(lineItems)
     }
 
-    private func calculateAmountForOneLineItem(lineItem: LineItem) -> Int {
-        if let discountedAmount = lineItem.price?.discounted?.value?.centAmount {
-            return discountedAmount
 
-        } else if let amount = lineItem.price?.value?.centAmount {
-            return amount
 
-        } else {
-            return 0
-        }
-    }
 }
