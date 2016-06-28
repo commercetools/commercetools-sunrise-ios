@@ -1,9 +1,5 @@
 //
-//  OrdersHeaderView.swift
-//  Sunrise
-//
-//  Created by Nikola Mladenovic on 6/26/16.
-//  Copyright © 2016 Commercetools. All rights reserved.
+// Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
 import UIKit
@@ -13,8 +9,20 @@ class OrdersHeaderView: UIView {
     @IBInspectable var activeColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var inactiveColor: UIColor = UIColor.whiteColor()
     
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var columnDescriptionView: UIView!
-    @IBOutlet weak var expansionIcon: UIImageView!
+    @IBOutlet weak var footerSeparatorLineHeight: NSLayoutConstraint!
+    @IBOutlet weak var columnTitlesHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var expansionIcon: UIImageView!
+
+    var columnDescriptionViewHidden: Bool {
+        get {
+            return footerSeparatorLineHeight.constant == 0
+        }
+        set(hidden) {
+            footerSeparatorLineHeight.constant = hidden ? 0 : 1
+            columnTitlesHeight.constant = hidden ? 0 : 25
+        }
+    }
+
 }

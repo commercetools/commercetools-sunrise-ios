@@ -75,8 +75,9 @@ class OrdersViewController: UIViewController {
             guard let ordersHeader = self?.ordersHeader else { return }
             ordersHeader.expansionIcon.image = UIImage(named: ordersExpanded ? "minus-icon" : "plus-icon")
             ordersHeader.backgroundColor = ordersExpanded ? ordersHeader.activeColor : ordersHeader.inactiveColor
+            ordersHeader.columnDescriptionViewHidden = !ordersExpanded
             UIView.animateWithDuration(0.3, animations: {
-                ordersHeader.columnDescriptionView.hidden = !ordersExpanded
+                ordersHeader.layoutIfNeeded()
             })
 
         })
@@ -87,8 +88,9 @@ class OrdersViewController: UIViewController {
             guard let reservationsHeader = self?.reservationsHeader else { return }
             reservationsHeader.expansionIcon.image = UIImage(named: reservationsExpanded ? "minus-icon" : "plus-icon")
             reservationsHeader.backgroundColor = reservationsExpanded ? reservationsHeader.activeColor : reservationsHeader.inactiveColor
+            reservationsHeader.columnDescriptionViewHidden = !reservationsExpanded
             UIView.animateWithDuration(0.3, animations: {
-                reservationsHeader.columnDescriptionView.hidden = !reservationsExpanded
+                reservationsHeader.layoutIfNeeded()
             })
         })
 
