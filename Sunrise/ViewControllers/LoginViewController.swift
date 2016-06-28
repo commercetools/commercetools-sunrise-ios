@@ -27,7 +27,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        emailField.keyboardType = .EmailAddress
         loginFormView.layer.borderColor = borderColor.CGColor
         viewModel = LoginViewModel()
     }
