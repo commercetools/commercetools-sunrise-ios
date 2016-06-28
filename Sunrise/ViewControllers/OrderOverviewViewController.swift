@@ -7,40 +7,34 @@ import ReactiveCocoa
 import Result
 import SDWebImage
 
-class CartViewController: UIViewController {
+class OrderOverviewViewController: UIViewController {
 
     @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
-    
+
     @IBOutlet weak var numberOfItemsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: CartViewModel? {
+    var viewModel: OrderOverviewViewModel? {
         didSet {
             bindViewModel()
         }
     }
 
-    private let refreshControl = UIRefreshControl()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel = CartViewModel()
         tableView.layer.borderColor = borderColor.CGColor
         tableView.tableFooterView = UIView()
 
-        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl)
+        if viewModel != nil {
+            bindViewModel()
+        }
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        viewModel?.refreshObserver.sendNext()
-    }
+    // MARK: - Bindings
 
     func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel = viewModel where isViewLoaded() else { return }
 
         viewModel.numberOfItems.producer
         .observeOn(UIScheduler())
@@ -48,28 +42,11 @@ class CartViewController: UIViewController {
             self?.numberOfItemsLabel.text = numberOfItems
         })
 
-        viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isLoading in
-            if !isLoading {
-                self?.tableView.reloadData()
-                self?.refreshControl.endRefreshing()
-            } else {
-                self?.refreshControl.beginRefreshing()
-            }
-        })
-
-        viewModel.cart.producer
+        viewModel.order.producer
         .observeOn(UIScheduler())
         .startWithNext { [weak self] _ in
             self?.tableView.reloadData()
         }
-
-        observeAlertMessageSignal(viewModel: viewModel)
-    }
-
-    @objc private func refresh() {
-        viewModel?.refreshObserver.sendNext()
     }
 
     private func bindCartSummaryCell(summaryCell: CartSummaryCell) {
@@ -101,7 +78,9 @@ class CartViewController: UIViewController {
 
 }
 
-extension CartViewController: UITableViewDataSource {
+// MARK: - UITableViewDataSource
+
+extension OrderOverviewViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
@@ -109,12 +88,12 @@ extension CartViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let lineItemCell = tableView.dequeueReusableCellWithIdentifier("CartItemCell") as! CartLineItemCell
+        let lineItemCell = tableView.dequeueReusableCellWithIdentifier("OrderItemCell") as! CartLineItemCell
 
         guard let viewModel = viewModel else { return lineItemCell }
 
         if indexPath.row == viewModel.numberOfRowsInSection(0) - 1 {
-            let summaryCell = tableView.dequeueReusableCellWithIdentifier("CartSummaryCell") as! CartSummaryCell
+            let summaryCell = tableView.dequeueReusableCellWithIdentifier("OrderSummaryCell") as! CartSummaryCell
             bindCartSummaryCell(summaryCell)
             return summaryCell
 
@@ -122,6 +101,18 @@ extension CartViewController: UITableViewDataSource {
             bindLineItemCell(lineItemCell, indexPath: indexPath)
             return lineItemCell
         }
+    }
+
+}
+
+// MARK: - UITableViewDelegate
+
+extension OrderOverviewViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        guard let viewModel = viewModel else { return 0 }
+        let numberOfRows = viewModel.numberOfRowsInSection(indexPath.section)
+        return indexPath.row == numberOfRows - 1 ? 150 : 225
     }
 
 }
