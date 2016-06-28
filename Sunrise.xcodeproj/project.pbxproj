@@ -64,6 +64,7 @@
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */; };
+		21FDB47D1D219B580028DDC9 /* OrdersViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
 		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
@@ -152,6 +153,7 @@
 		21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SunriseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseUITests.swift; sourceTree = "<group>"; };
 		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModelSpec.swift; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug staging.xcconfig"; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */,
 				210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */,
 				210A5B281CFFBE8200217A86 /* CartViewModelSpec.swift */,
+				21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				215C4F6B1CF28CC600A99790 /* NSBundle+CurrentTestBundle.swift in Sources */,
 				21C637821CF730380079945A /* ProductOverviewViewModelSpec.swift in Sources */,
 				215C4F681CF2836400A99790 /* ProductViewModelSpec.swift in Sources */,
+				21FDB47D1D219B580028DDC9 /* OrdersViewModelSpec.swift in Sources */,
 				210A5B291CFFBE8200217A86 /* CartViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

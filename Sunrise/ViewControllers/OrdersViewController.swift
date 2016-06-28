@@ -157,7 +157,7 @@ extension OrdersViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfItemsInSection(section) ?? 0
+        return viewModel?.numberOfRowsInSection(section) ?? 0
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

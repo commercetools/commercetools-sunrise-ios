@@ -82,7 +82,7 @@ class OrdersViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
-    func numberOfItemsInSection(section: Int) -> Int {
+    func numberOfRowsInSection(section: Int) -> Int {
         if section == 0 {
             return ordersExpanded.value ? orders.count : 0
         } else {
