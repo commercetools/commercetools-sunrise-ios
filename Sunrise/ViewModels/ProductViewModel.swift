@@ -16,6 +16,7 @@ class ProductViewModel {
     let price = MutableProperty("")
     let oldPrice = MutableProperty("")
     let imageUrl = MutableProperty("")
+    let quantities = (1...9).map { String($0) }
 
     private let product: ProductProjection
 

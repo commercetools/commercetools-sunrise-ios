@@ -43,7 +43,7 @@
                                 </variation>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wns-pL-fEs">
-                                <rect key="frame" x="10" y="314" width="580" height="131"/>
+                                <rect key="frame" x="10" y="314" width="580" height="174"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-GT-kre">
                                         <rect key="frame" x="0.0" y="0.0" width="580" height="22"/>
@@ -94,6 +94,48 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7mE-QX-47U">
+                                        <rect key="frame" x="0.0" y="139" width="580" height="35"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ny-F3-hS4" customClass="IQDropDownTextField">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="dYj-l9-K1E"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <real key="value" value="1.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6cT-Sl-PTE">
+                                                <rect key="frame" x="40" y="0.0" width="10" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="10" id="EE8-z1-9md"/>
+                                                </constraints>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4h-rb-z3b">
+                                                <rect key="frame" x="50" y="0.0" width="170" height="35"/>
+                                                <color key="backgroundColor" red="1" green="0.72941176470000002" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="qQv-3X-gXQ"/>
+                                                    <constraint firstAttribute="width" constant="170" id="vmL-AI-Z3F"/>
+                                                </constraints>
+                                                <state key="normal" title="  ADD TO BAG" image="add-to-cart">
+                                                    <color key="titleColor" red="0.2470588235" green="0.23137254900000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addToCart:" destination="ixJ-Ux-evy" eventType="touchUpInside" id="DWl-ev-SSy"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ydn-f6-iGa">
+                                                <rect key="frame" x="220" y="0.0" width="360" height="35"/>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -110,11 +152,17 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="quantityBorderColor">
+                            <color key="value" red="1" green="0.72941176470588232" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="activePriceLabel" destination="igd-ff-OMm" id="msK-Zb-YQa"/>
                         <outlet property="priceBeforeDiscount" destination="3n7-OD-cao" id="rDj-El-0dF"/>
                         <outlet property="productImageView" destination="wQx-F2-Vf6" id="Ztc-kM-IzU"/>
                         <outlet property="productNameLabel" destination="jLh-GT-kre" id="lbh-9D-gFf"/>
+                        <outlet property="quantityField" destination="9ny-F3-hS4" id="yXv-3F-HxS"/>
                         <outlet property="sizeField" destination="lI4-iG-erI" id="eh2-RL-Hev"/>
                         <outlet property="skuLabel" destination="1df-TV-Xit" id="XfE-Zt-bmx"/>
                     </connections>
@@ -124,4 +172,7 @@
             <point key="canvasLocation" x="834" y="-995"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add-to-cart" width="18" height="19"/>
+    </resources>
 </document>

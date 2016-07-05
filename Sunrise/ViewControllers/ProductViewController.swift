@@ -10,12 +10,15 @@ import SDWebImage
 
 class ProductViewController: UIViewController {
 
+    @IBInspectable var quantityBorderColor: UIColor = UIColor.yellowColor()
+
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var sizeField: IQDropDownTextField!
     @IBOutlet weak var skuLabel: UILabel!
     @IBOutlet weak var priceBeforeDiscount: UILabel!
     @IBOutlet weak var activePriceLabel: UILabel!
+    @IBOutlet weak var quantityField: IQDropDownTextField!
     
     var viewModel: ProductViewModel? {
         didSet {
@@ -28,6 +31,10 @@ class ProductViewController: UIViewController {
 
         sizeField.isOptionalDropDown = false
         sizeField.dropDownMode = .TextPicker
+
+        quantityField.isOptionalDropDown = false
+        quantityField.dropDownMode = .TextPicker
+        quantityField.layer.borderColor = quantityBorderColor.CGColor
 
         if viewModel != nil {
             bindViewModel()
@@ -42,6 +49,9 @@ class ProductViewController: UIViewController {
         productNameLabel.text = viewModel.name
         sizeField.itemList = viewModel.sizes
         sizeField.setSelectedItem(viewModel.size.value, animated: false)
+
+        quantityField.itemList = viewModel.quantities
+        quantityField.setSelectedItem(viewModel.quantities.first ?? "N/A", animated: false)
 
         viewModel.size <~ sizeField.signalProducer()
 
@@ -72,5 +82,8 @@ class ProductViewController: UIViewController {
             }
     }
 
+    @IBAction func addToCart(sender: UIButton) {
+        
+    }
 
 }
