@@ -8,7 +8,7 @@ struct ProductVariant: Mappable {
 
     // MARK: - Properties
 
-    var id: String?
+    var id: Int?
     var sku: String?
     var prices: [Price]?
     var attributes: [Attribute]?
