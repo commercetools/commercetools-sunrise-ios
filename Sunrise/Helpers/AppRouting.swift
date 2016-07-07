@@ -21,6 +21,7 @@ class AppRouting {
 
     /**
         In case the user is not logged in, my account tab presents login screen, or my orders otherwise.
+
         - parameter isLoggedIn:               Indicator whether the user is logged in.
     */
     static func setupMyAccountRootViewController(isLoggedIn isLoggedIn: Bool) {
@@ -34,6 +35,15 @@ class AppRouting {
         }
 
         tabBarController.viewControllers?[3] = newAccountRootViewController
+    }
+
+    /**
+        Presents tab containing cart overview.
+    */
+    static func switchToCartTab() {
+        guard let tabBarController = tabBarController where tabBarController.viewControllers?.count > 4 else { return }
+
+        tabBarController.selectedIndex = 4
     }
 
 }

@@ -72,7 +72,9 @@ class LoginViewController: UIViewController {
             self?.loginButton.enabled = inputIsValid
         })
 
-        viewModel.loginAction.events.observeOn(UIScheduler()).observeNext({ [weak self] event in
+        viewModel.loginAction.events
+        .observeOn(UIScheduler())
+        .observeNext({ [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
             case .Completed:
