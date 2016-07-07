@@ -23,7 +23,7 @@ class ProductViewModel: BaseViewModel {
 
     // Dialogue texts
     let addToCartSuccessTitle = NSLocalizedString("Product added to cart", comment: "Product added to cart")
-    let addToCartSuccessMessage = NSLocalizedString("You have successfully added product to your cart. Would you like to continue looking for more, or go to cart overview?", comment: "Product added to cart message")
+    let addToCartSuccessMessage = NSLocalizedString("Would you like to continue looking for more, or go to cart overview?", comment: "Product added to cart message")
     let continueTitle = NSLocalizedString("Continue", comment: "Continue")
     let cartOverviewTitle = NSLocalizedString("Cart overview", comment: "Cart overview")
     let addToCartFailedTitle = NSLocalizedString("Couldn't add product to cart", comment: "Adding product to cart failed")
