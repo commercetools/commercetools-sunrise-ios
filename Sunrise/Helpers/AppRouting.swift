@@ -46,4 +46,16 @@ class AppRouting {
         tabBarController.selectedIndex = 4
     }
 
+    /**
+        Switches back to the home tab, and activates search bar as a first responder.
+    */
+    static func switchToSearch() {
+        guard let tabBarController = tabBarController, homeTabNavigationController = tabBarController.viewControllers?.first as? UINavigationController,
+                productOverviewViewController = homeTabNavigationController.viewControllers.first as? ProductOverviewViewController else { return }
+
+        tabBarController.selectedIndex = 0
+        homeTabNavigationController.popToRootViewControllerAnimated(true)
+        productOverviewViewController.searchController.searchBar.becomeFirstResponder()
+    }
+
 }
