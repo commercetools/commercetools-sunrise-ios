@@ -44,11 +44,11 @@ class ProductOverviewViewModelSpec: QuickSpec {
                 }
 
                 it("has properly formatted price from master variant") {
-                    expect(overviewViewModel.productPriceAtIndexPath(indexPath)).to(equal("€96.00"))
+                    expect(overviewViewModel.productPriceAtIndexPath(indexPath)).to(equal("€96.25"))
                 }
 
                 it("has properly formatted price before discount from master variant") {
-                    expect(overviewViewModel.productOldPriceAtIndexPath(indexPath)).to(equal("€137.00"))
+                    expect(overviewViewModel.productOldPriceAtIndexPath(indexPath)).to(equal("€137.50"))
                 }
             }
         }

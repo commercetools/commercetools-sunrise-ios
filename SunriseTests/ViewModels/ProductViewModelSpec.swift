@@ -44,11 +44,11 @@ class ProductViewModelSpec: QuickSpec {
             }
 
             it("initially has properly formatted price from master variant") {
-                expect(productViewModel.price.value).to(equal("€96.00"))
+                expect(productViewModel.price.value).to(equal("€96.25"))
             }
 
             it("initially has properly formatted price before discount from master variant") {
-                expect(productViewModel.oldPrice.value).to(equal("€137.00"))
+                expect(productViewModel.oldPrice.value).to(equal("€137.50"))
             }
 
             context("after changing selected size") {
