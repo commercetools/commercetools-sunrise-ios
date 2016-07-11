@@ -56,6 +56,7 @@
 		217581B81CF4865A0067BE15 /* ProductOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */; };
 		218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218988241CED0C78006E7757 /* ProductDetails.storyboard */; };
 		219B2EBC1D1B7348004579DD /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B2EBB1D1B7348004579DD /* OrderCell.swift */; };
+		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
@@ -140,6 +141,7 @@
 		217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewViewController.swift; sourceTree = "<group>"; };
 		218988241CED0C78006E7757 /* ProductDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		219B2EBB1D1B7348004579DD /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
+		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */,
 				210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */,
 				210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */,
+				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */,
 				210BE90F7DFDB4A06F882E59 /* ProductViewController.swift in Sources */,
 				210BE50562A2F0BF23779C61 /* ProductViewModel.swift in Sources */,
+				21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */,
 				211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */,
 				210BEEE397C180AA40D0724D /* Dictionary+LocalizedString.swift in Sources */,
 				210BECAE13938A21A393C37E /* ProductProjection.swift in Sources */,
