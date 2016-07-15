@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (3.4.0)
-  - Commercetools (0.1.0):
+  - Alamofire (3.4.1)
+  - Commercetools (0.2.0):
     - Alamofire (~> 3.3)
   - IQDropDownTextField (1.1.0)
   - IQKeyboardManagerSwift (4.0.3)
@@ -25,7 +25,7 @@ PODS:
   - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
-  - Commercetools (~> 0.1)
+  - Commercetools (~> 0.2)
   - IQDropDownTextField
   - IQKeyboardManagerSwift (= 4.0.3)
   - Nimble
@@ -36,8 +36,8 @@ DEPENDENCIES:
   - SVProgressHUD
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  Commercetools: ca92be720da1d4c2e4afce759b74967576931585
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Commercetools: 8970ced225a99dee494ba8dc87e5bc0b0b5b40e9
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   IQKeyboardManagerSwift: b6883b720b0e76473692fdc80828442566e1075f
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
