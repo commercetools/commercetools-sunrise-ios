@@ -29,8 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         IQKeyboardManager.sharedManager().enable = true
+        
+        initializePushTechSDK()
 
         return true
+    }
+    
+    private func initializePushTechSDK() {
+#if DEBUG
+        PSHEngine.initializeWithAppId("5786c12785216d3ab8000045", appSecret: "1e9898f4f8722cfcae67e45bd96849f6", notificationDelegate: nil, eventBusDelegate: nil, logLevel: .Debug)
+#else
+        PSHEngine.initializeWithAppId("5786c0ab85216d031b00004b", appSecret: "b2560ca0865d797013615d232bbe5991", notificationDelegate: nil, eventBusDelegate: nil, logLevel: .Error)
+#endif
     }
 
 }

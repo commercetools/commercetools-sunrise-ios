@@ -60,8 +60,9 @@
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
-		21B8B1201D3A4759000B0493 /* PushTechSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B8B11E1D3A4759000B0493 /* PushTechSDK.framework */; };
-		21B8B1211D3A4759000B0493 /* PushTechSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21B8B11F1D3A4759000B0493 /* PushTechSDKResources.bundle */; };
+		21B8B1251D3A4E01000B0493 /* PushTechSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */; };
+		21B8B1261D3A4E01000B0493 /* PushTechSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21B8B1241D3A4E01000B0493 /* PushTechSDKResources.bundle */; };
+		21B8B1281D3A4EC2000B0493 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B8B1271D3A4EC2000B0493 /* CoreData.framework */; };
 		21B9001A1CFE07C700E053F9 /* CartLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B900191CFE07C700E053F9 /* CartLineItemCell.swift */; };
 		21C637821CF730380079945A /* ProductOverviewViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */; };
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
@@ -147,8 +148,10 @@
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		21B8B11E1D3A4759000B0493 /* PushTechSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushTechSDK.framework; sourceTree = "<group>"; };
-		21B8B11F1D3A4759000B0493 /* PushTechSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PushTechSDKResources.bundle; sourceTree = "<group>"; };
+		21B8B1221D3A4D7D000B0493 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushTechSDK.framework; sourceTree = "<group>"; };
+		21B8B1241D3A4E01000B0493 /* PushTechSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PushTechSDKResources.bundle; sourceTree = "<group>"; };
+		21B8B1271D3A4EC2000B0493 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		21B900191CFE07C700E053F9 /* CartLineItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartLineItemCell.swift; sourceTree = "<group>"; };
 		21CDC4941CE91D9B009D2638 /* Sunrise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunrise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4971CE91D9B009D2638 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,7 +189,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */,
-				21B8B1201D3A4759000B0493 /* PushTechSDK.framework in Frameworks */,
+				21B8B1281D3A4EC2000B0493 /* CoreData.framework in Frameworks */,
+				21B8B1251D3A4E01000B0493 /* PushTechSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +342,7 @@
 				21CDC4A51CE91D9B009D2638 /* Info.plist */,
 				21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */,
 				21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */,
+				21B8B1221D3A4D7D000B0493 /* Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -429,8 +434,9 @@
 		A5930317FAADB466B9D2E3C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				21B8B11E1D3A4759000B0493 /* PushTechSDK.framework */,
-				21B8B11F1D3A4759000B0493 /* PushTechSDKResources.bundle */,
+				21B8B1271D3A4EC2000B0493 /* CoreData.framework */,
+				21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */,
+				21B8B1241D3A4E01000B0493 /* PushTechSDKResources.bundle */,
 				9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */,
 				39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */,
 				7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */,
@@ -558,7 +564,7 @@
 				21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */,
 				216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */,
 				2168A02B1D1A9F0C00C244D8 /* Account.storyboard in Resources */,
-				21B8B1211D3A4759000B0493 /* PushTechSDKResources.bundle in Resources */,
+				21B8B1261D3A4E01000B0493 /* PushTechSDKResources.bundle in Resources */,
 				218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,7 +837,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-D STAGING";
+				OTHER_SWIFT_FLAGS = "-D STAGING -D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -846,7 +852,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PushTechSDK_iOS_v2_2",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sunrise/Info.plist;
@@ -879,6 +884,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Debug Staging";
 		};
@@ -956,7 +962,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PushTechSDK_iOS_v2_2",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sunrise/Info.plist;
@@ -989,6 +994,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Release Staging";
 		};
@@ -1058,7 +1064,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-D PROD";
+				OTHER_SWIFT_FLAGS = "-D PROD -D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1113,7 +1119,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PushTechSDK_iOS_v2_2",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sunrise/Info.plist;
@@ -1146,6 +1151,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Debug Prod";
 		};
@@ -1158,7 +1164,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PushTechSDK_iOS_v2_2",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Sunrise/Info.plist;
@@ -1191,6 +1196,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Release Prod";
 		};
