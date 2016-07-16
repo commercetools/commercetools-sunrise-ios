@@ -37,10 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func initializePushTechSDK() {
 #if DEBUG
-        PSHEngine.initializeWithAppId("5786c12785216d3ab8000045", appSecret: "1e9898f4f8722cfcae67e45bd96849f6", notificationDelegate: nil, eventBusDelegate: nil, logLevel: .Debug)
+        let config = PSHConfiguration(fileAtPath: NSBundle.mainBundle().pathForResource("PushTechDevConfig", ofType: "plist"))
 #else
-        PSHEngine.initializeWithAppId("5786c0ab85216d031b00004b", appSecret: "b2560ca0865d797013615d232bbe5991", notificationDelegate: nil, eventBusDelegate: nil, logLevel: .Error)
+        let config = PSHConfiguration(fileAtPath: NSBundle.mainBundle().pathForResource("PushTechReleaseConfig", ofType: "plist"))
 #endif
+        PSHEngine.startWithConfiguration(config, eventBusDelegate: nil, notificationDelegate: nil)
+        PSHEngine.sharedInstance().setLocationAdquisition(.Always)
     }
 
 }

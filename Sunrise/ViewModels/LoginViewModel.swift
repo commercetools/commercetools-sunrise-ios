@@ -44,18 +44,44 @@ class LoginViewModel: BaseViewModel {
 
     private func loginUser(username: String, password: String) -> SignalProducer<Void, NSError> {
         return SignalProducer { observer, disposable in
-            AuthManager.sharedInstance.loginUser(username, password: password, completionHandler: { error in
+            AuthManager.sharedInstance.loginUser(username, password: password, completionHandler: { [weak self] error in
                 if let error = error {
                     observer.sendFailed(error)
                 } else {
                     observer.sendCompleted()
+                    self?.sendUserMetricsToPushTech()
                     // Save username to user defaults for displaying it later on in the app
                     NSUserDefaults.standardUserDefaults().setObject(username, forKey: kLoggedInUsername)
                     NSUserDefaults.standardUserDefaults().synchronize()
                 }
-                self.isLoading.value = false
+                self?.isLoading.value = false
             })
         }
+    }
+
+    private func sendUserMetricsToPushTech() {
+        Customer.profile({ result in
+            if let response = result.response where result.isSuccess {
+
+                if let userId = response["id"] as? String {
+                    PSHMetrics.sendMetricUserID(userId)
+                }
+
+                if let email = response["email"] as? String {
+                    PSHMetrics.sendMetricEmail(email)
+                }
+
+                if let firstName = response["firstName"] as? String {
+                    PSHMetrics.sendMetricFirstName(firstName)
+                }
+
+                if let lastName = response["lastName"] as? String {
+                    PSHMetrics.sendMetricLastName(lastName)
+                }
+
+                PSHMetrics.forceSendMetrics()
+            }
+        })
     }
 
 }
