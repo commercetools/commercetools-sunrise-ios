@@ -2,7 +2,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'Sunrise' do
-    pod 'Commercetools', '~> 0.1'
+    pod 'Commercetools', '~> 0.2'
     pod 'ReactiveCocoa', '~> 4.1'
     pod 'ObjectMapper', '~> 1.3'
     pod 'IQKeyboardManagerSwift', '4.0.3'

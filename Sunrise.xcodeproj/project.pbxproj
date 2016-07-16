@@ -16,6 +16,7 @@
 		210BE24589543CA1E27301B4 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */; };
 		210BE2894AA5A6183C744542 /* ProductVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEBC1E14062A5443A9545 /* ProductVariant.swift */; };
 		210BE32ED9DFF61C4B4097B6 /* TaxedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEE28435FDC5BFE95DCBA /* TaxedPrice.swift */; };
+		210BE3564336C89A8C10ACC4 /* PushTechReleaseConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 210BEE2BDE2D3E3ECF3EBB67 /* PushTechReleaseConfig.plist */; };
 		210BE3FDCF3E7FD1AD829994 /* CartSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE4DC5197090C201025BE /* CartSummaryCell.swift */; };
 		210BE4394C6695E42872FBE3 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0EB8BF3DF720B62490C /* Money.swift */; };
 		210BE4A88E151313C428184E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE5453FDA40B948A5034D /* CartViewModel.swift */; };
@@ -63,6 +64,7 @@
 		21B8B1251D3A4E01000B0493 /* PushTechSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */; };
 		21B8B1261D3A4E01000B0493 /* PushTechSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21B8B1241D3A4E01000B0493 /* PushTechSDKResources.bundle */; };
 		21B8B1281D3A4EC2000B0493 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B8B1271D3A4EC2000B0493 /* CoreData.framework */; };
+		21B8B12A1D3AB80E000B0493 /* PushTechDevConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21B8B1291D3AB80E000B0493 /* PushTechDevConfig.plist */; };
 		21B9001A1CFE07C700E053F9 /* CartLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B900191CFE07C700E053F9 /* CartLineItemCell.swift */; };
 		21C637821CF730380079945A /* ProductOverviewViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */; };
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
@@ -127,6 +129,7 @@
 		210BECFF754F592E22066C90 /* UITextField+SignalProducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+SignalProducer.swift"; sourceTree = "<group>"; };
 		210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModel.swift; sourceTree = "<group>"; };
 		210BEE28435FDC5BFE95DCBA /* TaxedPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaxedPrice.swift; sourceTree = "<group>"; };
+		210BEE2BDE2D3E3ECF3EBB67 /* PushTechReleaseConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = PushTechReleaseConfig.plist; sourceTree = "<group>"; };
 		210BEEC91A5A9FD1BB6B87A8 /* ProductProjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductProjection.swift; sourceTree = "<group>"; };
 		210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
 		210BEF4DF3AD5DCA4B86375B /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushTechSDK.framework; sourceTree = "<group>"; };
 		21B8B1241D3A4E01000B0493 /* PushTechSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PushTechSDKResources.bundle; sourceTree = "<group>"; };
 		21B8B1271D3A4EC2000B0493 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		21B8B1291D3AB80E000B0493 /* PushTechDevConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushTechDevConfig.plist; sourceTree = "<group>"; };
 		21B900191CFE07C700E053F9 /* CartLineItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartLineItemCell.swift; sourceTree = "<group>"; };
 		21CDC4941CE91D9B009D2638 /* Sunrise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunrise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4971CE91D9B009D2638 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -342,7 +346,9 @@
 				21CDC4A51CE91D9B009D2638 /* Info.plist */,
 				21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */,
 				21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */,
+				21B8B1291D3AB80E000B0493 /* PushTechDevConfig.plist */,
 				21B8B1221D3A4D7D000B0493 /* Bridging-Header.h */,
+				210BEE2BDE2D3E3ECF3EBB67 /* PushTechReleaseConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -556,6 +562,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21B8B12A1D3AB80E000B0493 /* PushTechDevConfig.plist in Resources */,
 				211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */,
 				211468B61D2088440011A944 /* Cart.storyboard in Resources */,
 				216153A11D1AA03B006C9627 /* Main.storyboard in Resources */,
@@ -566,6 +573,7 @@
 				2168A02B1D1A9F0C00C244D8 /* Account.storyboard in Resources */,
 				21B8B1261D3A4E01000B0493 /* PushTechSDKResources.bundle in Resources */,
 				218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */,
+				210BE3564336C89A8C10ACC4 /* PushTechReleaseConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
