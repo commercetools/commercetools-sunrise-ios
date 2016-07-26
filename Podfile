@@ -9,6 +9,8 @@ target 'Sunrise' do
     pod 'SDWebImage', '~> 3.7'
     pod 'IQDropDownTextField'
     pod 'SVProgressHUD'
+    # PushTech SDK requires MagicalRecord
+    pod 'MagicalRecord', '~> 2.2'
 end
 
 def testing_pods
