@@ -36,15 +36,11 @@ class ProductViewModel: BaseViewModel {
         })
     }()
 
-    private let product: ProductProjection
-
-    private var currencyCodeForCurrentLocale: String {
-        let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.numberStyle = .CurrencyStyle
-        currencyFormatter.locale = NSLocale.currentLocale()
-
-        return currencyFormatter.currencyCode
+    var storeSelectionViewModel: StoreSelectionViewModel {
+        return StoreSelectionViewModel(product: product, sku: sku.value)
     }
+
+    private let product: ProductProjection
 
     // MARK: Lifecycle
 
@@ -119,7 +115,7 @@ class ProductViewModel: BaseViewModel {
     private func addLineItem(quantity: String = "1") -> SignalProducer<Void, NSError> {
         return SignalProducer { observer, disposable in
 
-            var lineItemDraft: [String: AnyObject] = ["action": "addLineItem", "productId": self.product.id ?? "", "variantId": self.currentVariantId() ?? 1, "quantity": Int(quantity) ?? 1]
+            var lineItemDraft: [String: AnyObject] = ["productId": self.product.id ?? "", "variantId": self.currentVariantId() ?? 1, "quantity": Int(quantity) ?? 1]
 
             // Get the cart with state Active which has the most recent lastModifiedAt.
             Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1, result: { result in

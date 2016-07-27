@@ -3,35 +3,131 @@
 //
 
 import UIKit
+import Commercetools
 import ReactiveCocoa
+import Result
 import ObjectMapper
 
 class StoreSelectionViewModel: BaseViewModel {
 
     // Inputs
-    let expandedChannelIndexPath: MutableProperty<NSIndexPath?>
+    let selectedIndexPathObserver: Observer<NSIndexPath, NoError>
     let userLocation: MutableProperty<CLLocation?>
 
     // Outputs
     let title: String
     let isLoading: MutableProperty<Bool>
+    let contentChangesSignal: Signal<Changeset, NoError>
+    var channelDetailsIndexPath: NSIndexPath? {
+        if let expandedChannelIndexPath = expandedChannelIndexPath.value {
+            return NSIndexPath(forRow: expandedChannelIndexPath.row + 1, inSection: expandedChannelIndexPath.section)
+        }
+        return nil
+    }
+
+    // Store information for currently expanded channel
+    var streetAndNumberInfo: String {
+        if let expandedChannel = expandedChannel, street = expandedChannel.details?.street,
+                number = expandedChannel.details?.number {
+            return "\(street) \(number)"
+        }
+        return "-"
+    }
+    var zipAndCityInfo: String {
+        if let expandedChannel = expandedChannel, zip = expandedChannel.details?.zip,
+                city = expandedChannel.details?.city {
+            return "\(zip), \(city)"
+        }
+        return "-"
+    }
+    var openLine1Info: String {
+        return expandedChannel?.details?.openLine1 ?? "-"
+    }
+    var openLine2Info: String {
+        return expandedChannel?.details?.openLine2 ?? "-"
+    }
+
+    // Actions
+    lazy var reserveAction: Action<NSIndexPath, Void, NSError> = { [unowned self] in
+        return Action(enabledIf: ConstantProperty(true), { indexPath in
+            self.isLoading.value = true
+            return self.reserveProductVariant(self.channels[self.rowForChannelAtIndexPath(indexPath)])
+        })
+    }()
+
+    // Dialogue texts
+    let reservationSuccessTitle = NSLocalizedString("Product has been reserved", comment: "Successful reservation")
+    let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
+    let reservationContinueTitle = NSLocalizedString("Continue shopping", comment: "Continue shopping")
+
+    private let expandedChannelIndexPath: MutableProperty<NSIndexPath?>
+    private let selectedIndexPathSignal: Signal<NSIndexPath, NoError>
+    private let contentChangesObserver: Observer<Changeset, NoError>
 
     var channels: [Channel]
+    private var expandedChannel: Channel? {
+        if let expandedChannelIndexPath = expandedChannelIndexPath.value {
+            return channels[rowForChannelAtIndexPath(expandedChannelIndexPath)]
+        }
+        return nil
+    }
+
+    private let product: ProductProjection
+    private let sku: String
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(product: ProductProjection, sku: String) {
+        self.product = product
+        self.sku = sku
+
         isLoading = MutableProperty(true)
-
         channels = []
-
         expandedChannelIndexPath = MutableProperty(nil)
-
         userLocation = MutableProperty(nil)
-
         title = NSLocalizedString("Store Location", comment: "Store Location")
 
+        let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<NSIndexPath, NoError>.pipe()
+        self.selectedIndexPathSignal = selectedIndexPathSignal
+        self.selectedIndexPathObserver = selectedIndexPathObserver
+
+        let (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
+        self.contentChangesSignal = contentChangesSignal
+        self.contentChangesObserver = contentChangesObserver
+
         super.init()
+
+        selectedIndexPathSignal
+        .observeNext { [unowned self] selectedIndexPath in
+            let previouslyExpandedIndexPath = self.expandedChannelIndexPath.value
+
+            if previouslyExpandedIndexPath == selectedIndexPath || self.channelDetailsIndexPath == selectedIndexPath {
+                self.expandedChannelIndexPath.value = nil
+            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath where selectedIndexPath.row > previouslyExpandedIndexPath.row {
+                self.expandedChannelIndexPath.value = NSIndexPath(forRow: selectedIndexPath.row - 1, inSection: selectedIndexPath.section)
+            } else {
+                self.expandedChannelIndexPath.value = selectedIndexPath
+            }
+
+            var changeset = Changeset()
+
+            if let channelDetailsIndexPath = self.channelDetailsIndexPath, expandedChannelIndexPath = self.expandedChannelIndexPath.value
+                    where previouslyExpandedIndexPath == nil {
+                changeset.insertions = [channelDetailsIndexPath]
+                changeset.modifications = [expandedChannelIndexPath]
+            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath where self.expandedChannelIndexPath.value == nil {
+                changeset.modifications = [previouslyExpandedIndexPath]
+                changeset.deletions = [NSIndexPath(forRow: previouslyExpandedIndexPath.row + 1, inSection: previouslyExpandedIndexPath.section)]
+            } else if let channelDetailsIndexPath = self.channelDetailsIndexPath, previouslyExpandedIndexPath = previouslyExpandedIndexPath,
+                    expandedChannelIndexPath = self.expandedChannelIndexPath.value {
+                let expandedChannelToModify = expandedChannelIndexPath.row > previouslyExpandedIndexPath.row ? NSIndexPath(forRow: expandedChannelIndexPath.row + 1, inSection: expandedChannelIndexPath.section) : expandedChannelIndexPath
+
+                changeset.modifications = [previouslyExpandedIndexPath, expandedChannelToModify]
+                changeset.insertions = [channelDetailsIndexPath]
+                changeset.deletions = [NSIndexPath(forRow: previouslyExpandedIndexPath.row + 1, inSection: previouslyExpandedIndexPath.section)]
+            }
+            self.contentChangesObserver.sendNext(changeset)
+        }
 
         retrieveStores()
 
@@ -98,8 +194,8 @@ class StoreSelectionViewModel: BaseViewModel {
 
     private func rowForChannelAtIndexPath(indexPath: NSIndexPath) -> Int {
         var channelRow = indexPath.row
-        if let expandedRow = expandedChannelIndexPath.value?.row where expandedRow >= channelRow {
-            channelRow += 1
+        if let expandedRow = expandedChannelIndexPath.value?.row where channelRow > expandedRow {
+            channelRow -= 1
         }
         return channelRow
     }
@@ -108,6 +204,41 @@ class StoreSelectionViewModel: BaseViewModel {
 
     private func reserveProductVariant() {
 
+    }
+
+    private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, NSError> {
+        return SignalProducer { observer, disposable in
+            let selectedChannel = ["typeId": "channel", "id": channel.id ?? ""]
+            let lineItemDraft: [String: AnyObject] = ["productId": self.product.id ?? "",
+                                                      "variantId": self.currentVariantId() ?? 1,
+                                                      "supplyChannel": selectedChannel,
+                                                      "distributionChannel": selectedChannel]
+            let customType = ["type": ["key": "reservationOrder"],
+                              "fields": ["isReservation": true]]
+
+            Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale,
+                                       "lineItems": [lineItemDraft],
+                                       "custom": customType], result: { result in
+                if let cart = Mapper<Cart>().map(result.response), id = cart.id, version = cart.version where result.isSuccess {
+                    Commercetools.Order.create(["id": id, "version": version], expansion: nil, result: { result in
+                        if result.isSuccess {
+                            observer.sendCompleted()
+                        } else if let error = result.errors?.first where result.isFailure {
+                            observer.sendFailed(error)
+                        }
+                        self.isLoading.value = false
+                    })
+
+                } else if let error = result.errors?.first where result.isFailure {
+                    observer.sendFailed(error)
+                    self.isLoading.value = false
+                }
+            })
+        }
+    }
+
+    private func currentVariantId() -> Int? {
+        return product.allVariants.filter({ $0.sku == sku }).first?.id
     }
 
     // MARK: - Querying for physical stores
