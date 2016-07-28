@@ -14,6 +14,7 @@ class StoreDetailsCell: UITableViewCell {
     @IBOutlet weak var availabilityIndicatorView: UIView!
     @IBOutlet weak var availabilityLabel: UILabel!    
     @IBOutlet weak var expandInfoLabel: UILabel!
+    @IBOutlet weak var reserveButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

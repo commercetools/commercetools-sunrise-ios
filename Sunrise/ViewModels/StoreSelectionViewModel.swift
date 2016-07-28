@@ -155,6 +155,12 @@ class StoreSelectionViewModel: BaseViewModel {
         }
     }
 
+    func reserveButtonEnabledAtIndexPath(indexPath: NSIndexPath) -> Bool {
+        let quantity = 3
+
+        return quantity > 0
+    }
+
     func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
         let channel = channels[rowForChannelAtIndexPath(indexPath)]
 
@@ -202,15 +208,16 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // MARK: - Creating a reservation
 
-    private func reserveProductVariant() {
-
-    }
-
     private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, NSError> {
         return SignalProducer { observer, disposable in
-            let selectedChannel = ["typeId": "channel", "id": channel.id ?? ""]
-            let lineItemDraft: [String: AnyObject] = ["productId": self.product.id ?? "",
-                                                      "variantId": self.currentVariantId() ?? 1,
+            guard let channelId = channel.id, productId = self.product.id, currentVariantId = self.currentVariantId() else {
+                observer.sendFailed(NSError(domain: "Sunrise", code: 1000, userInfo: [NSLocalizedDescriptionKey: "Unexpected product values encountered"]))
+                return
+            }
+
+            let selectedChannel = ["typeId": "channel", "id": channelId]
+            let lineItemDraft: [String: AnyObject] = ["productId": productId,
+                                                      "variantId": currentVariantId,
                                                       "supplyChannel": selectedChannel,
                                                       "distributionChannel": selectedChannel]
             let customType = ["type": ["key": "reservationOrder"],

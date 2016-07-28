@@ -132,6 +132,7 @@ class StoreSelectionViewController: UITableViewController {
             cell.availabilityLabel.text = viewModel.availabilityAtIndexPath(indexPath)
             cell.expandInfoLabel.text = viewModel.expansionTextAtIndexPath(indexPath)
             cell.availabilityIndicatorView.backgroundColor = viewModel.availabilityColorAtIndexPath(indexPath)
+            cell.reserveButton.enabled = viewModel.reserveButtonEnabledAtIndexPath(indexPath)
             cell.storeImageView.sd_setImageWithURL(NSURL(string: viewModel.storeImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
         }
