@@ -17,6 +17,7 @@ class Channel: Mappable {
     var name: [String: String]?
     var description: [String: String]?
     var details: ChannelDetails?
+    var address: Address?
 
     required init?(_ map: Map) {}
 
@@ -30,6 +31,7 @@ class Channel: Mappable {
         key              <- map["key"]
         name             <- map["name"]
         description      <- map["description"]
+        address          <- map["address"]
         details          <- map["custom"]
     }
 

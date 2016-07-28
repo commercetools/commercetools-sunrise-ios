@@ -131,8 +131,10 @@ class StoreSelectionViewController: UITableViewController {
             cell.storeDistanceLabel.text = viewModel.storeDistanceAtIndexPath(indexPath)
             cell.availabilityLabel.text = viewModel.availabilityAtIndexPath(indexPath)
             cell.expandInfoLabel.text = viewModel.expansionTextAtIndexPath(indexPath)
+            cell.priceLabel.text = viewModel.productVariantPrice
             cell.availabilityIndicatorView.backgroundColor = viewModel.availabilityColorAtIndexPath(indexPath)
             cell.reserveButton.enabled = viewModel.reserveButtonEnabledAtIndexPath(indexPath)
+            cell.reserveButton.alpha = viewModel.reserveButtonEnabledAtIndexPath(indexPath) ? 1.0 : 0.6
             cell.storeImageView.sd_setImageWithURL(NSURL(string: viewModel.storeImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
         }

@@ -27,15 +27,15 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // Store information for currently expanded channel
     var streetAndNumberInfo: String {
-        if let expandedChannel = expandedChannel, street = expandedChannel.details?.street,
-                number = expandedChannel.details?.number {
+        if let expandedChannel = expandedChannel, street = expandedChannel.address?.streetName,
+                number = expandedChannel.address?.streetNumber {
             return "\(street) \(number)"
         }
         return "-"
     }
     var zipAndCityInfo: String {
-        if let expandedChannel = expandedChannel, zip = expandedChannel.details?.zip,
-                city = expandedChannel.details?.city {
+        if let expandedChannel = expandedChannel, zip = expandedChannel.address?.postalCode,
+                city = expandedChannel.address?.city {
             return "\(zip), \(city)"
         }
         return "-"
@@ -45,6 +45,15 @@ class StoreSelectionViewModel: BaseViewModel {
     }
     var openLine2Info: String {
         return expandedChannel?.details?.openLine2 ?? "-"
+    }
+    var productVariantPrice: String {
+        guard let price = currentVariant?.independentPrice, value = price.value else { return "-" }
+
+        if let discounted = price.discounted?.value {
+            return discounted.description
+        } else {
+            return value.description
+        }
     }
 
     // Actions
@@ -70,6 +79,9 @@ class StoreSelectionViewModel: BaseViewModel {
             return channels[rowForChannelAtIndexPath(expandedChannelIndexPath)]
         }
         return nil
+    }
+    private var currentVariant: ProductVariant? {
+        return product.allVariants.filter({ $0.sku == sku }).first
     }
 
     private let product: ProductProjection
@@ -156,37 +168,36 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     func reserveButtonEnabledAtIndexPath(indexPath: NSIndexPath) -> Bool {
-        let quantity = 3
-
+        let quantity = quantityForChannelAtIndexPath(indexPath)
         return quantity > 0
     }
 
     func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
         let channel = channels[rowForChannelAtIndexPath(indexPath)]
 
-        if let userLocation = userLocation.value, lat = channel.details?.lat, lon = channel.details?.lon {
-            let channelLocation = CLLocation(latitude: lat, longitude: lon)
-            let distance = userLocation.distanceFromLocation(channelLocation)
-            return String(format: "%.1f", arguments: [distance / 1000]) + " km"
-        }
+//        if let userLocation = userLocation.value, lat = channel.details?.lat, lon = channel.details?.lon {
+//            let channelLocation = CLLocation(latitude: lat, longitude: lon)
+//            let distance = userLocation.distanceFromLocation(channelLocation)
+//            return String(format: "%.1f", arguments: [distance / 1000]) + " km"
+//        }
         return "-"
     }
 
     func availabilityAtIndexPath(indexPath: NSIndexPath) -> String {
-        let quantity = 3
+        let quantity = quantityForChannelAtIndexPath(indexPath)
 
         switch quantity {
         case 0:
-            return NSLocalizedString("This item is currently not available", comment: "Item not available")
+            return NSLocalizedString("not available", comment: "Item not available")
         case 1..<3:
-            return NSLocalizedString("Hurry up! Only few items left", comment: "Few items left")
+            return NSLocalizedString("hurry up, few items left", comment: "Few items left")
         default:
-            return NSLocalizedString("This item is available", comment: "Item available")
+            return NSLocalizedString("available", comment: "Item available")
         }
     }
 
     func availabilityColorAtIndexPath(indexPath: NSIndexPath) -> UIColor {
-        let quantity = 3
+        let quantity = quantityForChannelAtIndexPath(indexPath)
 
         switch quantity {
         case 0:
@@ -196,6 +207,13 @@ class StoreSelectionViewModel: BaseViewModel {
         default:
             return UIColor(red:0.55, green:0.78, blue:0.25, alpha:1.0)
         }
+    }
+
+    private func quantityForChannelAtIndexPath(indexPath: NSIndexPath) -> Int {
+        if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id {
+            return currentVariant?.availability?.channels?[channelId]?.availableQuantity ?? 0
+        }
+        return 0
     }
 
     private func rowForChannelAtIndexPath(indexPath: NSIndexPath) -> Int {
@@ -210,7 +228,7 @@ class StoreSelectionViewModel: BaseViewModel {
 
     private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, NSError> {
         return SignalProducer { observer, disposable in
-            guard let channelId = channel.id, productId = self.product.id, currentVariantId = self.currentVariantId() else {
+            guard let channelId = channel.id, productId = self.product.id, currentVariantId = self.currentVariant?.id else {
                 observer.sendFailed(NSError(domain: "Sunrise", code: 1000, userInfo: [NSLocalizedDescriptionKey: "Unexpected product values encountered"]))
                 return
             }
@@ -242,10 +260,6 @@ class StoreSelectionViewModel: BaseViewModel {
                 }
             })
         }
-    }
-
-    private func currentVariantId() -> Int? {
-        return product.allVariants.filter({ $0.sku == sku }).first?.id
     }
 
     // MARK: - Querying for physical stores
