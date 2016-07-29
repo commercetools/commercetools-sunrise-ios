@@ -314,7 +314,8 @@ class StoreSelectionViewModel: BaseViewModel {
         isLoading.value = true
 
         // Retrieve channels which represent physical stores
-        Channel.query(predicates: ["roles contains all (\"InventorySupply\", \"ProductDistribution\") AND NOT(roles contains any (\"Primary\"))"], result: { result in
+        Channel.query(predicates: ["roles contains all (\"InventorySupply\", \"ProductDistribution\") AND NOT(roles contains any (\"Primary\"))"],
+                sort:  ["lastModifiedAt desc"], result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
             channels = Mapper<Channel>().mapArray(results) where result.isSuccess {
                 self.channels = channels
