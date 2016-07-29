@@ -76,7 +76,7 @@ class StoreSelectionViewController: UITableViewController {
 
             tableView.beginUpdates()
             tableView.deleteRowsAtIndexPaths(changeset.deletions, withRowAnimation: .Automatic)
-            tableView.reloadRowsAtIndexPaths(changeset.modifications, withRowAnimation: .Automatic)
+            tableView.reloadRowsAtIndexPaths(changeset.modifications, withRowAnimation: .None)
             tableView.insertRowsAtIndexPaths(changeset.insertions, withRowAnimation: .Automatic)
             tableView.endUpdates()
         })
