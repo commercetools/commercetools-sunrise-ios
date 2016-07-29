@@ -85,7 +85,10 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     private let geocoder = CLGeocoder()
+    private var geocodeRequestsTimer: NSTimer?
     private var channelLocations = [Channel: CLLocation]()
+    private var processedChannels = Set<Channel>()
+
     private let product: ProductProjection
     private let sku: String
 
@@ -235,18 +238,34 @@ class StoreSelectionViewModel: BaseViewModel {
         return nil
     }
 
-    private func obtainStoreLocations() {
-        channels.forEach { channel in
-            if let zip = channel.address?.postalCode, city = channel.address?.city, street = channel.address?.streetName,
-            number = channel.address?.streetNumber, country = channel.address?.country {
-                geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { [weak self] placemarks, error in
-                    if let location = placemarks?.first?.location {
-                        self?.channelLocations[channel] = location
-                        if let indexPath = self?.indexPathForChannel(channel) {
-                            self?.contentChangesObserver.sendNext(Changeset(modifications: [indexPath]))
-                        }
+    private func retrieveStoreLocations() {
+        dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            self.geocodeRequestsTimer?.invalidate()
+            self.geocodeRequestsTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(self.requestStoreLocation), userInfo: nil, repeats: true)
+        }
+    }
+
+    @objc private func requestStoreLocation() {
+        if processedChannels.count == channels.count {
+            geocodeRequestsTimer?.invalidate()
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                var channelsForProcessing = Set(self.channels)
+                channelsForProcessing.subtractInPlace(self.processedChannels)
+                if let channel = channelsForProcessing.first {
+                    if let zip = channel.address?.postalCode, city = channel.address?.city, street = channel.address?.streetName,
+                    number = channel.address?.streetNumber, country = channel.address?.country {
+                        self.geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { placemarks, error in
+                            if let location = placemarks?.first?.location {
+                                self.channelLocations[channel] = location
+                                if let indexPath = self.indexPathForChannel(channel) where error == nil {
+                                    self.contentChangesObserver.sendNext(Changeset(modifications: [indexPath]))
+                                }
+                            }
+                        })
                     }
-                })
+                    self.processedChannels.insert(channel)
+                }
             }
         }
     }
@@ -299,7 +318,7 @@ class StoreSelectionViewModel: BaseViewModel {
             if let results = result.response?["results"] as? [[String: AnyObject]],
             channels = Mapper<Channel>().mapArray(results) where result.isSuccess {
                 self.channels = channels
-                self.obtainStoreLocations()
+                self.retrieveStoreLocations()
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
