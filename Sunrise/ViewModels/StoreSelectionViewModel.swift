@@ -84,6 +84,8 @@ class StoreSelectionViewModel: BaseViewModel {
         return product.allVariants.filter({ $0.sku == sku }).first
     }
 
+    private let geocoder = CLGeocoder()
+    private var channelLocations = [Channel: CLLocation]()
     private let product: ProductProjection
     private let sku: String
 
@@ -175,11 +177,10 @@ class StoreSelectionViewModel: BaseViewModel {
     func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
         let channel = channels[rowForChannelAtIndexPath(indexPath)]
 
-//        if let userLocation = userLocation.value, lat = channel.details?.lat, lon = channel.details?.lon {
-//            let channelLocation = CLLocation(latitude: lat, longitude: lon)
-//            let distance = userLocation.distanceFromLocation(channelLocation)
-//            return String(format: "%.1f", arguments: [distance / 1000]) + " km"
-//        }
+        if let userLocation = userLocation.value, channelLocation = channelLocations[channel] {
+            let distance = userLocation.distanceFromLocation(channelLocation)
+            return String(format: "%.1f", arguments: [distance / 1000]) + " km"
+        }
         return "-"
     }
 
@@ -222,6 +223,32 @@ class StoreSelectionViewModel: BaseViewModel {
             channelRow -= 1
         }
         return channelRow
+    }
+
+    private func indexPathForChannel(channel: Channel) -> NSIndexPath? {
+        if var channelRow = channels.indexOf(channel) {
+            if let expandedRow = expandedChannelIndexPath.value?.row where channelRow >= expandedRow {
+                channelRow += 1
+            }
+            return NSIndexPath(forRow: channelRow, inSection: 0)
+        }
+        return nil
+    }
+
+    private func obtainStoreLocations() {
+        channels.forEach { channel in
+            if let zip = channel.address?.postalCode, city = channel.address?.city, street = channel.address?.streetName,
+            number = channel.address?.streetNumber, country = channel.address?.country {
+                geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { [weak self] placemarks, error in
+                    if let location = placemarks?.first?.location {
+                        self?.channelLocations[channel] = location
+                        if let indexPath = self?.indexPathForChannel(channel) {
+                            self?.contentChangesObserver.sendNext(Changeset(modifications: [indexPath]))
+                        }
+                    }
+                })
+            }
+        }
     }
 
     // MARK: - Creating a reservation
@@ -272,6 +299,7 @@ class StoreSelectionViewModel: BaseViewModel {
             if let results = result.response?["results"] as? [[String: AnyObject]],
             channels = Mapper<Channel>().mapArray(results) where result.isSuccess {
                 self.channels = channels
+                self.obtainStoreLocations()
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))

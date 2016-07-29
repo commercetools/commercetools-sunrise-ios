@@ -42,3 +42,15 @@ extension Channel: QueryEndpoint {
     static let path = "channels"
 
 }
+
+extension Channel: Hashable {
+
+    var hashValue: Int {
+        return (id ?? "").hashValue
+    }
+
+}
+
+func ==(lhs: Channel, rhs: Channel) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
