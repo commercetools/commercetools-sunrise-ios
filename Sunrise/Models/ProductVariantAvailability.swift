@@ -11,6 +11,7 @@ struct ProductVariantAvailability: Mappable {
     var isOnStock: Bool?
     var restockableInDays: Int?
     var availableQuantity: Int?
+    var channels: [String: ProductVariantAvailability]?
 
     init?(_ map: Map) {}
 
@@ -20,6 +21,7 @@ struct ProductVariantAvailability: Mappable {
         isOnStock                <- map["isOnStock"]
         restockableInDays        <- map["restockableInDays"]
         availableQuantity        <- map["availableQuantity"]
+        channels                 <- map["channels"]
     }
 
 

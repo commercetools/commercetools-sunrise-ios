@@ -14,6 +14,15 @@ class BaseViewModel {
 
     let alertMessageObserver: Observer<String, NoError>
 
+    // Convenience property for obtaining currency code for user's locale
+    var currencyCodeForCurrentLocale: String {
+        let currencyFormatter = NSNumberFormatter()
+        currencyFormatter.numberStyle = .CurrencyStyle
+        currencyFormatter.locale = NSLocale.currentLocale()
+
+        return currencyFormatter.currencyCode
+    }
+
     // MARK: - Lifecycle
 
     init() {

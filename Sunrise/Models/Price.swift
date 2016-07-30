@@ -11,7 +11,7 @@ struct Price: Mappable {
     var value: Money?
     var country: String?
     var customerGroup: [String: AnyObject]?
-    var channel: [String: AnyObject]?
+    var channel: Channel?
     var validFrom: NSDate?
     var validUntil: NSDate?
     var discounted: DiscountedPrice?

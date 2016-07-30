@@ -113,6 +113,15 @@ class ProductViewController: UIViewController {
         observeAlertMessageSignal(viewModel: viewModel)
     }
 
+    // MARK: - Navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let storeSelectionViewController = segue.destinationViewController as? StoreSelectionViewController,
+                viewModel = viewModel {
+            storeSelectionViewController.viewModel = viewModel.storeSelectionViewModel
+        }
+    }
+
     @IBAction func addToCart(sender: UIButton) {
         addToCartAction?.execute(quantityField.selectedItem)
     }
