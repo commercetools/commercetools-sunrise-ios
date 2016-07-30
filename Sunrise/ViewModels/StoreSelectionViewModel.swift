@@ -239,6 +239,7 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     private func retrieveStoreLocations() {
+        // We need to deplay each geocoding request due to service limitation
         dispatch_async(dispatch_get_main_queue()) { [unowned self] in
             self.geocodeRequestsTimer?.invalidate()
             self.geocodeRequestsTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(self.requestStoreLocation), userInfo: nil, repeats: true)
