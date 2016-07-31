@@ -26,11 +26,12 @@ class ProductOverviewViewController: UICollectionViewController {
         super.viewDidLoad()
 
         viewModel = ProductOverviewViewModel()
-        
+
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
         navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
     }
 
     // MARK: - Bindings
