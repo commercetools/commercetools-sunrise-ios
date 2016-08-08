@@ -275,7 +275,8 @@ class StoreSelectionViewModel: BaseViewModel {
 
     private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, NSError> {
         return SignalProducer { observer, disposable in
-            guard let channelId = channel.id, productId = self.product.id, currentVariantId = self.currentVariant?.id else {
+            guard let channelId = channel.id, productId = self.product.id, currentVariantId = self.currentVariant?.id,
+                    shippingAddress = channel.address?.toJSON() else {
                 observer.sendFailed(NSError(domain: "Sunrise", code: 1000, userInfo: [NSLocalizedDescriptionKey: "Unexpected product values encountered"]))
                 return
             }
@@ -289,6 +290,7 @@ class StoreSelectionViewModel: BaseViewModel {
                               "fields": ["isReservation": true]]
 
             Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale,
+                                       "shippingAddress": shippingAddress,
                                        "lineItems": [lineItemDraft],
                                        "custom": customType], result: { result in
                 if let cart = Mapper<Cart>().map(result.response), id = cart.id, version = cart.version where result.isSuccess {

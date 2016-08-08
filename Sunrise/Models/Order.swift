@@ -17,6 +17,7 @@ struct Order: Mappable {
     var totalPrice: Money?
     var taxedPrice: TaxedPrice?
     var country: String?
+    var isReservation: Bool?
 
     init?(_ map: Map) {}
 
@@ -32,6 +33,7 @@ struct Order: Mappable {
         totalPrice       <- map["totalPrice"]
         taxedPrice       <- map["taxedPrice"]
         country          <- map["country"]
+        isReservation    <- map["custom.fields.isReservation"]
     }
 
 }
