@@ -54,8 +54,11 @@ class AppRouting {
                 productOverviewViewController = homeTabNavigationController.viewControllers.first as? ProductOverviewViewController else { return }
 
         tabBarController.selectedIndex = 0
-        homeTabNavigationController.popToRootViewControllerAnimated(true)
-        productOverviewViewController.searchController.searchBar.becomeFirstResponder()
+        homeTabNavigationController.popToRootViewControllerAnimated(false)
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(50 * Double(NSEC_PER_MSEC))), dispatch_get_main_queue()) {
+            productOverviewViewController.searchController.searchBar.becomeFirstResponder()
+        }
+
     }
 
 }

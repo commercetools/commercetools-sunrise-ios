@@ -110,8 +110,8 @@ class OrdersViewModel: BaseViewModel {
         Commercetools.Order.query(sort: ["createdAt desc"], result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
             orders = Mapper<Order>().mapArray(results) where result.isSuccess {
-                // TODO Add filtering by clickandreserve custom field to differentiate orders and reservations
-                self.orders = orders
+                self.orders = orders.filter { $0.isReservation != true }
+                self.reservations = orders.filter { $0.isReservation == true }
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
