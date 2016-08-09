@@ -46,7 +46,7 @@ class StoreSelectionViewModel: BaseViewModel {
     var openLine2Info: String {
         return expandedChannel?.details?.openLine2 ?? "-"
     }
-    var productVariantPrice: String {
+    private var productVariantPrice: String {
         guard let price = currentVariant?.independentPrice, value = price.value else { return "-" }
 
         if let discounted = price.discounted?.value {
@@ -211,6 +211,18 @@ class StoreSelectionViewModel: BaseViewModel {
         default:
             return UIColor(red:0.55, green:0.78, blue:0.25, alpha:1.0)
         }
+    }
+
+    func priceForChannelAtIndexPath(indexPath: NSIndexPath) -> String {
+        if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id,
+        price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
+            if let discounted = price.discounted?.value {
+                return discounted.description
+            } else if let value = price.value {
+                return value.description
+            }
+        }
+        return productVariantPrice
     }
 
     private func quantityForChannelAtIndexPath(indexPath: NSIndexPath) -> Int {
