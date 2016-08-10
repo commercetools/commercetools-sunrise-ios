@@ -2,6 +2,7 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
+import Foundation
 import ReactiveCocoa
 import Result
 import ObjectMapper
@@ -11,6 +12,7 @@ class CartViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
+    let deleteLineItemObserver: Observer<NSIndexPath, NoError>
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -25,6 +27,7 @@ class CartViewModel: BaseViewModel {
     let cart: MutableProperty<Cart?>
 
     private let contentChangesObserver: Observer<Changeset, NoError>
+    private let deleteLineItemSignal: Signal<NSIndexPath, NoError>
 
     // MARK: - Lifecycle
 
@@ -37,6 +40,10 @@ class CartViewModel: BaseViewModel {
         self.contentChangesSignal = contentChangesSignal
         self.contentChangesObserver = contentChangesObserver
 
+        let (deleteLineItemSignal, deleteLineItemObserver) = Signal<NSIndexPath, NoError>.pipe()
+        self.deleteLineItemSignal = deleteLineItemSignal
+        self.deleteLineItemObserver = deleteLineItemObserver
+
         cart = MutableProperty(nil)
         numberOfItems <~ cart.producer.map { cart in String(cart?.lineItems?.count ?? 0) }
 
@@ -48,20 +55,27 @@ class CartViewModel: BaseViewModel {
         taxRowHidden <~ tax.producer.map { tax in tax == "" }
         orderDiscount <~ cart.producer.map { [unowned self] _ in self.calculateOrderDiscount() }
 
-        refreshSignal
-        .observeNext { [weak self] in
+        refreshSignal.observeNext { [weak self] in
             self?.queryForActiveCart()
+        }
+
+        deleteLineItemSignal.observeNext { [weak self] indexPath in
+            self?.deleteLineItemAtIndexPath(indexPath)
         }
     }
 
     // MARK: - Data Source
 
     func numberOfRowsInSection(section: Int) -> Int {
-        if let lineItemsCount = cart.value?.lineItems?.count {
+        if let lineItemsCount = cart.value?.lineItems?.count where lineItemsCount > 0 {
             return lineItemsCount + 1
         } else {
             return 0
         }
+    }
+
+    func canDeleteRowAtIndexPath(indexPath: NSIndexPath) -> Bool {
+        return indexPath.row != numberOfRowsInSection(0) - 1
     }
 
     func lineItemNameAtIndexPath(indexPath: NSIndexPath) -> String {
@@ -103,6 +117,21 @@ class CartViewModel: BaseViewModel {
 
     func lineItemTotalPriceAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
+    }
+
+    private func deleteLineItemAtIndexPath(indexPath: NSIndexPath) {
+        if let cartId = cart.value?.id, version = cart.value?.version, lineItemId = cart.value?.lineItems?[indexPath.row].id {
+            self.isLoading.value = true
+            Commercetools.Cart.update(cartId, version: version, actions: [["action": "removeLineItem",
+                                                                           "lineItemId": lineItemId]], result: { result in
+                if let errors = result.errors where result.isFailure {
+                    super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                    self.isLoading.value = false
+                }
+                self.queryForActiveCart()
+
+            })
+        }
     }
 
     // MARK: - Cart retrieval
@@ -151,10 +180,13 @@ class CartViewModel: BaseViewModel {
                 }
             }
 
-            if newLineItems.count > 0 {
+            if newLineItems.count > 0 && oldLineItems.count > 0 {
                 modifications.append(NSIndexPath(forRow: oldLineItems.count, inSection:0))
             }
             changeset.modifications = modifications
+            if newLineItems.count == 0 && oldLineItems.count > 0 {
+                deletions.append(NSIndexPath(forRow: oldLineItems.count, inSection:0))
+            }
             changeset.deletions = deletions
 
             var insertions = [NSIndexPath]()
@@ -162,6 +194,9 @@ class CartViewModel: BaseViewModel {
                 if !oldLineItems.contains(lineItem) {
                     insertions.append(NSIndexPath(forRow: i, inSection:0))
                 }
+            }
+            if oldLineItems.count == 0 && newLineItems.count > 0 {
+                insertions.append(NSIndexPath(forRow: newLineItems.count, inSection:0))
             }
             changeset.insertions = insertions
 
