@@ -35,3 +35,7 @@ struct LineItem: Mappable {
     }
 
 }
+
+func ==(lhs: LineItem, rhs: LineItem) -> Bool {
+    return lhs.id == rhs.id
+}

@@ -52,18 +52,23 @@ class CartViewController: UIViewController {
         .observeOn(UIScheduler())
         .startWithNext({ [weak self] isLoading in
             if !isLoading {
-                self?.tableView.reloadData()
                 self?.refreshControl.endRefreshing()
             } else {
                 self?.refreshControl.beginRefreshing()
             }
         })
 
-        viewModel.cart.producer
+        viewModel.contentChangesSignal
         .observeOn(UIScheduler())
-        .startWithNext { [weak self] _ in
-            self?.tableView.reloadData()
-        }
+        .observeNext({ [weak self] changeset in
+            guard let tableView = self?.tableView else { return }
+
+            tableView.beginUpdates()
+            tableView.deleteRowsAtIndexPaths(changeset.deletions, withRowAnimation: .Automatic)
+            tableView.reloadRowsAtIndexPaths(changeset.modifications, withRowAnimation: .None)
+            tableView.insertRowsAtIndexPaths(changeset.insertions, withRowAnimation: .Automatic)
+            tableView.endUpdates()
+        })
 
         observeAlertMessageSignal(viewModel: viewModel)
     }
