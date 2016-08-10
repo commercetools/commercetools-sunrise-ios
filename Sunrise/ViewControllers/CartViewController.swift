@@ -129,4 +129,14 @@ extension CartViewController: UITableViewDataSource {
         }
     }
 
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return viewModel?.canDeleteRowAtIndexPath(indexPath) ?? false
+    }
+
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            viewModel?.deleteLineItemObserver.sendNext(indexPath)
+        }
+    }
+
 }
