@@ -119,6 +119,17 @@ class CartViewModel: BaseViewModel {
         return cart.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
     }
 
+    func productDetailsViewModelForLineItemAtIndexPath(indexPath: NSIndexPath) -> ProductViewModel {
+        var product = ProductProjection()
+        if let lineItem = cart.value?.lineItems?[indexPath.row] {
+            product.id = lineItem.productId
+            // When navigating to PDP from LineItem, we only show one variant
+            product.masterVariant = lineItem.variant
+            product.name = lineItem.name
+        }
+        return ProductViewModel(product: product)
+    }
+
     private func deleteLineItemAtIndexPath(indexPath: NSIndexPath) {
         if let cartId = cart.value?.id, version = cart.value?.version, lineItemId = cart.value?.lineItems?[indexPath.row].id {
             self.isLoading.value = true
