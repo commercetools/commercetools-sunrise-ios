@@ -51,6 +51,8 @@ extension Channel: Hashable {
 
 }
 
+extension Channel: Equatable {}
+
 func ==(lhs: Channel, rhs: Channel) -> Bool {
     return lhs.hashValue == rhs.hashValue
 }
