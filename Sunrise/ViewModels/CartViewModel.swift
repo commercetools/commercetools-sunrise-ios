@@ -123,13 +123,15 @@ class CartViewModel: BaseViewModel {
         if let cartId = cart.value?.id, version = cart.value?.version, lineItemId = cart.value?.lineItems?[indexPath.row].id {
             self.isLoading.value = true
             Commercetools.Cart.update(cartId, version: version, actions: [["action": "removeLineItem",
-                                                                           "lineItemId": lineItemId]], result: { result in
-                if let errors = result.errors where result.isFailure {
+                                                                           "lineItemId": lineItemId],
+                                                                          ["action": "recalculate"]], result: { result in
+                if let cart = Mapper<Cart>().map(result.response) where result.isSuccess {
+                    self.updateCart(cart)
+                } else if let errors = result.errors where result.isFailure {
+                    self.updateCart(nil)
                     super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
-                    self.isLoading.value = false
                 }
-                self.queryForActiveCart()
-
+                self.isLoading.value = false
             })
         }
     }
