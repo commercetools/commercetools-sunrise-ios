@@ -73,9 +73,21 @@ class CartViewController: UIViewController {
         observeAlertMessageSignal(viewModel: viewModel)
     }
 
+    // MARK: - Navigation
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let selectedCell = sender as? CartLineItemCell, indexPath = tableView.indexPathForCell(selectedCell),
+                productViewController = segue.destinationViewController as? ProductViewController, viewModel = viewModel {
+            let productViewModel = viewModel.productDetailsViewModelForLineItemAtIndexPath(indexPath)
+            productViewController.viewModel = productViewModel
+        }
+    }
+
     @objc private func refresh() {
         viewModel?.refreshObserver.sendNext()
     }
+
+    // MARK: - Binding utilities
 
     private func bindCartSummaryCell(summaryCell: CartSummaryCell) {
         guard let viewModel = viewModel else { return }
