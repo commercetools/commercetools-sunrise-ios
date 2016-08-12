@@ -77,8 +77,8 @@ class CartViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let selectedCell = sender as? CartLineItemCell, indexPath = tableView.indexPathForCell(selectedCell),
-                productViewController = segue.destinationViewController as? ProductViewController, viewModel = viewModel {
-            let productViewModel = viewModel.productDetailsViewModelForLineItemAtIndexPath(indexPath)
+                productViewController = segue.destinationViewController as? ProductViewController,
+                let productViewModel = viewModel?.productDetailsViewModelForLineItemAtIndexPath(indexPath) {
             productViewController.viewModel = productViewModel
         }
     }

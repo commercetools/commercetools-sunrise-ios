@@ -34,8 +34,6 @@ struct ProductProjection: Mappable {
 
     init?(_ map: Map) {}
 
-    init() {}
-
     // MARK: - Mappable
 
     mutating func mapping(map: Map) {
