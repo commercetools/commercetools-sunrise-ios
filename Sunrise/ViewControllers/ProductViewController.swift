@@ -147,11 +147,11 @@ class ProductViewController: UIViewController {
                 message: viewModel?.addToCartSuccessMessage,
                 preferredStyle: .Alert
                 )
-        alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .Default, handler: { [weak self] _ in
-            self?.navigationController?.popViewControllerAnimated(true)
+        alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .Default, handler: { _ in
+            AppRouting.switchToHome()
         }))
         alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .Default, handler: { _ in
-            AppRouting.switchToCartTab()
+            AppRouting.switchToCartOverview()
         }))
         presentViewController(alertController, animated: true, completion: nil)
     }
