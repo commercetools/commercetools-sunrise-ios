@@ -12,8 +12,8 @@ class ProductViewModel: BaseViewModel {
     let size = MutableProperty("")
 
     // Outputs
-    let name: String
-    let sizes: [String]
+    let sizes = MutableProperty([String]())
+    let name = MutableProperty("")
     let sku = MutableProperty("")
     let price = MutableProperty("")
     let oldPrice = MutableProperty("")
@@ -36,50 +36,66 @@ class ProductViewModel: BaseViewModel {
         })
     }()
 
-    var storeSelectionViewModel: StoreSelectionViewModel {
+    var storeSelectionViewModel: StoreSelectionViewModel? {
+        guard let product = product else { return nil }
         return StoreSelectionViewModel(product: product, sku: sku.value)
     }
 
-    private let product: ProductProjection
+    private var product: ProductProjection?
 
     // MARK: Lifecycle
 
     init(product: ProductProjection) {
         self.product = product
 
-        name = product.name?.localizedString?.uppercaseString ?? ""
+        super.init()
+
+        bindViewModelProducers()
+    }
+
+    init(productId: String, size: String? = nil) {
+        self.isLoading.value = true
+
+        super.init()
+
+        retrieveProduct(productId, size: size)
+    }
+
+    // MARK: Bindings
+
+    private func bindViewModelProducers() {
+        name.value = product?.name?.localizedString?.uppercaseString ?? ""
+
         var sizes = [String]()
         // We want to show sizes only for those variants that have prices available
-        if let masterVariant = product.masterVariant, prices = masterVariant.prices,
-                defaultSize = masterVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String where
-                prices.count > 0 {
+        if let masterVariant = product?.masterVariant, prices = masterVariant.prices,
+        defaultSize = masterVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String where
+        prices.count > 0 {
             sizes.append(defaultSize)
         }
-        product.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
+        product?.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
             if let size = variant.attributes?.filter({ $0.name == "size" }).first?.value as? String {
                 sizes.append(size)
             }
         }
 
-        self.sizes = sizes
+        self.sizes.value = sizes
         size.value = sizes.first ?? "N/A"
 
-        super.init()
+        let allVariants = product?.allVariants
 
-        let allVariants = product.allVariants
-
-        if let matchingVariant = allVariants.filter({ $0.isMatchingVariant ?? false }).first,
-                matchingSize = matchingVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String {
+        if let matchingVariant = allVariants?.filter({ $0.isMatchingVariant ?? false }).first,
+        matchingSize = matchingVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String {
             size.value = matchingSize
         }
 
 
         sku <~ size.producer.map { size in
-            return allVariants.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.sku ?? ""
+            return allVariants?.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.sku ?? ""
         }
 
         imageUrl <~ size.producer.map { size in
-            return allVariants.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.images?.first?.url ?? ""
+            return allVariants?.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.images?.first?.url ?? ""
         }
 
         price <~ size.producer.map { [weak self] size in
@@ -94,7 +110,7 @@ class ProductViewModel: BaseViewModel {
 
         oldPrice <~ size.producer.map { [weak self] size in
             guard let price = self?.priceForSize(size, variants: allVariants), value = price.value,
-                    _ = price.discounted?.value else { return "" }
+            _ = price.discounted?.value else { return "" }
 
             return "\(value)"
         }
@@ -102,12 +118,12 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: Internal Helpers
 
-    private func priceForSize(size: String, variants: [ProductVariant]) -> Price? {
-        return variants.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.independentPrice
+    private func priceForSize(size: String, variants: [ProductVariant]?) -> Price? {
+        return variants?.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.independentPrice
     }
 
     private func currentVariantId() -> Int? {
-        return product.allVariants.filter({ $0.sku == sku.value }).first?.id
+        return product?.allVariants.filter({ $0.sku == sku.value }).first?.id
     }
 
     // MARK: - Cart interaction
@@ -115,7 +131,7 @@ class ProductViewModel: BaseViewModel {
     private func addLineItem(quantity: String = "1") -> SignalProducer<Void, NSError> {
         return SignalProducer { observer, disposable in
 
-            var lineItemDraft: [String: AnyObject] = ["productId": self.product.id ?? "", "variantId": self.currentVariantId() ?? 1, "quantity": Int(quantity) ?? 1]
+            var lineItemDraft: [String: AnyObject] = ["productId": self.product?.id ?? "", "variantId": self.currentVariantId() ?? 1, "quantity": Int(quantity) ?? 1]
 
             // Get the cart with state Active which has the most recent lastModifiedAt.
             Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1, result: { result in
@@ -146,6 +162,24 @@ class ProductViewModel: BaseViewModel {
                 }
             })
         }
+    }
+
+    // MARK: - Product retrieval
+
+    private func retrieveProduct(productId: String, size: String?) {
+        Commercetools.ProductProjection.byId(productId, expansion: nil, result: { result in
+            if let product = Mapper<ProductProjection>().map(result.response) where result.isSuccess {
+                self.product = product
+                self.bindViewModelProducers()
+                if let size = size {
+                    self.size.value = size
+                }
+
+            } else if let errors = result.errors where result.isFailure {
+                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            }
+            self.isLoading.value = false
+        })
     }
 
 }

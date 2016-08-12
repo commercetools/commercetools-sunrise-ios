@@ -52,9 +52,24 @@ class ProductViewController: UIViewController {
 
         addToCartAction = CocoaAction(viewModel.addToCartAction, { quantity in return quantity as! String })
 
-        productNameLabel.text = viewModel.name
-        sizeField.itemList = viewModel.sizes
-        sizeField.setSelectedItem(viewModel.size.value, animated: false)
+        viewModel.name.producer
+        .observeOn(UIScheduler())
+        .startWithNext { [weak self] name in
+            self?.productNameLabel.text = name
+        }
+
+        viewModel.sizes.producer
+        .observeOn(UIScheduler())
+        .startWithNext { [weak self] sizes in
+            self?.sizeField.itemList = sizes.count > 0 ? sizes : [""]
+            self?.sizeField.setSelectedItem(self?.viewModel?.size.value, animated: false)
+        }
+
+        viewModel.size.producer
+        .observeOn(UIScheduler())
+        .startWithNext { [weak self] size in
+            self?.sizeField.setSelectedItem(size, animated: false)
+        }
 
         quantityField.itemList = viewModel.quantities
         quantityField.setSelectedItem(viewModel.quantities.first, animated: false)
@@ -117,8 +132,8 @@ class ProductViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let storeSelectionViewController = segue.destinationViewController as? StoreSelectionViewController,
-                viewModel = viewModel {
-            storeSelectionViewController.viewModel = viewModel.storeSelectionViewModel
+                storeSelectionViewModel = viewModel?.storeSelectionViewModel {
+            storeSelectionViewController.viewModel = storeSelectionViewModel
         }
     }
 
