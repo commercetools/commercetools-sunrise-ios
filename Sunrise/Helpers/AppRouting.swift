@@ -38,15 +38,6 @@ class AppRouting {
     }
 
     /**
-        Presents tab containing cart overview.
-    */
-    static func switchToCartTab() {
-        guard let tabBarController = tabBarController where tabBarController.viewControllers?.count > 4 else { return }
-
-        tabBarController.selectedIndex = 4
-    }
-
-    /**
         Switches back to the home tab, and activates search bar as a first responder.
     */
     static func switchToSearch() {
@@ -58,7 +49,26 @@ class AppRouting {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(50 * Double(NSEC_PER_MSEC))), dispatch_get_main_queue()) {
             productOverviewViewController.searchController.searchBar.becomeFirstResponder()
         }
+    }
 
+    /**
+        Switches back to the cart tab, and pops to root cart view controller.
+    */
+    static func switchToCartOverview() {
+        guard let tabBarController = tabBarController, cartNavigationController = tabBarController.viewControllers?[4] as? UINavigationController else { return }
+
+        tabBarController.selectedIndex = 4
+        cartNavigationController.popToRootViewControllerAnimated(true)
+    }
+
+    /**
+        Switches back to the home tab, and pops to root product overview view controller.
+    */
+    static func switchToHome() {
+        guard let tabBarController = tabBarController, homeNavigationController = tabBarController.viewControllers?.first as? UINavigationController else { return }
+
+        tabBarController.selectedIndex = 0
+        homeNavigationController.popToRootViewControllerAnimated(true)
     }
 
 }

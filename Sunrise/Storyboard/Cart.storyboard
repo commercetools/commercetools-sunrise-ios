@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M1X-40-gbr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="M1X-40-gbr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -70,7 +70,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="584" height="185"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lo4-Gj-Xj4" id="I1a-ek-g1b">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="185"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="184.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Df6-KX-mH0">
@@ -243,13 +243,14 @@
                                                     <outlet property="sizeLabel" destination="4gz-hq-Wwy" id="qp6-gi-OEO"/>
                                                     <outlet property="skuLabel" destination="MvW-vX-EQ7" id="JiF-gk-CTj"/>
                                                     <outlet property="totalPriceLabel" destination="7F2-RF-zHk" id="SHX-uK-JHt"/>
+                                                    <segue destination="kV2-YP-FfZ" kind="show" id="bUf-sF-9zE"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CartSummaryCell" rowHeight="250" id="0Em-7Y-yUV" customClass="CartSummaryCell" customModule="Sunrise" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="213" width="584" height="250"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Em-7Y-yUV" id="Y45-Ag-k3B">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="250"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="249.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="6gc-jV-qHH">
@@ -462,6 +463,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XJJ-Sd-kOx" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="30" y="1743"/>
+        </scene>
+        <!--ProductDetails-->
+        <scene sceneID="VET-wd-FMN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProductDetails" id="kV2-YP-FfZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbb-XG-5T3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="522.5" y="1743"/>
         </scene>
     </scenes>
     <resources>

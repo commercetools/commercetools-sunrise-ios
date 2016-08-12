@@ -9,7 +9,7 @@ struct LineItem: Mappable {
     // MARK: - Properties
 
     var id: String?
-    var productId: AnyObject?
+    var productId: String?
     var name: [String: String]?
     var productSlug: [String: String]?
     var variant: ProductVariant?

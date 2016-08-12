@@ -119,6 +119,13 @@ class CartViewModel: BaseViewModel {
         return cart.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
     }
 
+    func productDetailsViewModelForLineItemAtIndexPath(indexPath: NSIndexPath) -> ProductViewModel? {
+        if let productId = cart.value?.lineItems?[indexPath.row].productId {
+            return ProductViewModel(productId: productId, size: lineItemSizeAtIndexPath(indexPath))
+        }
+        return nil
+    }
+
     private func deleteLineItemAtIndexPath(indexPath: NSIndexPath) {
         if let cartId = cart.value?.id, version = cart.value?.version, lineItemId = cart.value?.lineItems?[indexPath.row].id {
             self.isLoading.value = true
