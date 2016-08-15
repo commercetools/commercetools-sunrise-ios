@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -128,38 +128,6 @@
             </objects>
             <point key="canvasLocation" x="-668" y="-995"/>
         </scene>
-        <!--Categories-->
-        <scene sceneID="wg7-f3-ORb">
-            <objects>
-                <viewController id="8rJ-Kc-sve" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Categories View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5" userLabel="Categories View">
-                                <rect key="frame" x="170" y="278" width="261" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Categories" image="filter-tab-icon" id="cPa-gy-q4n"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-668" y="-316"/>
-        </scene>
         <!--Sunrise Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -177,7 +145,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="HlC-be-hcu" kind="relationship" relationship="viewControllers" id="PqD-qt-SAa"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="hFS-aq-TFp" kind="relationship" relationship="viewControllers" id="gkQ-LB-vQA"/>
                         <segue destination="rgd-hg-sWA" kind="relationship" relationship="viewControllers" id="688-Hv-lOB"/>
                         <segue destination="1jB-PC-SmE" kind="relationship" relationship="viewControllers" id="cc5-8t-4PC"/>
@@ -217,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0s-1r-K7Z" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="368"/>
+            <point key="canvasLocation" x="-668" y="-318"/>
         </scene>
         <!--My Account-->
         <scene sceneID="EEC-G1-NCI">
@@ -239,7 +206,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez4-c2-9Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="1044"/>
+            <point key="canvasLocation" x="-668" y="358"/>
         </scene>
         <!--Sign in-->
         <scene sceneID="3Qe-sI-m5P">
@@ -439,7 +406,7 @@ fields*</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFL-9S-cYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="1044"/>
+            <point key="canvasLocation" x="30" y="358"/>
         </scene>
         <!--Cart-->
         <scene sceneID="cYz-Z4-5gl">
@@ -461,7 +428,7 @@ fields*</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO7-2v-cuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="1743"/>
+            <point key="canvasLocation" x="-668" y="1057"/>
         </scene>
         <!--ProductDetails-->
         <scene sceneID="c9X-cq-pfd">
@@ -511,13 +478,12 @@ fields*</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uW3-2d-YJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="1743"/>
+            <point key="canvasLocation" x="29.5" y="1057"/>
         </scene>
     </scenes>
     <resources>
         <image name="barcode-scanner" width="42" height="33"/>
         <image name="cart-tab-icon" width="23" height="25"/>
-        <image name="filter-tab-icon" width="25" height="25"/>
         <image name="home-tab-icon" width="26" height="25"/>
         <image name="myaccount-tab-icon" width="25" height="25"/>
         <image name="search-tab-icon" width="25" height="25"/>

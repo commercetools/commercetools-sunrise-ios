@@ -15,7 +15,7 @@ class AppRouting {
     */
     static func setupInitiallyActiveTab() {
         if let tabBarController = tabBarController where NSUserDefaults.standardUserDefaults().objectForKey(kLoggedInUsername) == nil {
-            tabBarController.selectedIndex = 3
+            tabBarController.selectedIndex = 2
         }
     }
 
@@ -25,7 +25,7 @@ class AppRouting {
         - parameter isLoggedIn:               Indicator whether the user is logged in.
     */
     static func setupMyAccountRootViewController(isLoggedIn isLoggedIn: Bool) {
-        guard let tabBarController = tabBarController where tabBarController.viewControllers?.count > 3 else { return }
+        guard let tabBarController = tabBarController where tabBarController.viewControllers?.count > 2 else { return }
 
         let newAccountRootViewController: UIViewController
         if isLoggedIn {
@@ -34,7 +34,7 @@ class AppRouting {
             newAccountRootViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginViewController")
         }
 
-        tabBarController.viewControllers?[3] = newAccountRootViewController
+        tabBarController.viewControllers?[2] = newAccountRootViewController
     }
 
     /**
@@ -55,9 +55,9 @@ class AppRouting {
         Switches back to the cart tab, and pops to root cart view controller.
     */
     static func switchToCartOverview() {
-        guard let tabBarController = tabBarController, cartNavigationController = tabBarController.viewControllers?[4] as? UINavigationController else { return }
+        guard let tabBarController = tabBarController, cartNavigationController = tabBarController.viewControllers?[3] as? UINavigationController else { return }
 
-        tabBarController.selectedIndex = 4
+        tabBarController.selectedIndex = 3
         cartNavigationController.popToRootViewControllerAnimated(true)
     }
 
