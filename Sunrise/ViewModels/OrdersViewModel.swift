@@ -77,7 +77,7 @@ class OrdersViewModel: BaseViewModel {
     func orderOverviewViewModelForOrderAtIndexPath(indexPath: NSIndexPath) -> OrderOverviewViewModel? {
         if indexPath.section == 0 {
             let orderOverviewViewModel = OrderOverviewViewModel()
-            orderOverviewViewModel.order.value = indexPath.section == 0 ? orders[indexPath.row] : reservations[indexPath.row]
+            orderOverviewViewModel.order.value = orders[indexPath.row]
             return orderOverviewViewModel
         }
         return nil
