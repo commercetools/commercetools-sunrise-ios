@@ -26,26 +26,22 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     // Store information for currently expanded channel
-    var streetAndNumberInfo: String {
-        if let expandedChannel = expandedChannel, street = expandedChannel.address?.streetName,
-                number = expandedChannel.address?.streetNumber {
-            return "\(street) \(number)"
-        }
-        return "-"
+    var streetAndNumberInfo: String? {
+        return expandedChannel?.streetAndNumberInfo
     }
-    var zipAndCityInfo: String {
-        if let expandedChannel = expandedChannel, zip = expandedChannel.address?.postalCode,
-                city = expandedChannel.address?.city {
-            return "\(zip), \(city)"
-        }
-        return "-"
+
+    var zipAndCityInfo: String? {
+        return expandedChannel?.zipAndCityInfo
     }
-    var openLine1Info: String {
-        return expandedChannel?.details?.openLine1 ?? "-"
+
+    var openLine1Info: String? {
+        return expandedChannel?.openLine1Info
     }
-    var openLine2Info: String {
-        return expandedChannel?.details?.openLine2 ?? "-"
+
+    var openLine2Info: String? {
+        return expandedChannel?.openLine2Info
     }
+
     private var productVariantPrice: String {
         guard let price = currentVariant?.independentPrice, value = price.value else { return "-" }
 

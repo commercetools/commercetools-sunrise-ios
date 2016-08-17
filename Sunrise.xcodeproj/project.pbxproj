@@ -62,6 +62,8 @@
 		218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218988241CED0C78006E7757 /* ProductDetails.storyboard */; };
 		219B2EBC1D1B7348004579DD /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B2EBB1D1B7348004579DD /* OrderCell.swift */; };
 		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
+		21A6B4681D6330DA008BA95C /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4671D6330DA008BA95C /* ReservationViewController.swift */; };
+		21A6B46A1D63311E008BA95C /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4691D63311E008BA95C /* ReservationViewModel.swift */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
@@ -154,6 +156,8 @@
 		218988241CED0C78006E7757 /* ProductDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		219B2EBB1D1B7348004579DD /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
+		21A6B4671D6330DA008BA95C /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		21A6B4691D63311E008BA95C /* ReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 				210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */,
 				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
 				21BBDC211D34177B00C516FD /* StoreSelectionViewController.swift */,
+				21A6B4671D6330DA008BA95C /* ReservationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */,
 				210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */,
 				2105567D1D3650780036493C /* StoreSelectionViewModel.swift */,
+				21A6B4691D63311E008BA95C /* ReservationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -742,6 +748,7 @@
 				210BE2894AA5A6183C744542 /* ProductVariant.swift in Sources */,
 				21BBDC221D34177B00C516FD /* StoreSelectionViewController.swift in Sources */,
 				217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */,
+				21A6B4681D6330DA008BA95C /* ReservationViewController.swift in Sources */,
 				217581B81CF4865A0067BE15 /* ProductOverviewViewController.swift in Sources */,
 				210BE102F5839C5029CAFEC5 /* Attribute.swift in Sources */,
 				210BE8BFECC821239614E8C9 /* Image.swift in Sources */,
@@ -762,6 +769,7 @@
 				210BE3FDCF3E7FD1AD829994 /* CartSummaryCell.swift in Sources */,
 				21BBDC241D34199500C516FD /* StoreDetailsCell.swift in Sources */,
 				210BE32ED9DFF61C4B4097B6 /* TaxedPrice.swift in Sources */,
+				21A6B46A1D63311E008BA95C /* ReservationViewModel.swift in Sources */,
 				210BE2199317FF50F41799C3 /* DiscountedLineItemPriceForQuantity.swift in Sources */,
 				210BEE156F121F695E9A9063 /* DiscountedLineItemPrice.swift in Sources */,
 				210BE6B5006B9DD2CC047578 /* LoginViewModel.swift in Sources */,

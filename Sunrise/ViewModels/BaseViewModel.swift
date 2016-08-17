@@ -42,7 +42,7 @@ class BaseViewModel {
         }).joinWithSeparator("\n")
     }
 
-    // MARK: - Cart or order overview calculations    
+    // MARK: - Cart or order overview calculations
 
     func calculateOrderDiscount(lineItems: [LineItem]) -> String {
         let totalOrderDiscountAmount = lineItems.reduce(0, combine: { $0 + calculateCartDiscountForLineItem($1) })

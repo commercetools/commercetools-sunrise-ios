@@ -74,10 +74,20 @@ class OrdersViewModel: BaseViewModel {
         }
     }
 
-    func orderOverviewViewModelForOrderAtIndexPath(indexPath: NSIndexPath) -> OrderOverviewViewModel {
-        let orderOverviewViewModel = OrderOverviewViewModel()
-        orderOverviewViewModel.order.value = indexPath.section == 0 ? orders[indexPath.row] : reservations[indexPath.row]
-        return orderOverviewViewModel
+    func orderOverviewViewModelForOrderAtIndexPath(indexPath: NSIndexPath) -> OrderOverviewViewModel? {
+        if indexPath.section == 0 {
+            let orderOverviewViewModel = OrderOverviewViewModel()
+            orderOverviewViewModel.order.value = indexPath.section == 0 ? orders[indexPath.row] : reservations[indexPath.row]
+            return orderOverviewViewModel
+        }
+        return nil
+    }
+
+    func reservationViewModelForOrderAtIndexPath(indexPath: NSIndexPath) -> ReservationViewModel? {
+        if indexPath.section == 1 {
+            return ReservationViewModel(order: reservations[indexPath.row])
+        }
+        return nil
     }
 
     // MARK: - Data Source
@@ -107,7 +117,7 @@ class OrdersViewModel: BaseViewModel {
     private func retrieveOrders(offset offset: UInt, text: String = "") {
         isLoading.value = true
 
-        Commercetools.Order.query(sort: ["createdAt desc"], result: { result in
+        Commercetools.Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
             orders = Mapper<Order>().mapArray(results) where result.isSuccess {
                 self.orders = orders.filter { $0.isReservation != true }

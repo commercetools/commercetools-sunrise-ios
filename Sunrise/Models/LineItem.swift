@@ -17,6 +17,7 @@ struct LineItem: Mappable {
     var totalPrice: Money?
     var discountedPricePerQuantity: [DiscountedLineItemPriceForQuantity]?
     var quantity: Int?
+    var distributionChannel: Channel?
 
     init?(_ map: Map) {}
 
@@ -32,6 +33,7 @@ struct LineItem: Mappable {
         totalPrice                 <- map["totalPrice"]
         discountedPricePerQuantity <- map["discountedPricePerQuantity"]
         quantity                   <- map["quantity"]
+        distributionChannel        <- map["distributionChannel.obj"]
     }
 
 }
