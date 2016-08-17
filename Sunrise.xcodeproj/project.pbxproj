@@ -64,6 +64,8 @@
 		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
 		21A6B4681D6330DA008BA95C /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4671D6330DA008BA95C /* ReservationViewController.swift */; };
 		21A6B46A1D63311E008BA95C /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4691D63311E008BA95C /* ReservationViewModel.swift */; };
+		21A6B46C1D6477E0008BA95C /* ReservationViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */; };
+		21A6B46E1D647807008BA95C /* reservation.json in Resources */ = {isa = PBXBuildFile; fileRef = 21A6B46D1D647807008BA95C /* reservation.json */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
@@ -158,6 +160,8 @@
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
 		21A6B4671D6330DA008BA95C /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		21A6B4691D63311E008BA95C /* ReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
+		21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModelSpec.swift; sourceTree = "<group>"; };
+		21A6B46D1D647807008BA95C /* reservation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reservation.json; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 			children = (
 				215C4F691CF286D100A99790 /* product-projection.json */,
 				210A5B2A1CFFBEA300217A86 /* cart.json */,
+				21A6B46D1D647807008BA95C /* reservation.json */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */,
 				210A5B281CFFBE8200217A86 /* CartViewModelSpec.swift */,
 				21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */,
+				21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A6B46E1D647807008BA95C /* reservation.json in Resources */,
 				215C4F6A1CF286D100A99790 /* product-projection.json in Resources */,
 				210A5B2B1CFFBEA300217A86 /* cart.json in Resources */,
 			);
@@ -797,6 +804,7 @@
 				21C637821CF730380079945A /* ProductOverviewViewModelSpec.swift in Sources */,
 				215C4F681CF2836400A99790 /* ProductViewModelSpec.swift in Sources */,
 				21FDB47D1D219B580028DDC9 /* OrdersViewModelSpec.swift in Sources */,
+				21A6B46C1D6477E0008BA95C /* ReservationViewModelSpec.swift in Sources */,
 				210A5B291CFFBE8200217A86 /* CartViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
