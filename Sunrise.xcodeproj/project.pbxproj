@@ -65,6 +65,7 @@
 		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
+		21A9E70A1D64BB3300AC3953 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A9E7091D64BB3300AC3953 /* Customer.swift */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
 		21B8B1251D3A4E01000B0493 /* PushTechSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */; };
 		21B8B1261D3A4E01000B0493 /* PushTechSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21B8B1241D3A4E01000B0493 /* PushTechSDKResources.bundle */; };
@@ -162,6 +163,7 @@
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
+		21A9E7091D64BB3300AC3953 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		21B8B1221D3A4D7D000B0493 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		21B8B1231D3A4E01000B0493 /* PushTechSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushTechSDK.framework; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				210BE43439B05958D1D34363 /* DiscountedLineItemPrice.swift */,
 				210BE4F6B106A961AF6A65BA /* Order.swift */,
 				210BEB00FE4F8D1D6542BBD7 /* Channel */,
+				21A9E7091D64BB3300AC3953 /* Customer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -753,6 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2147E6611D07860100EB21AE /* LoginViewController.swift in Sources */,
+				21A9E70A1D64BB3300AC3953 /* Customer.swift in Sources */,
 				210556801D36FFA00036493C /* StoreInfoCell.swift in Sources */,
 				21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */,
 				210BE90F7DFDB4A06F882E59 /* ProductViewController.swift in Sources */,
