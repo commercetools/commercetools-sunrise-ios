@@ -297,25 +297,43 @@ class StoreSelectionViewModel: BaseViewModel {
             let customType = ["type": ["key": "reservationOrder"],
                               "fields": ["isReservation": true]]
 
-            Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale,
-                                       "shippingAddress": shippingAddress,
-                                       "lineItems": [lineItemDraft],
-                                       "custom": customType], result: { result in
-                if let cart = Mapper<Cart>().map(result.response), id = cart.id, version = cart.version where result.isSuccess {
-                    Commercetools.Order.create(["id": id, "version": version], expansion: nil, result: { result in
-                        if result.isSuccess {
-                            observer.sendCompleted()
+            Commercetools.Customer.profile { result in
+                if let profile = Mapper<Customer>().map(result.response) where result.isSuccess {
+
+                    var billingAddress = profile.reservationAddress
+
+                    // In case the customer doesn't even have a country set in the address,
+                    // it's being set to match the channel country.
+                    if billingAddress.country == nil {
+                        billingAddress.country = channel.address?.country
+                    }
+
+                    Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale,
+                                               "shippingAddress": shippingAddress,
+                                               "billingAddress": billingAddress.toJSON(),
+                                               "lineItems": [lineItemDraft],
+                                               "custom": customType], result: { result in
+
+                        if let cart = Mapper<Cart>().map(result.response), id = cart.id, version = cart.version where result.isSuccess {
+                            Commercetools.Order.create(["id": id, "version": version], expansion: nil, result: { result in
+                                if result.isSuccess {
+                                    observer.sendCompleted()
+                                } else if let error = result.errors?.first where result.isFailure {
+                                    observer.sendFailed(error)
+                                }
+                                self.isLoading.value = false
+                            })
+
                         } else if let error = result.errors?.first where result.isFailure {
                             observer.sendFailed(error)
+                            self.isLoading.value = false
                         }
-                        self.isLoading.value = false
                     })
-
                 } else if let error = result.errors?.first where result.isFailure {
                     observer.sendFailed(error)
                     self.isLoading.value = false
                 }
-            })
+            }
         }
     }
 
