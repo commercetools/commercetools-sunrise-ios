@@ -70,7 +70,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="584" height="185"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lo4-Gj-Xj4" id="I1a-ek-g1b">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="184.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="185"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Df6-KX-mH0">
@@ -250,7 +250,7 @@
                                                 <rect key="frame" x="0.0" y="213" width="584" height="250"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Em-7Y-yUV" id="Y45-Ag-k3B">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="249.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="250"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="6gc-jV-qHH">
@@ -456,10 +456,40 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="emptyCartView" destination="eBY-Cf-Bwr" id="4ie-aL-XVk"/>
                         <outlet property="numberOfItemsLabel" destination="nyF-PD-TeJ" id="oa3-fd-C83"/>
                         <outlet property="tableView" destination="tSM-nH-jVI" id="vr0-Op-dfl"/>
                     </connections>
                 </viewController>
+                <view contentMode="scaleToFill" id="eBY-Cf-Bwr">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ji2-tC-pzo">
+                            <rect key="frame" x="20" y="27" width="280" height="96"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="big-bag" translatesAutoresizingMaskIntoConstraints="NO" id="qwV-RU-itT">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="70"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="70" id="UcG-6v-ZPJ"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your cart is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPN-2K-i6f">
+                                    <rect key="frame" x="0.0" y="78" width="280" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.20784313730000001" green="0.24313725489999999" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ji2-tC-pzo" firstAttribute="centerY" secondItem="eBY-Cf-Bwr" secondAttribute="centerY" id="070-K0-biU"/>
+                        <constraint firstAttribute="trailing" secondItem="ji2-tC-pzo" secondAttribute="trailing" constant="20" id="4kO-gp-O37"/>
+                        <constraint firstItem="ji2-tC-pzo" firstAttribute="leading" secondItem="eBY-Cf-Bwr" secondAttribute="leading" constant="20" id="ZsM-EB-D8b"/>
+                    </constraints>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XJJ-Sd-kOx" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="30" y="1743"/>
@@ -474,6 +504,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="big-bag" width="300" height="330"/>
         <image name="cart-tab-icon" width="23" height="25"/>
     </resources>
 </document>
