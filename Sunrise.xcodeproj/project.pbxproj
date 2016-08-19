@@ -62,6 +62,10 @@
 		218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218988241CED0C78006E7757 /* ProductDetails.storyboard */; };
 		219B2EBC1D1B7348004579DD /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B2EBB1D1B7348004579DD /* OrderCell.swift */; };
 		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
+		21A6B4681D6330DA008BA95C /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4671D6330DA008BA95C /* ReservationViewController.swift */; };
+		21A6B46A1D63311E008BA95C /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4691D63311E008BA95C /* ReservationViewModel.swift */; };
+		21A6B46C1D6477E0008BA95C /* ReservationViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */; };
+		21A6B46E1D647807008BA95C /* reservation.json in Resources */ = {isa = PBXBuildFile; fileRef = 21A6B46D1D647807008BA95C /* reservation.json */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21A9E70A1D64BB3300AC3953 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A9E7091D64BB3300AC3953 /* Customer.swift */; };
@@ -155,6 +159,10 @@
 		218988241CED0C78006E7757 /* ProductDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		219B2EBB1D1B7348004579DD /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
+		21A6B4671D6330DA008BA95C /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		21A6B4691D63311E008BA95C /* ReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
+		21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModelSpec.swift; sourceTree = "<group>"; };
+		21A6B46D1D647807008BA95C /* reservation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reservation.json; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21A9E7091D64BB3300AC3953 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
@@ -226,6 +234,7 @@
 			children = (
 				215C4F691CF286D100A99790 /* product-projection.json */,
 				210A5B2A1CFFBEA300217A86 /* cart.json */,
+				21A6B46D1D647807008BA95C /* reservation.json */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
@@ -243,6 +252,7 @@
 				210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */,
 				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
 				21BBDC211D34177B00C516FD /* StoreSelectionViewController.swift */,
+				21A6B4671D6330DA008BA95C /* ReservationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -259,6 +269,7 @@
 				210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */,
 				210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */,
 				2105567D1D3650780036493C /* StoreSelectionViewModel.swift */,
+				21A6B4691D63311E008BA95C /* ReservationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,6 +321,7 @@
 				210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */,
 				210A5B281CFFBE8200217A86 /* CartViewModelSpec.swift */,
 				21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */,
+				21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -593,6 +605,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A6B46E1D647807008BA95C /* reservation.json in Resources */,
 				215C4F6A1CF286D100A99790 /* product-projection.json in Resources */,
 				210A5B2B1CFFBEA300217A86 /* cart.json in Resources */,
 			);
@@ -748,6 +761,7 @@
 				210BE2894AA5A6183C744542 /* ProductVariant.swift in Sources */,
 				21BBDC221D34177B00C516FD /* StoreSelectionViewController.swift in Sources */,
 				217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */,
+				21A6B4681D6330DA008BA95C /* ReservationViewController.swift in Sources */,
 				217581B81CF4865A0067BE15 /* ProductOverviewViewController.swift in Sources */,
 				210BE102F5839C5029CAFEC5 /* Attribute.swift in Sources */,
 				210BE8BFECC821239614E8C9 /* Image.swift in Sources */,
@@ -768,6 +782,7 @@
 				210BE3FDCF3E7FD1AD829994 /* CartSummaryCell.swift in Sources */,
 				21BBDC241D34199500C516FD /* StoreDetailsCell.swift in Sources */,
 				210BE32ED9DFF61C4B4097B6 /* TaxedPrice.swift in Sources */,
+				21A6B46A1D63311E008BA95C /* ReservationViewModel.swift in Sources */,
 				210BE2199317FF50F41799C3 /* DiscountedLineItemPriceForQuantity.swift in Sources */,
 				210BEE156F121F695E9A9063 /* DiscountedLineItemPrice.swift in Sources */,
 				210BE6B5006B9DD2CC047578 /* LoginViewModel.swift in Sources */,
@@ -795,6 +810,7 @@
 				21C637821CF730380079945A /* ProductOverviewViewModelSpec.swift in Sources */,
 				215C4F681CF2836400A99790 /* ProductViewModelSpec.swift in Sources */,
 				21FDB47D1D219B580028DDC9 /* OrdersViewModelSpec.swift in Sources */,
+				21A6B46C1D6477E0008BA95C /* ReservationViewModelSpec.swift in Sources */,
 				210A5B291CFFBE8200217A86 /* CartViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -867,7 +883,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D STAGING";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = "Debug Staging";
@@ -950,7 +966,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D STAGING";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release Staging";
@@ -1040,7 +1056,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D PROD";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = "Debug Prod";
@@ -1081,7 +1097,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D PROD";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release Prod";
