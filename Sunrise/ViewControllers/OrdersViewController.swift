@@ -102,10 +102,15 @@ class OrdersViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let selectedCell = sender as? OrderCell, indexPath = tableView.indexPathForCell(selectedCell),
-                orderOverviewViewController = segue.destinationViewController as? OrderOverviewViewController, viewModel = viewModel {
-            let orderOverviewViewModel = viewModel.orderOverviewViewModelForOrderAtIndexPath(indexPath)
+        guard let indexPath = sender as? NSIndexPath, viewModel = viewModel else { return }
+
+        if let orderOverviewViewController = segue.destinationViewController as? OrderOverviewViewController,
+                orderOverviewViewModel = viewModel.orderOverviewViewModelForOrderAtIndexPath(indexPath){
             orderOverviewViewController.viewModel = orderOverviewViewModel
+
+        } else if let reservationViewController = segue.destinationViewController as? ReservationViewController,
+                reservationViewModel = viewModel.reservationViewModelForOrderAtIndexPath(indexPath){
+            reservationViewController.viewModel = reservationViewModel
         }
     }
 
@@ -180,6 +185,10 @@ extension OrdersViewController: UITableViewDelegate {
         headerView.tag = section
 
         return headerView
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        indexPath.section == 0 ? performSegueWithIdentifier("orderDetails", sender: indexPath) : performSegueWithIdentifier("reservationDetails", sender: indexPath)
     }
 
 }

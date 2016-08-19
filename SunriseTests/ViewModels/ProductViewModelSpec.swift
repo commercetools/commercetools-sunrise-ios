@@ -24,11 +24,11 @@ class ProductViewModelSpec: QuickSpec {
             }
 
             it("has the correct upper case name") {
-                expect(productViewModel.name).to(equal("SNEAKERS ”TOKYO” LOTTO GREY"))
+                expect(productViewModel.name.value).to(equal("SNEAKERS ”TOKYO” LOTTO GREY"))
             }
 
             it("has proper sizes extracted") {
-                expect(productViewModel.sizes).to(equal(["34", "34.5", "35", "35.5", "36", "36.5", "37", "37.5", "38", "38.5", "39", "39.5", "40", "40.5", "41", "41.5", "42", "42.5", "43", "43.5", "44", "44.5", "45", "45.5", "46"]))
+                expect(productViewModel.sizes.value).to(equal(["34", "34.5", "35", "35.5", "36", "36.5", "37", "37.5", "38", "38.5", "39", "39.5", "40", "40.5", "41", "41.5", "42", "42.5", "43", "43.5", "44", "44.5", "45", "45.5", "46"]))
             }
 
             it("initially has size selected from master variant") {

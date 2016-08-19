@@ -19,6 +19,26 @@ class Channel: Mappable {
     var details: ChannelDetails?
     var address: Address?
 
+    // MARK: - Physical store properties
+    var streetAndNumberInfo: String {
+        if let street = address?.streetName, number = address?.streetNumber {
+            return "\(street) \(number)"
+        }
+        return "-"
+    }
+    var zipAndCityInfo: String {
+        if let zip = address?.postalCode, city = address?.city {
+            return "\(zip), \(city)"
+        }
+        return "-"
+    }
+    var openLine1Info: String {
+        return details?.openLine1 ?? "-"
+    }
+    var openLine2Info: String {
+        return details?.openLine2 ?? "-"
+    }
+
     required init?(_ map: Map) {}
 
     // MARK: - Mappable
