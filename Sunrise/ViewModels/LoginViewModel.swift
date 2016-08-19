@@ -60,7 +60,7 @@ class LoginViewModel: BaseViewModel {
     }
 
     private func sendUserMetricsToPushTech() {
-        Customer.profile({ result in
+        Commercetools.Customer.profile({ result in
             if let response = result.response where result.isSuccess {
 
                 if let userId = response["id"] as? String {
