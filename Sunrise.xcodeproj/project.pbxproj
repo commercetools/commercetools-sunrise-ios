@@ -166,6 +166,7 @@
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21A9E7091D64BB3300AC3953 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		21A9E70B1D65FB1B00AC3953 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		21B900191CFE07C700E053F9 /* CartLineItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartLineItemCell.swift; sourceTree = "<group>"; };
 		21BBDC211D34177B00C516FD /* StoreSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSelectionViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +378,7 @@
 				21CDC4A51CE91D9B009D2638 /* Info.plist */,
 				21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */,
 				21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */,
+				21A9E70B1D65FB1B00AC3953 /* Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -881,6 +883,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D STAGING";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = "Debug Staging";
@@ -898,6 +901,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Debug Staging";
 		};
@@ -962,6 +966,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D STAGING";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release Staging";
@@ -979,6 +984,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Release Staging";
 		};
@@ -1050,6 +1056,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D PROD";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = "Debug Prod";
@@ -1090,6 +1097,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D PROD";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Release Prod";
@@ -1107,6 +1115,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Debug Prod";
 		};
@@ -1123,6 +1132,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 			};
 			name = "Release Prod";
 		};
