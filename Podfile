@@ -9,6 +9,7 @@ target 'Sunrise' do
     pod 'SDWebImage', '~> 3.7'
     pod 'IQDropDownTextField'
     pod 'SVProgressHUD'
+    pod 'DZNEmptyDataSet'
 end
 
 def testing_pods

@@ -6,11 +6,13 @@ import UIKit
 import ReactiveCocoa
 import Result
 import SDWebImage
+import DZNEmptyDataSet
 
 class CartViewController: UIViewController {
 
     @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
     
+    @IBOutlet var emptyCartView: UIView!
     @IBOutlet weak var numberOfItemsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
@@ -24,6 +26,9 @@ class CartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
 
         viewModel = CartViewModel()
         tableView.layer.borderColor = borderColor.CGColor
@@ -149,6 +154,22 @@ extension CartViewController: UITableViewDataSource {
         if editingStyle == .Delete {
             viewModel?.deleteLineItemObserver.sendNext(indexPath)
         }
+    }
+
+}
+
+extension CartViewController: DZNEmptyDataSetSource {
+
+    func customViewForEmptyDataSet(scrollView: UIScrollView) -> UIView {
+        return emptyCartView
+    }
+
+}
+
+extension CartViewController: DZNEmptyDataSetDelegate {
+
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView) -> Bool {
+        return true
     }
 
 }

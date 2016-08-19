@@ -7,9 +7,11 @@ import ReactiveCocoa
 import Result
 import SDWebImage
 import SVProgressHUD
+import DZNEmptyDataSet
 
 class ProductOverviewViewController: UICollectionViewController {
 
+    @IBOutlet var noResultsView: UIView!
     @IBInspectable var cellHeight: CGFloat = 270
     
     let searchController = UISearchController(searchResultsController:  nil)
@@ -26,6 +28,9 @@ class ProductOverviewViewController: UICollectionViewController {
         super.viewDidLoad()
 
         viewModel = ProductOverviewViewModel()
+
+        collectionView?.emptyDataSetSource = self
+        noResultsView.hidden = true
 
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
@@ -46,6 +51,7 @@ class ProductOverviewViewController: UICollectionViewController {
         .startWithNext({ [weak self] isLoading in
             if !isLoading {
                 self?.collectionView?.reloadData()
+                self?.noResultsView.hidden = false
                 SVProgressHUD.dismiss()
             }
         })
@@ -149,6 +155,14 @@ extension ProductOverviewViewController: UISearchResultsUpdating {
 
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         resetIdleTimer()
+    }
+
+}
+
+extension ProductOverviewViewController: DZNEmptyDataSetSource {
+
+    func customViewForEmptyDataSet(scrollView: UIScrollView) -> UIView {
+        return noResultsView
     }
 
 }
