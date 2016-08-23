@@ -6,6 +6,7 @@ import UIKit
 import ReactiveCocoa
 import Result
 import SDWebImage
+import IQDropDownTextField
 import DZNEmptyDataSet
 
 class CartViewController: UIViewController {
@@ -112,7 +113,10 @@ class CartViewController: UIViewController {
         lineItemCell.skuLabel.text = viewModel.lineItemSkuAtIndexPath(indexPath)
         lineItemCell.sizeLabel.text = viewModel.lineItemSizeAtIndexPath(indexPath)
         lineItemCell.priceLabel.text = viewModel.lineItemPriceAtIndexPath(indexPath)
-        lineItemCell.quantityLabel.text = viewModel.lineItemQuantityAtIndexPath(indexPath)
+        lineItemCell.quantityField?.delegate = self
+        lineItemCell.quantityField?.isOptionalDropDown = false
+        lineItemCell.quantityField?.itemList = viewModel.availableQuantities
+        lineItemCell.quantityField?.selectedItem = viewModel.lineItemQuantityAtIndexPath(indexPath)
         lineItemCell.totalPriceLabel.text = viewModel.lineItemTotalPriceAtIndexPath(indexPath)
         lineItemCell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
@@ -153,6 +157,17 @@ extension CartViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             viewModel?.deleteLineItemObserver.sendNext(indexPath)
+        }
+    }
+
+}
+
+extension CartViewController: IQDropDownTextFieldDelegate {
+
+    func textFieldDidEndEditing(textField: UITextField) {
+        if let indexPath = self.tableView.indexPathForRowAtPoint(textField.convertPoint(.zero, toView: tableView)),
+                quantity = textField.text {
+            viewModel?.updateLineItemQuantityAtIndexPath(indexPath, quantity: quantity)
         }
     }
 
