@@ -20,16 +20,16 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="LnC-z8-fcR">
                                 <rect key="frame" x="8" y="8" width="584" height="471"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="P7E-O5-fi2">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="P7E-O5-fi2">
                                         <rect key="frame" x="0.0" y="0.0" width="584" height="25"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" misplaced="YES" image="cart-tab-icon" translatesAutoresizingMaskIntoConstraints="NO" id="F5M-Ax-rkO">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="cart-tab-icon" translatesAutoresizingMaskIntoConstraints="NO" id="F5M-Ax-rkO">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="UYe-7h-e2c"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" misplaced="YES" text="YOUR BAG:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4S-P5-PCb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="YOUR BAG:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4S-P5-PCb">
                                                 <rect key="frame" x="33" y="0.0" width="89" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.3411764705882353" green="0.33725490196078434" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +49,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="225" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tSM-nH-jVI">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="225" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tSM-nH-jVI">
                                         <rect key="frame" x="0.0" y="41" width="584" height="430"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -164,12 +164,31 @@
                                                                                     <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="hoA-hk-4CZ">
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9v-5g-hpO">
                                                                                     <rect key="frame" x="0.0" y="18" width="76" height="32"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
+                                                                                    <subviews>
+                                                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iEe-5N-WaU" customClass="IQDropDownTextField">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="54" height="32"/>
+                                                                                            <color key="textColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                            <textInputTraits key="textInputTraits"/>
+                                                                                        </textField>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RR6-Dd-WFp">
+                                                                                            <rect key="frame" x="54" y="0.0" width="4" height="32"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="4" id="5xx-sv-RFS"/>
+                                                                                            </constraints>
+                                                                                        </stackView>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cX-Qn-XK4">
+                                                                                            <rect key="frame" x="58" y="0.0" width="18" height="32"/>
+                                                                                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
+                                                                                            <state key="normal" image="edit-icon"/>
+                                                                                            <connections>
+                                                                                                <action selector="editQuantity:" destination="lo4-Gj-Xj4" eventType="touchUpInside" id="vjv-Ki-6Rv"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                    </subviews>
+                                                                                </stackView>
                                                                             </subviews>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="76" id="kW5-1r-BFd"/>
@@ -228,7 +247,7 @@
                                                     <outlet property="priceLabel" destination="OJ5-qS-LGQ" id="Jpg-l7-a6x"/>
                                                     <outlet property="productImageView" destination="LgL-2J-G33" id="2m9-bR-LZP"/>
                                                     <outlet property="productNameLabel" destination="Xfv-bq-C4l" id="AAH-Gx-uXr"/>
-                                                    <outlet property="quantityLabel" destination="hoA-hk-4CZ" id="P8s-en-y8i"/>
+                                                    <outlet property="quantityField" destination="iEe-5N-WaU" id="9VE-6y-SC4"/>
                                                     <outlet property="sizeLabel" destination="4gz-hq-Wwy" id="qp6-gi-OEO"/>
                                                     <outlet property="skuLabel" destination="MvW-vX-EQ7" id="JiF-gk-CTj"/>
                                                     <outlet property="totalPriceLabel" destination="7F2-RF-zHk" id="SHX-uK-JHt"/>
@@ -495,5 +514,6 @@
     <resources>
         <image name="big-bag" width="300" height="330"/>
         <image name="cart-tab-icon" width="23" height="25"/>
+        <image name="edit-icon" width="18" height="18"/>
     </resources>
 </document>
