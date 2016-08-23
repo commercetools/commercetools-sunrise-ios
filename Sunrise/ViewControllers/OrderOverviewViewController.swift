@@ -67,7 +67,7 @@ class OrderOverviewViewController: UIViewController {
         lineItemCell.skuLabel.text = viewModel.lineItemSkuAtIndexPath(indexPath)
         lineItemCell.sizeLabel.text = viewModel.lineItemSizeAtIndexPath(indexPath)
         lineItemCell.priceLabel.text = viewModel.lineItemPriceAtIndexPath(indexPath)
-        lineItemCell.quantityLabel.text = viewModel.lineItemQuantityAtIndexPath(indexPath)
+        lineItemCell.quantityLabel?.text = viewModel.lineItemQuantityAtIndexPath(indexPath)
         lineItemCell.totalPriceLabel.text = viewModel.lineItemTotalPriceAtIndexPath(indexPath)
         lineItemCell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 

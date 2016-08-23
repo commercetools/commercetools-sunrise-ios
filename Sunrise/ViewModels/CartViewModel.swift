@@ -23,6 +23,7 @@ class CartViewModel: BaseViewModel {
     let tax = MutableProperty("")
     let orderTotal = MutableProperty("")
     let contentChangesSignal: Signal<Changeset, NoError>
+    let availableQuantities = (1...9).map { String($0) }
 
     let cart: MutableProperty<Cart?>
 
@@ -117,6 +118,25 @@ class CartViewModel: BaseViewModel {
 
     func lineItemTotalPriceAtIndexPath(indexPath: NSIndexPath) -> String {
         return cart.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
+    }
+
+    func updateLineItemQuantityAtIndexPath(indexPath: NSIndexPath, quantity: String) {
+        if let cartId = cart.value?.id, version = cart.value?.version, lineItemId = cart.value?.lineItems?[indexPath.row].id,
+                quantity = UInt(quantity) {
+            self.isLoading.value = true
+            Commercetools.Cart.update(cartId, version: version, actions: [["action": "changeLineItemQuantity",
+                                                                           "lineItemId": lineItemId,
+                                                                           "quantity": quantity],
+                                                                          ["action": "recalculate"]], result: { result in
+                if let cart = Mapper<Cart>().map(result.response) where result.isSuccess {
+                    self.updateCart(cart)
+                } else if let errors = result.errors where result.isFailure {
+                    self.updateCart(nil)
+                    super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                }
+                self.isLoading.value = false
+            })
+        }
     }
 
     func productDetailsViewModelForLineItemAtIndexPath(indexPath: NSIndexPath) -> ProductViewModel? {
