@@ -16,6 +16,7 @@ class OrdersViewModel: BaseViewModel {
     // Outputs
     let isLoading: MutableProperty<Bool>
     let contentChangesSignal: Signal<Changeset, NoError>
+    let showReservationSignal: Signal<NSIndexPath, NoError>
     let ordersExpanded = MutableProperty(false)
     let reservationsExpanded = MutableProperty(false)
 
@@ -23,6 +24,10 @@ class OrdersViewModel: BaseViewModel {
     var reservations = [Order]()
 
     private let contentChangesObserver: Observer<Changeset, NoError>
+    private let showReservationObserver: Observer<NSIndexPath, NoError>
+
+    /// The UUID of the reservation confirmation received via push notification, to be shown after next refresh.
+    private var reservationConfirmationId: String? = nil
 
     // MARK: - Lifecycle
 
@@ -35,15 +40,21 @@ class OrdersViewModel: BaseViewModel {
         let (sectionExpandedSignal, expandedObserver) = Signal<Int, NoError>.pipe()
         sectionExpandedObserver = expandedObserver
 
-        let (signal, changesObserver) = Signal<Changeset, NoError>.pipe()
-        contentChangesSignal = signal
-        contentChangesObserver = changesObserver
+        (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
+
+        (showReservationSignal, showReservationObserver) = Signal<NSIndexPath, NoError>.pipe()
 
         super.init()
 
         refreshSignal
         .observeNext { [weak self] in
             self?.retrieveOrders(offset: 0)
+        }
+
+        isLoading.signal.observeNext { [weak self] isLoading in
+            if let id = self?.reservationConfirmationId, row = self?.reservations.indexOf({ $0.id == id }) where !isLoading {
+                self?.showReservationObserver.sendNext(NSIndexPath(forRow: row, inSection: 1))
+            }
         }
 
         sectionExpandedSignal
@@ -110,6 +121,18 @@ class OrdersViewModel: BaseViewModel {
 
     func totalPriceAtIndexPath(indexPath: NSIndexPath) -> String? {
         return indexPath.section == 0 ? orders[indexPath.row].totalPrice?.description : reservations[indexPath.row].totalPrice?.description
+    }
+
+    // MARK: - Presenting reservation confirmation from push notification
+
+    func presentConfirmationForReservationWithId(reservationId: String) {
+        if let row = reservations.indexOf({ $0.id == reservationId }) {
+            showReservationObserver.sendNext(NSIndexPath(forRow: row, inSection: 1))
+
+        } else if !isLoading.value {
+            reservationConfirmationId = reservationId
+            refreshObserver.sendNext()
+        }
     }
 
     // MARK: - Commercetools product projections querying

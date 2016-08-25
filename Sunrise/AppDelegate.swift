@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         initializePushTechSDK()
 
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+        application.registerForRemoteNotifications()
+
         return true
     }
     
