@@ -30,7 +30,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IQKeyboardManager.sharedManager().enable = true
 
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+        application.registerForRemoteNotifications()
+
+        if let notificationInfo = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject : AnyObject] {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.handlePushNotification(notificationInfo)
+            }
+        }
+
         return true
+    }
+
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        handlePushNotification(userInfo)
+    }
+
+    private func handlePushNotification(notificationInfo: [NSObject : AnyObject]) {
+        if let reservationId = notificationInfo["reservation-id"] as? String {
+            AppRouting.showReservationWithId(reservationId)
+        }
     }
 
 }
