@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Notifications View Controller-->
+        <scene sceneID="ij6-nw-2vg">
+            <objects>
+                <viewController storyboardIdentifier="NotificationsViewController" id="NSP-2i-nZB" customClass="NotificationsViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qlx-ea-3WL"/>
+                        <viewControllerLayoutGuide type="bottom" id="VlL-UP-JQd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qGZ-Bg-UuR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mG8-Xd-0C7">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="0.85098039215686272" green="0.84313725490196079" blue="0.80784313725490198" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISw-O1-6Fs">
+                                <rect key="frame" x="564" y="33" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="23" id="d0C-CP-ONE"/>
+                                    <constraint firstAttribute="height" constant="23" id="ecB-Nw-o4W"/>
+                                </constraints>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="dismissNotification:" destination="NSP-2i-nZB" eventType="touchUpInside" id="WsB-47-Rg5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85098039215686272" green="0.84313725490196079" blue="0.80784313725490198" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="VlL-UP-JQd" firstAttribute="top" secondItem="mG8-Xd-0C7" secondAttribute="bottom" id="0LN-WU-00H"/>
+                            <constraint firstItem="ISw-O1-6Fs" firstAttribute="top" secondItem="Qlx-ea-3WL" secondAttribute="bottom" constant="13" id="3dw-gE-kWs"/>
+                            <constraint firstItem="mG8-Xd-0C7" firstAttribute="top" secondItem="Qlx-ea-3WL" secondAttribute="bottom" id="Wxr-9x-eDB"/>
+                            <constraint firstAttribute="trailing" secondItem="ISw-O1-6Fs" secondAttribute="trailing" constant="13" id="aOo-vj-aFj"/>
+                            <constraint firstItem="mG8-Xd-0C7" firstAttribute="leading" secondItem="qGZ-Bg-UuR" secondAttribute="leading" id="cMp-UR-A9Y"/>
+                            <constraint firstAttribute="trailing" secondItem="mG8-Xd-0C7" secondAttribute="trailing" id="nT4-Eg-vgY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="mG8-Xd-0C7" id="GWu-pe-D29"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UI5-JZ-tCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="506" y="168"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="closeButton" width="64" height="64"/>
+    </resources>
+</document>

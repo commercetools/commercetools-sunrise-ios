@@ -50,6 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: PSHNotificationDelegate {
 
     func shouldPerformDefaultActionForRemoteNotification(notification: PSHNotification, completionHandler: (UIBackgroundFetchResult) -> Void) -> Bool {
+        if let notificationUrl = notification.campaign?.URL where notification.defaultAction == .LandingPage {
+            AppRouting.presentNotificationWebPage(notificationUrl)
+            return false
+        }
         return true
     }
 

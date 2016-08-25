@@ -8,6 +8,8 @@ class AppRouting {
 
     private static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
+    private static let notificationsStoryboard = UIStoryboard(name: "Notifications", bundle: nil)
+
     private static let tabBarController = UIApplication.sharedApplication().delegate?.window??.rootViewController as? UITabBarController
 
     /**
@@ -69,6 +71,18 @@ class AppRouting {
 
         tabBarController.selectedIndex = 0
         homeNavigationController.popToRootViewControllerAnimated(true)
+    }
+
+    /**
+        Modal presentation of a view controller containing page at the specified URL.
+    */
+    static func presentNotificationWebPage(url: NSURL) {
+        guard let rootViewController = tabBarController,
+                notificationsViewController = notificationsStoryboard.instantiateViewControllerWithIdentifier("NotificationsViewController") as? NotificationsViewController,
+                _ = notificationsViewController.view else { return }
+
+        notificationsViewController.webView.loadRequest(NSURLRequest(URL: url))
+        rootViewController.presentViewController(notificationsViewController, animated: true, completion: nil)
     }
 
 }
