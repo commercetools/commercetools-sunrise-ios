@@ -74,6 +74,18 @@ class AppRouting {
     }
 
     /**
+        Switches to the account tab, and presents reservation overview view controller.
+    */
+    static func showReservationWithId(reservationId: String) {
+        guard let tabBarController = tabBarController, ordersNavigationController = tabBarController.viewControllers?[2] as? UINavigationController,
+                ordersViewController = ordersNavigationController.viewControllers.first as? OrdersViewController else { return }
+
+        tabBarController.selectedIndex = 2
+        ordersNavigationController.popToRootViewControllerAnimated(false)
+        ordersViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+    }
+
+    /**
         Modal presentation of a view controller containing page at the specified URL.
     */
     static func presentNotificationWebPage(url: NSURL) {

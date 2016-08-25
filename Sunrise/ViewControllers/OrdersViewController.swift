@@ -94,6 +94,12 @@ class OrdersViewController: UIViewController {
             })
         })
 
+        viewModel.showReservationSignal
+        .observeOn(UIScheduler())
+        .observeNext({ [weak self] indexPath in
+            self?.performSegueWithIdentifier("reservationDetails", sender: indexPath)
+        })
+
         observeAlertMessageSignal(viewModel: viewModel)
 
         viewModel.refreshObserver.sendNext()
