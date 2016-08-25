@@ -71,4 +71,16 @@ class AppRouting {
         homeNavigationController.popToRootViewControllerAnimated(true)
     }
 
+    /**
+        Switches to the account tab, and presents reservation overview view controller.
+    */
+    static func showReservationWithId(reservationId: String) {
+        guard let tabBarController = tabBarController, ordersNavigationController = tabBarController.viewControllers?[2] as? UINavigationController,
+                ordersViewController = ordersNavigationController.viewControllers.first as? OrdersViewController else { return }
+
+        tabBarController.selectedIndex = 2
+        ordersNavigationController.popToRootViewControllerAnimated(false)
+        ordersViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+    }
+
 }
