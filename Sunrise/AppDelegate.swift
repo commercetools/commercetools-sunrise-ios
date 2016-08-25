@@ -41,8 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #else
         let config = PSHConfiguration(fileAtPath: NSBundle.mainBundle().pathForResource("PushTechReleaseConfig", ofType: "plist"))
 #endif
-        PSHEngine.startWithConfiguration(config, eventBusDelegate: nil, notificationDelegate: nil)
+        PSHEngine.startWithConfiguration(config, eventBusDelegate: nil, notificationDelegate: self)
         PSHEngine.sharedInstance().setLocationAdquisition(.Always)
+    }
+
+}
+
+extension AppDelegate: PSHNotificationDelegate {
+
+    func shouldPerformDefaultActionForRemoteNotification(notification: PSHNotification, completionHandler: (UIBackgroundFetchResult) -> Void) -> Bool {
+        return true
     }
 
 }
