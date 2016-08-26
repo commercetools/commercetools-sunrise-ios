@@ -120,6 +120,14 @@ class ProductViewController: UIViewController {
                 switch event {
                 case .Completed:
                     self?.presentAfterAddingToCartOptions()
+                case let .Failed(error):
+                    let alertController = UIAlertController(
+                            title: "Could not add to cart",
+                            message: self?.viewModel?.alertMessageForErrors([error]),
+                            preferredStyle: .Alert
+                            )
+                    alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                    self?.presentViewController(alertController, animated: true, completion: nil)
                 default:
                     return
                 }
