@@ -136,7 +136,7 @@ class ProductViewModel: BaseViewModel {
             // Get the cart with state Active which has the most recent lastModifiedAt.
             Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1, result: { result in
                 if let results = result.response?["results"] as? [[String: AnyObject]],
-                carts = Mapper<Cart>().mapArray(results), cart = carts.first, id = cart.id,
+                        carts = Mapper<Cart>().mapArray(results), cart = carts.first, id = cart.id,
                         version = cart.version where result.isSuccess {
                     // In case we already have an active cart, just add selected product
                     lineItemDraft["action"] = "addLineItem"
@@ -149,13 +149,17 @@ class ProductViewModel: BaseViewModel {
                         self.isLoading.value = false
                     })
 
-                } else if result.isFailure {
+                } else if let error = result.errors?.first where result.isFailure {
+                    observer.sendFailed(error)
+                    self.isLoading.value = false
+
+                } else {
                     // If there is no active cart, create one, with the selected product
                     Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale, "lineItems": [lineItemDraft]], result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
-                        } else if let errors = result.errors where result.isFailure {
-                            super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                        } else if let error = result.errors?.first where result.isFailure {
+                            observer.sendFailed(error)
                         }
                         self.isLoading.value = false
                     })
