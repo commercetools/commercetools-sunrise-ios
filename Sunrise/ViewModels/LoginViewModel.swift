@@ -60,28 +60,30 @@ class LoginViewModel: BaseViewModel {
     }
 
     private func sendUserMetricsToPushTech() {
-        Commercetools.Customer.profile({ result in
-            if let response = result.response where result.isSuccess {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC))), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            Commercetools.Customer.profile({ result in
+                if let response = result.response where result.isSuccess {
 
-                if let userId = response["id"] as? String {
-                    PSHMetrics.sendMetricUserID(userId)
+                    if let userId = response["id"] as? String {
+                        PSHMetrics.sendMetricUserID(userId)
+                    }
+
+                    if let email = response["email"] as? String {
+                        PSHMetrics.sendMetricEmail(email)
+                    }
+
+                    if let firstName = response["firstName"] as? String {
+                        PSHMetrics.sendMetricFirstName(firstName)
+                    }
+
+                    if let lastName = response["lastName"] as? String {
+                        PSHMetrics.sendMetricLastName(lastName)
+                    }
+
+                    PSHMetrics.forceSendMetrics()
                 }
-
-                if let email = response["email"] as? String {
-                    PSHMetrics.sendMetricEmail(email)
-                }
-
-                if let firstName = response["firstName"] as? String {
-                    PSHMetrics.sendMetricFirstName(firstName)
-                }
-
-                if let lastName = response["lastName"] as? String {
-                    PSHMetrics.sendMetricLastName(lastName)
-                }
-
-                PSHMetrics.forceSendMetrics()
-            }
-        })
+            })
+        }
     }
 
 }

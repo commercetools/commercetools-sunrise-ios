@@ -48,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PSHEngine.sharedInstance().setLocationAdquisition(.Always)
     }
 
+    func applicationDidBecomeActive(application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
+    }
+
 }
 
 extension AppDelegate: PSHNotificationDelegate {
