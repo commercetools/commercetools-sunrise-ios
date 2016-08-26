@@ -188,6 +188,17 @@ class CartViewModel: BaseViewModel {
                         self.updateCart(nil)
                         super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
                         self.isLoading.value = false
+                    } else {
+                        // If there is no active cart, create one, with the selected product
+                        Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale], result: { result in
+                            if let cart = Mapper<Cart>().map(result.response) where result.isSuccess {
+                                self.updateCart(cart)
+                            } else if let errors = result.errors where result.isFailure {
+                                self.updateCart(nil)
+                                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                            }
+                            self.isLoading.value = false
+                        })
                     }
                 })
     }
