@@ -10,8 +10,8 @@ struct ChannelDetails: Mappable {
 
     var openingTimes: [String: String]?
     var imageUrl: String?
-    var latitude: Double?
-    var longitude: Double?
+    var latitude: String?
+    var longitude: String?
 
     init?(_ map: Map) {}
 
