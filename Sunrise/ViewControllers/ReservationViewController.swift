@@ -77,7 +77,6 @@ class ReservationViewController: UIViewController {
         streetAndNumberLabel.text = viewModel.streetAndNumberInfo
         zipAndCityLabel.text = viewModel.zipAndCityInfo
         openLine1Label.text = viewModel.openLine1Info
-        openLine2Label.text = viewModel.openLine2Info
     }
 
 }

@@ -32,11 +32,8 @@ class Channel: Mappable {
         }
         return "-"
     }
-    var openLine1Info: String {
-        return details?.openLine1 ?? "-"
-    }
-    var openLine2Info: String {
-        return details?.openLine2 ?? "-"
+    var openingTimes: String {
+        return details?.openingTimes?.localizedString ?? "-"
     }
 
     required init?(_ map: Map) {}
