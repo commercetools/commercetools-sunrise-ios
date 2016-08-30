@@ -223,8 +223,10 @@
                  "id":"2f652ada-491d-4af3-bf74-f61a7ce1722d"
                  },
                  "fields":{
-                 "openLine2":"Sa. 9:00AM - 6:00PM",
-                 "openLine1":"Mo-Fr. 10:00AM - 8:00PM",
+                 "openingTimes":{
+                   "en": "Mo-Fr. 10:00AM - 8:00PM\nSa. 9:00AM - 6:00PM",
+                   "de": "Mo-Fr. 10:00 - 20:00\nSa. 9:00 - 18:00"
+                 },
                  "imageUrl":"https://commercetools-joyride.s3.amazonaws.com/channels/SUNRISE_berlin.jpg"
                  }
                  },
