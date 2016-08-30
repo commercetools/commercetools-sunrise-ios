@@ -167,8 +167,9 @@ class StoreSelectionViewModel: BaseViewModel {
     func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
         let channel = channels[rowForChannelAtIndexPath(indexPath)]
 
-        if let userLocation = userLocation.value, lat = channel.details?.latitude, lon = channel.details?.longitude {
-            let channelLocation = CLLocation(latitude: lat, longitude: lon)
+        if let userLocation = userLocation.value, lat = channel.details?.latitude, lon = channel.details?.longitude,
+                latitude = Double(lat), longitude = Double(lon) {
+            let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
             let distance = userLocation.distanceFromLocation(channelLocation)
             return String(format: "%.1f", arguments: [distance / 1000]) + " km"
         }
