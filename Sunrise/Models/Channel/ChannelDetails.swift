@@ -8,18 +8,20 @@ struct ChannelDetails: Mappable {
 
     // MARK: - Properties
 
-    var openLine1: String?
-    var openLine2: String?
+    var openingTimes: [String: String]?
     var imageUrl: String?
+    var latitude: String?
+    var longitude: String?
 
     init?(_ map: Map) {}
 
     // MARK: - Mappable
 
     mutating func mapping(map: Map) {
-        openLine1        <- map["fields.openLine1"]
-        openLine2        <- map["fields.openLine2"]
+        openingTimes     <- map["fields.openingTimes"]
         imageUrl         <- map["fields.imageUrl"]
+        latitude         <- map["fields.latitude"]
+        longitude        <- map["fields.longitude"]
     }
 
 }
