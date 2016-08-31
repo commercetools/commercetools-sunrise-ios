@@ -165,13 +165,10 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
-        let channel = channels[rowForChannelAtIndexPath(indexPath)]
+        let store = channels[rowForChannelAtIndexPath(indexPath)]
 
-        if let userLocation = userLocation.value, lat = channel.details?.latitude, lon = channel.details?.longitude,
-                latitude = Double(lat), longitude = Double(lon) {
-            let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
-            let distance = userLocation.distanceFromLocation(channelLocation)
-            return String(format: "%.1f", arguments: [distance / 1000]) + " km"
+        if let storeDistance = storeDistance(store) {
+            return String(format: "%.1f", arguments: [storeDistance / 1000]) + " km"
         }
         return "-"
     }
@@ -204,7 +201,7 @@ class StoreSelectionViewModel: BaseViewModel {
 
     func priceForChannelAtIndexPath(indexPath: NSIndexPath) -> String {
         if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id,
-        price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
+                price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
             if let discounted = price.discounted?.value {
                 return discounted.description
             } else if let value = price.value {
@@ -235,6 +232,15 @@ class StoreSelectionViewModel: BaseViewModel {
                 channelRow += 1
             }
             return NSIndexPath(forRow: channelRow, inSection: 0)
+        }
+        return nil
+    }
+
+    private func storeDistance(store: Channel) -> Double? {
+        if let userLocation = userLocation.value, lat = store.details?.latitude, lon = store.details?.longitude,
+                latitude = Double(lat), longitude = Double(lon) {
+            let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
+            return userLocation.distanceFromLocation(channelLocation)
         }
         return nil
     }
@@ -307,7 +313,9 @@ class StoreSelectionViewModel: BaseViewModel {
                 sort:  ["lastModifiedAt desc"], result: { result in
             if let results = result.response?["results"] as? [[String: AnyObject]],
             channels = Mapper<Channel>().mapArray(results) where result.isSuccess {
-                self.channels = channels
+                self.channels = channels.sort { [weak self] in
+                    self?.storeDistance($0) < self?.storeDistance($1)
+                }
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
