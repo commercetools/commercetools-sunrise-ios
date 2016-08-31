@@ -34,12 +34,8 @@ class StoreSelectionViewModel: BaseViewModel {
         return expandedChannel?.zipAndCityInfo
     }
 
-    var openLine1Info: String? {
-        return expandedChannel?.openLine1Info
-    }
-
-    var openLine2Info: String? {
-        return expandedChannel?.openLine2Info
+    var openingTimes: String? {
+        return expandedChannel?.openingTimes
     }
 
     private var productVariantPrice: String {
@@ -79,11 +75,6 @@ class StoreSelectionViewModel: BaseViewModel {
     private var currentVariant: ProductVariant? {
         return product.allVariants.filter({ $0.sku == sku }).first
     }
-
-    private let geocoder = CLGeocoder()
-    private var geocodeRequestsTimer: NSTimer?
-    private var channelLocations = [Channel: CLLocation]()
-    private var processedChannels = Set<Channel>()
 
     private let product: ProductProjection
     private let sku: String
@@ -176,7 +167,9 @@ class StoreSelectionViewModel: BaseViewModel {
     func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
         let channel = channels[rowForChannelAtIndexPath(indexPath)]
 
-        if let userLocation = userLocation.value, channelLocation = channelLocations[channel] {
+        if let userLocation = userLocation.value, lat = channel.details?.latitude, lon = channel.details?.longitude,
+                latitude = Double(lat), longitude = Double(lon) {
+            let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
             let distance = userLocation.distanceFromLocation(channelLocation)
             return String(format: "%.1f", arguments: [distance / 1000]) + " km"
         }
@@ -244,39 +237,6 @@ class StoreSelectionViewModel: BaseViewModel {
             return NSIndexPath(forRow: channelRow, inSection: 0)
         }
         return nil
-    }
-
-    private func retrieveStoreLocations() {
-        // We need to deplay each geocoding request due to service limitation
-        dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-            self.geocodeRequestsTimer?.invalidate()
-            self.geocodeRequestsTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(self.requestStoreLocation), userInfo: nil, repeats: true)
-        }
-    }
-
-    @objc private func requestStoreLocation() {
-        if processedChannels.count == channels.count {
-            geocodeRequestsTimer?.invalidate()
-        } else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                var channelsForProcessing = Set(self.channels)
-                channelsForProcessing.subtractInPlace(self.processedChannels)
-                if let channel = channelsForProcessing.first {
-                    if let zip = channel.address?.postalCode, city = channel.address?.city, street = channel.address?.streetName,
-                    number = channel.address?.streetNumber, country = channel.address?.country {
-                        self.geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { placemarks, error in
-                            if let location = placemarks?.first?.location {
-                                self.channelLocations[channel] = location
-                                if let indexPath = self.indexPathForChannel(channel) where error == nil {
-                                    self.contentChangesObserver.sendNext(Changeset(modifications: [indexPath]))
-                                }
-                            }
-                        })
-                    }
-                    self.processedChannels.insert(channel)
-                }
-            }
-        }
     }
 
     // MARK: - Creating a reservation
@@ -348,7 +308,6 @@ class StoreSelectionViewModel: BaseViewModel {
             if let results = result.response?["results"] as? [[String: AnyObject]],
             channels = Mapper<Channel>().mapArray(results) where result.isSuccess {
                 self.channels = channels
-                self.retrieveStoreLocations()
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))

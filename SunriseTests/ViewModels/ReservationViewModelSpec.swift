@@ -48,11 +48,7 @@ class ReservationViewModelSpec: QuickSpec {
             }
 
             it("has the proper opening hours line 1") {
-                expect(reservationViewModel.openLine1Info).to(equal("Mo-Fr. 10:00AM - 8:00PM"))
-            }
-
-            it("has the proper opening hours line 2") {
-                expect(reservationViewModel.openLine2Info).to(equal("Sa. 9:00AM - 6:00PM"))
+                expect(reservationViewModel.openLine1Info).to(equal("Mo-Fr. 10:00AM - 8:00PM\nSa. 9:00AM - 6:00PM"))
             }
 
             it("has the proper product image URL") {

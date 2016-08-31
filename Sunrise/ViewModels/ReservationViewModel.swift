@@ -22,7 +22,6 @@ class ReservationViewModel {
     let streetAndNumberInfo: String?
     let zipAndCityInfo: String?
     let openLine1Info: String?
-    let openLine2Info: String?
 
     private let order: Order
     private let geocoder = CLGeocoder()
@@ -51,8 +50,7 @@ class ReservationViewModel {
         storeName = order.lineItems?.first?.distributionChannel?.name?.localizedString
         streetAndNumberInfo = order.lineItems?.first?.distributionChannel?.streetAndNumberInfo
         zipAndCityInfo = order.lineItems?.first?.distributionChannel?.zipAndCityInfo
-        openLine1Info = order.lineItems?.first?.distributionChannel?.openLine1Info
-        openLine2Info = order.lineItems?.first?.distributionChannel?.openLine2Info
+        openLine1Info = order.lineItems?.first?.distributionChannel?.openingTimes
 
         geocodeStoreAddress()
     }

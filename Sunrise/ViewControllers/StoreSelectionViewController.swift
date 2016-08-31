@@ -121,8 +121,7 @@ class StoreSelectionViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("StoreInfoCell") as! StoreInfoCell
             cell.streetAndNumberLabel.text = viewModel.streetAndNumberInfo
             cell.zipAndCityLabel.text = viewModel.zipAndCityInfo
-            cell.openLine1Label.text = viewModel.openLine1Info
-            cell.openLine2Label.text = viewModel.openLine2Info
+            cell.openLine1Label.text = viewModel.openingTimes
 
             return cell
 
