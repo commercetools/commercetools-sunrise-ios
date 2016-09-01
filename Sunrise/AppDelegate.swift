@@ -37,6 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+
+    func applicationDidBecomeActive(application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
+    }
     
     private func initializePushTechSDK() {
 #if DEBUG
@@ -48,8 +52,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PSHEngine.sharedInstance().setLocationAdquisition(.Always)
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
-        application.applicationIconBadgeNumber = 0
+    /**
+        Provides handling for different notification actions by checking URL-like formatted parameters.
+
+        - parameter params:                    String containing URL-like formatted parameters.
+    */
+    private func handleCustomActions(params: String) {
+        let components = params.componentsSeparatedByString("=")
+        if components.count == 2 {
+            let key = components[0]
+            let value = components[1]
+
+            switch key {
+                case "reservationId":
+                    AppRouting.showReservationWithId(value)
+
+            // As we add more notification types, appropriate cases should be placed in this switch statement.
+
+            default:
+                break
+            }
+        }
     }
 
 }
@@ -59,6 +82,10 @@ extension AppDelegate: PSHNotificationDelegate {
     func shouldPerformDefaultActionForRemoteNotification(notification: PSHNotification, completionHandler: (UIBackgroundFetchResult) -> Void) -> Bool {
         if let notificationUrl = notification.campaign?.URL where notification.defaultAction == .LandingPage {
             AppRouting.presentNotificationWebPage(notificationUrl)
+            return false
+
+        } else if let extra = notification.custom?.extra {
+            handleCustomActions(extra)
             return false
         }
         return true
