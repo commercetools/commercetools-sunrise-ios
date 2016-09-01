@@ -9,6 +9,7 @@
 @property (nonatomic, strong) NSNumber* type;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* text;
+@property (nonatomic, strong) NSString* extra;
 @property (nonatomic, strong) NSURL* URL;
 @property (nonatomic, strong) NSURL* thumbnailURL;
 @property (nonatomic, strong) NSDate* date;
