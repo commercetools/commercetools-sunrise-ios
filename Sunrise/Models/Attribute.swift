@@ -38,7 +38,7 @@ struct Attribute: Mappable {
                 return String(value)
             case ("money", let value):
                 return Mapper<Money>().map(value)?.description
-        
+
             default: return nil
         }
     }
