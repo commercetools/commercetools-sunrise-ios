@@ -30,8 +30,8 @@ struct Attribute: Mappable {
                 return value ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
             case (let typeName, let value as String) where ["text", "enum"].contains(typeName):
                 return value
-            case (let typeName, let value as [String: String]) where ["ltext", "lenum"].contains(typeName):
-                return value.localizedString
+            case (let typeName, let value as [String: AnyObject]) where ["ltext", "lenum"].contains(typeName):
+                return (value["label"] as? [String: String])?.localizedString
             case ("number", let value as Int):
                 return String(value)
             case ("number", let value as Double):

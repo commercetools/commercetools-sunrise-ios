@@ -44,7 +44,9 @@ class ProductViewModel: BaseViewModel {
     private var product: ProductProjection?
 
     // Attributes configuration
-    private let selectableAttributes = ["size"]
+    private let selectableAttributes: [String] = {
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("Selectable attributes") as? [String] ?? []
+    }()
 
     // MARK: Lifecycle
 
