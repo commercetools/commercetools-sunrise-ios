@@ -193,11 +193,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVu-4G-oqv">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVu-4G-oqv">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="100"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Sxw-l0-nOS">
-                                    <rect key="frame" x="10" y="10" width="380" height="78"/>
+                                    <rect key="frame" x="10" y="10" width="380" height="104"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFb-Rr-rgm">
                                             <rect key="frame" x="0.0" y="0.0" width="380" height="35"/>
@@ -262,6 +262,12 @@
                                                     <rect key="frame" x="220" y="0.0" width="160" height="35"/>
                                                 </stackView>
                                             </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SsL-3v-gk5">
+                                            <rect key="frame" x="0.0" y="86" width="380" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="Nai-Ww-Gsg"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                 </stackView>
