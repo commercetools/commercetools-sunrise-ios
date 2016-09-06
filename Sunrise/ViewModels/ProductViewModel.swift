@@ -48,6 +48,21 @@ class ProductViewModel: BaseViewModel {
         return NSBundle.mainBundle().objectForInfoDictionaryKey("Selectable attributes") as? [String] ?? []
     }()
 
+    // Product variant for currently active (selected) attributes
+    private var variantForActiveAttributes: ProductVariant? {
+        let allVariants = product?.allVariants
+        return allVariants?.filter({ variant in
+            for activeAttribute in activeAttributes.value {
+                if let type = typeForAttributeName(activeAttribute.0),
+                attributeValue = variant.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value(type) where attributeValue != activeAttribute.1
+                        || variant.attributes?.filter({ $0.name == activeAttribute.0 }).count == 0 {
+                    return false
+                }
+            }
+            return true
+        }).first
+    }
+
     // MARK: Lifecycle
 
     init(product: ProductProjection) {
@@ -71,9 +86,9 @@ class ProductViewModel: BaseViewModel {
         let allVariants = product?.allVariants
 
         selectableAttributes.forEach { attribute in
-            if let type = product?.productType?.attributes?.filter({ $0.name == attribute }).first?.type {
-
+            if let type = typeForAttributeName(attribute) {
                 var values = [String]()
+
                 // We want to show attribute values only for those variants that have prices available
                 if let masterVariant = product?.masterVariant, prices = masterVariant.prices,
                         defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) where
@@ -82,7 +97,9 @@ class ProductViewModel: BaseViewModel {
                 }
                 product?.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
                     if let value = variant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
-                        values.append(value)
+                        if !values.contains(value) {
+                            values.append(value)
+                        }
                     }
                 }
 
@@ -96,22 +113,16 @@ class ProductViewModel: BaseViewModel {
             }
         }
 
-        sku <~ activeAttributes.producer.map { activeAttributes in
-            if let activeAttribute = activeAttributes.first {
-                return allVariants?.filter({ $0.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value as? String == activeAttribute.1 }).first?.sku ?? ""
-            }
-            return ""
+        sku <~ activeAttributes.producer.map { [weak self] _ in
+            return self?.variantForActiveAttributes?.sku ?? ""
         }
 
-        imageUrl <~ activeAttributes.producer.map { activeAttributes in
-            if let activeAttribute = activeAttributes.first {
-                return allVariants?.filter({ $0.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value as? String == activeAttribute.1 }).first?.images?.first?.url ?? ""
-            }
-            return ""
+        imageUrl <~ activeAttributes.producer.map { [weak self] _ in
+            return self?.variantForActiveAttributes?.images?.first?.url ?? ""
         }
 
-        price <~ activeAttributes.producer.map { [weak self] activeAttributes in
-            guard let activeAttribute = activeAttributes.first, price = self?.priceForActiveAttribute(activeAttribute, variants: allVariants), value = price.value else { return "" }
+        price <~ activeAttributes.producer.map { [weak self] _ in
+            guard let price = self?.priceForActiveAttributes, value = price.value else { return "" }
 
             if let discounted = price.discounted?.value {
                 return "\(discounted)"
@@ -120,9 +131,8 @@ class ProductViewModel: BaseViewModel {
             }
         }
 
-        oldPrice <~ activeAttributes.producer.map { [weak self] activeAttributes in
-            guard let activeAttribute = activeAttributes.first, price = self?.priceForActiveAttribute(activeAttribute, variants: allVariants), value = price.value,
-                    _ = price.discounted?.value else { return "" }
+        oldPrice <~ activeAttributes.producer.map { [weak self] _ in
+            guard let price = self?.priceForActiveAttributes, value = price.value, _ = price.discounted?.value else { return "" }
 
             return "\(value)"
         }
@@ -147,12 +157,16 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: Internal Helpers
 
-    private func priceForActiveAttribute(activeAttribute: (String, String), variants: [ProductVariant]?) -> Price? {
-        return variants?.filter({ $0.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value as? String == activeAttribute.1 }).first?.independentPrice
+    private var priceForActiveAttributes: Price? {
+        return variantForActiveAttributes?.independentPrice
     }
 
     private func currentVariantId() -> Int? {
         return product?.allVariants.filter({ $0.sku == sku.value }).first?.id
+    }
+
+    private func typeForAttributeName(name: String) -> AttributeType? {
+        return product?.productType?.attributes?.filter({ $0.name == name }).first?.type
     }
 
     // MARK: - Cart interaction
