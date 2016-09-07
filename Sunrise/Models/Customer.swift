@@ -44,14 +44,14 @@ struct Customer: Mappable {
         id                         <- map["id"]
         version                    <- map["version"]
         customerNumber             <- map["customerNumber"]
-        createdAt                  <- (map["createdAt"], DateTransform())
-        lastModifiedAt             <- (map["lastModifiedAt"], DateTransform())
+        createdAt                  <- (map["createdAt"], ISO8601DateTransform())
+        lastModifiedAt             <- (map["lastModifiedAt"], ISO8601DateTransform())
         email                      <- map["email"]
         firstName                  <- map["firstName"]
         lastName                   <- map["lastName"]
         middleName                 <- map["middleName"]
         title                      <- map["title"]
-        dateOfBirth                <- (map["dateOfBirth"], DateTransform())
+        dateOfBirth                <- (map["dateOfBirth"], ISO8601DateTransform())
         companyName                <- map["companyName"]
         vatId                      <- map["vatId"]
         addresses                  <- map["addresses"]

@@ -9,18 +9,31 @@ import IQDropDownTextField
 import SDWebImage
 import SVProgressHUD
 
-class ProductViewController: UIViewController {
+class ProductViewController: UITableViewController {
 
     @IBInspectable var quantityBorderColor: UIColor = UIColor.yellowColor()
 
+    @IBOutlet var headerView: UIView!
+    @IBOutlet var footerView: UIView!
+
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameLabel: UILabel!
-    @IBOutlet weak var sizeField: IQDropDownTextField!
     @IBOutlet weak var skuLabel: UILabel!
     @IBOutlet weak var priceBeforeDiscount: UILabel!
     @IBOutlet weak var activePriceLabel: UILabel!
     @IBOutlet weak var quantityField: IQDropDownTextField!
     @IBOutlet weak var addToCartButton: UIButton!
+
+    private let footerCellIdentifier = "FooterCell"
+    private var footerCell: UITableViewCell {
+        if let cell = tableView.dequeueReusableCellWithIdentifier(footerCellIdentifier) {
+            return cell
+        } else {
+            let cell = UITableViewCell(style: .Default, reuseIdentifier: footerCellIdentifier)
+            cell.contentView.addSubview(footerView)
+            return cell
+        }
+    }
     
     var viewModel: ProductViewModel? {
         didSet {
@@ -33,12 +46,11 @@ class ProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        sizeField.isOptionalDropDown = false
-        sizeField.dropDownMode = .TextPicker
-
         quantityField.isOptionalDropDown = false
         quantityField.dropDownMode = .TextPicker
         quantityField.layer.borderColor = quantityBorderColor.CGColor
+        
+        tableView.tableHeaderView = headerView
 
         if viewModel != nil {
             bindViewModel()
@@ -58,23 +70,8 @@ class ProductViewController: UIViewController {
             self?.productNameLabel.text = name
         }
 
-        viewModel.sizes.producer
-        .observeOn(UIScheduler())
-        .startWithNext { [weak self] sizes in
-            self?.sizeField.itemList = sizes.count > 0 ? sizes : [""]
-            self?.sizeField.setSelectedItem(self?.viewModel?.size.value, animated: false)
-        }
-
-        viewModel.size.producer
-        .observeOn(UIScheduler())
-        .startWithNext { [weak self] size in
-            self?.sizeField.setSelectedItem(size, animated: false)
-        }
-
         quantityField.itemList = viewModel.quantities
         quantityField.setSelectedItem(viewModel.quantities.first, animated: false)
-
-        viewModel.size <~ sizeField.signalProducer()
 
         viewModel.sku.producer
             .observeOn(UIScheduler())
@@ -109,6 +106,7 @@ class ProductViewController: UIViewController {
                 if isLoading {
                     SVProgressHUD.show()
                 } else {
+                    self?.tableView.reloadData()
                     SVProgressHUD.dismiss()
                 }
             })
@@ -136,6 +134,71 @@ class ProductViewController: UIViewController {
         observeAlertMessageSignal(viewModel: viewModel)
     }
 
+    private func bindSelectableAttributeCell(cell: SelectableAttributeCell, indexPath: NSIndexPath) {
+        guard let viewModel = viewModel else { return }
+
+        cell.attributeLabel.text = viewModel.attributeNameAtIndexPath(indexPath)
+        cell.attributeField.isOptionalDropDown = false
+        cell.attributeField.dropDownMode = .TextPicker
+        let attributeKey = viewModel.attributeKeyAtIndexPath(indexPath)
+
+        viewModel.attributes.producer
+        .observeOn(UIScheduler())
+        .takeUntil(cell.prepareForReuseSignalProducer())
+        .startWithNext({ [weak self] attributes in
+            if let items = attributes[attributeKey] {
+                cell.attributeField.itemList = items.count > 0 ? items : [""]
+                cell.attributeField.setSelectedItem(self?.viewModel?.activeAttributes.value[attributeKey], animated: false)
+            }
+        })
+
+        viewModel.activeAttributes.producer
+        .observeOn(UIScheduler())
+        .takeUntil(cell.prepareForReuseSignalProducer())
+        .startWithNext { activeAttributes in
+            if let activeAttribute = activeAttributes[attributeKey] {
+                cell.attributeField.setSelectedItem(activeAttribute, animated: false)
+            }
+        }
+
+        cell.attributeField.signalProducer()
+        .takeUntil(cell.prepareForReuseSignalProducer())
+        .startWithNext { [weak self] attributeValue in
+            self?.viewModel?.activeAttributes.value[attributeKey] = attributeValue
+        }
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfRowsInSection(section) ?? 0
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("SelectableAttributeCell") as! SelectableAttributeCell
+
+        guard let viewModel = viewModel else { return cell }
+        if indexPath.section == 0 && indexPath.row == viewModel.numberOfRowsInSection(0) - 1 {
+            return footerCell
+        }
+
+        bindSelectableAttributeCell(cell, indexPath: indexPath)
+
+        return cell
+    }
+
+    // MARK: - UITableViewDelegate
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        guard let viewModel = viewModel else { return 0 }
+        let numberOfRows = viewModel.numberOfRowsInSection(indexPath.section)
+        return indexPath.row == numberOfRows - 1 ? 100 : 63
+    }
+
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -144,7 +207,7 @@ class ProductViewController: UIViewController {
             storeSelectionViewController.viewModel = storeSelectionViewModel
         }
     }
-
+    
     @IBAction func addToCart(sender: UIButton) {
         addToCartAction?.execute(quantityField.selectedItem)
     }

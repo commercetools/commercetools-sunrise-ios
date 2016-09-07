@@ -10,6 +10,8 @@ struct ProductProjection: Mappable {
 
     var id: String?
     var name: [String: String]?
+    var productTypeId: String?
+    var productType: ProductType?
     var masterVariant: ProductVariant?
     var variants: [ProductVariant]?
     /// The union of `masterVariant` and other`variants`.
@@ -39,6 +41,8 @@ struct ProductProjection: Mappable {
     mutating func mapping(map: Map) {
         id                 <- map["id"]
         name               <- map["name"]
+        productTypeId      <- map["productType.id"]
+        productType        <- map["productType.obj"]
         masterVariant      <- map["masterVariant"]
         variants           <- map["variants"]
     }
