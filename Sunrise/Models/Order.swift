@@ -27,8 +27,8 @@ struct Order: Mappable {
         id               <- map["id"]
         version          <- map["version"]
         orderNumber      <- map["orderNumber"]
-        createdAt        <- (map["createdAt"], DateTransform())
-        lastModifiedAt   <- (map["lastModifiedAt"], DateTransform())
+        createdAt        <- (map["createdAt"], ISO8601DateTransform())
+        lastModifiedAt   <- (map["lastModifiedAt"], ISO8601DateTransform())
         lineItems        <- map["lineItems"]
         totalPrice       <- map["totalPrice"]
         taxedPrice       <- map["taxedPrice"]

@@ -11,7 +11,11 @@ struct Attribute: Mappable {
     var name: String?
     var value: AnyObject?
 
-    init?(_ map: Map) {}
+    private let dateFormatter = NSDateFormatter()
+
+    init?(_ map: Map) {
+        dateFormatter.locale = NSLocale.currentLocale()
+    }
 
     // MARK: - Mappable
 
@@ -23,23 +27,64 @@ struct Attribute: Mappable {
     // MARK: - Value string representation
 
     func value(type: AttributeType) -> String? {
+        return representationForRawValue(value, ofType: type)
+    }
+    
+    private func representationForRawValue(rawValue: AnyObject?, ofType type: AttributeType) -> String? {
         guard let typeName = type.name else { return nil }
 
-        switch (typeName, value) {
-            case ("boolean", let value as Bool):
-                return value ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
-            case (let typeName, let value as String) where ["text", "enum"].contains(typeName):
-                return value
-            case (let typeName, let value as [String: AnyObject]) where ["ltext", "lenum"].contains(typeName):
-                return (value["label"] as? [String: String])?.localizedString
-            case ("number", let value as Int):
-                return String(value)
-            case ("number", let value as Double):
-                return String(value)
-            case ("money", let value):
-                return Mapper<Money>().map(value)?.description
+        switch (typeName, rawValue) {
+        case ("boolean", let rawValue as Bool):
+            return rawValue ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
+        case (let typeName, let rawValue as String) where ["text", "enum"].contains(typeName):
+            return rawValue
+        case ("ltext", let rawValue as [String: String]):
+            return rawValue.localizedString
+        case ("lenum", let rawValue as [String: AnyObject]):
+            return (rawValue["label"] as? [String: String])?.localizedString
+        case ("number", let rawValue as Int):
+            return String(rawValue)
+        case ("number", let rawValue as Double):
+            return String(rawValue)
+        case ("money", let rawValue):
+            return Mapper<Money>().map(rawValue)?.description
+        case ("date", let rawValue):
+            if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
+                dateFormatter.dateStyle = .MediumStyle
+                dateFormatter.timeStyle = .NoStyle
+                return dateFormatter.stringFromDate(date)
+            }
+            return nil
+        case ("time", let rawValue):
+            if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
+                dateFormatter.dateStyle = .NoStyle
+                dateFormatter.timeStyle = .ShortStyle
+                return dateFormatter.stringFromDate(date)
+            }
+            return nil
+        case ("datetime", let rawValue):
+            if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
+                dateFormatter.dateStyle = .MediumStyle
+                dateFormatter.timeStyle = .ShortStyle
+                return dateFormatter.stringFromDate(date)
+            }
+            return nil
+        case ("set", let rawValues as [AnyObject]):
+            if let elementType = type.elementType {
+                return rawValues.reduce("") {
+                    if let rawValue = self.representationForRawValue($1, ofType: elementType) {
+                        return "\($0) \(rawValue)"
+                    }
+                    return $0
+                }
+            }
+            return nil
 
-            default: return nil
+        // Please note that the representation for both nested and reference types has not been added, since it is
+        // highly dependable on the specific presentation use case, and UI elements.
+
+        default: return nil
+
         }
     }
 
