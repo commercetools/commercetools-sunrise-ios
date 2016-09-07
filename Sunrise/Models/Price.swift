@@ -25,8 +25,8 @@ struct Price: Mappable {
         country            <- map["country"]
         customerGroup      <- map["customerGroup"]
         channel            <- map["channel"]
-        validFrom          <- (map["validFrom"], DateTransform())
-        validUntil         <- (map["validUntil"], DateTransform())
+        validFrom          <- (map["validFrom"], ISO8601DateTransform())
+        validUntil         <- (map["validUntil"], ISO8601DateTransform())
         discounted         <- map["discounted"]
     }
 

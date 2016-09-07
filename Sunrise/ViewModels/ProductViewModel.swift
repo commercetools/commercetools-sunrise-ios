@@ -9,10 +9,10 @@ import ObjectMapper
 class ProductViewModel: BaseViewModel {
 
     // Inputs
-    let size = MutableProperty("")
+    let activeAttributes = MutableProperty([String: String]())
 
     // Outputs
-    let sizes = MutableProperty([String]())
+    let attributes = MutableProperty([String: [String]]())
     let name = MutableProperty("")
     let sku = MutableProperty("")
     let price = MutableProperty("")
@@ -43,19 +43,36 @@ class ProductViewModel: BaseViewModel {
 
     private var product: ProductProjection?
 
+    // Attributes configuration
+    private let selectableAttributes: [String] = {
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("Selectable attributes") as? [String] ?? []
+    }()
+
+    // Product variant for currently active (selected) attributes
+    private var variantForActiveAttributes: ProductVariant? {
+        let allVariants = product?.allVariants
+        return allVariants?.filter({ variant in
+            for activeAttribute in activeAttributes.value {
+                if let type = typeForAttributeName(activeAttribute.0),
+                attributeValue = variant.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value(type) where attributeValue != activeAttribute.1
+                        || variant.attributes?.filter({ $0.name == activeAttribute.0 }).count == 0 {
+                    return false
+                }
+            }
+            return true
+        }).first
+    }
+
     // MARK: Lifecycle
 
     init(product: ProductProjection) {
         self.product = product
-
         super.init()
 
-        bindViewModelProducers()
+        retrieveProductType()
     }
 
     init(productId: String, size: String? = nil) {
-        self.isLoading.value = true
-
         super.init()
 
         retrieveProduct(productId, size: size)
@@ -66,40 +83,46 @@ class ProductViewModel: BaseViewModel {
     private func bindViewModelProducers() {
         name.value = product?.name?.localizedString?.uppercaseString ?? ""
 
-        var sizes = [String]()
-        // We want to show sizes only for those variants that have prices available
-        if let masterVariant = product?.masterVariant, prices = masterVariant.prices,
-        defaultSize = masterVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String where
-        prices.count > 0 {
-            sizes.append(defaultSize)
-        }
-        product?.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
-            if let size = variant.attributes?.filter({ $0.name == "size" }).first?.value as? String {
-                sizes.append(size)
+        let allVariants = product?.allVariants
+
+        selectableAttributes.forEach { attribute in
+            if let type = typeForAttributeName(attribute) {
+                var values = [String]()
+
+                // We want to show attribute values only for those variants that have prices available
+                if let masterVariant = product?.masterVariant, prices = masterVariant.prices,
+                        defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) where
+                        prices.count > 0 {
+                    values.append(defaultValue)
+                }
+                product?.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
+                    if let value = variant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
+                        if !values.contains(value) {
+                            values.append(value)
+                        }
+                    }
+                }
+
+                self.attributes.value[attribute] = values
+                activeAttributes.value[attribute] = values.first ?? "N/A"
+
+                if let matchingVariant = allVariants?.filter({ $0.isMatchingVariant ?? false }).first,
+                        matchingValue = matchingVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
+                    activeAttributes.value[attribute] = matchingValue
+                }
             }
         }
 
-        self.sizes.value = sizes
-        size.value = sizes.first ?? "N/A"
-
-        let allVariants = product?.allVariants
-
-        if let matchingVariant = allVariants?.filter({ $0.isMatchingVariant ?? false }).first,
-        matchingSize = matchingVariant.attributes?.filter({ $0.name == "size" }).first?.value as? String {
-            size.value = matchingSize
+        sku <~ activeAttributes.producer.map { [weak self] _ in
+            return self?.variantForActiveAttributes?.sku ?? ""
         }
 
-
-        sku <~ size.producer.map { size in
-            return allVariants?.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.sku ?? ""
+        imageUrl <~ activeAttributes.producer.map { [weak self] _ in
+            return self?.variantForActiveAttributes?.images?.first?.url ?? ""
         }
 
-        imageUrl <~ size.producer.map { size in
-            return allVariants?.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.images?.first?.url ?? ""
-        }
-
-        price <~ size.producer.map { [weak self] size in
-            guard let price = self?.priceForSize(size, variants: allVariants), value = price.value else { return "" }
+        price <~ activeAttributes.producer.map { [weak self] _ in
+            guard let price = self?.priceForActiveAttributes, value = price.value else { return "" }
 
             if let discounted = price.discounted?.value {
                 return "\(discounted)"
@@ -108,22 +131,46 @@ class ProductViewModel: BaseViewModel {
             }
         }
 
-        oldPrice <~ size.producer.map { [weak self] size in
-            guard let price = self?.priceForSize(size, variants: allVariants), value = price.value,
-            _ = price.discounted?.value else { return "" }
+        oldPrice <~ activeAttributes.producer.map { [weak self] _ in
+            guard let price = self?.priceForActiveAttributes, value = price.value, _ = price.discounted?.value else { return "" }
 
             return "\(value)"
         }
+
+        self.isLoading.value = false
+    }
+
+    // MARK: - Data Source
+
+    func numberOfRowsInSection(section: Int) -> Int {
+        return selectableAttributes.count + 1
+    }
+
+    func attributeNameAtIndexPath(indexPath: NSIndexPath) -> String? {
+        let attribute = selectableAttributes[indexPath.row]
+        return product?.productType?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercaseString
+    }
+
+    func attributeKeyAtIndexPath(indexPath: NSIndexPath) -> String {
+        return selectableAttributes[indexPath.row]
+    }
+
+    func isAttributeSelectableAtIndexPath(indexPath: NSIndexPath) -> Bool {
+        return attributes.value[selectableAttributes[indexPath.row]]?.count > 1
     }
 
     // MARK: Internal Helpers
 
-    private func priceForSize(size: String, variants: [ProductVariant]?) -> Price? {
-        return variants?.filter({ $0.attributes?.filter({ $0.name == "size" }).first?.value as? String == size }).first?.independentPrice
+    private var priceForActiveAttributes: Price? {
+        return variantForActiveAttributes?.independentPrice
     }
 
     private func currentVariantId() -> Int? {
         return product?.allVariants.filter({ $0.sku == sku.value }).first?.id
+    }
+
+    private func typeForAttributeName(name: String) -> AttributeType? {
+        return product?.productType?.attributes?.filter({ $0.name == name }).first?.type
     }
 
     // MARK: - Cart interaction
@@ -171,18 +218,35 @@ class ProductViewModel: BaseViewModel {
     // MARK: - Product retrieval
 
     private func retrieveProduct(productId: String, size: String?) {
-        Commercetools.ProductProjection.byId(productId, expansion: nil, result: { result in
+        self.isLoading.value = true
+        Commercetools.ProductProjection.byId(productId, expansion: ["productType"], result: { result in
             if let product = Mapper<ProductProjection>().map(result.response) where result.isSuccess {
                 self.product = product
                 self.bindViewModelProducers()
                 if let size = size {
-                    self.size.value = size
+                    self.activeAttributes.value["size"] = size
                 }
 
             } else if let errors = result.errors where result.isFailure {
                 super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                self.isLoading.value = false
             }
-            self.isLoading.value = false
+        })
+    }
+
+    private func retrieveProductType() {
+        guard let id = product?.productTypeId else { return }
+        self.isLoading.value = true
+
+        Commercetools.ProductType.byId(id, expansion: nil, result: { result in
+            if let productType = Mapper<ProductType>().map(result.response) where result.isSuccess {
+                self.product?.productType = productType
+                self.bindViewModelProducers()
+
+            } else if let errors = result.errors where result.isFailure {
+                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                self.isLoading.value = false
+            }
         })
     }
 

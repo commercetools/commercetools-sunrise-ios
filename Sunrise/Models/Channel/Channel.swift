@@ -43,8 +43,8 @@ class Channel: Mappable {
     func mapping(map: Map) {
         id               <- map["id"]
         version          <- map["version"]
-        createdAt        <- (map["createdAt"], DateTransform())
-        lastModifiedAt   <- (map["lastModifiedAt"], DateTransform())
+        createdAt        <- (map["createdAt"], ISO8601DateTransform())
+        lastModifiedAt   <- (map["lastModifiedAt"], ISO8601DateTransform())
         key              <- map["key"]
         name             <- map["name"]
         description      <- map["description"]
