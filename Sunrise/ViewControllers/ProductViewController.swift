@@ -51,8 +51,6 @@ class ProductViewController: UITableViewController {
         quantityField.layer.borderColor = quantityBorderColor.CGColor
         
         tableView.tableHeaderView = headerView
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 50
 
         if viewModel != nil {
             bindViewModel()
@@ -193,6 +191,14 @@ class ProductViewController: UITableViewController {
         return cell
     }
 
+    // MARK: - UITableViewDelegate
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        guard let viewModel = viewModel else { return 0 }
+        let numberOfRows = viewModel.numberOfRowsInSection(indexPath.section)
+        return indexPath.row == numberOfRows - 1 ? 100 : 63
+    }
+
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -201,7 +207,7 @@ class ProductViewController: UITableViewController {
             storeSelectionViewController.viewModel = storeSelectionViewModel
         }
     }
-
+    
     @IBAction func addToCart(sender: UIButton) {
         addToCartAction?.execute(quantityField.selectedItem)
     }
