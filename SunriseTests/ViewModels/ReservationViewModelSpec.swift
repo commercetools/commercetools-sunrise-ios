@@ -2,10 +2,10 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
+import Commercetools
 import Quick
 import Nimble
 import ObjectMapper
-import ReactiveCocoa
 import Result
 @testable import Sunrise
 
@@ -16,9 +16,9 @@ class ReservationViewModelSpec: QuickSpec {
             var reservationViewModel: ReservationViewModel!
             
             beforeEach {
-                let path = NSBundle.currentTestBundle!.pathForResource("reservation", ofType: "json")!
-                let reservationJSON = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let order = Mapper<Order>().map(reservationJSON)!
+                let path = Bundle.currentTestBundle!.path(forResource: "reservation", ofType: "json")!
+                let reservationJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+                let order = Mapper<Order>().map(JSONString: reservationJSON as String)!
 
                 reservationViewModel = ReservationViewModel(order: order)
             }

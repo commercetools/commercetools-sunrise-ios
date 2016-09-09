@@ -1,19 +1,22 @@
+source 'https://github.com/nikola-mladenovic/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '9.0'
 use_frameworks!
 
 def common_pods
-    pod 'ReactiveCocoa', '~> 4.1'
-    pod 'ObjectMapper', '~> 1.3'
+    pod 'Commercetools'
+    pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
+    pod 'ReactiveObjC'
 end
 
 target 'Sunrise' do
-    pod 'Commercetools', '~> 0.2'    
-    pod 'IQKeyboardManagerSwift', '4.0.3'
-    pod 'SDWebImage', '~> 3.7'
+    common_pods
+    pod 'IQKeyboardManagerSwift'
+    pod 'SDWebImage'
     pod 'IQDropDownTextField'
     pod 'SVProgressHUD'
     pod 'DZNEmptyDataSet'
-    common_pods
     # PushTech SDK requires MagicalRecord
     pod 'MagicalRecord', '~> 2.2'
 end

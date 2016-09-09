@@ -5,15 +5,16 @@
 import UIKit
 import Commercetools
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 class OrdersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    var ordersHeader = NSBundle.mainBundle().loadNibNamed("OrdersHeaderView", owner: nil, options: nil).first as! OrdersHeaderView
+    var ordersHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
-    var reservationsHeader = NSBundle.mainBundle().loadNibNamed("OrdersHeaderView", owner: nil, options: nil).first as! OrdersHeaderView
+    var reservationsHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
     private let refreshControl = UIRefreshControl()
 
@@ -31,24 +32,24 @@ class OrdersViewController: UIViewController {
 
         configureHeaderViews()
 
-        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel?.refreshObserver.sendNext()
+        viewModel?.refreshObserver.send(value: ())
     }
 
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel where isViewLoaded() else { return }
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isLoading in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] isLoading in
             if !isLoading {
                 self?.tableView.reloadData()
                 self?.refreshControl.endRefreshing()
@@ -58,64 +59,64 @@ class OrdersViewController: UIViewController {
         })
 
         viewModel.contentChangesSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] changeset in
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
 
             tableView.beginUpdates()
-            tableView.deleteRowsAtIndexPaths(changeset.deletions, withRowAnimation: .Automatic)
-            tableView.reloadRowsAtIndexPaths(changeset.modifications, withRowAnimation: .Automatic)
-            tableView.insertRowsAtIndexPaths(changeset.insertions, withRowAnimation: .Automatic)
+            tableView.deleteRows(at: changeset.deletions, with: .automatic)
+            tableView.reloadRows(at: changeset.modifications, with: .automatic)
+            tableView.insertRows(at: changeset.insertions, with: .automatic)
             tableView.endUpdates()
         })
 
         viewModel.ordersExpanded.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] ordersExpanded in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] ordersExpanded in
             guard let ordersHeader = self?.ordersHeader else { return }
             ordersHeader.expansionIcon.image = UIImage(named: ordersExpanded ? "minus-icon" : "plus-icon")
             ordersHeader.backgroundColor = ordersExpanded ? ordersHeader.activeColor : ordersHeader.inactiveColor
             ordersHeader.columnDescriptionViewHidden = !ordersExpanded
-            UIView.animateWithDuration(0.3, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 ordersHeader.layoutIfNeeded()
             })
 
         })
 
         viewModel.reservationsExpanded.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] reservationsExpanded in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] reservationsExpanded in
             guard let reservationsHeader = self?.reservationsHeader else { return }
             reservationsHeader.expansionIcon.image = UIImage(named: reservationsExpanded ? "minus-icon" : "plus-icon")
             reservationsHeader.backgroundColor = reservationsExpanded ? reservationsHeader.activeColor : reservationsHeader.inactiveColor
             reservationsHeader.columnDescriptionViewHidden = !reservationsExpanded
-            UIView.animateWithDuration(0.3, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 reservationsHeader.layoutIfNeeded()
             })
         })
 
         viewModel.showReservationSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] indexPath in
-            self?.performSegueWithIdentifier("reservationDetails", sender: indexPath)
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] indexPath in
+            self?.performSegue(withIdentifier: "reservationDetails", sender: indexPath)
         })
 
         observeAlertMessageSignal(viewModel: viewModel)
 
-        viewModel.refreshObserver.sendNext()
+        viewModel.refreshObserver.send(value: ())
     }
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let indexPath = sender as? NSIndexPath, viewModel = viewModel else { return }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = sender as? IndexPath, let viewModel = viewModel else { return }
 
-        if let orderOverviewViewController = segue.destinationViewController as? OrderOverviewViewController,
-                orderOverviewViewModel = viewModel.orderOverviewViewModelForOrderAtIndexPath(indexPath){
+        if let orderOverviewViewController = segue.destination as? OrderOverviewViewController,
+                let orderOverviewViewModel = viewModel.orderOverviewViewModelForOrderAtIndexPath(indexPath){
             orderOverviewViewController.viewModel = orderOverviewViewModel
 
-        } else if let reservationViewController = segue.destinationViewController as? ReservationViewController,
-                reservationViewModel = viewModel.reservationViewModelForOrderAtIndexPath(indexPath){
+        } else if let reservationViewController = segue.destination as? ReservationViewController,
+                let reservationViewModel = viewModel.reservationViewModelForOrderAtIndexPath(indexPath){
             reservationViewController.viewModel = reservationViewModel
         }
     }
@@ -123,7 +124,7 @@ class OrdersViewController: UIViewController {
     // MARK: - Refreshing
 
     @objc private func refresh() {
-        viewModel?.refreshObserver.sendNext()
+        viewModel?.refreshObserver.send(value: ())
     }
 
     // MARK: - Headers configuration
@@ -136,20 +137,20 @@ class OrdersViewController: UIViewController {
         reservationsHeader.addGestureRecognizer(recognizer)
     }
 
-    func handleTap(recognizer: UITapGestureRecognizer) {
-        if let headerView = recognizer.view, viewModel = viewModel {
-            viewModel.sectionExpandedObserver.sendNext(headerView.tag)
+    func handleTap(_ recognizer: UITapGestureRecognizer) {
+        if let headerView = recognizer.view, let viewModel = viewModel {
+            viewModel.sectionExpandedObserver.send(value: headerView.tag)
         }
     }
 
     // MARK: - Logout action
 
-    @IBAction func logout(sender: AnyObject) {
+    @IBAction func logout(_ sender: AnyObject) {
         // Temporary perform login in view controller, refactor once orders are in place
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: kLoggedInUsername)
-        NSUserDefaults.standardUserDefaults().synchronize()
-        AuthManager.sharedInstance.logoutUser()
-        AppRouting.setupMyAccountRootViewController(isLoggedIn: false)
+        UserDefaults.standard.set(nil, forKey: kLoggedInUsername)
+        UserDefaults.standard.synchronize()
+        Commercetools.logoutCustomer()
+        AppRouting.setupMyAccountRootViewController()
     }
 
 
@@ -159,8 +160,8 @@ class OrdersViewController: UIViewController {
 
 extension OrdersViewController: UITableViewDataSource {
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("OrderCell") as! OrderCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell") as! OrderCell
 
         guard let viewModel = viewModel else { return cell }
         cell.orderNumberLabel.text = viewModel.orderNumberAtIndexPath(indexPath)
@@ -169,11 +170,11 @@ extension OrdersViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRowsInSection(section) ?? 0
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
@@ -183,7 +184,7 @@ extension OrdersViewController: UITableViewDataSource {
 
 extension OrdersViewController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = section == 0 ? ordersHeader : reservationsHeader
         guard let viewModel = viewModel else { return headerView }
 
@@ -193,8 +194,8 @@ extension OrdersViewController: UITableViewDelegate {
         return headerView
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        indexPath.section == 0 ? performSegueWithIdentifier("orderDetails", sender: indexPath) : performSegueWithIdentifier("reservationDetails", sender: indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexPath.section == 0 ? performSegue(withIdentifier: "orderDetails", sender: indexPath) : performSegue(withIdentifier: "reservationDetails", sender: indexPath)
     }
 
 }

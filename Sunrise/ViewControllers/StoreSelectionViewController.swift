@@ -5,6 +5,7 @@
 import UIKit
 import CoreLocation
 import ReactiveCocoa
+import ReactiveSwift
 import SVProgressHUD
 import SDWebImage
 
@@ -33,12 +34,12 @@ class StoreSelectionViewController: UITableViewController {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.stopUpdatingLocation()
     }
@@ -50,11 +51,11 @@ class StoreSelectionViewController: UITableViewController {
 
         navigationItem.title = viewModel.title
 
-        reserveAction = CocoaAction(viewModel.reserveAction, { indexPath in return indexPath as! NSIndexPath })
+        reserveAction = CocoaAction(viewModel.reserveAction, { indexPath in return indexPath as! IndexPath })
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isLoading in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] isLoading in
             if !isLoading {
                 self?.tableView.reloadData()
                 self?.refreshControl?.endRefreshing()
@@ -65,37 +66,37 @@ class StoreSelectionViewController: UITableViewController {
         })
 
         viewModel.userLocation.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] _ in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] _ in
             self?.tableView.reloadData()
         })
 
         viewModel.contentChangesSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] changeset in
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
 
             tableView.beginUpdates()
-            tableView.deleteRowsAtIndexPaths(changeset.deletions, withRowAnimation: .Automatic)
-            tableView.reloadRowsAtIndexPaths(changeset.modifications, withRowAnimation: .None)
-            tableView.insertRowsAtIndexPaths(changeset.insertions, withRowAnimation: .Automatic)
+            tableView.deleteRows(at: changeset.deletions, with: .automatic)
+            tableView.reloadRows(at: changeset.modifications, with: .none)
+            tableView.insertRows(at: changeset.insertions, with: .automatic)
             tableView.endUpdates()
         })
 
         viewModel.reserveAction.events
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] event in
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] event in
             switch event {
-            case .Completed:
+            case .completed:
                 self?.presentSuccessfulReservationAlert()
-            case let .Failed(error):
+            case let .failed(error):
                 let alertController = UIAlertController(
                         title: "Reservation failed",
-                        message: self?.viewModel?.alertMessageForErrors([error]),
-                        preferredStyle: .Alert
+                        message: self?.viewModel?.alertMessage(for: [error]),
+                        preferredStyle: .alert
                         )
-                alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-                self?.presentViewController(alertController, animated: true, completion: nil)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self?.present(alertController, animated: true, completion: nil)
             default:
                 return
             }
@@ -106,20 +107,20 @@ class StoreSelectionViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRowsInSection(section) ?? 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StoreDetailsCell") as! StoreDetailsCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StoreDetailsCell") as! StoreDetailsCell
         guard let viewModel = viewModel else { return cell }
 
-        if let expandedIndexPath = viewModel.channelDetailsIndexPath where indexPath == expandedIndexPath {
-            let cell = tableView.dequeueReusableCellWithIdentifier("StoreInfoCell") as! StoreInfoCell
+        if let expandedIndexPath = viewModel.channelDetailsIndexPath, indexPath == expandedIndexPath {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StoreInfoCell") as! StoreInfoCell
             cell.streetAndNumberLabel.text = viewModel.streetAndNumberInfo
             cell.zipAndCityLabel.text = viewModel.zipAndCityInfo
             cell.openLine1Label.text = viewModel.openingTimes
@@ -133,9 +134,9 @@ class StoreSelectionViewController: UITableViewController {
             cell.expandInfoLabel.text = viewModel.expansionTextAtIndexPath(indexPath)
             cell.priceLabel.text = viewModel.priceForChannelAtIndexPath(indexPath)
             cell.availabilityIndicatorView.backgroundColor = viewModel.availabilityColorAtIndexPath(indexPath)
-            cell.reserveButton.enabled = viewModel.reserveButtonEnabledAtIndexPath(indexPath)
+            cell.reserveButton.isEnabled = viewModel.reserveButtonEnabledAtIndexPath(indexPath)
             cell.reserveButton.alpha = viewModel.reserveButtonEnabledAtIndexPath(indexPath) ? 1.0 : 0.6
-            cell.storeImageView.sd_setImageWithURL(NSURL(string: viewModel.storeImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
+            cell.storeImageView.sd_setImage(with: URL(string: viewModel.storeImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
         }
         return cell
@@ -143,15 +144,21 @@ class StoreSelectionViewController: UITableViewController {
 
     // MARK: - Table view delegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        viewModel?.selectedIndexPathObserver.sendNext(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.selectedIndexPathObserver.send(value: indexPath)
     }
     
     // MARK: - Actions
     
-    @IBAction func reserve(sender: UIButton) {
-        let indexPath = self.tableView.indexPathForRowAtPoint(sender.convertPoint(.zero, toView: tableView))
-        reserveAction?.execute(indexPath)
+    @IBAction func reserve(_ sender: UIButton) {
+        let indexPath = self.tableView.indexPathForRow(at: sender.convert(.zero, to: tableView))
+        reserveAction?.execute(indexPath as AnyObject)
+    }
+    
+    // MARK: - Refreshing
+    
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        viewModel?.refreshObserver.send(value: ())
     }
     
     // MARK: - Refreshing
@@ -166,19 +173,19 @@ class StoreSelectionViewController: UITableViewController {
         let alertController = UIAlertController(
                 title: viewModel?.reservationSuccessTitle,
                 message: viewModel?.reservationSuccessMessage,
-                preferredStyle: .Alert
+                preferredStyle: .alert
                 )
-        alertController.addAction(UIAlertAction(title: viewModel?.reservationContinueTitle, style: .Default, handler: { [weak self] _ in
-            self?.navigationController?.popToRootViewControllerAnimated(true)
+        alertController.addAction(UIAlertAction(title: viewModel?.reservationContinueTitle, style: .default, handler: { [weak self] _ in
+            _ = self?.navigationController?.popToRootViewController(animated: true)
         }))
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }
 
 extension StoreSelectionViewController: CLLocationManagerDelegate {
 
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         viewModel?.userLocation.value = locations.last
     }
 

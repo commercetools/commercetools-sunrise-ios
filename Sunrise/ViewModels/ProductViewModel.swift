@@ -3,9 +3,8 @@
 //
 
 import Commercetools
-import ReactiveCocoa
+import ReactiveSwift
 import Result
-import ObjectMapper
 
 class ProductViewModel: BaseViewModel {
 
@@ -22,6 +21,9 @@ class ProductViewModel: BaseViewModel {
     let imageUrl = MutableProperty("")
     let quantities = (1...9).map { String($0) }
     let isLoading = MutableProperty(false)
+    var isLoggedIn: Bool {
+        return AppRouting.isLoggedIn
+    }
 
     // Dialogue texts
     let addToCartSuccessTitle = NSLocalizedString("Product added to cart", comment: "Product added to cart")
@@ -30,11 +32,16 @@ class ProductViewModel: BaseViewModel {
     let cartOverviewTitle = NSLocalizedString("Cart overview", comment: "Cart overview")
     let addToCartFailedTitle = NSLocalizedString("Couldn't add product to cart", comment: "Adding product to cart failed")
 
+    let logInTitle = NSLocalizedString("Log In To Continue", comment: "Log In To Continue")
+    let logInMessage = NSLocalizedString("In order to make a reservation, you have to log in first.", comment: "Reservation log in prompt")
+    let logInAction = NSLocalizedString("Log in", comment: "Log in")
+    let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel")
+
     // Actions
-    lazy var addToCartAction: Action<String, Void, NSError> = { [unowned self] in
-        return Action(enabledIf: ConstantProperty(true), { quantity in
+    lazy var addToCartAction: Action<String, Void, CTError> = { [unowned self] in
+        return Action(enabledIf: Property(value: true), { quantity in
             self.isLoading.value = true
-            return self.addLineItem(quantity)
+            return self.addLineItem(quantity: quantity)
         })
     }()
 
@@ -47,10 +54,10 @@ class ProductViewModel: BaseViewModel {
 
     // Attributes configuration
     private let selectableAttributes: [String] = {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("Selectable attributes") as? [String] ?? []
+        return Bundle.main.object(forInfoDictionaryKey: "Selectable attributes") as? [String] ?? []
     }()
     private let displayableAttributes: [String] = {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("Displayable attributes") as? [String] ?? []
+        return Bundle.main.object(forInfoDictionaryKey: "Displayable attributes") as? [String] ?? []
     }()
 
     // Product variant for currently active (selected) attributes
@@ -59,7 +66,7 @@ class ProductViewModel: BaseViewModel {
         return allVariants?.filter({ variant in
             for activeAttribute in activeAttributes.value {
                 if let type = typeForAttributeName(activeAttribute.0),
-                attributeValue = variant.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value(type) where attributeValue != activeAttribute.1
+                let attributeValue = variant.attributes?.filter({ $0.name == activeAttribute.0 }).first?.value(type), attributeValue != activeAttribute.1
                         || variant.attributes?.filter({ $0.name == activeAttribute.0 }).count == 0 {
                     return false
                 }
@@ -77,7 +84,7 @@ class ProductViewModel: BaseViewModel {
         super.init()
 
         refreshSignal
-        .observeNext { [weak self] in
+        .observeValues { [weak self] in
             if let productId = self?.product?.id {
                 self?.retrieveProduct(productId, size: nil)
             }
@@ -99,7 +106,7 @@ class ProductViewModel: BaseViewModel {
     // MARK: Bindings
 
     private func bindViewModelProducers() {
-        name.value = product?.name?.localizedString?.uppercaseString ?? ""
+        name.value = product?.name?.localizedString?.uppercased() ?? ""
 
         let allVariants = product?.allVariants
 
@@ -108,12 +115,12 @@ class ProductViewModel: BaseViewModel {
                 var values = [String]()
 
                 // We want to show attribute values only for those variants that have prices available
-                if let masterVariant = product?.masterVariant, prices = masterVariant.prices,
-                        defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) where
+                if let masterVariant = product?.masterVariant, let prices = masterVariant.prices,
+                        let defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) ,
                         prices.count > 0 {
                     values.append(defaultValue)
                 }
-                product?.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
+                product?.variants?.filter({ ($0.prices?.count ?? 0) > 0 }).forEach { variant in
                     if let value = variant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
                         if !values.contains(value) {
                             values.append(value)
@@ -125,7 +132,7 @@ class ProductViewModel: BaseViewModel {
                 activeAttributes.value[attribute] = values.first ?? "N/A"
 
                 if let matchingVariant = allVariants?.filter({ $0.isMatchingVariant ?? false }).first,
-                        matchingValue = matchingVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
+                        let matchingValue = matchingVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
                     activeAttributes.value[attribute] = matchingValue
                 }
             }
@@ -140,7 +147,7 @@ class ProductViewModel: BaseViewModel {
         }
 
         price <~ activeAttributes.producer.map { [weak self] _ in
-            guard let price = self?.priceForActiveAttributes, value = price.value else { return "" }
+            guard let price = self?.priceForActiveAttributes, let value = price.value else { return "" }
 
             if let discounted = price.discounted?.value {
                 return "\(discounted)"
@@ -150,7 +157,7 @@ class ProductViewModel: BaseViewModel {
         }
 
         oldPrice <~ activeAttributes.producer.map { [weak self] _ in
-            guard let price = self?.priceForActiveAttributes, value = price.value, _ = price.discounted?.value else { return "" }
+            guard let price = self?.priceForActiveAttributes, let value = price.value, let _ = price.discounted?.value else { return "" }
 
             return "\(value)"
         }
@@ -160,7 +167,7 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
-    func numberOfRowsInSection(section: Int) -> Int {
+    func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
             case 0: return selectableAttributes.count
             case 2: return displayableAttributes.count
@@ -168,13 +175,17 @@ class ProductViewModel: BaseViewModel {
         }
     }
 
-    func attributeNameAtIndexPath(indexPath: NSIndexPath) -> String? {
+    func attributeNameAtIndexPath(_ indexPath: IndexPath) -> String? {
         let attribute = indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
-        return product?.productType?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercaseString
+        return product?.productType?.obj?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercased()
     }
 
-    func attributeKeyAtIndexPath(indexPath: NSIndexPath) -> String {
+    func attributeKeyAtIndexPath(_ indexPath: IndexPath) -> String {
         return indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
+    }
+
+    func isAttributeSelectableAtIndexPath(_ indexPath: IndexPath) -> Bool {
+        return (attributes.value[selectableAttributes[indexPath.row]]?.count ?? 0) > 1
     }
 
     // MARK: Internal Helpers
@@ -187,47 +198,55 @@ class ProductViewModel: BaseViewModel {
         return product?.allVariants.filter({ $0.sku == sku.value }).first?.id
     }
 
-    private func typeForAttributeName(name: String) -> AttributeType? {
-        return product?.productType?.attributes?.filter({ $0.name == name }).first?.type
+    private func typeForAttributeName(_ name: String) -> AttributeType? {
+        return product?.productType?.obj?.attributes?.filter({ $0.name == name }).first?.type
     }
 
     // MARK: - Cart interaction
 
-    private func addLineItem(quantity: String = "1") -> SignalProducer<Void, NSError> {
+    private func addLineItem(quantity: String = "1") -> SignalProducer<Void, CTError> {
         return SignalProducer { observer, disposable in
 
-            var lineItemDraft: [String: AnyObject] = ["productId": self.product?.id ?? "", "variantId": self.currentVariantId() ?? 1, "quantity": Int(quantity) ?? 1]
-
-            // Get the cart with state Active which has the most recent lastModifiedAt.
-            Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1, result: { result in
-                if let results = result.response?["results"] as? [[String: AnyObject]],
-                        carts = Mapper<Cart>().mapArray(results), cart = carts.first, id = cart.id,
-                        version = cart.version where result.isSuccess {
+            Cart.active(result: { result in
+                if let cart = result.model, let cartId = cart.id, let version = cart.version, result.isSuccess {
                     // In case we already have an active cart, just add selected product
-                    lineItemDraft["action"] = "addLineItem"
-                    Commercetools.Cart.update(id, version: version, actions: [lineItemDraft], result: { result in
+                    var options = AddLineItemOptions()
+                    options.productId = self.product?.id
+                    options.variantId = self.currentVariantId()
+                    options.quantity = UInt(quantity)
+                    let updateActions = UpdateActions(version: version, actions: [CartUpdateAction.addLineItem(options: options)])
+                    Cart.update(cartId, actions: updateActions, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
-                        } else if let errors = result.errors where result.isFailure {
-                            super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+                        } else if let errors = result.errors as? [CTError], result.isFailure {
+                            super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                         }
                         self.isLoading.value = false
                     })
 
-                } else if let error = result.errors?.first where result.isFailure {
-                    observer.sendFailed(error)
-                    self.isLoading.value = false
-
-                } else {
+                } else if let error = result.errors?.first as? CTError, case .resourceNotFoundError(let reason) = error,
+                          reason.message == "No active cart exists." {
                     // If there is no active cart, create one, with the selected product
-                    Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale, "lineItems": [lineItemDraft]], result: { result in
+                    var cartDraft = CartDraft()
+                    cartDraft.currency = self.currencyCodeForCurrentLocale
+                    var lineItemDraft = LineItemDraft()
+                    lineItemDraft.productId = self.product?.id
+                    lineItemDraft.variantId = self.currentVariantId()
+                    lineItemDraft.quantity = UInt(quantity)
+                    cartDraft.lineItems = [lineItemDraft]
+
+                    Cart.create(cartDraft, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
-                        } else if let error = result.errors?.first where result.isFailure {
-                            observer.sendFailed(error)
+                        } else if let error = result.errors?.first as? CTError, result.isFailure {
+                            observer.send(error: error)
                         }
                         self.isLoading.value = false
                     })
+
+                } else if let error = result.errors?.first as? CTError {
+                    observer.send(error: error)
+                    self.isLoading.value = false
                 }
             })
         }
@@ -235,34 +254,34 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: - Product retrieval
 
-    private func retrieveProduct(productId: String, size: String?) {
+    private func retrieveProduct(_ productId: String, size: String?) {
         self.isLoading.value = true
-        Commercetools.ProductProjection.byId(productId, expansion: ["productType"], result: { result in
-            if let product = Mapper<ProductProjection>().map(result.response) where result.isSuccess {
+        ProductProjection.byId(productId, expansion: ["productType"], result: { result in
+            if let product = result.model, result.isSuccess {
                 self.product = product
                 self.bindViewModelProducers()
                 if let size = size {
                     self.activeAttributes.value["size"] = size
                 }
 
-            } else if let errors = result.errors where result.isFailure {
-                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                 self.isLoading.value = false
             }
         })
     }
 
     private func retrieveProductType() {
-        guard let id = product?.productTypeId else { return }
+        guard let id = product?.productType?.id else { return }
         self.isLoading.value = true
 
-        Commercetools.ProductType.byId(id, expansion: nil, result: { result in
-            if let productType = Mapper<ProductType>().map(result.response) where result.isSuccess {
-                self.product?.productType = productType
+        ProductType.byId(id, expansion: nil, result: { result in
+            if let productType = result.model, result.isSuccess {
+                self.product?.productType?.obj = productType
                 self.bindViewModelProducers()
 
-            } else if let errors = result.errors where result.isFailure {
-                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                 self.isLoading.value = false
             }
         })

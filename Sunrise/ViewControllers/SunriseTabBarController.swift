@@ -15,7 +15,7 @@ class SunriseTabBarController: UITabBarController {
 
 extension SunriseTabBarController: UITabBarControllerDelegate {
 
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         // Until placing custom search view controller, invoke search bar on home tab.
         if viewController == tabBarController.viewControllers?[1] {
             AppRouting.switchToSearch()

@@ -2,27 +2,12 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ObjectMapper
+import Commercetools
 
-struct Money: Mappable {
-
-    // MARK: - Properties
-
-    var currencyCode: String?
-    var centAmount: Int?
-
-    init?(_ map: Map) {}
-
+extension Money {
     init(currencyCode: String? = nil, centAmount: Int? = nil) {
         self.currencyCode = currencyCode
         self.centAmount = centAmount
-    }
-
-    // MARK: - Mappable
-
-    mutating func mapping(map: Map) {
-        currencyCode       <- map["currencyCode"]
-        centAmount         <- map["centAmount"]
     }
 }
 
@@ -30,14 +15,14 @@ struct Money: Mappable {
 
 extension Money: CustomStringConvertible {
     /// The textual representation used when written to an output stream, with locale based format
-    var description: String {
-        if let centAmount = centAmount, currencyCode = currencyCode,
-        currencySymbol = NSLocale(localeIdentifier: currencyCode).displayNameForKey(NSLocaleCurrencySymbol, value: currencyCode) {
-            let currencyFormatter = NSNumberFormatter()
-            currencyFormatter.numberStyle = .CurrencyStyle
+    public var description: String {
+        if let centAmount = centAmount, let currencyCode = currencyCode,
+           let currencySymbol = (Locale(identifier: currencyCode) as NSLocale).displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode) {
+            let currencyFormatter = NumberFormatter()
+            currencyFormatter.numberStyle = .currency
             currencyFormatter.currencySymbol = currencySymbol
-            currencyFormatter.locale = NSLocale.currentLocale()
-            return currencyFormatter.stringFromNumber(Double(centAmount) / 100) ?? ""
+            currencyFormatter.locale = Locale.current
+            return currencyFormatter.string(from: NSNumber(value: Double(centAmount) / 100)) ?? ""
         }
         return ""
     }

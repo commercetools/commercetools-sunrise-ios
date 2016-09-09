@@ -1,7 +1,17 @@
 language: objective-c
 
-osx_image: xcode7.3
+before_install:
+  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
-xcode_sdk: iphonesimulator9.3
+install:
+   - pod repo update
+   - pod install
 
-script: xcodebuild -workspace Sunrise.xcworkspace -scheme "Sunrise Staging" -destination "platform=iOS Simulator,name=iPhone 6" test | xcpretty -f `xcpretty-travis-formatter`
+osx_image: xcode8
+
+xcode_sdk: iphonesimulator10.0
+
+script:
+  - set -o pipefail
+  - xcodebuild -showsdks
+  - xcodebuild -workspace Sunrise.xcworkspace -scheme "Sunrise Staging" -destination "platform=iOS Simulator,name=iPhone 6" test | xcpretty -c;

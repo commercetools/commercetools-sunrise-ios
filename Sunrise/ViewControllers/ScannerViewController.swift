@@ -5,14 +5,15 @@
 import UIKit
 import AVFoundation
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 import SDWebImage
 import SVProgressHUD
 
 class ScannerViewController: UIViewController {
 
-    private let captureSession = AVCaptureSession()
-    private let videoCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+    private var captureSession: AVCaptureSession? = AVCaptureSession()
+    private let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
     private let metadataOutput = AVCaptureMetadataOutput()
 
     var viewModel: ScannerViewModel? {
@@ -29,18 +30,18 @@ class ScannerViewController: UIViewController {
         setupCaptureSessionAndPreview()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if captureSession.running {
+        if let captureSession = captureSession, captureSession.isRunning {
             captureSession.stopRunning()
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if !captureSession.running {
+        if let captureSession = captureSession, !captureSession.isRunning {
             captureSession.startRunning()
         }
     }
@@ -49,8 +50,9 @@ class ScannerViewController: UIViewController {
         Method used to setup video input from camera, add input and output to the session.
     */
     private func setupCaptureSessionAndPreview() {
-        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice)
-                where captureSession.canAddInput(videoInput) && captureSession.canAddOutput(metadataOutput) else {
+        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice), let captureSession = captureSession,
+                captureSession.canAddInput(videoInput) && captureSession.canAddOutput(metadataOutput) else {
+            self.captureSession = nil
             presentCaptureError()
             return
         }
@@ -58,14 +60,14 @@ class ScannerViewController: UIViewController {
         captureSession.addInput(videoInput)
         captureSession.addOutput(metadataOutput)
 
-        metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 
-        previewLayer.frame = view.layer.bounds
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        view.layer.addSublayer(previewLayer)
+        previewLayer?.frame = view.layer.bounds
+        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        view.layer.addSublayer(previewLayer!)
 
         viewModel?.isCapturing.value = true
     }
@@ -74,36 +76,36 @@ class ScannerViewController: UIViewController {
         Method used to present errors related to capture device capabilities and permissions.
     */
     private func presentCaptureError() {
-        let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
 
         let alertController = UIAlertController(
                 title: viewModel?.errorTitle,
-                message: authorizationStatus == .Denied ? viewModel?.permissionError : viewModel?.capabilitiesError,
-                preferredStyle: .Alert
+                message: authorizationStatus == .denied ? viewModel?.permissionError : viewModel?.capabilitiesError,
+                preferredStyle: .alert
                 )
-        if authorizationStatus == .Denied {
-            alertController.addAction(UIAlertAction(title: "Settings", style: .Cancel, handler: { _ in
-                if let appSettingsURL = NSURL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.sharedApplication().openURL(appSettingsURL)
+        if authorizationStatus == .denied {
+            alertController.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { _ in
+                if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.openURL(appSettingsURL)
                 }
-                self.navigationController?.popViewControllerAnimated(true)
+                _ = self.navigationController?.popViewController(animated: true)
             }))
         }
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in
-            self.navigationController?.popViewControllerAnimated(true)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            _ = self.navigationController?.popViewController(animated: true)
         }))
 
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel where isViewLoaded() else { return }
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ isLoading in
+        .observe(on: UIScheduler())
+        .startWithValues({ isLoading in
             if isLoading {
                 SVProgressHUD.show()
             } else {
@@ -112,20 +114,20 @@ class ScannerViewController: UIViewController {
         })
 
         viewModel.isCapturing.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isCapturing in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] isCapturing in
             if isCapturing {
-                self?.captureSession.startRunning()
+                self?.captureSession?.startRunning()
             } else {
-                self?.captureSession.stopRunning()
+                self?.captureSession?.stopRunning()
             }
         })
 
         viewModel.scannedProduct.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] scannedProduct in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] scannedProduct in
             if scannedProduct != nil {
-                self?.performSegueWithIdentifier("showScannedProduct", sender: self)
+                self?.performSegue(withIdentifier: "showScannedProduct", sender: self)
             }
         })
 
@@ -134,9 +136,9 @@ class ScannerViewController: UIViewController {
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let productViewController = segue.destinationViewController as? ProductViewController, viewModel = viewModel,
-                product = viewModel.scannedProduct.value {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let productViewController = segue.destination as? ProductViewController, let viewModel = viewModel,
+                let product = viewModel.scannedProduct.value {
             let productDetailsViewModel = ProductViewModel(product: product)
             productViewController.viewModel = productDetailsViewModel
         }
@@ -148,8 +150,8 @@ class ScannerViewController: UIViewController {
 
 extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
 
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
-        if let readableObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject, viewModel = viewModel {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+        if let readableObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject, let viewModel = viewModel {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             viewModel.scannedCode.value = readableObject.stringValue
         }

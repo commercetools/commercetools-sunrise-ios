@@ -3,8 +3,7 @@
 //
 
 import Commercetools
-import ReactiveCocoa
-import ObjectMapper
+import ReactiveSwift
 
 class ScannerViewModel: BaseViewModel {
 
@@ -26,28 +25,27 @@ class ScannerViewModel: BaseViewModel {
 
         super.init()
 
-        scannedCode.signal.observeNext { [weak self] sku in
+        scannedCode.signal.observeValues { [weak self] sku in
             if sku.characters.count > 0 {
                 self?.searchForProduct(sku)
             }
         }
     }
 
-    private func searchForProduct(sku: String) {
+    private func searchForProduct(_ sku: String) {
         isLoading.value = true
         isCapturing.value = false
 
-        Commercetools.ProductProjection.search(filter: "variants.sku:\"\(sku)\"", limit: 1, result: { result in
-            if let results = result.response?["results"] as? [[String: AnyObject]],
-            product = Mapper<ProductProjection>().mapArray(results)?.first where result.isSuccess {
+        ProductProjection.search(limit: 1, filter: "variants.sku:\"\(sku)\"", result: { result in
+            if let product = result.model?.results?.first, result.isSuccess {
                 self.scannedProduct.value = product
 
-            } else if let errors = result.errors where result.isFailure {
-                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                 self.isCapturing.value = true
 
             } else {
-                super.alertMessageObserver.sendNext(NSLocalizedString("Scanned product could not be found.", comment: "Scanned product not found"))
+                super.alertMessageObserver.send(value: NSLocalizedString("Scanned product could not be found.", comment: "Scanned product not found"))
                 self.isCapturing.value = true
 
             }

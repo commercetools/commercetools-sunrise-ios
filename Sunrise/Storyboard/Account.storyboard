@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -29,7 +29,7 @@
             </objects>
             <point key="canvasLocation" x="782" y="1044"/>
         </scene>
-        <!--My account-->
+        <!--My Account-->
         <scene sceneID="SUY-w4-voI">
             <objects>
                 <viewController id="HCW-6s-77m" customClass="OrdersViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,7 +181,7 @@
                             <constraint firstAttribute="trailing" secondItem="09Z-is-o7W" secondAttribute="trailing" constant="8" id="yE5-03-ieU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My account" id="oxG-Bs-3Qe">
+                    <navigationItem key="navigationItem" title="My Account" id="oxG-Bs-3Qe">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="Gep-A0-Hhy">
                             <connections>
                                 <action selector="logout:" destination="HCW-6s-77m" id="BmS-d1-keV"/>

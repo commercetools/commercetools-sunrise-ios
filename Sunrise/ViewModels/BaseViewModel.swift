@@ -2,9 +2,8 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import Result
-import ObjectMapper
 import Commercetools
 
 class BaseViewModel {
@@ -16,9 +15,9 @@ class BaseViewModel {
 
     // Convenience property for obtaining currency code for user's locale
     var currencyCodeForCurrentLocale: String {
-        let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.numberStyle = .CurrencyStyle
-        currencyFormatter.locale = NSLocale.currentLocale()
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.locale = Locale.current
 
         return currencyFormatter.currencyCode
     }
@@ -31,30 +30,23 @@ class BaseViewModel {
         self.alertMessageObserver = alertMessageObserver
     }
 
-    func alertMessageForErrors(errors: [NSError]) -> String {
-        return errors.map({
-            var alertMessage = ""
-            if let failureReason = $0.userInfo[NSLocalizedFailureReasonErrorKey] as? String {
-                alertMessage += "\(failureReason) :"
-            }
-            alertMessage += $0.localizedDescription
-            return alertMessage
-        }).joinWithSeparator("\n")
+    func alertMessage(for errors: [CTError]) -> String {
+        return errors.map({ $0.errorDescription ?? "" }).joined(separator: "\n")
     }
 
     // MARK: - Cart or order overview calculations
 
-    func calculateOrderDiscount(lineItems: [LineItem]) -> String {
-        let totalOrderDiscountAmount = lineItems.reduce(0, combine: { $0 + calculateCartDiscountForLineItem($1) })
+    func calculateOrderDiscount(_ lineItems: [LineItem]) -> String {
+        let totalOrderDiscountAmount = lineItems.reduce(0, { $0 + calculateCartDiscountForLineItem($1) })
         return Money(currencyCode: lineItems.first?.totalPrice?.currencyCode ?? "",
                 centAmount: totalOrderDiscountAmount).description
     }
 
-    func calculateCartDiscountForLineItem(lineItem: LineItem) -> Int {
-        guard let discountedPricePerQuantity = lineItem.discountedPricePerQuantity, quantity = lineItem.quantity else { return 0 }
+    func calculateCartDiscountForLineItem(_ lineItem: LineItem) -> Int {
+        guard let discountedPricePerQuantity = lineItem.discountedPricePerQuantity, let quantity = lineItem.quantity else { return 0 }
 
-        let discountedPriceAmount = discountedPricePerQuantity.reduce(0, combine: {
-            if let quantity = $1.quantity, discountedAmount = $1.discountedPrice?.value?.centAmount {
+        let discountedPriceAmount = discountedPricePerQuantity.reduce(0, {
+            if let quantity = $1.quantity, let discountedAmount = $1.discountedPrice?.value?.centAmount {
                 return $0 + quantity * discountedAmount
             }
             return $0
@@ -62,20 +54,20 @@ class BaseViewModel {
         return discountedPriceAmount > 0 ? quantity * calculateAmountForOneLineItem(lineItem) - discountedPriceAmount : 0
     }
 
-    func calculateSubtotal(lineItems: [LineItem]) -> String {
+    func calculateSubtotal(_ lineItems: [LineItem]) -> String {
         var money = Money(currencyCode: lineItems.first?.totalPrice?.currencyCode ?? "")
 
         let subtotal = lineItems.map {
             let quantity = $0.quantity ?? 0
             let amount = calculateAmountForOneLineItem($0)
             return quantity * amount
-        }.reduce(0, combine: { $0 + $1 }) ?? 0
+        }.reduce(0, { $0 + $1 })
 
         money.centAmount = subtotal
         return money.description
     }
 
-    func calculateAmountForOneLineItem(lineItem: LineItem) -> Int {
+    func calculateAmountForOneLineItem(_ lineItem: LineItem) -> Int {
         if let discountedAmount = lineItem.price?.discounted?.value?.centAmount {
             return discountedAmount
 

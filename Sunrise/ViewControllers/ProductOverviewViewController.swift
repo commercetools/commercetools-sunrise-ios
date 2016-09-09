@@ -4,6 +4,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 import SDWebImage
 import SVProgressHUD
@@ -16,7 +17,7 @@ class ProductOverviewViewController: UICollectionViewController {
     
     let searchController = UISearchController(searchResultsController:  nil)
 
-    private var idleTimer: NSTimer?
+    private var idleTimer: Timer?
 
     var viewModel: ProductOverviewViewModel? {
         didSet {
@@ -30,7 +31,7 @@ class ProductOverviewViewController: UICollectionViewController {
         viewModel = ProductOverviewViewModel()
 
         collectionView?.emptyDataSetSource = self
-        noResultsView.hidden = true
+        noResultsView.isHidden = true
 
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
@@ -42,16 +43,16 @@ class ProductOverviewViewController: UICollectionViewController {
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel where isViewLoaded() else { return }
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
         navigationItem.title = viewModel.title
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isLoading in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] isLoading in
             if !isLoading {
                 self?.collectionView?.reloadData()
-                self?.noResultsView.hidden = false
+                self?.noResultsView.isHidden = false
                 SVProgressHUD.dismiss()
             }
         })
@@ -59,14 +60,14 @@ class ProductOverviewViewController: UICollectionViewController {
         observeAlertMessageSignal(viewModel: viewModel)
 
         SVProgressHUD.show()
-        viewModel.refreshObserver.sendNext()
+        viewModel.refreshObserver.send(value: ())
     }
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let selectedCell = sender as? ProductOverviewCell, indexPath = collectionView?.indexPathForCell(selectedCell),
-                productViewController = segue.destinationViewController as? ProductViewController, viewModel = viewModel {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectedCell = sender as? ProductOverviewCell, let indexPath = collectionView?.indexPath(for: selectedCell),
+                let productViewController = segue.destination as? ProductViewController, let viewModel = viewModel {
             let productDetailsViewModel = viewModel.productDetailsViewModelForProductAtIndexPath(indexPath)
             productViewController.viewModel = productDetailsViewModel
         }
@@ -74,13 +75,13 @@ class ProductOverviewViewController: UICollectionViewController {
 
     // MARK: - UICollectionViewDataSource
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
         return viewModel.numberOfProductsInSection(section)
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProductOverviewCell", forIndexPath: indexPath) as! ProductOverviewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductOverviewCell", for: indexPath) as! ProductOverviewCell
 
         guard let viewModel = viewModel else { return cell }
 
@@ -91,14 +92,14 @@ class ProductOverviewViewController: UICollectionViewController {
         priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
         cell.oldPriceLabel.attributedText = priceBeforeDiscount
 
-        cell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.productImageUrlAtIndexPath(indexPath)))
+        cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrlAtIndexPath(indexPath)))
 
         return cell
     }
 
     // MARK: - UIScrollViewDelegate
 
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let viewModel = viewModel else { return }
 
         if viewModel.numberOfProductsInSection(0) > 0 {
@@ -108,7 +109,7 @@ class ProductOverviewViewController: UICollectionViewController {
             // Load new results when the y offset still hasn't reached the bottom.
             // In case it did reach the bottom (i.e user scrolled fast), show the the progress as well.
             if scrollView.contentOffset.y >= topOfMiddleCell && !viewModel.isLoading.value {
-                viewModel.nextPageObserver.sendNext()
+                viewModel.nextPageObserver.send(value: ())
             }
             if scrollView.contentOffset.y >= topOfLastCell && viewModel.isLoading.value {
                 SVProgressHUD.show()
@@ -121,15 +122,15 @@ class ProductOverviewViewController: UICollectionViewController {
     /**
         In order to avoid fetching search results on each change, we use the idleTimer to trigger search action.
     */
-    private func resetIdleTimer() {
+    fileprivate func resetIdleTimer() {
         if let idleTimer = idleTimer {
             idleTimer.invalidate()
         }
-        idleTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(performSearch), userInfo: nil, repeats: false)
+        idleTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(performSearch), userInfo: nil, repeats: false)
     }
 
     @objc private func performSearch() {
-        if let searchText = searchController.searchBar.text where searchText != viewModel?.searchText.value {
+        if let searchText = searchController.searchBar.text, searchText != viewModel?.searchText.value {
             SVProgressHUD.show()
             viewModel?.searchText.value = searchText
         }
@@ -141,8 +142,8 @@ class ProductOverviewViewController: UICollectionViewController {
 
 extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath: NSIndexPath) -> CGSize {
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt sizeForItemAtIndexPath: IndexPath) -> CGSize {
+        let screenSize: CGRect = UIScreen.main.bounds
         let cellWidth = (screenSize.width - 26) / 2
         return CGSize(width: cellWidth, height: cellHeight)
     }
@@ -153,7 +154,7 @@ extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
 
 extension ProductOverviewViewController: UISearchResultsUpdating {
 
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         resetIdleTimer()
     }
 
@@ -161,7 +162,7 @@ extension ProductOverviewViewController: UISearchResultsUpdating {
 
 extension ProductOverviewViewController: DZNEmptyDataSetSource {
 
-    func customViewForEmptyDataSet(scrollView: UIScrollView) -> UIView {
+    func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView {
         return noResultsView
     }
 

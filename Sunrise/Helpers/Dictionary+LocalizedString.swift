@@ -4,15 +4,15 @@
 
 import Foundation
 
-extension Dictionary where Key: StringLiteralConvertible, Value: StringLiteralConvertible {
+extension Dictionary where Key: ExpressibleByStringLiteral, Value: ExpressibleByStringLiteral {
 
     var localizedString: Value? {
-        let currentLocaleIdentifier = NSLocale.currentLocale().localeIdentifier
+        let currentLocaleIdentifier = Locale.current.identifier
 
-        if let key = currentLocaleIdentifier as? Key, localizedString = self[key] {
+        if let key = currentLocaleIdentifier as? Key, let localizedString = self[key] {
             return localizedString
 
-        } else if let key = NSLocale.componentsFromLocaleIdentifier(currentLocaleIdentifier)[NSLocaleLanguageCode] as? Key, localizedString = self[key] {
+        } else if let key = Locale.components(fromIdentifier: currentLocaleIdentifier)[NSLocale.Key.languageCode.rawValue] as? Key, let localizedString = self[key] {
             return localizedString
 
         } else {

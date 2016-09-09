@@ -2,49 +2,16 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ObjectMapper
+import Commercetools
 
-struct ProductProjection: Mappable {
+extension ProductProjection {
 
-    // MARK: - Properties
-
-    var id: String?
-    var name: [String: String]?
-    var productTypeId: String?
-    var productType: ProductType?
-    var masterVariant: ProductVariant?
-    var variants: [ProductVariant]?
-    /// The union of `masterVariant` and other`variants`.
-    var allVariants: [ProductVariant] {
-        var allVariants = [ProductVariant]()
-        if let masterVariant = masterVariant {
-            allVariants.append(masterVariant)
-        }
-        if let otherVariants = variants {
-            allVariants += otherVariants
-        }
-        return allVariants
-    }
     /// The `masterVariant` if it has price, or first from `variants` with price.
     var mainVariantWithPrice: ProductVariant? {
-        if let prices = masterVariant?.prices where prices.count > 0 {
+        if let prices = masterVariant?.prices, prices.count > 0 {
             return masterVariant
         } else {
-            return variants?.filter({ $0.prices?.count > 0 }).first
+            return variants?.filter({ ($0.prices?.count ?? 0) > 0 }).first
         }
     }
-
-    init?(_ map: Map) {}
-
-    // MARK: - Mappable
-
-    mutating func mapping(map: Map) {
-        id                 <- map["id"]
-        name               <- map["name"]
-        productTypeId      <- map["productType.id"]
-        productType        <- map["productType.obj"]
-        masterVariant      <- map["masterVariant"]
-        variants           <- map["variants"]
-    }
-
 }

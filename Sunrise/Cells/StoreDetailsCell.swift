@@ -6,7 +6,7 @@ import UIKit
 
 class StoreDetailsCell: UITableViewCell {
 
-    @IBInspectable var activeColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var activeColor: UIColor = UIColor.lightGray
     
     @IBOutlet weak var storeImageView: UIImageView!
     @IBOutlet weak var storeDistanceLabel: UILabel!
@@ -22,7 +22,7 @@ class StoreDetailsCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
