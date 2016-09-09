@@ -141,6 +141,9 @@ class ProductViewController: UITableViewController {
     private func bindSelectableAttributeCell(cell: SelectableAttributeCell, indexPath: NSIndexPath) {
         guard let viewModel = viewModel else { return }
 
+        cell.attributeField.layer.borderWidth = viewModel.isAttributeSelectableAtIndexPath(indexPath) ? 1 : 0
+        cell.attributeField.enabled = viewModel.isAttributeSelectableAtIndexPath(indexPath)
+
         cell.attributeLabel.text = viewModel.attributeNameAtIndexPath(indexPath)
         cell.attributeField.isOptionalDropDown = false
         cell.attributeField.dropDownMode = .TextPicker

@@ -177,6 +177,10 @@ class ProductViewModel: BaseViewModel {
         return indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
     }
 
+    func isAttributeSelectableAtIndexPath(indexPath: NSIndexPath) -> Bool {
+        return attributes.value[selectableAttributes[indexPath.row]]?.count > 1
+    }
+
     // MARK: Internal Helpers
 
     private var priceForActiveAttributes: Price? {
