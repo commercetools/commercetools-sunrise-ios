@@ -110,6 +110,7 @@ class ProductViewController: UITableViewController {
                     SVProgressHUD.show()
                 } else {
                     self?.tableView.reloadData()
+                    self?.refreshControl?.endRefreshing()
                     SVProgressHUD.dismiss()
                 }
             })
@@ -226,6 +227,12 @@ class ProductViewController: UITableViewController {
             case 2: return 55
             default: return 0
         }
+    }
+
+    // MARK: - Refreshing
+    
+    @IBAction func refresh(sender: UIRefreshControl) {
+        viewModel?.refreshObserver.sendNext()
     }
 
     // MARK: - Navigation
