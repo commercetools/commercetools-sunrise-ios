@@ -757,6 +757,12 @@
                             <outlet property="delegate" destination="JIS-eh-T7N" id="9SW-4f-Gi8"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qnb-Gx-3kP">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="JIS-eh-T7N" eventType="valueChanged" id="pTM-IM-ODs"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6C-LF-jwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

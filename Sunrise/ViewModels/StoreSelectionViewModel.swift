@@ -12,6 +12,7 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // Inputs
     let selectedIndexPathObserver: Observer<NSIndexPath, NoError>
+    let refreshObserver: Observer<Void, NoError>
     let userLocation: MutableProperty<CLLocation?>
 
     // Outputs
@@ -91,6 +92,9 @@ class StoreSelectionViewModel: BaseViewModel {
         userLocation = MutableProperty(nil)
         title = NSLocalizedString("Store Location", comment: "Store Location")
 
+        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
+        self.refreshObserver = refreshObserver
+
         let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<NSIndexPath, NoError>.pipe()
         self.selectedIndexPathSignal = selectedIndexPathSignal
         self.selectedIndexPathObserver = selectedIndexPathObserver
@@ -131,6 +135,11 @@ class StoreSelectionViewModel: BaseViewModel {
                 changeset.deletions = [NSIndexPath(forRow: previouslyExpandedIndexPath.row + 1, inSection: previouslyExpandedIndexPath.section)]
             }
             self.contentChangesObserver.sendNext(changeset)
+        }
+
+        refreshSignal
+        .observeNext { [weak self] in
+            self?.retrieveStores()
         }
 
         retrieveStores()
