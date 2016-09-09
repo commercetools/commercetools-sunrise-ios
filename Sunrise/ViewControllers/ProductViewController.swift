@@ -15,6 +15,7 @@ class ProductViewController: UITableViewController {
 
     @IBOutlet var headerView: UIView!
     @IBOutlet var footerView: UIView!
+    @IBOutlet var displayableAttributesHeaderView: UIView!
 
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameLabel: UILabel!
@@ -51,6 +52,8 @@ class ProductViewController: UITableViewController {
         quantityField.layer.borderColor = quantityBorderColor.CGColor
         
         tableView.tableHeaderView = headerView
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
 
         if viewModel != nil {
             bindViewModel()
@@ -168,10 +171,26 @@ class ProductViewController: UITableViewController {
         }
     }
 
+    private func bindDisplayableAttributeCell(cell: DisplayedAttributeCell, indexPath: NSIndexPath) {
+        guard let viewModel = viewModel else { return }
+
+        cell.attributeKey.text = viewModel.attributeNameAtIndexPath(indexPath)
+        let attributeKey = viewModel.attributeKeyAtIndexPath(indexPath)
+
+        viewModel.activeAttributes.producer
+        .observeOn(UIScheduler())
+        .takeUntil(cell.prepareForReuseSignalProducer())
+        .startWithNext { activeAttributes in
+            if let activeAttribute = activeAttributes[attributeKey] {
+                cell.attributeValue.text = activeAttribute
+            }
+        }
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -179,13 +198,13 @@ class ProductViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SelectableAttributeCell") as! SelectableAttributeCell
-
-        guard let viewModel = viewModel else { return cell }
-        if indexPath.section == 0 && indexPath.row == viewModel.numberOfRowsInSection(0) - 1 {
-            return footerCell
+        if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("DisplayedAttributeCell") as! DisplayedAttributeCell
+            bindDisplayableAttributeCell(cell, indexPath: indexPath)
+            return cell
         }
 
+        let cell = tableView.dequeueReusableCellWithIdentifier("SelectableAttributeCell") as! SelectableAttributeCell
         bindSelectableAttributeCell(cell, indexPath: indexPath)
 
         return cell
@@ -193,10 +212,20 @@ class ProductViewController: UITableViewController {
 
     // MARK: - UITableViewDelegate
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let viewModel = viewModel else { return 0 }
-        let numberOfRows = viewModel.numberOfRowsInSection(indexPath.section)
-        return indexPath.row == numberOfRows - 1 ? 100 : 63
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+            case 1: return footerView
+            case 2: return displayableAttributesHeaderView
+            default: return nil
+        }
+    }
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+            case 1: return 100
+            case 2: return 55
+            default: return 0
+        }
     }
 
     // MARK: - Navigation
