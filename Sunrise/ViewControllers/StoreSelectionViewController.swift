@@ -57,6 +57,7 @@ class StoreSelectionViewController: UITableViewController {
         .startWithNext({ [weak self] isLoading in
             if !isLoading {
                 self?.tableView.reloadData()
+                self?.refreshControl?.endRefreshing()
                 SVProgressHUD.dismiss()
             } else {
                 SVProgressHUD.show()
@@ -151,6 +152,12 @@ class StoreSelectionViewController: UITableViewController {
     @IBAction func reserve(sender: UIButton) {
         let indexPath = self.tableView.indexPathForRowAtPoint(sender.convertPoint(.zero, toView: tableView))
         reserveAction?.execute(indexPath)
+    }
+    
+    // MARK: - Refreshing
+    
+    @IBAction func refresh(sender: UIRefreshControl) {
+        viewModel?.refreshObserver.sendNext()
     }
 
     // MARK: - Success presentation

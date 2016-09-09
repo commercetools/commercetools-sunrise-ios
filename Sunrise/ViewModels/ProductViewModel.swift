@@ -4,12 +4,14 @@
 
 import Commercetools
 import ReactiveCocoa
+import Result
 import ObjectMapper
 
 class ProductViewModel: BaseViewModel {
 
     // Inputs
     let activeAttributes = MutableProperty([String: String]())
+    let refreshObserver: Observer<Void, NoError>
 
     // Outputs
     let attributes = MutableProperty([String: [String]]())
@@ -68,16 +70,29 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: Lifecycle
 
-    init(product: ProductProjection) {
-        self.product = product
+    override private init() {
+        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
+        self.refreshObserver = refreshObserver
+
         super.init()
 
+        refreshSignal
+        .observeNext { [weak self] in
+            if let productId = self?.product?.id {
+                self?.retrieveProduct(productId, size: nil)
+            }
+        }
+    }
+
+    convenience init(product: ProductProjection) {
+        self.init()
+
+        self.product = product
         retrieveProductType()
     }
 
-    init(productId: String, size: String? = nil) {
-        super.init()
-
+    convenience init(productId: String, size: String? = nil) {
+        self.init()
         retrieveProduct(productId, size: size)
     }
 
