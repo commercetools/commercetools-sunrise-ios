@@ -47,6 +47,9 @@ class ProductViewModel: BaseViewModel {
     private let selectableAttributes: [String] = {
         return NSBundle.mainBundle().objectForInfoDictionaryKey("Selectable attributes") as? [String] ?? []
     }()
+    private let displayableAttributes: [String] = {
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("Displayable attributes") as? [String] ?? []
+    }()
 
     // Product variant for currently active (selected) attributes
     private var variantForActiveAttributes: ProductVariant? {
@@ -85,7 +88,7 @@ class ProductViewModel: BaseViewModel {
 
         let allVariants = product?.allVariants
 
-        selectableAttributes.forEach { attribute in
+        (selectableAttributes + displayableAttributes).forEach { attribute in
             if let type = typeForAttributeName(attribute) {
                 var values = [String]()
 
@@ -143,16 +146,20 @@ class ProductViewModel: BaseViewModel {
     // MARK: - Data Source
 
     func numberOfRowsInSection(section: Int) -> Int {
-        return selectableAttributes.count + 1
+        switch section {
+            case 0: return selectableAttributes.count
+            case 2: return displayableAttributes.count
+            default: return 0
+        }
     }
 
     func attributeNameAtIndexPath(indexPath: NSIndexPath) -> String? {
-        let attribute = selectableAttributes[indexPath.row]
+        let attribute = indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
         return product?.productType?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercaseString
     }
 
     func attributeKeyAtIndexPath(indexPath: NSIndexPath) -> String {
-        return selectableAttributes[indexPath.row]
+        return indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
     }
 
     // MARK: Internal Helpers
