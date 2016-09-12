@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
     @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
     
     @IBOutlet weak var loginFormView: UIView!
+    @IBOutlet weak var registerFormView: UIView!
+
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -29,7 +31,18 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         emailField.keyboardType = .EmailAddress
-        loginFormView.layer.borderColor = borderColor.CGColor
+
+        [loginFormView, registerFormView].forEach {
+            $0.layer.borderColor = borderColor.CGColor
+        }
+
+
+        [emailField, passwordField].forEach {
+            $0.layer.borderColor = borderColor.CGColor
+            $0.leftView = UIView(frame: CGRectMake(0, 0, 7, $0.frame.height))
+            $0.leftViewMode = .Always
+        }
+
         viewModel = LoginViewModel()
     }
 
