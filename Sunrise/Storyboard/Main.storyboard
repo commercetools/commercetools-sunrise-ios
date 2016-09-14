@@ -262,10 +262,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="888"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RII-l2-v6V">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="850"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9W6-gP-M1J">
-                                                <rect key="frame" x="8" y="8" width="584" height="338"/>
+                                                <rect key="frame" x="8" y="8" width="584" height="328"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNr-B7-Yse">
                                                         <rect key="frame" x="0.0" y="0.0" width="584" height="25"/>
@@ -285,7 +285,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="48w-Eh-LNl">
-                                                        <rect key="frame" x="0.0" y="33" width="584" height="305"/>
+                                                        <rect key="frame" x="0.0" y="33" width="584" height="295"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6rX-qE-9fL">
                                                                 <rect key="frame" x="8" y="0.0" width="568" height="258"/>
@@ -432,7 +432,7 @@ fields*</string>
                                                         <constraints>
                                                             <constraint firstItem="6rX-qE-9fL" firstAttribute="top" secondItem="48w-Eh-LNl" secondAttribute="top" id="0tj-zw-pGy"/>
                                                             <constraint firstAttribute="trailing" secondItem="6rX-qE-9fL" secondAttribute="trailing" constant="8" id="6Jl-vO-mZa"/>
-                                                            <constraint firstAttribute="height" constant="305" id="8KN-79-LGZ"/>
+                                                            <constraint firstAttribute="height" constant="295" id="8KN-79-LGZ"/>
                                                             <constraint firstItem="6rX-qE-9fL" firstAttribute="leading" secondItem="48w-Eh-LNl" secondAttribute="leading" constant="8" id="B6j-xa-yc6"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -444,10 +444,10 @@ fields*</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3V8-FF-Igf">
-                                                <rect key="frame" x="8" y="376" width="584" height="500"/>
+                                                <rect key="frame" x="8" y="366" width="584" height="475"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0m-kU-IhG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="584" height="500"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="584" height="475"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w2a-FX-aJg">
                                                                 <rect key="frame" x="8" y="0.0" width="568" height="452"/>
@@ -653,6 +653,9 @@ fields*</string>
                                                                                 <state key="normal" title="REGISTER NOW">
                                                                                     <color key="titleColor" red="0.2470588235" green="0.23137254900000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="register:" destination="Lb3-Wa-75F" eventType="touchUpInside" id="7NT-Cs-Zr7"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-Pa-G78">
                                                                                 <rect key="frame" x="170" y="0.0" width="398" height="35"/>
@@ -667,7 +670,7 @@ fields*</string>
                                                             <constraint firstItem="w2a-FX-aJg" firstAttribute="top" secondItem="r0m-kU-IhG" secondAttribute="top" id="BBa-wx-Z4o"/>
                                                             <constraint firstAttribute="trailing" secondItem="w2a-FX-aJg" secondAttribute="trailing" constant="8" id="JCc-RR-8KJ"/>
                                                             <constraint firstItem="w2a-FX-aJg" firstAttribute="leading" secondItem="r0m-kU-IhG" secondAttribute="leading" constant="8" id="TQS-pL-mQ0"/>
-                                                            <constraint firstAttribute="height" constant="500" id="kty-UH-Umu"/>
+                                                            <constraint firstAttribute="height" constant="475" id="kty-UH-Umu"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -684,7 +687,7 @@ fields*</string>
                                             <constraint firstItem="9W6-gP-M1J" firstAttribute="top" secondItem="RII-l2-v6V" secondAttribute="top" constant="8" id="Xf8-OK-DDO"/>
                                             <constraint firstItem="3V8-FF-Igf" firstAttribute="leading" secondItem="RII-l2-v6V" secondAttribute="leading" constant="8" id="bUZ-Ii-2fS"/>
                                             <constraint firstItem="3V8-FF-Igf" firstAttribute="top" secondItem="9W6-gP-M1J" secondAttribute="bottom" constant="30" id="dOB-TV-Ltw"/>
-                                            <constraint firstAttribute="height" constant="1000" id="hpm-ak-LJZ"/>
+                                            <constraint firstAttribute="height" constant="850" id="hpm-ak-LJZ"/>
                                             <constraint firstItem="9W6-gP-M1J" firstAttribute="leading" secondItem="RII-l2-v6V" secondAttribute="leading" constant="8" id="qel-SE-faT"/>
                                             <constraint firstAttribute="trailing" secondItem="3V8-FF-Igf" secondAttribute="trailing" constant="8" id="zEs-Xk-0UD"/>
                                         </constraints>
@@ -717,10 +720,15 @@ fields*</string>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="emailField" destination="AtD-fN-ZNh" id="TpZ-tG-ssF"/>
+                        <outlet property="firstNameField" destination="Vtn-Lh-zCY" id="MUW-Q2-LMa"/>
+                        <outlet property="lastNameField" destination="y3w-g7-RQP" id="Idx-V2-RZX"/>
                         <outlet property="loginButton" destination="pxI-4D-N8Q" id="GbH-g3-KfA"/>
                         <outlet property="loginFormView" destination="48w-Eh-LNl" id="myI-hO-yUh"/>
                         <outlet property="passwordField" destination="bmV-JS-vlQ" id="wmY-cF-40m"/>
                         <outlet property="registerFormView" destination="r0m-kU-IhG" id="K42-zY-9wg"/>
+                        <outlet property="registrationEmailField" destination="Z1t-fZ-hYV" id="car-5X-jA1"/>
+                        <outlet property="registrationPasswordConfirmationField" destination="vHI-h4-ln0" id="Wcl-QW-rT3"/>
+                        <outlet property="registrationPasswordField" destination="08K-oy-Jrc" id="Lf6-Hh-SKW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFL-9S-cYa" userLabel="First Responder" sceneMemberID="firstResponder"/>

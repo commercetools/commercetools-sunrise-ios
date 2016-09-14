@@ -18,8 +18,15 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var registrationEmailField: UITextField!
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var registrationPasswordField: UITextField!
+    @IBOutlet weak var registrationPasswordConfirmationField: UITextField!
 
     private var loginAction: CocoaAction?
+    private var registerAction: CocoaAction?
 
     private var viewModel: LoginViewModel? {
         didSet {
@@ -37,7 +44,8 @@ class LoginViewController: UIViewController {
         }
 
 
-        [emailField, passwordField].forEach {
+        [emailField, passwordField, registrationEmailField, firstNameField, lastNameField,
+                registrationPasswordField, registrationPasswordConfirmationField].forEach {
             $0.layer.borderColor = borderColor.CGColor
             $0.leftView = UIView(frame: CGRectMake(0, 0, 7, $0.frame.height))
             $0.leftViewMode = .Always
@@ -50,6 +58,11 @@ class LoginViewController: UIViewController {
         loginAction?.execute(nil)
     }
     
+    @IBAction func register(sender: UIButton) {
+        registerAction?.execute(nil)
+    }
+    
+    
     // MARK: - Bindings
 
     private func bindViewModel() {
@@ -59,6 +72,11 @@ class LoginViewController: UIViewController {
 
         viewModel.username <~ emailField.signalProducer()
         viewModel.password <~ passwordField.signalProducer()
+        viewModel.email <~ registrationEmailField.signalProducer()
+        viewModel.firstName <~ firstNameField.signalProducer()
+        viewModel.lastName <~ lastNameField.signalProducer()
+        viewModel.registrationPassword <~ registrationPasswordField.signalProducer()
+        viewModel.registrationPasswordConfirmation <~ registrationPasswordConfirmationField.signalProducer()
 
         viewModel.isLoggedIn.producer
         .observeOn(UIScheduler())
@@ -79,7 +97,7 @@ class LoginViewController: UIViewController {
             }
         })
 
-        viewModel.inputIsValid.producer
+        viewModel.isLoginInputValid.producer
         .observeOn(UIScheduler())
         .startWithNext({ [weak self] inputIsValid in
             self?.loginButton.enabled = inputIsValid
