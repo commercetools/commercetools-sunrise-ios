@@ -24,12 +24,21 @@ class LoginViewModel: BaseViewModel {
     let isLoggedIn: MutableProperty<Bool>
     let isLoading: MutableProperty<Bool>
     let isLoginInputValid = MutableProperty(false)
+    let isRegisterInputValid = MutableProperty(false)
+    let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MRS.", comment: "MRS."),
+                        NSLocalizedString("MS.", comment: "MS."), NSLocalizedString("DR.", comment: "DR.")]
 
     // Actions
     lazy var loginAction: Action<Void, Void, NSError> = { [unowned self] in
         return Action(enabledIf: self.isLoginInputValid, { _ in
             self.isLoading.value = true
             return self.loginUser(self.username.value, password: self.password.value)
+        })
+    }()
+    lazy var registerAction: Action<Void, Void, NSError> = { [unowned self] in
+        return Action(enabledIf: self.isRegisterInputValid, { _ in
+            self.isLoading.value = true
+            return self.registerUser()
         })
     }()
 
@@ -41,8 +50,22 @@ class LoginViewModel: BaseViewModel {
 
         super.init()
 
-        isLoginInputValid <~ username.producer.combineLatestWith(password.producer).map { (username, password) in
+        isLoginInputValid <~ combineLatest(username.producer, password.producer).map { username, password in
             username.characters.count > 0 && password.characters.count > 0
+        }
+
+        isRegisterInputValid <~ combineLatest(email.producer, firstName.producer, lastName.producer,
+                registrationPassword.producer, registrationPasswordConfirmation.producer).map { email, firstName, lastName, password, passwordConfirmation in
+            var isRegisterInputValid = true
+            [email, firstName, lastName, password].forEach {
+                if $0.characters.count == 0 {
+                    isRegisterInputValid = false
+                }
+            }
+            if password != passwordConfirmation {
+                isRegisterInputValid = false
+            }
+            return isRegisterInputValid
         }
     }
 

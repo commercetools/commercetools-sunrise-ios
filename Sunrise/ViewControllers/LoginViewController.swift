@@ -7,6 +7,7 @@ import ReactiveCocoa
 import Result
 import SDWebImage
 import SVProgressHUD
+import IQDropDownTextField
 
 class LoginViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet weak var titleField: IQDropDownTextField!
     @IBOutlet weak var registrationEmailField: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
@@ -38,6 +40,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         emailField.keyboardType = .EmailAddress
+        registrationEmailField.keyboardType = .EmailAddress
+        titleField.dropDownMode = .TextPicker
 
         [loginFormView, registerFormView].forEach {
             $0.layer.borderColor = borderColor.CGColor
@@ -45,7 +49,7 @@ class LoginViewController: UIViewController {
 
 
         [emailField, passwordField, registrationEmailField, firstNameField, lastNameField,
-                registrationPasswordField, registrationPasswordConfirmationField].forEach {
+                titleField, registrationPasswordField, registrationPasswordConfirmationField].forEach {
             $0.layer.borderColor = borderColor.CGColor
             $0.leftView = UIView(frame: CGRectMake(0, 0, 7, $0.frame.height))
             $0.leftViewMode = .Always
@@ -69,14 +73,18 @@ class LoginViewController: UIViewController {
         guard let viewModel = viewModel else { return }
 
         loginAction = CocoaAction(viewModel.loginAction, { _ in return () })
+        registerAction = CocoaAction(viewModel.registerAction, { _ in return () })
 
         viewModel.username <~ emailField.signalProducer()
         viewModel.password <~ passwordField.signalProducer()
         viewModel.email <~ registrationEmailField.signalProducer()
         viewModel.firstName <~ firstNameField.signalProducer()
         viewModel.lastName <~ lastNameField.signalProducer()
+        viewModel.title <~ titleField.signalProducer()
         viewModel.registrationPassword <~ registrationPasswordField.signalProducer()
         viewModel.registrationPasswordConfirmation <~ registrationPasswordConfirmationField.signalProducer()
+
+        titleField.itemList = viewModel.titleOptions
 
         viewModel.isLoggedIn.producer
         .observeOn(UIScheduler())
@@ -103,16 +111,14 @@ class LoginViewController: UIViewController {
             self?.loginButton.enabled = inputIsValid
         })
 
-        viewModel.loginAction.events
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] event in
+        let signInSuccess: (Event<Void, NSError> -> Void) = { [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
             case .Completed:
                 AppRouting.setupMyAccountRootViewController(isLoggedIn: true)
             case let .Failed(error):
                 let alertController = UIAlertController(
-                        title: "Log in failed",
+                        title: "Failed",
                         message: self?.viewModel?.alertMessageForErrors([error]),
                         preferredStyle: .Alert
                         )
@@ -121,7 +127,15 @@ class LoginViewController: UIViewController {
             default:
                 return
             }
-        })
+        }
+
+        viewModel.loginAction.events
+        .observeOn(UIScheduler())
+        .observeNext(signInSuccess)
+
+        viewModel.registerAction.events
+        .observeOn(UIScheduler())
+        .observeNext(signInSuccess)
     }
     
 }
