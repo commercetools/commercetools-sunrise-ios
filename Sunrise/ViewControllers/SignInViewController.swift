@@ -9,7 +9,7 @@ import SDWebImage
 import SVProgressHUD
 import IQDropDownTextField
 
-class LoginViewController: UIViewController {
+class SignInViewController: UIViewController {
     
     @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
     
@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
     private var loginAction: CocoaAction?
     private var registerAction: CocoaAction?
 
-    private var viewModel: LoginViewModel? {
+    private var viewModel: SignInViewModel? {
         didSet {
             bindViewModel()
         }
@@ -55,7 +55,7 @@ class LoginViewController: UIViewController {
             $0.leftViewMode = .Always
         }
 
-        viewModel = LoginViewModel()
+        viewModel = SignInViewModel()
     }
 
     @IBAction func logIn(sender: UIButton) {
@@ -63,7 +63,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func register(sender: UIButton) {
-        registerAction?.execute(nil)
+        guard let viewModel = viewModel else { return }
+
+        if viewModel.isRegisterInputValid.value {
+            registerAction?.execute(nil)
+        } else {
+            let alertController = UIAlertController(
+                    title: "Failed",
+                    message: viewModel.registrationGuide,
+                    preferredStyle: .Alert
+                    )
+            alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+            presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     
