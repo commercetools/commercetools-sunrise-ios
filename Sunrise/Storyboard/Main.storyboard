@@ -246,7 +246,7 @@
             </objects>
             <point key="canvasLocation" x="-668" y="358"/>
         </scene>
-        <!--Sign in-->
+        <!--Sign In or Register-->
         <scene sceneID="3Qe-sI-m5P">
             <objects>
                 <viewController id="Lb3-Wa-75F" customClass="SignInViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
@@ -751,7 +751,7 @@ fields*</string>
                             <constraint firstItem="RII-l2-v6V" firstAttribute="width" secondItem="CO6-1G-Z6W" secondAttribute="width" id="y1g-II-gIo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign in" id="EKH-g1-MyU"/>
+                    <navigationItem key="navigationItem" title="Sign In or Register" id="EKH-g1-MyU"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <userDefinedRuntimeAttributes>
