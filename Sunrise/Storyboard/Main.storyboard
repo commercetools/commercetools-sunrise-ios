@@ -262,30 +262,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="888"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RII-l2-v6V">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="920"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="900"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9W6-gP-M1J">
-                                                <rect key="frame" x="8" y="8" width="584" height="328"/>
+                                                <rect key="frame" x="8" y="8" width="584" height="295"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNr-B7-Yse">
-                                                        <rect key="frame" x="0.0" y="0.0" width="584" height="25"/>
-                                                        <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myaccount-tab-icon" translatesAutoresizingMaskIntoConstraints="NO" id="NAK-cO-MDQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="25"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="35" id="c1m-1h-n2H"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="CUSTOMER SIGN IN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMo-yA-Yc1">
-                                                                <rect key="frame" x="35" y="0.0" width="549" height="25"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" red="0.3411764706" green="0.33725490200000002" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="48w-Eh-LNl">
-                                                        <rect key="frame" x="0.0" y="33" width="584" height="295"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="584" height="295"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6rX-qE-9fL">
                                                                 <rect key="frame" x="8" y="0.0" width="568" height="258"/>
@@ -444,7 +427,7 @@ fields*</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3V8-FF-Igf">
-                                                <rect key="frame" x="8" y="366" width="584" height="540"/>
+                                                <rect key="frame" x="8" y="333" width="584" height="540"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0m-kU-IhG">
                                                         <rect key="frame" x="0.0" y="0.0" width="584" height="540"/>
@@ -728,7 +711,7 @@ fields*</string>
                                             <constraint firstItem="9W6-gP-M1J" firstAttribute="top" secondItem="RII-l2-v6V" secondAttribute="top" constant="8" id="Xf8-OK-DDO"/>
                                             <constraint firstItem="3V8-FF-Igf" firstAttribute="leading" secondItem="RII-l2-v6V" secondAttribute="leading" constant="8" id="bUZ-Ii-2fS"/>
                                             <constraint firstItem="3V8-FF-Igf" firstAttribute="top" secondItem="9W6-gP-M1J" secondAttribute="bottom" constant="30" id="dOB-TV-Ltw"/>
-                                            <constraint firstAttribute="height" constant="920" id="hpm-ak-LJZ"/>
+                                            <constraint firstAttribute="height" constant="900" id="hpm-ak-LJZ"/>
                                             <constraint firstItem="9W6-gP-M1J" firstAttribute="leading" secondItem="RII-l2-v6V" secondAttribute="leading" constant="8" id="qel-SE-faT"/>
                                             <constraint firstAttribute="trailing" secondItem="3V8-FF-Igf" secondAttribute="trailing" constant="8" id="zEs-Xk-0UD"/>
                                         </constraints>
