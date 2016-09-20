@@ -25,7 +25,7 @@
 		210BE5531A46D49DC5FC045F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE81F2AC37E98EA8580EA /* BaseViewModel.swift */; };
 		210BE64C6B6B25F09F3FD20D /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE026DC744F97CD4EDE90 /* LineItem.swift */; };
 		210BE67B374D7D5130EDEF04 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE326EC179776D6CECAD0 /* Channel.swift */; };
-		210BE6B5006B9DD2CC047578 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE09BDDBB63DD98464192 /* LoginViewModel.swift */; };
+		210BE6B5006B9DD2CC047578 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE09BDDBB63DD98464192 /* SignInViewModel.swift */; };
 		210BE782A076C8D447413714 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE1786F78A2DADF4CE9BB /* Price.swift */; };
 		210BE7B8019E23DB879AAE1B /* ProductVariantAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEAF8ED81121BF94F2B46 /* ProductVariantAvailability.swift */; };
 		210BE7E5E4522D03EF0BB7B8 /* Changeset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE70101007B36C753F74B /* Changeset.swift */; };
@@ -49,7 +49,7 @@
 		211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */; };
 		211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211468B31D1F54240011A944 /* OrdersHeaderView.xib */; };
 		211468B61D2088440011A944 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 211468B51D2088440011A944 /* Cart.storyboard */; };
-		2147E6611D07860100EB21AE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147E6601D07860100EB21AE /* LoginViewController.swift */; };
+		2147E6611D07860100EB21AE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147E6601D07860100EB21AE /* SignInViewController.swift */; };
 		215C4F681CF2836400A99790 /* ProductViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */; };
 		215C4F6A1CF286D100A99790 /* product-projection.json in Resources */ = {isa = PBXBuildFile; fileRef = 215C4F691CF286D100A99790 /* product-projection.json */; };
 		215C4F6B1CF28CC600A99790 /* NSBundle+CurrentTestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */; };
@@ -115,7 +115,7 @@
 		210A5B2A1CFFBEA300217A86 /* cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cart.json; sourceTree = "<group>"; };
 		210BE026DC744F97CD4EDE90 /* LineItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		210BE07D571738D36AF37F5B /* DiscountedPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountedPrice.swift; sourceTree = "<group>"; };
-		210BE09BDDBB63DD98464192 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		210BE09BDDBB63DD98464192 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		210BE0EB8BF3DF720B62490C /* Money.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		210BE1786F78A2DADF4CE9BB /* Price.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
 		210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
 		211468B31D1F54240011A944 /* OrdersHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersHeaderView.xib; sourceTree = "<group>"; };
 		211468B51D2088440011A944 /* Cart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
-		2147E6601D07860100EB21AE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2147E6601D07860100EB21AE /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModelSpec.swift; sourceTree = "<group>"; };
 		215C4F691CF286D100A99790 /* product-projection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "product-projection.json"; sourceTree = "<group>"; };
 		215C7C1F1D79A08C002EC074 /* SelectableAttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableAttributeCell.swift; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 				217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */,
 				21B1D8261CFCAE930005848C /* CartViewController.swift */,
 				210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */,
-				2147E6601D07860100EB21AE /* LoginViewController.swift */,
+				2147E6601D07860100EB21AE /* SignInViewController.swift */,
 				210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */,
 				210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */,
 				210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */,
@@ -274,7 +274,7 @@
 				210BE8F057692647AF7F4389 /* ProductOverviewViewModel.swift */,
 				210BE5453FDA40B948A5034D /* CartViewModel.swift */,
 				210BE81F2AC37E98EA8580EA /* BaseViewModel.swift */,
-				210BE09BDDBB63DD98464192 /* LoginViewModel.swift */,
+				210BE09BDDBB63DD98464192 /* SignInViewModel.swift */,
 				210BE8917F4B6AB6DDA9FFBA /* ScannerViewModel.swift */,
 				210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */,
 				210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */,
@@ -768,7 +768,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2147E6611D07860100EB21AE /* LoginViewController.swift in Sources */,
+				2147E6611D07860100EB21AE /* SignInViewController.swift in Sources */,
 				21A9E70A1D64BB3300AC3953 /* Customer.swift in Sources */,
 				210556801D36FFA00036493C /* StoreInfoCell.swift in Sources */,
 				21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */,
@@ -810,7 +810,7 @@
 				21A6B46A1D63311E008BA95C /* ReservationViewModel.swift in Sources */,
 				210BE2199317FF50F41799C3 /* DiscountedLineItemPriceForQuantity.swift in Sources */,
 				210BEE156F121F695E9A9063 /* DiscountedLineItemPrice.swift in Sources */,
-				210BE6B5006B9DD2CC047578 /* LoginViewModel.swift in Sources */,
+				210BE6B5006B9DD2CC047578 /* SignInViewModel.swift in Sources */,
 				210BE8603FFDCB26D5443788 /* AppRouting.swift in Sources */,
 				2105567E1D3650780036493C /* StoreSelectionViewModel.swift in Sources */,
 				210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */,
