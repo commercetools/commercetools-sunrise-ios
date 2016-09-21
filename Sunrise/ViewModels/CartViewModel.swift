@@ -96,17 +96,21 @@ class CartViewModel: BaseViewModel {
     }
 
     func lineItemOldPriceAtIndexPath(indexPath: NSIndexPath) -> String {
-        guard let price = cart.value?.lineItems?[indexPath.row].price, value = price.value,
-        _ = price.discounted?.value else { return "" }
+        guard let lineItem = cart.value?.lineItems?[indexPath.row], price = lineItem.price, value = price.value where
+                price.discounted?.value != nil || (lineItem.discountedPricePerQuantity?.count ?? 0) > 0  else { return "" }
 
         return value.description
     }
 
     func lineItemPriceAtIndexPath(indexPath: NSIndexPath) -> String {
-        guard let price = cart.value?.lineItems?[indexPath.row].price, value = price.value else { return "" }
+        guard let lineItem = cart.value?.lineItems?[indexPath.row], price = lineItem.price, value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
+
+        } else if let discounted = lineItem.discountedPricePerQuantity?.first?.discountedPrice?.value {
+            return discounted.description
+
         } else {
             return value.description
         }
