@@ -417,7 +417,27 @@
         "id": "c9320e4a-c9a9-4793-add1-64b6693d6cda"
       },
       "quantity": 1,
-      "discountedPricePerQuantity": [],
+      "discountedPricePerQuantity":[{
+        "quantity": 1,
+        "discountedPrice": {
+          "value": {
+            "currencyCode": "EUR",
+            "centAmount": 12750
+          },
+          "includedDiscounts": [
+            {
+              "discount": {
+                "typeId": "cart-discount",
+                "id": "c5592074-8027-479f-bc60-8d90bffe0165"
+              },
+              "discountedAmount": {
+                "currencyCode": "EUR",
+                "centAmount": 1000
+              }
+            }
+          ]
+        }
+      }],
       "supplyChannel": {
         "typeId": "channel",
         "id": "0cb2aed0-ed4f-4c0c-bc66-479ee3b53f5e"

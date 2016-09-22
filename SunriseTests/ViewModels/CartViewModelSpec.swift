@@ -32,7 +32,7 @@ class CartViewModelSpec: QuickSpec {
                 expect(cartViewModel.numberOfItems.value).to(equal("3"))
             }
 
-            context("retrieving data for the first cell") {
+            context("retrieving data for the first line item") {
                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
 
                 it("product name is properly extracted") {
@@ -64,7 +64,7 @@ class CartViewModelSpec: QuickSpec {
                 }
             }
 
-            context("retrieving data for the second cell") {
+            context("retrieving data for the second line item") {
                 let indexPath = NSIndexPath(forRow: 1, inSection: 0)
 
                 it("product name is properly extracted") {
@@ -89,6 +89,10 @@ class CartViewModelSpec: QuickSpec {
 
                 it("has correct quantity") {
                     expect(cartViewModel.lineItemQuantityAtIndexPath(indexPath)).to(equal("1"))
+                }
+                
+                it("has correct discounted price extracted from first discountedPricePerQuantity element") {
+                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal("€127.50"))
                 }
 
                 it("has correct total item price") {

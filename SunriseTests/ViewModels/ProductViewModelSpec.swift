@@ -65,7 +65,7 @@ class ProductViewModelSpec: QuickSpec {
                     }
                     waitUntil { done in
                         productViewModel.activeAttributes.producer
-                        .startWithNext({ [weak self] activeAttributes in
+                        .startWithNext({ activeAttributes in
                             if activeAttributes["size"] == "38" {
                                 expect(productViewModel.sku.value).to(equal("M0E20000000E7W9"))
                                 done()
