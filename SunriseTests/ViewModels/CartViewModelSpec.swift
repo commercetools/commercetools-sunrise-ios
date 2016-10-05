@@ -16,9 +16,9 @@ class CartViewModelSpec: QuickSpec {
             var cartViewModel: CartViewModel!
 
             beforeEach {
-                let path = NSBundle.currentTestBundle!.pathForResource("cart", ofType: "json")!
-                let cartJSON = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let cart = Mapper<Cart>().map(cartJSON)!
+                let path = Bundle.currentTestBundle!.path(forResource: "cart", ofType: "json")!
+                let cartJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+                let cart = Mapper<Cart>().map(JSONString: cartJSON as String)!
 
                 cartViewModel = CartViewModel()
                 cartViewModel.cart.value = cart
@@ -33,7 +33,7 @@ class CartViewModelSpec: QuickSpec {
             }
 
             context("retrieving data for the first line item") {
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                let indexPath = IndexPath(row: 0, section: 0)
 
                 it("product name is properly extracted") {
                     expect(cartViewModel.lineItemNameAtIndexPath(indexPath)).to(equal("Dress “Olivia“ Polo Ralph Lauren blue"))
@@ -65,7 +65,7 @@ class CartViewModelSpec: QuickSpec {
             }
 
             context("retrieving data for the second line item") {
-                let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+                let indexPath = IndexPath(row: 1, section: 0)
 
                 it("product name is properly extracted") {
                     expect(cartViewModel.lineItemNameAtIndexPath(indexPath)).to(equal("Pumps ”Flex” Michael Kors red"))
@@ -80,11 +80,7 @@ class CartViewModelSpec: QuickSpec {
                 }
 
                 it("has correct item price") {
-                    expect(cartViewModel.lineItemPriceAtIndexPath(indexPath)).to(equal("€137.50"))
-                }
-
-                it("doesn't show discount when there's no any") {
-                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal(""))
+                    expect(cartViewModel.lineItemPriceAtIndexPath(indexPath)).to(equal("€127.50"))
                 }
 
                 it("has correct quantity") {
@@ -92,7 +88,7 @@ class CartViewModelSpec: QuickSpec {
                 }
                 
                 it("has correct discounted price extracted from first discountedPricePerQuantity element") {
-                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal("€127.50"))
+                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal("€137.50"))
                 }
 
                 it("has correct total item price") {
