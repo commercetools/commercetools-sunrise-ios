@@ -13,7 +13,7 @@ struct ProductVariantAvailability: Mappable {
     var availableQuantity: Int?
     var channels: [String: ProductVariantAvailability]?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

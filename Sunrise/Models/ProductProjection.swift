@@ -27,14 +27,14 @@ struct ProductProjection: Mappable {
     }
     /// The `masterVariant` if it has price, or first from `variants` with price.
     var mainVariantWithPrice: ProductVariant? {
-        if let prices = masterVariant?.prices where prices.count > 0 {
+        if let prices = masterVariant?.prices, prices.count > 0 {
             return masterVariant
         } else {
-            return variants?.filter({ $0.prices?.count > 0 }).first
+            return variants?.filter({ ($0.prices?.count ?? 0) > 0 }).first
         }
     }
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

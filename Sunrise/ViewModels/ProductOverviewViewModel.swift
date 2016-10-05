@@ -2,7 +2,7 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 import ObjectMapper
 import Commercetools
@@ -39,44 +39,44 @@ class ProductOverviewViewModel: BaseViewModel {
         super.init()
 
         refreshSignal
-        .observeNext { [weak self] in
+        .observeValues { [weak self] in
             self?.queryForProductProjections(offset: 0)
         }
 
         nextPageSignal
-        .observeNext { [weak self] in
-            if let productCount = self?.products.count where productCount > 0 {
+        .observeValues { [weak self] in
+            if let productCount = self?.products.count, productCount > 0 {
                 self?.queryForProductProjections(offset: UInt(productCount), text: self?.searchText.value ?? "")
             }
         }
 
         searchText.signal
-        .observeNext({ [weak self] searchText in
+        .observeValues({ [weak self] searchText in
             self?.queryForProductProjections(offset: 0, text: searchText)
         })
     }
 
-    func productDetailsViewModelForProductAtIndexPath(indexPath: NSIndexPath) -> ProductViewModel {
+    func productDetailsViewModelForProductAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel {
         let product = products[indexPath.row]
         return ProductViewModel(product: product)
     }
 
     // MARK: - Data Source
 
-    func numberOfProductsInSection(section: Int) -> Int {
+    func numberOfProductsInSection(_ section: Int) -> Int {
         return products.count
     }
 
-    func productNameAtIndexPath(indexPath: NSIndexPath) -> String {
+    func productNameAtIndexPath(_ indexPath: IndexPath) -> String {
         return products[indexPath.row].name?.localizedString ?? ""
     }
 
-    func productImageUrlAtIndexPath(indexPath: NSIndexPath) -> String {
+    func productImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
         return products[indexPath.row].mainVariantWithPrice?.images?.first?.url ?? ""
     }
 
-    func productPriceAtIndexPath(indexPath: NSIndexPath) -> String {
-        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, value = price.value else { return "" }
+    func productPriceAtIndexPath(_ indexPath: IndexPath) -> String {
+        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, let value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -85,26 +85,26 @@ class ProductOverviewViewModel: BaseViewModel {
         }
     }
 
-    func productOldPriceAtIndexPath(indexPath: NSIndexPath) -> String {
-        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, value = price.value,
-        _ = price.discounted?.value else { return "" }
+    func productOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
+        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, let value = price.value,
+        let _ = price.discounted?.value else { return "" }
 
         return value.description
     }
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections(offset offset: UInt, text: String = "") {
+    private func queryForProductProjections(offset: UInt, text: String = "") {
         isLoading.value = true
 
         Commercetools.ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, offset: offset,
-                lang: NSLocale(localeIdentifier: "en"), text: text, result: { result in
-            if let results = result.response?["results"] as? [[String: AnyObject]],
-            products = Mapper<ProductProjection>().mapArray(results) where result.isSuccess {
+                lang: Locale(identifier: "en"), text: text, result: { result in
+            if let results = result.response?["results"] as? [[String: Any]],
+            let products = Mapper<ProductProjection>().mapArray(JSONArray: results), result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 
-            } else if let errors = result.errors where result.isFailure {
-                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
 
             }
             self.isLoading.value = false

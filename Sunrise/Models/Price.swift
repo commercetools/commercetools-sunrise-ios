@@ -12,11 +12,11 @@ struct Price: Mappable {
     var country: String?
     var customerGroup: [String: AnyObject]?
     var channel: Channel?
-    var validFrom: NSDate?
-    var validUntil: NSDate?
+    var validFrom: Date?
+    var validUntil: Date?
     var discounted: DiscountedPrice?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

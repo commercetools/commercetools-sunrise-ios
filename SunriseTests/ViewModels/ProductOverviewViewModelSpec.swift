@@ -16,9 +16,9 @@ class ProductOverviewViewModelSpec: QuickSpec {
             var overviewViewModel: ProductOverviewViewModel!
 
             beforeEach {
-                let path = NSBundle.currentTestBundle!.pathForResource("product-projection", ofType: "json")!
-                let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let product = Mapper<ProductProjection>().map(productProjectionJSON)!
+                let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
+                let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+                let product = Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
 
                 overviewViewModel = ProductOverviewViewModel()
                 overviewViewModel.products = [product]
@@ -33,7 +33,7 @@ class ProductOverviewViewModelSpec: QuickSpec {
             }
 
             context("retrieving data for the first cell") {
-                let indexPath = NSIndexPath(forItem: 0, inSection: 0)
+                let indexPath = IndexPath(item: 0, section: 0)
 
                 it("product name is properly extracted") {
                     expect(overviewViewModel.productNameAtIndexPath(indexPath)).to(equal("Sneakers ”Tokyo” Lotto grey"))

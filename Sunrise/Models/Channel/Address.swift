@@ -32,7 +32,7 @@ struct Address: Mappable {
     var fax: String?
     var additionalAddressInfo: String?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     init() {}
 

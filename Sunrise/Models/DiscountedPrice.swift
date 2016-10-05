@@ -11,7 +11,7 @@ struct DiscountedPrice: Mappable {
     var value: Money?
     var discount: [String: AnyObject]?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

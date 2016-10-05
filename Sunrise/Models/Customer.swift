@@ -11,14 +11,14 @@ struct Customer: Mappable {
     var id: String?
     var version: UInt?
     var customerNumber: String?
-    var createdAt: NSDate?
-    var lastModifiedAt: NSDate?
+    var createdAt: Date?
+    var lastModifiedAt: Date?
     var email: String?
     var firstName: String?
     var lastName: String?
     var middleName: String?
     var title: String?
-    var dateOfBirth: NSDate?
+    var dateOfBirth: Date?
     var companyName: String?
     var vatId: String?
     var addresses: [Address]?
@@ -36,7 +36,7 @@ struct Customer: Mappable {
         return address
     }
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

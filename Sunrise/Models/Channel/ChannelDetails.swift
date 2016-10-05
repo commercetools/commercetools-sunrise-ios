@@ -13,7 +13,7 @@ struct ChannelDetails: Mappable {
     var latitude: String?
     var longitude: String?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

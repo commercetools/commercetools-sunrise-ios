@@ -499,12 +499,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21CDC4BE1CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "Sunrise" */;
 			buildPhases = (
-				2CF7DD2A9C3C70DD19476E06 /* Check Pods Manifest.lock */,
+				2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */,
 				21CDC4901CE91D9B009D2638 /* Sources */,
 				21CDC4911CE91D9B009D2638 /* Frameworks */,
 				21CDC4921CE91D9B009D2638 /* Resources */,
-				C51C4638AF67D6B89CE5675E /* Embed Pods Frameworks */,
-				65B0A653A7509D406E466E72 /* Copy Pods Resources */,
+				C51C4638AF67D6B89CE5675E /* [CP] Embed Pods Frameworks */,
+				65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -519,12 +519,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21CDC4C11CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "SunriseTests" */;
 			buildPhases = (
-				B376E0CF05118F76C327319C /* Check Pods Manifest.lock */,
+				B376E0CF05118F76C327319C /* [CP] Check Pods Manifest.lock */,
 				21CDC4A61CE91D9B009D2638 /* Sources */,
 				21CDC4A71CE91D9B009D2638 /* Frameworks */,
 				21CDC4A81CE91D9B009D2638 /* Resources */,
-				FEFDCFB8952F3B692E80AF65 /* Embed Pods Frameworks */,
-				FA62B30873B9CA8D581F910C /* Copy Pods Resources */,
+				FEFDCFB8952F3B692E80AF65 /* [CP] Embed Pods Frameworks */,
+				FA62B30873B9CA8D581F910C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -540,11 +540,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21CDC4C41CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "SunriseUITests" */;
 			buildPhases = (
-				FF64BBFEEB8C34F3C2743D4D /* Check Pods Manifest.lock */,
+				FF64BBFEEB8C34F3C2743D4D /* [CP] Check Pods Manifest.lock */,
 				21CDC4B11CE91D9B009D2638 /* Sources */,
 				21CDC4B21CE91D9B009D2638 /* Frameworks */,
 				21CDC4B31CE91D9B009D2638 /* Resources */,
-				68B0478F9AD978C779595ABF /* Copy Pods Resources */,
+				68B0478F9AD978C779595ABF /* [CP] Copy Pods Resources */,
+				094B2A358611C082A08615B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -568,6 +569,7 @@
 				TargetAttributes = {
 					21CDC4931CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -576,10 +578,12 @@
 					};
 					21CDC4A91CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 21CDC4931CE91D9B009D2638;
 					};
 					21CDC4B41CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 21CDC4931CE91D9B009D2638;
 					};
 				};
@@ -641,29 +645,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2CF7DD2A9C3C70DD19476E06 /* Check Pods Manifest.lock */ = {
+		094B2A358611C082A08615B5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		65B0A653A7509D406E466E72 /* Copy Pods Resources */ = {
+		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,14 +690,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		68B0478F9AD978C779595ABF /* Copy Pods Resources */ = {
+		68B0478F9AD978C779595ABF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -686,29 +705,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B376E0CF05118F76C327319C /* Check Pods Manifest.lock */ = {
+		B376E0CF05118F76C327319C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C51C4638AF67D6B89CE5675E /* Embed Pods Frameworks */ = {
+		C51C4638AF67D6B89CE5675E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -716,14 +735,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FA62B30873B9CA8D581F910C /* Copy Pods Resources */ = {
+		FA62B30873B9CA8D581F910C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,14 +750,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FEFDCFB8952F3B692E80AF65 /* Embed Pods Frameworks */ = {
+		FEFDCFB8952F3B692E80AF65 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -746,19 +765,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF64BBFEEB8C34F3C2743D4D /* Check Pods Manifest.lock */ = {
+		FF64BBFEEB8C34F3C2743D4D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -927,6 +946,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Debug Staging";
 		};
@@ -939,6 +959,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
 			name = "Debug Staging";
@@ -951,6 +972,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
 			name = "Debug Staging";
@@ -1010,6 +1032,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Release Staging";
 		};
@@ -1022,6 +1045,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
 			name = "Release Staging";
@@ -1034,6 +1058,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
 			name = "Release Staging";
@@ -1141,6 +1166,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Debug Prod";
 		};
@@ -1158,6 +1184,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = "Release Prod";
 		};
@@ -1170,6 +1197,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
 			name = "Debug Prod";
@@ -1183,6 +1211,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
 			name = "Release Prod";
@@ -1195,6 +1224,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
 			name = "Debug Prod";
@@ -1207,6 +1237,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
 			name = "Release Prod";

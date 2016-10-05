@@ -3,21 +3,21 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import ReactiveSwift
 
 extension UIViewController {
 
-    func observeAlertMessageSignal(viewModel viewModel: BaseViewModel) {
+    func observeAlertMessageSignal(viewModel: BaseViewModel) {
         viewModel.alertMessageSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] alertMessage in
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] alertMessage in
             let alertController = UIAlertController(
             title: "Oops!",
                     message: alertMessage,
-                    preferredStyle: .Alert
+                    preferredStyle: .alert
             )
-            alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-            self?.presentViewController(alertController, animated: true, completion: nil)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self?.present(alertController, animated: true, completion: nil)
         })
     }
 }

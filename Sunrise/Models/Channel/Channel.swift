@@ -11,8 +11,8 @@ class Channel: Mappable {
 
     var id: String?
     var version: UInt?
-    var createdAt: NSDate?
-    var lastModifiedAt: NSDate?
+    var createdAt: Date?
+    var lastModifiedAt: Date?
     var key: String?
     var name: [String: String]?
     var description: [String: String]?
@@ -21,13 +21,13 @@ class Channel: Mappable {
 
     // MARK: - Physical store properties
     var streetAndNumberInfo: String {
-        if let street = address?.streetName, number = address?.streetNumber {
+        if let street = address?.streetName, let number = address?.streetNumber {
             return "\(street) \(number)"
         }
         return "-"
     }
     var zipAndCityInfo: String {
-        if let zip = address?.postalCode, city = address?.city {
+        if let zip = address?.postalCode, let city = address?.city {
             return "\(zip), \(city)"
         }
         return "-"
@@ -36,7 +36,7 @@ class Channel: Mappable {
         return details?.openingTimes?.localizedString ?? "-"
     }
 
-    required init?(_ map: Map) {}
+    required init?(map: Map) {}
 
     // MARK: - Mappable
 

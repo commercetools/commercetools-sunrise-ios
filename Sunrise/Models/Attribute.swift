@@ -11,10 +11,10 @@ struct Attribute: Mappable {
     var name: String?
     var value: AnyObject?
 
-    private let dateFormatter = NSDateFormatter()
+    private let dateFormatter = DateFormatter()
 
-    init?(_ map: Map) {
-        dateFormatter.locale = NSLocale.currentLocale()
+    init?(map: Map) {
+        dateFormatter.locale = NSLocale.current
     }
 
     // MARK: - Mappable
@@ -26,11 +26,11 @@ struct Attribute: Mappable {
 
     // MARK: - Value string representation
 
-    func value(type: AttributeType) -> String? {
-        return representationForRawValue(value, ofType: type)
+    func value(_ type: AttributeType) -> String? {
+        return representation(for: value, ofType: type)
     }
     
-    private func representationForRawValue(rawValue: AnyObject?, ofType type: AttributeType) -> String? {
+    private func representation(for rawValue: Any?, ofType type: AttributeType) -> String? {
         guard let typeName = type.name else { return nil }
 
         switch (typeName, rawValue) {
@@ -47,32 +47,32 @@ struct Attribute: Mappable {
         case ("number", let rawValue as Double):
             return String(rawValue)
         case ("money", let rawValue):
-            return Mapper<Money>().map(rawValue)?.description
+            return Mapper<Money>().map(JSONObject: rawValue)?.description
         case ("date", let rawValue):
             if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
-                dateFormatter.dateStyle = .MediumStyle
-                dateFormatter.timeStyle = .NoStyle
-                return dateFormatter.stringFromDate(date)
+                dateFormatter.dateStyle = .medium
+                dateFormatter.timeStyle = .none
+                return dateFormatter.string(from: date)
             }
             return nil
         case ("time", let rawValue):
             if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
-                dateFormatter.dateStyle = .NoStyle
-                dateFormatter.timeStyle = .ShortStyle
-                return dateFormatter.stringFromDate(date)
+                dateFormatter.dateStyle = .none
+                dateFormatter.timeStyle = .short
+                return dateFormatter.string(from: date)
             }
             return nil
         case ("datetime", let rawValue):
             if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
-                dateFormatter.dateStyle = .MediumStyle
-                dateFormatter.timeStyle = .ShortStyle
-                return dateFormatter.stringFromDate(date)
+                dateFormatter.dateStyle = .medium
+                dateFormatter.timeStyle = .short
+                return dateFormatter.string(from: date)
             }
             return nil
         case ("set", let rawValues as [AnyObject]):
             if let elementType = type.elementType {
                 return rawValues.reduce("") {
-                    if let rawValue = self.representationForRawValue($1, ofType: elementType) {
+                    if let rawValue = self.representation(for: $1, ofType: elementType) {
                         return "\($0) \(rawValue)"
                     }
                     return $0

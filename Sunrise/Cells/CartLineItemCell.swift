@@ -17,7 +17,7 @@ class CartLineItemCell: UITableViewCell {
     @IBOutlet weak var skuLabel: UILabel!
     @IBOutlet weak var sizeLabel: UILabel!
 
-    @IBAction func editQuantity(sender: AnyObject) {
+    @IBAction func editQuantity(_ sender: AnyObject) {
         quantityField?.becomeFirstResponder()
     }    
 

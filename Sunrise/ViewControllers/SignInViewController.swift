@@ -3,7 +3,9 @@
 //
 
 import UIKit
+import Commercetools
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 import SDWebImage
 import SVProgressHUD
@@ -11,7 +13,7 @@ import IQDropDownTextField
 
 class SignInViewController: UIViewController {
     
-    @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var borderColor: UIColor = UIColor.lightGray
     
     @IBOutlet weak var loginFormView: UIView!
     @IBOutlet weak var registerFormView: UIView!
@@ -39,30 +41,30 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        emailField.keyboardType = .EmailAddress
-        registrationEmailField.keyboardType = .EmailAddress
-        titleField.dropDownMode = .TextPicker
+        emailField.keyboardType = .emailAddress
+        registrationEmailField.keyboardType = .emailAddress
+        titleField.dropDownMode = .textPicker
 
         [loginFormView, registerFormView].forEach {
-            $0.layer.borderColor = borderColor.CGColor
+            $0.layer.borderColor = borderColor.cgColor
         }
 
 
         [emailField, passwordField, registrationEmailField, firstNameField, lastNameField,
                 titleField, registrationPasswordField, registrationPasswordConfirmationField].forEach {
-            $0.layer.borderColor = borderColor.CGColor
-            $0.leftView = UIView(frame: CGRectMake(0, 0, 7, $0.frame.height))
-            $0.leftViewMode = .Always
+            $0?.layer.borderColor = borderColor.cgColor
+            $0?.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 7, height: ($0?.frame.height)!))
+            $0?.leftViewMode = .always
         }
 
         viewModel = SignInViewModel()
     }
 
-    @IBAction func logIn(sender: UIButton) {
+    @IBAction func logIn(_ sender: UIButton) {
         loginAction?.execute(nil)
     }
     
-    @IBAction func register(sender: UIButton) {
+    @IBAction func register(_ sender: UIButton) {
         guard let viewModel = viewModel else { return }
 
         if viewModel.isRegisterInputValid.value {
@@ -71,10 +73,10 @@ class SignInViewController: UIViewController {
             let alertController = UIAlertController(
                     title: "Failed",
                     message: viewModel.registrationGuide,
-                    preferredStyle: .Alert
+                    preferredStyle: .alert
                     )
-            alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -99,17 +101,17 @@ class SignInViewController: UIViewController {
         titleField.itemList = viewModel.titleOptions
 
         viewModel.isLoggedIn.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ isLoggedIn in
+        .observe(on: UIScheduler())
+        .startWithValues({ isLoggedIn in
             if isLoggedIn {
                 AppRouting.setupMyAccountRootViewController(isLoggedIn: isLoggedIn)
             }
         })
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isLoading in
-            self?.loginButton.enabled = !isLoading
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] isLoading in
+            self?.loginButton.isEnabled = !isLoading
             if isLoading {
                 SVProgressHUD.show()
             } else {
@@ -118,36 +120,36 @@ class SignInViewController: UIViewController {
         })
 
         viewModel.isLoginInputValid.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] inputIsValid in
-            self?.loginButton.enabled = inputIsValid
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] inputIsValid in
+            self?.loginButton.isEnabled = inputIsValid
         })
 
-        let signInSuccess: (Event<Void, NSError> -> Void) = { [weak self] event in
+        let signInSuccess: ((Event<Void, CTError>) -> Void) = { [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
-            case .Completed:
+            case .completed:
                 AppRouting.setupMyAccountRootViewController(isLoggedIn: true)
-            case let .Failed(error):
+            case let .failed(error):
                 let alertController = UIAlertController(
                         title: "Failed",
-                        message: self?.viewModel?.alertMessageForErrors([error]),
-                        preferredStyle: .Alert
+                        message: self?.viewModel?.alertMessage(for: [error]),
+                        preferredStyle: .alert
                         )
-                alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-                self?.presentViewController(alertController, animated: true, completion: nil)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self?.present(alertController, animated: true, completion: nil)
             default:
                 return
             }
         }
 
         viewModel.loginAction.events
-        .observeOn(UIScheduler())
-        .observeNext(signInSuccess)
+        .observe(on: UIScheduler())
+        .observeValues(signInSuccess)
 
         viewModel.registerAction.events
-        .observeOn(UIScheduler())
-        .observeNext(signInSuccess)
+        .observe(on: UIScheduler())
+        .observeValues(signInSuccess)
     }
     
 }

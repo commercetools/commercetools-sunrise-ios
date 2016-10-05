@@ -16,9 +16,9 @@ class ProductViewModelSpec: QuickSpec {
             var productViewModel: ProductViewModel!
 
             beforeEach {
-                let path = NSBundle.currentTestBundle!.pathForResource("product-projection", ofType: "json")!
-                let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let product = Mapper<ProductProjection>().map(productProjectionJSON)!
+                let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
+                let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+                let product = Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
 
                 productViewModel = ProductViewModel(product: product)
             }
@@ -56,7 +56,7 @@ class ProductViewModelSpec: QuickSpec {
                 it("sku is updated") {
                     waitUntil { done in
                         productViewModel.isLoading.producer
-                        .startWithNext({ isLoading in
+                        .startWithValues({ isLoading in
                             if !isLoading {
                                 productViewModel.activeAttributes.value["size"] = "38"
                                 done()
@@ -65,7 +65,7 @@ class ProductViewModelSpec: QuickSpec {
                     }
                     waitUntil { done in
                         productViewModel.activeAttributes.producer
-                        .startWithNext({ activeAttributes in
+                        .startWithValues({ activeAttributes in
                             if activeAttributes["size"] == "38" {
                                 expect(productViewModel.sku.value).to(equal("M0E20000000E7W9"))
                                 done()

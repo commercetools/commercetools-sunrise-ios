@@ -6,7 +6,7 @@ import UIKit
 
 class CartSummaryCell: UITableViewCell {
 
-    @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var borderColor: UIColor = UIColor.lightGray
 
     // MARK: - Outlets
 
@@ -19,7 +19,7 @@ class CartSummaryCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        continueShippingButton?.layer.borderColor = borderColor.CGColor
+        continueShippingButton?.layer.borderColor = borderColor.cgColor
     }
     
 }

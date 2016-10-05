@@ -16,9 +16,9 @@ class OrdersViewModelSpec: QuickSpec {
             var ordersViewModel: OrdersViewModel!
 
             beforeEach {
-                let path = NSBundle.currentTestBundle!.pathForResource("cart", ofType: "json")!
-                let orderJSON = try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let order = Mapper<Order>().map(orderJSON)!
+                let path = Bundle.currentTestBundle!.path(forResource: "cart", ofType: "json")!
+                let orderJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+                let order = Mapper<Order>().map(JSONString: orderJSON as String)!
 
                 ordersViewModel = OrdersViewModel()
                 ordersViewModel.orders = [order]
@@ -56,7 +56,7 @@ class OrdersViewModelSpec: QuickSpec {
             }
 
             context("retrieving data for the first order") {
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                let indexPath = IndexPath(row: 0, section: 0)
 
                 it("order number is properly extracted") {
                     expect(ordersViewModel.orderNumberAtIndexPath(indexPath)).to(equal("ORD123"))

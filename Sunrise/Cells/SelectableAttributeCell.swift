@@ -7,7 +7,7 @@ import IQDropDownTextField
 
 class SelectableAttributeCell: UITableViewCell {
 
-    @IBInspectable var attributesBorderColor: UIColor = UIColor.grayColor()
+    @IBInspectable var attributesBorderColor: UIColor = UIColor.gray
 
     @IBOutlet weak var attributeLabel: UILabel!
     @IBOutlet weak var attributeField: IQDropDownTextField!
@@ -15,7 +15,7 @@ class SelectableAttributeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        attributeField.layer.borderColor = attributesBorderColor.CGColor
+        attributeField.layer.borderColor = attributesBorderColor.cgColor
     }
 
 }

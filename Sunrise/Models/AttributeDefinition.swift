@@ -15,7 +15,7 @@ struct AttributeDefinition: Mappable {
     var isRequired: Bool?
     var isSearchable: Bool?
     
-    init?(_ map: Map) {}
+    init?(map: Map) {}
     
     // MARK: - Mappable
     

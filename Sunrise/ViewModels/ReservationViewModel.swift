@@ -3,8 +3,8 @@
 //
 
 import Foundation
-import ReactiveCocoa
-import Result
+import ReactiveSwift
+import CoreLocation
 import ObjectMapper
 import Commercetools
 
@@ -58,9 +58,9 @@ class ReservationViewModel {
     // MARK: - Store address geocoding
 
     private func geocodeStoreAddress() {
-        if let channel = order.lineItems?.first?.distributionChannel, zip = channel.address?.postalCode,
-                city = channel.address?.city, street = channel.address?.streetName, number = channel.address?.streetNumber,
-                country = channel.address?.country {
+        if let channel = order.lineItems?.first?.distributionChannel, let zip = channel.address?.postalCode,
+                let city = channel.address?.city, let street = channel.address?.streetName, let number = channel.address?.streetNumber,
+                let country = channel.address?.country {
             self.geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { placemarks, error in
                 if let location = placemarks?.first?.location {
                     self.storeLocation.value = location

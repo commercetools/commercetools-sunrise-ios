@@ -2,7 +2,7 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 import ObjectMapper
 import Commercetools
@@ -16,7 +16,7 @@ class OrdersViewModel: BaseViewModel {
     // Outputs
     let isLoading: MutableProperty<Bool>
     let contentChangesSignal: Signal<Changeset, NoError>
-    let showReservationSignal: Signal<NSIndexPath, NoError>
+    let showReservationSignal: Signal<IndexPath, NoError>
     let ordersExpanded = MutableProperty(false)
     let reservationsExpanded = MutableProperty(false)
 
@@ -24,7 +24,7 @@ class OrdersViewModel: BaseViewModel {
     var reservations = [Order]()
 
     private let contentChangesObserver: Observer<Changeset, NoError>
-    private let showReservationObserver: Observer<NSIndexPath, NoError>
+    private let showReservationObserver: Observer<IndexPath, NoError>
 
     /// The UUID of the reservation confirmation received via push notification, to be shown after next refresh.
     private var reservationConfirmationId: String? = nil
@@ -42,28 +42,28 @@ class OrdersViewModel: BaseViewModel {
 
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
 
-        (showReservationSignal, showReservationObserver) = Signal<NSIndexPath, NoError>.pipe()
+        (showReservationSignal, showReservationObserver) = Signal<IndexPath, NoError>.pipe()
 
         super.init()
 
         refreshSignal
-        .observeNext { [weak self] in
+        .observeValues { [weak self] in
             self?.retrieveOrders(offset: 0)
         }
 
-        isLoading.signal.observeNext { [weak self] isLoading in
-            if let id = self?.reservationConfirmationId, row = self?.reservations.indexOf({ $0.id == id }) where !isLoading {
-                self?.showReservationObserver.sendNext(NSIndexPath(forRow: row, inSection: 1))
+        isLoading.signal.observeValues { [weak self] isLoading in
+            if let id = self?.reservationConfirmationId, let row = self?.reservations.index(where: { $0.id == id }), !isLoading {
+                self?.showReservationObserver.send(value: IndexPath(row: row, section: 1))
             }
         }
 
         sectionExpandedSignal
-        .observeNext { [weak self] section in
+        .observeValues { [weak self] section in
             guard let strongSelf = self else { return }
 
             let rowsCount = section == 0 ? strongSelf.orders.count : strongSelf.reservations.count
             let rowsToModify = 0...(rowsCount > 0 ? rowsCount - 1 : 0)
-            let indexPaths = rowsCount > 0 ? rowsToModify.map { NSIndexPath(forRow: $0, inSection: section) } : []
+            let indexPaths = rowsCount > 0 ? rowsToModify.map { IndexPath(row: $0, section: section) } : []
 
             let changeset: Changeset
             if section == 0 {
@@ -81,11 +81,11 @@ class OrdersViewModel: BaseViewModel {
                 }
                 strongSelf.reservationsExpanded.value = !strongSelf.reservationsExpanded.value
             }
-            strongSelf.contentChangesObserver.sendNext(changeset)
+            strongSelf.contentChangesObserver.send(value: changeset)
         }
     }
 
-    func orderOverviewViewModelForOrderAtIndexPath(indexPath: NSIndexPath) -> OrderOverviewViewModel? {
+    func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {
         if indexPath.section == 0 {
             let orderOverviewViewModel = OrderOverviewViewModel()
             orderOverviewViewModel.order.value = orders[indexPath.row]
@@ -94,7 +94,7 @@ class OrdersViewModel: BaseViewModel {
         return nil
     }
 
-    func reservationViewModelForOrderAtIndexPath(indexPath: NSIndexPath) -> ReservationViewModel? {
+    func reservationViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> ReservationViewModel? {
         if indexPath.section == 1 {
             return ReservationViewModel(order: reservations[indexPath.row])
         }
@@ -103,7 +103,7 @@ class OrdersViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
-    func numberOfRowsInSection(section: Int) -> Int {
+    func numberOfRowsInSection(_ section: Int) -> Int {
         if section == 0 {
             return ordersExpanded.value ? orders.count : 0
         } else {
@@ -111,43 +111,43 @@ class OrdersViewModel: BaseViewModel {
         }
     }
 
-    func headerTitleForSection(section: Int) -> String {
+    func headerTitleForSection(_ section: Int) -> String {
         return section == 0 ? NSLocalizedString("MY ORDERS", comment: "My orders") : NSLocalizedString("MY RESERVATIONS", comment: "My reservations")
     }
 
-    func orderNumberAtIndexPath(indexPath: NSIndexPath) -> String? {
+    func orderNumberAtIndexPath(_ indexPath: IndexPath) -> String? {
         return indexPath.section == 0 ? orders[indexPath.row].orderNumber : reservations[indexPath.row].orderNumber
     }
 
-    func totalPriceAtIndexPath(indexPath: NSIndexPath) -> String? {
+    func totalPriceAtIndexPath(_ indexPath: IndexPath) -> String? {
         return indexPath.section == 0 ? orders[indexPath.row].totalPrice?.description : reservations[indexPath.row].totalPrice?.description
     }
 
     // MARK: - Presenting reservation confirmation from push notification
 
-    func presentConfirmationForReservationWithId(reservationId: String) {
-        if let row = reservations.indexOf({ $0.id == reservationId }) {
-            showReservationObserver.sendNext(NSIndexPath(forRow: row, inSection: 1))
+    func presentConfirmationForReservationWithId(_ reservationId: String) {
+        if let row = reservations.index(where: { $0.id == reservationId }) {
+            showReservationObserver.send(value: IndexPath(row: row, section: 1))
 
         } else if !isLoading.value {
             reservationConfirmationId = reservationId
-            refreshObserver.sendNext()
+            refreshObserver.send(value: ())
         }
     }
 
     // MARK: - Commercetools product projections querying
 
-    private func retrieveOrders(offset offset: UInt, text: String = "") {
+    private func retrieveOrders(offset: UInt, text: String = "") {
         isLoading.value = true
 
         Commercetools.Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { result in
-            if let results = result.response?["results"] as? [[String: AnyObject]],
-            orders = Mapper<Order>().mapArray(results) where result.isSuccess {
+            if let results = result.response?["results"] as? [[String: Any]],
+            let orders = Mapper<Order>().mapArray(JSONArray: results), result.isSuccess {
                 self.orders = orders.filter { $0.isReservation != true }
                 self.reservations = orders.filter { $0.isReservation == true }
 
-            } else if let errors = result.errors where result.isFailure {
-                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
 
             }
             self.isLoading.value = false
