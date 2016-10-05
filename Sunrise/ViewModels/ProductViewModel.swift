@@ -6,26 +6,6 @@ import Commercetools
 import ReactiveSwift
 import Result
 import ObjectMapper
-private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class ProductViewModel: BaseViewModel {
 
@@ -133,7 +113,7 @@ class ProductViewModel: BaseViewModel {
                         prices.count > 0 {
                     values.append(defaultValue)
                 }
-                product?.variants?.filter({ $0.prices?.count > 0 }).forEach { variant in
+                product?.variants?.filter({ ($0.prices?.count ?? 0) > 0 }).forEach { variant in
                     if let value = variant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
                         if !values.contains(value) {
                             values.append(value)
@@ -198,7 +178,7 @@ class ProductViewModel: BaseViewModel {
     }
 
     func isAttributeSelectableAtIndexPath(_ indexPath: IndexPath) -> Bool {
-        return attributes.value[selectableAttributes[indexPath.row]]?.count > 1
+        return (attributes.value[selectableAttributes[indexPath.row]]?.count ?? 0) > 1
     }
 
     // MARK: Internal Helpers

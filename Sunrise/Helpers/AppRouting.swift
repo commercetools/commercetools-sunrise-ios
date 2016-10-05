@@ -3,26 +3,6 @@
 //
 
 import UIKit
-private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class AppRouting {
 
@@ -45,7 +25,8 @@ class AppRouting {
         - parameter isLoggedIn:               Indicator whether the user is logged in.
     */
     static func setupMyAccountRootViewController(isLoggedIn: Bool) {
-        guard let tabBarController = tabBarController, tabBarController.viewControllers?.count > 2 else { return }
+        guard let tabBarController = tabBarController, let controllersCount = tabBarController.viewControllers?.count,
+              controllersCount > 2 else { return }
 
         let newAccountRootViewController: UIViewController
         if isLoggedIn {
