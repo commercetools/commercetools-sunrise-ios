@@ -11,7 +11,7 @@ struct TaxedPrice: Mappable {
     var totalNet: Money?
     var totalGross: Money?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

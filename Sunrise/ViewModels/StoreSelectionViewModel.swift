@@ -4,14 +4,15 @@
 
 import UIKit
 import Commercetools
-import ReactiveCocoa
+import ReactiveSwift
 import Result
+import CoreLocation
 import ObjectMapper
 
 class StoreSelectionViewModel: BaseViewModel {
 
     // Inputs
-    let selectedIndexPathObserver: Observer<NSIndexPath, NoError>
+    let selectedIndexPathObserver: Observer<IndexPath, NoError>
     let refreshObserver: Observer<Void, NoError>
     let userLocation: MutableProperty<CLLocation?>
 
@@ -19,9 +20,9 @@ class StoreSelectionViewModel: BaseViewModel {
     let title: String
     let isLoading: MutableProperty<Bool>
     let contentChangesSignal: Signal<Changeset, NoError>
-    var channelDetailsIndexPath: NSIndexPath? {
+    var channelDetailsIndexPath: IndexPath? {
         if let expandedChannelIndexPath = expandedChannelIndexPath.value {
-            return NSIndexPath(forRow: expandedChannelIndexPath.row + 1, inSection: expandedChannelIndexPath.section)
+            return IndexPath(row: expandedChannelIndexPath.row + 1, section: expandedChannelIndexPath.section)
         }
         return nil
     }
@@ -40,7 +41,7 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     private var productVariantPrice: String {
-        guard let price = currentVariant?.independentPrice, value = price.value else { return "-" }
+        guard let price = currentVariant?.independentPrice, let value = price.value else { return "-" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -50,8 +51,8 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     // Actions
-    lazy var reserveAction: Action<NSIndexPath, Void, NSError> = { [unowned self] in
-        return Action(enabledIf: ConstantProperty(true), { indexPath in
+    lazy var reserveAction: Action<IndexPath, Void, CTError> = { [unowned self] in
+        return Action(enabledIf: Property(value: true), { indexPath in
             self.isLoading.value = true
             return self.reserveProductVariant(self.channels[self.rowForChannelAtIndexPath(indexPath)])
         })
@@ -62,8 +63,8 @@ class StoreSelectionViewModel: BaseViewModel {
     let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
     let reservationContinueTitle = NSLocalizedString("Continue shopping", comment: "Continue shopping")
 
-    private let expandedChannelIndexPath: MutableProperty<NSIndexPath?>
-    private let selectedIndexPathSignal: Signal<NSIndexPath, NoError>
+    private let expandedChannelIndexPath: MutableProperty<IndexPath?>
+    private let selectedIndexPathSignal: Signal<IndexPath, NoError>
     private let contentChangesObserver: Observer<Changeset, NoError>
 
     var channels: [Channel]
@@ -95,7 +96,7 @@ class StoreSelectionViewModel: BaseViewModel {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
-        let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<NSIndexPath, NoError>.pipe()
+        let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<IndexPath, NoError>.pipe()
         self.selectedIndexPathSignal = selectedIndexPathSignal
         self.selectedIndexPathObserver = selectedIndexPathObserver
 
@@ -106,39 +107,39 @@ class StoreSelectionViewModel: BaseViewModel {
         super.init()
 
         selectedIndexPathSignal
-        .observeNext { [unowned self] selectedIndexPath in
+        .observeValues { [unowned self] selectedIndexPath in
             let previouslyExpandedIndexPath = self.expandedChannelIndexPath.value
 
             if previouslyExpandedIndexPath == selectedIndexPath || self.channelDetailsIndexPath == selectedIndexPath {
                 self.expandedChannelIndexPath.value = nil
-            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath where selectedIndexPath.row > previouslyExpandedIndexPath.row {
-                self.expandedChannelIndexPath.value = NSIndexPath(forRow: selectedIndexPath.row - 1, inSection: selectedIndexPath.section)
+            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath, selectedIndexPath.row > previouslyExpandedIndexPath.row {
+                self.expandedChannelIndexPath.value = IndexPath(row: selectedIndexPath.row - 1, section: selectedIndexPath.section)
             } else {
                 self.expandedChannelIndexPath.value = selectedIndexPath
             }
 
             var changeset = Changeset()
 
-            if let channelDetailsIndexPath = self.channelDetailsIndexPath, expandedChannelIndexPath = self.expandedChannelIndexPath.value
-                    where previouslyExpandedIndexPath == nil {
+            if let channelDetailsIndexPath = self.channelDetailsIndexPath, let expandedChannelIndexPath = self.expandedChannelIndexPath.value,
+                    previouslyExpandedIndexPath == nil {
                 changeset.insertions = [channelDetailsIndexPath]
                 changeset.modifications = [expandedChannelIndexPath]
-            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath where self.expandedChannelIndexPath.value == nil {
+            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath, self.expandedChannelIndexPath.value == nil {
                 changeset.modifications = [previouslyExpandedIndexPath]
-                changeset.deletions = [NSIndexPath(forRow: previouslyExpandedIndexPath.row + 1, inSection: previouslyExpandedIndexPath.section)]
-            } else if let channelDetailsIndexPath = self.channelDetailsIndexPath, previouslyExpandedIndexPath = previouslyExpandedIndexPath,
-                    expandedChannelIndexPath = self.expandedChannelIndexPath.value {
-                let expandedChannelToModify = expandedChannelIndexPath.row > previouslyExpandedIndexPath.row ? NSIndexPath(forRow: expandedChannelIndexPath.row + 1, inSection: expandedChannelIndexPath.section) : expandedChannelIndexPath
+                changeset.deletions = [IndexPath(row: previouslyExpandedIndexPath.row + 1, section: previouslyExpandedIndexPath.section)]
+            } else if let channelDetailsIndexPath = self.channelDetailsIndexPath, let previouslyExpandedIndexPath = previouslyExpandedIndexPath,
+                    let expandedChannelIndexPath = self.expandedChannelIndexPath.value {
+                let expandedChannelToModify = expandedChannelIndexPath.row > previouslyExpandedIndexPath.row ? IndexPath(row: expandedChannelIndexPath.row + 1, section: expandedChannelIndexPath.section) : expandedChannelIndexPath
 
                 changeset.modifications = [previouslyExpandedIndexPath, expandedChannelToModify]
                 changeset.insertions = [channelDetailsIndexPath]
-                changeset.deletions = [NSIndexPath(forRow: previouslyExpandedIndexPath.row + 1, inSection: previouslyExpandedIndexPath.section)]
+                changeset.deletions = [IndexPath(row: previouslyExpandedIndexPath.row + 1, section: previouslyExpandedIndexPath.section)]
             }
-            self.contentChangesObserver.sendNext(changeset)
+            self.contentChangesObserver.send(value: changeset)
         }
 
         refreshSignal
-        .observeNext { [weak self] in
+        .observeValues { [weak self] in
             self?.retrieveStores()
         }
 
@@ -148,19 +149,19 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
-    func numberOfRowsInSection(section: Int) -> Int {
+    func numberOfRowsInSection(_ section: Int) -> Int {
         return channels.count + (expandedChannelIndexPath.value != nil ? 1 : 0)
     }
 
-    func storeNameAtIndexPath(indexPath: NSIndexPath) -> String {
+    func storeNameAtIndexPath(_ indexPath: IndexPath) -> String {
         return channels[rowForChannelAtIndexPath(indexPath)].name?.localizedString ?? ""
     }
 
-    func storeImageUrlAtIndexPath(indexPath: NSIndexPath) -> String {
+    func storeImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
         return channels[rowForChannelAtIndexPath(indexPath)].details?.imageUrl ?? ""
     }
 
-    func expansionTextAtIndexPath(indexPath: NSIndexPath) -> String {
+    func expansionTextAtIndexPath(_ indexPath: IndexPath) -> String {
         if indexPath == expandedChannelIndexPath.value {
             return NSLocalizedString("Less info", comment: "Less info")
         } else {
@@ -168,12 +169,12 @@ class StoreSelectionViewModel: BaseViewModel {
         }
     }
 
-    func reserveButtonEnabledAtIndexPath(indexPath: NSIndexPath) -> Bool {
+    func reserveButtonEnabledAtIndexPath(_ indexPath: IndexPath) -> Bool {
         let quantity = quantityForChannelAtIndexPath(indexPath)
         return quantity > 0
     }
 
-    func storeDistanceAtIndexPath(indexPath: NSIndexPath) -> String {
+    func storeDistanceAtIndexPath(_ indexPath: IndexPath) -> String {
         let store = channels[rowForChannelAtIndexPath(indexPath)]
 
         if let storeDistance = storeDistance(store) {
@@ -182,7 +183,7 @@ class StoreSelectionViewModel: BaseViewModel {
         return "-"
     }
 
-    func availabilityAtIndexPath(indexPath: NSIndexPath) -> String {
+    func availabilityAtIndexPath(_ indexPath: IndexPath) -> String {
         let quantity = quantityForChannelAtIndexPath(indexPath)
 
         switch quantity {
@@ -195,7 +196,7 @@ class StoreSelectionViewModel: BaseViewModel {
         }
     }
 
-    func availabilityColorAtIndexPath(indexPath: NSIndexPath) -> UIColor {
+    func availabilityColorAtIndexPath(_ indexPath: IndexPath) -> UIColor {
         let quantity = quantityForChannelAtIndexPath(indexPath)
 
         switch quantity {
@@ -208,9 +209,9 @@ class StoreSelectionViewModel: BaseViewModel {
         }
     }
 
-    func priceForChannelAtIndexPath(indexPath: NSIndexPath) -> String {
+    func priceForChannelAtIndexPath(_ indexPath: IndexPath) -> String {
         if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id,
-                price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
+                let price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
             if let discounted = price.discounted?.value {
                 return discounted.description
             } else if let value = price.value {
@@ -220,52 +221,52 @@ class StoreSelectionViewModel: BaseViewModel {
         return productVariantPrice
     }
 
-    private func quantityForChannelAtIndexPath(indexPath: NSIndexPath) -> Int {
+    private func quantityForChannelAtIndexPath(_ indexPath: IndexPath) -> Int {
         if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id {
             return currentVariant?.availability?.channels?[channelId]?.availableQuantity ?? 0
         }
         return 0
     }
 
-    private func rowForChannelAtIndexPath(indexPath: NSIndexPath) -> Int {
+    private func rowForChannelAtIndexPath(_ indexPath: IndexPath) -> Int {
         var channelRow = indexPath.row
-        if let expandedRow = expandedChannelIndexPath.value?.row where channelRow > expandedRow {
+        if let expandedRow = expandedChannelIndexPath.value?.row, channelRow > expandedRow {
             channelRow -= 1
         }
         return channelRow
     }
 
-    private func indexPathForChannel(channel: Channel) -> NSIndexPath? {
-        if var channelRow = channels.indexOf(channel) {
-            if let expandedRow = expandedChannelIndexPath.value?.row where channelRow >= expandedRow {
+    private func indexPathForChannel(_ channel: Channel) -> IndexPath? {
+        if var channelRow = channels.index(of: channel) {
+            if let expandedRow = expandedChannelIndexPath.value?.row, channelRow >= expandedRow {
                 channelRow += 1
             }
-            return NSIndexPath(forRow: channelRow, inSection: 0)
+            return IndexPath(row: channelRow, section: 0)
         }
         return nil
     }
 
-    private func storeDistance(store: Channel) -> Double? {
-        if let userLocation = userLocation.value, lat = store.details?.latitude, lon = store.details?.longitude,
-                latitude = Double(lat), longitude = Double(lon) {
+    private func storeDistance(_ store: Channel) -> Double? {
+        if let userLocation = userLocation.value, let lat = store.details?.latitude, let lon = store.details?.longitude,
+                let latitude = Double(lat), let longitude = Double(lon) {
             let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
-            return userLocation.distanceFromLocation(channelLocation)
+            return userLocation.distance(from: channelLocation)
         }
         return nil
     }
 
     // MARK: - Creating a reservation
 
-    private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, NSError> {
+    private func reserveProductVariant(_ channel: Channel) -> SignalProducer<Void, CTError> {
         return SignalProducer { observer, disposable in
-            guard let channelId = channel.id, productId = self.product.id, currentVariantId = self.currentVariant?.id,
-                    shippingAddress = channel.address?.toJSON() else {
-                observer.sendFailed(NSError(domain: "Sunrise", code: 1000, userInfo: [NSLocalizedDescriptionKey: "Unexpected product values encountered"]))
+            guard let channelId = channel.id, let productId = self.product.id, let currentVariantId = self.currentVariant?.id,
+                    let shippingAddress = channel.address?.toJSON() else {
+                        observer.send(error: CTError.generalError(reason: nil))
                 return
             }
 
             let selectedChannel = ["typeId": "channel", "id": channelId]
-            let lineItemDraft: [String: AnyObject] = ["productId": productId,
+            let lineItemDraft: [String: Any] = ["productId": productId,
                                                       "variantId": currentVariantId,
                                                       "supplyChannel": selectedChannel,
                                                       "distributionChannel": selectedChannel]
@@ -273,7 +274,7 @@ class StoreSelectionViewModel: BaseViewModel {
                               "fields": ["isReservation": true]]
 
             Commercetools.Customer.profile { result in
-                if let profile = Mapper<Customer>().map(result.response) where result.isSuccess {
+                if let profile = Mapper<Customer>().map(JSONObject: result.response), result.isSuccess {
 
                     var billingAddress = profile.reservationAddress
 
@@ -289,23 +290,23 @@ class StoreSelectionViewModel: BaseViewModel {
                                                "lineItems": [lineItemDraft],
                                                "custom": customType], result: { result in
 
-                        if let cart = Mapper<Cart>().map(result.response), id = cart.id, version = cart.version where result.isSuccess {
+                        if let cart = Mapper<Cart>().map(JSONObject: result.response), let id = cart.id, let version = cart.version, result.isSuccess {
                             Commercetools.Order.create(["id": id, "version": version], expansion: nil, result: { result in
                                 if result.isSuccess {
                                     observer.sendCompleted()
-                                } else if let error = result.errors?.first where result.isFailure {
-                                    observer.sendFailed(error)
+                                } else if let error = result.errors?.first as? CTError, result.isFailure {
+                                    observer.send(error: error)
                                 }
                                 self.isLoading.value = false
                             })
 
-                        } else if let error = result.errors?.first where result.isFailure {
-                            observer.sendFailed(error)
+                        } else if let error = result.errors?.first as? CTError, result.isFailure {
+                            observer.send(error: error)
                             self.isLoading.value = false
                         }
                     })
-                } else if let error = result.errors?.first where result.isFailure {
-                    observer.sendFailed(error)
+                } else if let error = result.errors?.first as? CTError, result.isFailure {
+                    observer.send(error: error)
                     self.isLoading.value = false
                 }
             }
@@ -320,14 +321,18 @@ class StoreSelectionViewModel: BaseViewModel {
         // Retrieve channels which represent physical stores
         Channel.query(predicates: ["roles contains all (\"InventorySupply\", \"ProductDistribution\") AND NOT(roles contains any (\"Primary\"))"],
                 sort:  ["lastModifiedAt desc"], result: { result in
-            if let results = result.response?["results"] as? [[String: AnyObject]],
-            channels = Mapper<Channel>().mapArray(results) where result.isSuccess {
-                self.channels = channels.sort { [weak self] in
-                    self?.storeDistance($0) < self?.storeDistance($1)
-                }
+            if let results = result.response?["results"] as? [[String: Any]],
+            let channels = Mapper<Channel>().mapArray(JSONArray: results), result.isSuccess {
+                self.channels = channels.sorted(by: { [weak self] in
+                    if let first = self?.storeDistance($0), let second = self?.storeDistance($1) {
+                        return first < second
+                    } else {
+                        return false
+                    }
+                })
 
-            } else if let errors = result.errors where result.isFailure {
-                super.alertMessageObserver.sendNext(self.alertMessageForErrors(errors))
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
 
             }
             self.isLoading.value = false

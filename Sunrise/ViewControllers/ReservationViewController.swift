@@ -4,6 +4,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import MapKit
 import SVProgressHUD
 import SDWebImage
@@ -32,8 +33,8 @@ class ReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        storeLocationMapView.scrollEnabled = false
-        storeLocationMapView.zoomEnabled = false
+        storeLocationMapView.isScrollEnabled = false
+        storeLocationMapView.isZoomEnabled = false
 
         if viewModel != nil {
             bindViewModel()
@@ -43,11 +44,11 @@ class ReservationViewController: UIViewController {
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel where isViewLoaded() else { return }
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ isLoading in
+        .observe(on: UIScheduler())
+        .startWithValues({ isLoading in
             if !isLoading {
                 SVProgressHUD.dismiss()
             } else {
@@ -56,8 +57,8 @@ class ReservationViewController: UIViewController {
         })
 
         viewModel.storeLocation.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] storeLocation in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] storeLocation in
             if let storeLocation = storeLocation {
                 let mapViewRegion = MKCoordinateRegion(center: storeLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
                 self?.storeLocationMapView.region = mapViewRegion
@@ -68,7 +69,7 @@ class ReservationViewController: UIViewController {
             }
         })
 
-        productImageView.sd_setImageWithURL(NSURL(string: viewModel.productImageUrl))
+        productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl))
         productNameLabel.text = viewModel.productName
         sizeLabel.text = viewModel.size
         quantityLabel.text = viewModel.quantity

@@ -6,11 +6,11 @@ import Foundation
 
 struct Changeset {
 
-    var deletions: [NSIndexPath]
-    var modifications: [NSIndexPath]
-    var insertions: [NSIndexPath]
+    var deletions: [IndexPath]
+    var modifications: [IndexPath]
+    var insertions: [IndexPath]
 
-    init(deletions: [NSIndexPath] = [], modifications: [NSIndexPath] = [], insertions: [NSIndexPath] = []) {
+    init(deletions: [IndexPath] = [], modifications: [IndexPath] = [], insertions: [IndexPath] = []) {
         self.deletions = deletions
         self.modifications = modifications
         self.insertions = insertions

@@ -4,6 +4,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 import IQDropDownTextField
 import SDWebImage
@@ -11,7 +12,7 @@ import SVProgressHUD
 
 class ProductViewController: UITableViewController {
 
-    @IBInspectable var quantityBorderColor: UIColor = UIColor.yellowColor()
+    @IBInspectable var quantityBorderColor: UIColor = UIColor.yellow
 
     @IBOutlet var headerView: UIView!
     @IBOutlet var footerView: UIView!
@@ -27,10 +28,10 @@ class ProductViewController: UITableViewController {
 
     private let footerCellIdentifier = "FooterCell"
     private var footerCell: UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier(footerCellIdentifier) {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: footerCellIdentifier) {
             return cell
         } else {
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: footerCellIdentifier)
+            let cell = UITableViewCell(style: .default, reuseIdentifier: footerCellIdentifier)
             cell.contentView.addSubview(footerView)
             return cell
         }
@@ -48,8 +49,8 @@ class ProductViewController: UITableViewController {
         super.viewDidLoad()
 
         quantityField.isOptionalDropDown = false
-        quantityField.dropDownMode = .TextPicker
-        quantityField.layer.borderColor = quantityBorderColor.CGColor
+        quantityField.dropDownMode = .textPicker
+        quantityField.layer.borderColor = quantityBorderColor.cgColor
         
         tableView.tableHeaderView = headerView
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -63,13 +64,13 @@ class ProductViewController: UITableViewController {
     // MARK: - Bindings
 
     private func bindViewModel() {
-        guard let viewModel = viewModel where isViewLoaded() else { return }
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
         addToCartAction = CocoaAction(viewModel.addToCartAction, { quantity in return quantity as! String })
 
         viewModel.name.producer
-        .observeOn(UIScheduler())
-        .startWithNext { [weak self] name in
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] name in
             self?.productNameLabel.text = name
         }
 
@@ -77,35 +78,35 @@ class ProductViewController: UITableViewController {
         quantityField.setSelectedItem(viewModel.quantities.first, animated: false)
 
         viewModel.sku.producer
-            .observeOn(UIScheduler())
-            .startWithNext { [weak self] sku in
+            .observe(on: UIScheduler())
+            .startWithValues { [weak self] sku in
                 self?.skuLabel.text = sku
             }
 
         viewModel.price.producer
-            .observeOn(UIScheduler())
-            .startWithNext { [weak self] price in
+            .observe(on: UIScheduler())
+            .startWithValues { [weak self] price in
                 self?.activePriceLabel.text = price
             }
 
         viewModel.oldPrice.producer
-            .observeOn(UIScheduler())
-            .startWithNext { [weak self] oldPrice in
+            .observe(on: UIScheduler())
+            .startWithValues { [weak self] oldPrice in
                 let priceBeforeDiscount =  NSMutableAttributedString(string: oldPrice)
                 priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
                 self?.priceBeforeDiscount.attributedText = priceBeforeDiscount
             }
 
         viewModel.imageUrl.producer
-            .observeOn(UIScheduler())
-            .startWithNext { [weak self] imageUrl in
-                self?.productImageView.sd_setImageWithURL(NSURL(string: imageUrl))
+            .observe(on: UIScheduler())
+            .startWithValues { [weak self] imageUrl in
+                self?.productImageView.sd_setImage(with: URL(string: imageUrl))
             }
 
         viewModel.isLoading.producer
-            .observeOn(UIScheduler())
-            .startWithNext({ [weak self] isLoading in
-                self?.addToCartButton.enabled = !isLoading
+            .observe(on: UIScheduler())
+            .startWithValues({ [weak self] isLoading in
+                self?.addToCartButton.isEnabled = !isLoading
                 if isLoading {
                     SVProgressHUD.show()
                 } else {
@@ -116,20 +117,20 @@ class ProductViewController: UITableViewController {
             })
 
         viewModel.addToCartAction.events
-            .observeOn(UIScheduler())
-            .observeNext({ [weak self] event in
+            .observe(on: UIScheduler())
+            .observeValues({ [weak self] event in
                 SVProgressHUD.dismiss()
                 switch event {
-                case .Completed:
+                case .completed:
                     self?.presentAfterAddingToCartOptions()
-                case let .Failed(error):
+                case let .failed(error):
                     let alertController = UIAlertController(
                             title: "Could not add to cart",
-                            message: self?.viewModel?.alertMessageForErrors([error]),
-                            preferredStyle: .Alert
+                            message: self?.viewModel?.alertMessage(for: [error]),
+                            preferredStyle: .alert
                             )
-                    alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-                    self?.presentViewController(alertController, animated: true, completion: nil)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present(alertController, animated: true, completion: nil)
                 default:
                     return
                 }
@@ -138,21 +139,21 @@ class ProductViewController: UITableViewController {
         observeAlertMessageSignal(viewModel: viewModel)
     }
 
-    private func bindSelectableAttributeCell(cell: SelectableAttributeCell, indexPath: NSIndexPath) {
+    private func bindSelectableAttributeCell(_ cell: SelectableAttributeCell, indexPath: IndexPath) {
         guard let viewModel = viewModel else { return }
 
         cell.attributeField.layer.borderWidth = viewModel.isAttributeSelectableAtIndexPath(indexPath) ? 1 : 0
-        cell.attributeField.enabled = viewModel.isAttributeSelectableAtIndexPath(indexPath)
+        cell.attributeField.isEnabled = viewModel.isAttributeSelectableAtIndexPath(indexPath)
 
         cell.attributeLabel.text = viewModel.attributeNameAtIndexPath(indexPath)
         cell.attributeField.isOptionalDropDown = false
-        cell.attributeField.dropDownMode = .TextPicker
+        cell.attributeField.dropDownMode = .textPicker
         let attributeKey = viewModel.attributeKeyAtIndexPath(indexPath)
 
         viewModel.attributes.producer
-        .observeOn(UIScheduler())
-        .takeUntil(cell.prepareForReuseSignalProducer())
-        .startWithNext({ [weak self] attributes in
+        .observe(on: UIScheduler())
+        .take(until: cell.prepareForReuseSignalProducer())
+        .startWithValues({ [weak self] attributes in
             if let items = attributes[attributeKey] {
                 cell.attributeField.itemList = items.count > 0 ? items : [""]
                 cell.attributeField.setSelectedItem(self?.viewModel?.activeAttributes.value[attributeKey], animated: false)
@@ -160,31 +161,31 @@ class ProductViewController: UITableViewController {
         })
 
         viewModel.activeAttributes.producer
-        .observeOn(UIScheduler())
-        .takeUntil(cell.prepareForReuseSignalProducer())
-        .startWithNext { activeAttributes in
+        .observe(on: UIScheduler())
+        .take(until: cell.prepareForReuseSignalProducer())
+        .startWithValues { activeAttributes in
             if let activeAttribute = activeAttributes[attributeKey] {
                 cell.attributeField.setSelectedItem(activeAttribute, animated: false)
             }
         }
 
         cell.attributeField.signalProducer()
-        .takeUntil(cell.prepareForReuseSignalProducer())
-        .startWithNext { [weak self] attributeValue in
+        .take(until: cell.prepareForReuseSignalProducer())
+        .startWithValues { [weak self] attributeValue in
             self?.viewModel?.activeAttributes.value[attributeKey] = attributeValue
         }
     }
 
-    private func bindDisplayableAttributeCell(cell: DisplayedAttributeCell, indexPath: NSIndexPath) {
+    private func bindDisplayableAttributeCell(_ cell: DisplayedAttributeCell, indexPath: IndexPath) {
         guard let viewModel = viewModel else { return }
 
         cell.attributeKey.text = viewModel.attributeNameAtIndexPath(indexPath)
         let attributeKey = viewModel.attributeKeyAtIndexPath(indexPath)
 
         viewModel.activeAttributes.producer
-        .observeOn(UIScheduler())
-        .takeUntil(cell.prepareForReuseSignalProducer())
-        .startWithNext { activeAttributes in
+        .observe(on: UIScheduler())
+        .take(until: cell.prepareForReuseSignalProducer())
+        .startWithValues { activeAttributes in
             if let activeAttribute = activeAttributes[attributeKey] {
                 cell.attributeValue.text = activeAttribute
             }
@@ -193,22 +194,22 @@ class ProductViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfRowsInSection(section) ?? 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("DisplayedAttributeCell") as! DisplayedAttributeCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DisplayedAttributeCell") as! DisplayedAttributeCell
             bindDisplayableAttributeCell(cell, indexPath: indexPath)
             return cell
         }
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("SelectableAttributeCell") as! SelectableAttributeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectableAttributeCell") as! SelectableAttributeCell
         bindSelectableAttributeCell(cell, indexPath: indexPath)
 
         return cell
@@ -216,7 +217,7 @@ class ProductViewController: UITableViewController {
 
     // MARK: - UITableViewDelegate
 
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
             case 1: return footerView
             case 2: return displayableAttributesHeaderView
@@ -224,7 +225,7 @@ class ProductViewController: UITableViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
             case 1: return 100
             case 2: return 55
@@ -234,36 +235,36 @@ class ProductViewController: UITableViewController {
 
     // MARK: - Refreshing
     
-    @IBAction func refresh(sender: UIRefreshControl) {
-        viewModel?.refreshObserver.sendNext()
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        viewModel?.refreshObserver.send(value: ())
     }
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let storeSelectionViewController = segue.destinationViewController as? StoreSelectionViewController,
-                storeSelectionViewModel = viewModel?.storeSelectionViewModel {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let storeSelectionViewController = segue.destination as? StoreSelectionViewController,
+                let storeSelectionViewModel = viewModel?.storeSelectionViewModel {
             storeSelectionViewController.viewModel = storeSelectionViewModel
         }
     }
     
-    @IBAction func addToCart(sender: UIButton) {
-        addToCartAction?.execute(quantityField.selectedItem)
+    @IBAction func addToCart(_ sender: UIButton) {
+        addToCartAction?.execute(quantityField.selectedItem as AnyObject?)
     }
 
     private func presentAfterAddingToCartOptions() {
         let alertController = UIAlertController(
                 title: viewModel?.addToCartSuccessTitle,
                 message: viewModel?.addToCartSuccessMessage,
-                preferredStyle: .Alert
+                preferredStyle: .alert
                 )
-        alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .Default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .default, handler: { _ in
             AppRouting.switchToHome()
         }))
-        alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .Default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .default, handler: { _ in
             AppRouting.switchToCartOverview()
         }))
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
 }

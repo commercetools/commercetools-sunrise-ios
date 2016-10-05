@@ -12,7 +12,7 @@ struct Image: Mappable {
     var dimensions: [String: Int]?
     var label: String?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

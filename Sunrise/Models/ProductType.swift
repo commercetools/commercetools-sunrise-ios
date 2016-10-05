@@ -10,14 +10,14 @@ struct ProductType: Mappable {
     
     var id: String?
     var version: UInt?
-    var createdAt: NSDate?
-    var lastModifiedAt: NSDate?
+    var createdAt: Date?
+    var lastModifiedAt: Date?
     var key: String?
     var name: String?
     var description: String?
     var attributes: [AttributeDefinition]?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
     
     // MARK: - Mappable
     

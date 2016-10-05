@@ -3,6 +3,26 @@
 //
 
 import ObjectMapper
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 struct ProductProjection: Mappable {
 
@@ -27,14 +47,14 @@ struct ProductProjection: Mappable {
     }
     /// The `masterVariant` if it has price, or first from `variants` with price.
     var mainVariantWithPrice: ProductVariant? {
-        if let prices = masterVariant?.prices where prices.count > 0 {
+        if let prices = masterVariant?.prices, prices.count > 0 {
             return masterVariant
         } else {
             return variants?.filter({ $0.prices?.count > 0 }).first
         }
     }
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

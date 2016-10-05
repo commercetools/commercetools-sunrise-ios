@@ -6,8 +6,8 @@ import UIKit
 
 class OrdersHeaderView: UIView {
     
-    @IBInspectable var activeColor: UIColor = UIColor.lightGrayColor()
-    @IBInspectable var inactiveColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var activeColor: UIColor = UIColor.lightGray
+    @IBInspectable var inactiveColor: UIColor = UIColor.white
     
     @IBOutlet weak var footerSeparatorLineHeight: NSLayoutConstraint!
     @IBOutlet weak var columnTitlesHeight: NSLayoutConstraint!

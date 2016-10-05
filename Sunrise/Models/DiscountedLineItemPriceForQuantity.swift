@@ -11,7 +11,7 @@ struct DiscountedLineItemPriceForQuantity: Mappable {
     var quantity: Int?
     var discountedPrice: DiscountedLineItemPrice?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

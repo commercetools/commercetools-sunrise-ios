@@ -19,7 +19,7 @@ struct LineItem: Mappable {
     var quantity: Int?
     var distributionChannel: Channel?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

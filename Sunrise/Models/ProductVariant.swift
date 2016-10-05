@@ -26,7 +26,7 @@ struct ProductVariant: Mappable {
         }).first
     }
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

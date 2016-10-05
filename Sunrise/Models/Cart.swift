@@ -10,14 +10,14 @@ struct Cart: Mappable {
 
     var id: String?
     var version: UInt?
-    var createdAt: NSDate?
-    var lastModifiedAt: NSDate?
+    var createdAt: Date?
+    var lastModifiedAt: Date?
     var lineItems: [LineItem]?
     var totalPrice: Money?
     var taxedPrice: TaxedPrice?
     var country: String?
 
-    init?(_ map: Map) {}
+    init?(map: Map) {}
 
     // MARK: - Mappable
 

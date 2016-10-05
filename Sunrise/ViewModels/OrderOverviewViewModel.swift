@@ -2,7 +2,7 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 
 class OrderOverviewViewModel: BaseViewModel {
@@ -36,7 +36,7 @@ class OrderOverviewViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
-    func numberOfRowsInSection(section: Int) -> Int {
+    func numberOfRowsInSection(_ section: Int) -> Int {
         if let lineItemsCount = order.value?.lineItems?.count {
             return lineItemsCount + 1
         } else {
@@ -44,31 +44,31 @@ class OrderOverviewViewModel: BaseViewModel {
         }
     }
 
-    func lineItemNameAtIndexPath(indexPath: NSIndexPath) -> String {
+    func lineItemNameAtIndexPath(_ indexPath: IndexPath) -> String {
         return order.value?.lineItems?[indexPath.row].name?.localizedString ?? ""
     }
 
-    func lineItemSkuAtIndexPath(indexPath: NSIndexPath) -> String {
+    func lineItemSkuAtIndexPath(_ indexPath: IndexPath) -> String {
         return order.value?.lineItems?[indexPath.row].variant?.sku ?? ""
     }
 
-    func lineItemSizeAtIndexPath(indexPath: NSIndexPath) -> String {
+    func lineItemSizeAtIndexPath(_ indexPath: IndexPath) -> String {
         return order.value?.lineItems?[indexPath.row].variant?.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
     }
 
-    func lineItemImageUrlAtIndexPath(indexPath: NSIndexPath) -> String {
+    func lineItemImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
         return order.value?.lineItems?[indexPath.row].variant?.images?.first?.url ?? ""
     }
 
-    func lineItemOldPriceAtIndexPath(indexPath: NSIndexPath) -> String {
-        guard let price = order.value?.lineItems?[indexPath.row].price, value = price.value,
-        _ = price.discounted?.value else { return "" }
+    func lineItemOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
+        guard let price = order.value?.lineItems?[indexPath.row].price, let value = price.value,
+        let _ = price.discounted?.value else { return "" }
 
         return value.description
     }
 
-    func lineItemPriceAtIndexPath(indexPath: NSIndexPath) -> String {
-        guard let price = order.value?.lineItems?[indexPath.row].price, value = price.value else { return "" }
+    func lineItemPriceAtIndexPath(_ indexPath: IndexPath) -> String {
+        guard let price = order.value?.lineItems?[indexPath.row].price, let value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -77,18 +77,18 @@ class OrderOverviewViewModel: BaseViewModel {
         }
     }
 
-    func lineItemQuantityAtIndexPath(indexPath: NSIndexPath) -> String {
+    func lineItemQuantityAtIndexPath(_ indexPath: IndexPath) -> String {
         return order.value?.lineItems?[indexPath.row].quantity?.description ?? "0"
     }
 
-    func lineItemTotalPriceAtIndexPath(indexPath: NSIndexPath) -> String {
+    func lineItemTotalPriceAtIndexPath(_ indexPath: IndexPath) -> String {
         return order.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
     }
     
     // MARK: - Order overview calculations
     
     func calculateOrderTotal() -> String {
-        guard let order = order.value, totalPrice = order.totalPrice else { return "" }
+        guard let order = order.value, let totalPrice = order.totalPrice else { return "" }
         
         if let totalGross = order.taxedPrice?.totalGross {
             return totalGross.description
@@ -104,8 +104,8 @@ class OrderOverviewViewModel: BaseViewModel {
     }
 
     func calculateTax() -> String {
-        guard let order = order.value, totalGrossAmount = order.taxedPrice?.totalGross?.centAmount,
-        totalNetAmount = order.taxedPrice?.totalNet?.centAmount else { return "" }
+        guard let order = order.value, let totalGrossAmount = order.taxedPrice?.totalGross?.centAmount,
+        let totalNetAmount = order.taxedPrice?.totalNet?.centAmount else { return "" }
 
         return Money(currencyCode: order.lineItems?.first?.totalPrice?.currencyCode ?? "",
                 centAmount: totalGrossAmount - totalNetAmount).description

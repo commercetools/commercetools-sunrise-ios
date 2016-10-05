@@ -4,6 +4,7 @@
 
 import UIKit
 import ReactiveCocoa
+import ReactiveSwift
 import Result
 import SDWebImage
 import IQDropDownTextField
@@ -11,7 +12,7 @@ import DZNEmptyDataSet
 
 class CartViewController: UIViewController {
 
-    @IBInspectable var borderColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var borderColor: UIColor = UIColor.lightGray
     
     @IBOutlet var emptyCartView: UIView!
     @IBOutlet weak var numberOfItemsLabel: UILabel!
@@ -32,31 +33,31 @@ class CartViewController: UIViewController {
         tableView.emptyDataSetDelegate = self
 
         viewModel = CartViewModel()
-        tableView.layer.borderColor = borderColor.CGColor
+        tableView.layer.borderColor = borderColor.cgColor
         tableView.tableFooterView = UIView()
 
-        refreshControl.addTarget(self, action: #selector(refresh), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel?.refreshObserver.sendNext()
+        viewModel?.refreshObserver.send(value: ())
     }
 
     func bindViewModel() {
         guard let viewModel = viewModel else { return }
 
         viewModel.numberOfItems.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] numberOfItems in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] numberOfItems in
             self?.numberOfItemsLabel.text = numberOfItems
         })
 
         viewModel.isLoading.producer
-        .observeOn(UIScheduler())
-        .startWithNext({ [weak self] isLoading in
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] isLoading in
             if !isLoading {
                 self?.refreshControl.endRefreshing()
             } else {
@@ -65,14 +66,14 @@ class CartViewController: UIViewController {
         })
 
         viewModel.contentChangesSignal
-        .observeOn(UIScheduler())
-        .observeNext({ [weak self] changeset in
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
 
             tableView.beginUpdates()
-            tableView.deleteRowsAtIndexPaths(changeset.deletions, withRowAnimation: .Automatic)
-            tableView.reloadRowsAtIndexPaths(changeset.modifications, withRowAnimation: .None)
-            tableView.insertRowsAtIndexPaths(changeset.insertions, withRowAnimation: .Automatic)
+            tableView.deleteRows(at: changeset.deletions, with: .automatic)
+            tableView.reloadRows(at: changeset.modifications, with: .none)
+            tableView.insertRows(at: changeset.insertions, with: .automatic)
             tableView.endUpdates()
         })
 
@@ -81,32 +82,32 @@ class CartViewController: UIViewController {
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let selectedCell = sender as? CartLineItemCell, indexPath = tableView.indexPathForCell(selectedCell),
-                productViewController = segue.destinationViewController as? ProductViewController,
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectedCell = sender as? CartLineItemCell, let indexPath = tableView.indexPath(for: selectedCell),
+                let productViewController = segue.destination as? ProductViewController,
                 let productViewModel = viewModel?.productDetailsViewModelForLineItemAtIndexPath(indexPath) {
             productViewController.viewModel = productViewModel
         }
     }
 
     @objc private func refresh() {
-        viewModel?.refreshObserver.sendNext()
+        viewModel?.refreshObserver.send(value: ())
     }
 
     // MARK: - Binding utilities
 
-    private func bindCartSummaryCell(summaryCell: CartSummaryCell) {
+    fileprivate func bindCartSummaryCell(_ summaryCell: CartSummaryCell) {
         guard let viewModel = viewModel else { return }
 
         summaryCell.subtotalLabel.text = viewModel.subtotal.value
         summaryCell.orderDiscountLabel.text = viewModel.orderDiscount.value
         summaryCell.taxLabel.text = viewModel.tax.value
-        summaryCell.taxLabel.hidden = viewModel.taxRowHidden.value
-        summaryCell.taxDescriptionLabel.hidden = viewModel.taxRowHidden.value
+        summaryCell.taxLabel.isHidden = viewModel.taxRowHidden.value
+        summaryCell.taxDescriptionLabel.isHidden = viewModel.taxRowHidden.value
         summaryCell.orderTotalLabel.text = viewModel.orderTotal.value
     }
 
-    private func bindLineItemCell(lineItemCell: CartLineItemCell, indexPath: NSIndexPath) {
+    fileprivate func bindLineItemCell(_ lineItemCell: CartLineItemCell, indexPath: IndexPath) {
         guard let viewModel = viewModel else { return }
 
         lineItemCell.productNameLabel.text = viewModel.lineItemNameAtIndexPath(indexPath)
@@ -118,7 +119,7 @@ class CartViewController: UIViewController {
         lineItemCell.quantityField?.itemList = viewModel.availableQuantities
         lineItemCell.quantityField?.selectedItem = viewModel.lineItemQuantityAtIndexPath(indexPath)
         lineItemCell.totalPriceLabel.text = viewModel.lineItemTotalPriceAtIndexPath(indexPath)
-        lineItemCell.productImageView.sd_setImageWithURL(NSURL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
+        lineItemCell.productImageView.sd_setImage(with: URL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
         let priceBeforeDiscount =  NSMutableAttributedString(string: viewModel.lineItemOldPriceAtIndexPath(indexPath))
         priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
@@ -129,18 +130,18 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDataSource {
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
         return viewModel.numberOfRowsInSection(section)
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let lineItemCell = tableView.dequeueReusableCellWithIdentifier("CartItemCell") as! CartLineItemCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let lineItemCell = tableView.dequeueReusableCell(withIdentifier: "CartItemCell") as! CartLineItemCell
 
         guard let viewModel = viewModel else { return lineItemCell }
 
         if indexPath.row == viewModel.numberOfRowsInSection(0) - 1 {
-            let summaryCell = tableView.dequeueReusableCellWithIdentifier("CartSummaryCell") as! CartSummaryCell
+            let summaryCell = tableView.dequeueReusableCell(withIdentifier: "CartSummaryCell") as! CartSummaryCell
             bindCartSummaryCell(summaryCell)
             return summaryCell
 
@@ -150,13 +151,13 @@ extension CartViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return viewModel?.canDeleteRowAtIndexPath(indexPath) ?? false
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            viewModel?.deleteLineItemObserver.sendNext(indexPath)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel?.deleteLineItemObserver.send(value: indexPath)
         }
     }
 
@@ -164,9 +165,9 @@ extension CartViewController: UITableViewDataSource {
 
 extension CartViewController: IQDropDownTextFieldDelegate {
 
-    func textFieldDidEndEditing(textField: UITextField) {
-        if let indexPath = self.tableView.indexPathForRowAtPoint(textField.convertPoint(.zero, toView: tableView)),
-                quantity = textField.text {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let indexPath = self.tableView.indexPathForRow(at: textField.convert(.zero, to: tableView)),
+                let quantity = textField.text {
             viewModel?.updateLineItemQuantityAtIndexPath(indexPath, quantity: quantity)
         }
     }
@@ -175,7 +176,7 @@ extension CartViewController: IQDropDownTextFieldDelegate {
 
 extension CartViewController: DZNEmptyDataSetSource {
 
-    func customViewForEmptyDataSet(scrollView: UIScrollView) -> UIView {
+    func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView {
         return emptyCartView
     }
 
@@ -183,7 +184,7 @@ extension CartViewController: DZNEmptyDataSetSource {
 
 extension CartViewController: DZNEmptyDataSetDelegate {
 
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
         return true
     }
 
