@@ -7,7 +7,6 @@ import Commercetools
 import ReactiveSwift
 import Result
 import CoreLocation
-import ObjectMapper
 
 class StoreSelectionViewModel: BaseViewModel {
 
@@ -54,7 +53,7 @@ class StoreSelectionViewModel: BaseViewModel {
     lazy var reserveAction: Action<IndexPath, Void, CTError> = { [unowned self] in
         return Action(enabledIf: Property(value: true), { indexPath in
             self.isLoading.value = true
-            return self.reserveProductVariant(self.channels[self.rowForChannelAtIndexPath(indexPath)])
+            return self.reserveProductVariant(channel: self.channels[self.rowForChannelAtIndexPath(indexPath)])
         })
     }()
 
@@ -158,7 +157,7 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     func storeImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return channels[rowForChannelAtIndexPath(indexPath)].details?.imageUrl ?? ""
+        return channels[rowForChannelAtIndexPath(indexPath)].imageUrl ?? ""
     }
 
     func expansionTextAtIndexPath(_ indexPath: IndexPath) -> String {
@@ -247,7 +246,7 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     private func storeDistance(_ store: Channel) -> Double? {
-        if let userLocation = userLocation.value, let lat = store.details?.latitude, let lon = store.details?.longitude,
+        if let userLocation = userLocation.value, let lat = store.latitude, let lon = store.longitude,
                 let latitude = Double(lat), let longitude = Double(lon) {
             let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
             return userLocation.distance(from: channelLocation)
@@ -257,24 +256,27 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // MARK: - Creating a reservation
 
-    private func reserveProductVariant(_ channel: Channel) -> SignalProducer<Void, CTError> {
+    private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, CTError> {
         return SignalProducer { observer, disposable in
             guard let channelId = channel.id, let productId = self.product.id, let currentVariantId = self.currentVariant?.id,
-                    let shippingAddress = channel.address?.toJSON() else {
+                    let shippingAddress = channel.address else {
                         observer.send(error: CTError.generalError(reason: nil))
                 return
             }
 
-            let selectedChannel = ["typeId": "channel", "id": channelId]
-            let lineItemDraft: [String: Any] = ["productId": productId,
-                                                      "variantId": currentVariantId,
-                                                      "supplyChannel": selectedChannel,
-                                                      "distributionChannel": selectedChannel]
+            var selectedChannelReference = Reference<Channel>()
+            selectedChannelReference.typeId = "channel"
+            selectedChannelReference.id = channelId
+            var lineItemDraft = LineItemDraft()
+            lineItemDraft.productId = productId
+            lineItemDraft.variantId = currentVariantId
+            lineItemDraft.supplyChannel = selectedChannelReference
+            lineItemDraft.distributionChannel = selectedChannelReference
             let customType = ["type": ["key": "reservationOrder"],
                               "fields": ["isReservation": true]]
 
-            Commercetools.Customer.profile { result in
-                if let profile = Mapper<Customer>().map(JSONObject: result.response), result.isSuccess {
+            Customer.profile { result in
+                if let profile = result.model, result.isSuccess {
 
                     var billingAddress = profile.reservationAddress
 
@@ -284,14 +286,19 @@ class StoreSelectionViewModel: BaseViewModel {
                         billingAddress.country = channel.address?.country
                     }
 
-                    Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale,
-                                               "shippingAddress": shippingAddress,
-                                               "billingAddress": billingAddress.toJSON(),
-                                               "lineItems": [lineItemDraft],
-                                               "custom": customType], result: { result in
+                    var cartDraft = CartDraft()
+                    cartDraft.currency = self.currencyCodeForCurrentLocale
+                    cartDraft.shippingAddress = shippingAddress
+                    cartDraft.billingAddress = billingAddress
+                    cartDraft.lineItems = [lineItemDraft]
+                    cartDraft.custom = customType
+                    Commercetools.Cart.create(cartDraft, result: { result in
 
-                        if let cart = Mapper<Cart>().map(JSONObject: result.response), let id = cart.id, let version = cart.version, result.isSuccess {
-                            Commercetools.Order.create(["id": id, "version": version], expansion: nil, result: { result in
+                        if let cart = result.model, let id = cart.id, let version = cart.version, result.isSuccess {
+                            var orderDraft = OrderDraft()
+                            orderDraft.id = id
+                            orderDraft.version = version
+                            Order.create(orderDraft, expansion: nil, result: { result in
                                 if result.isSuccess {
                                     observer.sendCompleted()
                                 } else if let error = result.errors?.first as? CTError, result.isFailure {
@@ -321,8 +328,7 @@ class StoreSelectionViewModel: BaseViewModel {
         // Retrieve channels which represent physical stores
         Channel.query(predicates: ["roles contains all (\"InventorySupply\", \"ProductDistribution\") AND NOT(roles contains any (\"Primary\"))"],
                 sort:  ["lastModifiedAt desc"], result: { result in
-            if let results = result.response?["results"] as? [[String: Any]],
-            let channels = Mapper<Channel>().mapArray(JSONArray: results), result.isSuccess {
+            if let channels = result.model?.results, result.isSuccess {
                 self.channels = channels.sorted(by: { [weak self] in
                     if let first = self?.storeDistance($0), let second = self?.storeDistance($1) {
                         return first < second

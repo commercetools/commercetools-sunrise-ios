@@ -91,14 +91,15 @@ class SignInViewModel: BaseViewModel {
     private func registerUser() -> SignalProducer<Void, CTError> {
         let username = email.value
         let password = registrationPassword.value
-        let userProfile = ["email": username,
-                           "password": password,
-                           "firstName": firstName.value,
-                           "lastName": lastName.value,
-                           "title": title.value]
+        var draft = CustomerDraft()
+        draft.email = username
+        draft.password = password
+        draft.firstName = firstName.value
+        draft.lastName = lastName.value
+        draft.title = title.value
 
         return SignalProducer { [weak self] observer, disposable in
-            Commercetools.Customer.signup(userProfile, result: { result in
+            Customer.signup(draft, result: { result in
                 if let error = result.errors?.first as? CTError, result.isFailure {
                     observer.send(error: error)
                 } else {

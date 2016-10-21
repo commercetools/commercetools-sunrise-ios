@@ -5,7 +5,6 @@
 import Commercetools
 import ReactiveSwift
 import Result
-import ObjectMapper
 
 class ProductViewModel: BaseViewModel {
 
@@ -34,7 +33,7 @@ class ProductViewModel: BaseViewModel {
     lazy var addToCartAction: Action<String, Void, CTError> = { [unowned self] in
         return Action(enabledIf: Property(value: true), { quantity in
             self.isLoading.value = true
-            return self.addLineItem(quantity)
+            return self.addLineItem(quantity: quantity)
         })
     }()
 
@@ -170,7 +169,7 @@ class ProductViewModel: BaseViewModel {
 
     func attributeNameAtIndexPath(_ indexPath: IndexPath) -> String? {
         let attribute = indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
-        return product?.productType?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercased()
+        return product?.productType?.obj?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercased()
     }
 
     func attributeKeyAtIndexPath(_ indexPath: IndexPath) -> String {
@@ -192,23 +191,23 @@ class ProductViewModel: BaseViewModel {
     }
 
     private func typeForAttributeName(_ name: String) -> AttributeType? {
-        return product?.productType?.attributes?.filter({ $0.name == name }).first?.type
+        return product?.productType?.obj?.attributes?.filter({ $0.name == name }).first?.type
     }
 
     // MARK: - Cart interaction
 
-    private func addLineItem(_ quantity: String = "1") -> SignalProducer<Void, CTError> {
+    private func addLineItem(quantity: String = "1") -> SignalProducer<Void, CTError> {
         return SignalProducer { observer, disposable in
 
-            var lineItemDraft: [String: Any] = ["productId": self.product?.id ?? "", "variantId": self.currentVariantId() ?? 1, "quantity": Int(quantity) ?? 1]
-
-            // Get the cart with state Active which has the most recent lastModifiedAt.
-            Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1, result: { result in
-                if let carts = Mapper<Cart>().mapArray(JSONObject: result.response?["results"]), let cart = carts.first, let id = cart.id,
-                        let version = cart.version, result.isSuccess {
+            Cart.active(result: { result in
+                if let cart = result.model, let cartId = cart.id, let version = cart.version, result.isSuccess {
                     // In case we already have an active cart, just add selected product
-                    lineItemDraft["action"] = "addLineItem"
-                    Commercetools.Cart.update(id, version: version, actions: [lineItemDraft], result: { result in
+                    var options = AddLineItemOptions()
+                    options.productId = self.product?.id
+                    options.variantId = self.currentVariantId()
+                    options.quantity = UInt(quantity)
+                    let updateActions = UpdateActions(version: version, actions: [CartUpdateAction.addLineItem(options: options)])
+                    Cart.update(cartId, actions: updateActions, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
                         } else if let errors = result.errors as? [CTError], result.isFailure {
@@ -223,7 +222,15 @@ class ProductViewModel: BaseViewModel {
 
                 } else {
                     // If there is no active cart, create one, with the selected product
-                    Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale, "lineItems": [lineItemDraft]], result: { result in
+                    var cartDraft = CartDraft()
+                    cartDraft.currency = self.currencyCodeForCurrentLocale
+                    var lineItemDraft = LineItemDraft()
+                    lineItemDraft.productId = self.product?.id
+                    lineItemDraft.variantId = self.currentVariantId()
+                    lineItemDraft.quantity = UInt(quantity)
+                    cartDraft.lineItems = [lineItemDraft]
+
+                    Cart.create(cartDraft, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
                         } else if let error = result.errors?.first as? CTError, result.isFailure {
@@ -240,8 +247,8 @@ class ProductViewModel: BaseViewModel {
 
     private func retrieveProduct(_ productId: String, size: String?) {
         self.isLoading.value = true
-        Commercetools.ProductProjection.byId(productId, expansion: ["productType"], result: { result in
-            if let product = Mapper<ProductProjection>().map(JSONObject: result.response), result.isSuccess {
+        ProductProjection.byId(productId, expansion: ["productType"], result: { result in
+            if let product = result.model, result.isSuccess {
                 self.product = product
                 self.bindViewModelProducers()
                 if let size = size {
@@ -256,12 +263,12 @@ class ProductViewModel: BaseViewModel {
     }
 
     private func retrieveProductType() {
-        guard let id = product?.productTypeId else { return }
+        guard let id = product?.productType?.id else { return }
         self.isLoading.value = true
 
-        Commercetools.ProductType.byId(id, expansion: nil, result: { result in
-            if let productType = Mapper<ProductType>().map(JSONObject: result.response), result.isSuccess {
-                self.product?.productType = productType
+        ProductType.byId(id, expansion: nil, result: { result in
+            if let productType = result.model, result.isSuccess {
+                self.product?.productType?.obj = productType
                 self.bindViewModelProducers()
 
             } else if let errors = result.errors as? [CTError], result.isFailure {

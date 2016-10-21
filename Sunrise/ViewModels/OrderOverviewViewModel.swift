@@ -2,6 +2,7 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
+import Commercetools
 import ReactiveSwift
 import Result
 

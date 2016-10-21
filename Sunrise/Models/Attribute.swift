@@ -2,34 +2,23 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
+import Commercetools
 import ObjectMapper
 
-struct Attribute: Mappable {
-
-    // MARK: - Properties
-
-    var name: String?
-    var value: AnyObject?
-
-    private let dateFormatter = DateFormatter()
-
-    init?(map: Map) {
-        dateFormatter.locale = NSLocale.current
-    }
-
-    // MARK: - Mappable
-
-    mutating func mapping(map: Map) {
-        name               <- map["name"]
-        value              <- map["value"]
-    }
+extension Attribute {
 
     // MARK: - Value string representation
+
+    private var dateFormatter: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        return dateFormatter
+    }
 
     func value(_ type: AttributeType) -> String? {
         return representation(for: value, ofType: type)
     }
-    
+
     private func representation(for rawValue: Any?, ofType type: AttributeType) -> String? {
         guard let typeName = type.name else { return nil }
 
@@ -80,12 +69,11 @@ struct Attribute: Mappable {
             }
             return nil
 
-        // Please note that the representation for both nested and reference types has not been added, since it is
-        // highly dependable on the specific presentation use case, and UI elements.
+                // Please note that the representation for both nested and reference types has not been added, since it is
+                // highly dependable on the specific presentation use case, and UI elements.
 
         default: return nil
 
         }
     }
-
 }

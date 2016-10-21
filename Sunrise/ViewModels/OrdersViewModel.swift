@@ -4,7 +4,6 @@
 
 import ReactiveSwift
 import Result
-import ObjectMapper
 import Commercetools
 
 class OrdersViewModel: BaseViewModel {
@@ -140,9 +139,8 @@ class OrdersViewModel: BaseViewModel {
     private func retrieveOrders(offset: UInt, text: String = "") {
         isLoading.value = true
 
-        Commercetools.Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { result in
-            if let results = result.response?["results"] as? [[String: Any]],
-            let orders = Mapper<Order>().mapArray(JSONArray: results), result.isSuccess {
+        Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { result in
+            if let orders = result.model?.results, result.isSuccess {
                 self.orders = orders.filter { $0.isReservation != true }
                 self.reservations = orders.filter { $0.isReservation == true }
 

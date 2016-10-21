@@ -5,7 +5,6 @@
 import Foundation
 import ReactiveSwift
 import Result
-import ObjectMapper
 import Commercetools
 
 class CartViewModel: BaseViewModel {
@@ -128,14 +127,17 @@ class CartViewModel: BaseViewModel {
         if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems?[indexPath.row].id,
                 let quantity = UInt(quantity) {
             self.isLoading.value = true
-            Commercetools.Cart.update(cartId, version: version, actions: [["action": "changeLineItemQuantity",
-                                                                           "lineItemId": lineItemId,
-                                                                           "quantity": quantity],
-                                                                          ["action": "recalculate"]], result: { result in
-                if let cart = Mapper<Cart>().map(JSONObject: result.response), result.isSuccess {
-                    self.updateCart(cart)
+
+            var options = ChangeLineItemQuantityOptions()
+            options.lineItemId = lineItemId
+            options.quantity = quantity
+            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.changeLineItemQuantity(options: options),
+                                                                                            .recalculate(options: RecalculateOptions())])
+            Cart.update(cartId, actions: updateActions, result: { result in
+                if let cart = result.model, result.isSuccess {
+                    self.update(cart: cart)
                 } else if let errors = result.errors as? [CTError], result.isFailure {
-                    self.updateCart(nil)
+                    self.update(cart: nil)
                     super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                 }
                 self.isLoading.value = false
@@ -153,13 +155,16 @@ class CartViewModel: BaseViewModel {
     private func deleteLineItemAtIndexPath(_ indexPath: IndexPath) {
         if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems?[indexPath.row].id {
             self.isLoading.value = true
-            Commercetools.Cart.update(cartId, version: version, actions: [["action": "removeLineItem",
-                                                                           "lineItemId": lineItemId],
-                                                                          ["action": "recalculate"]], result: { result in
-                if let cart = Mapper<Cart>().map(JSONObject: result.response), result.isSuccess {
-                    self.updateCart(cart)
+
+            var options = RemoveLineItemOptions()
+            options.lineItemId = lineItemId
+            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.removeLineItem(options: options),
+                                                                                           .recalculate(options: RecalculateOptions())])
+            Cart.update(cartId, actions: updateActions, result: { result in
+                if let cart = result.model, result.isSuccess {
+                    self.update(cart: cart)
                 } else if let errors = result.errors as? [CTError], result.isFailure {
-                    self.updateCart(nil)
+                    self.update(cart: nil)
                     super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                 }
                 self.isLoading.value = false
@@ -172,42 +177,36 @@ class CartViewModel: BaseViewModel {
     private func queryForActiveCart() {
         isLoading.value = true
 
-        // Get the cart with state Active which has the most recent lastModifiedAt.
-        Commercetools.Cart.query(predicates: ["cartState=\"Active\""], sort: ["lastModifiedAt desc"], limit: 1,
-                result: { result in
-                    if let results = result.response?["results"] as? [[String: Any]],
-                            let carts = Mapper<Cart>().mapArray(JSONArray: results), let cartId = carts.first?.id,
-                            let version = carts.first?.version, result.isSuccess {
-                        // Run recalculation before we present the refreshed cart
-                        Commercetools.Cart.update(cartId, version: version, actions: [["action": "recalculate"]], result: { result in
-                            if let cart = Mapper<Cart>().map(JSONObject: result.response), result.isSuccess {
-                                self.updateCart(cart)
-                            } else if let errors = result.errors as? [CTError], result.isFailure {
-                                self.updateCart(nil)
-                                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                            }
-                            self.isLoading.value = false
-                        })
+        Cart.active(result: { result in
+            if let cart = result.model, let cartId = cart.id, let version = cart.version, result.isSuccess {
+                // Run recalculation before we present the refreshed cart
+                Cart.update(cartId, actions: UpdateActions<CartUpdateAction>(version: version, actions: [.recalculate(options: RecalculateOptions())]), result: { result in
+                    if let cart = result.model, result.isSuccess {
+                        self.update(cart: cart)
                     } else if let errors = result.errors as? [CTError], result.isFailure {
-                        self.updateCart(nil)
+                        self.update(cart: nil)
                         super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                        self.isLoading.value = false
-                    } else {
-                        // If there is no active cart, create one, with the selected product
-                        Commercetools.Cart.create(["currency": self.currencyCodeForCurrentLocale], result: { result in
-                            if let cart = Mapper<Cart>().map(JSONObject: result.response), result.isSuccess {
-                                self.updateCart(cart)
-                            } else if let errors = result.errors as? [CTError], result.isFailure {
-                                self.updateCart(nil)
-                                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                            }
-                            self.isLoading.value = false
-                        })
                     }
+                    self.isLoading.value = false
                 })
+            } else {
+                // If there is no active cart, create one, with the selected product
+                var cartDraft = CartDraft()
+                cartDraft.currency = self.currencyCodeForCurrentLocale
+                Cart.create(cartDraft, result: { result in
+                    if let cart = result.model, result.isSuccess {
+                        self.update(cart: cart)
+                    } else if let errors = result.errors as? [CTError], result.isFailure {
+                        self.update(cart: nil)
+                        super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+                    }
+                    self.isLoading.value = false
+                })
+            }
+        })
     }
 
-    private func updateCart(_ cart: Cart?) {
+    private func update(cart: Cart?) {
         let previousCart = self.cart.value
 
         var changeset = Changeset()

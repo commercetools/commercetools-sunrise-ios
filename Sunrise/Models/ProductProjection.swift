@@ -2,18 +2,10 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import ObjectMapper
+import Commercetools
 
-struct ProductProjection: Mappable {
+extension ProductProjection {
 
-    // MARK: - Properties
-
-    var id: String?
-    var name: [String: String]?
-    var productTypeId: String?
-    var productType: ProductType?
-    var masterVariant: ProductVariant?
-    var variants: [ProductVariant]?
     /// The union of `masterVariant` and other`variants`.
     var allVariants: [ProductVariant] {
         var allVariants = [ProductVariant]()
@@ -33,18 +25,4 @@ struct ProductProjection: Mappable {
             return variants?.filter({ ($0.prices?.count ?? 0) > 0 }).first
         }
     }
-
-    init?(map: Map) {}
-
-    // MARK: - Mappable
-
-    mutating func mapping(map: Map) {
-        id                 <- map["id"]
-        name               <- map["name"]
-        productTypeId      <- map["productType.id"]
-        productType        <- map["productType.obj"]
-        masterVariant      <- map["masterVariant"]
-        variants           <- map["variants"]
-    }
-
 }
