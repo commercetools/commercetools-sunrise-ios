@@ -4,7 +4,6 @@
 
 import ReactiveSwift
 import Result
-import ObjectMapper
 import Commercetools
 
 class ProductOverviewViewModel: BaseViewModel {
@@ -97,10 +96,8 @@ class ProductOverviewViewModel: BaseViewModel {
     private func queryForProductProjections(offset: UInt, text: String = "") {
         isLoading.value = true
 
-        Commercetools.ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, offset: offset,
-                lang: Locale(identifier: "en"), text: text, result: { result in
-            if let results = result.response?["results"] as? [[String: Any]],
-            let products = Mapper<ProductProjection>().mapArray(JSONArray: results), result.isSuccess {
+        ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text, result: { result in
+            if let products = result.model?.results, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 
             } else if let errors = result.errors as? [CTError], result.isFailure {

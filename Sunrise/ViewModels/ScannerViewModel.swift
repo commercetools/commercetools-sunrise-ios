@@ -4,7 +4,6 @@
 
 import Commercetools
 import ReactiveSwift
-import ObjectMapper
 
 class ScannerViewModel: BaseViewModel {
 
@@ -37,9 +36,8 @@ class ScannerViewModel: BaseViewModel {
         isLoading.value = true
         isCapturing.value = false
 
-        Commercetools.ProductProjection.search(limit: 1, filter: "variants.sku:\"\(sku)\"", result: { result in
-            if let results = result.response?["results"] as? [[String: Any]],
-            let product = Mapper<ProductProjection>().mapArray(JSONArray: results)?.first, result.isSuccess {
+        ProductProjection.search(limit: 1, filter: "variants.sku:\"\(sku)\"", result: { result in
+            if let product = result.model?.results?.first, result.isSuccess {
                 self.scannedProduct.value = product
 
             } else if let errors = result.errors as? [CTError], result.isFailure {

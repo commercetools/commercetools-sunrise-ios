@@ -5,19 +5,18 @@ platform :ios, '9.0'
 use_frameworks!
 
 def common_pods
+    pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'fcb7361ba78dc103e0b69bb92dd4e44666532123'
     pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
     pod 'ReactiveObjC'
-    pod 'ObjectMapper'
 end
 
 target 'Sunrise' do
-    pod 'Commercetools'
+    common_pods
     pod 'IQKeyboardManagerSwift'
     pod 'SDWebImage'
     pod 'IQDropDownTextField'
     pod 'SVProgressHUD'
     pod 'DZNEmptyDataSet'
-    common_pods
 end
 
 def testing_pods

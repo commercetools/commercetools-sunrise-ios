@@ -4,7 +4,6 @@
 
 import ReactiveSwift
 import Result
-import ObjectMapper
 import Commercetools
 
 class BaseViewModel {

@@ -12,7 +12,7 @@ import SVProgressHUD
 
 class ScannerViewController: UIViewController {
 
-    private let captureSession = AVCaptureSession()
+    private var captureSession: AVCaptureSession? = AVCaptureSession()
     private let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
     private let metadataOutput = AVCaptureMetadataOutput()
 
@@ -33,7 +33,7 @@ class ScannerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if captureSession.isRunning {
+        if let captureSession = captureSession, captureSession.isRunning {
             captureSession.stopRunning()
         }
     }
@@ -41,7 +41,7 @@ class ScannerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if !captureSession.isRunning {
+        if let captureSession = captureSession, !captureSession.isRunning {
             captureSession.startRunning()
         }
     }
@@ -50,8 +50,9 @@ class ScannerViewController: UIViewController {
         Method used to setup video input from camera, add input and output to the session.
     */
     private func setupCaptureSessionAndPreview() {
-        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice),
+        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice), let captureSession = captureSession,
                 captureSession.canAddInput(videoInput) && captureSession.canAddOutput(metadataOutput) else {
+            self.captureSession = nil
             presentCaptureError()
             return
         }
@@ -116,9 +117,9 @@ class ScannerViewController: UIViewController {
         .observe(on: UIScheduler())
         .startWithValues({ [weak self] isCapturing in
             if isCapturing {
-                self?.captureSession.startRunning()
+                self?.captureSession?.startRunning()
             } else {
-                self?.captureSession.stopRunning()
+                self?.captureSession?.stopRunning()
             }
         })
 

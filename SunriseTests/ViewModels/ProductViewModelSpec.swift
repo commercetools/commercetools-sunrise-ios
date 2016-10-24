@@ -2,10 +2,11 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
+import Commercetools
 import Quick
 import Nimble
 import ObjectMapper
-import ReactiveCocoa
+import ReactiveSwift
 import Result
 @testable import Sunrise
 

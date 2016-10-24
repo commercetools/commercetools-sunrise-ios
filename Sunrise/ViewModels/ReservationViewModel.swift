@@ -5,7 +5,6 @@
 import Foundation
 import ReactiveSwift
 import CoreLocation
-import ObjectMapper
 import Commercetools
 
 class ReservationViewModel {
@@ -47,10 +46,10 @@ class ReservationViewModel {
             price = nil
         }
 
-        storeName = order.lineItems?.first?.distributionChannel?.name?.localizedString
-        streetAndNumberInfo = order.lineItems?.first?.distributionChannel?.streetAndNumberInfo
-        zipAndCityInfo = order.lineItems?.first?.distributionChannel?.zipAndCityInfo
-        openLine1Info = order.lineItems?.first?.distributionChannel?.openingTimes
+        storeName = order.lineItems?.first?.distributionChannel?.obj?.name?.localizedString
+        streetAndNumberInfo = order.lineItems?.first?.distributionChannel?.obj?.streetAndNumberInfo
+        zipAndCityInfo = order.lineItems?.first?.distributionChannel?.obj?.zipAndCityInfo
+        openLine1Info = order.lineItems?.first?.distributionChannel?.obj?.openingTimes
 
         geocodeStoreAddress()
     }
@@ -58,7 +57,7 @@ class ReservationViewModel {
     // MARK: - Store address geocoding
 
     private func geocodeStoreAddress() {
-        if let channel = order.lineItems?.first?.distributionChannel, let zip = channel.address?.postalCode,
+        if let channel = order.lineItems?.first?.distributionChannel?.obj, let zip = channel.address?.postalCode,
                 let city = channel.address?.city, let street = channel.address?.streetName, let number = channel.address?.streetNumber,
                 let country = channel.address?.country {
             self.geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { placemarks, error in
