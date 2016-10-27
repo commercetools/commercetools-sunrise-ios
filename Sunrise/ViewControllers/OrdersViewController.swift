@@ -150,7 +150,7 @@ class OrdersViewController: UIViewController {
         UserDefaults.standard.set(nil, forKey: kLoggedInUsername)
         UserDefaults.standard.synchronize()
         AuthManager.sharedInstance.logoutUser()
-        AppRouting.setupMyAccountRootViewController(isLoggedIn: false)
+        AppRouting.setupMyAccountRootViewController()
     }
 
 

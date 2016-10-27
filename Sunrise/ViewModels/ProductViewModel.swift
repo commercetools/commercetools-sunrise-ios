@@ -21,6 +21,9 @@ class ProductViewModel: BaseViewModel {
     let imageUrl = MutableProperty("")
     let quantities = (1...9).map { String($0) }
     let isLoading = MutableProperty(false)
+    var isLoggedIn: Bool {
+        return AppRouting.isLoggedIn
+    }
 
     // Dialogue texts
     let addToCartSuccessTitle = NSLocalizedString("Product added to cart", comment: "Product added to cart")
@@ -28,6 +31,11 @@ class ProductViewModel: BaseViewModel {
     let continueTitle = NSLocalizedString("Continue", comment: "Continue")
     let cartOverviewTitle = NSLocalizedString("Cart overview", comment: "Cart overview")
     let addToCartFailedTitle = NSLocalizedString("Couldn't add product to cart", comment: "Adding product to cart failed")
+
+    let logInTitle = NSLocalizedString("Log In To Continue", comment: "Log In To Continue")
+    let logInMessage = NSLocalizedString("In order to make a reservation, you have to log in first.", comment: "Reservation log in prompt")
+    let logInAction = NSLocalizedString("Log in", comment: "Log in")
+    let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel")
 
     // Actions
     lazy var addToCartAction: Action<String, Void, CTError> = { [unowned self] in
@@ -216,11 +224,8 @@ class ProductViewModel: BaseViewModel {
                         self.isLoading.value = false
                     })
 
-                } else if let error = result.errors?.first as? CTError, result.isFailure {
-                    observer.send(error: error)
-                    self.isLoading.value = false
-
-                } else {
+                } else if let error = result.errors?.first as? CTError, case .resourceNotFoundError(let reason) = error,
+                          reason.message == "No active cart exists." {
                     // If there is no active cart, create one, with the selected product
                     var cartDraft = CartDraft()
                     cartDraft.currency = self.currencyCodeForCurrentLocale
@@ -238,6 +243,10 @@ class ProductViewModel: BaseViewModel {
                         }
                         self.isLoading.value = false
                     })
+
+                } else if let error = result.errors?.first as? CTError {
+                    observer.send(error: error)
+                    self.isLoading.value = false
                 }
             })
         }

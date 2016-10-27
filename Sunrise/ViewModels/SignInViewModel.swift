@@ -21,19 +21,21 @@ class SignInViewModel: BaseViewModel {
     let registrationPasswordConfirmation = MutableProperty("")
 
     // Outputs
-    let isLoggedIn: MutableProperty<Bool>
     let isLoading: MutableProperty<Bool>
     let isLoginInputValid = MutableProperty(false)
     let isRegisterInputValid = MutableProperty(false)
     let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MRS.", comment: "MRS."),
                         NSLocalizedString("MS.", comment: "MS."), NSLocalizedString("DR.", comment: "DR.")]
     let registrationGuide = NSLocalizedString("All mandatory fields (*) have to be filled, and your password and confirmation must match", comment: "Registration form instructions")
+    var isLoggedIn: Bool {
+        return AppRouting.isLoggedIn
+    }
 
     // Actions
     lazy var loginAction: Action<Void, Void, CTError> = { [unowned self] in
         return Action(enabledIf: self.isLoginInputValid, { _ in
             self.isLoading.value = true
-            return self.loginUser(self.username.value, password: self.password.value)
+            return self.login(username: self.username.value, password: self.password.value)
         })
     }()
     lazy var registerAction: Action<Void, Void, CTError> = { [unowned self] in
@@ -46,7 +48,6 @@ class SignInViewModel: BaseViewModel {
     // MARK: Lifecycle
 
     override init() {
-        isLoggedIn = MutableProperty(AuthManager.sharedInstance.state == .customerToken)
         isLoading = MutableProperty(false)
 
         super.init()
@@ -72,9 +73,10 @@ class SignInViewModel: BaseViewModel {
 
     // MARK: - Commercetools platform user log in and sign up
 
-    private func loginUser(_ username: String, password: String) -> SignalProducer<Void, CTError> {
+    private func login(username: String, password: String) -> SignalProducer<Void, CTError> {
         return SignalProducer { [weak self] observer, disposable in
-            AuthManager.sharedInstance.loginUser(username, password: password, completionHandler: { error in
+            Commercetools.login(username: username, password: password,
+                    activeCartSignInMode: .mergeWithExistingCustomerCart, completionHandler: { error in
                 if let error = error as? CTError {
                     observer.send(error: error)
                 } else {
@@ -103,7 +105,7 @@ class SignInViewModel: BaseViewModel {
                 if let error = result.errors?.first as? CTError, result.isFailure {
                     observer.send(error: error)
                 } else {
-                    self?.loginUser(username, password: password).startWithSignal { signal, signalDisposable in
+                    self?.login(username: username, password: password).startWithSignal { signal, signalDisposable in
                         disposable.add(signalDisposable)
                         signal.observe { event in
                             switch event {

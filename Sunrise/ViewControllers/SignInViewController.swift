@@ -86,6 +86,10 @@ class SignInViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
 
+        if viewModel.isLoggedIn {
+            AppRouting.setupMyAccountRootViewController()
+        }
+
         loginAction = CocoaAction(viewModel.loginAction, { _ in return () })
         registerAction = CocoaAction(viewModel.registerAction, { _ in return () })
 
@@ -99,14 +103,6 @@ class SignInViewController: UIViewController {
         viewModel.registrationPasswordConfirmation <~ registrationPasswordConfirmationField.signalProducer()
 
         titleField.itemList = viewModel.titleOptions
-
-        viewModel.isLoggedIn.producer
-        .observe(on: UIScheduler())
-        .startWithValues({ isLoggedIn in
-            if isLoggedIn {
-                AppRouting.setupMyAccountRootViewController(isLoggedIn: isLoggedIn)
-            }
-        })
 
         viewModel.isLoading.producer
         .observe(on: UIScheduler())
@@ -129,7 +125,7 @@ class SignInViewController: UIViewController {
             SVProgressHUD.dismiss()
             switch event {
             case .completed:
-                AppRouting.setupMyAccountRootViewController(isLoggedIn: true)
+                AppRouting.switchAfterLogInSuccess()
             case let .failed(error):
                 let alertController = UIAlertController(
                         title: "Failed",

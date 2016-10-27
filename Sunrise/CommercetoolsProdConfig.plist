@@ -3,16 +3,18 @@
 <plist version="1.0">
     <dict>
         <key>projectKey</key>
-        <string>sunrise-production</string>
+        <string>sunrise-demo-production-1</string>
         <key>scope</key>
-        <string>view_products:sunrise-production manage_my_profile:sunrise-production manage_my_orders:sunrise-production</string>
+        <string>view_products:sunrise-demo-production-1 manage_my_profile:sunrise-demo-production-1 manage_my_orders:sunrise-demo-production-1 create_anonymous_token:sunrise-demo-production-1</string>
         <key>clientId</key>
-        <string>9qzbKJ_BvGqeHn8p7JV7f-rm</string>
+        <string>TwWyXK-9JjtOuJ83bi6dppcJ</string>
         <key>clientSecret</key>
-        <string>MRzx7hkO8Dgq92e4NnVe346jT0psng42</string>
+        <string>3ffxKILm1Rex78ZBFJHo49hUu8ZdwBlU</string>
         <key>authUrl</key>
         <string>https://auth.sphere.io</string>
         <key>apiUrl</key>
         <string>https://api.sphere.io</string>
+        <key>anonymousSession</key>
+        <true/>
     </dict>
 </plist>
