@@ -252,6 +252,25 @@ class ProductViewController: UITableViewController {
         addToCartAction?.execute(quantityField.selectedItem as AnyObject?)
     }
 
+    @IBAction func reserveInStore(_ sender: UIButton) {
+        guard let viewModel = viewModel else { return }
+
+        if viewModel.isLoggedIn {
+            performSegue(withIdentifier: "showStoreSelection", sender: self)
+        } else {
+            let alertController = UIAlertController(
+                    title: viewModel.logInTitle,
+                    message: viewModel.logInMessage,
+                    preferredStyle: .alert
+            )
+            alertController.addAction(UIAlertAction(title: viewModel.cancelTitle, style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: viewModel.logInAction, style: .default, handler: { _ in
+                AppRouting.presentSignInViewController(tabIndexAfterLogIn: 0)
+            }))
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     private func presentAfterAddingToCartOptions() {
         let alertController = UIAlertController(
                 title: viewModel?.addToCartSuccessTitle,

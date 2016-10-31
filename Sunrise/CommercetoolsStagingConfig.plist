@@ -3,16 +3,18 @@
 <plist version="1.0">
     <dict>
         <key>projectKey</key>
-        <string>sunrise-restore-1</string>
+        <string>sunrise-demo-staging-1</string>
         <key>scope</key>
-        <string>view_products:sunrise-restore-1 manage_my_profile:sunrise-restore-1 manage_my_orders:sunrise-restore-1</string>
+        <string>view_products:sunrise-demo-staging-1 manage_my_profile:sunrise-demo-staging-1 manage_my_orders:sunrise-demo-staging-1 create_anonymous_token:sunrise-demo-staging-1</string>
         <key>clientId</key>
-        <string>G3uGPcJbuGXnyFdEqYKIVzUa</string>
+        <string>ODVQbfh4pBP-dWpBkd4KewH5</string>
         <key>clientSecret</key>
-        <string>0gjYkyytWLsrVAWekcJU2hWi0JbSOevC</string>
+        <string>7Qm1SFxirhxXtAfKI5nRX70zmBDnPDLL</string>
         <key>authUrl</key>
         <string>https://auth.sphere.io</string>
         <key>apiUrl</key>
         <string>https://api.sphere.io</string>
+        <key>anonymousSession</key>
+        <true/>
     </dict>
 </plist>
