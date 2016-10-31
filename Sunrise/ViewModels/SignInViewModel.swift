@@ -75,9 +75,9 @@ class SignInViewModel: BaseViewModel {
 
     private func login(username: String, password: String) -> SignalProducer<Void, CTError> {
         return SignalProducer { [weak self] observer, disposable in
-            Commercetools.login(username: username, password: password,
-                    activeCartSignInMode: .mergeWithExistingCustomerCart, completionHandler: { error in
-                if let error = error as? CTError {
+            Commercetools.loginCustomer(username: username, password: password,
+                    activeCartSignInMode: .mergeWithExistingCustomerCart) { result in
+                if let error = result.errors?.first as? CTError, result.isFailure {
                     observer.send(error: error)
                 } else {
                     observer.sendCompleted()
@@ -86,7 +86,7 @@ class SignInViewModel: BaseViewModel {
                     UserDefaults.standard.synchronize()
                 }
                 self?.isLoading.value = false
-            })
+            }
         }
     }
 
@@ -101,7 +101,7 @@ class SignInViewModel: BaseViewModel {
         draft.title = title.value
 
         return SignalProducer { [weak self] observer, disposable in
-            Customer.signup(draft, result: { result in
+            Commercetools.signUpCustomer(draft, result: { result in
                 if let error = result.errors?.first as? CTError, result.isFailure {
                     observer.send(error: error)
                 } else {

@@ -149,7 +149,7 @@ class OrdersViewController: UIViewController {
         // Temporary perform login in view controller, refactor once orders are in place
         UserDefaults.standard.set(nil, forKey: kLoggedInUsername)
         UserDefaults.standard.synchronize()
-        AuthManager.sharedInstance.logoutUser()
+        Commercetools.logoutCustomer()
         AppRouting.setupMyAccountRootViewController()
     }
 
