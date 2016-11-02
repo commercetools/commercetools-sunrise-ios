@@ -38,18 +38,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
     }
     
     private func initializePushTechSDK() {
 #if DEBUG
-        let config = PSHConfiguration(fileAtPath: NSBundle.mainBundle().pathForResource("PushTechDevConfig", ofType: "plist"))
+        let config = PSHConfiguration(fileAtPath: Bundle.main.path(forResource: "PushTechDevConfig", ofType: "plist"))
 #else
-        let config = PSHConfiguration(fileAtPath: NSBundle.mainBundle().pathForResource("PushTechReleaseConfig", ofType: "plist"))
+    let config = PSHConfiguration(fileAtPath: Bundle.main.path(forResource: "PushTechReleaseConfig", ofType: "plist"))
 #endif
-        PSHEngine.startWithConfiguration(config, eventBusDelegate: nil, notificationDelegate: self)
-        PSHEngine.sharedInstance().setLocationAdquisition(.Always)
+        PSHEngine.start(with: config, eventBusDelegate: nil, notificationDelegate: self)
+        PSHEngine.sharedInstance().setLocationAdquisition(.always)
     }
 
     /**
@@ -57,8 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         - parameter params:                    String containing URL-like formatted parameters.
     */
-    private func handleCustomActions(params: String) {
-        let components = params.componentsSeparatedByString("=")
+    fileprivate func handleCustomActions(params: String) {
+        let components = params.components(separatedBy: "=")
         if components.count == 2 {
             let key = components[0]
             let value = components[1]
@@ -79,13 +79,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: PSHNotificationDelegate {
 
-    func shouldPerformDefaultActionForRemoteNotification(notification: PSHNotification, completionHandler: (UIBackgroundFetchResult) -> Void) -> Bool {
-        if let notificationUrl = notification.campaign?.URL where notification.defaultAction == .LandingPage {
-            AppRouting.presentNotificationWebPage(notificationUrl)
+    func shouldPerformDefaultAction(forRemoteNotification notification: PSHNotification!, completionHandler: ((UIBackgroundFetchResult) -> Void)!) -> Bool {
+        if let notificationUrl = notification.campaign?.url, notification.defaultAction == .landingPage {
+            AppRouting.presentNotificationWebPage(url: notificationUrl)
             return false
 
         } else if let extra = notification.custom?.extra {
-            handleCustomActions(extra)
+            handleCustomActions(params: extra)
             return false
         }
         return true

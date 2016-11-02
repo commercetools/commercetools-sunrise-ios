@@ -164,7 +164,7 @@ class StoreSelectionViewController: UITableViewController {
     // MARK: - Refreshing
     
     @IBAction func refresh(sender: UIRefreshControl) {
-        viewModel?.refreshObserver.sendNext()
+        viewModel?.refreshObserver.send(value: ())
     }
 
     // MARK: - Success presentation

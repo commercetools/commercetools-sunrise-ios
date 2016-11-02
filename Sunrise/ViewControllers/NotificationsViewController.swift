@@ -24,7 +24,7 @@ class NotificationsViewController: UIViewController {
     }
     
     @IBAction func dismissNotification(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
 }

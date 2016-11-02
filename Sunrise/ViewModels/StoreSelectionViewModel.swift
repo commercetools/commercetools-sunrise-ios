@@ -143,7 +143,7 @@ class StoreSelectionViewModel: BaseViewModel {
         }
 
         refreshSignal
-        .observeNext { [weak self] in
+        .observeValues { [weak self] in
             self?.retrieveStores()
         }
 

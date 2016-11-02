@@ -19,6 +19,8 @@ class AppRouting {
     }
 
     private static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    
+    private static let notificationsStoryboard = UIStoryboard(name: "Notifications", bundle: nil)
 
     private static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
 
@@ -124,6 +126,18 @@ class AppRouting {
         tabBarController.selectedIndex = TabIndex.myAccountTab.index
         ordersNavigationController.popToRootViewController(animated: false)
         ordersViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+    }
+
+    /**
+        Modal presentation of a view controller containing page at the specified URL.
+    */
+    static func presentNotificationWebPage(url: URL) {
+        guard let rootViewController = tabBarController,
+              let notificationsViewController = notificationsStoryboard.instantiateViewController(withIdentifier: "NotificationsViewController") as? NotificationsViewController,
+              let _ = notificationsViewController.view else { return }
+
+        notificationsViewController.webView.loadRequest(URLRequest(url: url))
+        rootViewController.present(notificationsViewController, animated: true, completion: nil)
     }
 
 }
