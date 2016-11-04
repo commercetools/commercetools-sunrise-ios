@@ -5,7 +5,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 def common_pods
-  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'e6133ba2e65c8a53768a0852552665f28330359a'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'ff4f1d6c8423c7b2a26ed9de63063e5f31419241'
   pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
   pod 'ReactiveObjC'
 end

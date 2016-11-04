@@ -37,15 +37,17 @@ class ReservationNotificationViewController: UIViewController, UNNotificationCon
     }
     
     func didReceive(_ notification: UNNotification) {
-        Order.byId("1392cf00-f24f-4082-b7a9-5a614ccb26c8", expansion: ["lineItems[0].distributionChannel"]) { [weak self] result in
-            if let order = result.model, result.isSuccess {
-                DispatchQueue.main.async {
-                    self?.viewModel = ReservationViewModel(order: order)
-                    UIView.animate(withDuration: 0.4) {
-                        self?.loadingIndicator.stopAnimating()
-                        self?.containerView.alpha = 1
+        if let orderId = notification.request.content.userInfo["reservation-id"] as? String {
+            Order.byId(orderId, expansion: ["lineItems[0].distributionChannel"]) { [weak self] result in
+                if let order = result.model, result.isSuccess {
+                    DispatchQueue.main.async {
+                        self?.viewModel = ReservationViewModel(order: order)
+                        UIView.animate(withDuration: 0.4) {
+                            self?.loadingIndicator.stopAnimating()
+                            self?.containerView.alpha = 1
+                        }
                     }
-                }                
+                }
             }
         }
     }
