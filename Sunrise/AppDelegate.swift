@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Commercetools
 import IQKeyboardManagerSwift
 
@@ -30,27 +31,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IQKeyboardManager.sharedManager().enable = true
 
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.requestAuthorization(options: [.badge, .alert, .sound]) { success, _ in
+            if !success {
+                // Requesting authorization for notifications failed. Perhaps let the API know.
+            }
+        }
+        notificationCenter.delegate = self
         application.registerForRemoteNotifications()
+        AppRouting.setupMyAccountRootViewController()
 
         if let notificationInfo = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(NSEC_PER_SEC)) {
-                self.handlePushNotification(notificationInfo)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.handleNotification(notificationInfo: notificationInfo)
             }
         }
 
         return true
     }
 
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        handlePushNotification(userInfo)
-    }
-
-    private func handlePushNotification(_ notificationInfo: [AnyHashable: Any]) {
+    fileprivate func handleNotification(notificationInfo: [AnyHashable: Any]) {
         if let reservationId = notificationInfo["reservation-id"] as? String {
             AppRouting.showReservationWithId(reservationId)
         }
     }
-
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        handleNotification(notificationInfo: response.notification.request.content.userInfo)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
+    }
+    
+}
