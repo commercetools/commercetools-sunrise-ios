@@ -86,7 +86,7 @@ class ScannerViewController: UIViewController {
         if authorizationStatus == .denied {
             alertController.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { _ in
                 if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.shared.openURL(appSettingsURL)
+                    UIApplication.shared.open(appSettingsURL)
                 }
                 _ = self.navigationController?.popViewController(animated: true)
             }))

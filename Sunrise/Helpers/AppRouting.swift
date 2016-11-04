@@ -58,6 +58,11 @@ class AppRouting {
         let newAccountRootViewController: UIViewController
         if isLoggedIn {
             newAccountRootViewController = mainStoryboard.instantiateViewController(withIdentifier: "OrdersViewController")
+            if let navigationController = newAccountRootViewController as? UINavigationController,
+               let ordersViewController = navigationController.viewControllers.first as? OrdersViewController {
+                // Preload orders
+                _ = ordersViewController.view
+            }
         } else {
             newAccountRootViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
         }

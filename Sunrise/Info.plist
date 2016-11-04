@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>We use your camera in order to scan for product barcodes.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We use your photo library in order to look for product barcodes.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -31,12 +27,20 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We use your camera in order to scan for product barcodes.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Sunrise uses your location to find the best products for you</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We use your photo library in order to look for product barcodes.</string>
 	<key>Selectable attributes</key>
 	<array>
 		<string>size</string>
 		<string>color</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

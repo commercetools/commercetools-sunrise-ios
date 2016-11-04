@@ -53,6 +53,15 @@
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		217581B81CF4865A0067BE15 /* ProductOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */; };
 		218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218988241CED0C78006E7757 /* ProductDetails.storyboard */; };
+		219657741DCB9AA4002C7108 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4691D63311E008BA95C /* ReservationViewModel.swift */; };
+		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
+		219657761DCB9B81002C7108 /* Dictionary+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */; };
+		219657771DCB9BA2002C7108 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
+		219992391DC9FAAB000E48FD /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219992381DC9FAAB000E48FD /* UserNotifications.framework */; };
+		2199923B1DC9FAAB000E48FD /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */; };
+		2199923E1DC9FAAB000E48FD /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2199923D1DC9FAAB000E48FD /* NotificationViewController.swift */; };
+		219992411DC9FAAB000E48FD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2199923F1DC9FAAB000E48FD /* MainInterface.storyboard */; };
+		219992451DC9FAAB000E48FD /* ReservationNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 219992371DC9FAAB000E48FD /* ReservationNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		219B2EBC1D1B7348004579DD /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B2EBB1D1B7348004579DD /* OrderCell.swift */; };
 		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
 		21A6B4681D6330DA008BA95C /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6B4671D6330DA008BA95C /* ReservationViewController.swift */; };
@@ -61,6 +70,8 @@
 		21A6B46E1D647807008BA95C /* reservation.json in Resources */ = {isa = PBXBuildFile; fileRef = 21A6B46D1D647807008BA95C /* reservation.json */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
+		21A921271DCAC77500134125 /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
+		21A921281DCAC77900134125 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
 		21B9001A1CFE07C700E053F9 /* CartLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B900191CFE07C700E053F9 /* CartLineItemCell.swift */; };
 		21BBDC221D34177B00C516FD /* StoreSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBDC211D34177B00C516FD /* StoreSelectionViewController.swift */; };
@@ -73,9 +84,17 @@
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
 		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
+		D78C254EAC84E3853FB82002 /* Pods_ReservationNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		219992431DC9FAAB000E48FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 219992361DC9FAAB000E48FD;
+			remoteInfo = ReservationNotification;
+		};
 		21CDC4AB1CE91D9B009D2638 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
@@ -92,7 +111,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2199924B1DC9FAAB000E48FD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				219992451DC9FAAB000E48FD /* ReservationNotification.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release prod.xcconfig"; sourceTree = "<group>"; };
 		17D1760D1D552D42D0C367DB /* Pods-Sunrise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		1FBFF28843B465BB315D9FFC /* Pods-Sunrise.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release prod.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +165,7 @@
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
 		211468B31D1F54240011A944 /* OrdersHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersHeaderView.xib; sourceTree = "<group>"; };
 		211468B51D2088440011A944 /* Cart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
+		2137FA901DCA776800A38A25 /* Sunrise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunrise.entitlements; sourceTree = "<group>"; };
 		2147E6601D07860100EB21AE /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModelSpec.swift; sourceTree = "<group>"; };
 		215C4F691CF286D100A99790 /* product-projection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "product-projection.json"; sourceTree = "<group>"; };
@@ -142,6 +177,13 @@
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewViewController.swift; sourceTree = "<group>"; };
 		218988241CED0C78006E7757 /* ProductDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
+		219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReservationNotification.entitlements; sourceTree = "<group>"; };
+		219992371DC9FAAB000E48FD /* ReservationNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReservationNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		219992381DC9FAAB000E48FD /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		2199923D1DC9FAAB000E48FD /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		219992401DC9FAAB000E48FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		219992421DC9FAAB000E48FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		219B2EBB1D1B7348004579DD /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
 		21A6B4671D6330DA008BA95C /* ReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +210,9 @@
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug staging.xcconfig"; sourceTree = "<group>"; };
+		461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReservationNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE03700D7B2698868A8CE86 /* Pods-SunriseTests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release prod.xcconfig"; sourceTree = "<group>"; };
+		535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5BE041370A3BD096E67F065F /* Pods-Sunrise.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release prod.xcconfig"; sourceTree = "<group>"; };
 		6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release staging.xcconfig"; sourceTree = "<group>"; };
@@ -179,13 +223,25 @@
 		8F5E8D230203D5E6313ED72F /* Pods-SunriseTests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release staging.xcconfig"; sourceTree = "<group>"; };
 		8F8E56E096FD3BFA07010301 /* Pods-SunriseTests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug staging.xcconfig"; sourceTree = "<group>"; };
 		A8FC8B040717F832768D583E /* Pods-SunriseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A91DC6065974B510D4BD15D2 /* Pods-SunriseTests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug prod.xcconfig"; sourceTree = "<group>"; };
+		AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release staging.xcconfig"; sourceTree = "<group>"; };
 		E63198A54D318A4B3544D108 /* Pods-SunriseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6C180AA6EF954F701F486C2 /* Pods-SunriseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		219992341DC9FAAB000E48FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2199923B1DC9FAAB000E48FD /* UserNotificationsUI.framework in Frameworks */,
+				219992391DC9FAAB000E48FD /* UserNotifications.framework in Frameworks */,
+				D78C254EAC84E3853FB82002 /* Pods_ReservationNotification.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		21CDC4911CE91D9B009D2638 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +396,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		2199923C1DC9FAAB000E48FD /* ReservationNotification */ = {
+			isa = PBXGroup;
+			children = (
+				219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */,
+				2199923D1DC9FAAB000E48FD /* NotificationViewController.swift */,
+				2199923F1DC9FAAB000E48FD /* MainInterface.storyboard */,
+				219992421DC9FAAB000E48FD /* Info.plist */,
+			);
+			path = ReservationNotification;
+			sourceTree = "<group>";
+		};
 		21A8EEA91CEC64C0009A8CEB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +424,7 @@
 				21CDC4961CE91D9B009D2638 /* Sunrise */,
 				21CDC4AD1CE91D9B009D2638 /* SunriseTests */,
 				21CDC4B81CE91D9B009D2638 /* SunriseUITests */,
+				2199923C1DC9FAAB000E48FD /* ReservationNotification */,
 				21CDC4951CE91D9B009D2638 /* Products */,
 				35E540A469E198E7F3ACD078 /* Pods */,
 				A5930317FAADB466B9D2E3C1 /* Frameworks */,
@@ -369,6 +437,7 @@
 				21CDC4941CE91D9B009D2638 /* Sunrise.app */,
 				21CDC4AA1CE91D9B009D2638 /* SunriseTests.xctest */,
 				21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */,
+				219992371DC9FAAB000E48FD /* ReservationNotification.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,6 +445,7 @@
 		21CDC4961CE91D9B009D2638 /* Sunrise */ = {
 			isa = PBXGroup;
 			children = (
+				2137FA901DCA776800A38A25 /* Sunrise.entitlements */,
 				21A8EEA91CEC64C0009A8CEB /* Supporting Files */,
 				21CDC4971CE91D9B009D2638 /* AppDelegate.swift */,
 				21CDC4A01CE91D9B009D2638 /* Assets.xcassets */,
@@ -431,6 +501,10 @@
 				1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */,
 				5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */,
 				6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */,
+				535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */,
+				96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */,
+				0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */,
+				AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -441,6 +515,9 @@
 				9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */,
 				39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */,
 				7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */,
+				219992381DC9FAAB000E48FD /* UserNotifications.framework */,
+				2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */,
+				461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -448,6 +525,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		219992361DC9FAAB000E48FD /* ReservationNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 219992461DC9FAAB000E48FD /* Build configuration list for PBXNativeTarget "ReservationNotification" */;
+			buildPhases = (
+				4D60F9E0DF7AF87D33414337 /* [CP] Check Pods Manifest.lock */,
+				219992331DC9FAAB000E48FD /* Sources */,
+				219992341DC9FAAB000E48FD /* Frameworks */,
+				219992351DC9FAAB000E48FD /* Resources */,
+				456C84DA3E12DE9C243E0A7D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReservationNotification;
+			productName = ReservationNotification;
+			productReference = 219992371DC9FAAB000E48FD /* ReservationNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		21CDC4931CE91D9B009D2638 /* Sunrise */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21CDC4BE1CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "Sunrise" */;
@@ -458,10 +554,12 @@
 				21CDC4921CE91D9B009D2638 /* Resources */,
 				C51C4638AF67D6B89CE5675E /* [CP] Embed Pods Frameworks */,
 				65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */,
+				2199924B1DC9FAAB000E48FD /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				219992441DC9FAAB000E48FD /* PBXTargetDependency */,
 			);
 			name = Sunrise;
 			productName = Sunrise;
@@ -516,15 +614,31 @@
 		21CDC48C1CE91D9B009D2638 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Commercetools;
 				TargetAttributes = {
+					219992361DC9FAAB000E48FD = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = H2968B9CHK;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
 					21CDC4931CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = H2968B9CHK;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -558,11 +672,22 @@
 				21CDC4931CE91D9B009D2638 /* Sunrise */,
 				21CDC4A91CE91D9B009D2638 /* SunriseTests */,
 				21CDC4B41CE91D9B009D2638 /* SunriseUITests */,
+				219992361DC9FAAB000E48FD /* ReservationNotification */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		219992351DC9FAAB000E48FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21A921281DCAC77900134125 /* CommercetoolsStagingConfig.plist in Resources */,
+				21A921271DCAC77500134125 /* CommercetoolsProdConfig.plist in Resources */,
+				219992411DC9FAAB000E48FD /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		21CDC4921CE91D9B009D2638 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -615,6 +740,36 @@
 			showEnvVarsInLog = 0;
 		};
 		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		456C84DA3E12DE9C243E0A7D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D60F9E0DF7AF87D33414337 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -737,6 +892,18 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		219992331DC9FAAB000E48FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				219657761DCB9B81002C7108 /* Dictionary+LocalizedString.swift in Sources */,
+				219657771DCB9BA2002C7108 /* Channel.swift in Sources */,
+				219657751DCB9B38002C7108 /* Money.swift in Sources */,
+				2199923E1DC9FAAB000E48FD /* NotificationViewController.swift in Sources */,
+				219657741DCB9AA4002C7108 /* ReservationViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		21CDC4901CE91D9B009D2638 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -812,6 +979,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		219992441DC9FAAB000E48FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 219992361DC9FAAB000E48FD /* ReservationNotification */;
+			targetProxy = 219992431DC9FAAB000E48FD /* PBXContainerItemProxy */;
+		};
 		21CDC4AC1CE91D9B009D2638 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 21CDC4931CE91D9B009D2638 /* Sunrise */;
@@ -824,7 +996,240 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		2199923F1DC9FAAB000E48FD /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				219992401DC9FAAB000E48FD /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		219992471DC9FAAB000E48FD /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = ReservationNotification/ReservationNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ReservationNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.ReservationNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = "Debug Prod";
+		};
+		219992481DC9FAAB000E48FD /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = ReservationNotification/ReservationNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ReservationNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.ReservationNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = "Debug Staging";
+		};
+		219992491DC9FAAB000E48FD /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = ReservationNotification/ReservationNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ReservationNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.ReservationNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Prod";
+		};
+		2199924A1DC9FAAB000E48FD /* Release Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = ReservationNotification/ReservationNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = ReservationNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.ReservationNotification;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Staging";
+		};
 		21A8EEA11CEC614C009A8CEB /* Debug Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -865,7 +1270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D STAGING";
@@ -881,11 +1286,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sunrise/Sunrise.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H2968B9CHK;
 				INFOPLIST_FILE = Sunrise/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -958,7 +1364,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D STAGING";
 				SDKROOT = iphoneos;
@@ -974,11 +1380,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sunrise/Sunrise.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H2968B9CHK;
 				INFOPLIST_FILE = Sunrise/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1057,7 +1464,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D PROD";
@@ -1101,7 +1508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D PROD";
 				SDKROOT = iphoneos;
@@ -1117,11 +1524,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sunrise/Sunrise.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H2968B9CHK;
 				INFOPLIST_FILE = Sunrise/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1137,11 +1545,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sunrise/Sunrise.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = H2968B9CHK;
 				INFOPLIST_FILE = Sunrise/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1212,6 +1621,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		219992461DC9FAAB000E48FD /* Build configuration list for PBXNativeTarget "ReservationNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				219992471DC9FAAB000E48FD /* Debug Prod */,
+				219992481DC9FAAB000E48FD /* Debug Staging */,
+				219992491DC9FAAB000E48FD /* Release Prod */,
+				2199924A1DC9FAAB000E48FD /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Prod";
+		};
 		21CDC48F1CE91D9B009D2638 /* Build configuration list for PBXProject "Sunrise" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
