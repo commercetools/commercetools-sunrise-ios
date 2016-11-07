@@ -10,7 +10,13 @@ import IQKeyboardManagerSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+
     var window: UIWindow?
+
+    var deviceToken: String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppRouting.setupInitiallyActiveTab()
@@ -55,6 +61,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppRouting.showReservationWithId(reservationId)
         }
     }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        deviceToken = nil
+        saveDeviceTokenForCurrentCustomer()
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        self.deviceToken = deviceToken
+        saveDeviceTokenForCurrentCustomer()
+    }
+    
+    func saveDeviceTokenForCurrentCustomer() {
+        if Commercetools.authState == .customerToken {
+            Customer.profile { result in
+                if let customerVersion = result.model?.version, result.isSuccess {
+                    var options = SetCustomTypeOptions()
+                    if let deviceToken = self.deviceToken {
+                        var type = ResourceIdentifier()
+                        type.key = "iOSUser"
+                        type.typeId = "type"
+                        options.type = type
+                        options.fields = ["apnsToken": deviceToken]
+                    }
+                    let updateActions = UpdateActions<CustomerUpdateAction>(version: customerVersion, actions: [.setCustomType(options: options)])
+                    Customer.update(actions: updateActions) { result in
+                        if result.isFailure {
+                            result.errors?.forEach { debugPrint($0) }
+                        }
+                    }
+                } else if result.isFailure {
+                    result.errors?.forEach { debugPrint($0) }
+                }
+            }
+        }
+    }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -66,5 +108,4 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert])
     }
-    
 }

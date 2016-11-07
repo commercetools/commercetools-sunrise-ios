@@ -146,14 +146,8 @@ class OrdersViewController: UIViewController {
     // MARK: - Logout action
 
     @IBAction func logout(_ sender: AnyObject) {
-        // Temporary perform login in view controller, refactor once orders are in place
-        UserDefaults.standard.set(nil, forKey: kLoggedInUsername)
-        UserDefaults.standard.synchronize()
-        Commercetools.logoutCustomer()
-        AppRouting.setupMyAccountRootViewController()
+        viewModel?.logoutCustomer()
     }
-
-
 }
 
 // MARK: - UITableViewDataSource
