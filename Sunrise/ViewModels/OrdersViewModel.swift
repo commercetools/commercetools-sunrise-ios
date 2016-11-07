@@ -150,8 +150,31 @@ class OrdersViewModel: BaseViewModel {
             }
             self.isLoading.value = false
         })
+        AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
     }
 
+    // MARK: - Customer logout
 
-
+    func logoutCustomer() {
+        isLoading.value = true
+        UserDefaults.standard.set(nil, forKey: kLoggedInUsername)
+        UserDefaults.standard.synchronize()
+        Customer.profile { result in
+            if let customerVersion = result.model?.version, result.isSuccess {
+                let options = SetCustomTypeOptions()
+                let updateActions = UpdateActions<CustomerUpdateAction>(version: customerVersion, actions: [.setCustomType(options: options)])
+                Customer.update(actions: updateActions) { _ in
+                    DispatchQueue.main.async {
+                        Commercetools.logoutCustomer()
+                        AppRouting.setupMyAccountRootViewController()
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    Commercetools.logoutCustomer()
+                    AppRouting.setupMyAccountRootViewController()
+                }
+            }
+        }
+    }
 }
