@@ -80,13 +80,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     var options = SetCustomTypeOptions()
                     if let deviceToken = self.deviceToken {
                         var type = ResourceIdentifier()
-                        type.id = "b1c3dbfb-68b9-407f-ba97-e1e0ef4c2bdb"
+                        type.key = "iOSUser"
                         type.typeId = "type"
                         options.type = type
                         options.fields = ["apnsToken": deviceToken]
                     }
                     let updateActions = UpdateActions<CustomerUpdateAction>(version: customerVersion, actions: [.setCustomType(options: options)])
-                    Customer.update(actions: updateActions) { _ in }
+                    Customer.update(actions: updateActions) { result in
+                        if result.isFailure {
+                            result.errors?.forEach { debugPrint($0) }
+                        }
+                    }
+                } else if result.isFailure {
+                    result.errors?.forEach { debugPrint($0) }
                 }
             }
         }
