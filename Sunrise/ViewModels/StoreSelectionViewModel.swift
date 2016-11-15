@@ -246,7 +246,7 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     private func storeDistance(_ store: Channel) -> Double? {
-        if let userLocation = userLocation.value, let lat = store.latitude, let lon = store.longitude,
+        if let userLocation = userLocation.value, let lat = store.longitude, let lon = store.latitude,
                 let latitude = Double(lat), let longitude = Double(lon) {
             let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
             return userLocation.distance(from: channelLocation)

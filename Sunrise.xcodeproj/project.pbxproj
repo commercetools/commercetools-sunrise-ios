@@ -29,8 +29,10 @@
 		210BE953F6CBCBB4AD333A05 /* ProductProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE19428F36804EF53BFC8 /* ProductProjection.swift */; };
 		210BE9B1CA0CF2B5C27D5392 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
 		210BEA81E77949DA5C0DE293 /* OrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */; };
+		210BEA975FBBC48D6F310F2F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2E04B75AFE85C227E9C /* API.swift */; };
 		210BEB6685337570C6EA3287 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE6CC28A92953A6E02564 /* Customer.swift */; };
 		210BEBCB6460A6C110A6DF66 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE8917F4B6AB6DDA9FFBA /* ScannerViewModel.swift */; };
+		210BECFF01CB9EF75C657204 /* ProductOverview.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 210BEE980C8EFDDEA83AA25A /* ProductOverview.graphql */; };
 		210BED60B9D7ED7035A347E4 /* OrderOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */; };
 		210BEDB86468757333A2BF3D /* SignalProducerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECFF754F592E22066C90 /* SignalProducerUtils.swift */; };
 		210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */; };
@@ -126,7 +128,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0816D9923B015D20E6BA14A2 /* Pods-SunriseUITests.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debugstaging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debugstaging.xcconfig"; sourceTree = "<group>"; };
+		0EA9EE665FB3DE6486E446B7 /* Pods-ReservationNotification.releasestaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.releasestaging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.releasestaging.xcconfig"; sourceTree = "<group>"; };
 		0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release prod.xcconfig"; sourceTree = "<group>"; };
+		16C873E83718CAFC43070D98 /* Pods-ReservationNotification.debugprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debugprod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debugprod.xcconfig"; sourceTree = "<group>"; };
 		17D1760D1D552D42D0C367DB /* Pods-Sunrise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		1FBFF28843B465BB315D9FFC /* Pods-Sunrise.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release prod.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 		210BE0E296C4DD7568F84DAE /* Money.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		210BE19428F36804EF53BFC8 /* ProductProjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductProjection.swift; sourceTree = "<group>"; };
 		210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		210BE2E04B75AFE85C227E9C /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewBinding.swift; sourceTree = "<group>"; };
 		210BE439FAD7F1908A054A18 /* ProductVariant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductVariant.swift; sourceTree = "<group>"; };
 		210BE49252E7EBF7CB02D732 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 		210BECFF754F592E22066C90 /* SignalProducerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalProducerUtils.swift; sourceTree = "<group>"; };
 		210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModel.swift; sourceTree = "<group>"; };
 		210BEDBDA0B3DD0E3AA22401 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		210BEE980C8EFDDEA83AA25A /* ProductOverview.graphql */ = {isa = PBXFileReference; lastKnownFileType = file.graphql; path = ProductOverview.graphql; sourceTree = "<group>"; };
 		210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
 		210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOverviewViewController.swift; sourceTree = "<group>"; };
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
@@ -207,19 +214,27 @@
 		21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseUITests.swift; sourceTree = "<group>"; };
 		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModelSpec.swift; sourceTree = "<group>"; };
+		2907E3AA549F6D6B8D0E6B96 /* Pods-ReservationNotification.releaseprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.releaseprod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.releaseprod.xcconfig"; sourceTree = "<group>"; };
+		2A33D89E162D8C1E5398CF04 /* Pods-Sunrise.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debugstaging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debugstaging.xcconfig"; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug staging.xcconfig"; sourceTree = "<group>"; };
+		3B9230361E575BDEEA622264 /* Pods-SunriseTests.releaseprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.releaseprod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.releaseprod.xcconfig"; sourceTree = "<group>"; };
+		4277E29887299CDCB279C84D /* Pods-ReservationNotification.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debugstaging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debugstaging.xcconfig"; sourceTree = "<group>"; };
 		461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReservationNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE03700D7B2698868A8CE86 /* Pods-SunriseTests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release prod.xcconfig"; sourceTree = "<group>"; };
 		535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5BE041370A3BD096E67F065F /* Pods-Sunrise.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release prod.xcconfig"; sourceTree = "<group>"; };
+		637B08C4359CE7CC13280924 /* Pods-Sunrise.releasestaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.releasestaging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.releasestaging.xcconfig"; sourceTree = "<group>"; };
 		6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release staging.xcconfig"; sourceTree = "<group>"; };
 		6B8E12D52C3FC7E6B9174358 /* Pods-Sunrise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release.xcconfig"; sourceTree = "<group>"; };
+		6F85D18F8E5FC134B6C22155 /* Pods-Sunrise.debugprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debugprod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debugprod.xcconfig"; sourceTree = "<group>"; };
 		75C04D6F02B1AC2F2C0AC1EB /* Pods-SunriseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EBF3D893BE6EA7D5A5293CB /* Pods-Sunrise.releaseprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.releaseprod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.releaseprod.xcconfig"; sourceTree = "<group>"; };
 		8080A3FE3BC2FE4CAC9A3A23 /* Pods-SunriseUITests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug prod.xcconfig"; sourceTree = "<group>"; };
+		84E8F9220B44C4C58BC737C0 /* Pods-SunriseUITests.releaseprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.releaseprod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.releaseprod.xcconfig"; sourceTree = "<group>"; };
 		8F5E8D230203D5E6313ED72F /* Pods-SunriseTests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release staging.xcconfig"; sourceTree = "<group>"; };
 		8F8E56E096FD3BFA07010301 /* Pods-SunriseTests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,8 +242,13 @@
 		A8FC8B040717F832768D583E /* Pods-SunriseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A91DC6065974B510D4BD15D2 /* Pods-SunriseTests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug prod.xcconfig"; sourceTree = "<group>"; };
 		AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release staging.xcconfig"; sourceTree = "<group>"; };
+		AFF58BCF02C8F53920E9B937 /* Pods-SunriseTests.debugprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debugprod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debugprod.xcconfig"; sourceTree = "<group>"; };
+		B0D2BDAE914336D2DE124697 /* Pods-SunriseTests.debugstaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debugstaging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debugstaging.xcconfig"; sourceTree = "<group>"; };
+		B1C9D7609EAEF8607E043B07 /* Pods-SunriseUITests.releasestaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.releasestaging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.releasestaging.xcconfig"; sourceTree = "<group>"; };
+		B529FB4634FA226D0A39B555 /* Pods-SunriseUITests.debugprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debugprod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debugprod.xcconfig"; sourceTree = "<group>"; };
 		E63198A54D318A4B3544D108 /* Pods-SunriseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6C180AA6EF954F701F486C2 /* Pods-SunriseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FBC32DBA4D82D9D4B9CE6156 /* Pods-SunriseTests.releasestaging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.releasestaging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.releasestaging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,8 +300,18 @@
 				210BE6CC28A92953A6E02564 /* Customer.swift */,
 				210BEDBDA0B3DD0E3AA22401 /* Order.swift */,
 				210BEA09145F59DD74FA5B99 /* LineItem.swift */,
+				210BE1C38D52DAAD453CDEA7 /* Queries */,
+				210BE2E04B75AFE85C227E9C /* API.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		210BE1C38D52DAAD453CDEA7 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				210BEE980C8EFDDEA83AA25A /* ProductOverview.graphql */,
+			);
+			path = Queries;
 			sourceTree = "<group>";
 		};
 		210BE28B27D82FD9F37A0247 /* TestData */ = {
@@ -505,6 +535,22 @@
 				96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */,
 				0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */,
 				AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */,
+				16C873E83718CAFC43070D98 /* Pods-ReservationNotification.debugprod.xcconfig */,
+				4277E29887299CDCB279C84D /* Pods-ReservationNotification.debugstaging.xcconfig */,
+				2907E3AA549F6D6B8D0E6B96 /* Pods-ReservationNotification.releaseprod.xcconfig */,
+				0EA9EE665FB3DE6486E446B7 /* Pods-ReservationNotification.releasestaging.xcconfig */,
+				6F85D18F8E5FC134B6C22155 /* Pods-Sunrise.debugprod.xcconfig */,
+				2A33D89E162D8C1E5398CF04 /* Pods-Sunrise.debugstaging.xcconfig */,
+				7EBF3D893BE6EA7D5A5293CB /* Pods-Sunrise.releaseprod.xcconfig */,
+				637B08C4359CE7CC13280924 /* Pods-Sunrise.releasestaging.xcconfig */,
+				AFF58BCF02C8F53920E9B937 /* Pods-SunriseTests.debugprod.xcconfig */,
+				B0D2BDAE914336D2DE124697 /* Pods-SunriseTests.debugstaging.xcconfig */,
+				3B9230361E575BDEEA622264 /* Pods-SunriseTests.releaseprod.xcconfig */,
+				FBC32DBA4D82D9D4B9CE6156 /* Pods-SunriseTests.releasestaging.xcconfig */,
+				B529FB4634FA226D0A39B555 /* Pods-SunriseUITests.debugprod.xcconfig */,
+				0816D9923B015D20E6BA14A2 /* Pods-SunriseUITests.debugstaging.xcconfig */,
+				84E8F9220B44C4C58BC737C0 /* Pods-SunriseUITests.releaseprod.xcconfig */,
+				B1C9D7609EAEF8607E043B07 /* Pods-SunriseUITests.releasestaging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -549,6 +595,7 @@
 			buildConfigurationList = 21CDC4BE1CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "Sunrise" */;
 			buildPhases = (
 				2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */,
+				21D850031DD93585009622EB /* Generate GraphQL API */,
 				21CDC4901CE91D9B009D2638 /* Sources */,
 				21CDC4911CE91D9B009D2638 /* Frameworks */,
 				21CDC4921CE91D9B009D2638 /* Resources */,
@@ -701,6 +748,7 @@
 				216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */,
 				2168A02B1D1A9F0C00C244D8 /* Account.storyboard in Resources */,
 				218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */,
+				210BECFF01CB9EF75C657204 /* ProductOverview.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +786,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		21D850031DD93585009622EB /* Generate GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate GraphQL API";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APOLLO_FRAMEWORK_PATH=$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd ${SRCROOT}/${TARGET_NAME}\n#$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-codegen.sh generate $(find . -name '*.graphql') --schema schema.json --output Models/API.swift";
 		};
 		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -951,6 +1013,7 @@
 				210BEB6685337570C6EA3287 /* Customer.swift in Sources */,
 				210BE9B1CA0CF2B5C27D5392 /* Order.swift in Sources */,
 				210BEE9AF8567A17A425CEC1 /* LineItem.swift in Sources */,
+				210BEA975FBBC48D6F310F2F /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,9 +1071,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		219992471DC9FAAB000E48FD /* Debug Prod */ = {
+		219992471DC9FAAB000E48FD /* DebugProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */;
+			baseConfigurationReference = 16C873E83718CAFC43070D98 /* Pods-ReservationNotification.debugprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1065,11 +1128,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug Prod";
+			name = DebugProd;
 		};
-		219992481DC9FAAB000E48FD /* Debug Staging */ = {
+		219992481DC9FAAB000E48FD /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */;
+			baseConfigurationReference = 4277E29887299CDCB279C84D /* Pods-ReservationNotification.debugstaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1124,11 +1187,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug Staging";
+			name = DebugStaging;
 		};
-		219992491DC9FAAB000E48FD /* Release Prod */ = {
+		219992491DC9FAAB000E48FD /* ReleaseProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */;
+			baseConfigurationReference = 2907E3AA549F6D6B8D0E6B96 /* Pods-ReservationNotification.releaseprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1176,11 +1239,11 @@
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Prod";
+			name = ReleaseProd;
 		};
-		2199924A1DC9FAAB000E48FD /* Release Staging */ = {
+		2199924A1DC9FAAB000E48FD /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */;
+			baseConfigurationReference = 0EA9EE665FB3DE6486E446B7 /* Pods-ReservationNotification.releasestaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1228,9 +1291,9 @@
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Staging";
+			name = ReleaseStaging;
 		};
-		21A8EEA11CEC614C009A8CEB /* Debug Staging */ = {
+		21A8EEA11CEC614C009A8CEB /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1278,11 +1341,11 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = "Debug Staging";
+			name = DebugStaging;
 		};
-		21A8EEA21CEC614C009A8CEB /* Debug Staging */ = {
+		21A8EEA21CEC614C009A8CEB /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */;
+			baseConfigurationReference = 2A33D89E162D8C1E5398CF04 /* Pods-Sunrise.debugstaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1299,11 +1362,11 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug Staging";
+			name = DebugStaging;
 		};
-		21A8EEA31CEC614C009A8CEB /* Debug Staging */ = {
+		21A8EEA31CEC614C009A8CEB /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F8E56E096FD3BFA07010301 /* Pods-SunriseTests.debug staging.xcconfig */;
+			baseConfigurationReference = B0D2BDAE914336D2DE124697 /* Pods-SunriseTests.debugstaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1314,11 +1377,11 @@
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
-			name = "Debug Staging";
+			name = DebugStaging;
 		};
-		21A8EEA41CEC614C009A8CEB /* Debug Staging */ = {
+		21A8EEA41CEC614C009A8CEB /* DebugStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */;
+			baseConfigurationReference = 0816D9923B015D20E6BA14A2 /* Pods-SunriseUITests.debugstaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SunriseUITests/Info.plist;
@@ -1328,9 +1391,9 @@
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
-			name = "Debug Staging";
+			name = DebugStaging;
 		};
-		21A8EEA51CEC615A009A8CEB /* Release Staging */ = {
+		21A8EEA51CEC615A009A8CEB /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1372,11 +1435,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Staging";
+			name = ReleaseStaging;
 		};
-		21A8EEA61CEC615A009A8CEB /* Release Staging */ = {
+		21A8EEA61CEC615A009A8CEB /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */;
+			baseConfigurationReference = 637B08C4359CE7CC13280924 /* Pods-Sunrise.releasestaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1393,11 +1456,11 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Release Staging";
+			name = ReleaseStaging;
 		};
-		21A8EEA71CEC615A009A8CEB /* Release Staging */ = {
+		21A8EEA71CEC615A009A8CEB /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F5E8D230203D5E6313ED72F /* Pods-SunriseTests.release staging.xcconfig */;
+			baseConfigurationReference = FBC32DBA4D82D9D4B9CE6156 /* Pods-SunriseTests.releasestaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1408,11 +1471,11 @@
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
-			name = "Release Staging";
+			name = ReleaseStaging;
 		};
-		21A8EEA81CEC615A009A8CEB /* Release Staging */ = {
+		21A8EEA81CEC615A009A8CEB /* ReleaseStaging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */;
+			baseConfigurationReference = B1C9D7609EAEF8607E043B07 /* Pods-SunriseUITests.releasestaging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SunriseUITests/Info.plist;
@@ -1422,9 +1485,9 @@
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
-			name = "Release Staging";
+			name = ReleaseStaging;
 		};
-		21CDC4BC1CE91D9B009D2638 /* Debug Prod */ = {
+		21CDC4BC1CE91D9B009D2638 /* DebugProd */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1472,9 +1535,9 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = "Debug Prod";
+			name = DebugProd;
 		};
-		21CDC4BD1CE91D9B009D2638 /* Release Prod */ = {
+		21CDC4BD1CE91D9B009D2638 /* ReleaseProd */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1516,11 +1579,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Prod";
+			name = ReleaseProd;
 		};
-		21CDC4BF1CE91D9B009D2638 /* Debug Prod */ = {
+		21CDC4BF1CE91D9B009D2638 /* DebugProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BE041370A3BD096E67F065F /* Pods-Sunrise.debug prod.xcconfig */;
+			baseConfigurationReference = 6F85D18F8E5FC134B6C22155 /* Pods-Sunrise.debugprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1537,11 +1600,11 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug Prod";
+			name = DebugProd;
 		};
-		21CDC4C01CE91D9B009D2638 /* Release Prod */ = {
+		21CDC4C01CE91D9B009D2638 /* ReleaseProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FBFF28843B465BB315D9FFC /* Pods-Sunrise.release prod.xcconfig */;
+			baseConfigurationReference = 7EBF3D893BE6EA7D5A5293CB /* Pods-Sunrise.releaseprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1558,11 +1621,11 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Sunrise/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Release Prod";
+			name = ReleaseProd;
 		};
-		21CDC4C21CE91D9B009D2638 /* Debug Prod */ = {
+		21CDC4C21CE91D9B009D2638 /* DebugProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A91DC6065974B510D4BD15D2 /* Pods-SunriseTests.debug prod.xcconfig */;
+			baseConfigurationReference = AFF58BCF02C8F53920E9B937 /* Pods-SunriseTests.debugprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1573,11 +1636,11 @@
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
-			name = "Debug Prod";
+			name = DebugProd;
 		};
-		21CDC4C31CE91D9B009D2638 /* Release Prod */ = {
+		21CDC4C31CE91D9B009D2638 /* ReleaseProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DE03700D7B2698868A8CE86 /* Pods-SunriseTests.release prod.xcconfig */;
+			baseConfigurationReference = 3B9230361E575BDEEA622264 /* Pods-SunriseTests.releaseprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1588,11 +1651,11 @@
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
 			};
-			name = "Release Prod";
+			name = ReleaseProd;
 		};
-		21CDC4C51CE91D9B009D2638 /* Debug Prod */ = {
+		21CDC4C51CE91D9B009D2638 /* DebugProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8080A3FE3BC2FE4CAC9A3A23 /* Pods-SunriseUITests.debug prod.xcconfig */;
+			baseConfigurationReference = B529FB4634FA226D0A39B555 /* Pods-SunriseUITests.debugprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SunriseUITests/Info.plist;
@@ -1602,11 +1665,11 @@
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
-			name = "Debug Prod";
+			name = DebugProd;
 		};
-		21CDC4C61CE91D9B009D2638 /* Release Prod */ = {
+		21CDC4C61CE91D9B009D2638 /* ReleaseProd */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */;
+			baseConfigurationReference = 84E8F9220B44C4C58BC737C0 /* Pods-SunriseUITests.releaseprod.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SunriseUITests/Info.plist;
@@ -1616,7 +1679,7 @@
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Sunrise;
 			};
-			name = "Release Prod";
+			name = ReleaseProd;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1624,57 +1687,57 @@
 		219992461DC9FAAB000E48FD /* Build configuration list for PBXNativeTarget "ReservationNotification" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				219992471DC9FAAB000E48FD /* Debug Prod */,
-				219992481DC9FAAB000E48FD /* Debug Staging */,
-				219992491DC9FAAB000E48FD /* Release Prod */,
-				2199924A1DC9FAAB000E48FD /* Release Staging */,
+				219992471DC9FAAB000E48FD /* DebugProd */,
+				219992481DC9FAAB000E48FD /* DebugStaging */,
+				219992491DC9FAAB000E48FD /* ReleaseProd */,
+				2199924A1DC9FAAB000E48FD /* ReleaseStaging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Prod";
+			defaultConfigurationName = ReleaseProd;
 		};
 		21CDC48F1CE91D9B009D2638 /* Build configuration list for PBXProject "Sunrise" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21CDC4BC1CE91D9B009D2638 /* Debug Prod */,
-				21A8EEA11CEC614C009A8CEB /* Debug Staging */,
-				21CDC4BD1CE91D9B009D2638 /* Release Prod */,
-				21A8EEA51CEC615A009A8CEB /* Release Staging */,
+				21CDC4BC1CE91D9B009D2638 /* DebugProd */,
+				21A8EEA11CEC614C009A8CEB /* DebugStaging */,
+				21CDC4BD1CE91D9B009D2638 /* ReleaseProd */,
+				21A8EEA51CEC615A009A8CEB /* ReleaseStaging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Prod";
+			defaultConfigurationName = ReleaseProd;
 		};
 		21CDC4BE1CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "Sunrise" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21CDC4BF1CE91D9B009D2638 /* Debug Prod */,
-				21A8EEA21CEC614C009A8CEB /* Debug Staging */,
-				21CDC4C01CE91D9B009D2638 /* Release Prod */,
-				21A8EEA61CEC615A009A8CEB /* Release Staging */,
+				21CDC4BF1CE91D9B009D2638 /* DebugProd */,
+				21A8EEA21CEC614C009A8CEB /* DebugStaging */,
+				21CDC4C01CE91D9B009D2638 /* ReleaseProd */,
+				21A8EEA61CEC615A009A8CEB /* ReleaseStaging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Prod";
+			defaultConfigurationName = ReleaseProd;
 		};
 		21CDC4C11CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "SunriseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21CDC4C21CE91D9B009D2638 /* Debug Prod */,
-				21A8EEA31CEC614C009A8CEB /* Debug Staging */,
-				21CDC4C31CE91D9B009D2638 /* Release Prod */,
-				21A8EEA71CEC615A009A8CEB /* Release Staging */,
+				21CDC4C21CE91D9B009D2638 /* DebugProd */,
+				21A8EEA31CEC614C009A8CEB /* DebugStaging */,
+				21CDC4C31CE91D9B009D2638 /* ReleaseProd */,
+				21A8EEA71CEC615A009A8CEB /* ReleaseStaging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Prod";
+			defaultConfigurationName = ReleaseProd;
 		};
 		21CDC4C41CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "SunriseUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21CDC4C51CE91D9B009D2638 /* Debug Prod */,
-				21A8EEA41CEC614C009A8CEB /* Debug Staging */,
-				21CDC4C61CE91D9B009D2638 /* Release Prod */,
-				21A8EEA81CEC615A009A8CEB /* Release Staging */,
+				21CDC4C51CE91D9B009D2638 /* DebugProd */,
+				21A8EEA41CEC614C009A8CEB /* DebugStaging */,
+				21CDC4C61CE91D9B009D2638 /* ReleaseProd */,
+				21A8EEA81CEC615A009A8CEB /* ReleaseStaging */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Prod";
+			defaultConfigurationName = ReleaseProd;
 		};
 /* End XCConfigurationList section */
 	};

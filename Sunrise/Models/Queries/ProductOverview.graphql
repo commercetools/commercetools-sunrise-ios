@@ -1,0 +1,46 @@
+query ProductOverview($pageSize: Int, $offset: Int) {
+  products(sort: "createdAt desc", limit: $pageSize, offset: $offset) {
+    results {
+      masterData {
+        current {
+          masterVariant {
+            ...VariantDetails
+          }
+          variants {
+            ...VariantDetails
+          }
+          name(locale: "en")
+        }
+      }
+    }
+  }
+}
+
+fragment VariantDetails on ProductVariant {
+  prices {
+    ...PriceDetails
+  }
+}
+
+fragment MoneyDetails on Money {
+  currencyCode
+  centAmount
+}
+
+fragment PriceDetails on ProductPrice {
+  value {
+    ...MoneyDetails
+  }
+  country
+  customerGroup {
+    typeId
+  }
+  channel {
+    typeId
+  }
+  discounted {
+    value {
+      ...MoneyDetails
+    }
+  }
+}

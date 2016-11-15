@@ -5,7 +5,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 def common_pods
-  pod 'Commercetools'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => '7ff1981d398fa48f75f771d30735a0efb4d5ca75'
   pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
   pod 'ReactiveObjC'
 end
@@ -17,6 +17,7 @@ target 'Sunrise' do
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
   pod 'DZNEmptyDataSet'
+  pod 'Apollo'
 end
 
 target 'ReservationNotification' do

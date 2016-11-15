@@ -6,6 +6,7 @@ import UIKit
 import UserNotifications
 import Commercetools
 import IQKeyboardManagerSwift
+import Apollo
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var deviceToken: String?
+    
+    var apolloClient: ApolloClient?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppRouting.setupInitiallyActiveTab()
@@ -30,6 +33,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let configuration = Config(path: configPath) {
             Commercetools.config = configuration
+            
+            AuthManager.sharedInstance.token { token, _ in
+                if let token = token {
+                    let config = URLSessionConfiguration.default
+                    config.httpAdditionalHeaders = ["Authorization": "Bearer \(token)"]
+                    let url = URL(string: "\(configuration.apiUrl!)\(configuration.projectKey!)/graphql")!
+                    self.apolloClient = ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: config))
+                }
+            }
 
         } else {
             // Inform user about the configuration error
