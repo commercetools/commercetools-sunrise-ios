@@ -157,7 +157,7 @@ class OrdersViewModel: BaseViewModel {
 
     func logoutCustomer() {
         isLoading.value = true
-        UserDefaults.standard.set(nil, forKey: kLoggedInUsername)
+        UserDefaults.standard.removeObject(forKey: kLoggedInUsername)
         UserDefaults.standard.synchronize()
         Customer.profile { result in
             if let customerVersion = result.model?.version, result.isSuccess {
