@@ -77,7 +77,7 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: Lifecycle
 
-    override private init() {
+    override init() {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 

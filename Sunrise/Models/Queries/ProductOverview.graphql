@@ -17,6 +17,9 @@ query ProductOverview($pageSize: Int, $offset: Int) {
 }
 
 fragment VariantDetails on ProductVariant {
+  images {
+    url
+  }
   prices {
     ...PriceDetails
   }
@@ -38,6 +41,8 @@ fragment PriceDetails on ProductPrice {
   channel {
     typeId
   }
+  validFrom
+  validUntil
   discounted {
     value {
       ...MoneyDetails

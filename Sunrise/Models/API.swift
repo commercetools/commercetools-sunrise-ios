@@ -117,6 +117,9 @@ public final class ProductOverviewQuery: GraphQLQuery {
 public struct VariantDetails: GraphQLNamedFragment {
   public static let fragmentDefinition =
     "fragment VariantDetails on ProductVariant {" +
+    "  images {" +
+    "    url" +
+    "  }" +
     "  prices {" +
     "    ...PriceDetails" +
     "  }" +
@@ -125,10 +128,21 @@ public struct VariantDetails: GraphQLNamedFragment {
   public static let possibleTypes = ["ProductVariant"]
 
   public let __typename = "ProductVariant"
+  public let images: [Image]
   public let prices: [Price]?
 
   public init(map: GraphQLMap) throws {
+    images = try map.list(forKey: "images")
     prices = try map.list(forKey: "prices")
+  }
+
+  public struct Image: GraphQLMapDecodable {
+    public let __typename = "Image"
+    public let url: String
+
+    public init(map: GraphQLMap) throws {
+      url = try map.value(forKey: "url")
+    }
   }
 
   public struct Price: GraphQLMapDecodable {
@@ -179,6 +193,8 @@ public struct PriceDetails: GraphQLNamedFragment {
     "  channel {" +
     "    typeId" +
     "  }" +
+    "  validFrom" +
+    "  validUntil" +
     "  discounted {" +
     "    value {" +
     "      ...MoneyDetails" +
@@ -193,6 +209,8 @@ public struct PriceDetails: GraphQLNamedFragment {
   public let country: String?
   public let customerGroup: CustomerGroup?
   public let channel: Channel?
+  public let validFrom: String?
+  public let validUntil: String?
   public let discounted: Discounted?
 
   public init(map: GraphQLMap) throws {
@@ -200,6 +218,8 @@ public struct PriceDetails: GraphQLNamedFragment {
     country = try map.optionalValue(forKey: "country")
     customerGroup = try map.optionalValue(forKey: "customerGroup")
     channel = try map.optionalValue(forKey: "channel")
+    validFrom = try map.optionalValue(forKey: "validFrom")
+    validUntil = try map.optionalValue(forKey: "validUntil")
     discounted = try map.optionalValue(forKey: "discounted")
   }
 
