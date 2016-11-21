@@ -79,5 +79,9 @@ class ReservationViewController: UIViewController {
         zipAndCityLabel.text = viewModel.zipAndCityInfo
         openLine1Label.text = viewModel.openLine1Info
     }
+    
+    @IBAction func getDirections(_ sender: UITapGestureRecognizer) {
+        viewModel?.getDirectionObserver.send(value: ())
+    }
 
 }
