@@ -2,12 +2,16 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import Foundation
+import MapKit
 import ReactiveSwift
+import Result
 import CoreLocation
 import Commercetools
 
 class ReservationViewModel {
+
+    // Inputs
+    let getDirectionObserver: Observer<Void, NoError>
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -33,6 +37,9 @@ class ReservationViewModel {
         isLoading = MutableProperty(true)
         storeLocation = MutableProperty(nil)
 
+        let (getDirectionSignal, getDirectionObserver) = Signal<Void, NoError>.pipe()
+        self.getDirectionObserver = getDirectionObserver
+
         productName = order.lineItems?.first?.name?.localizedString
         productImageUrl = order.lineItems?.first?.variant?.images?.first?.url ?? ""
         size = order.lineItems?.first?.variant?.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
@@ -50,6 +57,14 @@ class ReservationViewModel {
         streetAndNumberInfo = order.lineItems?.first?.distributionChannel?.obj?.streetAndNumberInfo
         zipAndCityInfo = order.lineItems?.first?.distributionChannel?.obj?.zipAndCityInfo
         openLine1Info = order.lineItems?.first?.distributionChannel?.obj?.openingTimes
+
+        getDirectionSignal.observeValues { [weak self] in
+            if let location = self?.storeLocation.value {
+                let destination = MKMapItem(placemark: MKPlacemark(coordinate: location.coordinate))
+                destination.name = self?.storeName
+                MKMapItem.openMaps(with: [destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+            }
+        }
 
         geocodeStoreAddress()
     }
