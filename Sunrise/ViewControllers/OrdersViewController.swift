@@ -11,7 +11,10 @@ import Result
 class OrdersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet var myAccountHeader: UIView!
+    @IBOutlet var myPreferencesHeader: UIView!
+    @IBOutlet var myStoreView: UIView!
+    
     var ordersHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
     var reservationsHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
@@ -169,7 +172,7 @@ extension OrdersViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 5
     }
 
 }
@@ -179,13 +182,33 @@ extension OrdersViewController: UITableViewDataSource {
 extension OrdersViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = section == 0 ? ordersHeader : reservationsHeader
-        guard let viewModel = viewModel else { return headerView }
+        switch section {
+            case 0:
+                return myAccountHeader
+            case 3:
+                return myPreferencesHeader
+            case 4:
+                return myStoreView
+            default:
+                let headerView = section == 1 ? ordersHeader : reservationsHeader
+                guard let viewModel = viewModel else { return headerView }
 
-        headerView.title.text = viewModel.headerTitleForSection(section)
-        headerView.tag = section
+                headerView.title.text = viewModel.headerTitleForSection(section)
+                headerView.tag = section
 
-        return headerView
+                return headerView
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 25
+        case 3:
+            return 55
+        default:
+            return 80
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
