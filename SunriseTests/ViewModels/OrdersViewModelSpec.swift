@@ -27,13 +27,13 @@ class OrdersViewModelSpec: QuickSpec {
             }
 
             it("both orders and reservations are collapsed initially") {
-                expect(ordersViewModel.numberOfRowsInSection(0)).to(equal(0))
                 expect(ordersViewModel.numberOfRowsInSection(1)).to(equal(0))
+                expect(ordersViewModel.numberOfRowsInSection(2)).to(equal(0))
             }
 
             it("has the proper title for section headers") {
-                expect(ordersViewModel.headerTitleForSection(0)).to(equal("MY ORDERS"))
-                expect(ordersViewModel.headerTitleForSection(1)).to(equal("MY RESERVATIONS"))
+                expect(ordersViewModel.headerTitleForSection(1)).to(equal("MY ORDERS"))
+                expect(ordersViewModel.headerTitleForSection(2)).to(equal("MY RESERVATIONS"))
             }
 
             context("expanding orders works") {
@@ -42,7 +42,7 @@ class OrdersViewModelSpec: QuickSpec {
                 }
 
                 it("orders are expanded") {
-                    expect(ordersViewModel.numberOfRowsInSection(0)).to(equal(1))
+                    expect(ordersViewModel.numberOfRowsInSection(1)).to(equal(1))
                 }
             }
 
@@ -52,12 +52,12 @@ class OrdersViewModelSpec: QuickSpec {
                 }
 
                 it("reservations are expanded") {
-                    expect(ordersViewModel.numberOfRowsInSection(1)).to(equal(1))
+                    expect(ordersViewModel.numberOfRowsInSection(2)).to(equal(1))
                 }
             }
 
             context("retrieving data for the first order") {
-                let indexPath = IndexPath(row: 0, section: 0)
+                let indexPath = IndexPath(row: 0, section: 1)
 
                 it("order number is properly extracted") {
                     expect(ordersViewModel.orderNumberAtIndexPath(indexPath)).to(equal("ORD123"))
