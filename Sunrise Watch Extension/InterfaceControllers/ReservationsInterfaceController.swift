@@ -1,16 +1,11 @@
 //
-//  InterfaceController.swift
-//  Sunrise Watch Extension
-//
-//  Created by Nikola Mladenovic on 11/25/16.
-//  Copyright © 2016 Commercetools. All rights reserved.
+// Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
 import WatchKit
 import Foundation
 
-
-class InterfaceController: WKInterfaceController {
+class ReservationsInterfaceController: WKInterfaceController {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)

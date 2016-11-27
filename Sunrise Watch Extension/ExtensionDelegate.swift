@@ -1,12 +1,9 @@
 //
-//  ExtensionDelegate.swift
-//  Sunrise Watch Extension
-//
-//  Created by Nikola Mladenovic on 11/25/16.
-//  Copyright © 2016 Commercetools. All rights reserved.
+// Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
 import WatchKit
+import Commercetools
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
