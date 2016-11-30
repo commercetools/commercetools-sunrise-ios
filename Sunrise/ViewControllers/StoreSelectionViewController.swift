@@ -19,7 +19,7 @@ class StoreSelectionViewController: UITableViewController {
         }
     }
 
-    private var reserveAction: CocoaAction?
+    private var reserveAction: CocoaAction<IndexPath>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class StoreSelectionViewController: UITableViewController {
 
         navigationItem.title = viewModel.title
 
-        reserveAction = CocoaAction(viewModel.reserveAction, { indexPath in return indexPath as! IndexPath })
+        reserveAction = CocoaAction(viewModel.reserveAction, { indexPath in return indexPath })
 
         viewModel.isLoading.producer
         .observe(on: UIScheduler())

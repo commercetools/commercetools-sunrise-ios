@@ -29,8 +29,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var registrationPasswordField: UITextField!
     @IBOutlet weak var registrationPasswordConfirmationField: UITextField!
 
-    private var loginAction: CocoaAction?
-    private var registerAction: CocoaAction?
+    private var loginAction: CocoaAction<Void>?
+    private var registerAction: CocoaAction<Void>?
 
     private var viewModel: SignInViewModel? {
         didSet {
@@ -61,14 +61,14 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func logIn(_ sender: UIButton) {
-        loginAction?.execute(nil)
+        loginAction?.execute(())
     }
     
     @IBAction func register(_ sender: UIButton) {
         guard let viewModel = viewModel else { return }
 
         if viewModel.isRegisterInputValid.value {
-            registerAction?.execute(nil)
+            registerAction?.execute(())
         } else {
             let alertController = UIAlertController(
                     title: "Failed",

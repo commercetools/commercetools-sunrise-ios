@@ -43,7 +43,7 @@ class ProductViewController: UITableViewController {
         }
     }
 
-    private var addToCartAction: CocoaAction?
+    private var addToCartAction: CocoaAction<String>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,7 @@ class ProductViewController: UITableViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
-        addToCartAction = CocoaAction(viewModel.addToCartAction, { quantity in return quantity as! String })
+        addToCartAction = CocoaAction(viewModel.addToCartAction, { quantity in return quantity })
 
         viewModel.name.producer
         .observe(on: UIScheduler())

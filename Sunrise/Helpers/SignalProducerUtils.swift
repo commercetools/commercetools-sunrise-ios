@@ -34,57 +34,6 @@ extension SignalProducerProtocol {
 }
 
 extension RACDisposable: Disposable {}
-extension RACScheduler: DateSchedulerProtocol {
-    /// The current date, as determined by this scheduler.
-    public var currentDate: Date {
-        return Date()
-    }
-    
-    /// Schedule an action for immediate execution.
-    ///
-    /// - note: This method calls the Objective-C implementation of `schedule:`
-    ///         method.
-    ///
-    /// - parameters:
-    ///   - action: Closure to perform.
-    ///
-    /// - returns: Disposable that can be used to cancel the work before it
-    ///            begins.
-    @discardableResult
-    public func schedule(_ action: @escaping () -> Void) -> Disposable? {
-        let disposable: RACDisposable = self.schedule(action) // Call the Objective-C implementation
-        return disposable as Disposable?
-    }
-    
-    /// Schedule an action for execution at or after the given date.
-    ///
-    /// - parameters:
-    ///   - date: Starting date.
-    ///   - action: Closure to perform.
-    ///
-    /// - returns: Optional disposable that can be used to cancel the work
-    ///            before it begins.
-    @discardableResult
-    public func schedule(after date: Date, action: @escaping () -> Void) -> Disposable? {
-        return self.after(date, schedule: action)
-    }
-    
-    /// Schedule a recurring action at the given interval, beginning at the
-    /// given start time.
-    ///
-    /// - parameters:
-    ///   - date: Starting date.
-    ///   - repeatingEvery: Repetition interval.
-    ///   - withLeeway: Some delta for repetition.
-    ///   - action: Closure of the action to perform.
-    ///
-    /// - returns: Optional `Disposable` that can be used to cancel the work
-    ///            before it begins.
-    @discardableResult
-    public func schedule(after date: Date, interval: TimeInterval, leeway: TimeInterval, action: @escaping () -> Void) -> Disposable? {
-        return self.after(date, repeatingEvery: interval, withLeeway: leeway, schedule: action)
-    }
-}
 
 extension ImmediateScheduler {
     /// Create `RACScheduler` that performs actions instantly.

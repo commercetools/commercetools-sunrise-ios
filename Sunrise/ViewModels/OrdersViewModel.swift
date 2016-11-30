@@ -47,7 +47,7 @@ class OrdersViewModel: BaseViewModel {
 
         refreshSignal
         .observeValues { [weak self] in
-            self?.retrieveOrders(offset: 0)
+            self?.retrieveOrders()
         }
 
         isLoading.signal.observeValues { [weak self] isLoading in
@@ -136,7 +136,7 @@ class OrdersViewModel: BaseViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func retrieveOrders(offset: UInt, text: String = "") {
+    private func retrieveOrders() {
         isLoading.value = true
 
         Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { result in
