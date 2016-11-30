@@ -152,7 +152,7 @@ class ProductViewController: UITableViewController {
 
         viewModel.attributes.producer
         .observe(on: UIScheduler())
-        .take(until: cell.prepareForReuseSignalProducer())
+        .take(until: cell.reactive.prepareForReuse)
         .startWithValues({ [weak self] attributes in
             if let items = attributes[attributeKey] {
                 cell.attributeField.itemList = items.count > 0 ? items : [""]
@@ -162,16 +162,16 @@ class ProductViewController: UITableViewController {
 
         viewModel.activeAttributes.producer
         .observe(on: UIScheduler())
-        .take(until: cell.prepareForReuseSignalProducer())
+        .take(until: cell.reactive.prepareForReuse)
         .startWithValues { activeAttributes in
             if let activeAttribute = activeAttributes[attributeKey] {
                 cell.attributeField.setSelectedItem(activeAttribute, animated: false)
             }
         }
 
-        cell.attributeField.signalProducer()
-        .take(until: cell.prepareForReuseSignalProducer())
-        .startWithValues { [weak self] attributeValue in
+        cell.attributeField.reactive.continuousTextValues.map({ $0 ?? "" })
+        .take(until: cell.reactive.prepareForReuse)
+        .observeValues { [weak self] attributeValue in
             self?.viewModel?.activeAttributes.value[attributeKey] = attributeValue
         }
     }
@@ -184,7 +184,7 @@ class ProductViewController: UITableViewController {
 
         viewModel.activeAttributes.producer
         .observe(on: UIScheduler())
-        .take(until: cell.prepareForReuseSignalProducer())
+        .take(until: cell.reactive.prepareForReuse)
         .startWithValues { activeAttributes in
             if let activeAttribute = activeAttributes[attributeKey] {
                 cell.attributeValue.text = activeAttribute
