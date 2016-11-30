@@ -62,8 +62,6 @@ class ReservationsInterfaceModel {
     // MARK: - Reservations retrieval
 
     private func retrieveReservations() {
-        
-
         Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { [weak self] result in
             if let orders = result.model?.results, result.isSuccess {
                 let reservations = orders.filter { $0.isReservation == true }
