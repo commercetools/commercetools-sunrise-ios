@@ -17,19 +17,19 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.1</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>48</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>UNNotificationExtensionDefaultContentHidden</key>
-			<string>YES</string>
 			<key>UNNotificationExtensionCategory</key>
 			<string>reservation_confirmation</string>
+			<key>UNNotificationExtensionDefaultContentHidden</key>
+			<string>YES</string>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>1.35</real>
+			<real>1.3500000000000001</real>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>

@@ -1531,7 +1531,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F9DCD91B55201637E84EFE47 /* Pods-Sunrise Watch Extension.debug prod.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1590,7 +1590,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00939BB1A611F998D130DD79 /* Pods-Sunrise Watch Extension.debug staging.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1649,7 +1649,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1701,7 +1701,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F6AE90BED5587F739F4B8F59 /* Pods-Sunrise Watch Extension.release staging.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
