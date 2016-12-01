@@ -42,6 +42,7 @@
 		211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */; };
 		211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211468B31D1F54240011A944 /* OrdersHeaderView.xib */; };
 		211468B61D2088440011A944 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 211468B51D2088440011A944 /* Cart.storyboard */; };
+		211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */; };
 		211D9DEC1DECE3DC00167C23 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
 		211D9DED1DECE49D00167C23 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		211D9DEE1DECE57B00167C23 /* Dictionary+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */; };
@@ -217,6 +218,7 @@
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
 		211468B31D1F54240011A944 /* OrdersHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersHeaderView.xib; sourceTree = "<group>"; };
 		211468B51D2088440011A944 /* Cart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
+		211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationNotificationController.swift; sourceTree = "<group>"; };
 		2137FA901DCA776800A38A25 /* Sunrise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunrise.entitlements; sourceTree = "<group>"; };
 		2147E6601D07860100EB21AE /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModelSpec.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				210BEAA11FFE6C2DE0CB2358 /* ReservationsInterfaceController.swift */,
+				211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */,
 			);
 			path = InterfaceControllers;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 				210BE15EB86DF0306282C27C /* ReservationsInterfaceModel.swift in Sources */,
 				210BEE08B7F4742032ED3B29 /* ReservationRowController.swift in Sources */,
 				211D9DEE1DECE57B00167C23 /* Dictionary+LocalizedString.swift in Sources */,
+				211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

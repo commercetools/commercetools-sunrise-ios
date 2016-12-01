@@ -91,5 +91,40 @@
             </objects>
             <point key="canvasLocation" x="83.692307692307693" y="101.12820512820514"/>
         </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="vty-sl-sqF">
+            <objects>
+                <notificationController id="WbL-gI-uGM">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="7w5-9J-Tc6"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="reservation_confirmation" id="p7g-c6-X1v"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="7w5-9J-Tc6" id="Pb2-uX-9qT"/>
+                        <segue destination="KBg-1t-Hra" kind="relationship" relationship="dynamicNotificationInterface" id="7ui-9t-Mx0"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="88" y="515"/>
+        </scene>
+        <!--Reservation Notification Controller-->
+        <scene sceneID="940-RE-W2z">
+            <objects>
+                <controller id="KBg-1t-Hra" customClass="ReservationNotificationController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="RTk-ID-roa">
+                            <items>
+                                <label alignment="left" text="Fancy shoes are ready for pickup!" numberOfLines="0" id="PDv-cl-Rj3"/>
+                                <label alignment="left" text="2 miles away" numberOfLines="0" id="JyW-L3-Y7u">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <button width="1" alignment="left" title="Get Directions" id="w53-NQ-Dsd"/>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="336" y="515"/>
+        </scene>
     </scenes>
 </document>
