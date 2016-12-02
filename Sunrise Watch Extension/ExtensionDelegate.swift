@@ -8,6 +8,9 @@ import Commercetools
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
+        if let configuration = Config(path: "CommercetoolsProdConfig") {
+            Commercetools.config = configuration
+        }
         // Perform any final initialization of your application.
     }
 

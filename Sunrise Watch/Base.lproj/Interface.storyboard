@@ -8,22 +8,88 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--ReservationsInterfaceController-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="ReservationsInterfaceController" customModule="Sunrise_Watch" customModuleProvider="target">
+                <controller identifier="ReservationsInterfaceController" id="AgC-eL-Hgc" customClass="ReservationsInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <label alignment="left" text="Label" id="zRW-l2-KDU"/>
-                        <table alignment="left" id="pyI-Ne-IAs">
+                        <group width="1" alignment="left" layout="vertical" id="adS-QO-6gk">
                             <items>
-                                <tableRow id="NSb-HN-VfY">
-                                    <group key="rootItem" width="1" alignment="left" id="C7y-gJ-lNj"/>
-                                </tableRow>
+                                <label width="136" alignment="center" text="Looks like you're not singed in!" textAlignment="center" numberOfLines="0" id="tnn-qb-LhV">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <label width="136" alignment="center" text="Open Sunrise on your iPhone and sign in to continue." textAlignment="center" numberOfLines="0" id="UUv-w4-koH">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
                             </items>
-                        </table>
+                            <edgeInsets key="margins" left="3" right="3" top="20" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="KEF-Ne-ykA">
+                            <items>
+                                <label alignment="left" text="Reservations:" numberOfLines="2" id="zRW-l2-KDU"/>
+                                <table alignment="left" spacing="6" id="pyI-Ne-IAs">
+                                    <items>
+                                        <tableRow identifier="ReservationRowType" id="NSb-HN-VfY" customClass="ReservationRowController" customModule="Sunrise_Watch_Extension">
+                                            <group key="rootItem" width="1" height="124" alignment="left" layout="vertical" id="C7y-gJ-lNj">
+                                                <items>
+                                                    <group width="156" alignment="left" radius="6" id="63h-AD-Ui1">
+                                                        <items>
+                                                            <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="yGs-2u-ATN"/>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </group>
+                                                    <group width="1" alignment="left" layout="vertical" id="HWb-vk-1ep">
+                                                        <items>
+                                                            <label alignment="left" text="$19.99" id="7xe-OI-1Qb">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                                            </label>
+                                                            <label alignment="left" text="Product Name" id="OtZ-3N-S8T">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </label>
+                                                        </items>
+                                                        <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <connections>
+                                                <outlet property="productImage" destination="yGs-2u-ATN" id="tM9-Kb-siQ"/>
+                                                <outlet property="productName" destination="OtZ-3N-S8T" id="W3t-TL-OvT"/>
+                                                <outlet property="productPrice" destination="7xe-OI-1Qb" id="fvf-vk-Nzu"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="cdj-XL-K6t">
+                            <items>
+                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="riW-Pa-HPR">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="6e4-Kp-WrE"/>
+                                    </items>
+                                </group>
+                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="gUH-t9-Hel">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Oz4-J0-SUu"/>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
                     </items>
+                    <connections>
+                        <outlet property="leftLoadingDot" destination="Oz4-J0-SUu" id="RbC-eP-Jal"/>
+                        <outlet property="loadingGroup" destination="cdj-XL-K6t" id="03m-be-5TB"/>
+                        <outlet property="reservationsGroup" destination="KEF-Ne-ykA" id="NCi-sx-oRQ"/>
+                        <outlet property="reservationsTable" destination="pyI-Ne-IAs" id="Owb-hn-2xk"/>
+                        <outlet property="rightLoadingDot" destination="6e4-Kp-WrE" id="PDv-uT-irz"/>
+                        <outlet property="signInGroup" destination="adS-QO-6gk" id="sMS-lP-ue3"/>
+                    </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="83.692307692307693" y="101.12820512820514"/>
         </scene>
     </scenes>
 </document>

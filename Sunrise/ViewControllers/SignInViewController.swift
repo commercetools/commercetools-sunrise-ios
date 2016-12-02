@@ -29,8 +29,8 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var registrationPasswordField: UITextField!
     @IBOutlet weak var registrationPasswordConfirmationField: UITextField!
 
-    private var loginAction: CocoaAction?
-    private var registerAction: CocoaAction?
+    private var loginAction: CocoaAction<Void>?
+    private var registerAction: CocoaAction<Void>?
 
     private var viewModel: SignInViewModel? {
         didSet {
@@ -61,14 +61,14 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func logIn(_ sender: UIButton) {
-        loginAction?.execute(nil)
+        loginAction?.execute(())
     }
     
     @IBAction func register(_ sender: UIButton) {
         guard let viewModel = viewModel else { return }
 
         if viewModel.isRegisterInputValid.value {
-            registerAction?.execute(nil)
+            registerAction?.execute(())
         } else {
             let alertController = UIAlertController(
                     title: "Failed",
@@ -93,14 +93,14 @@ class SignInViewController: UIViewController {
         loginAction = CocoaAction(viewModel.loginAction, { _ in return () })
         registerAction = CocoaAction(viewModel.registerAction, { _ in return () })
 
-        viewModel.username <~ emailField.signalProducer()
-        viewModel.password <~ passwordField.signalProducer()
-        viewModel.email <~ registrationEmailField.signalProducer()
-        viewModel.firstName <~ firstNameField.signalProducer()
-        viewModel.lastName <~ lastNameField.signalProducer()
-        viewModel.title <~ titleField.signalProducer()
-        viewModel.registrationPassword <~ registrationPasswordField.signalProducer()
-        viewModel.registrationPasswordConfirmation <~ registrationPasswordConfirmationField.signalProducer()
+        viewModel.username <~ emailField.reactive.textValues.map { $0 ?? "" }
+        viewModel.password <~ passwordField.reactive.textValues.map { $0 ?? "" }
+        viewModel.email <~ registrationEmailField.reactive.textValues.map { $0 ?? "" }
+        viewModel.firstName <~ firstNameField.reactive.textValues.map { $0 ?? "" }
+        viewModel.lastName <~ lastNameField.reactive.textValues.map { $0 ?? "" }
+        viewModel.title <~ titleField.reactive.textValues.map { $0 ?? "" }
+        viewModel.registrationPassword <~ registrationPasswordField.reactive.textValues.map { $0 ?? "" }
+        viewModel.registrationPasswordConfirmation <~ registrationPasswordConfirmationField.reactive.textValues.map { $0 ?? "" }
 
         titleField.itemList = viewModel.titleOptions
 
