@@ -13,6 +13,7 @@
 		210A5B2B1CFFBEA300217A86 /* cart.json in Resources */ = {isa = PBXBuildFile; fileRef = 210A5B2A1CFFBEA300217A86 /* cart.json */; };
 		210BE02EA82049EFD1E1188C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
 		210BE0D3C4E3336428ECAB34 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
+		210BE15EB86DF0306282C27C /* ReservationsInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE60A69039721F912B8E8 /* ReservationsInterfaceModel.swift */; };
 		210BE1FC59FA761E46E72C64 /* CommonViewBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */; };
 		210BE24589543CA1E27301B4 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */; };
 		210BE2FB5EE7C6EB9869D375 /* ProductVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE439FAD7F1908A054A18 /* ProductVariant.swift */; };
@@ -32,6 +33,7 @@
 		210BEB6685337570C6EA3287 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE6CC28A92953A6E02564 /* Customer.swift */; };
 		210BEBCB6460A6C110A6DF66 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE8917F4B6AB6DDA9FFBA /* ScannerViewModel.swift */; };
 		210BED60B9D7ED7035A347E4 /* OrderOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */; };
+		210BED8CA1DD15C00A358B06 /* ReservationsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEAA11FFE6C2DE0CB2358 /* ReservationsInterfaceController.swift */; };
 		210BEDB86468757333A2BF3D /* SignalProducerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECFF754F592E22066C90 /* SignalProducerUtils.swift */; };
 		210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */; };
 		210BEE95348FD2AEEE13490D /* OrderOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */; };
@@ -41,6 +43,7 @@
 		211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211468B31D1F54240011A944 /* OrdersHeaderView.xib */; };
 		211468B61D2088440011A944 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 211468B51D2088440011A944 /* Cart.storyboard */; };
 		2147E6611D07860100EB21AE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147E6601D07860100EB21AE /* SignInViewController.swift */; };
+		2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		215C4F681CF2836400A99790 /* ProductViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */; };
 		215C4F6A1CF286D100A99790 /* product-projection.json in Resources */ = {isa = PBXBuildFile; fileRef = 215C4F691CF286D100A99790 /* product-projection.json */; };
 		215C4F6B1CF28CC600A99790 /* NSBundle+CurrentTestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */; };
@@ -49,6 +52,12 @@
 		215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */; };
 		216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */; };
 		216153A11D1AA03B006C9627 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2161539F1D1AA03B006C9627 /* Main.storyboard */; };
+		2163EBB51DE8C26C00803640 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBB31DE8C26C00803640 /* Interface.storyboard */; };
+		2163EBB71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBB61DE8C26C00803640 /* Assets.xcassets */; };
+		2163EBBE1DE8C26C00803640 /* Sunrise Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2163EBC51DE8C26C00803640 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */; };
+		2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBC61DE8C26C00803640 /* Assets.xcassets */; };
+		2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */; };
 		2168A02B1D1A9F0C00C244D8 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2168A02A1D1A9F0C00C244D8 /* Account.storyboard */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		217581B81CF4865A0067BE15 /* ProductOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */; };
@@ -84,10 +93,25 @@
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
 		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
+		C3E67B54573794A35CE64ACE /* Pods_Sunrise_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */; };
 		D78C254EAC84E3853FB82002 /* Pods_ReservationNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2163EBBF1DE8C26C00803640 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2163EBBC1DE8C26C00803640;
+			remoteInfo = "Sunrise Watch Extension";
+		};
+		2163EBC91DE8C26C00803640 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2163EBB01DE8C26C00803640;
+			remoteInfo = "Sunrise Watch";
+		};
 		219992431DC9FAAB000E48FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
@@ -112,6 +136,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2163EBD51DE8C26C00803640 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2163EBBE1DE8C26C00803640 /* Sunrise Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2163EBD71DE8C26C00803640 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2199924B1DC9FAAB000E48FD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,6 +172,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00939BB1A611F998D130DD79 /* Pods-Sunrise Watch Extension.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.debug staging.xcconfig"; sourceTree = "<group>"; };
 		0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release prod.xcconfig"; sourceTree = "<group>"; };
 		17D1760D1D552D42D0C367DB /* Pods-Sunrise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug staging.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +191,7 @@
 		210BE4DC5197090C201025BE /* CartSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartSummaryCell.swift; sourceTree = "<group>"; };
 		210BE5453FDA40B948A5034D /* CartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		210BE5C13E116669D9FB4BDD /* ProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		210BE60A69039721F912B8E8 /* ReservationsInterfaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationsInterfaceModel.swift; sourceTree = "<group>"; };
 		210BE6CC28A92953A6E02564 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		210BE70101007B36C753F74B /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
 		210BE81F2AC37E98EA8580EA /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -154,6 +202,7 @@
 		210BEA09145F59DD74FA5B99 /* LineItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		210BEA292BFC7E26BF1DFFF1 /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewViewModelSpec.swift; sourceTree = "<group>"; };
+		210BEAA11FFE6C2DE0CB2358 /* ReservationsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationsInterfaceController.swift; sourceTree = "<group>"; };
 		210BEB43EB567F74C591D677 /* AppRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouting.swift; sourceTree = "<group>"; };
 		210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOverviewViewModel.swift; sourceTree = "<group>"; };
 		210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +222,14 @@
 		215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayedAttributeCell.swift; sourceTree = "<group>"; };
 		2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2161539F1D1AA03B006C9627 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2163EBB11DE8C26C00803640 /* Sunrise Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2163EBB41DE8C26C00803640 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		2163EBB61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2163EBB81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Sunrise Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		2163EBC61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2168A02A1D1A9F0C00C244D8 /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		217581B71CF4865A0067BE15 /* ProductOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +265,7 @@
 		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModelSpec.swift; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
+		391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug staging.xcconfig"; sourceTree = "<group>"; };
 		461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReservationNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +273,7 @@
 		535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5BE041370A3BD096E67F065F /* Pods-Sunrise.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release prod.xcconfig"; sourceTree = "<group>"; };
+		60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.release prod.xcconfig"; sourceTree = "<group>"; };
 		6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release staging.xcconfig"; sourceTree = "<group>"; };
 		6B8E12D52C3FC7E6B9174358 /* Pods-Sunrise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release.xcconfig"; sourceTree = "<group>"; };
 		75C04D6F02B1AC2F2C0AC1EB /* Pods-SunriseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -228,10 +287,20 @@
 		A91DC6065974B510D4BD15D2 /* Pods-SunriseTests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug prod.xcconfig"; sourceTree = "<group>"; };
 		AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release staging.xcconfig"; sourceTree = "<group>"; };
 		E63198A54D318A4B3544D108 /* Pods-SunriseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release.xcconfig"; sourceTree = "<group>"; };
+		F6AE90BED5587F739F4B8F59 /* Pods-Sunrise Watch Extension.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.release staging.xcconfig"; sourceTree = "<group>"; };
 		F6C180AA6EF954F701F486C2 /* Pods-SunriseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F9DCD91B55201637E84EFE47 /* Pods-Sunrise Watch Extension.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.debug prod.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2163EBBA1DE8C26C00803640 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3E67B54573794A35CE64ACE /* Pods_Sunrise_Watch_Extension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		219992341DC9FAAB000E48FD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +332,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BFA3F7AC753328BB6DD545D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +421,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		210BE7B0D9A47246B5E57BD0 /* InterfaceControllers */ = {
+			isa = PBXGroup;
+			children = (
+				210BEAA11FFE6C2DE0CB2358 /* ReservationsInterfaceController.swift */,
+			);
+			path = InterfaceControllers;
+			sourceTree = "<group>";
+		};
 		210BE7C136DD226F8E61C869 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +451,14 @@
 				210BE70101007B36C753F74B /* Changeset.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		210BE9831C03806F07032199 /* InterfaceModels */ = {
+			isa = PBXGroup;
+			children = (
+				210BE60A69039721F912B8E8 /* ReservationsInterfaceModel.swift */,
+			);
+			path = InterfaceModels;
 			sourceTree = "<group>";
 		};
 		210BEA54EF7C1D10C3ED034E /* ViewModels */ = {
@@ -394,6 +486,28 @@
 				215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		2163EBB21DE8C26C00803640 /* Sunrise Watch */ = {
+			isa = PBXGroup;
+			children = (
+				2163EBB31DE8C26C00803640 /* Interface.storyboard */,
+				2163EBB61DE8C26C00803640 /* Assets.xcassets */,
+				2163EBB81DE8C26C00803640 /* Info.plist */,
+			);
+			path = "Sunrise Watch";
+			sourceTree = "<group>";
+		};
+		2163EBC11DE8C26C00803640 /* Sunrise Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */,
+				2163EBC61DE8C26C00803640 /* Assets.xcassets */,
+				2163EBC81DE8C26C00803640 /* Info.plist */,
+				210BE7B0D9A47246B5E57BD0 /* InterfaceControllers */,
+				210BE9831C03806F07032199 /* InterfaceModels */,
+			);
+			path = "Sunrise Watch Extension";
 			sourceTree = "<group>";
 		};
 		2199923C1DC9FAAB000E48FD /* ReservationNotification */ = {
@@ -425,6 +539,8 @@
 				21CDC4AD1CE91D9B009D2638 /* SunriseTests */,
 				21CDC4B81CE91D9B009D2638 /* SunriseUITests */,
 				2199923C1DC9FAAB000E48FD /* ReservationNotification */,
+				2163EBB21DE8C26C00803640 /* Sunrise Watch */,
+				2163EBC11DE8C26C00803640 /* Sunrise Watch Extension */,
 				21CDC4951CE91D9B009D2638 /* Products */,
 				35E540A469E198E7F3ACD078 /* Pods */,
 				A5930317FAADB466B9D2E3C1 /* Frameworks */,
@@ -438,6 +554,8 @@
 				21CDC4AA1CE91D9B009D2638 /* SunriseTests.xctest */,
 				21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */,
 				219992371DC9FAAB000E48FD /* ReservationNotification.appex */,
+				2163EBB11DE8C26C00803640 /* Sunrise Watch.app */,
+				2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -505,6 +623,10 @@
 				96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */,
 				0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */,
 				AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */,
+				F9DCD91B55201637E84EFE47 /* Pods-Sunrise Watch Extension.debug prod.xcconfig */,
+				00939BB1A611F998D130DD79 /* Pods-Sunrise Watch Extension.debug staging.xcconfig */,
+				60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */,
+				F6AE90BED5587F739F4B8F59 /* Pods-Sunrise Watch Extension.release staging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -518,6 +640,7 @@
 				219992381DC9FAAB000E48FD /* UserNotifications.framework */,
 				2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */,
 				461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */,
+				391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -525,6 +648,44 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2163EBB01DE8C26C00803640 /* Sunrise Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2163EBD61DE8C26C00803640 /* Build configuration list for PBXNativeTarget "Sunrise Watch" */;
+			buildPhases = (
+				2163EBAF1DE8C26C00803640 /* Resources */,
+				2163EBD51DE8C26C00803640 /* Embed App Extensions */,
+				9BFA3F7AC753328BB6DD545D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2163EBC01DE8C26C00803640 /* PBXTargetDependency */,
+			);
+			name = "Sunrise Watch";
+			productName = "Sunrise Watch";
+			productReference = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		2163EBBC1DE8C26C00803640 /* Sunrise Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2163EBD41DE8C26C00803640 /* Build configuration list for PBXNativeTarget "Sunrise Watch Extension" */;
+			buildPhases = (
+				A0614FCAE11E8DA7C682DF54 /* [CP] Check Pods Manifest.lock */,
+				2163EBB91DE8C26C00803640 /* Sources */,
+				2163EBBA1DE8C26C00803640 /* Frameworks */,
+				2163EBBB1DE8C26C00803640 /* Resources */,
+				ED80737083E382773B1B9C12 /* [CP] Embed Pods Frameworks */,
+				0984A8AD2DF40569A114EB90 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Sunrise Watch Extension";
+			productName = "Sunrise Watch Extension";
+			productReference = 2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		219992361DC9FAAB000E48FD /* ReservationNotification */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 219992461DC9FAAB000E48FD /* Build configuration list for PBXNativeTarget "ReservationNotification" */;
@@ -555,11 +716,13 @@
 				C51C4638AF67D6B89CE5675E /* [CP] Embed Pods Frameworks */,
 				65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */,
 				2199924B1DC9FAAB000E48FD /* Embed App Extensions */,
+				2163EBD71DE8C26C00803640 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				219992441DC9FAAB000E48FD /* PBXTargetDependency */,
+				2163EBCA1DE8C26C00803640 /* PBXTargetDependency */,
 			);
 			name = Sunrise;
 			productName = Sunrise;
@@ -618,6 +781,21 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Commercetools;
 				TargetAttributes = {
+					2163EBB01DE8C26C00803640 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = H2968B9CHK;
+						ProvisioningStyle = Automatic;
+					};
+					2163EBBC1DE8C26C00803640 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = H2968B9CHK;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
+					};
 					219992361DC9FAAB000E48FD = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = H2968B9CHK;
@@ -673,11 +851,31 @@
 				21CDC4A91CE91D9B009D2638 /* SunriseTests */,
 				21CDC4B41CE91D9B009D2638 /* SunriseUITests */,
 				219992361DC9FAAB000E48FD /* ReservationNotification */,
+				2163EBB01DE8C26C00803640 /* Sunrise Watch */,
+				2163EBBC1DE8C26C00803640 /* Sunrise Watch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2163EBAF1DE8C26C00803640 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2163EBB71DE8C26C00803640 /* Assets.xcassets in Resources */,
+				2163EBB51DE8C26C00803640 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2163EBBB1DE8C26C00803640 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */,
+				2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		219992351DC9FAAB000E48FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -737,6 +935,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0984A8AD2DF40569A114EB90 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
@@ -814,6 +1027,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A0614FCAE11E8DA7C682DF54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		B376E0CF05118F76C327319C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,6 +1070,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED80737083E382773B1B9C12 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA62B30873B9CA8D581F910C /* [CP] Copy Pods Resources */ = {
@@ -892,6 +1135,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2163EBB91DE8C26C00803640 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2163EBC51DE8C26C00803640 /* ExtensionDelegate.swift in Sources */,
+				210BED8CA1DD15C00A358B06 /* ReservationsInterfaceController.swift in Sources */,
+				210BE15EB86DF0306282C27C /* ReservationsInterfaceModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		219992331DC9FAAB000E48FD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -979,6 +1232,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2163EBC01DE8C26C00803640 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2163EBBC1DE8C26C00803640 /* Sunrise Watch Extension */;
+			targetProxy = 2163EBBF1DE8C26C00803640 /* PBXContainerItemProxy */;
+		};
+		2163EBCA1DE8C26C00803640 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2163EBB01DE8C26C00803640 /* Sunrise Watch */;
+			targetProxy = 2163EBC91DE8C26C00803640 /* PBXContainerItemProxy */;
+		};
 		219992441DC9FAAB000E48FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 219992361DC9FAAB000E48FD /* ReservationNotification */;
@@ -997,6 +1260,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2163EBB31DE8C26C00803640 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2163EBB41DE8C26C00803640 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		2199923F1DC9FAAB000E48FD /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1008,6 +1279,454 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2163EBCC1DE8C26C00803640 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = Sunrise_Watch_Extension;
+				INFOPLIST_FILE = "Sunrise Watch/Info.plist";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Debug Prod";
+		};
+		2163EBCD1DE8C26C00803640 /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = Sunrise_Watch_Extension;
+				INFOPLIST_FILE = "Sunrise Watch/Info.plist";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Debug Staging";
+		};
+		2163EBCE1DE8C26C00803640 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = Sunrise_Watch_Extension;
+				INFOPLIST_FILE = "Sunrise Watch/Info.plist";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Release Prod";
+		};
+		2163EBCF1DE8C26C00803640 /* Release Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IBSC_MODULE = Sunrise_Watch_Extension;
+				INFOPLIST_FILE = "Sunrise Watch/Info.plist";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Release Staging";
+		};
+		2163EBD01DE8C26C00803640 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9DCD91B55201637E84EFE47 /* Pods-Sunrise Watch Extension.debug prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Sunrise Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Debug Prod";
+		};
+		2163EBD11DE8C26C00803640 /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00939BB1A611F998D130DD79 /* Pods-Sunrise Watch Extension.debug staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Sunrise Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Debug Staging";
+		};
+		2163EBD21DE8C26C00803640 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Sunrise Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Release Prod";
+		};
+		2163EBD31DE8C26C00803640 /* Release Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6AE90BED5587F739F4B8F59 /* Pods-Sunrise Watch Extension.release staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Sunrise Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = "Release Staging";
+		};
 		219992471DC9FAAB000E48FD /* Debug Prod */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */;
@@ -1621,6 +2340,28 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2163EBD41DE8C26C00803640 /* Build configuration list for PBXNativeTarget "Sunrise Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2163EBD01DE8C26C00803640 /* Debug Prod */,
+				2163EBD11DE8C26C00803640 /* Debug Staging */,
+				2163EBD21DE8C26C00803640 /* Release Prod */,
+				2163EBD31DE8C26C00803640 /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Prod";
+		};
+		2163EBD61DE8C26C00803640 /* Build configuration list for PBXNativeTarget "Sunrise Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2163EBCC1DE8C26C00803640 /* Debug Prod */,
+				2163EBCD1DE8C26C00803640 /* Debug Staging */,
+				2163EBCE1DE8C26C00803640 /* Release Prod */,
+				2163EBCF1DE8C26C00803640 /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Prod";
+		};
 		219992461DC9FAAB000E48FD /* Build configuration list for PBXNativeTarget "ReservationNotification" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

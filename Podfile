@@ -1,7 +1,7 @@
 source 'https://github.com/nikola-mladenovic/Specs.git'
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
 def common_pods
@@ -22,6 +22,12 @@ end
 target 'ReservationNotification' do
   common_pods
   pod 'SDWebImage'
+end
+
+target 'Sunrise Watch Extension' do
+  platform :watchos, '3.0'
+  pod 'Commercetools'
+  pod 'ReactiveCocoa', '~> 5.0.0-alpha.1'
 end
 
 def testing_pods
