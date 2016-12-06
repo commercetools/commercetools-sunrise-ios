@@ -36,6 +36,10 @@ class ReservationsInterfaceController: WKInterfaceController {
         
         interfaceModel = ReservationsInterfaceModel()
     }
+    
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
+        return interfaceModel?.reservationDetailsInterfaceModel(for: rowIndex)
+    }
 
     private func bindInterfaceModel() {
         guard let interfaceModel = interfaceModel else { return }

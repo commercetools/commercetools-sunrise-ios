@@ -1,57 +1,60 @@
 //
-//  ReservationNotificationController.swift
-//  Sunrise
-//
-//  Created by Nikola Mladenovic on 12/1/16.
-//  Copyright © 2016 Commercetools. All rights reserved.
+// Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
 import WatchKit
 import Foundation
+import UserNotifications
+import CoreLocation
 import Commercetools
-
+import ReactiveSwift
+import SDWebImage
 
 class ReservationNotificationController: WKUserNotificationInterfaceController {
 
+//    @IBOutlet var storeMap: WKInterfaceMap!
+    @IBOutlet var productImage: WKInterfaceImage!
+    @IBOutlet var titleLabel: WKInterfaceLabel!
+    @IBOutlet var storeNameLabel: WKInterfaceLabel!
+    @IBOutlet var distanceLabel: WKInterfaceLabel!    
+
     override init() {
-        // Initialize variables here.
         super.init()
         
-        // Configure interface objects here.
+        if let configuration = Config(path: "CommercetoolsProdConfig"), Commercetools.config == nil {
+            Commercetools.config = configuration
+        }
+        
+        distanceLabel.setText("")
     }
-
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-
 
     override func didReceive(_ notification: UNNotification, withCompletion completionHandler: @escaping (WKUserNotificationInterfaceType) -> Swift.Void) {
-        if let orderId = notification.request.content.userInfo["reservation-id"] as? String {
-            Order.byId(orderId, expansion: ["lineItems[0].distributionChannel"]) { [weak self] result in
-                if let order = result.model, result.isSuccess {
+        if let reservationId = notification.request.content.userInfo["reservation-id"] as? String {
+            Order.byId(reservationId, expansion: ["lineItems[0].distributionChannel"]) { [weak self] result in
+                if let reservation = result.model, result.isSuccess {
+                    let interfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
                     DispatchQueue.main.async {
-
-                        completionHandler(.custom)
-                        self?.viewModel = ReservationViewModel(order: order)
-                        UIView.animate(withDuration: 0.4) {
-                            self?.loadingIndicator.stopAnimating()
-                            self?.containerView.alpha = 1
+                        self?.titleLabel.setText(interfaceModel.productName + " is ready for pickup!")
+                        self?.distanceLabel.setText(interfaceModel.storeDistance)
+                        self?.storeNameLabel.setText(interfaceModel.storeName)
+                        if let url = URL(string: interfaceModel.productImageUrl) {
+                            SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
+                                if let image = image {
+                                    self?.productImage.setImage(image)
+                                }
+                            })
                         }
+//                        if let center = interfaceModel.storeLocation?.coordinate {
+//                            self?.storeMap.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)))
+//                            self?.storeMap.addAnnotation(center, with: .red)
+//                        }
+                        completionHandler(.custom)
                     }
+                    
+                } else if let errors = result.errors as? [CTError], result.isFailure {
+                    print(errors)
                 }
             }
         }
-        // This method is called when a notification needs to be presented.
-        // Implement it if you use a dynamic notification interface.
-        // Populate your dynamic notification interface as quickly as possible.
-        //
-        // After populating your dynamic notification interface call the completion block.
-        completionHandler(.custom)
     }
 }

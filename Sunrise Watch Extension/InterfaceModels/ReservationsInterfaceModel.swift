@@ -59,6 +59,11 @@ class ReservationsInterfaceModel {
         return reservations[row].lineItems?.first?.variant?.images?.first?.url ?? ""
     }
 
+    func reservationDetailsInterfaceModel(for row: Int) -> ReservationDetailsInterfaceModel {
+        let reservation = reservations[row]
+        return ReservationDetailsInterfaceModel(reservation: reservation)
+    }
+
     // MARK: - Reservations retrieval
 
     private func retrieveReservations() {

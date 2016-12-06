@@ -4,14 +4,23 @@
 
 import WatchKit
 import Commercetools
+import CoreLocation
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
+    
+    private var locationManager: CLLocationManager?
 
     func applicationDidFinishLaunching() {
         if let configuration = Config(path: "CommercetoolsProdConfig") {
             Commercetools.config = configuration
         }
-        // Perform any final initialization of your application.
+        
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.distanceFilter = 50
+        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.startUpdatingLocation()
     }
 
     func applicationDidBecomeActive() {
@@ -47,4 +56,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
 
+}
+
+let userLatitudeKey = "userLatitudeKey"
+let userLongitudeKey = "userLongitudeKey"
+
+extension ExtensionDelegate: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            UserDefaults.standard.set(location.coordinate.latitude, forKey: userLatitudeKey)
+            UserDefaults.standard.set(location.coordinate.longitude, forKey: userLongitudeKey)
+        }        
+    }
 }

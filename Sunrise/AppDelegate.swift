@@ -5,6 +5,7 @@
 import UIKit
 import UserNotifications
 import Commercetools
+import CoreLocation
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -35,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Inform user about the configuration error
         }
 
+        CLLocationManager().requestWhenInUseAuthorization()
         IQKeyboardManager.sharedManager().enable = true
 
         let notificationCenter = UNUserNotificationCenter.current()

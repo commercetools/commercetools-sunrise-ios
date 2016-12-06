@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2105567E1D3650780036493C /* StoreSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2105567D1D3650780036493C /* StoreSelectionViewModel.swift */; };
 		210556801D36FFA00036493C /* StoreInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2105567F1D36FFA00036493C /* StoreInfoCell.swift */; };
+		21068CD01DF0610700035760 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
 		210A5B291CFFBE8200217A86 /* CartViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210A5B281CFFBE8200217A86 /* CartViewModelSpec.swift */; };
 		210A5B2B1CFFBEA300217A86 /* cart.json in Resources */ = {isa = PBXBuildFile; fileRef = 210A5B2A1CFFBEA300217A86 /* cart.json */; };
 		210BE02EA82049EFD1E1188C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
@@ -85,6 +86,8 @@
 		21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21A921271DCAC77500134125 /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21A921281DCAC77900134125 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
+		21AFE8101DF24B4E00D0F6EE /* ReservationDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AFE80F1DF24B4E00D0F6EE /* ReservationDetailsInterfaceController.swift */; };
+		21AFE8121DF24B6C00D0F6EE /* ReservationDetailsInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AFE8111DF24B6C00D0F6EE /* ReservationDetailsInterfaceModel.swift */; };
 		21B1D8271CFCAE930005848C /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B1D8261CFCAE930005848C /* CartViewController.swift */; };
 		21B9001A1CFE07C700E053F9 /* CartLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B900191CFE07C700E053F9 /* CartLineItemCell.swift */; };
 		21BBDC221D34177B00C516FD /* StoreSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBDC211D34177B00C516FD /* StoreSelectionViewController.swift */; };
@@ -255,6 +258,8 @@
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
 		21A9E70B1D65FB1B00AC3953 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		21AFE80F1DF24B4E00D0F6EE /* ReservationDetailsInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationDetailsInterfaceController.swift; sourceTree = "<group>"; };
+		21AFE8111DF24B6C00D0F6EE /* ReservationDetailsInterfaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationDetailsInterfaceModel.swift; sourceTree = "<group>"; };
 		21B1D8261CFCAE930005848C /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		21B900191CFE07C700E053F9 /* CartLineItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartLineItemCell.swift; sourceTree = "<group>"; };
 		21BBDC211D34177B00C516FD /* StoreSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSelectionViewController.swift; sourceTree = "<group>"; };
@@ -431,6 +436,7 @@
 			children = (
 				210BEAA11FFE6C2DE0CB2358 /* ReservationsInterfaceController.swift */,
 				211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */,
+				21AFE80F1DF24B4E00D0F6EE /* ReservationDetailsInterfaceController.swift */,
 			);
 			path = InterfaceControllers;
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				210BE60A69039721F912B8E8 /* ReservationsInterfaceModel.swift */,
+				21AFE8111DF24B6C00D0F6EE /* ReservationDetailsInterfaceModel.swift */,
 			);
 			path = InterfaceModels;
 			sourceTree = "<group>";
@@ -1166,9 +1173,12 @@
 				210BED8CA1DD15C00A358B06 /* ReservationsInterfaceController.swift in Sources */,
 				211D9DEC1DECE3DC00167C23 /* Order.swift in Sources */,
 				210BE15EB86DF0306282C27C /* ReservationsInterfaceModel.swift in Sources */,
+				21AFE8101DF24B4E00D0F6EE /* ReservationDetailsInterfaceController.swift in Sources */,
 				210BEE08B7F4742032ED3B29 /* ReservationRowController.swift in Sources */,
 				211D9DEE1DECE57B00167C23 /* Dictionary+LocalizedString.swift in Sources */,
+				21068CD01DF0610700035760 /* Channel.swift in Sources */,
 				211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */,
+				21AFE8121DF24B6C00D0F6EE /* ReservationDetailsInterfaceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

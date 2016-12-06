@@ -26,7 +26,7 @@
                         </group>
                         <group width="1" alignment="left" layout="vertical" id="KEF-Ne-ykA">
                             <items>
-                                <label alignment="left" text="Reservations:" numberOfLines="2" id="zRW-l2-KDU"/>
+                                <label alignment="left" text="My reservations:" numberOfLines="2" id="zRW-l2-KDU"/>
                                 <table alignment="left" spacing="6" id="pyI-Ne-IAs">
                                     <items>
                                         <tableRow identifier="ReservationRowType" id="NSb-HN-VfY" customClass="ReservationRowController" customModule="Sunrise_Watch_Extension">
@@ -58,11 +58,13 @@
                                                 <outlet property="productImage" destination="yGs-2u-ATN" id="tM9-Kb-siQ"/>
                                                 <outlet property="productName" destination="OtZ-3N-S8T" id="W3t-TL-OvT"/>
                                                 <outlet property="productPrice" destination="7xe-OI-1Qb" id="fvf-vk-Nzu"/>
+                                                <segue destination="r4v-gy-uaD" kind="push" id="HWv-yg-fvO"/>
                                             </connections>
                                         </tableRow>
                                     </items>
                                 </table>
                             </items>
+                            <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="cdj-XL-K6t">
                             <items>
@@ -91,6 +93,60 @@
             </objects>
             <point key="canvasLocation" x="83.692307692307693" y="101.12820512820514"/>
         </scene>
+        <!--Reservation Details Interface Controller-->
+        <scene sceneID="lSW-xS-HHG">
+            <objects>
+                <controller id="r4v-gy-uaD" customClass="ReservationDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="UPM-mm-GiP">
+                            <items>
+                                <group width="1" alignment="left" layout="vertical" radius="6" id="OPc-Mz-fg6">
+                                    <items>
+                                        <imageView height="72" alignment="left" contentMode="scaleAspectFit" id="32v-KZ-Jba"/>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                                <label alignment="left" text="$19.99" id="elR-U1-7wD"/>
+                                <label alignment="left" text="Fancy Jacket" numberOfLines="0" id="Bbj-oP-hUa"/>
+                                <separator alignment="left" id="eTy-cs-hQT"/>
+                                <label alignment="left" text="SUNRISE Store Berlin" numberOfLines="0" id="JUS-Aq-nUI"/>
+                                <map height="72" alignment="left" id="yRT-gC-xad"/>
+                                <label alignment="left" text="13 km away" id="W94-hR-IrC"/>
+                                <label alignment="left" text="Address:" id="ZWh-Zh-aU2">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label alignment="left" text="streetAndNumber" numberOfLines="0" id="Psf-bt-his">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <label alignment="left" text="zipAndCity" numberOfLines="0" id="y5b-9w-fqz"/>
+                                <label alignment="left" text="Opening hours:" id="oVs-AQ-2Ee">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label alignment="left" text="openInfo" numberOfLines="0" id="p5T-nH-cer"/>
+                                <button width="1" alignment="left" title="Directions" id="5qi-Qf-osh">
+                                    <connections>
+                                        <action selector="getDirections" destination="r4v-gy-uaD" id="eEp-Fk-MBV"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="distanceLabel" destination="W94-hR-IrC" id="Vel-8w-lEo"/>
+                        <outlet property="openInfoLabel" destination="p5T-nH-cer" id="ZqP-k7-tOS"/>
+                        <outlet property="productImage" destination="32v-KZ-Jba" id="H4I-9y-Quj"/>
+                        <outlet property="productNameLabel" destination="Bbj-oP-hUa" id="TRJ-Wo-qnY"/>
+                        <outlet property="productPriceLabel" destination="elR-U1-7wD" id="SzT-er-Jx4"/>
+                        <outlet property="storeMap" destination="yRT-gC-xad" id="isN-U2-gag"/>
+                        <outlet property="storeNameLabel" destination="JUS-Aq-nUI" id="d71-jy-9nF"/>
+                        <outlet property="streetAndNumberLabel" destination="Psf-bt-his" id="f7X-fl-3cb"/>
+                        <outlet property="zipAndCityLabel" destination="y5b-9w-fqz" id="Vui-dw-fLV"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="369" y="102"/>
+        </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="vty-sl-sqF">
             <objects>
@@ -105,7 +161,7 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="88" y="515"/>
+            <point key="canvasLocation" x="83" y="697"/>
         </scene>
         <!--Reservation Notification Controller-->
         <scene sceneID="940-RE-W2z">
@@ -115,16 +171,28 @@
                         <group width="1" alignment="left" layout="vertical" id="RTk-ID-roa">
                             <items>
                                 <label alignment="left" text="Fancy shoes are ready for pickup!" numberOfLines="0" id="PDv-cl-Rj3"/>
+                                <group width="1" alignment="left" radius="6" id="1e5-VQ-hsx">
+                                    <items>
+                                        <imageView height="72" alignment="left" contentMode="scaleAspectFit" id="09x-vA-3F7"/>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                                <label alignment="left" text="SUNRISE Store Berlin" numberOfLines="0" id="T8J-lh-qeR"/>
                                 <label alignment="left" text="2 miles away" numberOfLines="0" id="JyW-L3-Y7u">
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
-                                <button width="1" alignment="left" title="Get Directions" id="w53-NQ-Dsd"/>
                             </items>
                         </group>
                     </items>
+                    <connections>
+                        <outlet property="distanceLabel" destination="JyW-L3-Y7u" id="Ul4-0V-nyO"/>
+                        <outlet property="productImage" destination="09x-vA-3F7" id="xSW-Kh-zXP"/>
+                        <outlet property="storeNameLabel" destination="T8J-lh-qeR" id="9J1-rn-47C"/>
+                        <outlet property="titleLabel" destination="PDv-cl-Rj3" id="9iR-tL-UXs"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="336" y="515"/>
+            <point key="canvasLocation" x="331" y="697"/>
         </scene>
     </scenes>
 </document>
