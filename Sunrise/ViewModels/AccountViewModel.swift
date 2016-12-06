@@ -6,7 +6,7 @@ import ReactiveSwift
 import Result
 import Commercetools
 
-class OrdersViewModel: BaseViewModel {
+class AccountViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
@@ -60,12 +60,12 @@ class OrdersViewModel: BaseViewModel {
         .observeValues { [weak self] section in
             guard let strongSelf = self else { return }
 
-            let rowsCount = section == 0 ? strongSelf.orders.count : strongSelf.reservations.count
+            let rowsCount = section == 1 ? strongSelf.orders.count : strongSelf.reservations.count
             let rowsToModify = 0...(rowsCount > 0 ? rowsCount - 1 : 0)
             let indexPaths = rowsCount > 0 ? rowsToModify.map { IndexPath(row: $0, section: section) } : []
 
             let changeset: Changeset
-            if section == 0 {
+            if section == 1 {
                 if strongSelf.ordersExpanded.value {
                     changeset = Changeset(deletions: indexPaths)
                 } else {
@@ -103,15 +103,18 @@ class OrdersViewModel: BaseViewModel {
     // MARK: - Data Source
 
     func numberOfRowsInSection(_ section: Int) -> Int {
-        if section == 0 {
-            return ordersExpanded.value ? orders.count : 0
-        } else {
-            return reservationsExpanded.value ? reservations.count : 0
+        switch section {
+            case 1:
+                return ordersExpanded.value ? orders.count : 0
+            case 2:
+                return reservationsExpanded.value ? reservations.count : 0
+            default:
+                return 0
         }
     }
 
     func headerTitleForSection(_ section: Int) -> String {
-        return section == 0 ? NSLocalizedString("MY ORDERS", comment: "My orders") : NSLocalizedString("MY RESERVATIONS", comment: "My reservations")
+        return section == 1 ? NSLocalizedString("MY ORDERS", comment: "My orders") : NSLocalizedString("MY RESERVATIONS", comment: "My reservations")
     }
 
     func orderNumberAtIndexPath(_ indexPath: IndexPath) -> String? {

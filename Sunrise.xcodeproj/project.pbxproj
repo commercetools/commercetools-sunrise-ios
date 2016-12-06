@@ -29,12 +29,12 @@
 		210BE928D44EA762B52DA93A /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA292BFC7E26BF1DFFF1 /* Attribute.swift */; };
 		210BE953F6CBCBB4AD333A05 /* ProductProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE19428F36804EF53BFC8 /* ProductProjection.swift */; };
 		210BE9B1CA0CF2B5C27D5392 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
-		210BEA81E77949DA5C0DE293 /* OrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */; };
+		210BEA81E77949DA5C0DE293 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BED4859A8F2A367EA4ED1 /* AccountViewModel.swift */; };
 		210BEB6685337570C6EA3287 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE6CC28A92953A6E02564 /* Customer.swift */; };
 		210BEBCB6460A6C110A6DF66 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE8917F4B6AB6DDA9FFBA /* ScannerViewModel.swift */; };
 		210BED60B9D7ED7035A347E4 /* OrderOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */; };
 		210BED8CA1DD15C00A358B06 /* ReservationsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEAA11FFE6C2DE0CB2358 /* ReservationsInterfaceController.swift */; };
-		210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */; };
+		210BEDE4529CF8A86AA49D69 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2D7A19A1C4E0EBAC526 /* AccountViewController.swift */; };
 		210BEE08B7F4742032ED3B29 /* ReservationRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE3DAAE3073D4D195CE30 /* ReservationRowController.swift */; };
 		210BEE95348FD2AEEE13490D /* OrderOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */; };
 		210BEE9AF8567A17A425CEC1 /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA09145F59DD74FA5B99 /* LineItem.swift */; };
@@ -92,7 +92,7 @@
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */; };
-		21FDB47D1D219B580028DDC9 /* OrdersViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */; };
+		21FDB47D1D219B580028DDC9 /* AccountViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FDB47C1D219B580028DDC9 /* AccountViewModelSpec.swift */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
 		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
@@ -187,7 +187,7 @@
 		210BE09BDDBB63DD98464192 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		210BE0E296C4DD7568F84DAE /* Money.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		210BE19428F36804EF53BFC8 /* ProductProjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductProjection.swift; sourceTree = "<group>"; };
-		210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
+		210BE2D7A19A1C4E0EBAC526 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		210BE3DAAE3073D4D195CE30 /* ReservationRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationRowController.swift; sourceTree = "<group>"; };
 		210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewBinding.swift; sourceTree = "<group>"; };
 		210BE439FAD7F1908A054A18 /* ProductVariant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductVariant.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 		210BEB43EB567F74C591D677 /* AppRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouting.swift; sourceTree = "<group>"; };
 		210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOverviewViewModel.swift; sourceTree = "<group>"; };
 		210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
-		210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModel.swift; sourceTree = "<group>"; };
+		210BED4859A8F2A367EA4ED1 /* AccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		210BEDBDA0B3DD0E3AA22401 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
 		210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOverviewViewController.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 		21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SunriseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseUITests.swift; sourceTree = "<group>"; };
 		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewModelSpec.swift; sourceTree = "<group>"; };
+		21FDB47C1D219B580028DDC9 /* AccountViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewModelSpec.swift; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -381,7 +381,7 @@
 				21B1D8261CFCAE930005848C /* CartViewController.swift */,
 				210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */,
 				2147E6601D07860100EB21AE /* SignInViewController.swift */,
-				210BE2D7A19A1C4E0EBAC526 /* OrdersViewController.swift */,
+				210BE2D7A19A1C4E0EBAC526 /* AccountViewController.swift */,
 				210BECBFAF7E6B6AA88B89BA /* ScannerViewController.swift */,
 				210BEFDF8893998022F80737 /* OrderOverviewViewController.swift */,
 				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
@@ -400,7 +400,7 @@
 				210BE81F2AC37E98EA8580EA /* BaseViewModel.swift */,
 				210BE09BDDBB63DD98464192 /* SignInViewModel.swift */,
 				210BE8917F4B6AB6DDA9FFBA /* ScannerViewModel.swift */,
-				210BED4859A8F2A367EA4ED1 /* OrdersViewModel.swift */,
+				210BED4859A8F2A367EA4ED1 /* AccountViewModel.swift */,
 				210BECA9CA2821C630F01AE4 /* OrderOverviewViewModel.swift */,
 				2105567D1D3650780036493C /* StoreSelectionViewModel.swift */,
 				21A6B4691D63311E008BA95C /* ReservationViewModel.swift */,
@@ -469,7 +469,7 @@
 				215C4F671CF2836400A99790 /* ProductViewModelSpec.swift */,
 				210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */,
 				210A5B281CFFBE8200217A86 /* CartViewModelSpec.swift */,
-				21FDB47C1D219B580028DDC9 /* OrdersViewModelSpec.swift */,
+				21FDB47C1D219B580028DDC9 /* AccountViewModelSpec.swift */,
 				21A6B46B1D6477E0008BA95C /* ReservationViewModelSpec.swift */,
 			);
 			path = ViewModels;
@@ -1211,10 +1211,10 @@
 				210BE6B5006B9DD2CC047578 /* SignInViewModel.swift in Sources */,
 				210BE8603FFDCB26D5443788 /* AppRouting.swift in Sources */,
 				2105567E1D3650780036493C /* StoreSelectionViewModel.swift in Sources */,
-				210BEDE4529CF8A86AA49D69 /* OrdersViewController.swift in Sources */,
+				210BEDE4529CF8A86AA49D69 /* AccountViewController.swift in Sources */,
 				210BE24589543CA1E27301B4 /* ScannerViewController.swift in Sources */,
 				210BEBCB6460A6C110A6DF66 /* ScannerViewModel.swift in Sources */,
-				210BEA81E77949DA5C0DE293 /* OrdersViewModel.swift in Sources */,
+				210BEA81E77949DA5C0DE293 /* AccountViewModel.swift in Sources */,
 				210BE7E5E4522D03EF0BB7B8 /* Changeset.swift in Sources */,
 				210BEE95348FD2AEEE13490D /* OrderOverviewViewModel.swift in Sources */,
 				210BED60B9D7ED7035A347E4 /* OrderOverviewViewController.swift in Sources */,
@@ -1236,7 +1236,7 @@
 				215C4F6B1CF28CC600A99790 /* NSBundle+CurrentTestBundle.swift in Sources */,
 				21C637821CF730380079945A /* ProductOverviewViewModelSpec.swift in Sources */,
 				215C4F681CF2836400A99790 /* ProductViewModelSpec.swift in Sources */,
-				21FDB47D1D219B580028DDC9 /* OrdersViewModelSpec.swift in Sources */,
+				21FDB47D1D219B580028DDC9 /* AccountViewModelSpec.swift in Sources */,
 				21A6B46C1D6477E0008BA95C /* ReservationViewModelSpec.swift in Sources */,
 				210A5B291CFFBE8200217A86 /* CartViewModelSpec.swift in Sources */,
 			);

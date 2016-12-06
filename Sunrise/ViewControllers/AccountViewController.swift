@@ -8,17 +8,20 @@ import ReactiveCocoa
 import ReactiveSwift
 import Result
 
-class OrdersViewController: UIViewController {
+class AccountViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet var myAccountHeader: UIView!
+    @IBOutlet var myPreferencesHeader: UIView!
+    @IBOutlet var myStoreView: UIView!
+    
     var ordersHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
     var reservationsHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
     private let refreshControl = UIRefreshControl()
 
-    var viewModel: OrdersViewModel? {
+    var viewModel: AccountViewModel? {
         didSet {
             bindViewModel()
         }
@@ -27,7 +30,7 @@ class OrdersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel = OrdersViewModel()
+        viewModel = AccountViewModel()
         tableView.tableFooterView = UIView()
 
         configureHeaderViews()
@@ -152,7 +155,7 @@ class OrdersViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension OrdersViewController: UITableViewDataSource {
+extension AccountViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell") as! OrderCell
@@ -169,23 +172,43 @@ extension OrdersViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 5
     }
 
 }
 
 // MARK: - UITableViewDelegate
 
-extension OrdersViewController: UITableViewDelegate {
+extension AccountViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = section == 0 ? ordersHeader : reservationsHeader
-        guard let viewModel = viewModel else { return headerView }
+        switch section {
+            case 0:
+                return myAccountHeader
+            case 3:
+                return myPreferencesHeader
+            case 4:
+                return myStoreView
+            default:
+                let headerView = section == 1 ? ordersHeader : reservationsHeader
+                guard let viewModel = viewModel else { return headerView }
 
-        headerView.title.text = viewModel.headerTitleForSection(section)
-        headerView.tag = section
+                headerView.title.text = viewModel.headerTitleForSection(section)
+                headerView.tag = section
 
-        return headerView
+                return headerView
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 25
+        case 3:
+            return 55
+        default:
+            return 80
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
