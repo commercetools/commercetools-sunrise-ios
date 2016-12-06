@@ -6,7 +6,7 @@ import ReactiveSwift
 import Result
 import Commercetools
 
-class OrdersViewModel: BaseViewModel {
+class AccountViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>

@@ -57,11 +57,11 @@ class AppRouting {
 
         let newAccountRootViewController: UIViewController
         if isLoggedIn {
-            newAccountRootViewController = mainStoryboard.instantiateViewController(withIdentifier: "OrdersViewController")
+            newAccountRootViewController = mainStoryboard.instantiateViewController(withIdentifier: "AccountViewController")
             if let navigationController = newAccountRootViewController as? UINavigationController,
-               let ordersViewController = navigationController.viewControllers.first as? OrdersViewController {
+               let accountViewController = navigationController.viewControllers.first as? AccountViewController {
                 // Preload orders
-                _ = ordersViewController.view
+                _ = accountViewController.view
             }
         } else {
             newAccountRootViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
@@ -123,12 +123,12 @@ class AppRouting {
         Switches to the account tab, and presents reservation overview view controller.
     */
     static func showReservationWithId(_ reservationId: String) {
-        guard let tabBarController = tabBarController, let ordersNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
-                let ordersViewController = ordersNavigationController.viewControllers.first as? OrdersViewController else { return }
+        guard let tabBarController = tabBarController, let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
+                let accountViewController = accountNavigationController.viewControllers.first as? AccountViewController else { return }
 
         tabBarController.selectedIndex = TabIndex.myAccountTab.index
-        ordersNavigationController.popToRootViewController(animated: false)
-        ordersViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+        accountNavigationController.popToRootViewController(animated: false)
+        accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
     }
 
 }

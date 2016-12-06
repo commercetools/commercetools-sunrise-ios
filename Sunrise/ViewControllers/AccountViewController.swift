@@ -8,7 +8,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import Result
 
-class OrdersViewController: UIViewController {
+class AccountViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var myAccountHeader: UIView!
@@ -21,7 +21,7 @@ class OrdersViewController: UIViewController {
 
     private let refreshControl = UIRefreshControl()
 
-    var viewModel: OrdersViewModel? {
+    var viewModel: AccountViewModel? {
         didSet {
             bindViewModel()
         }
@@ -30,7 +30,7 @@ class OrdersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel = OrdersViewModel()
+        viewModel = AccountViewModel()
         tableView.tableFooterView = UIView()
 
         configureHeaderViews()
@@ -155,7 +155,7 @@ class OrdersViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension OrdersViewController: UITableViewDataSource {
+extension AccountViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell") as! OrderCell
@@ -179,7 +179,7 @@ extension OrdersViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension OrdersViewController: UITableViewDelegate {
+extension AccountViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
