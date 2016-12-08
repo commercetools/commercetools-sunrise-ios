@@ -9,36 +9,41 @@ import Commercetools
 
 class ReservationsInterfaceModel {
 
-    // Inputs
+    static let sharedInstance = ReservationsInterfaceModel()
 
     // Outputs
     let isLoading: MutableProperty<Bool>
     let presentSignInMessage: MutableProperty<Bool>
     let numberOfRows: MutableProperty<Int>
+    let presentReservationSignal: Signal<ReservationDetailsInterfaceModel, NoError>
 
+    private let presentReservationObserver: Observer<ReservationDetailsInterfaceModel, NoError>
     private var reservations = [Order]()
 
     // MARK: - Lifecycle
 
-    init() {
+    private init() {
         presentSignInMessage = MutableProperty(Commercetools.authState != .customerToken)
         isLoading = MutableProperty(false)
         numberOfRows = MutableProperty(0)
-        NotificationCenter.default.addObserver(self, selector: #selector(checkAuthState), name: Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
+        let (presentReservationSignal, presentReservationObserver) = Signal<ReservationDetailsInterfaceModel, NoError>.pipe()
+        self.presentReservationSignal = presentReservationSignal
+        self.presentReservationObserver = presentReservationObserver
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkAuthState), name: Commercetools.Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
 
         presentSignInMessage.producer
         .startWithValues({ [weak self] presentSignIn in
-            if !presentSignIn {
-                self?.isLoading.value = true
-                self?.retrieveReservations()
-            } else {
+            if presentSignIn {
                 self?.numberOfRows.value = 0
+            } else {
+                self?.retrieveReservations()
             }
         })
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Commercetools.Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
     }
 
     @objc private func checkAuthState() {
@@ -64,9 +69,35 @@ class ReservationsInterfaceModel {
         return ReservationDetailsInterfaceModel(reservation: reservation)
     }
 
+    // MARK: - Presenting reservation from the notification
+
+    func presentDetails(for reservationId: String) {
+        if let reservation = reservations.filter({ $0.id == reservationId }).first {
+            let detailsInterfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
+            presentReservationObserver.send(value: detailsInterfaceModel)            
+        }
+    }
+
+    func presentDirections(for reservationId: String) {
+        if let reservation = reservations.filter({ $0.id == reservationId }).first {
+            let detailsInterfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
+            detailsInterfaceModel.getDirectionObserver.send(value: ())
+        }
+    }
+
+    func add(reservation: Order) {
+        if reservations.filter({ $0.id == reservation.id }).count == 0 {
+            reservations.insert(reservation, at: 0)
+            numberOfRows.value = reservations.count
+        }
+    }
+
     // MARK: - Reservations retrieval
 
     private func retrieveReservations() {
+        guard !presentSignInMessage.value else { return }
+
+        isLoading.value = true
         Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { [weak self] result in
             if let orders = result.model?.results, result.isSuccess {
                 let reservations = orders.filter { $0.isReservation == true }

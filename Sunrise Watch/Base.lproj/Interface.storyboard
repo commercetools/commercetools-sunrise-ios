@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="83.692307692307693" y="101.12820512820514"/>
         </scene>
-        <!--Reservation Details Interface Controller-->
+        <!--ReservationDetailsInterfaceController-->
         <scene sceneID="lSW-xS-HHG">
             <objects>
-                <controller id="r4v-gy-uaD" customClass="ReservationDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ReservationDetailsInterfaceController" id="r4v-gy-uaD" customClass="ReservationDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="UPM-mm-GiP">
                             <items>
@@ -171,12 +171,7 @@
                         <group width="1" alignment="left" layout="vertical" id="RTk-ID-roa">
                             <items>
                                 <label alignment="left" text="Fancy shoes are ready for pickup!" numberOfLines="0" id="PDv-cl-Rj3"/>
-                                <group width="1" alignment="left" radius="6" id="1e5-VQ-hsx">
-                                    <items>
-                                        <imageView height="72" alignment="left" contentMode="scaleAspectFit" id="09x-vA-3F7"/>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </group>
+                                <map height="72" alignment="left" id="7ZN-oQ-O0W"/>
                                 <label alignment="left" text="SUNRISE Store Berlin" numberOfLines="0" id="T8J-lh-qeR"/>
                                 <label alignment="left" text="2 miles away" numberOfLines="0" id="JyW-L3-Y7u">
                                     <fontDescription key="font" style="UICTFontTextStyleBody"/>
@@ -186,7 +181,7 @@
                     </items>
                     <connections>
                         <outlet property="distanceLabel" destination="JyW-L3-Y7u" id="Ul4-0V-nyO"/>
-                        <outlet property="productImage" destination="09x-vA-3F7" id="xSW-Kh-zXP"/>
+                        <outlet property="storeMap" destination="7ZN-oQ-O0W" id="v4M-TH-t4I"/>
                         <outlet property="storeNameLabel" destination="T8J-lh-qeR" id="9J1-rn-47C"/>
                         <outlet property="titleLabel" destination="PDv-cl-Rj3" id="9iR-tL-UXs"/>
                     </connections>

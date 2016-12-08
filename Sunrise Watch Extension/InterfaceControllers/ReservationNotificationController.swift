@@ -8,24 +8,22 @@ import UserNotifications
 import CoreLocation
 import Commercetools
 import ReactiveSwift
-import SDWebImage
 
 class ReservationNotificationController: WKUserNotificationInterfaceController {
 
-//    @IBOutlet var storeMap: WKInterfaceMap!
-    @IBOutlet var productImage: WKInterfaceImage!
+    @IBOutlet var storeMap: WKInterfaceMap!
     @IBOutlet var titleLabel: WKInterfaceLabel!
     @IBOutlet var storeNameLabel: WKInterfaceLabel!
     @IBOutlet var distanceLabel: WKInterfaceLabel!    
 
     override init() {
-        super.init()
-        
         if let configuration = Config(path: "CommercetoolsProdConfig"), Commercetools.config == nil {
             Commercetools.config = configuration
         }
         
-        distanceLabel.setText("")
+        super.init()
+
+        [titleLabel, storeNameLabel, distanceLabel].forEach { $0.setText("") }
     }
 
     override func didReceive(_ notification: UNNotification, withCompletion completionHandler: @escaping (WKUserNotificationInterfaceType) -> Swift.Void) {
@@ -37,18 +35,12 @@ class ReservationNotificationController: WKUserNotificationInterfaceController {
                         self?.titleLabel.setText(interfaceModel.productName + " is ready for pickup!")
                         self?.distanceLabel.setText(interfaceModel.storeDistance)
                         self?.storeNameLabel.setText(interfaceModel.storeName)
-                        if let url = URL(string: interfaceModel.productImageUrl) {
-                            SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
-                                if let image = image {
-                                    self?.productImage.setImage(image)
-                                }
-                            })
+                        if let center = interfaceModel.storeLocation?.coordinate {
+                            self?.storeMap.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)))
+                            self?.storeMap.addAnnotation(center, with: .red)
                         }
-//                        if let center = interfaceModel.storeLocation?.coordinate {
-//                            self?.storeMap.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)))
-//                            self?.storeMap.addAnnotation(center, with: .red)
-//                        }
                         completionHandler(.custom)
+                        ReservationsInterfaceModel.sharedInstance.add(reservation: reservation)
                     }
                     
                 } else if let errors = result.errors as? [CTError], result.isFailure {

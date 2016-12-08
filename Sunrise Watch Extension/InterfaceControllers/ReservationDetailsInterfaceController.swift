@@ -27,7 +27,7 @@ class ReservationDetailsInterfaceController: WKInterfaceController {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-
+        setTitle("Close")
         interfaceModel = context as? ReservationDetailsInterfaceModel
     }
 

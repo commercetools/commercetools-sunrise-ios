@@ -4,6 +4,7 @@
 
 import WatchKit
 import Commercetools
+import UserNotifications
 import CoreLocation
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
@@ -21,6 +22,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
+        
+        UNUserNotificationCenter.current().delegate = self
     }
 
     func applicationDidBecomeActive() {
@@ -68,5 +71,23 @@ extension ExtensionDelegate: CLLocationManagerDelegate {
             UserDefaults.standard.set(location.coordinate.latitude, forKey: userLatitudeKey)
             UserDefaults.standard.set(location.coordinate.longitude, forKey: userLongitudeKey)
         }        
+    }
+}
+
+extension ExtensionDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let reservationId = response.notification.request.content.userInfo["reservation-id"] as? String {
+            if response.actionIdentifier == Notification.Action.getDirections {
+                ReservationsInterfaceModel.sharedInstance.presentDirections(for: reservationId)
+            } else {
+                ReservationsInterfaceModel.sharedInstance.presentDetails(for: reservationId)
+            }
+        }
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
     }
 }

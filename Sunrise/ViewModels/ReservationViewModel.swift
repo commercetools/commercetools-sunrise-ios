@@ -87,3 +87,15 @@ class ReservationViewModel {
     }
 
 }
+
+struct Notification {
+    
+    struct Category {
+        static let reservationConfirmation = "reservation_confirmation"
+    }
+    
+    struct Action {
+        static let view = "viewAction"
+        static let getDirections = "getDirectionsAction"
+    }
+}
