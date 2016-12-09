@@ -142,6 +142,14 @@ class StoreSelectionViewModel: BaseViewModel {
             self?.retrieveStores()
         }
 
+        userLocation.producer
+        .startWithValues({ [weak self] userLocation in
+            if let userLocation = userLocation, let stores = self?.channels {
+                self?.channels = Channel.sortStoresByDistance(stores: stores, userLocation: userLocation)
+            }
+            self?.isLoading.value = false
+        })
+
         retrieveStores()
 
     }
@@ -176,7 +184,7 @@ class StoreSelectionViewModel: BaseViewModel {
     func storeDistanceAtIndexPath(_ indexPath: IndexPath) -> String {
         let store = channels[rowForChannelAtIndexPath(indexPath)]
 
-        if let storeDistance = storeDistance(store) {
+        if let userLocation = userLocation.value, let storeDistance = store.distance(from: userLocation) {
             return String(format: "%.1f", arguments: [storeDistance / 1000]) + " km"
         }
         return "-"
@@ -241,15 +249,6 @@ class StoreSelectionViewModel: BaseViewModel {
                 channelRow += 1
             }
             return IndexPath(row: channelRow, section: 0)
-        }
-        return nil
-    }
-
-    private func storeDistance(_ store: Channel) -> Double? {
-        if let userLocation = userLocation.value, let lat = store.latitude, let lon = store.longitude,
-                let latitude = Double(lat), let longitude = Double(lon) {
-            let channelLocation = CLLocation(latitude: latitude, longitude: longitude)
-            return userLocation.distance(from: channelLocation)
         }
         return nil
     }
@@ -326,23 +325,20 @@ class StoreSelectionViewModel: BaseViewModel {
         isLoading.value = true
 
         // Retrieve channels which represent physical stores
-        Channel.query(predicates: ["roles contains all (\"InventorySupply\", \"ProductDistribution\") AND NOT(roles contains any (\"Primary\"))"],
-                sort:  ["lastModifiedAt desc"], result: { result in
-            if let channels = result.model?.results, result.isSuccess {
-                self.channels = channels.sorted(by: { [weak self] in
-                    if let first = self?.storeDistance($0), let second = self?.storeDistance($1) {
-                        return first < second
-                    } else {
-                        return false
-                    }
-                })
 
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+        Channel.physicalStores { [weak self] result in
+            if let channels = result.model?.results, result.isSuccess {
+                self?.channels = channels
+                if let userLocation = self?.userLocation.value {
+                    self?.channels = Channel.sortStoresByDistance(stores: channels, userLocation: userLocation)
+                }
+
+            } else if let errors = result.errors as? [CTError], let message = self?.alertMessage(for: errors), result.isFailure {
+                self?.alertMessageObserver.send(value: message)
 
             }
-            self.isLoading.value = false
-        })
+            self?.isLoading.value = false
+        }
     }
 
 }

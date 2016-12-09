@@ -65,12 +65,6 @@ class StoreSelectionViewController: UITableViewController {
             }
         })
 
-        viewModel.userLocation.producer
-        .observe(on: UIScheduler())
-        .startWithValues({ [weak self] _ in
-            self?.tableView.reloadData()
-        })
-
         viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] changeset in

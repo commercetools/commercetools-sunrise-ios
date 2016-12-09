@@ -34,7 +34,11 @@ class ReservationsInterfaceController: WKInterfaceController {
         [signInGroup, reservationsGroup].forEach { $0.setAlpha(0) }
         [signInGroup, reservationsGroup].forEach { $0.setHidden(true) }
         
-        interfaceModel = ReservationsInterfaceModel()
+        interfaceModel = ReservationsInterfaceModel.sharedInstance
+    }
+    
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
+        return interfaceModel?.reservationDetailsInterfaceModel(for: rowIndex)
     }
 
     private func bindInterfaceModel() {
@@ -74,6 +78,12 @@ class ReservationsInterfaceController: WKInterfaceController {
             } else {
                 self?.activityAnimation?.stopAnimating()
             }
+        })
+
+        interfaceModel.presentReservationSignal
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] interfaceModel in
+            self?.presentController(withName: "ReservationDetailsInterfaceController", context: interfaceModel)
         })
 
         interfaceModel.numberOfRows.producer

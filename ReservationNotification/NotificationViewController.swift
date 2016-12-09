@@ -51,6 +51,23 @@ class ReservationNotificationViewController: UIViewController, UNNotificationCon
             }
         }
     }
+    
+    func didReceive(_ response: UNNotificationResponse,
+                    completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
+        
+        if response.actionIdentifier == Notification.Action.getDirections {
+            let request = response.notification.request
+            let identifiers = [request.identifier]
+            
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: identifiers)
+            
+            viewModel?.getDirectionObserver.send(value: ())
+            completion(.dismiss)
+        } else {
+            completion(.dismissAndForwardAction)
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
