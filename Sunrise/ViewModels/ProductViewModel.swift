@@ -18,7 +18,7 @@ class ProductViewModel: BaseViewModel {
     let sku = MutableProperty("")
     let price = MutableProperty("")
     let oldPrice = MutableProperty("")
-    let imageUrl = MutableProperty("")
+    let imageCount = MutableProperty(0)
     let quantities = (1...9).map { String($0) }
     let isLoading = MutableProperty(false)
     var isLoggedIn: Bool {
@@ -142,8 +142,8 @@ class ProductViewModel: BaseViewModel {
             return self?.variantForActiveAttributes?.sku ?? ""
         }
 
-        imageUrl <~ activeAttributes.producer.map { [weak self] _ in
-            return self?.variantForActiveAttributes?.images?.first?.url ?? ""
+        imageCount <~ activeAttributes.producer.map { [weak self] _ in
+            return self?.variantForActiveAttributes?.images?.count ?? 0
         }
 
         price <~ activeAttributes.producer.map { [weak self] _ in
@@ -186,6 +186,16 @@ class ProductViewModel: BaseViewModel {
 
     func isAttributeSelectableAtIndexPath(_ indexPath: IndexPath) -> Bool {
         return (attributes.value[selectableAttributes[indexPath.row]]?.count ?? 0) > 1
+    }
+
+    // MARK: - Images Collection View
+
+    func numberOfItems(in section: Int) -> Int {
+        return variantForActiveAttributes?.images?.count ?? 0
+    }
+
+    func productImageUrl(at indexPath: IndexPath) -> String {
+        return variantForActiveAttributes?.images?[indexPath.item].url ?? ""
     }
 
     // MARK: Internal Helpers
@@ -286,5 +296,4 @@ class ProductViewModel: BaseViewModel {
             }
         })
     }
-
 }
