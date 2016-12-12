@@ -44,6 +44,10 @@ class ProductViewModelSpec: QuickSpec {
                 expect(productViewModel.imageCount.value).toEventually(equal(1))
             }
 
+            it("initially has imageUrl selected from master variant") {
+                expect(productViewModel.productImageUrl(at: IndexPath(row: 0, section: 0))).toEventually(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg"))
+            }
+
             it("initially has properly formatted price from master variant") {
                 expect(productViewModel.price.value).toEventually(equal("€96.25"))
             }

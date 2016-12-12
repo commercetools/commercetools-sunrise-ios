@@ -190,10 +190,6 @@ class ProductViewModel: BaseViewModel {
 
     // MARK: - Images Collection View
 
-    func numberOfItems(in section: Int) -> Int {
-        return variantForActiveAttributes?.images?.count ?? 0
-    }
-
     func productImageUrl(at indexPath: IndexPath) -> String {
         return variantForActiveAttributes?.images?[indexPath.item].url ?? ""
     }

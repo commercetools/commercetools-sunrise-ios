@@ -304,7 +304,7 @@ extension ProductViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        return viewModel.numberOfItems(in: section)
+        return viewModel.imageCount.value
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
