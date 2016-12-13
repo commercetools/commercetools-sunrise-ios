@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var deviceToken: String?
 
+    private var locationManager: CLLocationManager?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppRouting.setupInitiallyActiveTab()
 
@@ -36,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Inform user about the configuration error
         }
 
-        CLLocationManager().requestWhenInUseAuthorization()
+        locationManager = CLLocationManager()
+        locationManager?.requestWhenInUseAuthorization()
         IQKeyboardManager.sharedManager().enable = true
 
         let notificationCenter = UNUserNotificationCenter.current()

@@ -17,8 +17,10 @@ class ProductViewController: UITableViewController {
     @IBOutlet var headerView: UIView!
     @IBOutlet var footerView: UIView!
     @IBOutlet var displayableAttributesHeaderView: UIView!
-
-    @IBOutlet weak var productImageView: UIImageView!
+    
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var imagesCollectionViewFlow: UICollectionViewFlowLayout!
+    @IBOutlet weak var imagePageControl: UIPageControl!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var skuLabel: UILabel!
     @IBOutlet weak var priceBeforeDiscount: UILabel!
@@ -55,6 +57,9 @@ class ProductViewController: UITableViewController {
         tableView.tableHeaderView = headerView
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
+
+        // Set the collection view cell width to match the screen width minus the spacing
+        imagesCollectionViewFlow.itemSize = CGSize(width: UIScreen.main.bounds.width - 10, height: 210)
 
         if viewModel != nil {
             bindViewModel()
@@ -97,10 +102,11 @@ class ProductViewController: UITableViewController {
                 self?.priceBeforeDiscount.attributedText = priceBeforeDiscount
             }
 
-        viewModel.imageUrl.producer
+        viewModel.imageCount.producer
             .observe(on: UIScheduler())
-            .startWithValues { [weak self] imageUrl in
-                self?.productImageView.sd_setImage(with: URL(string: imageUrl))
+            .startWithValues { [weak self] imageCount in
+                self?.imagesCollectionView.reloadData()
+                self?.imagePageControl.numberOfPages = imageCount
             }
 
         viewModel.isLoading.producer
@@ -286,4 +292,26 @@ class ProductViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
 
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == imagesCollectionView {
+            let pageWidth = scrollView.frame.size.width
+            imagePageControl.currentPage = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
+        }
+    }
+}
+
+extension ProductViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let viewModel = viewModel else { return 0 }
+        return viewModel.imageCount.value
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
+
+        guard let viewModel = viewModel else { return cell }
+        cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)), placeholderImage: UIImage(named: "sun-placeholder"))
+        return cell
+    }
 }

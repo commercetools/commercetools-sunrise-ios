@@ -40,8 +40,12 @@ class ProductViewModelSpec: QuickSpec {
                 expect(productViewModel.sku.value).toEventually(equal("M0E20000000E7W1"))
             }
 
+            it("initially has imageCount selected from master variant") {
+                expect(productViewModel.imageCount.value).toEventually(equal(1))
+            }
+
             it("initially has imageUrl selected from master variant") {
-                expect(productViewModel.imageUrl.value).toEventually(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg"))
+                expect(productViewModel.productImageUrl(at: IndexPath(row: 0, section: 0))).toEventually(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/080534_1_medium.jpg"))
             }
 
             it("initially has properly formatted price from master variant") {
