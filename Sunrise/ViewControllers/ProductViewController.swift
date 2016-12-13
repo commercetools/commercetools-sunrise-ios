@@ -311,7 +311,7 @@ extension ProductViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
 
         guard let viewModel = viewModel else { return cell }
-        cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)))
+        cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)), placeholderImage: UIImage(named: "sun-placeholder"))
         return cell
     }
 }

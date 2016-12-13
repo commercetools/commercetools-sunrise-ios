@@ -116,8 +116,8 @@ class ProductViewModel: BaseViewModel {
 
                 // We want to show attribute values only for those variants that have prices available
                 if let masterVariant = product?.masterVariant, let prices = masterVariant.prices,
-                        let defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) ,
-                        prices.count > 0 {
+                   let defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type),
+                   prices.count > 0 {
                     values.append(defaultValue)
                 }
                 product?.variants?.filter({ ($0.prices?.count ?? 0) > 0 }).forEach { variant in
