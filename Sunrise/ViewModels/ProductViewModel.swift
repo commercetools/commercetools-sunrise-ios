@@ -5,6 +5,7 @@
 import Commercetools
 import ReactiveSwift
 import Result
+import SDWebImage
 
 class ProductViewModel: BaseViewModel {
 
@@ -143,6 +144,7 @@ class ProductViewModel: BaseViewModel {
         }
 
         imageCount <~ activeAttributes.producer.map { [weak self] _ in
+            SDWebImagePrefetcher.shared().prefetchURLs(self?.variantForActiveAttributes?.images?.flatMap({ URL(string: ($0.url ?? "")) }))
             return self?.variantForActiveAttributes?.images?.count ?? 0
         }
 
