@@ -100,6 +100,7 @@ class ProductViewController: UITableViewController {
                 let priceBeforeDiscount =  NSMutableAttributedString(string: oldPrice)
                 priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
                 self?.priceBeforeDiscount.attributedText = priceBeforeDiscount
+                self?.priceBeforeDiscount.isHidden = oldPrice.characters.count == 0
             }
 
         viewModel.imageCount.producer

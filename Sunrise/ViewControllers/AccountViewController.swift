@@ -212,7 +212,7 @@ extension AccountViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        indexPath.section == 0 ? performSegue(withIdentifier: "orderDetails", sender: indexPath) : performSegue(withIdentifier: "reservationDetails", sender: indexPath)
+        indexPath.section == 1 ? performSegue(withIdentifier: "orderDetails", sender: indexPath) : performSegue(withIdentifier: "reservationDetails", sender: indexPath)
     }
 
 }

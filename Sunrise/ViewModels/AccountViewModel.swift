@@ -85,7 +85,7 @@ class AccountViewModel: BaseViewModel {
     }
 
     func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             let orderOverviewViewModel = OrderOverviewViewModel()
             orderOverviewViewModel.order.value = orders[indexPath.row]
             return orderOverviewViewModel
@@ -94,7 +94,7 @@ class AccountViewModel: BaseViewModel {
     }
 
     func reservationViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> ReservationViewModel? {
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             return ReservationViewModel(order: reservations[indexPath.row])
         }
         return nil
@@ -118,11 +118,11 @@ class AccountViewModel: BaseViewModel {
     }
 
     func orderNumberAtIndexPath(_ indexPath: IndexPath) -> String? {
-        return indexPath.section == 0 ? orders[indexPath.row].orderNumber : reservations[indexPath.row].orderNumber
+        return (indexPath.section == 1 ? orders[indexPath.row].orderNumber : reservations[indexPath.row].orderNumber) ?? "            N/A            "
     }
 
     func totalPriceAtIndexPath(_ indexPath: IndexPath) -> String? {
-        return indexPath.section == 0 ? orders[indexPath.row].totalPrice?.description : reservations[indexPath.row].totalPrice?.description
+        return indexPath.section == 1 ? orders[indexPath.row].totalPrice?.description : reservations[indexPath.row].totalPrice?.description
     }
 
     // MARK: - Presenting reservation confirmation from push notification
