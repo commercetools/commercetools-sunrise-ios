@@ -138,12 +138,19 @@ class AccountViewController: UIViewController {
 
         recognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
         reservationsHeader.addGestureRecognizer(recognizer)
+
+        recognizer = UITapGestureRecognizer(target: self, action:#selector(showMyStores))
+        myStoreView.addGestureRecognizer(recognizer)
     }
 
     func handleTap(_ recognizer: UITapGestureRecognizer) {
         if let headerView = recognizer.view, let viewModel = viewModel {
             viewModel.sectionExpandedObserver.send(value: headerView.tag)
         }
+    }
+
+    func showMyStores(_ recognizer: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "showMyStore", sender: self)
     }
 
     // MARK: - Logout action
