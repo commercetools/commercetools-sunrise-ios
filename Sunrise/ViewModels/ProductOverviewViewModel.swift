@@ -96,7 +96,7 @@ class ProductOverviewViewModel: BaseViewModel {
     private func queryForProductProjections(offset: UInt, text: String = "") {
         isLoading.value = true
 
-        ProductProjection.search(sort: ["createdAt desc"], limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text, result: { result in
+        ProductProjection.search(limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text, result: { result in
             if let products = result.model?.results, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 
