@@ -53,11 +53,13 @@ class MyStoreViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
+        viewModel?.isActive.value = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        viewModel?.isActive.value = false
         locationManager.stopUpdatingLocation()
+        super.viewWillDisappear(animated)
     }
 
     // MARK: - Bindings
@@ -115,22 +117,36 @@ class MyStoreViewController: UIViewController {
                     }
                 }
 
+        viewModel.presentStoreDetailsSignal
+                .observe(on: UIScheduler())
+                .observeValues { [weak self] in
+                    self?.performSegue(withIdentifier: "storeDetails", sender: self)
+                }
+
+        viewModel.backButtonTitle.producer
+                .observe(on: UIScheduler())
+                .startWithValues { [weak self] title in
+                    self?.navigationController?.navigationBar.backItem?.title = title
+                }
+
         viewModel.selectedStoreLocation.producer
                 .observe(on: UIScheduler())
                 .startWithValues({ [weak self] storeLocation in
                     guard let view = self?.view, let mapView = self?.mapView,
                           let tableViewHeight = self?.tableViewHeight,
                           let selectedStoreDetailsView = self?.selectedStoreDetailsView,
-                          let selectedStoreViewBottomGuide = self?.selectedStoreViewBottomGuide else { return }
+                          let selectedStoreViewBottomGuide = self?.selectedStoreViewBottomGuide,
+                          let navigationItem = self?.navigationItem else { return }
                     if let storeLocation = storeLocation {
                         let mapViewRegion = MKCoordinateRegion(center: storeLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
                         mapView.setRegion(mapViewRegion, animated: true)
+                    } else {
+                        navigationItem.hidesBackButton = true
                     }
-                    self?.navigationItem.rightBarButtonItem = storeLocation != nil ? UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self?.closeStoreDetails)) : nil
-                    self?.navigationItem.hidesBackButton = storeLocation != nil
                     UIView.animate(withDuration: 0.5) {
                         tableViewHeight.constant = storeLocation != nil ? 0 : 0.55 * view.bounds.size.height
                         selectedStoreViewBottomGuide.constant = storeLocation != nil ? 0 : -selectedStoreDetailsView.bounds.size.height
+                        navigationItem.hidesBackButton = false
                         view.layoutIfNeeded()
                     }
                 })
@@ -146,6 +162,21 @@ class MyStoreViewController: UIViewController {
 
     @IBAction func refresh(_ sender: UIRefreshControl) {
         viewModel?.refreshObserver.send(value: ())
+    }
+
+    // MARK: - Store details action
+
+    @IBAction func showStoreDetails(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "storeDetails", sender: self)
+    }
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let storeDetailsViewController = segue.destination as? StoreDetailsViewController,
+           let storeDetailsViewModel = viewModel?.storeDetailsViewModel {
+            storeDetailsViewController.viewModel = storeDetailsViewModel
+        }
     }
 }
 
@@ -196,5 +227,10 @@ extension MyStoreViewController: MKMapViewDelegate {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "storeAnnotation")
         annotationView.image = UIImage(named: "map-pin")
         return annotationView
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        mapView.deselectAnnotation(view.annotation, animated: false)
+        viewModel?.selectedPinCoordinateObserver.send(value: view.annotation?.coordinate)
     }
 }

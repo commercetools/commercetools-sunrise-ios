@@ -13,19 +13,40 @@ class MyStoreViewModel: BaseViewModel {
 
     // Inputs
     let selectedIndexPathObserver: Observer<IndexPath?, NoError>
+    let selectedPinCoordinateObserver: Observer<CLLocationCoordinate2D?, NoError>
     let refreshObserver: Observer<Void, NoError>
     let userLocation: MutableProperty<CLLocation?>
+    let isActive = MutableProperty(true)
 
     // Outputs
     let isLoading: MutableProperty<Bool>
     let visibleMapRect: MutableProperty<MKMapRect>
     let selectedStoreLocation: MutableProperty<CLLocation?>
     let storeLocations: MutableProperty<[CLLocation]>
+//    let selectedStoreDetailsViewModel: MutableProperty<StoreDetailsViewModel?>
     let selectedStoreName: MutableProperty<String?>
     let selectedStreetAndNumberInfo: MutableProperty<String?>
     let selectedZipAndCityInfo: MutableProperty<String?>
     let selectedOpenLine1Info: MutableProperty<String?>
+    let presentStoreDetailsSignal: Signal<Void, NoError>
+    let backButtonTitle: MutableProperty<String?>
+    var backButtonSignal: Signal<Void, NoError>? {
+        return AppRouting.accountViewController?.viewModel?.backButtonSignal
+    }
+    var storeDetailsViewModel: StoreDetailsViewModel? {
+        if let store = selectedStore.value {
+            return StoreDetailsViewModel(store: store)
+        }
+        return nil
+    }
+    var myStore: MutableProperty<Channel?>? {
+        return AppRouting.accountViewController?.viewModel?.myStore
+    }
+    var navigationShouldPop: MutableProperty<Bool>? {
+        return AppRouting.accountViewController?.viewModel?.navigationShouldPop
+    }
 
+    let selectedStore: MutableProperty<Channel?>
     private let channels: MutableProperty<[Channel]>
 
 
@@ -39,6 +60,8 @@ class MyStoreViewModel: BaseViewModel {
         selectedStoreLocation = MutableProperty(nil)
         storeLocations = MutableProperty([])
         channels = MutableProperty([])
+        backButtonTitle = MutableProperty(nil)
+        selectedStore = MutableProperty(nil)
         selectedStoreName = MutableProperty(nil)
         selectedStreetAndNumberInfo = MutableProperty(nil)
         selectedZipAndCityInfo = MutableProperty(nil)
@@ -49,6 +72,12 @@ class MyStoreViewModel: BaseViewModel {
 
         let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<IndexPath?, NoError>.pipe()
         self.selectedIndexPathObserver = selectedIndexPathObserver
+
+        let (selectedPinCoordinateSignal, selectedPinCoordinateObserver) = Signal<CLLocationCoordinate2D?, NoError>.pipe()
+        self.selectedPinCoordinateObserver = selectedPinCoordinateObserver
+
+        let (presentStoreDetailsSignal, presentStoreDetailsObserver) = Signal<Void, NoError>.pipe()
+        self.presentStoreDetailsSignal = presentStoreDetailsSignal
 
         super.init()
 
@@ -84,20 +113,48 @@ class MyStoreViewModel: BaseViewModel {
             self?.retrieveStores()
         }
 
+        selectedStoreLocation <~ selectedStore.map { return $0?.location }
+        selectedStoreName <~ selectedStore.map { return $0?.name?.localizedString }
+        selectedStreetAndNumberInfo <~ selectedStore.map { return $0?.streetAndNumberInfo }
+        selectedZipAndCityInfo <~ selectedStore.map { return $0?.zipAndCityInfo }
+        selectedOpenLine1Info <~ selectedStore.map { return $0?.openingTimes }
+        backButtonTitle <~ selectedStore.combineLatest(with: isActive).map { selectedStore, isActive in
+            selectedStore == nil || !isActive ? NSLocalizedString("My Account", comment: "My Account") : NSLocalizedString("All Stores", comment: "All Stores")
+        }
+        if let navigationShouldPop = navigationShouldPop {
+            navigationShouldPop <~ selectedStore.combineLatest(with: isActive).map { selectedStore, isActive in
+                return selectedStore == nil || !isActive
+            }
+        }
+        if let backButtonSignal = backButtonSignal {
+            backButtonSignal.observeValues { [weak self] in
+                if let isActive = self?.isActive.value, self?.selectedStore.value != nil && isActive {
+                    self?.selectedStore.value = nil
+                }
+            }
+        }
+
         selectedIndexPathSignal.observeValues { [weak self] selectedIndexPath in
             if let selectedIndexPath = selectedIndexPath {
-                let store = self?.channels.value[selectedIndexPath.row]
-                self?.selectedStoreLocation.value = self?.channels.value[selectedIndexPath.row].location
-                self?.selectedStoreName.value = store?.name?.localizedString
-                self?.selectedStreetAndNumberInfo.value = store?.streetAndNumberInfo
-                self?.selectedZipAndCityInfo.value = store?.zipAndCityInfo
-                self?.selectedOpenLine1Info.value = store?.openingTimes
+                self?.selectedStore.value = self?.channels.value[selectedIndexPath.row]
             } else {
-                self?.selectedStoreLocation.value = nil
-                self?.selectedStoreName.value = nil
-                self?.selectedStreetAndNumberInfo.value = nil
-                self?.selectedZipAndCityInfo.value = nil
-                self?.selectedOpenLine1Info.value = nil
+                self?.selectedStore.value = nil
+            }
+        }
+
+        selectedPinCoordinateSignal.observeValues { [weak self] coordinate in
+            if self?.selectedStore.value != nil {
+                presentStoreDetailsObserver.send(value: ())
+            } else if let coordinate = coordinate {
+                self?.selectedStore.value = self?.channels.value.filter({ store in
+                    if let storeLocation = store.location {
+                        return storeLocation.coordinate.latitude == coordinate.latitude
+                                && storeLocation.coordinate.longitude == coordinate.longitude
+                    }
+                    return false
+                }).first
+            } else {
+                self?.selectedStore.value = nil
             }
         }
 
@@ -128,8 +185,10 @@ class MyStoreViewModel: BaseViewModel {
     }
 
     func isMyStore(at indexPath: IndexPath) -> Bool {
-        // TODO obtain my store from user defaults once store details screen is in place
-        return indexPath.row == 0
+        if let myStore = myStore?.value {
+            return myStore.id == channels.value[indexPath.row].id
+        }
+        return false
     }
 
     // MARK: - Querying for physical stores
