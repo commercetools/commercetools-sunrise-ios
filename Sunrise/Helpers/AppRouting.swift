@@ -29,6 +29,10 @@ class AppRouting {
         return AuthManager.sharedInstance.state == .customerToken
     }
 
+    static var accountViewController: AccountViewController? {
+        return (tabBarController?.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController)?.viewControllers.first as? AccountViewController
+    }
+
     /**
         In case the user is not logged in, this method presents login view controller from my account tab.
     */
@@ -94,7 +98,7 @@ class AppRouting {
 
         tabBarController.selectedIndex = TabIndex.homeTab.index
         homeTabNavigationController.popToRootViewController(animated: false)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(50 * Double(NSEC_PER_MSEC))) / Double(NSEC_PER_SEC)) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
             productOverviewViewController.searchController.searchBar.becomeFirstResponder()
         }
     }
@@ -130,5 +134,4 @@ class AppRouting {
         accountNavigationController.popToRootViewController(animated: false)
         accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
     }
-
 }

@@ -8,6 +8,7 @@ import Result
 import CoreLocation
 import Commercetools
 
+#if os(iOS)
 class ReservationViewModel {
 
     // Inputs
@@ -87,6 +88,7 @@ class ReservationViewModel {
     }
 
 }
+#endif
 
 struct Notification {
     

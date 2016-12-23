@@ -6,11 +6,15 @@ import ReactiveSwift
 import Result
 import Commercetools
 
+/// The key used for storing logged in username.
+let kMyStoreId = "MyStoreId"
+
 class AccountViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let sectionExpandedObserver: Observer<Int, NoError>
+    let backButtonObserver: Observer<Void, NoError>
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -18,6 +22,9 @@ class AccountViewModel: BaseViewModel {
     let showReservationSignal: Signal<IndexPath, NoError>
     let ordersExpanded = MutableProperty(false)
     let reservationsExpanded = MutableProperty(false)
+    let myStore: MutableProperty<Channel?>
+    let navigationShouldPop = MutableProperty(true)
+    let backButtonSignal: Signal<Void, NoError>
 
     var orders = [Order]()
     var reservations = [Order]()
@@ -32,6 +39,7 @@ class AccountViewModel: BaseViewModel {
 
     override init() {
         isLoading = MutableProperty(true)
+        myStore = MutableProperty(nil)
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -40,6 +48,8 @@ class AccountViewModel: BaseViewModel {
         sectionExpandedObserver = expandedObserver
 
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
+
+        (backButtonSignal, backButtonObserver) = Signal<Void, NoError>.pipe()
 
         (showReservationSignal, showReservationObserver) = Signal<IndexPath, NoError>.pipe()
 
@@ -154,6 +164,12 @@ class AccountViewModel: BaseViewModel {
             self.isLoading.value = false
         })
         AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
+    }
+
+    private func retrieveMyStoreDetails() {
+        if let myStoreId = UserDefaults.standard.string(forKey: kMyStoreId) {
+            // retrieve stores
+        }
     }
 
     // MARK: - Customer logout

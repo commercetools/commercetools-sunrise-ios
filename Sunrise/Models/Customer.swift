@@ -13,4 +13,13 @@ extension Customer {
         address.lastName = lastName
         return address
     }
+
+    // MARK: - My store
+
+    private var fields: [String: Any]? {
+        return custom?["fields"] as? [String: Any]
+    }
+    var imageUrl: String? {
+        return (fields?["myStore"] as? Reference<Channel>)?.id
+    }
 }
