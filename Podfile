@@ -2,7 +2,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 def common_pods
-  pod 'Commercetools'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'bd195608efe6dd91aa3b781e6cce35d1973336a4'
   pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
   pod 'ReactiveObjC'
 end
@@ -23,7 +23,7 @@ end
 
 target 'Sunrise Watch Extension' do
   platform :watchos, '3.0'
-  pod 'Commercetools'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'bd195608efe6dd91aa3b781e6cce35d1973336a4'
   pod 'ReactiveSwift', '1.0.0-alpha.4'
   pod 'SDWebImage', '4.0.0-beta2'
   pod 'NKWatchActivityIndicator'

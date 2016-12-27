@@ -51,11 +51,27 @@ class StoreDetailsViewController: UIViewController {
         getDirectionsButton.reactive.pressed = CocoaAction(viewModel.getDirectionsAction)
         setAsMyStoreButton.reactive.pressed = CocoaAction(viewModel.saveMyStoreAction)
 
+        viewModel.isLoading.producer
+                .observe(on: UIScheduler())
+                .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
+
         viewModel.myStore?.producer
                 .observe(on: UIScheduler())
                 .startWithValues { [weak self] myStore in
                     self?.setAsMyStoreButton.isEnabled = myStore == nil || myStore!.id != viewModel.store.id
                     self?.setAsMyStoreButton.alpha = myStore == nil || myStore!.id != viewModel.store.id ? 1 : 0.7
+                }
+
+        viewModel.saveMyStoreAction.errors
+                .observe(on: UIScheduler())
+                .observeValues { [weak self] error in
+                    let alertController = UIAlertController(
+                            title: "Failed",
+                            message: self?.viewModel?.alertMessage(for: [error]),
+                            preferredStyle: .alert
+                    )
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present(alertController, animated: true, completion: nil)
                 }
 
         viewModel.saveMyStoreAction.completed

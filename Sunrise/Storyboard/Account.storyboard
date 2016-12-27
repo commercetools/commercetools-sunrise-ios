@@ -180,6 +180,7 @@
                         <outlet property="myAccountHeader" destination="Ogq-Hk-ot3" id="qtK-Bz-rzh"/>
                         <outlet property="myPreferencesHeader" destination="GS0-2v-y93" id="smj-UA-qIT"/>
                         <outlet property="myStoreView" destination="SR1-cv-9TS" id="ajD-qv-OjW"/>
+                        <outlet property="storeNameLabel" destination="qbG-23-FEG" id="HZo-8J-WkV"/>
                         <outlet property="tableView" destination="ZDn-FB-JXG" id="vg3-tu-pk5"/>
                         <segue destination="W7s-8U-YJU" kind="show" identifier="orderDetails" id="9aL-hQ-lfg"/>
                         <segue destination="j91-Mb-aah" kind="show" identifier="reservationDetails" id="IkU-6D-2lc"/>

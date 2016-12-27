@@ -75,24 +75,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func saveDeviceTokenForCurrentCustomer() {
         if Commercetools.authState == .customerToken {
-            Customer.profile { result in
-                if let customerVersion = result.model?.version, result.isSuccess {
-                    var options = SetCustomTypeOptions()
-                    if let deviceToken = self.deviceToken {
-                        var type = ResourceIdentifier()
-                        type.key = "iOSUser"
-                        type.typeId = "type"
-                        options.type = type
-                        options.fields = ["apnsToken": deviceToken]
-                    }
-                    let updateActions = UpdateActions<CustomerUpdateAction>(version: customerVersion, actions: [.setCustomType(options: options)])
+            Customer.addCustomTypeIfNotExists { version, errors in
+                if let version = version, errors == nil {
+                    var options = SetCustomFieldOptions()
+                    options.name = "apnsToken"
+                    options.value = self.deviceToken
+                    let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.setCustomField(options: options)])
+
                     Customer.update(actions: updateActions) { result in
                         if result.isFailure {
                             result.errors?.forEach { debugPrint($0) }
                         }
                     }
-                } else if result.isFailure {
-                    result.errors?.forEach { debugPrint($0) }
+                } else {
+                    errors?.forEach { debugPrint($0) }
                 }
             }
         }

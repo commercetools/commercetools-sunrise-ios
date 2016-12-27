@@ -8,9 +8,10 @@ import Result
 import CoreLocation
 import Commercetools
 
-class StoreDetailsViewModel {
+class StoreDetailsViewModel: BaseViewModel {
 
     // Outputs
+    let isLoading = MutableProperty(false)
     var storeLocation: CLLocation? {
         return store.location
     }
@@ -46,17 +47,9 @@ class StoreDetailsViewModel {
             }
         })
     }()
-    lazy var saveMyStoreAction: Action<Void, Void, NoError> = {
+    lazy var saveMyStoreAction: Action<Void, Void, CTError> = {
         return Action(enabledIf: Property(value: true), { _ in
-            return SignalProducer { [weak self] observer, disposable in
-                AppRouting.accountViewController?.viewModel?.myStore.value = self?.store
-                if let myStoreId = self?.store.id {
-                    UserDefaults.standard.set(myStoreId, forKey: kMyStoreId)
-                } else {
-                    UserDefaults.standard.removeObject(forKey: kMyStoreId)
-                }
-                observer.sendCompleted()
-            }
+            return self.saveMyStore()
         })
     }()
 
@@ -73,5 +66,37 @@ class StoreDetailsViewModel {
         let destination = MKMapItem(placemark: MKPlacemark(coordinate: location.coordinate))
         destination.name = name
         MKMapItem.openMaps(with: [destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
+
+    // MARK: - Saving my store to the customer endpoint
+
+    private func saveMyStore() -> SignalProducer<Void, CTError> {
+        isLoading.value = true
+        return SignalProducer { [weak self] observer, disposable in
+            Customer.addCustomTypeIfNotExists { version, errors in
+                if let version = version, errors == nil {
+                    var options = SetCustomFieldOptions()
+                    options.name = "myStore"
+                    options.value = ["typeId": "channel", "id": self?.store.id ?? ""]
+
+                    let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.setCustomField(options: options)])
+                    Customer.update(actions: updateActions) { result in
+                        self?.isLoading.value = false
+                        if result.isSuccess {
+                            AppRouting.accountViewController?.viewModel?.myStore.value = self?.store
+                            guard let myStoreId = self?.store.id else { return }
+                            UserDefaults.standard.set(myStoreId, forKey: kMyStoreId)
+                            observer.sendCompleted()
+                        } else if let error = result.errors?.first as? CTError, result.isFailure {
+                            observer.send(error: error)
+                        }
+                    }
+
+                } else if let error = errors?.first as? CTError {
+                    self?.isLoading.value = false
+                    observer.send(error: error)
+                }
+            }
+        }
     }
 }

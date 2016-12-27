@@ -23,6 +23,7 @@ class AccountViewModel: BaseViewModel {
     let ordersExpanded = MutableProperty(false)
     let reservationsExpanded = MutableProperty(false)
     let myStore: MutableProperty<Channel?>
+    let myStoreName: MutableProperty<String?>
     let navigationShouldPop = MutableProperty(true)
     let backButtonSignal: Signal<Void, NoError>
 
@@ -40,6 +41,7 @@ class AccountViewModel: BaseViewModel {
     override init() {
         isLoading = MutableProperty(true)
         myStore = MutableProperty(nil)
+        myStoreName = MutableProperty(nil)
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -92,6 +94,8 @@ class AccountViewModel: BaseViewModel {
             }
             strongSelf.contentChangesObserver.send(value: changeset)
         }
+
+        myStoreName <~ myStore.map { return $0?.name?.localizedString ?? NSLocalizedString("Not selected", comment: "Not selected") }
     }
 
     func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {
@@ -161,14 +165,21 @@ class AccountViewModel: BaseViewModel {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
 
             }
-            self.isLoading.value = false
+            self.retrieveMyStoreDetails()
         })
         AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
     }
 
     private func retrieveMyStoreDetails() {
-        if let myStoreId = UserDefaults.standard.string(forKey: kMyStoreId) {
-            // retrieve stores
+        isLoading.value = true
+        Customer.profile(expansion: ["custom.fields.myStore"]) { result in
+            self.myStore.value = result.model?.myStore?.obj
+            self.isLoading.value = false
+
+            if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+            }
+            self.isLoading.value = false
         }
     }
 
@@ -178,10 +189,12 @@ class AccountViewModel: BaseViewModel {
         isLoading.value = true
         UserDefaults.standard.removeObject(forKey: kLoggedInUsername)
         UserDefaults.standard.synchronize()
-        Customer.profile { result in
-            if let customerVersion = result.model?.version, result.isSuccess {
-                let options = SetCustomTypeOptions()
-                let updateActions = UpdateActions<CustomerUpdateAction>(version: customerVersion, actions: [.setCustomType(options: options)])
+        Customer.addCustomTypeIfNotExists { version, errors in
+            if let version = version, errors == nil {
+                var options = SetCustomFieldOptions()
+                options.name = "apnsToken"
+                let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.setCustomField(options: options)])
+
                 Customer.update(actions: updateActions) { _ in
                     DispatchQueue.main.async {
                         Commercetools.logoutCustomer()

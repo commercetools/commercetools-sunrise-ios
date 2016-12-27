@@ -14,6 +14,7 @@ class AccountViewController: UIViewController {
     @IBOutlet var myAccountHeader: UIView!
     @IBOutlet var myPreferencesHeader: UIView!
     @IBOutlet var myStoreView: UIView!
+    @IBOutlet weak var storeNameLabel: UILabel!    
     
     var ordersHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
@@ -105,6 +106,8 @@ class AccountViewController: UIViewController {
         .observeValues({ [weak self] indexPath in
             self?.performSegue(withIdentifier: "reservationDetails", sender: indexPath)
         })
+
+        storeNameLabel.reactive.text <~ viewModel.myStoreName
 
         observeAlertMessageSignal(viewModel: viewModel)
 
