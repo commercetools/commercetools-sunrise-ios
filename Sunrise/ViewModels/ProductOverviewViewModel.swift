@@ -95,7 +95,11 @@ class ProductOverviewViewModel: BaseViewModel {
 
     private func queryForProductProjections(offset: UInt, text: String = "") {
         isLoading.value = true
-        let sort = text == "" ? nil : ["createdAt desc"]
+        var sort: [String]? = nil
+        if text != "" {
+            // Show newer first only when the user performs a text search
+            sort = ["createdAt desc"]
+        }
 
         ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text, result: { result in
             if let products = result.model?.results, result.isSuccess {
