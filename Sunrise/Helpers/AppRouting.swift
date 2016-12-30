@@ -124,6 +124,20 @@ class AppRouting {
     }
 
     /**
+        Switches back to the my account tab, and navigates to the my store view controller.
+    */
+    static func switchToMyStore() {
+        guard let tabBarController = tabBarController,
+              let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
+              let accountViewController = accountViewController else { return }
+        accountNavigationController.popToRootViewController(animated: false)
+        tabBarController.selectedIndex = TabIndex.myAccountTab.index
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            accountViewController.showMyStores()
+        }
+    }
+
+    /**
         Switches to the account tab, and presents reservation overview view controller.
     */
     static func showReservationWithId(_ reservationId: String) {

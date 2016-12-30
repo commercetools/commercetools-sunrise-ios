@@ -63,6 +63,23 @@ class ProductOverviewViewController: UICollectionViewController {
         viewModel.refreshObserver.send(value: ())
     }
 
+    private func bindViewModel(for productHeaderView: ProductCollectionHeaderView) {
+        guard let viewModel = viewModel, isViewLoaded else { return }
+
+        viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .take(until: productHeaderView.reactive.prepareForReuse)
+        .startWithValues({ isLoading in
+            [productHeaderView.headerLabel, productHeaderView.myStoreNameLabel].forEach { $0.isHidden = isLoading }
+        })
+        viewModel.browsingStoreName.producer
+        .observe(on: UIScheduler())
+        .take(until: productHeaderView.reactive.prepareForReuse)
+        .startWithValues({ storeName in
+            productHeaderView.myStoreNameLabel.text = storeName
+        })
+    }
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,6 +88,10 @@ class ProductOverviewViewController: UICollectionViewController {
             let productDetailsViewModel = viewModel.productDetailsViewModelForProductAtIndexPath(indexPath)
             productViewController.viewModel = productDetailsViewModel
         }
+    }
+    
+    @IBAction func presentMyStoreSelection(_ sender: UITapGestureRecognizer) {
+        AppRouting.switchToMyStore()
     }
 
     // MARK: - UICollectionViewDataSource
@@ -95,6 +116,15 @@ class ProductOverviewViewController: UICollectionViewController {
         cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrlAtIndexPath(indexPath)))
 
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ProductCollectionHeader", for: indexPath) as! ProductCollectionHeaderView
+            bindViewModel(for: headerView)
+            return headerView
+        }
+        return UICollectionReusableView()
     }
 
     // MARK: - UIScrollViewDelegate

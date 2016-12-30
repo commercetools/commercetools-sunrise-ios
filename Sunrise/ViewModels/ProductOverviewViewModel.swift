@@ -16,9 +16,14 @@ class ProductOverviewViewModel: BaseViewModel {
     // Outputs
     let title: String
     let isLoading: MutableProperty<Bool>
+    let browsingStoreName: MutableProperty<String?>
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+    var myStore: MutableProperty<Channel?>? {
+        return AppRouting.accountViewController?.viewModel?.myStore
+    }
+    private let onlineStoreName = NSLocalizedString("Online Store", comment: "Online Store")
 
     // MARK: - Lifecycle
 
@@ -26,6 +31,7 @@ class ProductOverviewViewModel: BaseViewModel {
         products = []
 
         title = NSLocalizedString("Products", comment: "POP Title")
+        browsingStoreName = MutableProperty(onlineStoreName)
 
         isLoading = MutableProperty(true)
 
@@ -53,6 +59,17 @@ class ProductOverviewViewModel: BaseViewModel {
         .observeValues({ [weak self] searchText in
             self?.queryForProductProjections(offset: 0, text: searchText)
         })
+
+        if let myStore = myStore {
+            browsingStoreName <~ myStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
+
+            searchText <~ myStore.map { [weak self] _ in
+                self?.queryForProductProjections(offset: 0)
+                return ""
+            }
+        }
+
+
     }
 
     func productDetailsViewModelForProductAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel {
@@ -75,7 +92,9 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, let value = price.value else { return "" }
+        guard let variant = products[indexPath.row].mainVariantWithPrice,
+              let price = myStore?.value == nil ? variant.independentPrice : variant.price(for: myStore!.value!),
+              let value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -85,8 +104,9 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, let value = price.value,
-        let _ = price.discounted?.value else { return "" }
+        guard let variant = products[indexPath.row].mainVariantWithPrice,
+              let price = myStore?.value == nil ? variant.independentPrice : variant.price(for: myStore!.value!),
+              let value = price.value, price.discounted?.value != nil else { return "" }
 
         return value.description
     }
@@ -95,13 +115,21 @@ class ProductOverviewViewModel: BaseViewModel {
 
     private func queryForProductProjections(offset: UInt, text: String = "") {
         isLoading.value = true
+
+        // Sort by newer first, but only when the user performs a text search
         var sort: [String]? = nil
         if text != "" {
-            // Show newer first only when the user performs a text search
             sort = ["createdAt desc"]
         }
 
-        ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text, result: { result in
+        // When the user is browsing store inventory, include a filter, to limit POP results accordingly
+        var filter: String? = nil
+        if let myStoreId = myStore?.value?.id {
+            filter = "variants.availability.channels.\(myStoreId).isOnStock:true"
+        }
+
+        ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
+                                 filter: filter, result: { result in
             if let products = result.model?.results, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 

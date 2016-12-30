@@ -154,7 +154,7 @@ class AccountViewController: UIViewController {
         }
     }
 
-    func showMyStores(_ recognizer: UITapGestureRecognizer) {
+    func showMyStores(_ recognizer: UITapGestureRecognizer? = nil) {
         performSegue(withIdentifier: "showMyStore", sender: self)
     }
 
