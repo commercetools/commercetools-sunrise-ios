@@ -20,9 +20,6 @@ class ProductOverviewViewModel: BaseViewModel {
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
-    var myStore: MutableProperty<Channel?>? {
-        return AppRouting.accountViewController?.viewModel?.myStore
-    }
     private let onlineStoreName = NSLocalizedString("Online Store", comment: "Online Store")
 
     // MARK: - Lifecycle

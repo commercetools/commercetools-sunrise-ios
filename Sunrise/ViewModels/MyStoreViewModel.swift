@@ -23,7 +23,6 @@ class MyStoreViewModel: BaseViewModel {
     let visibleMapRect: MutableProperty<MKMapRect>
     let selectedStoreLocation: MutableProperty<CLLocation?>
     let storeLocations: MutableProperty<[CLLocation]>
-//    let selectedStoreDetailsViewModel: MutableProperty<StoreDetailsViewModel?>
     let selectedStoreName: MutableProperty<String?>
     let selectedStreetAndNumberInfo: MutableProperty<String?>
     let selectedZipAndCityInfo: MutableProperty<String?>
@@ -38,9 +37,6 @@ class MyStoreViewModel: BaseViewModel {
             return StoreDetailsViewModel(store: store)
         }
         return nil
-    }
-    var myStore: MutableProperty<Channel?>? {
-        return AppRouting.accountViewController?.viewModel?.myStore
     }
     var navigationShouldPop: MutableProperty<Bool>? {
         return AppRouting.accountViewController?.viewModel?.navigationShouldPop

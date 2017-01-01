@@ -20,6 +20,7 @@ class ProductViewModel: BaseViewModel {
     let price = MutableProperty("")
     let oldPrice = MutableProperty("")
     let imageCount = MutableProperty(0)
+    let displayAddToCartSection = MutableProperty(true)
     let quantities = (1...9).map { String($0) }
     let isLoading = MutableProperty(false)
     var isLoggedIn: Bool {
@@ -89,6 +90,10 @@ class ProductViewModel: BaseViewModel {
             if let productId = self?.product?.id {
                 self?.retrieveProduct(productId, size: nil)
             }
+        }
+
+        if let myStore = myStore {
+            displayAddToCartSection <~ myStore.map { return $0 == nil }
         }
     }
 

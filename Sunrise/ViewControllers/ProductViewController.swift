@@ -27,6 +27,8 @@ class ProductViewController: UITableViewController {
     @IBOutlet weak var activePriceLabel: UILabel!
     @IBOutlet weak var quantityField: IQDropDownTextField!
     @IBOutlet weak var addToCartButton: UIButton!
+    @IBOutlet weak var addToCartSection: UIStackView!
+    @IBOutlet weak var addToCartSectionHeight: NSLayoutConstraint!
 
     private let footerCellIdentifier = "FooterCell"
     private var footerCell: UITableViewCell {
@@ -64,6 +66,7 @@ class ProductViewController: UITableViewController {
         if viewModel != nil {
             bindViewModel()
         }
+
     }
 
     // MARK: - Bindings
@@ -122,6 +125,13 @@ class ProductViewController: UITableViewController {
                     SVProgressHUD.dismiss()
                 }
             })
+
+        viewModel.displayAddToCartSection.producer
+                .observe(on: UIScheduler())
+                .startWithValues({ [weak self] displayAddToCartSection in
+                    self?.addToCartSection.isHidden = !displayAddToCartSection
+                    self?.addToCartSectionHeight.constant = displayAddToCartSection ? 35 : 0
+                })
 
         viewModel.addToCartAction.events
             .observe(on: UIScheduler())
@@ -234,7 +244,7 @@ class ProductViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-            case 1: return 100
+            case 1: return viewModel?.displayAddToCartSection.value == false ? 55 : 100
             case 2: return 55
             default: return 0
         }

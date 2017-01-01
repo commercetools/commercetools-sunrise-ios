@@ -22,6 +22,11 @@ class BaseViewModel {
         return currencyFormatter.currencyCode
     }
 
+    // My store
+    var myStore: MutableProperty<Channel?>? {
+        return AppRouting.accountViewController?.viewModel?.currentStore
+    }
+
     // MARK: - Lifecycle
 
     init() {
