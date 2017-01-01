@@ -96,6 +96,13 @@ class AccountViewModel: BaseViewModel {
         }
 
         myStoreName <~ currentStore.map { return $0?.name?.localizedString ?? NSLocalizedString("Not selected", comment: "Not selected") }
+
+        currentStore.producer
+                .observe(on: UIScheduler())
+                .startWithValues { _ in
+                    // When my store changes, always pop to product overview, in case the customer was on a store specific PDP
+                    AppRouting.popHomeToProductOverview()
+                }
     }
 
     func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {

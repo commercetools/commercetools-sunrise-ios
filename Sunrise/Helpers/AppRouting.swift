@@ -124,6 +124,15 @@ class AppRouting {
     }
 
     /**
+        Pops home navigation controller to it's root view controller.
+    */
+    static func popHomeToProductOverview() {
+        guard let tabBarController = tabBarController, let homeNavigationController = tabBarController.viewControllers?[TabIndex.homeTab.index] as? UINavigationController else { return }
+
+        homeNavigationController.popToRootViewController(animated: false)
+    }
+
+    /**
         Switches back to the my account tab, and navigates to the my store view controller.
     */
     static func switchToMyStore() {
