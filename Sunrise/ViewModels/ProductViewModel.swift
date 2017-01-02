@@ -23,6 +23,8 @@ class ProductViewModel: BaseViewModel {
     let displayAddToCartSection = MutableProperty(true)
     let quantities = (1...9).map { String($0) }
     let isLoading = MutableProperty(false)
+    let performSegueSignal: Signal<String, NoError>
+    let signInPromptSignal: Signal<Void, NoError>
     var isLoggedIn: Bool {
         return AppRouting.isLoggedIn
     }
@@ -46,12 +48,27 @@ class ProductViewModel: BaseViewModel {
             return self.addLineItem(quantity: quantity)
         })
     }()
+    lazy var reserveAction: Action<Void, Void, CTError> = { [unowned self] in
+        return Action(enabledIf: Property(value: true), { [unowned self] in
+            if let store = self.myStore?.value {
+                self.isLoading.value = true
+                return Order.reserve(product: self.product, variant: self.variantForActiveAttributes, in: store)
+            } else if self.isLoggedIn {
+                self.performSegueObserver.send(value: "showStoreSelection")
+            } else {
+                self.signInPromptObserver.send(value: ())
+            }
+            return SignalProducer.empty
+        })
+    }()
 
     var storeSelectionViewModel: StoreSelectionViewModel? {
         guard let product = product else { return nil }
         return StoreSelectionViewModel(product: product, sku: sku.value)
     }
 
+    private let performSegueObserver: Observer<String, NoError>
+    private let signInPromptObserver: Observer<Void, NoError>
     private var product: ProductProjection?
 
     // Attributes configuration
@@ -83,6 +100,9 @@ class ProductViewModel: BaseViewModel {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
+        (performSegueSignal, performSegueObserver) = Signal<String, NoError>.pipe()
+        (signInPromptSignal, signInPromptObserver) = Signal<Void, NoError>.pipe()
+
         super.init()
 
         refreshSignal
@@ -91,6 +111,11 @@ class ProductViewModel: BaseViewModel {
                 self?.retrieveProduct(productId, size: nil)
             }
         }
+
+        reserveAction.events
+        .observeValues({ [weak self] _ in
+            self?.isLoading.value = false
+        })
 
         if let myStore = myStore {
             displayAddToCartSection <~ myStore.map { return $0 == nil }
@@ -241,7 +266,7 @@ class ProductViewModel: BaseViewModel {
                           reason.message == "No active cart exists." {
                     // If there is no active cart, create one, with the selected product
                     var cartDraft = CartDraft()
-                    cartDraft.currency = self.currencyCodeForCurrentLocale
+                    cartDraft.currency = BaseViewModel.currencyCodeForCurrentLocale
                     var lineItemDraft = LineItemDraft()
                     lineItemDraft.productId = self.product?.id
                     lineItemDraft.variantId = self.currentVariantId()

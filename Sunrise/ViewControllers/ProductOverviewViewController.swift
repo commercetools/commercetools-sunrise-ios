@@ -40,6 +40,11 @@ class ProductOverviewViewController: UICollectionViewController {
         definesPresentationContext = true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.willAppearObserver.send(value: ())
+    }
+
     // MARK: - Bindings
 
     private func bindViewModel() {
@@ -70,7 +75,9 @@ class ProductOverviewViewController: UICollectionViewController {
         .observe(on: UIScheduler())
         .take(until: productHeaderView.reactive.prepareForReuse)
         .startWithValues({ isLoading in
-            [productHeaderView.headerLabel, productHeaderView.myStoreNameLabel].forEach { $0.isHidden = isLoading }
+            if !isLoading {
+                [productHeaderView.headerLabel, productHeaderView.myStoreNameLabel].forEach { $0.isHidden = false }
+            }
         })
         viewModel.browsingStoreName.producer
         .observe(on: UIScheduler())

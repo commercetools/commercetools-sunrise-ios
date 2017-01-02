@@ -53,14 +53,9 @@ class StoreSelectionViewModel: BaseViewModel {
     lazy var reserveAction: Action<IndexPath, Void, CTError> = { [unowned self] in
         return Action(enabledIf: Property(value: true), { indexPath in
             self.isLoading.value = true
-            return self.reserveProductVariant(channel: self.channels[self.rowForChannelAtIndexPath(indexPath)])
+            return self.reserveProductVariant(store: self.channels[self.rowForChannelAtIndexPath(indexPath)])
         })
     }()
-
-    // Dialogue texts
-    let reservationSuccessTitle = NSLocalizedString("Product has been reserved", comment: "Successful reservation")
-    let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
-    let reservationContinueTitle = NSLocalizedString("Continue shopping", comment: "Continue shopping")
 
     private let expandedChannelIndexPath: MutableProperty<IndexPath?>
     private let selectedIndexPathSignal: Signal<IndexPath, NoError>
@@ -147,6 +142,11 @@ class StoreSelectionViewModel: BaseViewModel {
             if let userLocation = userLocation, let stores = self?.channels {
                 self?.channels = Channel.sortStoresByDistance(stores: stores, userLocation: userLocation)
             }
+            self?.isLoading.value = false
+        })
+
+        reserveAction.events
+        .observeValues({ [weak self] _ in
             self?.isLoading.value = false
         })
 
@@ -255,68 +255,8 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // MARK: - Creating a reservation
 
-    private func reserveProductVariant(channel: Channel) -> SignalProducer<Void, CTError> {
-        return SignalProducer { observer, disposable in
-            guard let channelId = channel.id, let productId = self.product.id, let currentVariantId = self.currentVariant?.id,
-                    let shippingAddress = channel.address else {
-                        observer.send(error: CTError.generalError(reason: nil))
-                return
-            }
-
-            var selectedChannelReference = Reference<Channel>()
-            selectedChannelReference.typeId = "channel"
-            selectedChannelReference.id = channelId
-            var lineItemDraft = LineItemDraft()
-            lineItemDraft.productId = productId
-            lineItemDraft.variantId = currentVariantId
-            lineItemDraft.supplyChannel = selectedChannelReference
-            lineItemDraft.distributionChannel = selectedChannelReference
-            let customType = ["type": ["key": "reservationOrder"],
-                              "fields": ["isReservation": true]]
-
-            Customer.profile { result in
-                if let profile = result.model, result.isSuccess {
-
-                    var billingAddress = profile.reservationAddress
-
-                    // In case the customer doesn't even have a country set in the address,
-                    // it's being set to match the channel country.
-                    if billingAddress.country == nil {
-                        billingAddress.country = channel.address?.country
-                    }
-
-                    var cartDraft = CartDraft()
-                    cartDraft.currency = self.currencyCodeForCurrentLocale
-                    cartDraft.shippingAddress = shippingAddress
-                    cartDraft.billingAddress = billingAddress
-                    cartDraft.lineItems = [lineItemDraft]
-                    cartDraft.custom = customType
-                    Commercetools.Cart.create(cartDraft, result: { result in
-
-                        if let cart = result.model, let id = cart.id, let version = cart.version, result.isSuccess {
-                            var orderDraft = OrderDraft()
-                            orderDraft.id = id
-                            orderDraft.version = version
-                            Order.create(orderDraft, expansion: nil, result: { result in
-                                if result.isSuccess {
-                                    observer.sendCompleted()
-                                } else if let error = result.errors?.first as? CTError, result.isFailure {
-                                    observer.send(error: error)
-                                }
-                                self.isLoading.value = false
-                            })
-
-                        } else if let error = result.errors?.first as? CTError, result.isFailure {
-                            observer.send(error: error)
-                            self.isLoading.value = false
-                        }
-                    })
-                } else if let error = result.errors?.first as? CTError, result.isFailure {
-                    observer.send(error: error)
-                    self.isLoading.value = false
-                }
-            }
-        }
+    private func reserveProductVariant(store: Channel) -> SignalProducer<Void, CTError> {
+        return Order.reserve(product: product, variant: currentVariant, in: store)
     }
 
     // MARK: - Querying for physical stores

@@ -192,7 +192,7 @@ class CartViewModel: BaseViewModel {
             } else {
                 // If there is no active cart, create one, with the selected product
                 var cartDraft = CartDraft()
-                cartDraft.currency = self.currencyCodeForCurrentLocale
+                cartDraft.currency = BaseViewModel.currencyCodeForCurrentLocale
                 Cart.create(cartDraft, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)

@@ -217,6 +217,7 @@
                         <outlet property="priceBeforeDiscount" destination="PtX-K9-l9I" id="1gg-5d-Jbl"/>
                         <outlet property="productNameLabel" destination="k0M-Ha-BQG" id="tQF-TM-sdJ"/>
                         <outlet property="quantityField" destination="sKu-ya-M4t" id="Lld-au-bgl"/>
+                        <outlet property="reserveButton" destination="tIP-5d-wBr" id="eQO-81-JZk"/>
                         <outlet property="skuLabel" destination="Eja-LF-Ub4" id="QvP-Jc-0Wb"/>
                         <segue destination="JIS-eh-T7N" kind="show" identifier="showStoreSelection" id="LHa-cQ-N71"/>
                     </connections>
@@ -386,9 +387,6 @@
                                                     <state key="normal" title="  ADD TO BAG" image="add-to-cart">
                                                         <color key="titleColor" red="0.2470588235" green="0.23137254900000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="addToCart:" destination="lSS-oI-s0e" eventType="touchUpInside" id="kA1-dh-onv"/>
-                                                    </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pmv-Xp-JL3">
                                                     <rect key="frame" x="220" y="0.0" width="0.0" height="35"/>
@@ -408,9 +406,6 @@
                                                     <state key="normal" title="  RESERVE IN STORE" image="reserve-in-store-icon">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="reserveInStore:" destination="lSS-oI-s0e" eventType="touchUpInside" id="2Qe-IH-NIw"/>
-                                                    </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zbW-YY-8n4">
                                                     <rect key="frame" x="220" y="0.0" width="0.0" height="35"/>

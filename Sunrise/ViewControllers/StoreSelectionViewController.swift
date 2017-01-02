@@ -81,7 +81,7 @@ class StoreSelectionViewController: UITableViewController {
         .observe(on: UIScheduler())
         .observeValues({ [weak self] event in
             switch event {
-            case .completed:
+            case .value:
                 self?.presentSuccessfulReservationAlert()
             case let .failed(error):
                 let alertController = UIAlertController(

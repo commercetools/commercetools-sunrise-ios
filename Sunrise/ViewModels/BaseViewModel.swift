@@ -14,13 +14,18 @@ class BaseViewModel {
     let alertMessageObserver: Observer<String, NoError>
 
     // Convenience property for obtaining currency code for user's locale
-    var currencyCodeForCurrentLocale: String {
+    static var currencyCodeForCurrentLocale: String {
         let currencyFormatter = NumberFormatter()
         currencyFormatter.numberStyle = .currency
         currencyFormatter.locale = Locale.current
 
         return currencyFormatter.currencyCode
     }
+
+    // Dialogue texts
+    let reservationSuccessTitle = NSLocalizedString("Product has been reserved", comment: "Successful reservation")
+    let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
+    let reservationContinueTitle = NSLocalizedString("Continue shopping", comment: "Continue shopping")
 
     // My store
     var myStore: MutableProperty<Channel?>? {

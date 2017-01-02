@@ -11,6 +11,7 @@ class ProductOverviewViewModel: BaseViewModel {
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let nextPageObserver: Observer<Void, NoError>
+    let willAppearObserver: Observer<Void, NoError>
     let searchText = MutableProperty("")
 
     // Outputs
@@ -20,6 +21,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+    var didBindMyStore = false
     private let onlineStoreName = NSLocalizedString("Online Store", comment: "Online Store")
 
     // MARK: - Lifecycle
@@ -38,11 +40,26 @@ class ProductOverviewViewModel: BaseViewModel {
         let (nextPageSignal, pageObserver) = Signal<Void, NoError>.pipe()
         nextPageObserver = pageObserver
 
+        let (willAppearSignal, willAppearObserver) = Signal<Void, NoError>.pipe()
+        self.willAppearObserver = willAppearObserver
+
         super.init()
 
-        refreshSignal
-        .observeValues { [weak self] in
-            self?.queryForProductProjections(offset: 0)
+        // Querying for product projections needs to done only when the profile / account info is not loading
+        // (the results depend on if and which store is selected)
+        if let accountInfoIsLoading = AppRouting.accountViewController?.viewModel?.isLoading {
+            refreshSignal.combineLatest(with: accountInfoIsLoading.signal)
+            .observeValues { [weak self] _, accountInfoIsLoading in
+                self?.isLoading.value = true
+                if !accountInfoIsLoading {
+                    self?.queryForProductProjections(offset: 0)
+                }
+            }
+        } else {
+            refreshSignal
+            .observeValues { [weak self] in
+                self?.queryForProductProjections(offset: 0)
+            }
         }
 
         nextPageSignal
@@ -52,21 +69,30 @@ class ProductOverviewViewModel: BaseViewModel {
             }
         }
 
+        willAppearSignal
+        .observeValues { [weak self] in
+            self?.bindMyStoreProperties()
+        }
+
         searchText.signal
         .observeValues({ [weak self] searchText in
             self?.queryForProductProjections(offset: 0, text: searchText)
         })
 
-        if let myStore = myStore {
-            browsingStoreName <~ myStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
+        bindMyStoreProperties()
+    }
 
-            searchText <~ myStore.map { [weak self] _ in
-                self?.queryForProductProjections(offset: 0)
-                return ""
-            }
+    func bindMyStoreProperties() {
+        guard let myStore = myStore, !didBindMyStore else { return }
+
+        browsingStoreName <~ myStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
+
+        searchText <~ myStore.map { [weak self] _ in
+            self?.queryForProductProjections(offset: 0)
+            return ""
         }
 
-
+        didBindMyStore = true
     }
 
     func productDetailsViewModelForProductAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel {
@@ -111,6 +137,7 @@ class ProductOverviewViewModel: BaseViewModel {
     // MARK: - Commercetools product projections querying
 
     private func queryForProductProjections(offset: UInt, text: String = "") {
+        guard AppRouting.accountViewController?.viewModel?.isLoading.value != true else { return }
         isLoading.value = true
 
         // Sort by newer first, but only when the user performs a text search

@@ -180,7 +180,10 @@ class AccountViewModel: BaseViewModel {
     private func retrieveMyStoreDetails() {
         isLoading.value = true
         Customer.profile(expansion: ["custom.fields.myStore"]) { result in
-            self.currentStore.value = result.model?.myStore?.obj
+            let myStore = result.model?.myStore?.obj
+            if self.currentStore.value != myStore {
+                self.currentStore.value = myStore
+            }
             self.isLoading.value = false
 
             if let errors = result.errors as? [CTError], result.isFailure {
@@ -194,6 +197,7 @@ class AccountViewModel: BaseViewModel {
 
     func logoutCustomer() {
         isLoading.value = true
+        currentStore.value = nil
         UserDefaults.standard.removeObject(forKey: kLoggedInUsername)
         UserDefaults.standard.synchronize()
         Customer.addCustomTypeIfNotExists { version, errors in
