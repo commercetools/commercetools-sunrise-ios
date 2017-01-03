@@ -111,11 +111,11 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return products[indexPath.row].mainVariantWithPrice?.images?.first?.url ?? ""
+        return products[indexPath.row].mainVariantWithPrice(for: myStore?.value)?.images?.first?.url ?? ""
     }
 
     func productPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let variant = products[indexPath.row].mainVariantWithPrice,
+        guard let variant = products[indexPath.row].mainVariantWithPrice(for: myStore?.value),
               let price = myStore?.value == nil ? variant.independentPrice : variant.price(for: myStore!.value!),
               let value = price.value else { return "" }
 
@@ -127,7 +127,7 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let variant = products[indexPath.row].mainVariantWithPrice,
+        guard let variant = products[indexPath.row].mainVariantWithPrice(for: myStore?.value),
               let price = myStore?.value == nil ? variant.independentPrice : variant.price(for: myStore!.value!),
               let value = price.value, price.discounted?.value != nil else { return "" }
 
@@ -164,7 +164,4 @@ class ProductOverviewViewModel: BaseViewModel {
             self.isLoading.value = false
         })
     }
-
-
-
 }

@@ -10,17 +10,19 @@ import Result
 @testable import Sunrise
 
 class ReservationViewModelSpec: QuickSpec {
+
+    static var order: Order = {
+        let path = Bundle.currentTestBundle!.path(forResource: "reservation", ofType: "json")!
+        let reservationJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+        return Mapper<Order>().map(JSONString: reservationJSON as String)!
+    }()
     
     override func spec() {
         describe("ReservationViewModelSpec") {
             var reservationViewModel: ReservationViewModel!
             
             beforeEach {
-                let path = Bundle.currentTestBundle!.path(forResource: "reservation", ofType: "json")!
-                let reservationJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-                let order = Mapper<Order>().map(JSONString: reservationJSON as String)!
-
-                reservationViewModel = ReservationViewModel(order: order)
+                reservationViewModel = ReservationViewModel(order: ReservationViewModelSpec.order)
             }
             
             it("has the proper product name") {

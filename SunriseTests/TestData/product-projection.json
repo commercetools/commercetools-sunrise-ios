@@ -406,6 +406,27 @@
         {
           "value": {
             "currencyCode": "EUR",
+            "centAmount": 18750
+          },
+          "id": "5d176e89-2f63-4e2f-ab13-9ee55005b462",
+          "channel": {
+            "typeId": "channel",
+            "id": "073f84f8-e368-4bb1-9493-0751fb060198"
+          },
+          "discounted": {
+            "value": {
+              "currencyCode": "EUR",
+              "centAmount": 14625
+            },
+            "discount": {
+              "typeId": "product-discount",
+              "id": "35dce229-365a-4c29-9ec1-81df41d7756b"
+            }
+          }
+        },
+        {
+          "value": {
+            "currencyCode": "EUR",
             "centAmount": 13750
           },
           "id": "5d176e89-2f63-4e2f-ab13-9ee55005b462",
