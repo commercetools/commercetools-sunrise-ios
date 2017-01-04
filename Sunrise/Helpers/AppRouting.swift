@@ -18,9 +18,9 @@ class AppRouting {
         }
     }
 
-    private static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
-    private static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
+    static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
 
     /// Tab index to present on successful login.
     private static var tabIndexAfterLogIn: Int? = nil

@@ -146,12 +146,12 @@ class ProductViewModel: BaseViewModel {
                 var values = [String]()
 
                 // We want to show attribute values only for those variants that have prices available
-                if let masterVariant = product?.masterVariant, let prices = masterVariant.prices,
+                if let masterVariant = product?.masterVariant, let prices = masterVariant.prices?.filter({ myStore?.value == nil ? true : $0.channel?.id == myStore?.value?.id }),
                    let defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type),
                    prices.count > 0 {
                     values.append(defaultValue)
                 }
-                product?.variants?.filter({ ($0.prices?.count ?? 0) > 0 }).forEach { variant in
+                allVariants?.filter({ ($0.prices?.filter({ myStore?.value == nil ? true : $0.channel?.id == myStore?.value?.id }).count ?? 0) > 0 }).forEach { variant in
                     if let value = variant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
                         if !values.contains(value) {
                             values.append(value)
@@ -163,7 +163,7 @@ class ProductViewModel: BaseViewModel {
                 activeAttributes.value[attribute] = values.first ?? "N/A"
 
                 if let matchingVariant = allVariants?.filter({ $0.isMatchingVariant ?? false }).first,
-                        let matchingValue = matchingVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
+                   let matchingValue = matchingVariant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
                     activeAttributes.value[attribute] = matchingValue
                 }
             }

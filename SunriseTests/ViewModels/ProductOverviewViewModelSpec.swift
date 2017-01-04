@@ -12,15 +12,28 @@ import Result
 
 class ProductOverviewViewModelSpec: QuickSpec {
 
+    static func loadMyAccountViewController() {
+        let newAccountRootViewController = AppRouting.mainStoryboard.instantiateViewController(withIdentifier: "AccountViewController") as! UINavigationController
+        _ = newAccountRootViewController.viewControllers.first!.view
+        AppRouting.tabBarController?.viewControllers?[AppRouting.TabIndex.myAccountTab.index] = newAccountRootViewController
+    }
+
     override func spec() {
         describe("ProductOverviewViewModel") {
             var overviewViewModel: ProductOverviewViewModel!
 
-            beforeEach {
+            beforeSuite {
                 Commercetools.config = nil
+                // For my store test context, we need to load my account view controller.
+                ProductOverviewViewModelSpec.loadMyAccountViewController()
+            }
+
+            beforeEach {
                 let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
                 let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
                 let product = Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
+
+                AppRouting.accountViewController?.viewModel?.currentStore.value = nil
 
                 overviewViewModel = ProductOverviewViewModel()
                 overviewViewModel.products = [product]

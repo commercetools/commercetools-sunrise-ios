@@ -12,16 +12,25 @@ import Result
 
 class ProductViewModelSpec: QuickSpec {
 
+    lazy var product: ProductProjection = {
+        let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
+        let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+        return Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
+    }()
+
     override func spec() {
         describe("ProductViewModel") {
             var productViewModel: ProductViewModel!
 
-            beforeEach {
-                let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
-                let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-                let product = Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
+            beforeSuite {
+                Commercetools.config = Config(path: "CommercetoolsStagingConfig")
+                // For my store test context, we need to load my account view controller.
+                ProductOverviewViewModelSpec.loadMyAccountViewController()
+            }
 
-                productViewModel = ProductViewModel(product: product)
+            beforeEach {
+                AppRouting.accountViewController?.viewModel?.currentStore.value = nil
+                productViewModel = ProductViewModel(product: self.product)
             }
 
             it("has the correct upper case name") {
@@ -57,7 +66,6 @@ class ProductViewModelSpec: QuickSpec {
             }
 
             context("after changing selected size") {
-
                 it("sku is updated") {
                     waitUntil { done in
                         productViewModel.isLoading.producer
@@ -77,6 +85,25 @@ class ProductViewModelSpec: QuickSpec {
                             }
                         })
                     }
+                }
+            }
+
+            context("when customer is shopping for selected store") {
+                beforeEach {
+                    AppRouting.accountViewController?.viewModel?.currentStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
+                    productViewModel = ProductViewModel(product: self.product)
+                }
+
+                it("has proper sizes extracted") {
+                    expect(productViewModel.attributes.value["size"]).toEventually(equal(["35"]))
+                }
+
+                it("has properly formatted price from variant containing price for specified channel") {
+                    expect(productViewModel.price.value).toEventually(equal("€146.25"))
+                }
+
+                it("has properly formatted price before discount from variant containing price for specified channel") {
+                    expect(productViewModel.oldPrice.value).toEventually(equal("€187.50"))
                 }
             }
         }

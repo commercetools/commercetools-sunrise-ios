@@ -605,7 +605,15 @@
           "name": "season",
           "value": "s15"
         }
-      ]
+      ],
+      "availability": {
+        "channels": {
+          "073f84f8-e368-4bb1-9493-0751fb060198": {
+            "isOnStock": true,
+            "availableQuantity": 10
+          }
+        }
+      }
     },
     {
       "id": 4,
