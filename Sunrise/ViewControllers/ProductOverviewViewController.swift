@@ -40,11 +40,6 @@ class ProductOverviewViewController: UICollectionViewController {
         definesPresentationContext = true
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel?.willAppearObserver.send(value: ())
-    }
-
     // MARK: - Bindings
 
     private func bindViewModel() {
@@ -98,7 +93,27 @@ class ProductOverviewViewController: UICollectionViewController {
     }
     
     @IBAction func presentMyStoreSelection(_ sender: UITapGestureRecognizer) {
-        AppRouting.switchToMyStore()
+        guard AppRouting.isLoggedIn else { return }
+
+        let alertController = UIAlertController(
+                title: viewModel?.browsingOptionsTitle,
+                message: viewModel?.browsingOptionsMessage,
+                preferredStyle: .actionSheet
+        )
+        if viewModel?.browsingStore.value == nil {
+            alertController.addAction(UIAlertAction(title: viewModel?.selectMyStoreOption, style: .default) { [weak self] _ in
+                self?.viewModel?.selectMyStoreObserver.send(value: ())
+            })
+        } else {
+            alertController.addAction(UIAlertAction(title: viewModel?.selectOnlineStoreOption, style: .default) { [weak self] _ in
+                self?.viewModel?.selectOnlineStoreObserver.send(value: ())
+            })
+        }
+        alertController.addAction(UIAlertAction(title: viewModel?.changeMyStoreOption, style: .default) { _ in
+            AppRouting.switchToMyStore()
+        })
+        alertController.addAction(UIAlertAction(title: viewModel?.cancelOption, style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - UICollectionViewDataSource
@@ -184,7 +199,6 @@ extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
         let cellWidth = (screenSize.width - 26) / 2
         return CGSize(width: cellWidth, height: cellHeight)
     }
-
 }
 
 // MARK: - UISearchResultsUpdating
@@ -194,7 +208,6 @@ extension ProductOverviewViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         resetIdleTimer()
     }
-
 }
 
 extension ProductOverviewViewController: DZNEmptyDataSetSource {
@@ -202,5 +215,4 @@ extension ProductOverviewViewController: DZNEmptyDataSetSource {
     func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView {
         return noResultsView
     }
-
 }

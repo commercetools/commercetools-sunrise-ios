@@ -98,11 +98,12 @@ class AccountViewModel: BaseViewModel {
         myStoreName <~ currentStore.map { return $0?.name?.localizedString ?? NSLocalizedString("Not selected", comment: "Not selected") }
 
         currentStore.producer
-                .observe(on: UIScheduler())
-                .startWithValues { _ in
-                    // When my store changes, always pop to product overview, in case the customer was on a store specific PDP
-                    AppRouting.popHomeToProductOverview()
-                }
+        .observe(on: UIScheduler())
+        .startWithValues { currentStore in
+            AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? currentStore : nil
+            // When my store changes, always pop to product overview, in case the customer was on a store specific PDP
+            AppRouting.popHomeToProductOverview()
+        }
     }
 
     func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {
@@ -199,6 +200,7 @@ class AccountViewModel: BaseViewModel {
         isLoading.value = true
         currentStore.value = nil
         UserDefaults.standard.removeObject(forKey: kLoggedInUsername)
+        UserDefaults.standard.set(false, forKey: kStorePreference)
         UserDefaults.standard.synchronize()
         Customer.addCustomTypeIfNotExists { version, errors in
             if let version = version, errors == nil {

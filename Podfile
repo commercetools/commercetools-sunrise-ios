@@ -5,6 +5,7 @@ def common_pods
   pod 'Commercetools'
   pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
   pod 'ReactiveObjC'
+  pod 'DZNEmptyDataSet'
 end
 
 target 'Sunrise' do
@@ -13,7 +14,6 @@ target 'Sunrise' do
   pod 'SDWebImage', '4.0.0-beta2'
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
-  pod 'DZNEmptyDataSet'
 end
 
 target 'ReservationNotification' do

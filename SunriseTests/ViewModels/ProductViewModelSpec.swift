@@ -24,12 +24,13 @@ class ProductViewModelSpec: QuickSpec {
 
             beforeSuite {
                 Commercetools.config = Config(path: "CommercetoolsStagingConfig")
-                // For my store test context, we need to load my account view controller.
-                ProductOverviewViewModelSpec.loadMyAccountViewController()
+                // For my store test context, we need to load product overview view controller.
+                AppRouting.switchToHome()
+                _ = AppRouting.productOverviewViewController?.view
             }
 
             beforeEach {
-                AppRouting.accountViewController?.viewModel?.currentStore.value = nil
+                AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = nil
                 productViewModel = ProductViewModel(product: self.product)
             }
 
@@ -90,7 +91,7 @@ class ProductViewModelSpec: QuickSpec {
 
             context("when customer is shopping for selected store") {
                 beforeEach {
-                    AppRouting.accountViewController?.viewModel?.currentStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
+                    AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
                     productViewModel = ProductViewModel(product: self.product)
                 }
 

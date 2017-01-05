@@ -31,6 +31,10 @@ class BaseViewModel {
     var myStore: MutableProperty<Channel?>? {
         return AppRouting.accountViewController?.viewModel?.currentStore
     }
+    // Store currently browsing
+    var activeStore: MutableProperty<Channel?>? {
+        return AppRouting.productOverviewViewController?.viewModel?.browsingStore
+    }
 
     // MARK: - Lifecycle
 
