@@ -38,8 +38,6 @@ class AccountViewController: UIViewController {
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
-
-        navigationController?.navigationBar.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -227,15 +225,4 @@ extension AccountViewController: UITableViewDelegate {
         indexPath.section == 1 ? performSegue(withIdentifier: "orderDetails", sender: indexPath) : performSegue(withIdentifier: "reservationDetails", sender: indexPath)
     }
 
-}
-
-extension AccountViewController: UINavigationBarDelegate {
-    func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
-        let shouldPop = viewModel?.navigationShouldPop.value ?? true
-        if shouldPop {
-            _ = navigationController?.popViewController(animated: true)
-        }
-        viewModel?.backButtonObserver.send(value: ())
-        return shouldPop
-    }
 }

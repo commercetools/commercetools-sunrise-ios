@@ -14,7 +14,6 @@ class AccountViewModel: BaseViewModel {
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let sectionExpandedObserver: Observer<Int, NoError>
-    let backButtonObserver: Observer<Void, NoError>
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -24,8 +23,6 @@ class AccountViewModel: BaseViewModel {
     let reservationsExpanded = MutableProperty(false)
     let currentStore: MutableProperty<Channel?>
     let myStoreName: MutableProperty<String?>
-    let navigationShouldPop = MutableProperty(true)
-    let backButtonSignal: Signal<Void, NoError>
 
     var orders = [Order]()
     var reservations = [Order]()
@@ -51,7 +48,6 @@ class AccountViewModel: BaseViewModel {
 
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
 
-        (backButtonSignal, backButtonObserver) = Signal<Void, NoError>.pipe()
 
         (showReservationSignal, showReservationObserver) = Signal<IndexPath, NoError>.pipe()
 

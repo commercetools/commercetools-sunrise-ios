@@ -24,14 +24,19 @@ class ProductViewModelSpec: QuickSpec {
 
             beforeSuite {
                 Commercetools.config = Config(path: "CommercetoolsStagingConfig")
+                print(Commercetools.authState)
                 // For my store test context, we need to load product overview view controller.
                 AppRouting.switchToHome()
                 _ = AppRouting.productOverviewViewController?.view
-            }
-
-            beforeEach {
-                AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = nil
                 productViewModel = ProductViewModel(product: self.product)
+                waitUntil { done in
+                    productViewModel.isLoading.producer
+                    .startWithValues({ isLoading in
+                        if !isLoading {
+                            done()
+                        }
+                    })
+                }
             }
 
             it("has the correct upper case name") {
@@ -93,6 +98,14 @@ class ProductViewModelSpec: QuickSpec {
                 beforeEach {
                     AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
                     productViewModel = ProductViewModel(product: self.product)
+                    waitUntil { done in
+                        productViewModel.isLoading.producer
+                        .startWithValues({ isLoading in
+                            if !isLoading {
+                                done()
+                            }
+                        })
+                    }
                 }
 
                 it("has proper sizes extracted") {

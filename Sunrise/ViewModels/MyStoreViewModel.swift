@@ -12,7 +12,7 @@ import MapKit
 class MyStoreViewModel: BaseViewModel {
 
     // Inputs
-    let selectedIndexPathObserver: Observer<IndexPath?, NoError>
+    let selectedIndexPathObserver: Observer<IndexPath, NoError>
     let selectedPinCoordinateObserver: Observer<CLLocationCoordinate2D?, NoError>
     let refreshObserver: Observer<Void, NoError>
     let userLocation: MutableProperty<CLLocation?>
@@ -21,52 +21,31 @@ class MyStoreViewModel: BaseViewModel {
     // Outputs
     let isLoading: MutableProperty<Bool>
     let visibleMapRect: MutableProperty<MKMapRect>
-    let selectedStoreLocation: MutableProperty<CLLocation?>
     let storeLocations: MutableProperty<[CLLocation]>
-    let selectedStoreName: MutableProperty<String?>
-    let selectedStreetAndNumberInfo: MutableProperty<String?>
-    let selectedZipAndCityInfo: MutableProperty<String?>
-    let selectedOpenLine1Info: MutableProperty<String?>
     let presentStoreDetailsSignal: Signal<Void, NoError>
-    let backButtonTitle: MutableProperty<String?>
-    var backButtonSignal: Signal<Void, NoError>? {
-        return AppRouting.accountViewController?.viewModel?.backButtonSignal
-    }
-    var storeDetailsViewModel: StoreDetailsViewModel? {
-        if let store = selectedStore.value {
-            return StoreDetailsViewModel(store: store)
+    var myStoreIndexPath: IndexPath? {
+        if let myStore = myStore?.value, let row = channels.value.index(of: myStore) {
+            return IndexPath(row: row, section: 0)
         }
         return nil
     }
-    var navigationShouldPop: MutableProperty<Bool>? {
-        return AppRouting.accountViewController?.viewModel?.navigationShouldPop
-    }
+    var storeDetailsViewModel: StoreDetailsViewModel?
 
-    let selectedStore: MutableProperty<Channel?>
     private let channels: MutableProperty<[Channel]>
-
 
     // MARK: - Lifecycle
 
     override init() {
-
         userLocation = MutableProperty(nil)
         isLoading = MutableProperty(true)
         visibleMapRect = MutableProperty(MKMapRectNull)
-        selectedStoreLocation = MutableProperty(nil)
         storeLocations = MutableProperty([])
         channels = MutableProperty([])
-        backButtonTitle = MutableProperty(nil)
-        selectedStore = MutableProperty(nil)
-        selectedStoreName = MutableProperty(nil)
-        selectedStreetAndNumberInfo = MutableProperty(nil)
-        selectedZipAndCityInfo = MutableProperty(nil)
-        selectedOpenLine1Info = MutableProperty(nil)
 
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
-        let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<IndexPath?, NoError>.pipe()
+        let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<IndexPath, NoError>.pipe()
         self.selectedIndexPathObserver = selectedIndexPathObserver
 
         let (selectedPinCoordinateSignal, selectedPinCoordinateObserver) = Signal<CLLocationCoordinate2D?, NoError>.pipe()
@@ -79,9 +58,11 @@ class MyStoreViewModel: BaseViewModel {
 
         storeLocations <~ channels.producer.map { channels in channels.flatMap({ $0.location }) }
 
-        visibleMapRect <~ userLocation.producer.combineLatest(with: channels.producer).map { userLocation, channels in
+        visibleMapRect <~ userLocation.producer.combineLatest(with: channels.producer).map { [weak self] userLocation, channels in
             var visibleLocations = [CLLocation]()
-            if let userLocation = userLocation, let nearestStore = channels.first?.location {
+            if let userLocation = userLocation, let myStore = self?.myStore?.value?.location {
+                visibleLocations = [userLocation, myStore]
+            } else if let userLocation = userLocation, let nearestStore = channels.first?.location {
                 visibleLocations = [userLocation, nearestStore]
             } else {
                 visibleLocations = channels.flatMap { $0.location }
@@ -109,48 +90,23 @@ class MyStoreViewModel: BaseViewModel {
             self?.retrieveStores()
         }
 
-        selectedStoreLocation <~ selectedStore.map { return $0?.location }
-        selectedStoreName <~ selectedStore.map { return $0?.name?.localizedString }
-        selectedStreetAndNumberInfo <~ selectedStore.map { return $0?.streetAndNumberInfo }
-        selectedZipAndCityInfo <~ selectedStore.map { return $0?.zipAndCityInfo }
-        selectedOpenLine1Info <~ selectedStore.map { return $0?.openingTimes }
-        backButtonTitle <~ selectedStore.combineLatest(with: isActive).map { selectedStore, isActive in
-            selectedStore == nil || !isActive ? NSLocalizedString("My Account", comment: "My Account") : NSLocalizedString("All Stores", comment: "All Stores")
-        }
-        if let navigationShouldPop = navigationShouldPop {
-            navigationShouldPop <~ selectedStore.combineLatest(with: isActive).map { selectedStore, isActive in
-                return selectedStore == nil || !isActive
-            }
-        }
-        if let backButtonSignal = backButtonSignal {
-            backButtonSignal.observeValues { [weak self] in
-                if let isActive = self?.isActive.value, self?.selectedStore.value != nil && isActive {
-                    self?.selectedStore.value = nil
-                }
-            }
-        }
-
-        selectedIndexPathSignal.observeValues { [weak self] selectedIndexPath in
-            if let selectedIndexPath = selectedIndexPath {
-                self?.selectedStore.value = self?.channels.value[selectedIndexPath.row]
-            } else {
-                self?.selectedStore.value = nil
-            }
-        }
-
         selectedPinCoordinateSignal.observeValues { [weak self] coordinate in
-            if self?.selectedStore.value != nil {
+            if let coordinate = coordinate, let store = self?.channels.value.filter({ store in
+                if let storeLocation = store.location {
+                    return storeLocation.coordinate.latitude == coordinate.latitude
+                            && storeLocation.coordinate.longitude == coordinate.longitude
+                }
+                return false
+            }).first {
+                self?.storeDetailsViewModel = StoreDetailsViewModel(store: store)
                 presentStoreDetailsObserver.send(value: ())
-            } else if let coordinate = coordinate {
-                self?.selectedStore.value = self?.channels.value.filter({ store in
-                    if let storeLocation = store.location {
-                        return storeLocation.coordinate.latitude == coordinate.latitude
-                                && storeLocation.coordinate.longitude == coordinate.longitude
-                    }
-                    return false
-                }).first
-            } else {
-                self?.selectedStore.value = nil
+            }
+        }
+
+        selectedIndexPathSignal.observeValues { [weak self] indexPath in
+            if let store = self?.channels.value[indexPath.row] {
+                self?.storeDetailsViewModel = StoreDetailsViewModel(store: store)
+                presentStoreDetailsObserver.send(value: ())
             }
         }
 
