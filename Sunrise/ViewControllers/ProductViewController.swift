@@ -26,7 +26,10 @@ class ProductViewController: UITableViewController {
     @IBOutlet weak var priceBeforeDiscount: UILabel!
     @IBOutlet weak var activePriceLabel: UILabel!
     @IBOutlet weak var quantityField: IQDropDownTextField!
+    @IBOutlet weak var reserveButton: UIButton!
     @IBOutlet weak var addToCartButton: UIButton!
+    @IBOutlet weak var addToCartSection: UIStackView!
+    @IBOutlet weak var addToCartSectionHeight: NSLayoutConstraint!
 
     private let footerCellIdentifier = "FooterCell"
     private var footerCell: UITableViewCell {
@@ -64,6 +67,7 @@ class ProductViewController: UITableViewController {
         if viewModel != nil {
             bindViewModel()
         }
+
     }
 
     // MARK: - Bindings
@@ -71,7 +75,8 @@ class ProductViewController: UITableViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
-        addToCartAction = CocoaAction(viewModel.addToCartAction, { quantity in return quantity })
+        addToCartButton.reactive.pressed = CocoaAction(viewModel.addToCartAction) { [unowned self] _ in return self.quantityField.selectedItem! }
+        reserveButton.reactive.pressed = CocoaAction(viewModel.reserveAction)
 
         viewModel.name.producer
         .observe(on: UIScheduler())
@@ -123,6 +128,19 @@ class ProductViewController: UITableViewController {
                 }
             })
 
+        viewModel.performSegueSignal
+            .observe(on: UIScheduler())
+            .observeValues { [weak self] in
+                self?.performSegue(withIdentifier: $0, sender: nil)
+            }
+
+        viewModel.displayAddToCartSection.producer
+            .observe(on: UIScheduler())
+            .startWithValues({ [weak self] displayAddToCartSection in
+                self?.addToCartSection.isHidden = !displayAddToCartSection
+                self?.addToCartSectionHeight.constant = displayAddToCartSection ? 35 : 0
+            })
+
         viewModel.addToCartAction.events
             .observe(on: UIScheduler())
             .observeValues({ [weak self] event in
@@ -136,6 +154,40 @@ class ProductViewController: UITableViewController {
                             message: self?.viewModel?.alertMessage(for: [error]),
                             preferredStyle: .alert
                             )
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present(alertController, animated: true, completion: nil)
+                default:
+                    return
+                }
+            })
+
+        viewModel.signInPromptSignal
+            .observe(on: UIScheduler())
+            .observeValues { [weak self] in
+                let alertController = UIAlertController(
+                        title: viewModel.logInTitle,
+                        message: viewModel.logInMessage,
+                        preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(title: viewModel.cancelTitle, style: .cancel, handler: nil))
+                alertController.addAction(UIAlertAction(title: viewModel.logInAction, style: .default, handler: { _ in
+                    AppRouting.presentSignInViewController(tabIndexAfterLogIn: 0)
+                }))
+                self?.present(alertController, animated: true, completion: nil)
+            }
+
+        viewModel.reserveAction.events
+            .observe(on: UIScheduler())
+            .observeValues({ [weak self] event in
+                switch event {
+                case .value:
+                    self?.presentSuccessfulReservationAlert()
+                case let .failed(error):
+                    let alertController = UIAlertController(
+                            title: "Reservation failed",
+                            message: self?.viewModel?.alertMessage(for: [error]),
+                            preferredStyle: .alert
+                    )
                     alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self?.present(alertController, animated: true, completion: nil)
                 default:
@@ -176,7 +228,7 @@ class ProductViewController: UITableViewController {
             }
         }
 
-        cell.attributeField.reactive.continuousTextValues.map({ $0 ?? "" })
+        cell.attributeField.reactive.textValues.map({ $0 ?? "" })
         .take(until: cell.reactive.prepareForReuse)
         .observeValues { [weak self] attributeValue in
             self?.viewModel?.activeAttributes.value[attributeKey] = attributeValue
@@ -197,6 +249,20 @@ class ProductViewController: UITableViewController {
                 cell.attributeValue.text = activeAttribute
             }
         }
+    }
+
+    // MARK: - Success presentation
+
+    private func presentSuccessfulReservationAlert() {
+        let alertController = UIAlertController(
+                title: viewModel?.reservationSuccessTitle,
+                message: viewModel?.reservationSuccessMessage,
+                preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: viewModel?.reservationContinueTitle, style: .default, handler: { [weak self] _ in
+            _ = self?.navigationController?.popToRootViewController(animated: true)
+        }))
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -234,7 +300,7 @@ class ProductViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-            case 1: return 100
+            case 1: return viewModel?.displayAddToCartSection.value == false ? 55 : 100
             case 2: return 55
             default: return 0
         }
@@ -252,29 +318,6 @@ class ProductViewController: UITableViewController {
         if let storeSelectionViewController = segue.destination as? StoreSelectionViewController,
                 let storeSelectionViewModel = viewModel?.storeSelectionViewModel {
             storeSelectionViewController.viewModel = storeSelectionViewModel
-        }
-    }
-    
-    @IBAction func addToCart(_ sender: UIButton) {
-        addToCartAction?.execute(quantityField.selectedItem as AnyObject?)
-    }
-
-    @IBAction func reserveInStore(_ sender: UIButton) {
-        guard let viewModel = viewModel else { return }
-
-        if viewModel.isLoggedIn {
-            performSegue(withIdentifier: "showStoreSelection", sender: self)
-        } else {
-            let alertController = UIAlertController(
-                    title: viewModel.logInTitle,
-                    message: viewModel.logInMessage,
-                    preferredStyle: .alert
-            )
-            alertController.addAction(UIAlertAction(title: viewModel.cancelTitle, style: .cancel, handler: nil))
-            alertController.addAction(UIAlertAction(title: viewModel.logInAction, style: .default, handler: { _ in
-                AppRouting.presentSignInViewController(tabIndexAfterLogIn: 0)
-            }))
-            present(alertController, animated: true, completion: nil)
         }
     }
     

@@ -63,6 +63,25 @@ class ProductOverviewViewController: UICollectionViewController {
         viewModel.refreshObserver.send(value: ())
     }
 
+    private func bindViewModel(for productHeaderView: ProductCollectionHeaderView) {
+        guard let viewModel = viewModel, isViewLoaded else { return }
+
+        viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .take(until: productHeaderView.reactive.prepareForReuse)
+        .startWithValues({ isLoading in
+            if !isLoading {
+                [productHeaderView.headerLabel, productHeaderView.myStoreNameLabel].forEach { $0.isHidden = false }
+            }
+        })
+        viewModel.browsingStoreName.producer
+        .observe(on: UIScheduler())
+        .take(until: productHeaderView.reactive.prepareForReuse)
+        .startWithValues({ storeName in
+            productHeaderView.myStoreNameLabel.text = storeName
+        })
+    }
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,6 +90,30 @@ class ProductOverviewViewController: UICollectionViewController {
             let productDetailsViewModel = viewModel.productDetailsViewModelForProductAtIndexPath(indexPath)
             productViewController.viewModel = productDetailsViewModel
         }
+    }
+    
+    @IBAction func presentMyStoreSelection(_ sender: UITapGestureRecognizer) {
+        guard AppRouting.isLoggedIn else { return }
+
+        let alertController = UIAlertController(
+                title: viewModel?.browsingOptionsTitle,
+                message: viewModel?.browsingOptionsMessage,
+                preferredStyle: .actionSheet
+        )
+        if viewModel?.browsingStore.value == nil {
+            alertController.addAction(UIAlertAction(title: viewModel?.selectMyStoreOption, style: .default) { [weak self] _ in
+                self?.viewModel?.selectMyStoreObserver.send(value: ())
+            })
+        } else {
+            alertController.addAction(UIAlertAction(title: viewModel?.selectOnlineStoreOption, style: .default) { [weak self] _ in
+                self?.viewModel?.selectOnlineStoreObserver.send(value: ())
+            })
+        }
+        alertController.addAction(UIAlertAction(title: viewModel?.changeMyStoreOption, style: .default) { _ in
+            AppRouting.switchToMyStore()
+        })
+        alertController.addAction(UIAlertAction(title: viewModel?.cancelOption, style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - UICollectionViewDataSource
@@ -95,6 +138,15 @@ class ProductOverviewViewController: UICollectionViewController {
         cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrlAtIndexPath(indexPath)))
 
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ProductCollectionHeader", for: indexPath) as! ProductCollectionHeaderView
+            bindViewModel(for: headerView)
+            return headerView
+        }
+        return UICollectionReusableView()
     }
 
     // MARK: - UIScrollViewDelegate
@@ -147,7 +199,6 @@ extension ProductOverviewViewController: UICollectionViewDelegateFlowLayout {
         let cellWidth = (screenSize.width - 26) / 2
         return CGSize(width: cellWidth, height: cellHeight)
     }
-
 }
 
 // MARK: - UISearchResultsUpdating
@@ -157,7 +208,6 @@ extension ProductOverviewViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         resetIdleTimer()
     }
-
 }
 
 extension ProductOverviewViewController: DZNEmptyDataSetSource {
@@ -165,5 +215,4 @@ extension ProductOverviewViewController: DZNEmptyDataSetSource {
     func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView {
         return noResultsView
     }
-
 }

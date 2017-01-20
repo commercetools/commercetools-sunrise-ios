@@ -6,19 +6,35 @@ import ReactiveSwift
 import Result
 import Commercetools
 
+/// The key used for whether the user was using online or physical store
+let kStorePreference = "StorePreference"
+
 class ProductOverviewViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let nextPageObserver: Observer<Void, NoError>
+    let selectOnlineStoreObserver: Observer<Void, NoError>
+    let selectMyStoreObserver: Observer<Void, NoError>
     let searchText = MutableProperty("")
 
     // Outputs
     let title: String
     let isLoading: MutableProperty<Bool>
+    let browsingStoreName: MutableProperty<String?>
+    let browsingStore: MutableProperty<Channel?>
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+
+    // Dialogue texts
+    let browsingOptionsTitle = NSLocalizedString("Browsing Options", comment: "Browsing Options")
+    let browsingOptionsMessage = NSLocalizedString("Which store would you like to browse?", comment: "Which store would you like to browse")
+    let selectOnlineStoreOption = NSLocalizedString("Select Online Store", comment: "Select Online Store")
+    var selectMyStoreOption: String { return String(format: NSLocalizedString("Select %@", comment: "Select My Store"), myStore?.value?.name?.localizedString ?? "") }
+    let changeMyStoreOption = NSLocalizedString("Change My Store", comment: "Change My Store")
+    let cancelOption = NSLocalizedString("Cancel", comment: "Cancel")
+    let onlineStoreName = NSLocalizedString("Online Store", comment: "Online Store")
 
     // MARK: - Lifecycle
 
@@ -26,8 +42,10 @@ class ProductOverviewViewModel: BaseViewModel {
         products = []
 
         title = NSLocalizedString("Products", comment: "POP Title")
+        browsingStoreName = MutableProperty(onlineStoreName)
 
         isLoading = MutableProperty(true)
+        browsingStore = MutableProperty(nil)
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -35,11 +53,29 @@ class ProductOverviewViewModel: BaseViewModel {
         let (nextPageSignal, pageObserver) = Signal<Void, NoError>.pipe()
         nextPageObserver = pageObserver
 
+        let (selectOnlineStoreSignal, selectOnlineStoreObserver) = Signal<Void, NoError>.pipe()
+        self.selectOnlineStoreObserver = selectOnlineStoreObserver
+
+        let (selectMyStoreSignal, selectMyStoreObserver) = Signal<Void, NoError>.pipe()
+        self.selectMyStoreObserver = selectMyStoreObserver
+
         super.init()
 
-        refreshSignal
-        .observeValues { [weak self] in
-            self?.queryForProductProjections(offset: 0)
+        // Querying for product projections needs to done only when the profile / account info is not loading
+        // (the results depend on if and which store is selected)
+        if let accountInfoIsLoading = AppRouting.accountViewController?.viewModel?.isLoading {
+            refreshSignal.combineLatest(with: accountInfoIsLoading.signal)
+            .observeValues { [weak self] _, accountInfoIsLoading in
+                self?.isLoading.value = true
+                if !accountInfoIsLoading {
+                    self?.queryForProductProjections(offset: 0)
+                }
+            }
+        } else {
+            refreshSignal
+            .observeValues { [weak self] in
+                self?.queryForProductProjections(offset: 0)
+            }
         }
 
         nextPageSignal
@@ -53,6 +89,17 @@ class ProductOverviewViewModel: BaseViewModel {
         .observeValues({ [weak self] searchText in
             self?.queryForProductProjections(offset: 0, text: searchText)
         })
+
+        browsingStore <~ selectOnlineStoreSignal.map { return nil }
+        browsingStore <~ selectMyStoreSignal.map { [weak self] in return self?.myStore?.value }
+        browsingStore.signal.observe(on: QueueScheduler())
+        .observeValues { browsingStore in
+            UserDefaults.standard.set(browsingStore != nil, forKey: kStorePreference)
+        }
+
+        browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
+
+        searchText <~ browsingStore.map { _ in return "" }
     }
 
     func productDetailsViewModelForProductAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel {
@@ -71,11 +118,13 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return products[indexPath.row].mainVariantWithPrice?.images?.first?.url ?? ""
+        return products[indexPath.row].mainVariantWithPrice(for: browsingStore.value)?.images?.first?.url ?? ""
     }
 
     func productPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, let value = price.value else { return "" }
+        guard let variant = products[indexPath.row].mainVariantWithPrice(for: browsingStore.value),
+              let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!),
+              let value = price.value else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -85,8 +134,9 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let price = products[indexPath.row].mainVariantWithPrice?.independentPrice, let value = price.value,
-        let _ = price.discounted?.value else { return "" }
+        guard let variant = products[indexPath.row].mainVariantWithPrice(for: browsingStore.value),
+              let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!),
+              let value = price.value, price.discounted?.value != nil else { return "" }
 
         return value.description
     }
@@ -94,14 +144,23 @@ class ProductOverviewViewModel: BaseViewModel {
     // MARK: - Commercetools product projections querying
 
     private func queryForProductProjections(offset: UInt, text: String = "") {
+        guard AppRouting.accountViewController?.viewModel?.isLoading.value != true else { return }
         isLoading.value = true
+
+        // Sort by newer first, but only when the user performs a text search
         var sort: [String]? = nil
         if text != "" {
-            // Show newer first only when the user performs a text search
             sort = ["createdAt desc"]
         }
 
-        ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text, result: { result in
+        // When the user is browsing store inventory, include a filter, to limit POP results accordingly
+        var filter: String? = nil
+        if let myStoreId = browsingStore.value?.id {
+            filter = "variants.availability.channels.\(myStoreId).isOnStock:true"
+        }
+
+        ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
+                                 filter: filter, result: { result in
             if let products = result.model?.results, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 
@@ -112,7 +171,4 @@ class ProductOverviewViewModel: BaseViewModel {
             self.isLoading.value = false
         })
     }
-
-
-
 }

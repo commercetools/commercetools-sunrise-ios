@@ -14,12 +14,6 @@ class MyStoreViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var selectedStoreDetailsView: UIView!
-    @IBOutlet weak var selectedStoreViewBottomGuide: NSLayoutConstraint!
-    @IBOutlet weak var storeNameLabel: UILabel!
-    @IBOutlet weak var streetAndNumberLabel: UILabel!
-    @IBOutlet weak var zipAndCityLabel: UILabel!
-    @IBOutlet weak var openLine1Label: UILabel!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
 
     private let locationManager = CLLocationManager()
@@ -67,16 +61,15 @@ class MyStoreViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
 
-        storeNameLabel.reactive.text <~ viewModel.selectedStoreName
-        streetAndNumberLabel.reactive.text <~ viewModel.selectedStreetAndNumberInfo
-        zipAndCityLabel.reactive.text <~ viewModel.selectedZipAndCityInfo
-        openLine1Label.reactive.text <~ viewModel.selectedOpenLine1Info
-
         viewModel.isLoading.producer
                 .observe(on: UIScheduler())
                 .startWithValues({ [weak self] isLoading in
                     if !isLoading {
-                        self?.tableView.reloadData()
+                        UIView.animate(withDuration: 0, animations: { self?.tableView.reloadData() }, completion: { _ in
+                            if let myStoreIndexPath = self?.viewModel?.myStoreIndexPath {
+                                self?.tableView.scrollToRow(at: myStoreIndexPath, at: .middle, animated: true)
+                            }
+                        })
                         self?.refreshControl.endRefreshing()
                         SVProgressHUD.dismiss()
                     } else {
@@ -123,51 +116,13 @@ class MyStoreViewController: UIViewController {
                     self?.performSegue(withIdentifier: "storeDetails", sender: self)
                 }
 
-        viewModel.backButtonTitle.producer
-                .observe(on: UIScheduler())
-                .startWithValues { [weak self] title in
-                    self?.navigationController?.navigationBar.backItem?.title = title
-                }
-
-        viewModel.selectedStoreLocation.producer
-                .observe(on: UIScheduler())
-                .startWithValues({ [weak self] storeLocation in
-                    guard let view = self?.view, let mapView = self?.mapView,
-                          let tableViewHeight = self?.tableViewHeight,
-                          let selectedStoreDetailsView = self?.selectedStoreDetailsView,
-                          let selectedStoreViewBottomGuide = self?.selectedStoreViewBottomGuide,
-                          let navigationItem = self?.navigationItem else { return }
-                    if let storeLocation = storeLocation {
-                        let mapViewRegion = MKCoordinateRegion(center: storeLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                        mapView.setRegion(mapViewRegion, animated: true)
-                    } else {
-                        navigationItem.hidesBackButton = true
-                    }
-                    UIView.animate(withDuration: 0.5) {
-                        tableViewHeight.constant = storeLocation != nil ? 0 : 0.55 * view.bounds.size.height
-                        selectedStoreViewBottomGuide.constant = storeLocation != nil ? 0 : -selectedStoreDetailsView.bounds.size.height
-                        navigationItem.hidesBackButton = false
-                        view.layoutIfNeeded()
-                    }
-                })
-
         observeAlertMessageSignal(viewModel: viewModel)
-    }
-
-    @objc private func closeStoreDetails() {
-        viewModel?.selectedIndexPathObserver.send(value: nil)
     }
 
     // MARK: - Refreshing
 
     @IBAction func refresh(_ sender: UIRefreshControl) {
         viewModel?.refreshObserver.send(value: ())
-    }
-
-    // MARK: - Store details action
-
-    @IBAction func showStoreDetails(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "storeDetails", sender: self)
     }
 
     // MARK: - Navigation

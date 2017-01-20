@@ -30,9 +30,6 @@ class StoreDetailsViewModel: BaseViewModel {
     var openLine1Info: String? {
         return store.openingTimes
     }
-    var myStore: MutableProperty<Channel?>? {
-        return AppRouting.accountViewController?.viewModel?.myStore
-    }
     let successTitle = NSLocalizedString("My Store Saved", comment: "My store saved")
     let successMessage: String
 
@@ -83,7 +80,7 @@ class StoreDetailsViewModel: BaseViewModel {
                     Customer.update(actions: updateActions) { result in
                         self?.isLoading.value = false
                         if result.isSuccess {
-                            AppRouting.accountViewController?.viewModel?.myStore.value = self?.store
+                            AppRouting.accountViewController?.viewModel?.currentStore.value = self?.store
                             guard let myStoreId = self?.store.id else { return }
                             UserDefaults.standard.set(myStoreId, forKey: kMyStoreId)
                             observer.sendCompleted()

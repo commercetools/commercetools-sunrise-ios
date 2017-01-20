@@ -16,6 +16,10 @@ class ProductOverviewViewModelSpec: QuickSpec {
         describe("ProductOverviewViewModel") {
             var overviewViewModel: ProductOverviewViewModel!
 
+            beforeSuite {
+                Commercetools.config = nil
+            }
+
             beforeEach {
                 let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
                 let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
@@ -50,6 +54,36 @@ class ProductOverviewViewModelSpec: QuickSpec {
 
                 it("has properly formatted price before discount from master variant") {
                     expect(overviewViewModel.productOldPriceAtIndexPath(indexPath)).to(equal("€137.50"))
+                }
+            }
+
+            context("online store shopping") {
+                beforeEach {
+                    overviewViewModel.browsingStore.value = nil
+                }
+
+                it("header shows online store name") {
+                    expect(overviewViewModel.browsingStoreName.value).toEventually(equal("Online Store"))
+                }
+            }
+
+            context("my store selected") {
+                let indexPath = IndexPath(item: 0, section: 0)
+
+                beforeEach {
+                    overviewViewModel.browsingStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
+                }
+
+                it("header shows my store name") {
+                    expect(overviewViewModel.browsingStoreName.value).toEventually(equal("SUNRISE Store Berlin"))
+                }
+
+                it("has properly formatted price for the selected store") {
+                    expect(overviewViewModel.productPriceAtIndexPath(indexPath)).to(equal("€146.25"))
+                }
+
+                it("has properly formatted price for the selected store") {
+                    expect(overviewViewModel.productOldPriceAtIndexPath(indexPath)).to(equal("€187.50"))
                 }
             }
         }

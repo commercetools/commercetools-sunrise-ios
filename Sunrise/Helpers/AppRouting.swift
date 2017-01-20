@@ -18,9 +18,9 @@ class AppRouting {
         }
     }
 
-    private static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
-    private static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
+    static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
 
     /// Tab index to present on successful login.
     private static var tabIndexAfterLogIn: Int? = nil
@@ -31,6 +31,10 @@ class AppRouting {
 
     static var accountViewController: AccountViewController? {
         return (tabBarController?.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController)?.viewControllers.first as? AccountViewController
+    }
+
+    static var productOverviewViewController: ProductOverviewViewController? {
+        return (tabBarController?.viewControllers?[TabIndex.homeTab.index] as? UINavigationController)?.viewControllers.first as? ProductOverviewViewController
     }
 
     /**
@@ -121,6 +125,29 @@ class AppRouting {
 
         tabBarController.selectedIndex = TabIndex.homeTab.index
         homeNavigationController.popToRootViewController(animated: true)
+    }
+
+    /**
+        Pops home navigation controller to it's root view controller.
+    */
+    static func popHomeToProductOverview() {
+        guard let tabBarController = tabBarController, let homeNavigationController = tabBarController.viewControllers?[TabIndex.homeTab.index] as? UINavigationController else { return }
+
+        homeNavigationController.popToRootViewController(animated: false)
+    }
+
+    /**
+        Switches back to the my account tab, and navigates to the my store view controller.
+    */
+    static func switchToMyStore() {
+        guard let tabBarController = tabBarController,
+              let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
+              let accountViewController = accountViewController else { return }
+        accountNavigationController.popToRootViewController(animated: false)
+        tabBarController.selectedIndex = TabIndex.myAccountTab.index
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            accountViewController.showMyStores()
+        }
     }
 
     /**

@@ -14,7 +14,6 @@ class AccountViewModel: BaseViewModel {
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let sectionExpandedObserver: Observer<Int, NoError>
-    let backButtonObserver: Observer<Void, NoError>
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -22,10 +21,8 @@ class AccountViewModel: BaseViewModel {
     let showReservationSignal: Signal<IndexPath, NoError>
     let ordersExpanded = MutableProperty(false)
     let reservationsExpanded = MutableProperty(false)
-    let myStore: MutableProperty<Channel?>
+    let currentStore: MutableProperty<Channel?>
     let myStoreName: MutableProperty<String?>
-    let navigationShouldPop = MutableProperty(true)
-    let backButtonSignal: Signal<Void, NoError>
 
     var orders = [Order]()
     var reservations = [Order]()
@@ -40,7 +37,7 @@ class AccountViewModel: BaseViewModel {
 
     override init() {
         isLoading = MutableProperty(true)
-        myStore = MutableProperty(nil)
+        currentStore = MutableProperty(nil)
         myStoreName = MutableProperty(nil)
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
@@ -51,7 +48,6 @@ class AccountViewModel: BaseViewModel {
 
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
 
-        (backButtonSignal, backButtonObserver) = Signal<Void, NoError>.pipe()
 
         (showReservationSignal, showReservationObserver) = Signal<IndexPath, NoError>.pipe()
 
@@ -95,7 +91,15 @@ class AccountViewModel: BaseViewModel {
             strongSelf.contentChangesObserver.send(value: changeset)
         }
 
-        myStoreName <~ myStore.map { return $0?.name?.localizedString ?? NSLocalizedString("Not selected", comment: "Not selected") }
+        myStoreName <~ currentStore.map { return $0?.name?.localizedString ?? NSLocalizedString("Not selected", comment: "Not selected") }
+
+        currentStore.producer
+        .observe(on: UIScheduler())
+        .startWithValues { currentStore in
+            AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? currentStore : nil
+            // When my store changes, always pop to product overview, in case the customer was on a store specific PDP
+            AppRouting.popHomeToProductOverview()
+        }
     }
 
     func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {
@@ -173,7 +177,10 @@ class AccountViewModel: BaseViewModel {
     private func retrieveMyStoreDetails() {
         isLoading.value = true
         Customer.profile(expansion: ["custom.fields.myStore"]) { result in
-            self.myStore.value = result.model?.myStore?.obj
+            let myStore = result.model?.myStore?.obj
+            if self.currentStore.value != myStore {
+                self.currentStore.value = myStore
+            }
             self.isLoading.value = false
 
             if let errors = result.errors as? [CTError], result.isFailure {
@@ -187,7 +194,9 @@ class AccountViewModel: BaseViewModel {
 
     func logoutCustomer() {
         isLoading.value = true
+        currentStore.value = nil
         UserDefaults.standard.removeObject(forKey: kLoggedInUsername)
+        UserDefaults.standard.set(false, forKey: kStorePreference)
         UserDefaults.standard.synchronize()
         Customer.addCustomTypeIfNotExists { version, errors in
             if let version = version, errors == nil {

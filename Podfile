@@ -2,9 +2,10 @@ platform :ios, '10.0'
 use_frameworks!
 
 def common_pods
-  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'bd195608efe6dd91aa3b781e6cce35d1973336a4'
+  pod 'Commercetools'
   pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
   pod 'ReactiveObjC'
+  pod 'DZNEmptyDataSet'
 end
 
 target 'Sunrise' do
@@ -13,7 +14,6 @@ target 'Sunrise' do
   pod 'SDWebImage', '4.0.0-beta2'
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
-  pod 'DZNEmptyDataSet'
 end
 
 target 'ReservationNotification' do
@@ -23,7 +23,7 @@ end
 
 target 'Sunrise Watch Extension' do
   platform :watchos, '3.0'
-  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :commit => 'bd195608efe6dd91aa3b781e6cce35d1973336a4'
+  pod 'Commercetools'
   pod 'ReactiveSwift', '1.0.0-alpha.4'
   pod 'SDWebImage', '4.0.0-beta2'
   pod 'NKWatchActivityIndicator'

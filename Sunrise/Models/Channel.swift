@@ -16,13 +16,6 @@ extension Channel {
 
     // MARK: - Retrieving physical stores
 
-    var location: CLLocation? {
-        if let lon = self.latitude, let lat = self.longitude, let latitude = Double(lat), let longitude = Double(lon) {
-            return CLLocation(latitude: latitude, longitude: longitude)
-        }
-        return nil
-    }
-
     /**
         Queries for channels which represent physical stores.
 
