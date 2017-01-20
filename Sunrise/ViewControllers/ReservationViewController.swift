@@ -85,3 +85,15 @@ class ReservationViewController: UIViewController {
     }
 
 }
+
+extension ReservationViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else { return nil }
+        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "storeAnnotation") {
+            return annotationView
+        }
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "storeAnnotation")
+        annotationView.image = UIImage(named: "map-pin")
+        return annotationView
+    }
+}

@@ -14,6 +14,7 @@ class AccountViewController: UIViewController {
     @IBOutlet var myAccountHeader: UIView!
     @IBOutlet var myPreferencesHeader: UIView!
     @IBOutlet var myStoreView: UIView!
+    @IBOutlet weak var storeNameLabel: UILabel!    
     
     var ordersHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
@@ -37,6 +38,8 @@ class AccountViewController: UIViewController {
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
+
+        navigationController?.navigationBar.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +107,8 @@ class AccountViewController: UIViewController {
             self?.performSegue(withIdentifier: "reservationDetails", sender: indexPath)
         })
 
+        storeNameLabel.reactive.text <~ viewModel.myStoreName
+
         observeAlertMessageSignal(viewModel: viewModel)
 
         viewModel.refreshObserver.send(value: ())
@@ -138,12 +143,19 @@ class AccountViewController: UIViewController {
 
         recognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
         reservationsHeader.addGestureRecognizer(recognizer)
+
+        recognizer = UITapGestureRecognizer(target: self, action:#selector(showMyStores))
+        myStoreView.addGestureRecognizer(recognizer)
     }
 
     func handleTap(_ recognizer: UITapGestureRecognizer) {
         if let headerView = recognizer.view, let viewModel = viewModel {
             viewModel.sectionExpandedObserver.send(value: headerView.tag)
         }
+    }
+
+    func showMyStores(_ recognizer: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "showMyStore", sender: self)
     }
 
     // MARK: - Logout action
@@ -215,4 +227,15 @@ extension AccountViewController: UITableViewDelegate {
         indexPath.section == 1 ? performSegue(withIdentifier: "orderDetails", sender: indexPath) : performSegue(withIdentifier: "reservationDetails", sender: indexPath)
     }
 
+}
+
+extension AccountViewController: UINavigationBarDelegate {
+    func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+        let shouldPop = viewModel?.navigationShouldPop.value ?? true
+        if shouldPop {
+            _ = navigationController?.popViewController(animated: true)
+        }
+        viewModel?.backButtonObserver.send(value: ())
+        return shouldPop
+    }
 }
