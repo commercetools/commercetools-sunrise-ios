@@ -4,7 +4,7 @@
 [![][license img]][license]
 [![Stories in Ready](https://badge.waffle.io/commercetools/commercetools-sunrise-ios.svg?label=ready&title=Ready)](http://waffle.io/commercetools/commercetools-sunrise-ios)
 
-The mobile shop template using the latest version of [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk), and providing you with the best and quickest way to get up and running with the Commercetools platform.
+The mobile shop template using the latest version of [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk), and providing you with the best and quickest way to get up and running with the commercetools platform.
 
 ## Getting started
 
@@ -32,19 +32,19 @@ $ pod install
 
 ### Commercetools Project Configuration
 
-Sunrise is a mobile shop template that relies on the Commercetools platform, and the first step after successfully installing and being able to build the project is to configure [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk) with your project key and credentials, as well as other SDK specific settings (e.g `anonymousSession`, `keychainAccessGroupName`, `shareWatchSession`, desired logging level, etc).
+Sunrise is a mobile shop template that relies on the commercetools platform, and the first step after successfully installing and being able to build the project is to configure [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk) with your project key and credentials, as well as other SDK specific settings (e.g `anonymousSession`, `keychainAccessGroupName`, `shareWatchSession`, desired logging level, etc).
 
 You can optionally decide to have multiple environments (staging, qa, production), and this project provides a good example on how to make this work.
 
 ## Mobile Shop Template Features
 
-The main goal of this project is to provide you with the best practices on how to utilize [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk) along with current iOS trends, and quickly start with your own mobile shop. We are constantly working on adding new features, and you can always check the status by looking at the project's [Waffle board](https://waffle.io/commercetools/commercetools-sunrise-ios).
+The main goal of this project is to provide you with the best practices on how to utilize the [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk) along with current iOS trends, and quickly start with your own mobile shop. We are constantly working on adding new features, and you can always check the status by looking at the project's [Waffle board](https://waffle.io/commercetools/commercetools-sunrise-ios).
 
 This is the list of features you can find in the current version of the Sunrise app:
-- Products overview: customer can browse for products on the overview screen, and navigate to product details. Optionally for authenticated customer, Sunrise provides the ability to customize products overview experience, by choosing whether to browse entire online inventory, or just the products which are in stock in your favorite store.
+- Products overview: a customer can browse for products on the overview screen, and navigate to product details. Optionally for an authenticated customer, Sunrise provides the ability to customize products overview experience, by choosing whether to browse the entire online inventory, or just the products which are in stock in your favorite store.
 - Product details: all product related details, customized depending on selected preference on the overview screen.
-- Click 'n' collect: from the product details, customer can reserve an item to be picked up from one of the stores selected on the score selection screen.
-- Carts: products can be added to cart from the details page, and managed on the cart tab (delete items, change quantity, etc).
+- Click 'n' collect: from the product details, a customer can reserve an item to be picked up from one of the stores selected on the score selection screen.
+- Carts: products can be added to the cart from the details page, and managed on the cart tab (delete items, change quantity, etc).
 - Search: textual search, with results presented on the product overview screen.
 - My account:
   - Login and registration screen in case the customer has not previously logged in.
@@ -64,7 +64,7 @@ Depending on the business case, you might want to trigger customer notifications
 
 ### Delivering Notifications
 
-Sunrise uses serverless push notification solution. We have prepared both [IronWorker](https://www.iron.io/platform/ironworker/) and [AWS Lambda](https://aws.amazon.com/lambda/) function, which work when triggered from [IronMQ](https://www.iron.io/platform/ironmq/) or [AWS SNS](https://aws.amazon.com/sns/) respectively, for messages delivered using the Commercetools platform subscription.
+Sunrise uses serverless push notification solution. We have prepared both [IronWorker](https://www.iron.io/platform/ironworker/) and [AWS Lambda](https://aws.amazon.com/lambda/) functions, which work when triggered from [IronMQ](https://www.iron.io/platform/ironmq/) or [AWS SNS](https://aws.amazon.com/sns/) respectively, for messages delivered using the commercetools platform subscription.
 - [IronWorker example](https://github.com/nikola-mladenovic/notification-service-iron-worker)
 - [AWS Lambda function example](https://github.com/nikola-mladenovic/notification-service-aws-lambda)
 
