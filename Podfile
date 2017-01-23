@@ -3,7 +3,7 @@ use_frameworks!
 
 def common_pods
   pod 'Commercetools'
-  pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
+  pod 'ReactiveCocoa'
   pod 'ReactiveObjC'
   pod 'DZNEmptyDataSet'
 end
@@ -24,7 +24,7 @@ end
 target 'Sunrise Watch Extension' do
   platform :watchos, '3.0'
   pod 'Commercetools'
-  pod 'ReactiveSwift', '1.0.0-alpha.4'
+  pod 'ReactiveSwift'
   pod 'SDWebImage', '4.0.0-beta2'
   pod 'NKWatchActivityIndicator'
 end
