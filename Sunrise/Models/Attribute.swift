@@ -38,21 +38,21 @@ extension Attribute {
         case ("money", let rawValue):
             return Mapper<Money>().map(JSONObject: rawValue)?.description
         case ("date", let rawValue):
-            if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
+            if let date = Commercetools.ISO8601DateTransform().transformFromJSON(rawValue) {
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .none
                 return dateFormatter.string(from: date)
             }
             return nil
         case ("time", let rawValue):
-            if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
+            if let date = Commercetools.ISO8601DateTransform().transformFromJSON(rawValue) {
                 dateFormatter.dateStyle = .none
                 dateFormatter.timeStyle = .short
                 return dateFormatter.string(from: date)
             }
             return nil
         case ("datetime", let rawValue):
-            if let date = ISO8601DateTransform().transformFromJSON(rawValue) {
+            if let date = Commercetools.ISO8601DateTransform().transformFromJSON(rawValue) {
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .short
                 return dateFormatter.string(from: date)
