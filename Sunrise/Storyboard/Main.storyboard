@@ -230,6 +230,7 @@
                         <segue destination="hFS-aq-TFp" kind="relationship" relationship="viewControllers" id="gkQ-LB-vQA"/>
                         <segue destination="rgd-hg-sWA" kind="relationship" relationship="viewControllers" id="688-Hv-lOB"/>
                         <segue destination="1jB-PC-SmE" kind="relationship" relationship="viewControllers" id="cc5-8t-4PC"/>
+                        <segue destination="zhL-kL-YlU" kind="relationship" relationship="viewControllers" id="htc-TQ-Kf6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -266,7 +267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0s-1r-K7Z" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="-318"/>
+            <point key="canvasLocation" x="-668" y="-319"/>
         </scene>
         <!--My Account-->
         <scene sceneID="EEC-G1-NCI">
@@ -288,7 +289,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez4-c2-9Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="358"/>
+            <point key="canvasLocation" x="-668" y="418"/>
         </scene>
         <!--Sign In or Register-->
         <scene sceneID="3Qe-sI-m5P">
@@ -802,7 +803,7 @@ fields*</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFL-9S-cYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285" y="357"/>
+            <point key="canvasLocation" x="285" y="416"/>
         </scene>
         <!--Cart-->
         <scene sceneID="cYz-Z4-5gl">
@@ -824,7 +825,7 @@ fields*</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO7-2v-cuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="1057"/>
+            <point key="canvasLocation" x="-668" y="1117"/>
         </scene>
         <!--ProductDetails-->
         <scene sceneID="c9X-cq-pfd">
@@ -864,7 +865,7 @@ fields*</string>
                 <viewControllerPlaceholder storyboardIdentifier="AccountViewController" storyboardName="Account" referencedIdentifier="AccountViewController" id="SQp-Sy-9I1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQG-2K-uAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="782" y="1044"/>
+            <point key="canvasLocation" x="-58" y="1518"/>
         </scene>
         <!--Cart-->
         <scene sceneID="6rx-iH-7iU">
@@ -874,7 +875,17 @@ fields*</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uW3-2d-YJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.5" y="1057"/>
+            <point key="canvasLocation" x="-668" y="1518"/>
+        </scene>
+        <!--Categories-->
+        <scene sceneID="nxE-1s-0Cs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Categories" id="zhL-kL-YlU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="80R-88-u7Q"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Q2-q4-FeY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-668" y="41"/>
         </scene>
     </scenes>
     <resources>
