@@ -11,6 +11,8 @@ let kStorePreference = "StorePreference"
 
 class ProductOverviewViewModel: BaseViewModel {
 
+    typealias Category = Commercetools.Category
+
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let nextPageObserver: Observer<Void, NoError>
@@ -26,6 +28,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+    private var category: Category?
 
     // Dialogue texts
     let browsingOptionsTitle = NSLocalizedString("Browsing Options", comment: "Browsing Options")
@@ -38,8 +41,9 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(category: Category? = nil) {
         products = []
+        self.category = category
 
         title = NSLocalizedString("Products", comment: "POP Title")
         browsingStoreName = MutableProperty(onlineStoreName)
@@ -154,13 +158,17 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         // When the user is browsing store inventory, include a filter, to limit POP results accordingly
-        var filter: String? = nil
+        var filters = [String]()
         if let myStoreId = browsingStore.value?.id {
-            filter = "variants.availability.channels.\(myStoreId).isOnStock:true"
+            filters.append("variants.availability.channels.\(myStoreId).isOnStock:true")
+        }
+        // If the POP is being presented from the categories selection screen, filter by the category ID
+        if let categoryId = category?.id {
+            filters.append("categories.id:\"\(categoryId)\"")
         }
 
         ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
-                                 filter: filter, result: { result in
+                                 filters: filters, result: { result in
             if let products = result.model?.results, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 

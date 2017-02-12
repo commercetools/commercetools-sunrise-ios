@@ -13,8 +13,8 @@
         <!--Product Overview View Controller-->
         <scene sceneID="HmG-4C-paz">
             <objects>
-                <collectionViewController id="uQS-sw-UU6" customClass="ProductOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vIp-Xt-nMU">
+                <collectionViewController storyboardIdentifier="ProductOverviewViewController" id="uQS-sw-UU6" customClass="ProductOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="vIp-Xt-nMU">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

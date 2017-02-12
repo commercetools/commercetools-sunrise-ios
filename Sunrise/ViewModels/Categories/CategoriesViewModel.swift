@@ -14,11 +14,13 @@ class CategoriesViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
+    let selectedRowObserver: Observer<IndexPath, NoError>
 
     // Outputs
     let rootCategoryNames = MutableProperty([String?]())
     let activeRootCategoryName: MutableProperty<String?> = MutableProperty(nil)
     let contentChangesSignal: Signal<Changeset, NoError>
+    let title = NSLocalizedString("Categories", comment: "Categories")
 
     // Actions
     lazy var selectRootCategoryAction: Action<String, Void, NoError> = { [unowned self] in
@@ -46,6 +48,8 @@ class CategoriesViewModel: BaseViewModel {
         refreshObserver = observer
 
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
+        let (selectedRowSignal, selectedRowObserver) = Signal<IndexPath, NoError>.pipe()
+        self.selectedRowObserver = selectedRowObserver
 
         super.init()
 
@@ -69,6 +73,15 @@ class CategoriesViewModel: BaseViewModel {
             }
         }
 
+        selectedRowSignal.observeValues { [weak self] indexPath in
+            guard let activeCategoryId = self?.activeCategories.value.last?.id else { return }
+            if let activeList = self?.childCategoriesCache.value[activeCategoryId], self?.activeCategories.value.count == 1 {
+                self?.activeCategories.value.append(activeList[indexPath.row])
+            } else if let rootCategory = self?.activeCategories.value.first, indexPath.row == 0 {
+                self?.activeCategories.value = [rootCategory]
+            }
+        }
+
         queryForRootCategories()
     }
 
@@ -78,13 +91,13 @@ class CategoriesViewModel: BaseViewModel {
 
         // 1. Remove previous list
         if let previousId = previous.last?.id, let previousList = childCategoriesCache.value[previousId] {
-            if previousList.count > 0 {
-                if let selectedCategory = current.last, previous.count == 1 && current.count > 1 {
-                    rangeToDelete = (0...previousList.count - 1).filter({ previousList[$0].id != selectedCategory.id })
-                } else if current.count == 1 {
-                    rangeToDelete = Array<Int>(previous.count == 1 ? 0...previousList.count - 1 : 0...previousList.count)
-                }
+            if let selectedCategory = current.last, previousList.count > 0 && previous.count == 1 && current.count > 1 {
+                rangeToDelete = (0...previousList.count - 1).filter({ previousList[$0].id != selectedCategory.id })
+            } else if previousList.count > 0 && current.count == 1 {
+                rangeToDelete = Array<Int>(previous.count == 1 ? 0...previousList.count - 1 : 0...previousList.count)
             }
+        } else if previous.count > 1 && current.count == 1 {
+            rangeToDelete = [0]
         }
 
         // 2. Add new list
@@ -99,6 +112,11 @@ class CategoriesViewModel: BaseViewModel {
                                                     insertions: rangeToAdd.map({ IndexPath(row: $0, section: 0 )})))
     }
 
+    func productOverviewViewModelForCategory(at indexPath: IndexPath) -> ProductOverviewViewModel {
+        let category = childCategoriesCache.value[activeCategories.value.last?.id ?? ""]?[indexPath.row - 1]
+        return ProductOverviewViewModel(category: category)
+    }
+
     // MARK: - Data Source
 
     enum CellType {
@@ -108,8 +126,8 @@ class CategoriesViewModel: BaseViewModel {
 
     func numberOfRows(in section: Int) -> Int {
         guard let expandedCategoryId = activeCategories.value.last?.id,
-              let categoriesToShow = childCategoriesCache.value[expandedCategoryId] else { return 0 }
-        return activeCategories.value.count >= 2 ? categoriesToShow.count + 1 : categoriesToShow.count
+              let categoriesToShow = childCategoriesCache.value[expandedCategoryId] else { return activeCategories.value.count < 2 ? 0 : 1 }
+        return activeCategories.value.count < 2 ? categoriesToShow.count : categoriesToShow.count + 1
     }
 
     func cellType(at indexPath: IndexPath) -> CellType {
@@ -130,19 +148,11 @@ class CategoriesViewModel: BaseViewModel {
         return nil
     }
 
-//    func canDeleteRowAtIndexPath(_ indexPath: IndexPath) -> Bool {
-//        return indexPath.row != numberOfRowsInSection(0) - 1
-//    }
-//
-//    func lineItemNameAtIndexPath(_ indexPath: IndexPath) -> String {
-//        return cart.value?.lineItems?[indexPath.row].name?.localizedString ?? ""
-//    }
-
     // MARK: - Categories retrieval
 
     private func queryForRootCategories() {
-        Category.query(predicates: ["parent is not defined"], limit: 6) { result in
-            if let categories = result.model?.results, result.isSuccess {
+        Category.query(predicates: ["parent is not defined"]) { result in
+            if let categories = result.model?.results, self.rootCategories.value != categories, result.isSuccess {
                 self.rootCategories.value = categories
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
@@ -158,5 +168,12 @@ class CategoriesViewModel: BaseViewModel {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }
         }
+    }
+}
+
+// For the purpose of this view model, comparing categories by ID and name is sufficient
+extension Commercetools.Category: Equatable {
+    public static func == (lhs: Commercetools.Category, rhs: Commercetools.Category) -> Bool {
+        return lhs.id == rhs.id && lhs.id != nil && rhs.id != nil
     }
 }

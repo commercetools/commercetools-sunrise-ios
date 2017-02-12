@@ -19,16 +19,15 @@ class ProductOverviewViewController: UICollectionViewController {
 
     private var idleTimer: Timer?
 
-    var viewModel: ProductOverviewViewModel? {
-        didSet {
-            bindViewModel()
-        }
-    }
+    var viewModel: ProductOverviewViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel = ProductOverviewViewModel()
+        if viewModel == nil {
+            viewModel = ProductOverviewViewModel()
+        }
+        bindViewModel()
 
         collectionView?.emptyDataSetSource = self
         noResultsView.isHidden = true
@@ -36,8 +35,18 @@ class ProductOverviewViewController: UICollectionViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
-        navigationItem.titleView = searchController.searchBar
+        navigationItem.title = ""
+
         definesPresentationContext = true
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        navigationItem.titleView = searchController.searchBar
+        navigationItem.titleView?.alpha = 0
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.navigationItem.titleView?.alpha = 1
+        }
     }
 
     // MARK: - Bindings

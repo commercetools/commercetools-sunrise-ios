@@ -13,7 +13,7 @@ class CategoriesViewController: UIViewController {
     @IBOutlet weak var rootCategoriesStackView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
 
-    var rootCategorySeparatorImage: UIImageView {
+    private var rootCategorySeparatorImage: UIImageView {
         let imageView = UIImageView(image: UIImage(named: "category-separator"))
         imageView.contentMode = .center
         return imageView
@@ -32,18 +32,16 @@ class CategoriesViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 72
         tableView.tableFooterView = UIView()
-
-        rootCategoriesStackView.alpha = 0
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel?.refreshObserver.send(value: ())
+        navigationItem.title = viewModel?.title
     }
 
     func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
         viewModel.rootCategoryNames.producer
         .observe(on: UIScheduler())
@@ -83,20 +81,23 @@ class CategoriesViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        if let selectedCell = sender as? CategoryCell, let indexPath = tableView.indexPath(for: selectedCell),
+           let productOverviewViewController = segue.destination as? ProductOverviewViewController, let viewModel = viewModel {
+            let productOverviewViewModel = viewModel.productOverviewViewModelForCategory(at: indexPath)
+            productOverviewViewController.viewModel = productOverviewViewModel
+            navigationItem.title = ""
+        }
     }
 
     // MARK: - Buttons for root categories
 
     private func populateRootCategories(with names: [String?]) {
-        rootCategoriesStackView.arrangedSubviews.forEach { rootCategoriesStackView.removeArrangedSubview($0) }
+        rootCategoriesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         names.forEach { categoryName in
             rootCategoriesStackView.addArrangedSubview(createRootCategoryButton(with: categoryName))
             rootCategoriesStackView.addArrangedSubview(rootCategorySeparatorImage)
         }
-        if let last = rootCategoriesStackView.arrangedSubviews.last {
-            rootCategoriesStackView.removeArrangedSubview(last)
-        }
+        rootCategoriesStackView.arrangedSubviews.last?.removeFromSuperview()
     }
 
     private func changeRootCategory(from previous: String?, to current: String?) {
@@ -131,7 +132,6 @@ class CategoriesViewController: UIViewController {
 }
 
 extension CategoriesViewController: UITableViewDataSource {
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
         return viewModel.numberOfRows(in: section)
@@ -143,5 +143,11 @@ extension CategoriesViewController: UITableViewDataSource {
         categoryCell.categoryName.text = viewModel.categoryName(at: indexPath)
 
         return categoryCell
+    }
+}
+
+extension CategoriesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.selectedRowObserver.send(value: indexPath)
     }
 }
