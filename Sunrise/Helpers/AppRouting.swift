@@ -10,6 +10,7 @@ class AppRouting {
     enum TabIndex: Int {
         case homeTab = 0
         case searchTab
+        case categoriesTab
         case myAccountTab
         case cartTab
 

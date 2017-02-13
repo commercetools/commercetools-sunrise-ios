@@ -14,7 +14,7 @@
         <scene sceneID="HmG-4C-paz">
             <objects>
                 <collectionViewController storyboardIdentifier="ProductOverviewViewController" id="uQS-sw-UU6" customClass="ProductOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="vIp-Xt-nMU">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vIp-Xt-nMU">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -228,9 +228,9 @@
                     <connections>
                         <segue destination="HlC-be-hcu" kind="relationship" relationship="viewControllers" id="PqD-qt-SAa"/>
                         <segue destination="hFS-aq-TFp" kind="relationship" relationship="viewControllers" id="gkQ-LB-vQA"/>
+                        <segue destination="zhL-kL-YlU" kind="relationship" relationship="viewControllers" id="htc-TQ-Kf6"/>
                         <segue destination="rgd-hg-sWA" kind="relationship" relationship="viewControllers" id="688-Hv-lOB"/>
                         <segue destination="1jB-PC-SmE" kind="relationship" relationship="viewControllers" id="cc5-8t-4PC"/>
-                        <segue destination="zhL-kL-YlU" kind="relationship" relationship="viewControllers" id="htc-TQ-Kf6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
