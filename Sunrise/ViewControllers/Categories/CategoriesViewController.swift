@@ -8,8 +8,8 @@ import ReactiveSwift
 import Result
 
 class CategoriesViewController: UIViewController {
-    
-    
+        
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var rootCategoriesStackView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
 
@@ -56,6 +56,17 @@ class CategoriesViewController: UIViewController {
                     self?.rootCategoriesStackView.alpha = 1
                 }
             })
+        })
+
+        viewModel.backgroundImage.producer
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] backgroundImage in
+            guard let backgroundImage = backgroundImage else { return }
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = kCATransitionFade
+            self?.backgroundImage.layer.add(transition, forKey: nil)
+            self?.backgroundImage.image = backgroundImage
         })
 
         viewModel.activeRootCategoryName.combinePrevious(nil).signal

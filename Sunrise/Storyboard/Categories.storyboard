@@ -173,6 +173,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Categories" id="cx4-9j-3Wq"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="8zO-ni-COM" id="tsG-8h-CFT"/>
                         <outlet property="rootCategoriesStackView" destination="c5x-VF-zD5" id="FeZ-eE-eQs"/>
                         <outlet property="tableView" destination="0C5-y5-vcr" id="JaI-zj-DAc"/>
                     </connections>

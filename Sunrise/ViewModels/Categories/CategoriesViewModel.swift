@@ -20,6 +20,7 @@ class CategoriesViewModel: BaseViewModel {
     let rootCategoryNames = MutableProperty([String?]())
     let activeRootCategoryName: MutableProperty<String?> = MutableProperty(nil)
     let contentChangesSignal: Signal<Changeset, NoError>
+    let backgroundImage: MutableProperty<UIImage?> = MutableProperty(nil)
     let title = NSLocalizedString("Categories", comment: "Categories")
 
     // Actions
@@ -59,6 +60,18 @@ class CategoriesViewModel: BaseViewModel {
         activeRootCategoryName <~ activeCategories.producer.map { $0.first?.name?.localizedString }
         activeCategories.combinePrevious(activeCategories.value).signal.observeValues { [weak self] previous, current in
             self?.updateActiveCategory(from: previous, to: current)
+        }
+        // Use hardcoded images till we get assets on categories
+        backgroundImage <~ activeCategories.producer.map { (activeCategories: [Category]) -> UIImage? in
+            guard let rootCategoryName = activeCategories.first?.name?.localizedString else { return nil }
+            switch rootCategoryName {
+                case "Men":
+                    return UIImage(named: "category_men")
+                case "Women":
+                    return UIImage(named: "category_women")
+                default:
+                    return UIImage(named: "category_accessories")
+            }
         }
 
         refreshSignal.observeValues { [weak self] in
