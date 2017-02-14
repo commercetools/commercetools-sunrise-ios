@@ -164,7 +164,7 @@ class ProductOverviewViewModel: BaseViewModel {
         }
         // If the POP is being presented from the categories selection screen, filter by the category ID
         if let categoryId = category?.id {
-            filters.append("categories.id:\"\(categoryId)\"")
+            filters.append("categories.id:subtree(\"\(categoryId)\")")
         }
 
         ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
