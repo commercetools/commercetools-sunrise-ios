@@ -89,16 +89,25 @@ class ProductOverviewViewModel: BaseViewModel {
             }
         }
 
-        searchText.signal
-        .observeValues({ [weak self] searchText in
-            self?.queryForProductProjections(offset: 0, text: searchText)
+        searchText.combinePrevious(searchText.value).signal
+        .observeValues({ [weak self] previous, current in
+            guard previous != current else { return }
+            self?.queryForProductProjections(offset: 0, text: current)
         })
 
+        browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? myStore?.value : nil
         browsingStore <~ selectOnlineStoreSignal.map { return nil }
         browsingStore <~ selectMyStoreSignal.map { [weak self] in return self?.myStore?.value }
-        browsingStore.signal.observe(on: QueueScheduler())
-        .observeValues { browsingStore in
-            UserDefaults.standard.set(browsingStore != nil, forKey: kStorePreference)
+        browsingStore.combinePrevious(browsingStore.value).signal.observe(on: QueueScheduler())
+        .observeValues { previousStore, currentStore in
+            guard previousStore != currentStore else { return }
+            UserDefaults.standard.set(currentStore != nil, forKey: kStorePreference)
+            // If set from category specific POP, update the main POP
+            if let rootProductOverviewViewModel = AppRouting.productOverviewViewController?.viewModel, rootProductOverviewViewModel !== self {
+                rootProductOverviewViewModel.browsingStore.value = currentStore
+            } else if let categoryProductOverviewViewModel = AppRouting.categoryProductOverviewViewController?.viewModel, categoryProductOverviewViewModel !== self {
+                categoryProductOverviewViewModel.browsingStore.value = currentStore
+            }
         }
 
         browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }

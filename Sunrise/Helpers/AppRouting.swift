@@ -38,6 +38,13 @@ class AppRouting {
         return (tabBarController?.viewControllers?[TabIndex.homeTab.index] as? UINavigationController)?.viewControllers.first as? ProductOverviewViewController
     }
 
+    static var categoryProductOverviewViewController: ProductOverviewViewController? {
+        if let categoriesNavigationController = tabBarController?.viewControllers?[TabIndex.categoriesTab.index] as? UINavigationController {
+            return categoriesNavigationController.viewControllers.count > 1 ? categoriesNavigationController.viewControllers[1] as? ProductOverviewViewController : nil
+        }
+        return nil
+    }
+
     /**
         In case the user is not logged in, this method presents login view controller from my account tab.
     */
