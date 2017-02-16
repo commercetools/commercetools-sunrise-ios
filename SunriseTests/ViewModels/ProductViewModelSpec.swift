@@ -24,7 +24,6 @@ class ProductViewModelSpec: QuickSpec {
 
             beforeSuite {
                 Commercetools.config = Config(path: "CommercetoolsStagingConfig")
-                print(Commercetools.authState)
                 // For my store test context, we need to load product overview view controller.
                 AppRouting.switchToHome()
                 _ = AppRouting.productOverviewViewController?.view
