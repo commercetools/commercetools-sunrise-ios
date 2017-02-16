@@ -43,7 +43,7 @@ class ProductViewModel: BaseViewModel {
 
     // Actions
     lazy var addToCartAction: Action<String, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { quantity in
+        return Action(enabledIf: Property(value: true), { [unowned self] quantity in
             self.isLoading.value = true
             return self.addLineItem(quantity: quantity)
         })
@@ -70,6 +70,7 @@ class ProductViewModel: BaseViewModel {
     private let performSegueObserver: Observer<String, NoError>
     private let signInPromptObserver: Observer<Void, NoError>
     private var product: ProductProjection?
+    private var disposables = CompositeDisposable()
 
     // Attributes configuration
     private let selectableAttributes: [String] = {
@@ -105,7 +106,7 @@ class ProductViewModel: BaseViewModel {
 
         super.init()
 
-        refreshSignal
+        disposables += refreshSignal
         .observeValues { [weak self] in
             if let productId = self?.product?.id {
                 self?.retrieveProduct(productId, size: nil)
@@ -132,6 +133,10 @@ class ProductViewModel: BaseViewModel {
     convenience init(productId: String, size: String? = nil) {
         self.init()
         retrieveProduct(productId, size: size)
+    }
+    
+    deinit {
+        disposables.dispose()
     }
 
     // MARK: Bindings
@@ -194,7 +199,7 @@ class ProductViewModel: BaseViewModel {
             return "\(value)"
         }
 
-        self.isLoading.value = false
+        isLoading.value = false
     }
 
     // MARK: - Data Source
@@ -256,8 +261,8 @@ class ProductViewModel: BaseViewModel {
                     Cart.update(cartId, actions: updateActions, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
-                        } else if let errors = result.errors as? [CTError], result.isFailure {
-                            super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+                        } else if let error = result.errors?.first as? CTError, result.isFailure {
+                            observer.send(error: error)
                         }
                         self.isLoading.value = false
                     })
@@ -311,7 +316,7 @@ class ProductViewModel: BaseViewModel {
 
     private func retrieveProductType() {
         guard let id = product?.productType?.id else { return }
-        self.isLoading.value = true
+        isLoading.value = true
 
         ProductType.byId(id, expansion: nil, result: { result in
             if let productType = result.model, result.isSuccess {
