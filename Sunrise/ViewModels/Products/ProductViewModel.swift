@@ -198,8 +198,6 @@ class ProductViewModel: BaseViewModel {
 
             return "\(value)"
         }
-
-        isLoading.value = false
     }
 
     // MARK: - Data Source
@@ -309,8 +307,8 @@ class ProductViewModel: BaseViewModel {
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                self.isLoading.value = false
             }
+            self.isLoading.value = false
         })
     }
 
@@ -325,8 +323,8 @@ class ProductViewModel: BaseViewModel {
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                self.isLoading.value = false
             }
+            self.isLoading.value = false
         })
     }
 }

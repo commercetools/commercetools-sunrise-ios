@@ -108,6 +108,11 @@ class ProductOverviewViewModel: BaseViewModel {
             } else if let categoryProductOverviewViewModel = AppRouting.categoryProductOverviewViewController?.viewModel, categoryProductOverviewViewModel !== self {
                 categoryProductOverviewViewModel.browsingStore.value = currentStore
             }
+
+            // Perform new search after the store has changed
+            if self?.searchText.value == "" {
+                self?.queryForProductProjections(offset: 0)
+            }
         }
 
         browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }

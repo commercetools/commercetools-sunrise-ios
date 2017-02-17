@@ -38,6 +38,10 @@ class ProductViewModelSpec: QuickSpec {
                 }
             }
 
+            beforeEach {
+                AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = nil
+            }
+
             it("has the correct upper case name") {
                 expect(productViewModel.name.value).toEventually(equal("SNEAKERS ”TOKYO” LOTTO GREY"))
             }
