@@ -174,8 +174,10 @@ class AppRouting {
         guard let tabBarController = tabBarController, let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
                 let accountViewController = accountNavigationController.viewControllers.first as? AccountViewController else { return }
 
-        tabBarController.selectedIndex = TabIndex.myAccountTab.index
         accountNavigationController.popToRootViewController(animated: false)
-        accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+        tabBarController.selectedIndex = TabIndex.myAccountTab.index
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+        }
     }
 }

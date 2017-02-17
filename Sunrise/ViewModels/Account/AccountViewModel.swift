@@ -60,7 +60,7 @@ class AccountViewModel: BaseViewModel {
 
         isLoading.signal.observeValues { [weak self] isLoading in
             if let id = self?.reservationConfirmationId, let row = self?.reservations.index(where: { $0.id == id }), !isLoading {
-                self?.showReservationObserver.send(value: IndexPath(row: row, section: 1))
+                self?.showReservationObserver.send(value: IndexPath(row: row, section: 2))
             }
         }
 
@@ -148,7 +148,7 @@ class AccountViewModel: BaseViewModel {
 
     func presentConfirmationForReservationWithId(_ reservationId: String) {
         if let row = reservations.index(where: { $0.id == reservationId }) {
-            showReservationObserver.send(value: IndexPath(row: row, section: 1))
+            showReservationObserver.send(value: IndexPath(row: row, section: 2))
 
         } else if !isLoading.value {
             reservationConfirmationId = reservationId
