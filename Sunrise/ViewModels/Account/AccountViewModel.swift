@@ -99,6 +99,7 @@ class AccountViewModel: BaseViewModel {
             AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? currentStore : nil
             // When my store changes, always pop to product overview, in case the customer was on a store specific PDP
             AppRouting.popHomeToProductOverview()
+            AppRouting.popCategoryToRoot()
         }
     }
 

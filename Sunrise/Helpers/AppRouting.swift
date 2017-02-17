@@ -145,6 +145,15 @@ class AppRouting {
     }
 
     /**
+        Pops category navigation controller to it's root view controller.
+    */
+    static func popCategoryToRoot() {
+        guard let tabBarController = tabBarController, let categoryNavigationController = tabBarController.viewControllers?[TabIndex.categoriesTab.index] as? UINavigationController else { return }
+
+        categoryNavigationController.popToRootViewController(animated: false)
+    }
+
+    /**
         Switches back to the my account tab, and navigates to the my store view controller.
     */
     static func switchToMyStore() {
