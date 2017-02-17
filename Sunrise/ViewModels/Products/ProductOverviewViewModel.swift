@@ -11,6 +11,8 @@ let kStorePreference = "StorePreference"
 
 class ProductOverviewViewModel: BaseViewModel {
 
+    typealias Category = Commercetools.Category
+
     // Inputs
     let refreshObserver: Observer<Void, NoError>
     let nextPageObserver: Observer<Void, NoError>
@@ -26,6 +28,8 @@ class ProductOverviewViewModel: BaseViewModel {
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+    private var category: Category?
+    private var disposables = CompositeDisposable()
 
     // Dialogue texts
     let browsingOptionsTitle = NSLocalizedString("Browsing Options", comment: "Browsing Options")
@@ -38,8 +42,9 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(category: Category? = nil) {
         products = []
+        self.category = category
 
         title = NSLocalizedString("Products", comment: "POP Title")
         browsingStoreName = MutableProperty(onlineStoreName)
@@ -64,42 +69,59 @@ class ProductOverviewViewModel: BaseViewModel {
         // Querying for product projections needs to done only when the profile / account info is not loading
         // (the results depend on if and which store is selected)
         if let accountInfoIsLoading = AppRouting.accountViewController?.viewModel?.isLoading {
-            refreshSignal.combineLatest(with: accountInfoIsLoading.signal)
-            .observeValues { [weak self] _, accountInfoIsLoading in
-                self?.isLoading.value = true
-                if !accountInfoIsLoading {
+            disposables += accountInfoIsLoading.combinePrevious(accountInfoIsLoading.value)
+            .signal.observeValues { [weak self] previous, current in
+                if previous && !current {
                     self?.queryForProductProjections(offset: 0)
                 }
             }
-        } else {
-            refreshSignal
-            .observeValues { [weak self] in
-                self?.queryForProductProjections(offset: 0)
-            }
         }
 
-        nextPageSignal
+        disposables += refreshSignal
+        .observeValues { [weak self] in
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += nextPageSignal
         .observeValues { [weak self] in
             if let productCount = self?.products.count, productCount > 0 {
                 self?.queryForProductProjections(offset: UInt(productCount), text: self?.searchText.value ?? "")
             }
         }
 
-        searchText.signal
-        .observeValues({ [weak self] searchText in
-            self?.queryForProductProjections(offset: 0, text: searchText)
+        disposables += searchText.combinePrevious(searchText.value).signal
+        .observeValues({ [weak self] previous, current in
+            guard previous != current else { return }
+            self?.queryForProductProjections(offset: 0, text: current)
         })
 
+        browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? myStore?.value : nil
         browsingStore <~ selectOnlineStoreSignal.map { return nil }
         browsingStore <~ selectMyStoreSignal.map { [weak self] in return self?.myStore?.value }
-        browsingStore.signal.observe(on: QueueScheduler())
-        .observeValues { browsingStore in
-            UserDefaults.standard.set(browsingStore != nil, forKey: kStorePreference)
+        disposables += browsingStore.combinePrevious(browsingStore.value).signal.observe(on: QueueScheduler())
+        .observeValues { [weak self] previousStore, currentStore in
+            guard previousStore != currentStore else { return }
+            UserDefaults.standard.set(currentStore != nil, forKey: kStorePreference)
+            // If set from category specific POP, update the main POP
+            if let rootProductOverviewViewModel = AppRouting.productOverviewViewController?.viewModel, rootProductOverviewViewModel !== self {
+                rootProductOverviewViewModel.browsingStore.value = currentStore
+            } else if let categoryProductOverviewViewModel = AppRouting.categoryProductOverviewViewController?.viewModel, categoryProductOverviewViewModel !== self {
+                categoryProductOverviewViewModel.browsingStore.value = currentStore
+            }
+
+            // Perform new search after the store has changed
+            if self?.searchText.value == "" {
+                self?.queryForProductProjections(offset: 0)
+            }
         }
 
         browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
 
         searchText <~ browsingStore.map { _ in return "" }
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     func productDetailsViewModelForProductAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel {
@@ -154,13 +176,17 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         // When the user is browsing store inventory, include a filter, to limit POP results accordingly
-        var filter: String? = nil
+        var filters = [String]()
         if let myStoreId = browsingStore.value?.id {
-            filter = "variants.availability.channels.\(myStoreId).isOnStock:true"
+            filters.append("variants.availability.channels.\(myStoreId).isOnStock:true")
+        }
+        // If the POP is being presented from the categories selection screen, filter by the category ID
+        if let categoryId = category?.id {
+            filters.append("categories.id:subtree(\"\(categoryId)\")")
         }
 
         ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
-                                 filter: filter, result: { result in
+                                 filters: filters, result: { result in
             if let products = result.model?.results, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 

@@ -48,8 +48,6 @@ class ProductViewController: UITableViewController {
         }
     }
 
-    private var addToCartAction: CocoaAction<String>?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -165,12 +163,12 @@ class ProductViewController: UITableViewController {
             .observe(on: UIScheduler())
             .observeValues { [weak self] in
                 let alertController = UIAlertController(
-                        title: viewModel.logInTitle,
-                        message: viewModel.logInMessage,
+                        title: self?.viewModel?.logInTitle,
+                        message: self?.viewModel?.logInMessage,
                         preferredStyle: .alert
                 )
-                alertController.addAction(UIAlertAction(title: viewModel.cancelTitle, style: .cancel, handler: nil))
-                alertController.addAction(UIAlertAction(title: viewModel.logInAction, style: .default, handler: { _ in
+                alertController.addAction(UIAlertAction(title: self?.viewModel?.cancelTitle, style: .cancel, handler: nil))
+                alertController.addAction(UIAlertAction(title: self?.viewModel?.logInAction, style: .default, handler: { _ in
                     AppRouting.presentSignInViewController(tabIndexAfterLogIn: 0)
                 }))
                 self?.present(alertController, animated: true, completion: nil)

@@ -118,11 +118,11 @@ class AccountViewController: UIViewController {
         guard let indexPath = sender as? IndexPath, let viewModel = viewModel else { return }
 
         if let orderOverviewViewController = segue.destination as? OrderOverviewViewController,
-                let orderOverviewViewModel = viewModel.orderOverviewViewModelForOrderAtIndexPath(indexPath){
+                let orderOverviewViewModel = viewModel.orderOverviewViewModelForOrderAtIndexPath(indexPath) {
             orderOverviewViewController.viewModel = orderOverviewViewModel
 
         } else if let reservationViewController = segue.destination as? ReservationViewController,
-                let reservationViewModel = viewModel.reservationViewModelForOrderAtIndexPath(indexPath){
+                let reservationViewModel = viewModel.reservationViewModelForOrderAtIndexPath(indexPath) {
             reservationViewController.viewModel = reservationViewModel
         }
     }

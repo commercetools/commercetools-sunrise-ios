@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Product Overview View Controller-->
         <scene sceneID="HmG-4C-paz">
             <objects>
-                <collectionViewController id="uQS-sw-UU6" customClass="ProductOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ProductOverviewViewController" id="uQS-sw-UU6" customClass="ProductOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vIp-Xt-nMU">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,17 +96,17 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FQ9-ns-e7U">
-                                    <rect key="frame" x="71.5" y="8" width="232" height="23"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FQ9-ns-e7U">
+                                    <rect key="frame" x="72" y="8" width="0.0" height="23"/>
                                     <subviews>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Browsing:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zxa-mv-PRH">
-                                            <rect key="frame" x="0.0" y="0.0" width="75" height="23"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="Browsing:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zxa-mv-PRH">
+                                            <rect key="frame" x="-188" y="-8" width="0.0" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise Berlin store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-p8-ncv">
-                                            <rect key="frame" x="79" y="0.0" width="153" height="23"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sunrise Berlin store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-p8-ncv">
+                                            <rect key="frame" x="-188" y="-8" width="0.0" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -228,6 +228,7 @@
                     <connections>
                         <segue destination="HlC-be-hcu" kind="relationship" relationship="viewControllers" id="PqD-qt-SAa"/>
                         <segue destination="hFS-aq-TFp" kind="relationship" relationship="viewControllers" id="gkQ-LB-vQA"/>
+                        <segue destination="zhL-kL-YlU" kind="relationship" relationship="viewControllers" id="htc-TQ-Kf6"/>
                         <segue destination="rgd-hg-sWA" kind="relationship" relationship="viewControllers" id="688-Hv-lOB"/>
                         <segue destination="1jB-PC-SmE" kind="relationship" relationship="viewControllers" id="cc5-8t-4PC"/>
                     </connections>
@@ -266,7 +267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0s-1r-K7Z" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="-318"/>
+            <point key="canvasLocation" x="-668" y="-319"/>
         </scene>
         <!--My Account-->
         <scene sceneID="EEC-G1-NCI">
@@ -288,7 +289,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez4-c2-9Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="358"/>
+            <point key="canvasLocation" x="-668" y="418"/>
         </scene>
         <!--Sign In or Register-->
         <scene sceneID="3Qe-sI-m5P">
@@ -802,7 +803,7 @@ fields*</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFL-9S-cYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="358"/>
+            <point key="canvasLocation" x="285" y="416"/>
         </scene>
         <!--Cart-->
         <scene sceneID="cYz-Z4-5gl">
@@ -824,7 +825,7 @@ fields*</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO7-2v-cuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="1057"/>
+            <point key="canvasLocation" x="-668" y="1117"/>
         </scene>
         <!--ProductDetails-->
         <scene sceneID="c9X-cq-pfd">
@@ -864,7 +865,7 @@ fields*</string>
                 <viewControllerPlaceholder storyboardIdentifier="AccountViewController" storyboardName="Account" referencedIdentifier="AccountViewController" id="SQp-Sy-9I1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQG-2K-uAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="782" y="1044"/>
+            <point key="canvasLocation" x="-58" y="1518"/>
         </scene>
         <!--Cart-->
         <scene sceneID="6rx-iH-7iU">
@@ -874,7 +875,17 @@ fields*</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uW3-2d-YJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.5" y="1057"/>
+            <point key="canvasLocation" x="-668" y="1518"/>
+        </scene>
+        <!--Categories-->
+        <scene sceneID="nxE-1s-0Cs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Categories" id="zhL-kL-YlU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="80R-88-u7Q"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Q2-q4-FeY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-668" y="41"/>
         </scene>
     </scenes>
     <resources>

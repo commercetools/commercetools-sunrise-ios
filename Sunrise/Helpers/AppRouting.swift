@@ -10,6 +10,7 @@ class AppRouting {
     enum TabIndex: Int {
         case homeTab = 0
         case searchTab
+        case categoriesTab
         case myAccountTab
         case cartTab
 
@@ -35,6 +36,13 @@ class AppRouting {
 
     static var productOverviewViewController: ProductOverviewViewController? {
         return (tabBarController?.viewControllers?[TabIndex.homeTab.index] as? UINavigationController)?.viewControllers.first as? ProductOverviewViewController
+    }
+
+    static var categoryProductOverviewViewController: ProductOverviewViewController? {
+        if let categoriesNavigationController = tabBarController?.viewControllers?[TabIndex.categoriesTab.index] as? UINavigationController {
+            return categoriesNavigationController.viewControllers.count > 1 ? categoriesNavigationController.viewControllers[1] as? ProductOverviewViewController : nil
+        }
+        return nil
     }
 
     /**
@@ -137,6 +145,15 @@ class AppRouting {
     }
 
     /**
+        Pops category navigation controller to it's root view controller.
+    */
+    static func popCategoryToRoot() {
+        guard let tabBarController = tabBarController, let categoryNavigationController = tabBarController.viewControllers?[TabIndex.categoriesTab.index] as? UINavigationController else { return }
+
+        categoryNavigationController.popToRootViewController(animated: false)
+    }
+
+    /**
         Switches back to the my account tab, and navigates to the my store view controller.
     */
     static func switchToMyStore() {
@@ -157,8 +174,10 @@ class AppRouting {
         guard let tabBarController = tabBarController, let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
                 let accountViewController = accountNavigationController.viewControllers.first as? AccountViewController else { return }
 
-        tabBarController.selectedIndex = TabIndex.myAccountTab.index
         accountNavigationController.popToRootViewController(animated: false)
-        accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+        tabBarController.selectedIndex = TabIndex.myAccountTab.index
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
+        }
     }
 }

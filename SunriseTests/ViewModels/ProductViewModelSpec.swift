@@ -24,7 +24,6 @@ class ProductViewModelSpec: QuickSpec {
 
             beforeSuite {
                 Commercetools.config = Config(path: "CommercetoolsStagingConfig")
-                print(Commercetools.authState)
                 // For my store test context, we need to load product overview view controller.
                 AppRouting.switchToHome()
                 _ = AppRouting.productOverviewViewController?.view
@@ -37,6 +36,10 @@ class ProductViewModelSpec: QuickSpec {
                         }
                     })
                 }
+            }
+
+            beforeEach {
+                AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = nil
             }
 
             it("has the correct upper case name") {
