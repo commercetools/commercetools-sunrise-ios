@@ -101,11 +101,13 @@ class CategoriesViewModel: BaseViewModel {
     private func updateActiveCategory(from previous: [Category], to current: [Category]) {
         var rangeToDelete = [Int]()
         var rangeToAdd = [Int]()
+        var rangeToModify = [Int]()
 
         // 1. Remove previous list
         if let previousId = previous.last?.id, let previousList = childCategoriesCache.value[previousId] {
             if let selectedCategory = current.last, previousList.count > 0 && previous.count == 1 && current.count > 1 {
                 rangeToDelete = (0...previousList.count - 1).filter({ previousList[$0].id != selectedCategory.id })
+                rangeToModify = (0...previousList.count - 1).filter({ previousList[$0].id == selectedCategory.id })
             } else if previousList.count > 0 && current.count == 1 {
                 rangeToDelete = Array<Int>(previous.count == 1 ? 0...previousList.count - 1 : 0...previousList.count)
             }
@@ -122,7 +124,8 @@ class CategoriesViewModel: BaseViewModel {
             }
         }
         contentChangesObserver.send(value: Changeset(deletions: rangeToDelete.map({ IndexPath(row: $0, section: 0) }),
-                                                    insertions: rangeToAdd.map({ IndexPath(row: $0, section: 0 )})))
+                                                    modifications: rangeToModify.map({ IndexPath(row: $0, section: 0) }),
+                                                    insertions: rangeToAdd.map({ IndexPath(row: $0, section: 0 ) })))
     }
 
     func productOverviewViewModelForCategory(at indexPath: IndexPath) -> ProductOverviewViewModel {
@@ -145,6 +148,10 @@ class CategoriesViewModel: BaseViewModel {
 
     func cellType(at indexPath: IndexPath) -> CellType {
         return (activeCategories.value.count >= 2 && indexPath.row > 0) ? .smallCategory : .bigCategory
+    }
+
+    func cellRepresentsCollapsibleTitle(at indexPath: IndexPath) -> Bool {
+        return activeCategories.value.count >= 2 && indexPath.row == 0
     }
 
     func categoryName(at indexPath: IndexPath) -> String? {

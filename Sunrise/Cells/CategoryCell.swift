@@ -7,4 +7,6 @@ import UIKit
 class CategoryCell: UITableViewCell {
 
     @IBOutlet weak var categoryName: UILabel!
+    @IBOutlet weak var separatorView: UIView?    
+    @IBOutlet weak var closeArrowImageView: UIImageView?
 }

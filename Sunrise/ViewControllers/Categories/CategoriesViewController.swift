@@ -82,7 +82,7 @@ class CategoriesViewController: UIViewController {
 
             tableView.beginUpdates()
             tableView.deleteRows(at: changeset.deletions, with: .fade)
-            tableView.reloadRows(at: changeset.modifications, with: .none)
+            tableView.reloadRows(at: changeset.modifications, with: .fade)
             tableView.insertRows(at: changeset.insertions, with: .fade)
             tableView.endUpdates()
         })
@@ -152,6 +152,10 @@ extension CategoriesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = viewModel else { return UITableViewCell() }
         let categoryCell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellType(at: indexPath) == .smallCategory ? "SmallCategoryCell" : "BigCategoryCell") as! CategoryCell
+        if viewModel.cellType(at: indexPath) == .bigCategory {
+            categoryCell.separatorView?.alpha = viewModel.cellRepresentsCollapsibleTitle(at: indexPath) ? 0 : 1
+            categoryCell.closeArrowImageView?.alpha = viewModel.cellRepresentsCollapsibleTitle(at: indexPath) ? 1 : 0
+        }
         categoryCell.categoryName.text = viewModel.categoryName(at: indexPath)
 
         return categoryCell
