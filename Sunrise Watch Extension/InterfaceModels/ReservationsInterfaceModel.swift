@@ -97,18 +97,22 @@ class ReservationsInterfaceModel {
     private func retrieveReservations() {
         guard !presentSignInMessage.value else { return }
 
-        isLoading.value = true
-        Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { [weak self] result in
-            if let orders = result.model?.results, result.isSuccess {
-                let reservations = orders.filter { $0.isReservation == true }
-                self?.reservations = reservations
-                self?.numberOfRows.value = reservations.count
-
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                print(errors)
-
+        ProcessInfo.processInfo.performExpiringActivity(withReason: "Retrieve reservations") { [weak self] expired in
+            if !expired {
+                self?.isLoading.value = true
+                Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { [weak self] result in
+                    if let orders = result.model?.results, result.isSuccess {
+                        let reservations = orders.filter { $0.isReservation == true }
+                        self?.reservations = reservations
+                        self?.numberOfRows.value = reservations.count
+                        
+                    } else if let errors = result.errors as? [CTError], result.isFailure {
+                        print(errors)
+                        
+                    }
+                    self?.isLoading.value = false
+                })
             }
-            self?.isLoading.value = false
-        })
+        }
     }
 }
