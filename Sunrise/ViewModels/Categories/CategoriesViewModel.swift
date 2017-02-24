@@ -105,10 +105,10 @@ class CategoriesViewModel: BaseViewModel {
 
         // 1. Remove previous list
         if let previousId = previous.last?.id, let previousList = childCategoriesCache.value[previousId] {
-            if let selectedCategory = current.last, previousList.count > 0 && previous.count == 1 && current.count > 1 {
+            if let selectedCategory = current.last, previous.count == 1 && current.count > 1 {
                 rangeToDelete = (0...previousList.count - 1).filter({ previousList[$0].id != selectedCategory.id })
                 rangeToModify = (0...previousList.count - 1).filter({ previousList[$0].id == selectedCategory.id })
-            } else if previousList.count > 0 && current.count == 1 {
+            } else if current.count == 1 && previousList.count > 0 {
                 rangeToDelete = Array<Int>(previous.count == 1 ? 0...previousList.count - 1 : 0...previousList.count)
             }
         } else if previous.count > 1 && current.count == 1 {
