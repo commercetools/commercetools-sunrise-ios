@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var locationManager: CLLocationManager?
 
+    private let kProjectConfig = "ProjectConfig"
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppRouting.setupInitiallyActiveTab()
 
@@ -31,9 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configPath = "CommercetoolsStagingConfig"
 #endif
 
-        if let configuration = Config(path: configPath) {
+        if let storedConfig = UserDefaults.standard.dictionary(forKey: kProjectConfig), let configuration = Config(config: storedConfig as NSDictionary) {
             Commercetools.config = configuration
-
+        } else if let configuration = Config(path: configPath) {
+            Commercetools.config = configuration
         } else {
             // Inform user about the configuration error
         }
@@ -101,6 +104,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let reservationConfirmationCategory = UNNotificationCategory(identifier: Notification.Category.reservationConfirmation, actions: [viewAction, getDirectionsAction], intentIdentifiers: [], options: [])
 
         UNUserNotificationCenter.current().setNotificationCategories([reservationConfirmationCategory])
+    }
+    
+    // MARK: - Project configuration
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if let queryItems = URLComponents(string: url.absoluteString)?.queryItems, url.scheme == "ctpclient", url.host == "changeProject" {
+            var projectConfig = [String: Any]()
+            queryItems.forEach {
+                if $0.value != "true" && $0.value != "false" {
+                    projectConfig[$0.name] = $0.value
+                } else {
+                    // Handle boolean values explicitly
+                    projectConfig[$0.name] = $0.value == "true"
+                }
+            }
+            if Config(config: projectConfig as NSDictionary) != nil {
+                let alertController = UIAlertController(
+                    title: "Valid Configuration",
+                    message: "Confirm to store the new configuration and quit the app, or tap cancel to abort",
+                    preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
+                    AppRouting.accountViewController?.viewModel?.logoutCustomer()
+                    Commercetools.logoutCustomer()
+                    UserDefaults.standard.set(projectConfig, forKey: self.kProjectConfig)
+                    UserDefaults.standard.synchronize()
+                    exit(0)
+                })
+                window?.rootViewController?.present(alertController, animated: true)
+            } else {
+                let alertController = UIAlertController(
+                    title: "Invalid Configuration",
+                    message: "Project has not been changed",
+                    preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                window?.rootViewController?.present(alertController, animated: true)
+            }
+            return true
+        }
+        return false
     }
 }
 
