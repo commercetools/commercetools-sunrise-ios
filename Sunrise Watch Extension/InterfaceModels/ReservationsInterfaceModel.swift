@@ -11,6 +11,9 @@ class ReservationsInterfaceModel {
 
     static let sharedInstance = ReservationsInterfaceModel()
 
+    // Inputs
+    let refreshObserver: Observer<Void, NoError>
+
     // Outputs
     let isLoading: MutableProperty<Bool>
     let presentSignInMessage: MutableProperty<Bool>
@@ -26,9 +29,13 @@ class ReservationsInterfaceModel {
         presentSignInMessage = MutableProperty(Commercetools.authState != .customerToken)
         isLoading = MutableProperty(false)
         numberOfRows = MutableProperty(0)
+
         let (presentReservationSignal, presentReservationObserver) = Signal<ReservationDetailsInterfaceModel, NoError>.pipe()
         self.presentReservationSignal = presentReservationSignal
         self.presentReservationObserver = presentReservationObserver
+
+        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
+        self.refreshObserver = refreshObserver
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkAuthState), name: Commercetools.Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
 
@@ -37,9 +44,18 @@ class ReservationsInterfaceModel {
             if presentSignIn {
                 self?.numberOfRows.value = 0
             } else {
-                self?.retrieveReservations()
+                if self?.presentSignInMessage.value != true {
+                    self?.isLoading.value = true
+                    self?.retrieveReservations()
+                }
             }
         })
+
+        refreshSignal.observeValues { [weak self] in
+            if self?.presentSignInMessage.value != true && self?.isLoading.value != true {
+                self?.retrieveReservations()
+            }
+        }
     }
 
     deinit {
@@ -97,18 +113,21 @@ class ReservationsInterfaceModel {
     private func retrieveReservations() {
         guard !presentSignInMessage.value else { return }
 
-        isLoading.value = true
-        Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { [weak self] result in
-            if let orders = result.model?.results, result.isSuccess {
-                let reservations = orders.filter { $0.isReservation == true }
-                self?.reservations = reservations
-                self?.numberOfRows.value = reservations.count
-
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                print(errors)
-
+        ProcessInfo.processInfo.performExpiringActivity(withReason: "Retrieve reservations") { [weak self] expired in
+            if !expired {
+                Order.query(sort: ["createdAt desc"], expansion: ["lineItems[0].distributionChannel"], result: { [weak self] result in
+                    if let orders = result.model?.results, result.isSuccess {
+                        let reservations = orders.filter { $0.isReservation == true }
+                        self?.reservations = reservations
+                        self?.numberOfRows.value = reservations.count
+                        
+                    } else if let errors = result.errors as? [CTError], result.isFailure {
+                        print(errors)
+                        
+                    }
+                    self?.isLoading.value = false
+                })
             }
-            self?.isLoading.value = false
-        })
+        }
     }
 }

@@ -28,7 +28,8 @@ class ReservationsInterfaceController: WKInterfaceController {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: .NSExtensionHostDidBecomeActive, object: nil)
         activityAnimation = NKWActivityIndicatorAnimation(type: .twoDotsAnimation, controller: self, images: [leftLoadingDot, rightLoadingDot])
         
         [signInGroup, reservationsGroup].forEach { $0.setAlpha(0) }
@@ -36,7 +37,7 @@ class ReservationsInterfaceController: WKInterfaceController {
         
         interfaceModel = ReservationsInterfaceModel.sharedInstance
     }
-    
+
     override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         return interfaceModel?.reservationDetailsInterfaceModel(for: rowIndex)
     }
@@ -105,5 +106,9 @@ class ReservationsInterfaceController: WKInterfaceController {
                 }
             }
         })
+    }
+
+    @objc private func didBecomeActive() {
+        interfaceModel?.refreshObserver.send(value: ())
     }
 }
