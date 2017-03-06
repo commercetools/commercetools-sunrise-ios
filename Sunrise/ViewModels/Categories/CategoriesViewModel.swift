@@ -108,7 +108,7 @@ class CategoriesViewModel: BaseViewModel {
             if let selectedCategory = current.last, previous.count == 1 && current.count > 1 {
                 rangeToDelete = (0...previousList.count - 1).filter({ previousList[$0].id != selectedCategory.id })
                 rangeToModify = (0...previousList.count - 1).filter({ previousList[$0].id == selectedCategory.id })
-            } else if current.count == 1 && previousList.count > 0 {
+            } else if current.count == 1 && previousList.count != 0 || previous.count != 1 {
                 rangeToDelete = Array<Int>(previous.count == 1 ? 0...previousList.count - 1 : 0...previousList.count)
             }
         } else if previous.count > 1 && current.count == 1 {
