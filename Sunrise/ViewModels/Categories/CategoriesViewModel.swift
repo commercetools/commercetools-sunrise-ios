@@ -17,9 +17,11 @@ class CategoriesViewModel: BaseViewModel {
     let selectedRowObserver: Observer<IndexPath, NoError>
 
     // Outputs
+    let isLoading = MutableProperty(false)
     let rootCategoryNames = MutableProperty([String?]())
     let activeRootCategoryName: MutableProperty<String?> = MutableProperty(nil)
     let contentChangesSignal: Signal<Changeset, NoError>
+    let performProductOverviewSegueSignal: Signal<IndexPath, NoError>
     let backgroundImage: MutableProperty<UIImage?> = MutableProperty(nil)
     let title = NSLocalizedString("Categories", comment: "Categories")
 
@@ -45,6 +47,8 @@ class CategoriesViewModel: BaseViewModel {
     // MARK: - Lifecycle
 
     override init() {
+        let (performProductOverviewSegueSignal, performProductOverviewSegueObserver) = Signal<IndexPath, NoError>.pipe()
+        self.performProductOverviewSegueSignal = performProductOverviewSegueSignal
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
 
@@ -89,9 +93,27 @@ class CategoriesViewModel: BaseViewModel {
         selectedRowSignal.observeValues { [weak self] indexPath in
             guard let activeCategoryId = self?.activeCategories.value.last?.id else { return }
             if let activeList = self?.childCategoriesCache.value[activeCategoryId], self?.activeCategories.value.count == 1 {
-                self?.activeCategories.value.append(activeList[indexPath.row])
+                guard let selectedCategoryId = activeList[indexPath.row].id else { return }
+                if self?.childCategoriesCache.value[selectedCategoryId] == nil {
+                    self?.isLoading.value = true
+                    self?.queryForChildCategories(parentId: selectedCategoryId) {
+                        self?.isLoading.value = false
+                        if self?.childCategoriesCache.value[selectedCategoryId]?.count == 0 {
+                            performProductOverviewSegueObserver.send(value: indexPath)
+                        } else {
+                            self?.activeCategories.value.append(activeList[indexPath.row])
+                        }
+                    }
+                } else if self?.childCategoriesCache.value[selectedCategoryId]?.count == 0 {
+                    performProductOverviewSegueObserver.send(value: indexPath)
+                } else {
+                    self?.activeCategories.value.append(activeList[indexPath.row])
+                }
+
             } else if let rootCategory = self?.activeCategories.value.first, indexPath.row == 0 {
                 self?.activeCategories.value = [rootCategory]
+            } else {
+                performProductOverviewSegueObserver.send(value: indexPath)
             }
         }
 
@@ -129,7 +151,7 @@ class CategoriesViewModel: BaseViewModel {
     }
 
     func productOverviewViewModelForCategory(at indexPath: IndexPath) -> ProductOverviewViewModel {
-        let category = childCategoriesCache.value[activeCategories.value.last?.id ?? ""]?[indexPath.row - 1]
+        let category = childCategoriesCache.value[activeCategories.value.last?.id ?? ""]?[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row]
         return ProductOverviewViewModel(category: category)
     }
 
@@ -159,11 +181,7 @@ class CategoriesViewModel: BaseViewModel {
             return activeCategories.value.last?.name?.localizedString
         } else if let expandedCategoryId = activeCategories.value.last?.id,
                   let categoriesToShow = childCategoriesCache.value[expandedCategoryId] {
-            if activeCategories.value.count >= 2 {
-                return categoriesToShow[indexPath.row - 1].name?.localizedString
-            } else {
-                return categoriesToShow[indexPath.row].name?.localizedString
-            }
+            return categoriesToShow[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row].name?.localizedString
         }
         return nil
     }
@@ -180,13 +198,21 @@ class CategoriesViewModel: BaseViewModel {
         }
     }
 
-    private func queryForChildCategories(parentId: String) {
+    private func queryForChildCategories(parentId: String, completion: (() -> Void)? = nil) {
         Category.query(predicates: ["parent(id = \"\(parentId)\")"]) { result in
             if let categories = result.model?.results, result.isSuccess {
                 self.childCategoriesCache.value[parentId] = categories
+                // Categories precaching
+                categories.forEach {
+                    guard let id = $0.id else { return }
+                    if self.childCategoriesCache.value[id] == nil {
+                        self.queryForChildCategories(parentId: id)
+                    }
+                }
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }
+            completion?()
         }
     }
 }

@@ -6,6 +6,7 @@ import UIKit
 import ReactiveCocoa
 import ReactiveSwift
 import Result
+import SVProgressHUD
 
 class CategoriesViewController: UIViewController {
         
@@ -43,6 +44,12 @@ class CategoriesViewController: UIViewController {
 
     func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
+
+        viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .startWithValues { isLoading in
+            isLoading ? SVProgressHUD.show() : SVProgressHUD.dismiss()
+        }
 
         viewModel.rootCategoryNames.producer
         .observe(on: UIScheduler())
@@ -87,15 +94,20 @@ class CategoriesViewController: UIViewController {
             tableView.endUpdates()
         })
 
+        viewModel.performProductOverviewSegueSignal
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] indexPath in
+            self?.performSegue(withIdentifier: "showProductOverview", sender: indexPath)
+        })
+
         observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectedCell = sender as? CategoryCell, let indexPath = tableView.indexPath(for: selectedCell),
-           let productOverviewViewController = segue.destination as? ProductOverviewViewController, let viewModel = viewModel {
-            let productOverviewViewModel = viewModel.productOverviewViewModelForCategory(at: indexPath)
+        if let indexPath = sender as? IndexPath, let productOverviewViewController = segue.destination as? ProductOverviewViewController, let viewModel = viewModel {
+           let productOverviewViewModel = viewModel.productOverviewViewModelForCategory(at: indexPath)
             productOverviewViewController.viewModel = productOverviewViewModel
             navigationItem.title = ""
         }
