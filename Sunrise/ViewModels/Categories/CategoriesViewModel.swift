@@ -42,7 +42,11 @@ class CategoriesViewModel: BaseViewModel {
 
     private let rootCategories = MutableProperty([Category]())
     private let activeCategories = MutableProperty([Category]())
-    private let childCategoriesCache = MutableProperty([String: [Category]]())
+    private var childCategoriesCache = [String: [Category]]()
+    private let categoriesRetrievalQueue = OperationQueue()
+    private var categoriesRetrievalSemaphore: DispatchSemaphore?
+    private var allCategories = [Category]()
+    private let kQueryLimit: UInt = 500
 
     // MARK: - Lifecycle
 
@@ -55,6 +59,8 @@ class CategoriesViewModel: BaseViewModel {
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
         let (selectedRowSignal, selectedRowObserver) = Signal<IndexPath, NoError>.pipe()
         self.selectedRowObserver = selectedRowObserver
+
+        categoriesRetrievalQueue.maxConcurrentOperationCount = 1
 
         super.init()
 
@@ -79,37 +85,20 @@ class CategoriesViewModel: BaseViewModel {
         }
 
         refreshSignal.observeValues { [weak self] in
-            self?.queryForRootCategories()
-        }
-
-        childCategoriesCache.combinePrevious(childCategoriesCache.value).signal.observeValues { [weak self] previous, current in
-            if let activeCategories = self?.activeCategories.value, let activeCategoryId = activeCategories.last?.id,
-               let categoryList = current[activeCategoryId], categoryList.count > 0, previous[activeCategoryId] == nil {
-                let rangeToAdd = activeCategories.count == 1 ? 0...categoryList.count - 1 : 1...categoryList.count
-                self?.contentChangesObserver.send(value: Changeset(insertions: rangeToAdd.map({ IndexPath(row: $0, section: 0 )})))
-            }
+            self?.retrieveCategories()
         }
 
         selectedRowSignal.observeValues { [weak self] indexPath in
             guard let activeCategoryId = self?.activeCategories.value.last?.id else { return }
-            if let activeList = self?.childCategoriesCache.value[activeCategoryId], self?.activeCategories.value.count == 1 {
+            if let activeList = self?.childCategoriesCache[activeCategoryId], self?.activeCategories.value.count == 1 {
                 guard let selectedCategoryId = activeList[indexPath.row].id else { return }
-                if self?.childCategoriesCache.value[selectedCategoryId] == nil {
-                    self?.isLoading.value = true
-                    self?.queryForChildCategories(parentId: selectedCategoryId) {
-                        self?.isLoading.value = false
-                        if self?.childCategoriesCache.value[selectedCategoryId]?.count == 0 {
-                            performProductOverviewSegueObserver.send(value: indexPath)
-                        } else {
-                            self?.activeCategories.value.append(activeList[indexPath.row])
-                        }
-                    }
-                } else if self?.childCategoriesCache.value[selectedCategoryId]?.count == 0 {
+
+                if self?.childCategoriesCache[selectedCategoryId] == nil ||
+                   self?.childCategoriesCache[selectedCategoryId]?.count == 0 {
                     performProductOverviewSegueObserver.send(value: indexPath)
                 } else {
                     self?.activeCategories.value.append(activeList[indexPath.row])
                 }
-
             } else if let rootCategory = self?.activeCategories.value.first, indexPath.row == 0 {
                 self?.activeCategories.value = [rootCategory]
             } else {
@@ -117,7 +106,7 @@ class CategoriesViewModel: BaseViewModel {
             }
         }
 
-        queryForRootCategories()
+        retrieveCategories()
     }
 
     private func updateActiveCategory(from previous: [Category], to current: [Category]) {
@@ -126,7 +115,7 @@ class CategoriesViewModel: BaseViewModel {
         var rangeToModify = [Int]()
 
         // 1. Remove previous list
-        if let previousId = previous.last?.id, let previousList = childCategoriesCache.value[previousId] {
+        if let previousId = previous.last?.id, let previousList = childCategoriesCache[previousId] {
             if let selectedCategory = current.last, previous.count == 1 && current.count > 1 {
                 rangeToDelete = (0...previousList.count - 1).filter({ previousList[$0].id != selectedCategory.id })
                 rangeToModify = (0...previousList.count - 1).filter({ previousList[$0].id == selectedCategory.id })
@@ -139,10 +128,8 @@ class CategoriesViewModel: BaseViewModel {
 
         // 2. Add new list
         if let currentId = current.last?.id {
-            if let currentList = childCategoriesCache.value[currentId], currentList.count > 0 {
+            if let currentList = childCategoriesCache[currentId], currentList.count > 0 {
                 rangeToAdd = Array<Int>(current.count == 1 ? 0...currentList.count - 1 : 1...currentList.count)
-            } else if childCategoriesCache.value[currentId] == nil {
-                queryForChildCategories(parentId: currentId)
             }
         }
         contentChangesObserver.send(value: Changeset(deletions: rangeToDelete.map({ IndexPath(row: $0, section: 0) }),
@@ -151,7 +138,7 @@ class CategoriesViewModel: BaseViewModel {
     }
 
     func productOverviewViewModelForCategory(at indexPath: IndexPath) -> ProductOverviewViewModel {
-        let category = childCategoriesCache.value[activeCategories.value.last?.id ?? ""]?[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row]
+        let category = childCategoriesCache[activeCategories.value.last?.id ?? ""]?[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row]
         return ProductOverviewViewModel(category: category)
     }
 
@@ -164,7 +151,7 @@ class CategoriesViewModel: BaseViewModel {
 
     func numberOfRows(in section: Int) -> Int {
         guard let expandedCategoryId = activeCategories.value.last?.id,
-              let categoriesToShow = childCategoriesCache.value[expandedCategoryId] else { return activeCategories.value.count < 2 ? 0 : 1 }
+              let categoriesToShow = childCategoriesCache[expandedCategoryId] else { return activeCategories.value.count < 2 ? 0 : 1 }
         return activeCategories.value.count < 2 ? categoriesToShow.count : categoriesToShow.count + 1
     }
 
@@ -180,7 +167,7 @@ class CategoriesViewModel: BaseViewModel {
         if activeCategories.value.count >= 2 && indexPath.row == 0 {
             return activeCategories.value.last?.name?.localizedString
         } else if let expandedCategoryId = activeCategories.value.last?.id,
-                  let categoriesToShow = childCategoriesCache.value[expandedCategoryId] {
+                  let categoriesToShow = childCategoriesCache[expandedCategoryId] {
             return categoriesToShow[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row].name?.localizedString
         }
         return nil
@@ -188,32 +175,56 @@ class CategoriesViewModel: BaseViewModel {
 
     // MARK: - Categories retrieval
 
-    private func queryForRootCategories() {
-        Category.query(predicates: ["parent is not defined"]) { result in
-            if let categories = result.model?.results, self.rootCategories.value != categories, result.isSuccess {
-                self.rootCategories.value = categories
+    private func retrieveCategories() {
+        categoriesRetrievalQueue.addOperation { [weak self] in
+            self?.categoriesRetrievalSemaphore = DispatchSemaphore(value: 0)
+            self?.queryForCategories()
+            _ = self?.categoriesRetrievalSemaphore?.wait(timeout: DispatchTime.distantFuture)
+        }
+    }
+
+    private func queryForCategories(offset: UInt = 0) {
+        isLoading.value = true
+        if offset == 0 {
+            allCategories = []
+        }
+
+        Category.query(limit: kQueryLimit, offset: offset) { result in
+            if let queryResponse = result.model, let categories = queryResponse.results, let count = queryResponse.count,
+               let offset = queryResponse.offset, let total = queryResponse.total, result.isSuccess {
+                self.allCategories += categories
+                if offset + count < total {
+                    self.queryForCategories(offset: offset + self.kQueryLimit)
+                } else {
+                    self.process(categories: self.allCategories)
+                    self.isLoading.value = false
+                }
             } else if let errors = result.errors as? [CTError], result.isFailure {
+                self.isLoading.value = false
+                self.categoriesRetrievalSemaphore?.signal()
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }
         }
     }
 
-    private func queryForChildCategories(parentId: String, completion: (() -> Void)? = nil) {
-        Category.query(predicates: ["parent(id = \"\(parentId)\")"]) { result in
-            if let categories = result.model?.results, result.isSuccess {
-                self.childCategoriesCache.value[parentId] = categories
-                // Categories precaching
-                categories.forEach {
-                    guard let id = $0.id else { return }
-                    if self.childCategoriesCache.value[id] == nil {
-                        self.queryForChildCategories(parentId: id)
-                    }
-                }
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+    private func process(categories: [Category]) {
+        var rootCategories = [Category]()
+        var childCategories = [String: [Category]]()
+        categories.forEach { category in
+            let parentCategoryId = category.parent?.id ?? ""
+            if category.parent == nil {
+                rootCategories.append(category)
+            } else if childCategories[parentCategoryId] == nil {
+                childCategories[parentCategoryId] = [category]
+            } else {
+                childCategories[parentCategoryId]?.append(category)
             }
-            completion?()
         }
+        self.childCategoriesCache = childCategories
+        if rootCategories != self.rootCategories.value {
+            self.rootCategories.value = rootCategories
+        }
+        categoriesRetrievalSemaphore?.signal()
     }
 }
 
