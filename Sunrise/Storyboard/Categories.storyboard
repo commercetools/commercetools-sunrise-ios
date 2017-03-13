@@ -169,7 +169,6 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="categoryName" destination="CfI-cx-JWB" id="TqF-OO-aYF"/>
-                                            <segue destination="Cpl-tF-Nxg" kind="show" id="gBB-9z-LtJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -206,6 +205,7 @@
                         <outlet property="backgroundImage" destination="8zO-ni-COM" id="tsG-8h-CFT"/>
                         <outlet property="rootCategoriesStackView" destination="c5x-VF-zD5" id="FeZ-eE-eQs"/>
                         <outlet property="tableView" destination="0C5-y5-vcr" id="JaI-zj-DAc"/>
+                        <segue destination="Cpl-tF-Nxg" kind="show" identifier="showProductOverview" id="3gg-a8-8KV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Lp-v9-RQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
