@@ -12,7 +12,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     private var locationManager: CLLocationManager?
 
     func applicationDidFinishLaunching() {
-        if let configuration = Config(path: "CommercetoolsProdConfig") {
+        if let configuration = Project.config {
             Commercetools.config = configuration
         }
         

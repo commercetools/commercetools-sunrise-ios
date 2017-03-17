@@ -50,7 +50,7 @@
 		210BEE08B7F4742032ED3B29 /* ReservationRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE3DAAE3073D4D195CE30 /* ReservationRowController.swift */; };
 		210BEE9AF8567A17A425CEC1 /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA09145F59DD74FA5B99 /* LineItem.swift */; };
 		210BEEE146D00DE0F827421D /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE3637F7A703D60FC5694 /* CartViewModel.swift */; };
-		210BEEE397C180AA40D0724D /* Dictionary+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */; };
+		210BEEE397C180AA40D0724D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		210BEF173F289F1CDF03871C /* OrderOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF1EB098A371261B95F3 /* OrderOverviewViewController.swift */; };
 		210BEF6467E8C9F3A49D9F04 /* OrderOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE21121948A6D10B712C0 /* OrderOverviewViewModel.swift */; };
 		210BEFE2385E2DB904B79C85 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECE2DFCDB70A0D79B81C /* ReservationViewController.swift */; };
@@ -61,7 +61,7 @@
 		211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */; };
 		211D9DEC1DECE3DC00167C23 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
 		211D9DED1DECE49D00167C23 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
-		211D9DEE1DECE57B00167C23 /* Dictionary+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */; };
+		211D9DEE1DECE57B00167C23 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		213522E21E15FC7000433174 /* ProductCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213522E11E15FC7000433174 /* ProductCollectionHeaderView.swift */; };
 		2147A3251DFA589A00981A30 /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147A3241DFA589A00981A30 /* ProductImageCell.swift */; };
 		2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
@@ -83,7 +83,7 @@
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218988241CED0C78006E7757 /* ProductDetails.storyboard */; };
 		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
-		219657761DCB9B81002C7108 /* Dictionary+LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */; };
+		219657761DCB9B81002C7108 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		219657771DCB9BA2002C7108 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
 		219992391DC9FAAB000E48FD /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219992381DC9FAAB000E48FD /* UserNotifications.framework */; };
 		2199923B1DC9FAAB000E48FD /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */; };
@@ -223,7 +223,7 @@
 		210BE891A4BC1C90F3186F2B /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		210BE926D098DCEBFCF350B8 /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		210BE92C5ABF938D2BC46655 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
-		210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+LocalizedString.swift"; sourceTree = "<group>"; };
+		210BE9B158BE86C70C9F1F47 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		210BEA09145F59DD74FA5B99 /* LineItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		210BEA292BFC7E26BF1DFFF1 /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		210BEA423D40007AB1E0CA2D /* ProductOverviewViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewViewModelSpec.swift; sourceTree = "<group>"; };
@@ -530,7 +530,7 @@
 		210BE8897C04FAD5205BE6F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				210BE9B158BE86C70C9F1F47 /* Dictionary+LocalizedString.swift */,
+				210BE9B158BE86C70C9F1F47 /* Common.swift */,
 				210BEB43EB567F74C591D677 /* AppRouting.swift */,
 				210BE70101007B36C753F74B /* Changeset.swift */,
 			);
@@ -1282,7 +1282,7 @@
 				210BE15EB86DF0306282C27C /* ReservationsInterfaceModel.swift in Sources */,
 				21AFE8101DF24B4E00D0F6EE /* ReservationDetailsInterfaceController.swift in Sources */,
 				210BEE08B7F4742032ED3B29 /* ReservationRowController.swift in Sources */,
-				211D9DEE1DECE57B00167C23 /* Dictionary+LocalizedString.swift in Sources */,
+				211D9DEE1DECE57B00167C23 /* Common.swift in Sources */,
 				21068CD01DF0610700035760 /* Channel.swift in Sources */,
 				211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */,
 				21AFE8121DF24B6C00D0F6EE /* ReservationDetailsInterfaceModel.swift in Sources */,
@@ -1294,7 +1294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				219657761DCB9B81002C7108 /* Dictionary+LocalizedString.swift in Sources */,
+				219657761DCB9B81002C7108 /* Common.swift in Sources */,
 				219657771DCB9BA2002C7108 /* Channel.swift in Sources */,
 				219657751DCB9B38002C7108 /* Money.swift in Sources */,
 				2199923E1DC9FAAB000E48FD /* NotificationViewController.swift in Sources */,
@@ -1310,7 +1310,7 @@
 				21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */,
 				21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */,
 				211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */,
-				210BEEE397C180AA40D0724D /* Dictionary+LocalizedString.swift in Sources */,
+				210BEEE397C180AA40D0724D /* Common.swift in Sources */,
 				215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */,
 				217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */,
 				215C7C201D79A08C002EC074 /* SelectableAttributeCell.swift in Sources */,

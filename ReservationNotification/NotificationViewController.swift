@@ -96,7 +96,7 @@ class ReservationNotificationViewController: UIViewController, UNNotificationCon
     // MARK: - Commercetools SDK
     
     private func commercetoolsSDKSetup() {
-        if let configuration = Config(path: "CommercetoolsProdConfig") {
+        if let configuration = Project.config {
             Commercetools.config = configuration
         }
     }
