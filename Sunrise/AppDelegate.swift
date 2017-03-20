@@ -21,21 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var locationManager: CLLocationManager?
 
-    private let kProjectConfig = "ProjectConfig"
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         AppRouting.setupInitiallyActiveTab()
 
-        // Configure Commercetools SDK depending on target
-#if PROD
-        let configPath = "CommercetoolsProdConfig"
-#else
-        let configPath = "CommercetoolsStagingConfig"
-#endif
-
-        if let storedConfig = UserDefaults.standard.dictionary(forKey: kProjectConfig), let configuration = Config(config: storedConfig as NSDictionary) {
-            Commercetools.config = configuration
-        } else if let configuration = Config(path: configPath) {
+        if let configuration = Project.config {
             Commercetools.config = configuration
         } else {
             // Inform user about the configuration error
@@ -129,8 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
                     AppRouting.accountViewController?.viewModel?.logoutCustomer()
                     Commercetools.logoutCustomer()
-                    UserDefaults.standard.set(projectConfig, forKey: self.kProjectConfig)
-                    UserDefaults.standard.synchronize()
+                    Project.update(config: projectConfig as NSDictionary)
                     exit(0)
                 })
                 window?.rootViewController?.present(alertController, animated: true)
