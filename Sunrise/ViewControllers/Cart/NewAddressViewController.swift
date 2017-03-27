@@ -75,13 +75,13 @@ class NewAddressViewController: UIViewController {
         }
 
         viewModel.title <~ titleField.reactive.textValues.map { $0 ?? "" }
-        viewModel.firstName <~ firstNameField.reactive.textValues.map { $0 ?? "" }
-        viewModel.lastName <~ lastNameField.reactive.textValues.map { $0 ?? "" }
-        viewModel.address1 <~ address1Field.reactive.textValues.map { $0 ?? "" }
-        viewModel.address2 <~ address2Field.reactive.textValues.map { $0 ?? "" }
-        viewModel.postCode <~ postCodeField.reactive.textValues.map { $0 ?? "" }
-        viewModel.city <~ cityField.reactive.textValues.map { $0 ?? "" }
-        viewModel.region <~ regionField.reactive.textValues.map { $0 ?? "" }
+        viewModel.firstName <~ firstNameField.reactive.continuousTextValues.map { $0 ?? "" }
+        viewModel.lastName <~ lastNameField.reactive.continuousTextValues.map { $0 ?? "" }
+        viewModel.address1 <~ address1Field.reactive.continuousTextValues.map { $0 ?? "" }
+        viewModel.address2 <~ address2Field.reactive.continuousTextValues.map { $0 ?? "" }
+        viewModel.postCode <~ postCodeField.reactive.continuousTextValues.map { $0 ?? "" }
+        viewModel.city <~ cityField.reactive.continuousTextValues.map { $0 ?? "" }
+        viewModel.region <~ regionField.reactive.continuousTextValues.map { $0 ?? "" }
         viewModel.country <~ countryField.reactive.textValues.map { $0 ?? "" }
 
         disposables += viewModel.performSegueSignal.observe(on: UIScheduler())
