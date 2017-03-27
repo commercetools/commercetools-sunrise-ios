@@ -15,14 +15,19 @@ class AddressSelectionViewModel: BaseViewModel {
 
     // Outputs
     let isLoading = MutableProperty(false)
+    let performSegueSignal: Signal<Void, NoError>
 
     private var defaultAddress: MutableProperty<Address?> = MutableProperty(nil)
     private var addresses: MutableProperty<[Address]> = MutableProperty([Address]())
+    private let performSegueObserver: Observer<Void, NoError>
+    private let currentLocale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)
     private var disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
     override init() {
+        (performSegueSignal, performSegueObserver) = Signal<Void, NoError>.pipe()
+
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
@@ -103,7 +108,7 @@ class AddressSelectionViewModel: BaseViewModel {
 
     func country(at indexPath: IndexPath) -> String? {
         guard let countryCode = indexPath.section == 0 && defaultAddress.value != nil ? defaultAddress.value?.country : addresses.value[indexPath.row].country else { return nil }
-        return NSLocale.init(localeIdentifier: NSLocale.current.identifier).displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
+        return currentLocale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
     }
 
     func isDefault(at indexPath: IndexPath) -> Bool {
@@ -141,12 +146,15 @@ class AddressSelectionViewModel: BaseViewModel {
                 let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.setShippingAddress(options: shippingOptions), .setBillingAddress(options: billingOptions)])
                 Cart.update(id, actions: updateActions, result: { result in
                     if result.isSuccess {
-                        // continue
+                        self.performSegueObserver.send(value: ())
                     } else if let errors = result.errors as? [CTError], result.isFailure {
                         super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                     }
                     self.isLoading.value = false
                 })
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+                self.isLoading.value = false
             }
         }
     }

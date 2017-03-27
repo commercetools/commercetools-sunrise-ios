@@ -50,7 +50,7 @@ class CartViewModel: BaseViewModel {
         super.init()
 
         subtotal <~ cart.producer.map { [unowned self] _ in self.calculateSubtotal() }
-        orderTotal <~ cart.producer.map { [unowned self] _ in self.calculateOrderTotal() }
+        orderTotal <~ cart.producer.map { [unowned self] _ in self.orderTotal(for: self.cart.value) }
         tax <~ cart.producer.map { [unowned self] _ in self.calculateTax() }
         taxRowHidden <~ tax.producer.map { tax in tax == "" }
         orderDiscount <~ cart.producer.map { [unowned self] _ in self.calculateOrderDiscount() }
@@ -258,17 +258,6 @@ class CartViewModel: BaseViewModel {
     }
     
     // MARK: - Cart overview calculations
-    
-    private func calculateOrderTotal() -> String {
-        guard let cart = cart.value, let totalPrice = cart.totalPrice else { return "" }
-        
-        if let totalGross = cart.taxedPrice?.totalGross {
-            return totalGross.description
-            
-        } else {
-            return totalPrice.description
-        }
-    }
 
     private func calculateSubtotal() -> String {
         guard let lineItems = cart.value?.lineItems else { return "" }

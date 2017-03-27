@@ -20,6 +20,11 @@ class AddressSelectionViewController: UIViewController {
     }
 
     private let refreshControl = UIRefreshControl()
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +49,11 @@ class AddressSelectionViewController: UIViewController {
                 self?.refreshControl.endRefreshing()
                 self?.tableView.reloadData()
             }
+        }
+
+        disposables += viewModel.performSegueSignal.observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            self?.performSegue(withIdentifier: "showShippingMethods", sender: self)
         }
 
         observeAlertMessageSignal(viewModel: viewModel)

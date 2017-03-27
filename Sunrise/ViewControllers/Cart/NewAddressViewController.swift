@@ -25,11 +25,19 @@ class NewAddressViewController: UIViewController {
     @IBOutlet weak var regionField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var continueCheckoutButton: UIButton!
+    
     
     private var viewModel: NewAddressViewModel? {
         didSet {
             bindViewModel()
         }
+    }
+
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
     }
     
     override func viewDidLoad() {
@@ -57,6 +65,15 @@ class NewAddressViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
 
+        titleField.itemList = viewModel.titleOptions
+        continueCheckoutButton.reactive.pressed = CocoaAction(viewModel.continueCheckoutAction)
+
+        viewModel.countries.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] countryCodes in
+            self?.countryField.itemList = countryCodes.map { return $0.0 }
+        }
+
         viewModel.title <~ titleField.reactive.textValues.map { $0 ?? "" }
         viewModel.firstName <~ firstNameField.reactive.textValues.map { $0 ?? "" }
         viewModel.lastName <~ lastNameField.reactive.textValues.map { $0 ?? "" }
@@ -66,6 +83,13 @@ class NewAddressViewController: UIViewController {
         viewModel.city <~ cityField.reactive.textValues.map { $0 ?? "" }
         viewModel.region <~ regionField.reactive.textValues.map { $0 ?? "" }
         viewModel.country <~ countryField.reactive.textValues.map { $0 ?? "" }
+
+        disposables += viewModel.performSegueSignal.observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            self?.performSegue(withIdentifier: "showShippingMethods", sender: self)
+        }
+
+        observeAlertMessageSignal(viewModel: viewModel)
     }
     
 }

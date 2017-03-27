@@ -27,6 +27,10 @@ class BaseViewModel {
     let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
     let reservationContinueTitle = NSLocalizedString("Continue shopping", comment: "Continue shopping")
 
+    // Customer title options
+    let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MRS.", comment: "MRS."),
+                        NSLocalizedString("MS.", comment: "MS."), NSLocalizedString("DR.", comment: "DR.")]
+
     // My store
     var myStore: MutableProperty<Channel?>? {
         return AppRouting.accountViewController?.viewModel?.currentStore
@@ -49,6 +53,24 @@ class BaseViewModel {
     }
 
     // MARK: - Cart or order overview calculations
+
+    func calculateOrderTotal(for cart: Cart?) -> Money? {
+        guard let cart = cart, let totalPrice = cart.totalPrice else { return nil }
+
+        if let totalGross = cart.taxedPrice?.totalGross {
+            return totalGross
+
+        } else {
+            return totalPrice
+        }
+    }
+
+    func orderTotal(for cart: Cart?) -> String {
+        if let money = calculateOrderTotal(for: cart) {
+            return money.description
+        }
+        return ""
+    }
 
     func calculateOrderDiscount(_ lineItems: [LineItem]) -> String {
         let totalOrderDiscountAmount = lineItems.reduce(0, { $0 + calculateCartDiscountForLineItem($1) })

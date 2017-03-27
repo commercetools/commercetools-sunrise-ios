@@ -24,8 +24,6 @@ class SignInViewModel: BaseViewModel {
     let isLoading: MutableProperty<Bool>
     let isLoginInputValid = MutableProperty(false)
     let isRegisterInputValid = MutableProperty(false)
-    let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MRS.", comment: "MRS."),
-                        NSLocalizedString("MS.", comment: "MS."), NSLocalizedString("DR.", comment: "DR.")]
     let registrationGuide = NSLocalizedString("All mandatory fields (*) have to be filled, and your password and confirmation must match", comment: "Registration form instructions")
     var isLoggedIn: Bool {
         return AppRouting.isLoggedIn
