@@ -25,6 +25,11 @@ class CartViewController: UIViewController {
     }
 
     private let refreshControl = UIRefreshControl()
+    private var disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +70,7 @@ class CartViewController: UIViewController {
             }
         })
 
-        viewModel.contentChangesSignal
+        disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
@@ -75,6 +80,12 @@ class CartViewController: UIViewController {
             tableView.reloadRows(at: changeset.modifications, with: .none)
             tableView.insertRows(at: changeset.insertions, with: .automatic)
             tableView.endUpdates()
+        })
+
+        disposables += viewModel.performSegueSignal
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] identifier in
+            self?.performSegue(withIdentifier: identifier, sender: nil)
         })
 
         observeAlertMessageSignal(viewModel: viewModel)
@@ -105,6 +116,7 @@ class CartViewController: UIViewController {
         summaryCell.taxLabel.isHidden = viewModel.taxRowHidden.value
         summaryCell.taxDescriptionLabel.isHidden = viewModel.taxRowHidden.value
         summaryCell.orderTotalLabel.text = viewModel.orderTotal.value
+        summaryCell.checkoutButton.reactive.pressed = CocoaAction(viewModel.checkoutAction)
     }
 
     fileprivate func bindLineItemCell(_ lineItemCell: CartLineItemCell, indexPath: IndexPath) {

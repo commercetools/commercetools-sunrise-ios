@@ -88,7 +88,6 @@ extension AddressSelectionViewController: UITableViewDataSource {
             addressCell.hasBorder = true
             addressCell.hasBackgroundColor = false
         } else {
-            addressCell.titleLabel?.text = viewModel.title(at: indexPath)
             addressCell.firstNameLabel?.text = viewModel.firstName(at: indexPath)
             addressCell.lastNameLabel?.text = viewModel.lastName(at: indexPath)
             addressCell.streetNameLabel?.text = viewModel.streetName(at: indexPath)

@@ -62,7 +62,7 @@ extension Attribute {
             if let elementType = type.elementType {
                 return rawValues.reduce("") {
                     if let rawValue = self.representation(for: $1, ofType: elementType) {
-                        return "\($0) \(rawValue)"
+                        return "\($0 ?? "") \(rawValue)"
                     }
                     return $0
                 }

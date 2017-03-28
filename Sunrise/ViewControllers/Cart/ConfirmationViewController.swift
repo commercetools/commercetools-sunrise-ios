@@ -15,7 +15,6 @@ class ConfirmationViewController: UIViewController {
 
     @IBOutlet weak var formView: UIView!
     
-    @IBOutlet weak var shippingTitleLabel: UILabel!
     @IBOutlet weak var shippingFirstNameLabel: UILabel!
     @IBOutlet weak var shippingLastNameLabel: UILabel!
     @IBOutlet weak var shippingStreetNameLabel: UILabel!
@@ -24,7 +23,6 @@ class ConfirmationViewController: UIViewController {
     @IBOutlet weak var shippingRegionLabel: UILabel!
     @IBOutlet weak var shippingCountryLabel: UILabel!
 
-    @IBOutlet weak var billingTitleLabel: UILabel!
     @IBOutlet weak var billingFirstNameLabel: UILabel!
     @IBOutlet weak var billingLastNameLabel: UILabel!
     @IBOutlet weak var billingStreetNameLabel: UILabel!
@@ -63,7 +61,6 @@ class ConfirmationViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel else { return }
 
-        shippingTitleLabel.reactive.text <~ viewModel.shippingTitle
         shippingFirstNameLabel.reactive.text <~ viewModel.shippingFirstName
         shippingLastNameLabel.reactive.text <~ viewModel.shippingLastName
         shippingStreetNameLabel.reactive.text <~ viewModel.shippingStreetName
@@ -71,7 +68,6 @@ class ConfirmationViewController: UIViewController {
         shippingPostalCodeLabel.reactive.text <~ viewModel.shippingPostalCode
         shippingRegionLabel.reactive.text <~ viewModel.shippingRegion
         shippingCountryLabel.reactive.text <~ viewModel.shippingCountry
-        billingTitleLabel.reactive.text <~ viewModel.billingTitle
         billingFirstNameLabel.reactive.text <~ viewModel.billingFirstName
         billingLastNameLabel.reactive.text <~ viewModel.billingLastName
         billingStreetNameLabel.reactive.text <~ viewModel.billingStreetName

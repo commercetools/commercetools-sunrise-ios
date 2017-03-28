@@ -15,7 +15,6 @@ class ConfirmationViewModel: BaseViewModel {
     let isLoading = MutableProperty(false)
     let orderCreatedSignal: Signal<Void, NoError>
 
-    let shippingTitle: MutableProperty<String?> = MutableProperty(nil)
     let shippingFirstName: MutableProperty<String?> = MutableProperty(nil)
     let shippingLastName: MutableProperty<String?> = MutableProperty(nil)
     let shippingStreetName: MutableProperty<String?> = MutableProperty(nil)
@@ -24,7 +23,6 @@ class ConfirmationViewModel: BaseViewModel {
     let shippingRegion: MutableProperty<String?> = MutableProperty(nil)
     let shippingCountry: MutableProperty<String?> = MutableProperty(nil)
 
-    let billingTitle: MutableProperty<String?> = MutableProperty(nil)
     let billingFirstName: MutableProperty<String?> = MutableProperty(nil)
     let billingLastName: MutableProperty<String?> = MutableProperty(nil)
     let billingStreetName: MutableProperty<String?> = MutableProperty(nil)
@@ -59,8 +57,13 @@ class ConfirmationViewModel: BaseViewModel {
 
         super.init()
 
-        shippingTitle <~ cart.map { return $0?.shippingAddress?.title }
-        shippingFirstName <~ cart.map { return $0?.shippingAddress?.firstName }
+        shippingFirstName <~ cart.map { cart in
+            let address = cart?.shippingAddress
+            if let title = address?.title, title != "" {
+                return "\(title) \(address?.firstName ?? "")"
+            }
+            return address?.firstName ?? ""
+        }
         shippingLastName <~ cart.map { return $0?.shippingAddress?.lastName }
         shippingStreetName <~ cart.map { return ($0?.shippingAddress?.streetName ?? "") + " " + ($0?.shippingAddress?.additionalStreetInfo ?? "") }
         shippingCity <~ cart.map { return $0?.shippingAddress?.city }
@@ -70,10 +73,15 @@ class ConfirmationViewModel: BaseViewModel {
             guard let countryCode = $0?.shippingAddress?.country else { return "" }
             return self?.currentLocale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
         }
-        billingTitle <~ cart.map { return $0?.billingAddress?.title }
-        billingFirstName <~ cart.map { return $0?.billingAddress?.firstName }
+        billingFirstName <~ cart.map { cart in
+            let address = cart?.billingAddress
+            if let title = address?.title, title != "" {
+                return "\(title) \(address?.firstName ?? "")"
+            }
+            return address?.firstName ?? ""
+        }
         billingLastName <~ cart.map { return $0?.billingAddress?.lastName }
-        billingLastName <~ cart.map { return ($0?.billingAddress?.streetName ?? "") + " " + ($0?.billingAddress?.additionalStreetInfo ?? "") }
+        billingStreetName <~ cart.map { return ($0?.billingAddress?.streetName ?? "") + " " + ($0?.billingAddress?.additionalStreetInfo ?? "") }
         billingCity <~ cart.map { return $0?.billingAddress?.city }
         billingPostalCode <~ cart.map { return $0?.billingAddress?.postalCode }
         billingRegion <~ cart.map { return $0?.billingAddress?.region }

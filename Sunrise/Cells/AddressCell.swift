@@ -6,7 +6,6 @@ import UIKit
 
 class AddressCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var firstNameLabel: UILabel?
     @IBOutlet weak var lastNameLabel: UILabel?
     @IBOutlet weak var streetNameLabel: UILabel?

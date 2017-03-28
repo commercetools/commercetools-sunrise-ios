@@ -23,16 +23,31 @@ class CartViewModel: BaseViewModel {
     let orderTotal = MutableProperty("")
     let contentChangesSignal: Signal<Changeset, NoError>
     let availableQuantities = (1...9).map { String($0) }
+    let performSegueSignal: Signal<String, NoError>
+
+    // Actions
+    lazy var checkoutAction: Action<Void, Void, NoError> = { [weak self] in
+        return Action(enabledIf: Property(value: true), { [weak self] _ in
+            if Commercetools.authState == .customerToken {
+                self?.performSegueObserver.send(value: "showAddressSelection")
+            } else {
+                self?.performSegueObserver.send(value: "showNewAddress")
+            }
+            return SignalProducer.empty
+        })
+    }()
 
     let cart: MutableProperty<Cart?>
 
     private let contentChangesObserver: Observer<Changeset, NoError>
     private let deleteLineItemSignal: Signal<IndexPath, NoError>
+    private let performSegueObserver: Observer<String, NoError>
 
     // MARK: - Lifecycle
 
     override init() {
         isLoading = MutableProperty(false)
+        (performSegueSignal, performSegueObserver) = Signal<String, NoError>.pipe()
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
 

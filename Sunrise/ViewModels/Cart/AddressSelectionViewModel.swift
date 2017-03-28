@@ -79,7 +79,11 @@ class AddressSelectionViewModel: BaseViewModel {
     }
 
     func firstName(at indexPath: IndexPath) -> String? {
-        return indexPath.section == 0 && defaultAddress.value != nil ? defaultAddress.value?.firstName : addresses.value[indexPath.row].firstName
+        let address = indexPath.section == 0 && defaultAddress.value != nil ? defaultAddress.value : addresses.value[indexPath.row]
+        if let title = address?.title, title != "" {
+            return "\(title) \(address?.firstName ?? "")"
+        }
+        return address?.firstName
     }
 
     func lastName(at indexPath: IndexPath) -> String? {

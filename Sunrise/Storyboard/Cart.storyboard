@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M1X-40-gbr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M1X-40-gbr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -410,9 +410,6 @@
                                                                             <state key="normal" title="CHECKOUT NOW">
                                                                                 <color key="titleColor" red="0.2470588235" green="0.23137254900000001" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </state>
-                                                                            <connections>
-                                                                                <segue destination="drA-8g-peh" kind="show" id="6Wq-5x-oyr"/>
-                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -428,6 +425,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
+                                                    <outlet property="checkoutButton" destination="zgc-GS-ceq" id="HSr-BS-EQn"/>
                                                     <outlet property="continueShippingButton" destination="67l-VS-0ZB" id="oE8-z4-aTJ"/>
                                                     <outlet property="orderDiscountLabel" destination="LLT-dH-SKt" id="wgO-ab-la5"/>
                                                     <outlet property="orderTotalLabel" destination="Xza-0V-nX4" id="139-ET-3TI"/>
@@ -475,6 +473,8 @@
                         <outlet property="emptyCartView" destination="eBY-Cf-Bwr" id="4ie-aL-XVk"/>
                         <outlet property="numberOfItemsLabel" destination="nyF-PD-TeJ" id="oa3-fd-C83"/>
                         <outlet property="tableView" destination="tSM-nH-jVI" id="vr0-Op-dfl"/>
+                        <segue destination="drA-8g-peh" kind="show" identifier="showAddressSelection" id="IQn-TD-zMR"/>
+                        <segue destination="TWo-Lk-rJU" kind="show" identifier="showNewAddress" id="yMa-Ma-zX7"/>
                     </connections>
                 </viewController>
                 <view contentMode="scaleToFill" id="eBY-Cf-Bwr">
@@ -593,7 +593,7 @@
                                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddressCell" rowHeight="150" id="qxW-xr-p2v" customClass="AddressCell" customModule="Sunrise" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="359" height="150"/>
+                                                <rect key="frame" x="0.0" y="55" width="359" height="150"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qxW-xr-p2v" id="KiZ-d7-ctl">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="150"/>
@@ -608,20 +608,14 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AgO-ek-nlf">
                                                                             <rect key="frame" x="0.0" y="0.0" width="295" height="20.5"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Mr." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUA-AZ-XN7">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="24.5" height="20.5"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Christoph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBj-wx-OTi">
-                                                                                    <rect key="frame" x="28.5" y="0.0" width="75" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Neijenhuis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDl-RD-F9r">
-                                                                                    <rect key="frame" x="107.5" y="0.0" width="187.5" height="20.5"/>
+                                                                                    <rect key="frame" x="79" y="0.0" width="216" height="20.5"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -691,11 +685,10 @@
                                                     <outlet property="postalCodeLabel" destination="LJO-z0-xqB" id="JtF-fx-mLx"/>
                                                     <outlet property="regionLabel" destination="fFP-HU-ERR" id="gCm-72-95G"/>
                                                     <outlet property="streetNameLabel" destination="pok-MT-j3B" id="INF-dW-XOF"/>
-                                                    <outlet property="titleLabel" destination="DUA-AZ-XN7" id="UsD-jA-l4c"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddAddressCell" rowHeight="150" id="uc8-gQ-Wjy" customClass="AddressCell" customModule="Sunrise" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="206" width="359" height="150"/>
+                                                <rect key="frame" x="0.0" y="205" width="359" height="150"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uc8-gQ-Wjy" id="war-00-wFd">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="150"/>
@@ -1377,7 +1370,7 @@ fields*</string>
                                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShippingMethodCell" rowHeight="67" id="B5l-wQ-6HO" customClass="ShippingMethodCell" customModule="Sunrise" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="359" height="67"/>
+                                                <rect key="frame" x="0.0" y="55" width="359" height="67"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B5l-wQ-6HO" id="NwT-Eh-SJZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="67"/>
@@ -1855,20 +1848,14 @@ fields*</string>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="NjI-fP-Zkb">
                                                                                         <rect key="frame" x="0.0" y="26.5" width="303" height="20.5"/>
                                                                                         <subviews>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Mr." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVN-HD-DPg">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="24.5" height="20.5"/>
-                                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                                <nil key="highlightedColor"/>
-                                                                                            </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Christoph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ky7-S0-VNQ">
-                                                                                                <rect key="frame" x="28.5" y="0.0" width="75" height="20.5"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="20.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Neijenhuis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHM-Ow-k5w">
-                                                                                                <rect key="frame" x="107.5" y="0.0" width="195.5" height="20.5"/>
+                                                                                                <rect key="frame" x="79" y="0.0" width="224" height="20.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -1954,20 +1941,14 @@ fields*</string>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="CGf-IM-TcQ">
                                                                                         <rect key="frame" x="0.0" y="26.5" width="303" height="20.5"/>
                                                                                         <subviews>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Mr." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGh-jc-o2k">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="24.5" height="20.5"/>
-                                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                                <nil key="highlightedColor"/>
-                                                                                            </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Christoph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a36-bP-bLu">
-                                                                                                <rect key="frame" x="28.5" y="0.0" width="75" height="20.5"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="20.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Neijenhuis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFk-sQ-M6w">
-                                                                                                <rect key="frame" x="107.5" y="0.0" width="195.5" height="20.5"/>
+                                                                                                <rect key="frame" x="79" y="0.0" width="224" height="20.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -2219,7 +2200,6 @@ fields*</string>
                         <outlet property="billingPostalCodeLabel" destination="L2O-uz-kS9" id="EgA-ho-9bo"/>
                         <outlet property="billingRegionLabel" destination="RBM-nU-u6J" id="m0F-P1-jZX"/>
                         <outlet property="billingStreetNameLabel" destination="FJm-4m-TJm" id="Dv9-Si-ldZ"/>
-                        <outlet property="billingTitleLabel" destination="AGh-jc-o2k" id="cQZ-2s-Ec9"/>
                         <outlet property="completeOrderButton" destination="bz2-Wl-f4c" id="FKS-Eb-Hga"/>
                         <outlet property="emptyCartView" destination="eBY-Cf-Bwr" id="aAj-Mv-S6W"/>
                         <outlet property="formView" destination="p6c-FL-UT5" id="Z6r-2u-ajV"/>
@@ -2233,7 +2213,6 @@ fields*</string>
                         <outlet property="shippingPostalCodeLabel" destination="nwF-l4-JHj" id="NXR-wP-zQH"/>
                         <outlet property="shippingRegionLabel" destination="i9L-z2-aRf" id="vLB-X9-0qu"/>
                         <outlet property="shippingStreetNameLabel" destination="EFa-jE-jmH" id="qoH-G7-V6Y"/>
-                        <outlet property="shippingTitleLabel" destination="LVN-HD-DPg" id="CgE-UR-ipV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6I-WZ-Q6n" sceneMemberID="firstResponder"/>
@@ -2248,6 +2227,7 @@ fields*</string>
         <image name="edit-icon" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6vN-eD-LlP"/>
+        <segue reference="yMa-Ma-zX7"/>
+        <segue reference="fpD-w9-oFc"/>
     </inferredMetricsTieBreakers>
 </document>
