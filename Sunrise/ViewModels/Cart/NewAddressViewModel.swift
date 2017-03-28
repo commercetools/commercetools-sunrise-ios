@@ -78,7 +78,7 @@ class NewAddressViewModel: BaseViewModel {
     private func retrieveCountries() {
         isLoading.value = true
 
-        Project.settings { result in
+        Commercetools.Project.settings { result in
             if let countries = result.model?.countries, result.isSuccess {
                 var countryCodes = [String: String]()
                 let locale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)
