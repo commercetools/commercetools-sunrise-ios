@@ -26,22 +26,33 @@ class NewAddressViewModel: BaseViewModel {
     let isLoading = MutableProperty(false)
     let isAddressInputValid = MutableProperty(false)
     let countries = MutableProperty([String: String]())
+    let validationErrorSignal: Signal<Void, NoError>
     let performSegueSignal: Signal<Void, NoError>
 
+    let errorTitle = NSLocalizedString("Error", comment: "Error")
+    let formGuide = NSLocalizedString("All mandatory fields (*) have to be filled", comment: "Address form instructions")
+
     lazy var continueCheckoutAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: self.isAddressInputValid, { [unowned self] _ in
-            self.saveNewAddress()
+        return Action(enabledIf: Property(value: true), { [unowned self] _ in
+            if self.isAddressInputValid.value {
+                self.saveNewAddress()
+            } else {
+                self.validationErrorObserver.send(value: ())
+            }
             return SignalProducer.empty
         })
     }()
 
     private var disposables = CompositeDisposable()
     private let performSegueObserver: Observer<Void, NoError>
+    private let validationErrorObserver: Observer<Void, NoError>
 
     // MARK: - Lifecycle
 
     override init() {
         (performSegueSignal, performSegueObserver) = Signal<Void, NoError>.pipe()
+        (validationErrorSignal, validationErrorObserver) = Signal<Void, NoError>.pipe()
+
         super.init()
 
         isAddressInputValid <~ SignalProducer.combineLatest(firstName.producer, lastName.producer, address1.producer,

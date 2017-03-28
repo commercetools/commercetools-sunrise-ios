@@ -83,13 +83,25 @@ class NewAddressViewController: UIViewController {
         viewModel.city <~ cityField.reactive.continuousTextValues.map { $0 ?? "" }
         viewModel.region <~ regionField.reactive.continuousTextValues.map { $0 ?? "" }
         viewModel.country <~ countryField.reactive.textValues.map { $0 ?? "" }
+        viewModel.phone <~ phoneField.reactive.textValues.map { $0 ?? "" }
+        viewModel.email <~ emailField.reactive.textValues.map { $0 ?? "" }
 
         disposables += viewModel.performSegueSignal.observe(on: UIScheduler())
         .observeValues { [weak self] in
             self?.performSegue(withIdentifier: "showShippingMethods", sender: self)
         }
 
+        disposables += viewModel.validationErrorSignal.observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            let alertController = UIAlertController(
+                title: self?.viewModel?.errorTitle,
+                message: self?.viewModel?.formGuide,
+                preferredStyle: .alert
+            )
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self?.present(alertController, animated: true, completion: nil)
+        }
+
         observeAlertMessageSignal(viewModel: viewModel)
     }
-    
 }
