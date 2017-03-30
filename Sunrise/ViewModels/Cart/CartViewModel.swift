@@ -23,16 +23,31 @@ class CartViewModel: BaseViewModel {
     let orderTotal = MutableProperty("")
     let contentChangesSignal: Signal<Changeset, NoError>
     let availableQuantities = (1...9).map { String($0) }
+    let performSegueSignal: Signal<String, NoError>
+
+    // Actions
+    lazy var checkoutAction: Action<Void, Void, NoError> = { [weak self] in
+        return Action(enabledIf: Property(value: true), { [weak self] _ in
+            if Commercetools.authState == .customerToken {
+                self?.performSegueObserver.send(value: "showAddressSelection")
+            } else {
+                self?.performSegueObserver.send(value: "showNewAddress")
+            }
+            return SignalProducer.empty
+        })
+    }()
 
     let cart: MutableProperty<Cart?>
 
     private let contentChangesObserver: Observer<Changeset, NoError>
     private let deleteLineItemSignal: Signal<IndexPath, NoError>
+    private let performSegueObserver: Observer<String, NoError>
 
     // MARK: - Lifecycle
 
     override init() {
         isLoading = MutableProperty(false)
+        (performSegueSignal, performSegueObserver) = Signal<String, NoError>.pipe()
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
 
@@ -50,7 +65,7 @@ class CartViewModel: BaseViewModel {
         super.init()
 
         subtotal <~ cart.producer.map { [unowned self] _ in self.calculateSubtotal() }
-        orderTotal <~ cart.producer.map { [unowned self] _ in self.calculateOrderTotal() }
+        orderTotal <~ cart.producer.map { [unowned self] _ in self.orderTotal(for: self.cart.value) }
         tax <~ cart.producer.map { [unowned self] _ in self.calculateTax() }
         taxRowHidden <~ tax.producer.map { tax in tax == "" }
         orderDiscount <~ cart.producer.map { [unowned self] _ in self.calculateOrderDiscount() }
@@ -258,17 +273,6 @@ class CartViewModel: BaseViewModel {
     }
     
     // MARK: - Cart overview calculations
-    
-    private func calculateOrderTotal() -> String {
-        guard let cart = cart.value, let totalPrice = cart.totalPrice else { return "" }
-        
-        if let totalGross = cart.taxedPrice?.totalGross {
-            return totalGross.description
-            
-        } else {
-            return totalPrice.description
-        }
-    }
 
     private func calculateSubtotal() -> String {
         guard let lineItems = cart.value?.lineItems else { return "" }
