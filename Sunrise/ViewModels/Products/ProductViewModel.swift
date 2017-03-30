@@ -70,7 +70,7 @@ class ProductViewModel: BaseViewModel {
     private let performSegueObserver: Observer<String, NoError>
     private let signInPromptObserver: Observer<Void, NoError>
     private var product: ProductProjection?
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
 
     // Attributes configuration
     private let selectableAttributes: [String] = {

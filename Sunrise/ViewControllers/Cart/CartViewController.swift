@@ -25,7 +25,7 @@ class CartViewController: UIViewController {
     }
 
     private let refreshControl = UIRefreshControl()
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
 
     deinit {
         disposables.dispose()
@@ -88,7 +88,7 @@ class CartViewController: UIViewController {
             self?.performSegue(withIdentifier: identifier, sender: nil)
         })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Navigation

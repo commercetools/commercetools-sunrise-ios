@@ -74,6 +74,7 @@ class StoreSelectionViewModel: BaseViewModel {
 
     private let product: ProductProjection
     private let sku: String
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
@@ -100,8 +101,7 @@ class StoreSelectionViewModel: BaseViewModel {
 
         super.init()
 
-        selectedIndexPathSignal
-        .observeValues { [unowned self] selectedIndexPath in
+        disposables += selectedIndexPathSignal.observeValues { [unowned self] selectedIndexPath in
             let previouslyExpandedIndexPath = self.expandedChannelIndexPath.value
 
             if previouslyExpandedIndexPath == selectedIndexPath || self.channelDetailsIndexPath == selectedIndexPath {
@@ -132,8 +132,7 @@ class StoreSelectionViewModel: BaseViewModel {
             self.contentChangesObserver.send(value: changeset)
         }
 
-        refreshSignal
-        .observeValues { [weak self] in
+        disposables += refreshSignal.observeValues { [weak self] in
             self?.retrieveStores()
         }
 
@@ -152,6 +151,10 @@ class StoreSelectionViewModel: BaseViewModel {
 
         retrieveStores()
 
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     // MARK: - Data Source

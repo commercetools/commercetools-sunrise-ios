@@ -41,6 +41,11 @@ class ProductViewController: UITableViewController {
             return cell
         }
     }
+    private let disposables = CompositeDisposable()
+    
+    deinit {
+        disposables.dispose()
+    }
     
     var viewModel: ProductViewModel? {
         didSet {
@@ -126,7 +131,7 @@ class ProductViewController: UITableViewController {
                 }
             })
 
-        viewModel.performSegueSignal
+        disposables += viewModel.performSegueSignal
             .observe(on: UIScheduler())
             .observeValues { [weak self] in
                 self?.performSegue(withIdentifier: $0, sender: nil)
@@ -159,7 +164,7 @@ class ProductViewController: UITableViewController {
                 }
             })
 
-        viewModel.signInPromptSignal
+        disposables += viewModel.signInPromptSignal
             .observe(on: UIScheduler())
             .observeValues { [weak self] in
                 let alertController = UIAlertController(
@@ -193,7 +198,7 @@ class ProductViewController: UITableViewController {
                 }
             })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     private func bindSelectableAttributeCell(_ cell: SelectableAttributeCell, indexPath: IndexPath) {

@@ -42,6 +42,7 @@ class CartViewModel: BaseViewModel {
     private let contentChangesObserver: Observer<Changeset, NoError>
     private let deleteLineItemSignal: Signal<IndexPath, NoError>
     private let performSegueObserver: Observer<String, NoError>
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
@@ -70,13 +71,17 @@ class CartViewModel: BaseViewModel {
         taxRowHidden <~ tax.producer.map { tax in tax == "" }
         orderDiscount <~ cart.producer.map { [unowned self] _ in self.calculateOrderDiscount() }
 
-        refreshSignal.observeValues { [weak self] in
+        disposables += refreshSignal.observeValues { [weak self] in
             self?.queryForActiveCart()
         }
 
-        deleteLineItemSignal.observeValues { [weak self] indexPath in
+        disposables += deleteLineItemSignal.observeValues { [weak self] indexPath in
             self?.deleteLineItemAtIndexPath(indexPath)
         }
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     // MARK: - Data Source

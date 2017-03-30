@@ -56,7 +56,7 @@ class ShippingMethodsViewController: UIViewController {
             self?.performSegue(withIdentifier: "showPayment", sender: self)
         }
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Navigation

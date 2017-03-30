@@ -43,7 +43,7 @@ class NewAddressViewModel: BaseViewModel {
         })
     }()
 
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
     private let performSegueObserver: Observer<Void, NoError>
     private let validationErrorObserver: Observer<Void, NoError>
 

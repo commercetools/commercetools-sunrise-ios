@@ -56,7 +56,7 @@ class AddressSelectionViewController: UIViewController {
             self?.performSegue(withIdentifier: "showShippingMethods", sender: self)
         }
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     @objc private func refresh() {

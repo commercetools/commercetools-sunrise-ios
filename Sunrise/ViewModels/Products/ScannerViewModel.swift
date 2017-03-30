@@ -18,6 +18,8 @@ class ScannerViewModel: BaseViewModel {
     let isLoading = MutableProperty(false)
     let isCapturing = MutableProperty(false)
 
+    private let disposables = CompositeDisposable()
+
     // MARK: Lifecycle
 
     override init() {
@@ -25,11 +27,15 @@ class ScannerViewModel: BaseViewModel {
 
         super.init()
 
-        scannedCode.signal.observeValues { [weak self] sku in
+        disposables += scannedCode.signal.observeValues { [weak self] sku in
             if sku.characters.count > 0 {
                 self?.searchForProduct(sku)
             }
         }
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     private func searchForProduct(_ sku: String) {

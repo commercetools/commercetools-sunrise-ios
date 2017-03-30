@@ -29,6 +29,7 @@ class AccountViewModel: BaseViewModel {
 
     private let contentChangesObserver: Observer<Changeset, NoError>
     private let showReservationObserver: Observer<IndexPath, NoError>
+    private let disposables = CompositeDisposable()
 
     /// The UUID of the reservation confirmation received via push notification, to be shown after next refresh.
     private var reservationConfirmationId: String? = nil
@@ -53,20 +54,18 @@ class AccountViewModel: BaseViewModel {
 
         super.init()
 
-        refreshSignal
-        .observeValues { [weak self] in
+        disposables += refreshSignal.observeValues { [weak self] in
             self?.retrieveOrders()
         }
 
-        isLoading.signal.observeValues { [weak self] isLoading in
+        disposables += isLoading.signal.observeValues { [weak self] isLoading in
             if let id = self?.reservationConfirmationId, let row = self?.reservations.index(where: { $0.id == id }), !isLoading {
                 self?.reservationConfirmationId = nil
                 self?.showReservationObserver.send(value: IndexPath(row: row, section: 2))
             }
         }
 
-        sectionExpandedSignal
-        .observeValues { [weak self] section in
+        disposables += sectionExpandedSignal.observeValues { [weak self] section in
             guard let strongSelf = self else { return }
 
             let rowsCount = section == 1 ? strongSelf.orders.count : strongSelf.reservations.count
@@ -102,6 +101,10 @@ class AccountViewModel: BaseViewModel {
             AppRouting.popHomeToProductOverview()
             AppRouting.popCategoryToRoot()
         }
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     func orderOverviewViewModelForOrderAtIndexPath(_ indexPath: IndexPath) -> OrderOverviewViewModel? {

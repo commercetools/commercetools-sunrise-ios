@@ -21,6 +21,11 @@ class AccountViewController: UIViewController {
     var reservationsHeader = Bundle.main.loadNibNamed("OrdersHeaderView", owner: nil, options: nil)?.first as! OrdersHeaderView
 
     private let refreshControl = UIRefreshControl()
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
 
     var viewModel: AccountViewModel? {
         didSet {
@@ -62,7 +67,7 @@ class AccountViewController: UIViewController {
             }
         })
 
-        viewModel.contentChangesSignal
+        disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
@@ -99,7 +104,7 @@ class AccountViewController: UIViewController {
             })
         })
 
-        viewModel.showReservationSignal
+        disposables += viewModel.showReservationSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] indexPath in
             self?.performSegue(withIdentifier: "reservationDetails", sender: indexPath)
@@ -107,7 +112,7 @@ class AccountViewController: UIViewController {
 
         storeNameLabel.reactive.text <~ viewModel.myStoreName
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
 
         viewModel.refreshObserver.send(value: ())
     }

@@ -20,6 +20,11 @@ class StoreSelectionViewController: UITableViewController {
     }
 
     private var reserveAction: CocoaAction<IndexPath>?
+    private let disposables = CompositeDisposable()
+    
+    deinit {
+        disposables.dispose()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +70,7 @@ class StoreSelectionViewController: UITableViewController {
             }
         })
 
-        viewModel.contentChangesSignal
+        disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
@@ -96,7 +101,7 @@ class StoreSelectionViewController: UITableViewController {
             }
         })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Table view data source

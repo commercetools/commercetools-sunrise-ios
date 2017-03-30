@@ -20,7 +20,7 @@ class ShippingMethodsViewModel: BaseViewModel {
     private var methods: MutableProperty<[ShippingMethod]> = MutableProperty([ShippingMethod]())
     private let performSegueObserver: Observer<Void, NoError>
     private var cart: Cart?
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
