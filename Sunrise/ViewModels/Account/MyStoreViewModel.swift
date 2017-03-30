@@ -32,6 +32,7 @@ class MyStoreViewModel: BaseViewModel {
     var storeDetailsViewModel: StoreDetailsViewModel?
 
     private let channels: MutableProperty<[Channel]>
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
@@ -85,12 +86,11 @@ class MyStoreViewModel: BaseViewModel {
             self?.isLoading.value = false
         })
 
-        refreshSignal
-        .observeValues { [weak self] in
+        disposables += refreshSignal.observeValues { [weak self] in
             self?.retrieveStores()
         }
 
-        selectedPinCoordinateSignal.observeValues { [weak self] coordinate in
+        disposables += selectedPinCoordinateSignal.observeValues { [weak self] coordinate in
             if let coordinate = coordinate, let store = self?.channels.value.filter({ store in
                 if let storeLocation = store.location {
                     return storeLocation.coordinate.latitude == coordinate.latitude
@@ -103,7 +103,7 @@ class MyStoreViewModel: BaseViewModel {
             }
         }
 
-        selectedIndexPathSignal.observeValues { [weak self] indexPath in
+        disposables += selectedIndexPathSignal.observeValues { [weak self] indexPath in
             if let store = self?.channels.value[indexPath.row] {
                 self?.storeDetailsViewModel = StoreDetailsViewModel(store: store)
                 presentStoreDetailsObserver.send(value: ())
@@ -111,6 +111,10 @@ class MyStoreViewModel: BaseViewModel {
         }
 
         retrieveStores()
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     // MARK: - Data Source

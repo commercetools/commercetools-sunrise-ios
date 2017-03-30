@@ -7,8 +7,8 @@ import ReactiveSwift
 
 extension UIViewController {
 
-    func observeAlertMessageSignal(viewModel: BaseViewModel) {
-        viewModel.alertMessageSignal
+    func observeAlertMessageSignal(viewModel: BaseViewModel) -> Disposable? {
+        return viewModel.alertMessageSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] alertMessage in
             let alertController = UIAlertController(

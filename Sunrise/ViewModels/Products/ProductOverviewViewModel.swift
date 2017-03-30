@@ -29,7 +29,7 @@ class ProductOverviewViewModel: BaseViewModel {
     let pageSize: UInt = 16
     var products: [ProductProjection]
     private var category: Category?
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
 
     // Dialogue texts
     let browsingOptionsTitle = NSLocalizedString("Browsing Options", comment: "Browsing Options")

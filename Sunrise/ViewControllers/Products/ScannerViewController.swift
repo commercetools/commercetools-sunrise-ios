@@ -15,6 +15,11 @@ class ScannerViewController: UIViewController {
     private var captureSession: AVCaptureSession? = AVCaptureSession()
     private let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
     private let metadataOutput = AVCaptureMetadataOutput()
+    private let disposables = CompositeDisposable()
+    
+    deinit {
+        disposables.dispose()
+    }
 
     var viewModel: ScannerViewModel? {
         didSet {
@@ -131,7 +136,7 @@ class ScannerViewController: UIViewController {
             }
         })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Navigation

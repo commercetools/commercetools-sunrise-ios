@@ -96,6 +96,6 @@ class ConfirmationViewController: UIViewController {
             self?.present(alertController, animated: true, completion: nil)
         })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 }

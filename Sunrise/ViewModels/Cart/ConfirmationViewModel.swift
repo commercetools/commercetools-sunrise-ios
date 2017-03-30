@@ -45,7 +45,7 @@ class ConfirmationViewModel: BaseViewModel {
         })
     }()
 
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
     private let cart: MutableProperty<Cart?> = MutableProperty(nil)
     private let orderCreatedObserver: Observer<Void, NoError>
     private let currentLocale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)

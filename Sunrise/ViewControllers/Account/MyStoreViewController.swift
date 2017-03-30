@@ -18,6 +18,11 @@ class MyStoreViewController: UIViewController {
 
     private let locationManager = CLLocationManager()
     private let refreshControl = UIRefreshControl()
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
 
     var viewModel: MyStoreViewModel? {
         didSet {
@@ -110,13 +115,13 @@ class MyStoreViewController: UIViewController {
                     }
                 }
 
-        viewModel.presentStoreDetailsSignal
+        disposables += viewModel.presentStoreDetailsSignal
                 .observe(on: UIScheduler())
                 .observeValues { [weak self] in
                     self?.performSegue(withIdentifier: "storeDetails", sender: self)
                 }
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Refreshing

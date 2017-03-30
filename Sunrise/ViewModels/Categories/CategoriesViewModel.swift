@@ -47,6 +47,7 @@ class CategoriesViewModel: BaseViewModel {
     private var categoriesRetrievalSemaphore: DispatchSemaphore?
     private var allCategories = [Category]()
     private let kQueryLimit: UInt = 500
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
@@ -84,11 +85,11 @@ class CategoriesViewModel: BaseViewModel {
             }
         }
 
-        refreshSignal.observeValues { [weak self] in
+        disposables += refreshSignal.observeValues { [weak self] in
             self?.retrieveCategories()
         }
 
-        selectedRowSignal.observeValues { [weak self] indexPath in
+        disposables += selectedRowSignal.observeValues { [weak self] indexPath in
             guard let activeCategoryId = self?.activeCategories.value.last?.id else { return }
             if let activeList = self?.childCategoriesCache[activeCategoryId], self?.activeCategories.value.count == 1 {
                 guard let selectedCategoryId = activeList[indexPath.row].id else { return }
@@ -107,6 +108,10 @@ class CategoriesViewModel: BaseViewModel {
         }
 
         retrieveCategories()
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     private func updateActiveCategory(from previous: [Category], to current: [Category]) {

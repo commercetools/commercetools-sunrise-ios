@@ -18,6 +18,11 @@ class ProductOverviewViewController: UICollectionViewController {
     let searchController = UISearchController(searchResultsController:  nil)
 
     private var idleTimer: Timer?
+    private let disposables = CompositeDisposable()
+    
+    deinit {
+        disposables.dispose()
+    }
 
     var viewModel: ProductOverviewViewModel?
 
@@ -39,6 +44,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
         definesPresentationContext = true
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -66,7 +72,7 @@ class ProductOverviewViewController: UICollectionViewController {
             }
         })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
 
         SVProgressHUD.show()
         viewModel.refreshObserver.send(value: ())

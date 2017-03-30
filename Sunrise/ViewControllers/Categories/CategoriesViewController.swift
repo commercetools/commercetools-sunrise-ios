@@ -20,6 +20,12 @@ class CategoriesViewController: UIViewController {
         return imageView
     }
 
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
+
     var viewModel: CategoriesViewModel? {
         didSet {
             bindViewModel()
@@ -81,7 +87,7 @@ class CategoriesViewController: UIViewController {
             self?.changeRootCategory(from: previous, to: current)
         }
 
-        viewModel.contentChangesSignal
+        disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] changeset in
             guard let tableView = self?.tableView else { return }
@@ -93,13 +99,13 @@ class CategoriesViewController: UIViewController {
             tableView.endUpdates()
         })
 
-        viewModel.performProductOverviewSegueSignal
+        disposables += viewModel.performProductOverviewSegueSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] indexPath in
             self?.performSegue(withIdentifier: "showProductOverview", sender: indexPath)
         })
 
-        observeAlertMessageSignal(viewModel: viewModel)
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     // MARK: - Navigation

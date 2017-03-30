@@ -29,6 +29,7 @@ class ReservationViewModel {
 
     private let order: Order
     private let geocoder = CLGeocoder()
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
@@ -59,7 +60,7 @@ class ReservationViewModel {
         zipAndCityInfo = order.lineItems?.first?.distributionChannel?.obj?.zipAndCityInfo
         openLine1Info = order.lineItems?.first?.distributionChannel?.obj?.openingTimes
 
-        getDirectionSignal.observeValues { [weak self] in
+        disposables += getDirectionSignal.observeValues { [weak self] in
             if let location = self?.storeLocation.value {
                 let destination = MKMapItem(placemark: MKPlacemark(coordinate: location.coordinate))
                 destination.name = self?.storeName
@@ -68,6 +69,10 @@ class ReservationViewModel {
         }
 
         geocodeStoreAddress()
+    }
+
+    deinit {
+        disposables.dispose()
     }
 
     // MARK: - Store address geocoding

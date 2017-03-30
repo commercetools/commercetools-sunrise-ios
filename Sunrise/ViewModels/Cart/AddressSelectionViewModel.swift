@@ -21,7 +21,7 @@ class AddressSelectionViewModel: BaseViewModel {
     private var addresses: MutableProperty<[Address]> = MutableProperty([Address]())
     private let performSegueObserver: Observer<Void, NoError>
     private let currentLocale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)
-    private var disposables = CompositeDisposable()
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
