@@ -17,14 +17,17 @@ class ShippingMethodsViewModel: BaseViewModel {
     let isLoading = MutableProperty(false)
     let performSegueSignal: Signal<Void, NoError>
 
-    private var methods: MutableProperty<[ShippingMethod]> = MutableProperty([ShippingMethod]())
+    private var methods: MutableProperty<[ShippingMethod]>
     private let performSegueObserver: Observer<Void, NoError>
     private var cart: Cart?
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(shippingMethods: [ShippingMethod] = [], cart: Cart? = nil) {
+        methods = MutableProperty(shippingMethods)
+        self.cart = cart
+
         (performSegueSignal, performSegueObserver) = Signal<Void, NoError>.pipe()
 
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
@@ -43,7 +46,9 @@ class ShippingMethodsViewModel: BaseViewModel {
             self?.addShippingMethodToCart(at: indexPath)
         }
 
-        retrieveShippingMethods()
+        if shippingMethods.count == 0 {
+            retrieveShippingMethods()
+        }
     }
 
     deinit {
@@ -64,15 +69,15 @@ class ShippingMethodsViewModel: BaseViewModel {
     }
 
     func price(at indexPath: IndexPath) -> String? {
-        guard let shippingCountry = cart?.shippingAddress?.country, let total = calculateOrderTotal(for: cart),
-              let currency = total.currencyCode, let totalPrice = total.centAmount else { return nil }
         let method = methods.value[indexPath.row]
-        let zoneRate = method.zoneRates?.filter({ $0.zone?.obj?.locations?.contains(where: { return $0.country == shippingCountry }) ?? false }).first
-        let shippingRate = zoneRate?.shippingRates?.filter({ $0.price?.currencyCode == currency }).first
-        if let shippingRate = shippingRate, let shippingPrice = shippingRate.price, let freeAbove = shippingRate.freeAbove?.centAmount {
-            return totalPrice > freeAbove ? NSLocalizedString("Free", comment: "Free shipping") : shippingPrice.description
+        guard let total = calculateOrderTotal(for: cart), let totalPrice = total.centAmount,
+              let zoneRates = method.zoneRates else { return nil }
+        let shippingRate = zoneRates.flatMap({ $0.shippingRates }).flatMap({ $0 }).filter({ $0.isMatching == true }).first
+        if let shippingRate = shippingRate, let shippingPrice = shippingRate.price {
+            let freeAbove = shippingRate.freeAbove?.centAmount ?? Int.max
+            return totalPrice > freeAbove || shippingPrice.centAmount == 0 ? NSLocalizedString("Free", comment: "Free shipping") : shippingPrice.description
         }
-        return ""
+        return nil
     }
 
     // MARK: - Customer addresses retrieval
