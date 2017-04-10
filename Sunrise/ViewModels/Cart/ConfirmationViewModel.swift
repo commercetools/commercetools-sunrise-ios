@@ -46,54 +46,58 @@ class ConfirmationViewModel: BaseViewModel {
     }()
 
     private let disposables = CompositeDisposable()
-    private let cart: MutableProperty<Cart?> = MutableProperty(nil)
+    private let cart: MutableProperty<Cart?>
     private let orderCreatedObserver: Observer<Void, NoError>
     private let currentLocale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(cart: Cart? = nil) {
+        self.cart = MutableProperty(cart)
         (orderCreatedSignal, orderCreatedObserver) = Signal<Void, NoError>.pipe()
 
         super.init()
 
-        shippingFirstName <~ cart.map { cart in
+        shippingFirstName <~ self.cart.map { cart in
             let address = cart?.shippingAddress
             if let title = address?.title, title != "" {
                 return "\(title) \(address?.firstName ?? "")"
             }
             return address?.firstName ?? ""
         }
-        shippingLastName <~ cart.map { return $0?.shippingAddress?.lastName }
-        shippingStreetName <~ cart.map { return ($0?.shippingAddress?.streetName ?? "") + " " + ($0?.shippingAddress?.additionalStreetInfo ?? "") }
-        shippingCity <~ cart.map { return $0?.shippingAddress?.city }
-        shippingPostalCode <~ cart.map { return $0?.shippingAddress?.postalCode }
-        shippingRegion <~ cart.map { return $0?.shippingAddress?.region }
-        shippingCountry <~ cart.map { [weak self] in
+        shippingLastName <~ self.cart.map { return $0?.shippingAddress?.lastName }
+        shippingStreetName <~ self.cart.map { return ($0?.shippingAddress?.streetName ?? "") + " " + ($0?.shippingAddress?.additionalStreetInfo ?? "") }
+        shippingCity <~ self.cart.map { return $0?.shippingAddress?.city }
+        shippingPostalCode <~ self.cart.map { return $0?.shippingAddress?.postalCode }
+        shippingRegion <~ self.cart.map { return $0?.shippingAddress?.region }
+        shippingCountry <~ self.cart.map { [weak self] in
             guard let countryCode = $0?.shippingAddress?.country else { return "" }
             return self?.currentLocale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
         }
-        billingFirstName <~ cart.map { cart in
+        billingFirstName <~ self.cart.map { cart in
             let address = cart?.billingAddress
             if let title = address?.title, title != "" {
                 return "\(title) \(address?.firstName ?? "")"
             }
             return address?.firstName ?? ""
         }
-        billingLastName <~ cart.map { return $0?.billingAddress?.lastName }
-        billingStreetName <~ cart.map { return ($0?.billingAddress?.streetName ?? "") + " " + ($0?.billingAddress?.additionalStreetInfo ?? "") }
-        billingCity <~ cart.map { return $0?.billingAddress?.city }
-        billingPostalCode <~ cart.map { return $0?.billingAddress?.postalCode }
-        billingRegion <~ cart.map { return $0?.billingAddress?.region }
-        billingCountry <~ cart.map { [weak self] in
+        billingLastName <~ self.cart.map { return $0?.billingAddress?.lastName }
+        billingStreetName <~ self.cart.map { return ($0?.billingAddress?.streetName ?? "") + " " + ($0?.billingAddress?.additionalStreetInfo ?? "") }
+        billingCity <~ self.cart.map { return $0?.billingAddress?.city }
+        billingPostalCode <~ self.cart.map { return $0?.billingAddress?.postalCode }
+        billingRegion <~ self.cart.map { return $0?.billingAddress?.region }
+        billingCountry <~ self.cart.map { [weak self] in
             guard let countryCode = $0?.billingAddress?.country else { return "" }
             return self?.currentLocale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
         }
 
-        shippingMethodName <~ cart.map { return $0?.shippingInfo?.shippingMethod?.obj?.name }
-        shippingMethodDescription <~ cart.map { return $0?.shippingInfo?.shippingMethod?.obj?.description }
+        shippingMethodName <~ self.cart.map { return $0?.shippingInfo?.shippingMethod?.obj?.name }
+        shippingMethodDescription <~ self.cart.map { return $0?.shippingInfo?.shippingMethod?.obj?.description }
+        payment.value = "Prepaid" // TODO: remove once we have the API support for payments
 
-        retrieveCart()
+        if self.cart.value == nil {
+            retrieveCart()
+        }
     }
 
     deinit {
