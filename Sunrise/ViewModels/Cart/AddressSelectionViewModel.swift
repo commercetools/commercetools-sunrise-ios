@@ -25,7 +25,7 @@ class AddressSelectionViewModel: BaseViewModel {
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(customer: Customer? = nil) {
         (performSegueSignal, performSegueObserver) = Signal<Void, NoError>.pipe()
 
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
@@ -44,7 +44,11 @@ class AddressSelectionViewModel: BaseViewModel {
             self?.addAddressToCart(at: selectedIndexPath)
         }
 
-        retrieveAddresses()
+        if let customer = customer {
+            updateAddresses(for: customer)
+        } else {
+            retrieveAddresses()
+        }
     }
 
     deinit {
@@ -72,10 +76,6 @@ class AddressSelectionViewModel: BaseViewModel {
 
     func cellType(at indexPath: IndexPath) -> CellType {
         return indexPath.section == numberOfSections - 1 && indexPath.row == numberOfRows(in: indexPath.section) - 1 ? .addNew : .address
-    }
-
-    func title(at indexPath: IndexPath) -> String? {
-        return indexPath.section == 0 && defaultAddress.value != nil ? defaultAddress.value?.title : addresses.value[indexPath.row].title
     }
 
     func firstName(at indexPath: IndexPath) -> String? {
@@ -125,15 +125,19 @@ class AddressSelectionViewModel: BaseViewModel {
         isLoading.value = true
 
         Customer.profile { result in
-            if let profile = result.model, result.isSuccess {
-                self.defaultAddress.value = profile.addresses?.filter({ return $0.id == profile.defaultShippingAddressId }).first
-                self.addresses.value = profile.addresses?.filter({ $0.id != self.defaultAddress.value?.id }) ?? []
+            if let customer = result.model, result.isSuccess {
+                self.updateAddresses(for: customer)
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }
             self.isLoading.value = false
         }
+    }
+
+    private func updateAddresses(for customer: Customer) {
+        defaultAddress.value = customer.addresses?.filter({ return $0.id == customer.defaultShippingAddressId }).first
+        addresses.value = customer.addresses?.filter({ $0.id != defaultAddress.value?.id }) ?? []
     }
 
     private func addAddressToCart(at indexPath: IndexPath) {
