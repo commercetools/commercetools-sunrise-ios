@@ -48,6 +48,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Swift.Void) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+            let pathComponents = url.pathComponents
+            // POP
+            if pathComponents.contains("search"), let urlComponents = URLComponents(string: url.absoluteString),
+               let query = urlComponents.queryItems {
+                AppRouting.switchToSearch(query: query.filter({ $0.name == "q" }).first?.value ?? "")
+                return true
+
+            // PDP
+            } else if var sku = pathComponents.last?.components(separatedBy: "-").last, sku.contains(".html") {
+                sku = sku.substring(to: sku.index(sku.endIndex, offsetBy: -5))
+                AppRouting.switchToProductDetails(for: sku)
+                return true
+            }
+        }
+        return false
+    }
+
     fileprivate func handleNotification(notificationInfo: [AnyHashable: Any]) {
         if let reservationId = notificationInfo["reservation-id"] as? String {
             AppRouting.showReservationWithId(reservationId)
