@@ -25,9 +25,11 @@ class ProductOverviewViewModel: BaseViewModel {
     let isLoading: MutableProperty<Bool>
     let browsingStoreName: MutableProperty<String?>
     let browsingStore: MutableProperty<Channel?>
+    let presentProductDetailsSignal: Signal<ProductViewModel, NoError>
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+    private let presentProductDetailsObserver: Observer<ProductViewModel, NoError>
     private var category: Category?
     private let disposables = CompositeDisposable()
 
@@ -51,6 +53,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
         isLoading = MutableProperty(true)
         browsingStore = MutableProperty(nil)
+        (presentProductDetailsSignal, presentProductDetailsObserver) = Signal<ProductViewModel, NoError>.pipe()
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -196,5 +199,20 @@ class ProductOverviewViewModel: BaseViewModel {
             }
             self.isLoading.value = false
         })
+    }
+
+    // MARK: - Presenting product details from the universal links
+
+    func presentProductDetails(for sku: String) {
+        isLoading.value = true
+        ProductProjection.search(filters: ["variants.sku:\"\(sku)\""]) { result in
+            if let product = result.model?.results?.first, result.isSuccess {
+                self.presentProductDetailsObserver.send(value: ProductViewModel(product: product))
+
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+            }
+            self.isLoading.value = false
+        }
     }
 }

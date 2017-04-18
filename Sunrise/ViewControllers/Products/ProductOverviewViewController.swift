@@ -72,6 +72,11 @@ class ProductOverviewViewController: UICollectionViewController {
             }
         })
 
+        disposables += viewModel.presentProductDetailsSignal
+        .observe(on: UIScheduler()).observeValues { [weak self] product in
+            self?.performSegue(withIdentifier: "showProductDetails", sender: product)
+        }
+
         disposables += observeAlertMessageSignal(viewModel: viewModel)
 
         SVProgressHUD.show()
@@ -100,10 +105,13 @@ class ProductOverviewViewController: UICollectionViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectedCell = sender as? ProductOverviewCell, let indexPath = collectionView?.indexPath(for: selectedCell),
-                let productViewController = segue.destination as? ProductViewController, let viewModel = viewModel {
+        guard let productViewController = segue.destination as? ProductViewController, let viewModel = viewModel else { return }
+
+        if let selectedCell = sender as? ProductOverviewCell, let indexPath = collectionView?.indexPath(for: selectedCell) {
             let productDetailsViewModel = viewModel.productDetailsViewModelForProductAtIndexPath(indexPath)
             productViewController.viewModel = productDetailsViewModel
+        } else if let productViewModel = sender as? ProductViewModel {
+            productViewController.viewModel = productViewModel
         }
     }
     

@@ -103,14 +103,17 @@ class AppRouting {
 
     /**
         Switches back to the home tab, and activates search bar as a first responder.
+
+        - parameter query:                   Optional parameter, if specified, used for populating the search field.
     */
-    static func switchToSearch() {
+    static func switchToSearch(query: String = "") {
         guard let tabBarController = tabBarController, let homeTabNavigationController = tabBarController.viewControllers?.first as? UINavigationController,
                 let productOverviewViewController = homeTabNavigationController.viewControllers[TabIndex.homeTab.index] as? ProductOverviewViewController else { return }
 
         tabBarController.selectedIndex = TabIndex.homeTab.index
         homeTabNavigationController.popToRootViewController(animated: false)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
+            productOverviewViewController.searchController.searchBar.text = query
             productOverviewViewController.searchController.searchBar.becomeFirstResponder()
         }
     }
@@ -133,6 +136,21 @@ class AppRouting {
 
         tabBarController.selectedIndex = TabIndex.homeTab.index
         homeNavigationController.popToRootViewController(animated: true)
+    }
+
+    /**
+        Switches to the home tab, pops home navigation controller to it's root view controller, and finally loads and
+        pushes the product details screen for the specified SKU.
+
+        - parameter sku:                   SKU specifying the product variant which should be presented
+                                           on the product details screen.
+        - parameter completion:            Completion block which is executed after the product is retrieved, and should be
+                                           used to check whether the retrieval was successful.
+    */
+    static func switchToProductDetails(for sku: String) {
+        switchToHome()
+        popHomeToProductOverview()
+        productOverviewViewController?.viewModel?.presentProductDetails(for: sku)
     }
 
     /**
