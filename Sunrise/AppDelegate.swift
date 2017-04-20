@@ -51,13 +51,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Swift.Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             let pathComponents = url.pathComponents
-            // POP
+            // POP (e.g https://demo.commercetools.com/en/search?q=jeans)
             if pathComponents.contains("search"), let urlComponents = URLComponents(string: url.absoluteString),
                let query = urlComponents.queryItems {
                 AppRouting.switchToSearch(query: query.filter({ $0.name == "q" }).first?.value ?? "")
                 return true
 
-            // PDP
+            // PDP (e.g https://demo.commercetools.com/en/brunello-cucinelli-coat-mf9284762-cream-M0E20000000DQR5.html)
             } else if var sku = pathComponents.last?.components(separatedBy: "-").last, sku.contains(".html") {
                 sku = sku.substring(to: sku.index(sku.endIndex, offsetBy: -5))
                 AppRouting.switchToProductDetails(for: sku)
