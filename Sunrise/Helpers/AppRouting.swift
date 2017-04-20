@@ -107,14 +107,10 @@ class AppRouting {
         - parameter query:                   Optional parameter, if specified, used for populating the search field.
     */
     static func switchToSearch(query: String = "") {
-        guard let tabBarController = tabBarController, let homeTabNavigationController = tabBarController.viewControllers?.first as? UINavigationController,
-                let productOverviewViewController = homeTabNavigationController.viewControllers[TabIndex.homeTab.index] as? ProductOverviewViewController else { return }
-
-        tabBarController.selectedIndex = TabIndex.homeTab.index
-        homeTabNavigationController.popToRootViewController(animated: false)
+        switchToHome()
+        productOverviewViewController?.searchController.searchBar.text = query
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
-            productOverviewViewController.searchController.searchBar.text = query
-            productOverviewViewController.searchController.searchBar.becomeFirstResponder()
+            productOverviewViewController?.searchController.searchBar.becomeFirstResponder()
         }
     }
 
@@ -132,7 +128,8 @@ class AppRouting {
         Switches back to the home tab, and pops to root product overview view controller.
     */
     static func switchToHome() {
-        guard let tabBarController = tabBarController, let homeNavigationController = tabBarController.viewControllers?[TabIndex.homeTab.index] as? UINavigationController else { return }
+        guard let tabBarController = tabBarController, let _ = productOverviewViewController?.view,
+              let homeNavigationController = tabBarController.viewControllers?[TabIndex.homeTab.index] as? UINavigationController else { return }
 
         tabBarController.selectedIndex = TabIndex.homeTab.index
         homeNavigationController.popToRootViewController(animated: true)

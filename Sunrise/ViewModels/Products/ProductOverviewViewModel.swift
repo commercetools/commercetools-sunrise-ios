@@ -88,14 +88,14 @@ class ProductOverviewViewModel: BaseViewModel {
         disposables += nextPageSignal
         .observeValues { [weak self] in
             if let productCount = self?.products.count, productCount > 0 {
-                self?.queryForProductProjections(offset: UInt(productCount), text: self?.searchText.value ?? "")
+                self?.queryForProductProjections(offset: UInt(productCount))
             }
         }
 
         disposables += searchText.combinePrevious(searchText.value).signal
         .observeValues({ [weak self] previous, current in
             guard previous != current else { return }
-            self?.queryForProductProjections(offset: 0, text: current)
+            self?.queryForProductProjections(offset: 0)
         })
 
         browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? myStore?.value : nil
@@ -168,8 +168,9 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections(offset: UInt, text: String = "") {
+    private func queryForProductProjections(offset: UInt) {
         guard AppRouting.accountViewController?.viewModel?.isLoading.value != true else { return }
+        let text = searchText.value
         isLoading.value = true
 
         // Sort by newer first, but only when the user performs a text search
@@ -190,7 +191,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
         ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
                                  filters: filters, result: { result in
-            if let products = result.model?.results, result.isSuccess {
+            if let products = result.model?.results, text == self.searchText.value, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
