@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 AppRouting.switchToProductDetails(for: sku)
                 return true
 
+            // Orders (e.g https://demo.commercetools.com/en/user/orders/87896195?)
             } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last {
                 AppRouting.showOrderDetails(orderNumber: orderNumber)
             }
