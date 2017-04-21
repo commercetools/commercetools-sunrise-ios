@@ -62,6 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sku = sku.substring(to: sku.index(sku.endIndex, offsetBy: -5))
                 AppRouting.switchToProductDetails(for: sku)
                 return true
+
+            } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last {
+                AppRouting.showOrderDetails(orderNumber: orderNumber)
             }
         }
         return false
@@ -69,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func handleNotification(notificationInfo: [AnyHashable: Any]) {
         if let reservationId = notificationInfo["reservation-id"] as? String {
-            AppRouting.showReservationWithId(reservationId)
+            AppRouting.showReservationDetails(id: reservationId)
         }
     }
 
