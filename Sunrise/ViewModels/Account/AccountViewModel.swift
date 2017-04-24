@@ -68,6 +68,8 @@ class AccountViewModel: BaseViewModel {
                 self?.showOrderObserver.send(value: IndexPath(row: row, section: 1))
             } else if let row = self?.reservations.index(where: { $0.id == identifier || $0.orderNumber == identifier }) {
                 self?.showReservationObserver.send(value: IndexPath(row: row, section: 2))
+            } else {
+                self?.alertMessageObserver.send(value: NSLocalizedString("The order could not be found", comment: "Order not found"))
             }
         }
 
