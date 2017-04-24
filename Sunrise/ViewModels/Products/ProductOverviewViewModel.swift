@@ -210,6 +210,9 @@ class ProductOverviewViewModel: BaseViewModel {
             if let product = result.model?.results?.first, result.isSuccess {
                 self.presentProductDetailsObserver.send(value: ProductViewModel(product: product))
 
+            } else if result.model?.count == 0 {
+                super.alertMessageObserver.send(value: NSLocalizedString("The product could not be found", comment: "Product not found"))
+
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }
