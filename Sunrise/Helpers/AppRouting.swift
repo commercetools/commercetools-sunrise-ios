@@ -185,14 +185,28 @@ class AppRouting {
     /**
         Switches to the account tab, and presents reservation overview view controller.
     */
-    static func showReservationWithId(_ reservationId: String) {
-        guard let tabBarController = tabBarController, let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController,
-                let accountViewController = accountNavigationController.viewControllers.first as? AccountViewController else { return }
+    static func showReservationDetails(id: String) {
+        switchToAccount()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            accountViewController?.viewModel?.presentDetails(id: id)
+        }
+    }
+
+    /**
+        Switches to the account tab, and presents order details view controller.
+    */
+    static func showOrderDetails(orderNumber: String) {
+        switchToAccount()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            accountViewController?.viewModel?.presentDetails(orderNumber: orderNumber)
+        }
+    }
+
+    private static func switchToAccount() {
+        guard let tabBarController = tabBarController,
+              let accountNavigationController = tabBarController.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController else { return }
 
         accountNavigationController.popToRootViewController(animated: false)
         tabBarController.selectedIndex = TabIndex.myAccountTab.index
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            accountViewController.viewModel?.presentConfirmationForReservationWithId(reservationId)
-        }
     }
 }

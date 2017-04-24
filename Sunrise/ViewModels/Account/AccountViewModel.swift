@@ -19,6 +19,7 @@ class AccountViewModel: BaseViewModel {
     let isLoading: MutableProperty<Bool>
     let contentChangesSignal: Signal<Changeset, NoError>
     let showReservationSignal: Signal<IndexPath, NoError>
+    let showOrderSignal: Signal<IndexPath, NoError>
     let ordersExpanded = MutableProperty(false)
     let reservationsExpanded = MutableProperty(false)
     let currentStore: MutableProperty<Channel?>
@@ -29,10 +30,11 @@ class AccountViewModel: BaseViewModel {
 
     private let contentChangesObserver: Observer<Changeset, NoError>
     private let showReservationObserver: Observer<IndexPath, NoError>
+    private let showOrderObserver: Observer<IndexPath, NoError>
     private let disposables = CompositeDisposable()
 
     /// The UUID of the reservation confirmation received via push notification, to be shown after next refresh.
-    private var reservationConfirmationId: String? = nil
+    private var pendingOrderIdentifier: String? = nil
 
     // MARK: - Lifecycle
 
@@ -49,8 +51,8 @@ class AccountViewModel: BaseViewModel {
 
         (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
 
-
         (showReservationSignal, showReservationObserver) = Signal<IndexPath, NoError>.pipe()
+        (showOrderSignal, showOrderObserver) = Signal<IndexPath, NoError>.pipe()
 
         super.init()
 
@@ -59,9 +61,15 @@ class AccountViewModel: BaseViewModel {
         }
 
         disposables += isLoading.signal.observeValues { [weak self] isLoading in
-            if let id = self?.reservationConfirmationId, let row = self?.reservations.index(where: { $0.id == id }), !isLoading {
-                self?.reservationConfirmationId = nil
+            guard let identifier = self?.pendingOrderIdentifier, !isLoading else { return }
+            self?.pendingOrderIdentifier = nil
+
+            if let row = self?.orders.index(where: { $0.orderNumber == identifier }) {
+                self?.showOrderObserver.send(value: IndexPath(row: row, section: 1))
+            } else if let row = self?.reservations.index(where: { $0.id == identifier || $0.orderNumber == identifier }) {
                 self?.showReservationObserver.send(value: IndexPath(row: row, section: 2))
+            } else {
+                self?.alertMessageObserver.send(value: NSLocalizedString("The order could not be found", comment: "Order not found"))
             }
         }
 
@@ -156,11 +164,22 @@ class AccountViewModel: BaseViewModel {
 
     // MARK: - Presenting reservation confirmation from push notification
 
-    func presentConfirmationForReservationWithId(_ reservationId: String) {
-        if let row = reservations.index(where: { $0.id == reservationId }) {
+    func presentDetails(id: String) {
+        if let row = reservations.index(where: { $0.id == id }) {
             showReservationObserver.send(value: IndexPath(row: row, section: 2))
         } else {
-            reservationConfirmationId = reservationId
+            pendingOrderIdentifier = id
+            refreshObserver.send(value: ())
+        }
+    }
+
+    func presentDetails(orderNumber: String) {
+        if let row = orders.index(where: { $0.orderNumber == orderNumber }) {
+            showOrderObserver.send(value: IndexPath(row: row, section: 1))
+        } else if let row = reservations.index(where: { $0.orderNumber == orderNumber }) {
+            showReservationObserver.send(value: IndexPath(row: row, section: 2))
+        } else {
+            pendingOrderIdentifier = orderNumber
             refreshObserver.send(value: ())
         }
     }

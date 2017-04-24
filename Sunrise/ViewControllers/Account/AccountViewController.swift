@@ -110,6 +110,12 @@ class AccountViewController: UIViewController {
             self?.performSegue(withIdentifier: "reservationDetails", sender: indexPath)
         })
 
+        disposables += viewModel.showOrderSignal
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] indexPath in
+            self?.performSegue(withIdentifier: "orderDetails", sender: indexPath)
+        })
+
         storeNameLabel.reactive.text <~ viewModel.myStoreName
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
