@@ -103,15 +103,14 @@ class AppRouting {
 
     /**
         Switches back to the home tab, and activates search bar as a first responder.
-    */
-    static func switchToSearch() {
-        guard let tabBarController = tabBarController, let homeTabNavigationController = tabBarController.viewControllers?.first as? UINavigationController,
-                let productOverviewViewController = homeTabNavigationController.viewControllers[TabIndex.homeTab.index] as? ProductOverviewViewController else { return }
 
-        tabBarController.selectedIndex = TabIndex.homeTab.index
-        homeTabNavigationController.popToRootViewController(animated: false)
+        - parameter query:                   Optional parameter, if specified, used for populating the search field.
+    */
+    static func switchToSearch(query: String = "") {
+        switchToHome()
+        productOverviewViewController?.searchController.searchBar.text = query
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
-            productOverviewViewController.searchController.searchBar.becomeFirstResponder()
+            productOverviewViewController?.searchController.searchBar.becomeFirstResponder()
         }
     }
 
@@ -129,10 +128,26 @@ class AppRouting {
         Switches back to the home tab, and pops to root product overview view controller.
     */
     static func switchToHome() {
-        guard let tabBarController = tabBarController, let homeNavigationController = tabBarController.viewControllers?[TabIndex.homeTab.index] as? UINavigationController else { return }
+        guard let tabBarController = tabBarController, let _ = productOverviewViewController?.view,
+              let homeNavigationController = tabBarController.viewControllers?[TabIndex.homeTab.index] as? UINavigationController else { return }
 
         tabBarController.selectedIndex = TabIndex.homeTab.index
         homeNavigationController.popToRootViewController(animated: true)
+    }
+
+    /**
+        Switches to the home tab, pops home navigation controller to it's root view controller, and finally loads and
+        pushes the product details screen for the specified SKU.
+
+        - parameter sku:                   SKU specifying the product variant which should be presented
+                                           on the product details screen.
+        - parameter completion:            Completion block which is executed after the product is retrieved, and should be
+                                           used to check whether the retrieval was successful.
+    */
+    static func switchToProductDetails(for sku: String) {
+        switchToHome()
+        popHomeToProductOverview()
+        productOverviewViewController?.viewModel?.presentProductDetails(for: sku)
     }
 
     /**

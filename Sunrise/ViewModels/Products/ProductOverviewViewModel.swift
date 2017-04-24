@@ -25,9 +25,11 @@ class ProductOverviewViewModel: BaseViewModel {
     let isLoading: MutableProperty<Bool>
     let browsingStoreName: MutableProperty<String?>
     let browsingStore: MutableProperty<Channel?>
+    let presentProductDetailsSignal: Signal<ProductViewModel, NoError>
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
+    private let presentProductDetailsObserver: Observer<ProductViewModel, NoError>
     private var category: Category?
     private let disposables = CompositeDisposable()
 
@@ -51,6 +53,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
         isLoading = MutableProperty(true)
         browsingStore = MutableProperty(nil)
+        (presentProductDetailsSignal, presentProductDetailsObserver) = Signal<ProductViewModel, NoError>.pipe()
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -85,14 +88,14 @@ class ProductOverviewViewModel: BaseViewModel {
         disposables += nextPageSignal
         .observeValues { [weak self] in
             if let productCount = self?.products.count, productCount > 0 {
-                self?.queryForProductProjections(offset: UInt(productCount), text: self?.searchText.value ?? "")
+                self?.queryForProductProjections(offset: UInt(productCount))
             }
         }
 
         disposables += searchText.combinePrevious(searchText.value).signal
         .observeValues({ [weak self] previous, current in
             guard previous != current else { return }
-            self?.queryForProductProjections(offset: 0, text: current)
+            self?.queryForProductProjections(offset: 0)
         })
 
         browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? myStore?.value : nil
@@ -165,8 +168,9 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections(offset: UInt, text: String = "") {
+    private func queryForProductProjections(offset: UInt) {
         guard AppRouting.accountViewController?.viewModel?.isLoading.value != true else { return }
+        let text = searchText.value
         isLoading.value = true
 
         // Sort by newer first, but only when the user performs a text search
@@ -187,7 +191,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
         ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
                                  filters: filters, result: { result in
-            if let products = result.model?.results, result.isSuccess {
+            if let products = result.model?.results, text == self.searchText.value, result.isSuccess {
                 self.products = offset == 0 ? products : self.products + products
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
@@ -196,5 +200,20 @@ class ProductOverviewViewModel: BaseViewModel {
             }
             self.isLoading.value = false
         })
+    }
+
+    // MARK: - Presenting product details from the universal links
+
+    func presentProductDetails(for sku: String) {
+        isLoading.value = true
+        ProductProjection.search(filters: ["variants.sku:\"\(sku)\""]) { result in
+            if let product = result.model?.results?.first, result.isSuccess {
+                self.presentProductDetailsObserver.send(value: ProductViewModel(product: product))
+
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+            }
+            self.isLoading.value = false
+        }
     }
 }
