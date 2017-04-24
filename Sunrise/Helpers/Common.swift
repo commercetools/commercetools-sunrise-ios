@@ -45,3 +45,9 @@ struct Project {
         UserDefaults(suiteName: kSuiteName)?.synchronize()
     }
 }
+
+extension Collection where Iterator.Element == URLQueryItem {
+    subscript(key: String) -> String? {
+        return self.filter({ $0.name == key }).first?.value
+    }
+}

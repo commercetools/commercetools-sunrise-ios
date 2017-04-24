@@ -30,6 +30,10 @@ class AppRouting {
         return AuthManager.sharedInstance.state == .customerToken
     }
 
+    static var cartViewController: CartViewController? {
+        return (tabBarController?.viewControllers?[TabIndex.cartTab.index] as? UINavigationController)?.viewControllers.first as? CartViewController
+    }
+
     static var accountViewController: AccountViewController? {
         return (tabBarController?.viewControllers?[TabIndex.myAccountTab.index] as? UINavigationController)?.viewControllers.first as? AccountViewController
     }
@@ -115,6 +119,20 @@ class AppRouting {
     }
 
     /**
+        Switches to the cart tab, and adds the specified product, and applies discount code if specified.
+
+        - parameter product:               The ID of the product to be added.
+        - parameter variantId:             The product variant which should be added to the cart.
+        - parameter quantity:              The quantity.
+        - parameter discountCode:          Optional discount code.
+    */
+    static func switchToCartAndAdd(product: String, variantId: Int, quantity: UInt, discountCode: String?) {
+        switchToCartOverview()
+        _ = cartViewController?.view
+        cartViewController?.viewModel?.addProduct(id: product, variantId: variantId, quantity: quantity, discountCode: discountCode)
+    }
+
+    /**
         Switches back to the cart tab, and pops to root cart view controller.
     */
     static func switchToCartOverview() {
@@ -141,8 +159,6 @@ class AppRouting {
 
         - parameter sku:                   SKU specifying the product variant which should be presented
                                            on the product details screen.
-        - parameter completion:            Completion block which is executed after the product is retrieved, and should be
-                                           used to check whether the retrieval was successful.
     */
     static func switchToProductDetails(for sku: String) {
         switchToHome()
