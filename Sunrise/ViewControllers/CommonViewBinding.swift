@@ -12,11 +12,11 @@ extension UIViewController {
         .observe(on: UIScheduler())
         .observeValues({ [weak self] alertMessage in
             let alertController = UIAlertController(
-            title: "Oops!",
+            title: viewModel.oopsTitle,
                     message: alertMessage,
                     preferredStyle: .alert
             )
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
             self?.present(alertController, animated: true, completion: nil)
         })
     }

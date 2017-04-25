@@ -89,14 +89,14 @@ class ScannerViewController: UIViewController {
                 preferredStyle: .alert
                 )
         if authorizationStatus == .denied {
-            alertController.addAction(UIAlertAction(title: "Settings", style: .cancel, handler: { _ in
+            alertController.addAction(UIAlertAction(title: viewModel?.settingsAction, style: .cancel, handler: { _ in
                 if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
                     UIApplication.shared.open(appSettingsURL)
                 }
                 _ = self.navigationController?.popViewController(animated: true)
             }))
         }
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default, handler: { _ in
             _ = self.navigationController?.popViewController(animated: true)
         }))
 

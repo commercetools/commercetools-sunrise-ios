@@ -98,7 +98,7 @@ class NewAddressViewController: UIViewController {
                 message: self?.viewModel?.formGuide,
                 preferredStyle: .alert
             )
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
             self?.present(alertController, animated: true, completion: nil)
         }
 
