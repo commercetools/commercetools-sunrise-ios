@@ -194,7 +194,7 @@ class CartViewModel: BaseViewModel {
 
     // MARK: - Cart retrieval
 
-    private func queryForActiveCart() {
+    private func queryForActiveCart(completion: ((Cart)->())? = nil) {
         isLoading.value = true
 
         Cart.active(result: { result in
@@ -203,6 +203,7 @@ class CartViewModel: BaseViewModel {
                 Cart.update(cartId, actions: UpdateActions<CartUpdateAction>(version: version, actions: [.recalculate(options: RecalculateOptions())]), result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
+                        completion?(cart)
                     } else if let errors = result.errors as? [CTError], result.isFailure {
                         self.update(cart: nil)
                         super.alertMessageObserver.send(value: self.alertMessage(for: errors))
@@ -216,6 +217,7 @@ class CartViewModel: BaseViewModel {
                 Cart.create(cartDraft, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
+                        completion?(cart)
                     } else if let errors = result.errors as? [CTError], result.isFailure {
                         self.update(cart: nil)
                         super.alertMessageObserver.send(value: self.alertMessage(for: errors))
@@ -273,8 +275,6 @@ class CartViewModel: BaseViewModel {
 
         self.cart.value = cart
         contentChangesObserver.send(value: changeset)
-
-
     }
     
     // MARK: - Cart overview calculations
@@ -297,6 +297,32 @@ class CartViewModel: BaseViewModel {
         return calculateOrderDiscount(lineItems)
     }
 
+    // MARK: - Add product to the currently active cart
 
+    func addProduct(id: String, variantId: Int, quantity: UInt, discountCode: String?) {
+        queryForActiveCart { [weak self] cart in
+            guard let cartId = cart.id, let version = cart.version else { return }
 
+            var addLineItemOptions = AddLineItemOptions()
+            addLineItemOptions.productId = id
+            addLineItemOptions.variantId = variantId
+            addLineItemOptions.quantity = quantity
+            var actions = [CartUpdateAction.addLineItem(options: addLineItemOptions)]
+            if let discountCode = discountCode {
+                var addDiscountOptions = AddDiscountCodeOptions()
+                addDiscountOptions.code = discountCode
+                actions.append(.addDiscountCode(options: addDiscountOptions))
+            }
+            self?.isLoading.value = true
+            Cart.update(cartId, actions: UpdateActions<CartUpdateAction>(version: version, actions: actions), result: { [weak self] result in
+                if let cart = result.model, result.isSuccess {
+                    self?.update(cart: cart)
+
+                } else if let errors = result.errors as? [CTError], result.isFailure {
+                    self?.alertMessageObserver.send(value: self?.alertMessage(for: errors) ?? "")
+                }
+                self?.isLoading.value = false
+            })
+        }
+    }
 }
