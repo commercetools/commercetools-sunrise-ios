@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -97,16 +98,16 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FQ9-ns-e7U">
-                                    <rect key="frame" x="72" y="8" width="0.0" height="23"/>
+                                    <rect key="frame" x="71.5" y="8" width="0.0" height="23"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="Browsing:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zxa-mv-PRH">
-                                            <rect key="frame" x="-188" y="-8" width="0.0" height="20.5"/>
+                                            <rect key="frame" x="-187.5" y="-8" width="0.0" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sunrise Berlin store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-p8-ncv">
-                                            <rect key="frame" x="-188" y="-8" width="0.0" height="20.5"/>
+                                            <rect key="frame" x="-187.5" y="-8" width="0.0" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <color key="textColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -134,11 +135,18 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="vvd-2n-TRB">
                         <barButtonItem key="backBarButtonItem" title=" " id="Gac-dK-JJQ"/>
-                        <barButtonItem key="rightBarButtonItem" image="barcode-scanner" id="33O-6R-uha">
-                            <connections>
-                                <segue destination="L9a-Lh-4Vn" kind="show" identifier="" id="IlA-iI-0eB"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="barcode-scanner" id="33O-6R-uha">
+                                <connections>
+                                    <segue destination="L9a-Lh-4Vn" kind="show" identifier="" id="IlA-iI-0eB"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="mic" id="FSJ-Hl-atJ">
+                                <connections>
+                                    <segue destination="hjb-bT-GCq" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="XnP-wJ-hjm"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="noResultsView" destination="ylH-P2-Ogs" id="yHh-Gg-bjN"/>
@@ -268,7 +276,57 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0s-1r-K7Z" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="-319"/>
+            <point key="canvasLocation" x="-668" y="-304"/>
+        </scene>
+        <!--Voice Search View Controller-->
+        <scene sceneID="1cU-FT-y18">
+            <objects>
+                <viewController id="hjb-bT-GCq" customClass="VoiceSearchViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8oE-t0-Hia"/>
+                        <viewControllerLayoutGuide type="bottom" id="rYh-oO-14k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M2A-6Q-d1I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1oP-B6-f0z">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eRo-14-Ynm" appends="YES" id="Ajg-4q-5KP"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try: &quot;summer dress&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT6-Hf-aTH">
+                                <rect key="frame" x="43" y="586.5" width="289" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rYh-oO-14k" firstAttribute="top" secondItem="QT6-Hf-aTH" secondAttribute="bottom" constant="60" id="Grf-Rx-vgj"/>
+                            <constraint firstItem="QT6-Hf-aTH" firstAttribute="leading" secondItem="M2A-6Q-d1I" secondAttribute="leadingMargin" constant="27" id="LVR-OJ-96m"/>
+                            <constraint firstItem="1oP-B6-f0z" firstAttribute="leading" secondItem="M2A-6Q-d1I" secondAttribute="leading" id="Zwn-YK-pff"/>
+                            <constraint firstItem="rYh-oO-14k" firstAttribute="top" secondItem="1oP-B6-f0z" secondAttribute="bottom" id="eSL-gK-lKp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QT6-Hf-aTH" secondAttribute="trailing" constant="27" id="iYl-Y6-vLO"/>
+                            <constraint firstItem="1oP-B6-f0z" firstAttribute="height" secondItem="M2A-6Q-d1I" secondAttribute="height" id="icf-TM-6dn"/>
+                            <constraint firstAttribute="trailing" secondItem="1oP-B6-f0z" secondAttribute="trailing" id="sEG-h4-TUH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="recognizedTextLabel" destination="QT6-Hf-aTH" id="AYF-1b-17r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u2L-8O-huu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eRo-14-Ynm">
+                    <connections>
+                        <action selector="backgroundTap:" destination="hjb-bT-GCq" id="9Uz-A0-gON"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="104.8" y="-304.4977511244378"/>
         </scene>
         <!--My Account-->
         <scene sceneID="EEC-G1-NCI">
@@ -290,7 +348,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez4-c2-9Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="418"/>
+            <point key="canvasLocation" x="-668" y="502"/>
         </scene>
         <!--Sign In or Register-->
         <scene sceneID="3Qe-sI-m5P">
@@ -804,7 +862,7 @@ fields*</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFL-9S-cYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285" y="416"/>
+            <point key="canvasLocation" x="285" y="501"/>
         </scene>
         <!--Cart-->
         <scene sceneID="cYz-Z4-5gl">
@@ -826,7 +884,7 @@ fields*</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uO7-2v-cuj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="1117"/>
+            <point key="canvasLocation" x="-668" y="1209"/>
         </scene>
         <!--ProductDetails-->
         <scene sceneID="c9X-cq-pfd">
@@ -876,7 +934,7 @@ fields*</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uW3-2d-YJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="1518"/>
+            <point key="canvasLocation" x="-668" y="1599"/>
         </scene>
         <!--Categories-->
         <scene sceneID="nxE-1s-0Cs">
@@ -886,13 +944,14 @@ fields*</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Q2-q4-FeY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="41"/>
+            <point key="canvasLocation" x="-668" y="94"/>
         </scene>
     </scenes>
     <resources>
         <image name="barcode-scanner" width="41" height="33"/>
         <image name="cart-tab-icon" width="23" height="25"/>
         <image name="home-tab-icon" width="26" height="25"/>
+        <image name="mic" width="33" height="33"/>
         <image name="myaccount-tab-icon" width="25" height="25"/>
         <image name="no-results-icon" width="300" height="300"/>
         <image name="search-tab-icon" width="25" height="25"/>
