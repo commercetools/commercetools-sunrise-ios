@@ -66,12 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Orders (e.g https://demo.commercetools.com/en/user/orders/87896195?)
             } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last {
                 AppRouting.showOrderDetails(orderNumber: orderNumber)
+                return true
 
             // Add to cart (e.g https://demo.commercetools.com/en/cart/add?productId=eedf1d96-8eec-43c9-877c-76ebab6d5c7f&variantId=1&quantity=2&discountCode=SUNRISE)
             } else if let index = pathComponents.index(of: "cart"), pathComponents.count >= index + 1 && pathComponents[index + 1] == "add",
                       let urlComponents = URLComponents(string: url.absoluteString), let query = urlComponents.queryItems {
                 guard let product = query["productId"], let variantId = Int(query["variantId"] ?? "") else { return false }
                 AppRouting.switchToCartAndAdd(product: product, variantId: variantId, quantity: UInt(query["quantity"] ?? "") ?? 1, discountCode: query["discountCode"])
+                return true
             }
         }
         return false
