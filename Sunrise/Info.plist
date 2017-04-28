@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>80</string>
+	<string>81</string>
 	<key>Displayable attributes</key>
 	<array>
 		<string>colorFreeDefinition</string>
@@ -42,8 +42,12 @@
 	<string>We use your camera in order to scan for product barcodes.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Sunrise uses your location to find the best products for you</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Search for products without having to type!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We use your photo library in order to look for product barcodes.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Search for products without having to type!</string>
 	<key>Selectable attributes</key>
 	<array>
 		<string>size</string>
