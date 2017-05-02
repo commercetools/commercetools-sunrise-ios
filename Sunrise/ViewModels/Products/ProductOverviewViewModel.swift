@@ -176,12 +176,6 @@ class ProductOverviewViewModel: BaseViewModel {
         let text = searchText.value
         isLoading.value = true
 
-        // Sort by newer first, but only when the user performs a text search
-        var sort: [String]? = nil
-        if text != "" {
-            sort = ["createdAt desc"]
-        }
-
         // When the user is browsing store inventory, include a filter, to limit POP results accordingly
         var filters = [String]()
         if let myStoreId = browsingStore.value?.id {
@@ -192,7 +186,7 @@ class ProductOverviewViewModel: BaseViewModel {
             filters.append("categories.id:subtree(\"\(categoryId)\")")
         }
 
-        ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
+        ProductProjection.search(limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
                                  filters: filters, result: { result in
             if let products = result.model?.results, text == self.searchText.value, result.isSuccess {
                 if offset == 0 && products.count > 0 && self.products.count > 0 {

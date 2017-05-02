@@ -79,7 +79,7 @@ class ProductOverviewViewController: UICollectionViewController {
 
         disposables += viewModel.scrollToBeginningSignal
         .observe(on: UIScheduler()).observeValues { [weak self] in
-            self?.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            self?.collectionView?.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
