@@ -89,7 +89,7 @@ class ConfirmationViewController: UIViewController {
                     message: self?.viewModel?.orderCreatedMessage,
                     preferredStyle: .alert
             )
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+            alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: { _ in
                 AppRouting.switchToHome()
                 _ = self?.navigationController?.popToRootViewController(animated: false)
             }))

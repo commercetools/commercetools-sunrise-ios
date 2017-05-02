@@ -94,7 +94,7 @@ class StoreSelectionViewController: UITableViewController {
                         message: self?.viewModel?.alertMessage(for: [error]),
                         preferredStyle: .alert
                         )
-                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
                 self?.present(alertController, animated: true, completion: nil)
             default:
                 return

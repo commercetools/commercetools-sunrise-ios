@@ -77,6 +77,11 @@ class ProductOverviewViewController: UICollectionViewController {
             self?.performSegue(withIdentifier: "showProductDetails", sender: product)
         }
 
+        disposables += viewModel.scrollToBeginningSignal
+        .observe(on: UIScheduler()).observeValues { [weak self] in
+            self?.collectionView?.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
+
         disposables += observeAlertMessageSignal(viewModel: viewModel)
 
         SVProgressHUD.show()

@@ -26,10 +26,12 @@ class ProductOverviewViewModel: BaseViewModel {
     let browsingStoreName: MutableProperty<String?>
     let browsingStore: MutableProperty<Channel?>
     let presentProductDetailsSignal: Signal<ProductViewModel, NoError>
+    let scrollToBeginningSignal: Signal<Void, NoError>
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
     private let presentProductDetailsObserver: Observer<ProductViewModel, NoError>
+    private let scrollToBeginningObserver: Observer<Void, NoError>
     private var category: Category?
     private let disposables = CompositeDisposable()
 
@@ -54,6 +56,7 @@ class ProductOverviewViewModel: BaseViewModel {
         isLoading = MutableProperty(true)
         browsingStore = MutableProperty(nil)
         (presentProductDetailsSignal, presentProductDetailsObserver) = Signal<ProductViewModel, NoError>.pipe()
+        (scrollToBeginningSignal, scrollToBeginningObserver) = Signal<Void, NoError>.pipe()
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
@@ -173,12 +176,6 @@ class ProductOverviewViewModel: BaseViewModel {
         let text = searchText.value
         isLoading.value = true
 
-        // Sort by newer first, but only when the user performs a text search
-        var sort: [String]? = nil
-        if text != "" {
-            sort = ["createdAt desc"]
-        }
-
         // When the user is browsing store inventory, include a filter, to limit POP results accordingly
         var filters = [String]()
         if let myStoreId = browsingStore.value?.id {
@@ -189,9 +186,12 @@ class ProductOverviewViewModel: BaseViewModel {
             filters.append("categories.id:subtree(\"\(categoryId)\")")
         }
 
-        ProductProjection.search(sort: sort, limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
+        ProductProjection.search(limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
                                  filters: filters, result: { result in
             if let products = result.model?.results, text == self.searchText.value, result.isSuccess {
+                if offset == 0 && products.count > 0 && self.products.count > 0 {
+                    self.scrollToBeginningObserver.send(value: ())
+                }
                 self.products = offset == 0 ? products : self.products + products
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
