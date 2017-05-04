@@ -52,9 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             let pathComponents = url.pathComponents
             // POP (e.g https://demo.commercetools.com/en/search?q=jeans)
-            if pathComponents.contains("search"), let urlComponents = URLComponents(string: url.absoluteString),
-               let query = urlComponents.queryItems {
-                AppRouting.switchToSearch(query: query["q"] ?? "")
+            if let indexOfSearch = pathComponents.index(of: "search"), let urlComponents = URLComponents(string: url.absoluteString),
+               let query = urlComponents.queryItems, indexOfSearch > 0 {
+                AppRouting.switchToSearch(query: query["q"] ?? "", locale: Locale(identifier: pathComponents[indexOfSearch - 1]))
                 return true
 
             // PDP (e.g https://demo.commercetools.com/en/brunello-cucinelli-coat-mf9284762-cream-M0E20000000DQR5.html)

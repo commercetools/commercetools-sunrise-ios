@@ -67,7 +67,10 @@ class VoiceSearchViewModel: BaseViewModel {
     }
 
     private func recognizeSpeech() {
-        let recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))!
+        guard let recognizer = SFSpeechRecognizer() else {
+            alertMessageObserver.send(value: "Cannot perform speech recognition with your locale")
+            return
+        }
         
         let audioSession = AVAudioSession.sharedInstance()
 
