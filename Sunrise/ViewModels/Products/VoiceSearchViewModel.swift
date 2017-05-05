@@ -67,13 +67,22 @@ class VoiceSearchViewModel: BaseViewModel {
     }
 
     private func recognizeSpeech() {
-        let recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))!
+        guard let recognizer = SFSpeechRecognizer() else {
+            alertMessageObserver.send(value: "Cannot perform speech recognition with your locale")
+            return
+        }
         
         let audioSession = AVAudioSession.sharedInstance()
 
-        try? audioSession.setCategory(AVAudioSessionCategoryRecord)
-        try? audioSession.setMode(AVAudioSessionModeMeasurement)
-        try? audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryRecord)
+            try audioSession.setMode(AVAudioSessionModeMeasurement)
+            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        } catch {
+            alertMessageObserver.send(value: "\(error)")
+            return
+        }
+
 
         inputNode = audioEngine.inputNode
         guard let inputNode = inputNode else {

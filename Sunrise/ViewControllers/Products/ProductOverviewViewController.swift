@@ -72,6 +72,14 @@ class ProductOverviewViewController: UICollectionViewController {
             }
         })
 
+        viewModel.textSearch.producer
+        .observe(on: UIScheduler())
+        .startWithValues({ [weak self] searchText, _ in
+            if searchText != self?.searchController.searchBar.text {
+                self?.searchController.searchBar.text = searchText
+            }
+        })
+
         disposables += viewModel.presentProductDetailsSignal
         .observe(on: UIScheduler()).observeValues { [weak self] product in
             self?.performSegue(withIdentifier: "showProductDetails", sender: product)
@@ -99,6 +107,7 @@ class ProductOverviewViewController: UICollectionViewController {
                 [productHeaderView.headerLabel, productHeaderView.myStoreNameLabel].forEach { $0.isHidden = false }
             }
         })
+
         viewModel.browsingStoreName.producer
         .observe(on: UIScheduler())
         .take(until: productHeaderView.reactive.prepareForReuse)
@@ -210,9 +219,9 @@ class ProductOverviewViewController: UICollectionViewController {
     }
 
     @objc private func performSearch() {
-        if let searchText = searchController.searchBar.text, searchText != viewModel?.searchText.value {
+        if let searchText = searchController.searchBar.text, searchText != viewModel?.textSearch.value.0 {
             SVProgressHUD.show()
-            viewModel?.searchText.value = searchText
+            viewModel?.textSearch.value = (searchText, Locale.current)
         }
     }
 

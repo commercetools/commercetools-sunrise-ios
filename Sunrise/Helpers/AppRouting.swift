@@ -110,9 +110,9 @@ class AppRouting {
 
         - parameter query:                   Optional parameter, if specified, used for populating the search field.
     */
-    static func switchToSearch(query: String = "", becomeFirstResponder: Bool = false) {
+    static func switchToSearch(query: String = "", locale: Locale = Locale.current, becomeFirstResponder: Bool = false) {
         switchToHome()
-        productOverviewViewController?.searchController.searchBar.text = query
+        productOverviewViewController?.viewModel?.textSearch.value = (query, locale)
         if becomeFirstResponder {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
                 productOverviewViewController?.searchController.searchBar.becomeFirstResponder()

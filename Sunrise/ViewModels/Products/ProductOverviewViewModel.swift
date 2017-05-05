@@ -18,7 +18,7 @@ class ProductOverviewViewModel: BaseViewModel {
     let nextPageObserver: Observer<Void, NoError>
     let selectOnlineStoreObserver: Observer<Void, NoError>
     let selectMyStoreObserver: Observer<Void, NoError>
-    let searchText = MutableProperty("")
+    let textSearch = MutableProperty(("", Locale.current))
 
     // Outputs
     let title: String
@@ -95,7 +95,7 @@ class ProductOverviewViewModel: BaseViewModel {
             }
         }
 
-        disposables += searchText.combinePrevious(searchText.value).signal
+        disposables += textSearch.combinePrevious(textSearch.value).signal
         .observeValues({ [weak self] previous, current in
             guard previous != current else { return }
             self?.queryForProductProjections(offset: 0)
@@ -116,14 +116,14 @@ class ProductOverviewViewModel: BaseViewModel {
             }
 
             // Perform new search after the store has changed
-            if self?.searchText.value == "" {
+            if self?.textSearch.value.0 == "" {
                 self?.queryForProductProjections(offset: 0)
             }
         }
 
         browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
 
-        searchText <~ browsingStore.map { _ in return "" }
+        textSearch <~ browsingStore.map { _ in return ("", Locale.current) }
     }
 
     deinit {
@@ -173,7 +173,8 @@ class ProductOverviewViewModel: BaseViewModel {
 
     private func queryForProductProjections(offset: UInt) {
         guard AppRouting.accountViewController?.viewModel?.isLoading.value != true else { return }
-        let text = searchText.value
+        let text = textSearch.value.0
+        let locale = textSearch.value.1
         isLoading.value = true
 
         // When the user is browsing store inventory, include a filter, to limit POP results accordingly
@@ -186,9 +187,9 @@ class ProductOverviewViewModel: BaseViewModel {
             filters.append("categories.id:subtree(\"\(categoryId)\")")
         }
 
-        ProductProjection.search(limit: pageSize, offset: offset, lang: Locale(identifier: "en"), text: text,
+        ProductProjection.search(limit: pageSize, offset: offset, lang: locale, text: text,
                                  filters: filters, result: { result in
-            if let products = result.model?.results, text == self.searchText.value, result.isSuccess {
+            if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
                 if offset == 0 && products.count > 0 && self.products.count > 0 {
                     self.scrollToBeginningObserver.send(value: ())
                 }
