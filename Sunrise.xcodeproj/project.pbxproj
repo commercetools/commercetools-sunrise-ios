@@ -40,6 +40,7 @@
 		210BE8603FFDCB26D5443788 /* AppRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEB43EB567F74C591D677 /* AppRouting.swift */; };
 		210BE868E4229C925ACE7E82 /* ProductViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEE0F8506AC1A497B276B /* ProductViewModelSpec.swift */; };
 		210BE89F75659C406EED2538 /* AccountViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE6EC51ED5E2CE72FD6D4 /* AccountViewModelSpec.swift */; };
+		210BE91F37F1132ACF12CB18 /* VoiceLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE6205259A61AFFFDAF65 /* VoiceLevelView.swift */; };
 		210BE928D44EA762B52DA93A /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA292BFC7E26BF1DFFF1 /* Attribute.swift */; };
 		210BE9509EB7DEDD2794B90D /* StoreDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE2C6C78AEC0558AE55E5 /* StoreDetailsViewController.swift */; };
 		210BE953F6CBCBB4AD333A05 /* ProductProjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE19428F36804EF53BFC8 /* ProductProjection.swift */; };
@@ -241,6 +242,7 @@
 		210BE4DC5197090C201025BE /* CartSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartSummaryCell.swift; sourceTree = "<group>"; };
 		210BE5AE64695EE7D4139DD1 /* StoreDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailsViewModel.swift; sourceTree = "<group>"; };
 		210BE60A69039721F912B8E8 /* ReservationsInterfaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationsInterfaceModel.swift; sourceTree = "<group>"; };
+		210BE6205259A61AFFFDAF65 /* VoiceLevelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceLevelView.swift; sourceTree = "<group>"; };
 		210BE6CC28A92953A6E02564 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		210BE6EC51ED5E2CE72FD6D4 /* AccountViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewModelSpec.swift; sourceTree = "<group>"; };
 		210BE70101007B36C753F74B /* Changeset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Changeset.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 			children = (
 				211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */,
 				213522E11E15FC7000433174 /* ProductCollectionHeaderView.swift */,
+				210BE6205259A61AFFFDAF65 /* VoiceLevelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1463,6 +1466,7 @@
 				210BE42707A68CA941DD4365 /* PaymentsViewController.swift in Sources */,
 				210BE9E19FF2758A7FE3E2E5 /* VoiceSearchViewController.swift in Sources */,
 				210BED193C70A2F36D0D6477 /* VoiceSearchViewModel.swift in Sources */,
+				210BE91F37F1132ACF12CB18 /* VoiceLevelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
