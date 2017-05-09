@@ -3,6 +3,7 @@
 //
 
 import Speech
+import AVFoundation
 import ReactiveSwift
 import Result
 
@@ -20,6 +21,7 @@ class VoiceSearchViewModel: BaseViewModel {
     private var idleTimer: Timer?
     private let audioEngine = AVAudioEngine()
     private var inputNode: AVAudioInputNode?
+    private var audioRecorder: AVAudioRecorder?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
@@ -44,6 +46,14 @@ class VoiceSearchViewModel: BaseViewModel {
         disposables += dismissSignal.observeValues { [weak self] in
             self?.stopSpeechRecognition()
         }
+
+        let recorderSettings: [String: AnyObject] = [AVSampleRateKey: 44100.0 as AnyObject,
+                                                     AVFormatIDKey: NSNumber(value: kAudioFormatMPEG4AAC),
+                                                     AVNumberOfChannelsKey: 1 as AnyObject,
+                                                     AVEncoderAudioQualityKey: AVAudioQuality.min.rawValue as AnyObject]
+
+        audioRecorder = try? AVAudioRecorder(url: URL(fileURLWithPath:"/dev/null"), settings: recorderSettings)
+        audioRecorder?.isMeteringEnabled = true
     }
 
     deinit {
@@ -55,6 +65,7 @@ class VoiceSearchViewModel: BaseViewModel {
             if status == .authorized {
                 AVAudioSession.sharedInstance().requestRecordPermission { response in
                     if response {
+                        self.audioRecorder?.prepareToRecord()
                         self.recognizeSpeech()
                     } else {
                         self.notAuthorizedObserver.send(value: ())
@@ -64,6 +75,13 @@ class VoiceSearchViewModel: BaseViewModel {
                 self.notAuthorizedObserver.send(value: ())
             }
         }
+    }
+
+    var currentAudioMeterValue: Float {
+        guard let audioRecorder = audioRecorder else { return 0 }
+        audioRecorder.updateMeters()
+//        return (1 - abs(audioRecorder.averagePower(forChannel: 0)) / 160)
+        return (pow(10, audioRecorder.averagePower(forChannel: 0) / 20 + 1))
     }
 
     private func recognizeSpeech() {
@@ -119,6 +137,7 @@ class VoiceSearchViewModel: BaseViewModel {
 
         do {
             try audioEngine.start()
+            audioRecorder?.record()
         } catch {
             alertMessageObserver.send(value: "\(error)")
         }
@@ -129,6 +148,7 @@ class VoiceSearchViewModel: BaseViewModel {
         inputNode?.removeTap(onBus: 0)
         recognitionRequest.endAudio()
         audioEngine.stop()
+        audioRecorder?.stop()
     }
 
     private func performSearch() {

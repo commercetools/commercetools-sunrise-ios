@@ -290,6 +290,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try: &quot;summer dress&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT6-Hf-aTH">
+                                <rect key="frame" x="35" y="496.5" width="305" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMl-pp-X3U" customClass="VoiceLevelView" customModule="Sunrise" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="537" width="375" height="130"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="j4e-aQ-3YG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="sinceColor">
+                                        <color key="value" red="0.9882352941176471" green="0.73333333333333328" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1oP-B6-f0z">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -297,26 +315,24 @@
                                     <outletCollection property="gestureRecognizers" destination="eRo-14-Ynm" appends="YES" id="Ajg-4q-5KP"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try: &quot;summer dress&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QT6-Hf-aTH">
-                                <rect key="frame" x="43" y="586.5" width="289" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rYh-oO-14k" firstAttribute="top" secondItem="QT6-Hf-aTH" secondAttribute="bottom" constant="60" id="Grf-Rx-vgj"/>
-                            <constraint firstItem="QT6-Hf-aTH" firstAttribute="leading" secondItem="M2A-6Q-d1I" secondAttribute="leadingMargin" constant="27" id="LVR-OJ-96m"/>
+                            <constraint firstItem="QT6-Hf-aTH" firstAttribute="leading" secondItem="M2A-6Q-d1I" secondAttribute="leading" constant="35" id="OwG-FP-aob"/>
+                            <constraint firstItem="rYh-oO-14k" firstAttribute="top" secondItem="lMl-pp-X3U" secondAttribute="bottom" id="Qd3-l1-WR1"/>
+                            <constraint firstItem="lMl-pp-X3U" firstAttribute="leading" secondItem="M2A-6Q-d1I" secondAttribute="leading" id="ZqM-Ac-ELo"/>
                             <constraint firstItem="1oP-B6-f0z" firstAttribute="leading" secondItem="M2A-6Q-d1I" secondAttribute="leading" id="Zwn-YK-pff"/>
+                            <constraint firstAttribute="trailing" secondItem="lMl-pp-X3U" secondAttribute="trailing" id="duP-8P-s7i"/>
                             <constraint firstItem="rYh-oO-14k" firstAttribute="top" secondItem="1oP-B6-f0z" secondAttribute="bottom" id="eSL-gK-lKp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="QT6-Hf-aTH" secondAttribute="trailing" constant="27" id="iYl-Y6-vLO"/>
                             <constraint firstItem="1oP-B6-f0z" firstAttribute="height" secondItem="M2A-6Q-d1I" secondAttribute="height" id="icf-TM-6dn"/>
+                            <constraint firstItem="lMl-pp-X3U" firstAttribute="top" secondItem="QT6-Hf-aTH" secondAttribute="bottom" constant="20" id="j4b-ps-2fx"/>
                             <constraint firstAttribute="trailing" secondItem="1oP-B6-f0z" secondAttribute="trailing" id="sEG-h4-TUH"/>
+                            <constraint firstAttribute="trailing" secondItem="QT6-Hf-aTH" secondAttribute="trailing" constant="35" id="zcg-Wk-3vG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="recognizedTextLabel" destination="QT6-Hf-aTH" id="AYF-1b-17r"/>
+                        <outlet property="voiceLevelView" destination="lMl-pp-X3U" id="a8G-Cp-Omn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2L-8O-huu" userLabel="First Responder" sceneMemberID="firstResponder"/>

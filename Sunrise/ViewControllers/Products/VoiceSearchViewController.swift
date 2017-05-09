@@ -10,8 +10,10 @@ import Result
 class VoiceSearchViewController: UIViewController {
 
     private let disposables = CompositeDisposable()
+    private var displayLink: CADisplayLink?
     
     @IBOutlet weak var recognizedTextLabel: UILabel!
+    @IBOutlet weak var voiceLevelView: VoiceLevelView!
     
     deinit {
         disposables.dispose()
@@ -38,9 +40,27 @@ class VoiceSearchViewController: UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
         view.backgroundColor = UIColor.clear
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        displayLink = CADisplayLink(target: self, selector: #selector(updateMeter))
+        displayLink?.add(to: .current, forMode: .commonModes)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        displayLink?.invalidate()
+
+        super.viewDidDisappear(animated)
+    }
     
     @IBAction func backgroundTap(_ sender: Any) {
         viewModel?.dismissObserver.send(value: ())
+    }
+
+    func updateMeter() {
+        guard let amplitude = viewModel?.currentAudioMeterValue else { return }
+        voiceLevelView.update(amplitude: CGFloat(amplitude))
     }
 
     // MARK: - Bindings
