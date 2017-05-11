@@ -6,6 +6,7 @@ import UIKit
 import UserNotifications
 import Commercetools
 import CoreLocation
+import AVFoundation
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -179,5 +180,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert])
+    }
+}
+
+extension AppDelegate: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
     }
 }

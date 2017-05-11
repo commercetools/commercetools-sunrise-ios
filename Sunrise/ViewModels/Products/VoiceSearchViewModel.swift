@@ -15,7 +15,7 @@ class VoiceSearchViewModel: BaseViewModel {
     // Outputs
     let notAuthorizedSignal: Signal<Void, NoError>
     let dismissSignal: Signal<Void, NoError>
-    let recognizedText = MutableProperty(NSLocalizedString("Try: \"summer dress\"", comment: "Speech summer dress suggestion"))
+    let recognizedText = MutableProperty(NSLocalizedString("Try: \"black sneakers\"", comment: "Speech black sneakers suggestion"))
     let notAuthorizedMessage = NSLocalizedString("Microphone and speech recognition have to be activated for this feature.", comment: "Speech permissions error")
 
     private var idleTimer: Timer?
@@ -25,6 +25,9 @@ class VoiceSearchViewModel: BaseViewModel {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
+    // Property set from within the speech recognition task, indicating whether a search will be performed, so we can
+    // deactivate AVAudioSession or wait for the AVSpeechSynthesizer to complete the utterance.
+    private var willPerformSearch = false
     private let notAuthorizedObserver: Observer<Void, NoError>
     private let disposables = CompositeDisposable()
 
@@ -80,8 +83,7 @@ class VoiceSearchViewModel: BaseViewModel {
     var currentAudioMeterValue: Float {
         guard let audioRecorder = audioRecorder else { return 0 }
         audioRecorder.updateMeters()
-//        return (1 - abs(audioRecorder.averagePower(forChannel: 0)) / 160)
-        return (pow(10, audioRecorder.averagePower(forChannel: 0) / 20 + 1))
+        return pow(10, audioRecorder.averagePower(forChannel: 0) / 20 + 1.2)
     }
 
     private func recognizeSpeech() {
@@ -93,9 +95,9 @@ class VoiceSearchViewModel: BaseViewModel {
         let audioSession = AVAudioSession.sharedInstance()
 
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryRecord)
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try audioSession.setMode(AVAudioSessionModeMeasurement)
-            try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+            try audioSession.setActive(true)
         } catch {
             alertMessageObserver.send(value: "\(error)")
             return
@@ -116,6 +118,7 @@ class VoiceSearchViewModel: BaseViewModel {
                 self?.idleTimer?.invalidate()
                 self?.idleTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [weak self] _ in
                     self?.recognitionRequest.endAudio()
+                    self?.willPerformSearch = true
                     self?.performSearch()
                 }
             }
@@ -149,13 +152,21 @@ class VoiceSearchViewModel: BaseViewModel {
         recognitionRequest.endAudio()
         audioEngine.stop()
         audioRecorder?.stop()
+        if !willPerformSearch {
+            try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+        }
     }
 
     private func performSearch() {
         dismissObserver.send(value: ())
         let recognizedText = self.recognizedText.value
-        OperationQueue.main.addOperation() {
-            AppRouting.switchToSearch(query: recognizedText)
+        AppRouting.switchToSearch(query: recognizedText)
+
+        let speechUtterance = String(format: NSLocalizedString("Showing items matching %@", comment: "Showing matching items message"), recognizedText)
+        let speechSynthesizer = AVSpeechSynthesizer()
+        speechSynthesizer.delegate = AppDelegate.shared
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            speechSynthesizer.speak(AVSpeechUtterance(string: speechUtterance))
         }
     }
 }
