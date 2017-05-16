@@ -90,7 +90,7 @@ class StoreSelectionViewController: UITableViewController {
                 self?.presentSuccessfulReservationAlert()
             case let .failed(error):
                 let alertController = UIAlertController(
-                        title: "Reservation failed",
+                        title: viewModel.failedTitle,
                         message: self?.viewModel?.alertMessage(for: [error]),
                         preferredStyle: .alert
                         )

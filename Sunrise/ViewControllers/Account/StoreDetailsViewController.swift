@@ -66,7 +66,7 @@ class StoreDetailsViewController: UIViewController {
                 .observe(on: UIScheduler())
                 .observeValues { [weak self] error in
                     let alertController = UIAlertController(
-                            title: "Failed",
+                            title: viewModel.failedTitle,
                             message: self?.viewModel?.alertMessage(for: [error]),
                             preferredStyle: .alert
                     )

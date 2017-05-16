@@ -153,7 +153,7 @@ class ProductViewController: UITableViewController {
                     self?.presentAfterAddingToCartOptions()
                 case let .failed(error):
                     let alertController = UIAlertController(
-                            title: "Could not add to cart",
+                            title: viewModel.couldNotAddToCartTitle,
                             message: self?.viewModel?.alertMessage(for: [error]),
                             preferredStyle: .alert
                             )
@@ -187,7 +187,7 @@ class ProductViewController: UITableViewController {
                     self?.presentSuccessfulReservationAlert()
                 case let .failed(error):
                     let alertController = UIAlertController(
-                            title: "Reservation failed",
+                            title: viewModel.failedTitle,
                             message: self?.viewModel?.alertMessage(for: [error]),
                             preferredStyle: .alert
                     )

@@ -93,7 +93,7 @@ class ConfirmationViewModel: BaseViewModel {
 
         shippingMethodName <~ self.cart.map { return $0?.shippingInfo?.shippingMethod?.obj?.name }
         shippingMethodDescription <~ self.cart.map { return $0?.shippingInfo?.shippingMethod?.obj?.description }
-        payment.value = "Prepaid" // TODO: remove once we have the API support for payments
+        payment.value = NSLocalizedString("Prepaid", comment: "Prepaid") // TODO: remove once we have the API support for payments
 
         if self.cart.value == nil {
             retrieveCart()
