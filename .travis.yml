@@ -4,8 +4,8 @@ before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
 install:
-   - pod repo update
-   - pod install
+   - pod repo update > /dev/null
+   - pod install > /dev/null
 
 osx_image: xcode8
 
