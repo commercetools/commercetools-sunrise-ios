@@ -155,7 +155,7 @@ class AccountViewModel: BaseViewModel {
     }
 
     func orderNumberAtIndexPath(_ indexPath: IndexPath) -> String? {
-        return (indexPath.section == 1 ? orders[indexPath.row].orderNumber : reservations[indexPath.row].orderNumber) ?? "            N/A            "
+        return (indexPath.section == 1 ? orders[indexPath.row].orderNumber : reservations[indexPath.row].orderNumber) ?? "N/A            "
     }
 
     func totalPriceAtIndexPath(_ indexPath: IndexPath) -> String? {

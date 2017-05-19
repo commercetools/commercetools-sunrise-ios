@@ -119,8 +119,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func addNotificationCategories() {
-        let viewAction = UNNotificationAction(identifier: Notification.Action.view, title: "View", options: [.authenticationRequired, .foreground])
-        let getDirectionsAction = UNNotificationAction(identifier: Notification.Action.getDirections, title: "Get Directions", options: [.foreground])
+        let viewAction = UNNotificationAction(identifier: Notification.Action.view, title: NSLocalizedString("View", comment: "View"), options: [.authenticationRequired, .foreground])
+        let getDirectionsAction = UNNotificationAction(identifier: Notification.Action.getDirections, title: NSLocalizedString("Get Directions", comment: "Get Directions"), options: [.foreground])
 
         let reservationConfirmationCategory = UNNotificationCategory(identifier: Notification.Category.reservationConfirmation, actions: [viewAction, getDirectionsAction], intentIdentifiers: [], options: [])
 
