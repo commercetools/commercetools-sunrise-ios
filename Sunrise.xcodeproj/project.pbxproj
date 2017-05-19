@@ -282,7 +282,6 @@
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
 		211468B31D1F54240011A944 /* OrdersHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersHeaderView.xib; sourceTree = "<group>"; };
 		211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationNotificationController.swift; sourceTree = "<group>"; };
-		21265A0E1ECA0C0C00229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Interface.strings; sourceTree = "<group>"; };
 		21265A0F1ECA0C1000229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		21265A1A1ECA0CA700229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21265A301ECA0DE800229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1591,7 +1590,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2163EBB41DE8C26C00803640 /* Base */,
-				21265A0E1ECA0C0C00229D96 /* de */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
