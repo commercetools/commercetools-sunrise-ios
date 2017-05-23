@@ -1,9 +1,3 @@
-/* Speech black sneakers suggestion */
-"Try: \"black sneakers\"" = "Probieren Sie: \"Blaue Weste\"";
-
-/* Showing matching items message */
-"Showing items matching %@" = "Zeige Artikel, die zu %@ passen";
-
 /* Address form instructions */
 "All mandatory fields (*) have to be filled" = "Alle Pflichtfelder (*) müssen ausgefüllt sein";
 
@@ -14,7 +8,7 @@
 "Cancel" = "Abbrechen";
 
 /* Cart overview */
-"Cart overview" = "Ihr Warenkorb";
+"Cart overview" = "Zum Warenkorb";
 
 /* Categories */
 "Categories" = "Kategorien";
@@ -28,6 +22,9 @@
 /* Continue shopping */
 "Continue shopping" = "Weiter einkaufen";
 
+/* Could not add to cart */
+"Could not add to cart" = "Produkt wurde nicht in den Warenkorb gelegt";
+
 /* Scanning error title */
 "Could not scan" = "Barcode nicht erkannt";
 
@@ -40,11 +37,14 @@
 /* Error */
 "Error" = "Fehler";
 
+/* Failed */
+"Failed" = "Fehlgeschlagen";
+
 /* Free shipping */
 "Free" = "Gratis";
 
 /* Reservation log in prompt */
-"In order to make a reservation, you have to log in first." = "Bitte melden sie sich ein, um eine Reservierung vorzunehmen. ";
+"In order to make a reservation, you have to log in first." = "Bitte melden sie sich an, um eine Reservierung vorzunehmen. ";
 
 /* Camera permissions error */
 "In order to scan products, please go to settings and grant the Camera permission." = "Bitte öffnen sie die iPhone-Einstellungen und erlauben sie SUNRISE Kamerazugriff, um Barcodes scannen zu können. ";
@@ -53,7 +53,7 @@
 "Less info" = "Weniger";
 
 /* Log In To Continue */
-"Log In To Continue" = "Bitte melden sie sich ein, um fortzufahren";
+"Log In To Continue" = "Bitte melden sie sich an";
 
 /* Log in */
 "Log in" = "Anmelden";
@@ -77,7 +77,7 @@
 "Microphone and speech recognition have to be activated for this feature." = "Sie müssen Mikrofonzugriff und Spracherkennung aktiviert haben, um diese Funktion zu nutzen.";
 
 /* More info */
-"More info" = "Mehr Information";
+"More info" = "Mehr";
 
 /* My store saved */
 "My Store Saved" = "Filiale gespeichert";
@@ -97,14 +97,8 @@
 /* Oops! */
 "Oops!" = "Oh!";
 
-/* Failed */
-"Failed" = "Fehlgeschlagen";
-
 /* Prepaid */
 "Prepaid" = "Vorkasse";
-
-/* Could not add to cart */
-"Could not add to cart" = "Produkt wurde nicht in den Warenkorb gelegt";
 
 /* Product added to cart */
 "Product added to cart" = "Produkt wurde in den Warenkorb gelegt";
@@ -130,8 +124,11 @@
 /* Settings */
 "Settings" = "Einstellungen";
 
+/* Showing matching items message */
+"Showing items matching %@" = "Zeige Artikel, die zu %@ passen";
+
 /* Store Location */
-"Store Location" = "Filialadresse";
+"Store Location" = "Filiale wählen";
 
 /* Order Created */
 "Thank you " = "Danke ";
@@ -141,6 +138,9 @@
 
 /* Product not found */
 "The product could not be found" = "Das Produkt konnte nicht gefunden werden";
+
+/* Speech black sneakers suggestion */
+"Try: \"black sneakers\"" = "Probieren Sie: \"Blaue Weste\"";
 
 /* Which store would you like to browse */
 "Which store would you like to browse?" = "In welcher Filiale möchten sie stöbern?";
