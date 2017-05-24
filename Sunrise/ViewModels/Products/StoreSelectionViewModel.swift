@@ -173,9 +173,9 @@ class StoreSelectionViewModel: BaseViewModel {
 
     func expansionTextAtIndexPath(_ indexPath: IndexPath) -> String {
         if indexPath == expandedChannelIndexPath.value {
-            return NSLocalizedString("Less info", comment: "Less info")
+            return NSLocalizedString("Less", comment: "Less")
         } else {
-            return NSLocalizedString("More info", comment: "More info")
+            return NSLocalizedString("More", comment: "More")
         }
     }
 
