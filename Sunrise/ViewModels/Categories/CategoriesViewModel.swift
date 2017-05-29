@@ -46,8 +46,19 @@ class CategoriesViewModel: BaseViewModel {
     private let categoriesRetrievalQueue = OperationQueue()
     private var categoriesRetrievalSemaphore: DispatchSemaphore?
     private var allCategories = [Category]()
+    private var lastRefresh = Date()
     private let kQueryLimit: UInt = 500
     private let disposables = CompositeDisposable()
+
+    // Configuration parameters
+    private let navigationExternalId: String? = {
+        return Bundle.main.object(forInfoDictionaryKey: "Navigation external ID") as? String
+    }()
+
+    private let cacheExpiration: TimeInterval? = {
+        return Bundle.main.object(forInfoDictionaryKey: "Category cache expiration") as? TimeInterval
+    }()
+
 
     // MARK: - Lifecycle
 
@@ -105,6 +116,12 @@ class CategoriesViewModel: BaseViewModel {
             } else {
                 performProductOverviewSegueObserver.send(value: indexPath)
             }
+        }
+
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: .UIApplicationDidBecomeActive)
+        .observeValues { [weak self] _ in
+            self?.retrieveCategories()
         }
 
         retrieveCategories()
@@ -181,6 +198,8 @@ class CategoriesViewModel: BaseViewModel {
     // MARK: - Categories retrieval
 
     private func retrieveCategories() {
+        guard childCategoriesCache.keys.count == 0
+                      || (cacheExpiration != nil && lastRefresh.addingTimeInterval(cacheExpiration!) < Date()) else { return }
         categoriesRetrievalQueue.addOperation { [weak self] in
             self?.categoriesRetrievalSemaphore = DispatchSemaphore(value: 0)
             self?.queryForCategories()
@@ -215,6 +234,7 @@ class CategoriesViewModel: BaseViewModel {
     private func process(categories: [Category]) {
         var rootCategories = [Category]()
         var childCategories = [String: [Category]]()
+        var navigationId: String? = nil
         categories.forEach { category in
             let parentCategoryId = category.parent?.id ?? ""
             if category.parent == nil {
@@ -224,11 +244,19 @@ class CategoriesViewModel: BaseViewModel {
             } else {
                 childCategories[parentCategoryId]?.append(category)
             }
+
+            if category.externalId != nil && category.externalId == navigationExternalId {
+                navigationId = category.id
+            }
+        }
+        if let navigationId = navigationId {
+            rootCategories = childCategories[navigationId] ?? []
         }
         self.childCategoriesCache = childCategories
         if rootCategories != self.rootCategories.value {
             self.rootCategories.value = rootCategories
         }
+        lastRefresh = Date()
         categoriesRetrievalSemaphore?.signal()
     }
 }

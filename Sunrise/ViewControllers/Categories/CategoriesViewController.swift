@@ -45,6 +45,7 @@ class CategoriesViewController: UIViewController {
         super.viewWillAppear(animated)
 
         navigationItem.title = viewModel?.title
+        viewModel?.refreshObserver.send(value: ())
     }
 
     func bindViewModel() {
