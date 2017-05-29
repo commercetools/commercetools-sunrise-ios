@@ -73,7 +73,6 @@
 		210BEFE2385E2DB904B79C85 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BECE2DFCDB70A0D79B81C /* ReservationViewController.swift */; };
 		210BEFEBE4DFCF3B09BB6E49 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEAFA1F26FD820DCD739D /* AccountViewController.swift */; };
 		211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */; };
-		211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211468B31D1F54240011A944 /* OrdersHeaderView.xib */; };
 		211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */; };
 		211D9DEC1DECE3DC00167C23 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
 		211D9DED1DECE49D00167C23 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
@@ -104,6 +103,7 @@
 		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		219657761DCB9B81002C7108 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		219657771DCB9BA2002C7108 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
+		21971C7F1EDCC397001144C7 /* OrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21971C811EDCC397001144C7 /* OrdersHeaderView.xib */; };
 		219992391DC9FAAB000E48FD /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219992381DC9FAAB000E48FD /* UserNotifications.framework */; };
 		2199923B1DC9FAAB000E48FD /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */; };
 		2199923E1DC9FAAB000E48FD /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2199923D1DC9FAAB000E48FD /* NotificationViewController.swift */; };
@@ -280,7 +280,6 @@
 		210BEF5CEEFACEC329BEB6C9 /* cartConfirmation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cartConfirmation.json; sourceTree = "<group>"; };
 		210BEF89190076C84ECE96A7 /* AddressSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSelectionViewModel.swift; sourceTree = "<group>"; };
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
-		211468B31D1F54240011A944 /* OrdersHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersHeaderView.xib; sourceTree = "<group>"; };
 		211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationNotificationController.swift; sourceTree = "<group>"; };
 		21265A0F1ECA0C1000229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		21265A1A1ECA0CA700229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -313,6 +312,8 @@
 		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReservationNotification.entitlements; sourceTree = "<group>"; };
+		21971C801EDCC397001144C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OrdersHeaderView.xib; sourceTree = "<group>"; };
+		21971C831EDCC39A001144C7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/OrdersHeaderView.strings; sourceTree = "<group>"; };
 		219992371DC9FAAB000E48FD /* ReservationNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReservationNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		219992381DC9FAAB000E48FD /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -581,7 +582,7 @@
 				21265A3B1ECA0E2600229D96 /* Cart.storyboard */,
 				21265A401ECA0E3600229D96 /* Account.storyboard */,
 				21265A451ECA0E4D00229D96 /* ProductDetails.storyboard */,
-				211468B31D1F54240011A944 /* OrdersHeaderView.xib */,
+				21971C811EDCC397001144C7 /* OrdersHeaderView.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1124,7 +1125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21265A341ECA0E1400229D96 /* Categories.storyboard in Resources */,
-				211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */,
+				21971C7F1EDCC397001144C7 /* OrdersHeaderView.xib in Resources */,
 				213553331EBB681F007E9A60 /* Localizable.strings in Resources */,
 				21265A391ECA0E2600229D96 /* Cart.storyboard in Resources */,
 				21265A2F1ECA0DE800229D96 /* Main.storyboard in Resources */,
@@ -1592,6 +1593,15 @@
 				2163EBB41DE8C26C00803640 /* Base */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		21971C811EDCC397001144C7 /* OrdersHeaderView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21971C801EDCC397001144C7 /* Base */,
+				21971C831EDCC39A001144C7 /* de */,
+			);
+			name = OrdersHeaderView.xib;
 			sourceTree = "<group>";
 		};
 		2199923F1DC9FAAB000E48FD /* MainInterface.storyboard */ = {
