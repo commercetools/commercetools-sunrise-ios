@@ -74,11 +74,15 @@
 		210BEFEBE4DFCF3B09BB6E49 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEAFA1F26FD820DCD739D /* AccountViewController.swift */; };
 		211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */; };
 		211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211468B31D1F54240011A944 /* OrdersHeaderView.xib */; };
-		211468B61D2088440011A944 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 211468B51D2088440011A944 /* Cart.storyboard */; };
 		211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */; };
 		211D9DEC1DECE3DC00167C23 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
 		211D9DED1DECE49D00167C23 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		211D9DEE1DECE57B00167C23 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
+		21265A2F1ECA0DE800229D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A311ECA0DE800229D96 /* Main.storyboard */; };
+		21265A341ECA0E1400229D96 /* Categories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A361ECA0E1400229D96 /* Categories.storyboard */; };
+		21265A391ECA0E2600229D96 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A3B1ECA0E2600229D96 /* Cart.storyboard */; };
+		21265A3E1ECA0E3600229D96 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A401ECA0E3600229D96 /* Account.storyboard */; };
+		21265A431ECA0E4D00229D96 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A451ECA0E4D00229D96 /* ProductDetails.storyboard */; };
 		213522E21E15FC7000433174 /* ProductCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213522E11E15FC7000433174 /* ProductCollectionHeaderView.swift */; };
 		213553331EBB681F007E9A60 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 213553351EBB681F007E9A60 /* Localizable.strings */; };
 		2138467B1E7AAC6700A82C63 /* NewAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138467A1E7AAC6700A82C63 /* NewAddressViewController.swift */; };
@@ -90,16 +94,13 @@
 		215C7C201D79A08C002EC074 /* SelectableAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C1F1D79A08C002EC074 /* SelectableAttributeCell.swift */; };
 		215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */; };
 		216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */; };
-		216153A11D1AA03B006C9627 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2161539F1D1AA03B006C9627 /* Main.storyboard */; };
 		2163EBB51DE8C26C00803640 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBB31DE8C26C00803640 /* Interface.storyboard */; };
 		2163EBB71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBB61DE8C26C00803640 /* Assets.xcassets */; };
 		2163EBBE1DE8C26C00803640 /* Sunrise Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2163EBC51DE8C26C00803640 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */; };
 		2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBC61DE8C26C00803640 /* Assets.xcassets */; };
 		2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */; };
-		2168A02B1D1A9F0C00C244D8 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2168A02A1D1A9F0C00C244D8 /* Account.storyboard */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
-		218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218988241CED0C78006E7757 /* ProductDetails.storyboard */; };
 		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		219657761DCB9B81002C7108 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		219657771DCB9BA2002C7108 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
@@ -109,7 +110,6 @@
 		219992411DC9FAAB000E48FD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2199923F1DC9FAAB000E48FD /* MainInterface.storyboard */; };
 		219992451DC9FAAB000E48FD /* ReservationNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 219992371DC9FAAB000E48FD /* ReservationNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		219B2EBC1D1B7348004579DD /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B2EBB1D1B7348004579DD /* OrderCell.swift */; };
-		21A0497E1E4610DC00E476CE /* Categories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21A0497D1E4610DC00E476CE /* Categories.storyboard */; };
 		21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A30D101D3005300029DB7E /* SunriseTabBarController.swift */; };
 		21A6B46E1D647807008BA95C /* reservation.json in Resources */ = {isa = PBXBuildFile; fileRef = 21A6B46D1D647807008BA95C /* reservation.json */; };
 		21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
@@ -281,10 +281,20 @@
 		210BEF89190076C84ECE96A7 /* AddressSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSelectionViewModel.swift; sourceTree = "<group>"; };
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
 		211468B31D1F54240011A944 /* OrdersHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersHeaderView.xib; sourceTree = "<group>"; };
-		211468B51D2088440011A944 /* Cart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
 		211D1D031DF04C0800DDE3C3 /* ReservationNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationNotificationController.swift; sourceTree = "<group>"; };
+		21265A0F1ECA0C1000229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		21265A1A1ECA0CA700229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		21265A301ECA0DE800229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		21265A331ECA0DFB00229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		21265A351ECA0E1400229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Categories.storyboard; sourceTree = "<group>"; };
+		21265A381ECA0E1700229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Categories.strings; sourceTree = "<group>"; };
+		21265A3A1ECA0E2600229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Cart.storyboard; sourceTree = "<group>"; };
+		21265A3D1ECA0E2E00229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Cart.strings; sourceTree = "<group>"; };
+		21265A3F1ECA0E3600229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Account.storyboard; sourceTree = "<group>"; };
+		21265A421ECA0E3B00229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Account.strings; sourceTree = "<group>"; };
+		21265A441ECA0E4D00229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ProductDetails.storyboard; sourceTree = "<group>"; };
+		21265A471ECA0E5100229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ProductDetails.strings; sourceTree = "<group>"; };
 		213522E11E15FC7000433174 /* ProductCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionHeaderView.swift; sourceTree = "<group>"; };
-		213553371EBB6846007E9A60 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2135533A1EBB799B007E9A60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2137FA901DCA776800A38A25 /* Sunrise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunrise.entitlements; sourceTree = "<group>"; };
 		2138467A1E7AAC6700A82C63 /* NewAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAddressViewController.swift; sourceTree = "<group>"; };
@@ -293,7 +303,6 @@
 		215C7C1F1D79A08C002EC074 /* SelectableAttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableAttributeCell.swift; sourceTree = "<group>"; };
 		215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayedAttributeCell.swift; sourceTree = "<group>"; };
 		2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2161539F1D1AA03B006C9627 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2163EBB11DE8C26C00803640 /* Sunrise Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sunrise Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2163EBB41DE8C26C00803640 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		2163EBB61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -302,9 +311,7 @@
 		2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		2163EBC61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2168A02A1D1A9F0C00C244D8 /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
-		218988241CED0C78006E7757 /* ProductDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReservationNotification.entitlements; sourceTree = "<group>"; };
 		219992371DC9FAAB000E48FD /* ReservationNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReservationNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		219992381DC9FAAB000E48FD /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -313,7 +320,6 @@
 		219992401DC9FAAB000E48FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		219992421DC9FAAB000E48FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		219B2EBB1D1B7348004579DD /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
-		21A0497D1E4610DC00E476CE /* Categories.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Categories.storyboard; sourceTree = "<group>"; };
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
 		21A6B46D1D647807008BA95C /* reservation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reservation.json; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
@@ -570,11 +576,11 @@
 			isa = PBXGroup;
 			children = (
 				2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */,
-				2161539F1D1AA03B006C9627 /* Main.storyboard */,
-				21A0497D1E4610DC00E476CE /* Categories.storyboard */,
-				211468B51D2088440011A944 /* Cart.storyboard */,
-				2168A02A1D1A9F0C00C244D8 /* Account.storyboard */,
-				218988241CED0C78006E7757 /* ProductDetails.storyboard */,
+				21265A311ECA0DE800229D96 /* Main.storyboard */,
+				21265A361ECA0E1400229D96 /* Categories.storyboard */,
+				21265A3B1ECA0E2600229D96 /* Cart.storyboard */,
+				21265A401ECA0E3600229D96 /* Account.storyboard */,
+				21265A451ECA0E4D00229D96 /* ProductDetails.storyboard */,
 				211468B31D1F54240011A944 /* OrdersHeaderView.xib */,
 			);
 			path = Storyboard;
@@ -1117,17 +1123,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21A0497E1E4610DC00E476CE /* Categories.storyboard in Resources */,
+				21265A341ECA0E1400229D96 /* Categories.storyboard in Resources */,
 				211468B41D1F54240011A944 /* OrdersHeaderView.xib in Resources */,
 				213553331EBB681F007E9A60 /* Localizable.strings in Resources */,
-				211468B61D2088440011A944 /* Cart.storyboard in Resources */,
-				216153A11D1AA03B006C9627 /* Main.storyboard in Resources */,
+				21265A391ECA0E2600229D96 /* Cart.storyboard in Resources */,
+				21265A2F1ECA0DE800229D96 /* Main.storyboard in Resources */,
 				21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */,
 				21A8EEAD1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist in Resources */,
 				21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */,
 				216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */,
-				2168A02B1D1A9F0C00C244D8 /* Account.storyboard in Resources */,
-				218988251CED0C78006E7757 /* ProductDetails.storyboard in Resources */,
+				21265A3E1ECA0E3600229D96 /* Account.storyboard in Resources */,
+				21265A431ECA0E4D00229D96 /* ProductDetails.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,7 +1202,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		456C84DA3E12DE9C243E0A7D /* [CP] Copy Pods Resources */ = {
@@ -1226,7 +1232,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */ = {
@@ -1271,7 +1277,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B376E0CF05118F76C327319C /* [CP] Check Pods Manifest.lock */ = {
@@ -1286,7 +1292,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C51C4638AF67D6B89CE5675E /* [CP] Embed Pods Frameworks */ = {
@@ -1361,7 +1367,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1526,11 +1532,56 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		21265A311ECA0DE800229D96 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21265A301ECA0DE800229D96 /* Base */,
+				21265A331ECA0DFB00229D96 /* de */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		21265A361ECA0E1400229D96 /* Categories.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21265A351ECA0E1400229D96 /* Base */,
+				21265A381ECA0E1700229D96 /* de */,
+			);
+			name = Categories.storyboard;
+			sourceTree = "<group>";
+		};
+		21265A3B1ECA0E2600229D96 /* Cart.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21265A3A1ECA0E2600229D96 /* Base */,
+				21265A3D1ECA0E2E00229D96 /* de */,
+			);
+			name = Cart.storyboard;
+			sourceTree = "<group>";
+		};
+		21265A401ECA0E3600229D96 /* Account.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21265A3F1ECA0E3600229D96 /* Base */,
+				21265A421ECA0E3B00229D96 /* de */,
+			);
+			name = Account.storyboard;
+			sourceTree = "<group>";
+		};
+		21265A451ECA0E4D00229D96 /* ProductDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21265A441ECA0E4D00229D96 /* Base */,
+				21265A471ECA0E5100229D96 /* de */,
+			);
+			name = ProductDetails.storyboard;
+			sourceTree = "<group>";
+		};
 		213553351EBB681F007E9A60 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				213553371EBB6846007E9A60 /* de */,
 				2135533A1EBB799B007E9A60 /* Base */,
+				21265A1A1ECA0CA700229D96 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1547,6 +1598,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				219992401DC9FAAB000E48FD /* Base */,
+				21265A0F1ECA0C1000229D96 /* de */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";

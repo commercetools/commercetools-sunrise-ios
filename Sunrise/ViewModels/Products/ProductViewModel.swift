@@ -37,6 +37,7 @@ class ProductViewModel: BaseViewModel {
     let addToCartFailedTitle = NSLocalizedString("Couldn't add product to cart", comment: "Adding product to cart failed")
 
     let logInTitle = NSLocalizedString("Log In To Continue", comment: "Log In To Continue")
+    let couldNotAddToCartTitle = NSLocalizedString("Could not add to cart", comment: "Could not add to cart")
     let logInMessage = NSLocalizedString("In order to make a reservation, you have to log in first.", comment: "Reservation log in prompt")
     let logInAction = NSLocalizedString("Log in", comment: "Log in")
     let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel")

@@ -27,6 +27,7 @@ class BaseViewModel {
     let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
     let reservationContinueTitle = NSLocalizedString("Continue shopping", comment: "Continue shopping")
     let oopsTitle = NSLocalizedString("Oops!", comment: "Oops!")
+    let failedTitle = NSLocalizedString("Failed", comment: "Failed")
     let okAction = NSLocalizedString("OK", comment: "OK")
     let settingsAction = NSLocalizedString("Settings", comment: "Settings")
 

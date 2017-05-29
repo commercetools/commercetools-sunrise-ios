@@ -71,7 +71,7 @@ class SignInViewController: UIViewController {
             registerAction?.execute(())
         } else {
             let alertController = UIAlertController(
-                    title: "Failed",
+                    title: viewModel.failedTitle,
                     message: viewModel.registrationGuide,
                     preferredStyle: .alert
                     )
@@ -128,7 +128,7 @@ class SignInViewController: UIViewController {
                 AppRouting.switchAfterLogInSuccess()
             case let .failed(error):
                 let alertController = UIAlertController(
-                        title: "Failed",
+                        title: viewModel.failedTitle,
                         message: self?.viewModel?.alertMessage(for: [error]),
                         preferredStyle: .alert
                         )
