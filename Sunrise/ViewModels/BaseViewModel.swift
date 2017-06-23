@@ -59,13 +59,13 @@ class BaseViewModel {
     // MARK: - Cart or order overview calculations
 
     func calculateOrderTotal(for cart: Cart?) -> Money? {
-        guard let cart = cart, let totalPrice = cart.totalPrice else { return nil }
+        guard let cart = cart else { return nil }
 
         if let totalGross = cart.taxedPrice?.totalGross {
             return totalGross
 
         } else {
-            return totalPrice
+            return cart.totalPrice
         }
     }
 
@@ -78,44 +78,33 @@ class BaseViewModel {
 
     func calculateOrderDiscount(_ lineItems: [LineItem]) -> String {
         let totalOrderDiscountAmount = lineItems.reduce(0, { $0 + calculateCartDiscountForLineItem($1) })
-        return Money(currencyCode: lineItems.first?.totalPrice?.currencyCode ?? "",
+        return Money(currencyCode: lineItems.first?.totalPrice.currencyCode ?? "",
                 centAmount: totalOrderDiscountAmount).description
     }
 
     func calculateCartDiscountForLineItem(_ lineItem: LineItem) -> Int {
-        guard let discountedPricePerQuantity = lineItem.discountedPricePerQuantity, let quantity = lineItem.quantity else { return 0 }
-
-        let discountedPriceAmount = discountedPricePerQuantity.reduce(0, {
-            if let quantity = $1.quantity, let discountedAmount = $1.discountedPrice?.value?.centAmount {
-                return $0 + quantity * discountedAmount
-            }
-            return $0
+        let discountedPriceAmount = lineItem.discountedPricePerQuantity.reduce(0, {
+            return $0 + $1.quantity * $1.discountedPrice.value.centAmount
         })
-        return discountedPriceAmount > 0 ? quantity * calculateAmountForOneLineItem(lineItem) - discountedPriceAmount : 0
+        return discountedPriceAmount > 0 ? lineItem.quantity * calculateAmountForOneLineItem(lineItem) - discountedPriceAmount : 0
     }
 
     func calculateSubtotal(_ lineItems: [LineItem]) -> String {
-        var money = Money(currencyCode: lineItems.first?.totalPrice?.currencyCode ?? "")
-
         let subtotal = lineItems.map {
-            let quantity = $0.quantity ?? 0
+            let quantity = $0.quantity
             let amount = calculateAmountForOneLineItem($0)
             return quantity * amount
         }.reduce(0, { $0 + $1 })
 
-        money.centAmount = subtotal
-        return money.description
+        return Money(currencyCode: lineItems.first?.totalPrice.currencyCode ?? "", centAmount: subtotal).description
     }
 
     func calculateAmountForOneLineItem(_ lineItem: LineItem) -> Int {
-        if let discountedAmount = lineItem.price?.discounted?.value?.centAmount {
+        if let discountedAmount = lineItem.price.discounted?.value.centAmount {
             return discountedAmount
 
-        } else if let amount = lineItem.price?.value?.centAmount {
-            return amount
-
-        } else {
-            return 0
+        } else  {
+            return lineItem.price.value.centAmount
         }
     }
 

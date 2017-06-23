@@ -61,7 +61,7 @@ class CartViewModel: BaseViewModel {
         self.deleteLineItemObserver = deleteLineItemObserver
 
         cart = MutableProperty(nil)
-        numberOfItems <~ cart.producer.map { cart in String(cart?.lineItems?.count ?? 0) }
+        numberOfItems <~ cart.producer.map { cart in String(cart?.lineItems.count ?? 0) }
 
         super.init()
 
@@ -87,7 +87,7 @@ class CartViewModel: BaseViewModel {
     // MARK: - Data Source
 
     func numberOfRowsInSection(_ section: Int) -> Int {
-        if let lineItemsCount = cart.value?.lineItems?.count, lineItemsCount > 0 {
+        if let lineItemsCount = cart.value?.lineItems.count, lineItemsCount > 0 {
             return lineItemsCount + 1
         } else {
             return 0
@@ -99,60 +99,56 @@ class CartViewModel: BaseViewModel {
     }
 
     func lineItemNameAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems?[indexPath.row].name?.localizedString ?? ""
+        return cart.value?.lineItems[indexPath.row].name.localizedString ?? ""
     }
 
     func lineItemSkuAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems?[indexPath.row].variant?.sku ?? ""
+        return cart.value?.lineItems[indexPath.row].variant.sku ?? ""
     }
 
     func lineItemSizeAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems?[indexPath.row].variant?.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
+        return cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
     }
 
     func lineItemImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems?[indexPath.row].variant?.images?.first?.url ?? ""
+        return cart.value?.lineItems[indexPath.row].variant.images?.first?.url ?? ""
     }
 
     func lineItemOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let lineItem = cart.value?.lineItems?[indexPath.row], let price = lineItem.price, let value = price.value ,
-                price.discounted?.value != nil || (lineItem.discountedPricePerQuantity?.count ?? 0) > 0  else { return "" }
+        guard let lineItem = cart.value?.lineItems[indexPath.row], lineItem.price.discounted?.value != nil || lineItem.discountedPricePerQuantity.count > 0  else { return "" }
 
-        return value.description
+        return lineItem.price.value.description
     }
 
     func lineItemPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let lineItem = cart.value?.lineItems?[indexPath.row], let price = lineItem.price, let value = price.value else { return "" }
+        guard let lineItem = cart.value?.lineItems[indexPath.row] else { return "" }
 
-        if let discounted = price.discounted?.value {
+        if let discounted = lineItem.price.discounted?.value {
             return discounted.description
 
-        } else if let discounted = lineItem.discountedPricePerQuantity?.first?.discountedPrice?.value {
+        } else if let discounted = lineItem.discountedPricePerQuantity.first?.discountedPrice.value {
             return discounted.description
 
         } else {
-            return value.description
+            return lineItem.price.value.description
         }
     }
 
     func lineItemQuantityAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems?[indexPath.row].quantity?.description ?? "0"
+        return cart.value?.lineItems[indexPath.row].quantity.description ?? "0"
     }
 
     func lineItemTotalPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
+        return cart.value?.lineItems[indexPath.row].totalPrice.description ?? "N/A"
     }
 
     func updateLineItemQuantityAtIndexPath(_ indexPath: IndexPath, quantity: String) {
-        if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems?[indexPath.row].id,
+        if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems[indexPath.row].id,
                 let quantity = UInt(quantity) {
             self.isLoading.value = true
 
-            var options = ChangeLineItemQuantityOptions()
-            options.lineItemId = lineItemId
-            options.quantity = quantity
-            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.changeLineItemQuantity(options: options),
-                                                                                            .recalculate(options: RecalculateOptions())])
+            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.changeLineItemQuantity(lineItemId: lineItemId, quantity: quantity),
+                                                                                            .recalculate(updateProductData: nil)])
             Cart.update(cartId, actions: updateActions, result: { result in
                 if let cart = result.model, result.isSuccess {
                     self.update(cart: cart)
@@ -166,20 +162,18 @@ class CartViewModel: BaseViewModel {
     }
 
     func productDetailsViewModelForLineItemAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel? {
-        if let productId = cart.value?.lineItems?[indexPath.row].productId {
+        if let productId = cart.value?.lineItems[indexPath.row].productId {
             return ProductViewModel(productId: productId, size: lineItemSizeAtIndexPath(indexPath))
         }
         return nil
     }
 
     private func deleteLineItemAtIndexPath(_ indexPath: IndexPath) {
-        if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems?[indexPath.row].id {
+        if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems[indexPath.row].id {
             self.isLoading.value = true
 
-            var options = RemoveLineItemOptions()
-            options.lineItemId = lineItemId
-            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.removeLineItem(options: options),
-                                                                                           .recalculate(options: RecalculateOptions())])
+            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.removeLineItem(lineItemId: lineItemId, quantity: nil),
+                                                                                           .recalculate(updateProductData: nil)])
             Cart.update(cartId, actions: updateActions, result: { result in
                 if let cart = result.model, result.isSuccess {
                     self.update(cart: cart)
@@ -198,9 +192,9 @@ class CartViewModel: BaseViewModel {
         isLoading.value = true
 
         Cart.active(result: { result in
-            if let cart = result.model, let cartId = cart.id, let version = cart.version, result.isSuccess {
+            if let cart = result.model, result.isSuccess {
                 // Run recalculation before we present the refreshed cart
-                Cart.update(cartId, actions: UpdateActions<CartUpdateAction>(version: version, actions: [.recalculate(options: RecalculateOptions())]), result: { result in
+                Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: [.recalculate(updateProductData: nil)]), result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
                         completion?(cart)
@@ -212,8 +206,7 @@ class CartViewModel: BaseViewModel {
                 })
             } else {
                 // If there is no active cart, create one, with the selected product
-                var cartDraft = CartDraft()
-                cartDraft.currency = BaseViewModel.currencyCodeForCurrentLocale
+                let cartDraft = CartDraft(currency: BaseViewModel.currencyCodeForCurrentLocale)
                 Cart.create(cartDraft, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
@@ -233,8 +226,10 @@ class CartViewModel: BaseViewModel {
 
         var changeset = Changeset()
 
-        if let previousCart = previousCart, let newCart = cart, let oldLineItems = previousCart.lineItems,
-                let newLineItems = newCart.lineItems {
+        if let previousCart = previousCart, let newCart = cart {
+            let oldLineItems = previousCart.lineItems
+            let newLineItems = newCart.lineItems
+
             var deletions = [IndexPath]()
             var modifications = [IndexPath]()
             for (i, lineItem) in oldLineItems.enumerated() {
@@ -265,11 +260,10 @@ class CartViewModel: BaseViewModel {
             }
             changeset.insertions = insertions
 
-        } else if let previousCart = previousCart, let lineItemsCount = previousCart.lineItems?.count, cart == nil
-                && lineItemsCount > 0  {
-            changeset.deletions = (0...(lineItemsCount)).map { IndexPath(row: $0, section: 0) }
+        } else if let previousCart = previousCart, cart == nil && previousCart.lineItems.count > 0  {
+            changeset.deletions = (0...(previousCart.lineItems.count)).map { IndexPath(row: $0, section: 0) }
 
-        } else if let lineItemsCount = cart?.lineItems?.count, lineItemsCount > 0 {
+        } else if let lineItemsCount = cart?.lineItems.count, lineItemsCount > 0 {
             changeset.insertions = (0...lineItemsCount).map { IndexPath(row: $0, section: 0) }
         }
 
@@ -285,10 +279,10 @@ class CartViewModel: BaseViewModel {
     }
 
     private func calculateTax() -> String {
-        guard let cart = cart.value, let totalGrossAmount = cart.taxedPrice?.totalGross?.centAmount,
-        let totalNetAmount = cart.taxedPrice?.totalNet?.centAmount else { return "" }
+        guard let cart = cart.value, let totalGrossAmount = cart.taxedPrice?.totalGross.centAmount,
+        let totalNetAmount = cart.taxedPrice?.totalNet.centAmount else { return "" }
 
-        return Money(currencyCode: cart.lineItems?.first?.totalPrice?.currencyCode ?? "",
+        return Money(currencyCode: cart.lineItems.first?.totalPrice.currencyCode ?? "",
                 centAmount: totalGrossAmount - totalNetAmount).description
     }
 
@@ -301,20 +295,12 @@ class CartViewModel: BaseViewModel {
 
     func addProduct(id: String, variantId: Int, quantity: UInt, discountCode: String?) {
         queryForActiveCart { [weak self] cart in
-            guard let cartId = cart.id, let version = cart.version else { return }
-
-            var addLineItemOptions = AddLineItemOptions()
-            addLineItemOptions.productId = id
-            addLineItemOptions.variantId = variantId
-            addLineItemOptions.quantity = quantity
-            var actions = [CartUpdateAction.addLineItem(options: addLineItemOptions)]
+            var actions = [CartUpdateAction.addLineItem(productId: id, variantId: variantId, quantity: quantity, supplyChannel: nil, distributionChannel: nil, custom: nil)]
             if let discountCode = discountCode {
-                var addDiscountOptions = AddDiscountCodeOptions()
-                addDiscountOptions.code = discountCode
-                actions.append(.addDiscountCode(options: addDiscountOptions))
+                actions.append(.addDiscountCode(code: discountCode))
             }
             self?.isLoading.value = true
-            Cart.update(cartId, actions: UpdateActions<CartUpdateAction>(version: version, actions: actions), result: { [weak self] result in
+            Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: actions), result: { [weak self] result in
                 if let cart = result.model, result.isSuccess {
                     self?.update(cart: cart)
 

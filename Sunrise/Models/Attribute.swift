@@ -20,9 +20,7 @@ extension Attribute {
     }
 
     private func representation(for rawValue: Any?, ofType type: AttributeType) -> String? {
-        guard let typeName = type.name else { return nil }
-
-        switch (typeName, rawValue) {
+        switch (type.name, rawValue) {
         case ("boolean", let rawValue as Bool):
             return rawValue ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
         case (let typeName, let rawValue as String) where ["text", "enum"].contains(typeName):

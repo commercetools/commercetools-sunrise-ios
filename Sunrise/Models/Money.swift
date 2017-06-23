@@ -5,7 +5,7 @@
 import Commercetools
 
 extension Money {
-    init(currencyCode: String? = nil, centAmount: Int? = nil) {
+    init(currencyCode: String, centAmount: Int) {
         self.currencyCode = currencyCode
         self.centAmount = centAmount
     }
@@ -16,8 +16,7 @@ extension Money {
 extension Money: CustomStringConvertible {
     /// The textual representation used when written to an output stream, with locale based format
     public var description: String {
-        if let centAmount = centAmount, let currencyCode = currencyCode,
-           let currencySymbol = (Locale(identifier: currencyCode) as NSLocale).displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode) {
+        if let currencySymbol = (Locale(identifier: currencyCode) as NSLocale).displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode) {
             let currencyFormatter = NumberFormatter()
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencySymbol = currencySymbol

@@ -13,46 +13,27 @@ extension Order {
     #if os(iOS)
     static func reserve(product: ProductProjection?, variant: ProductVariant?, in store: Channel) -> SignalProducer<Void, CTError> {
         return SignalProducer { observer, disposable in
-            guard let channelId = store.id, let productId = product?.id, let variantId = variant?.id,
+            guard let productId = product?.id, let variantId = variant?.id,
                   let shippingAddress = store.address else {
                 observer.send(error: CTError.generalError(reason: nil))
                 return
             }
 
-            var selectedChannelReference = Reference<Channel>()
-            selectedChannelReference.typeId = "channel"
-            selectedChannelReference.id = channelId
-            var lineItemDraft = LineItemDraft()
-            lineItemDraft.productId = productId
-            lineItemDraft.variantId = variantId
-            lineItemDraft.supplyChannel = selectedChannelReference
-            lineItemDraft.distributionChannel = selectedChannelReference
+            let selectedChannelReference = Reference<Channel>(id: store.id, typeId: "channel")
+            let lineItemDraft = LineItemDraft(productId: productId, variantId: variantId, supplyChannel: selectedChannelReference, distributionChannel: selectedChannelReference)
             let customType = ["type": ["key": "reservationOrder"],
                               "fields": ["isReservation": true]]
 
             Customer.profile { result in
                 if let profile = result.model, result.isSuccess {
 
-                    var billingAddress = profile.reservationAddress
+                    let billingAddress = profile.addresses.filter({ $0.id == profile.defaultBillingAddressId }).first ?? Address(firstName: profile.firstName, lastName: profile.lastName, country: store.address?.country ?? "")
 
-                    // In case the customer doesn't even have a country set in the address,
-                    // it's being set to match the channel country.
-                    if billingAddress.country == nil {
-                        billingAddress.country = store.address?.country
-                    }
-
-                    var cartDraft = CartDraft()
-                    cartDraft.currency = BaseViewModel.currencyCodeForCurrentLocale
-                    cartDraft.shippingAddress = shippingAddress
-                    cartDraft.billingAddress = billingAddress
-                    cartDraft.lineItems = [lineItemDraft]
-                    cartDraft.custom = customType
+                    let cartDraft = CartDraft(currency: BaseViewModel.currencyCodeForCurrentLocale, lineItems: [lineItemDraft], shippingAddress: shippingAddress, billingAddress: billingAddress, custom: customType)
                     Commercetools.Cart.create(cartDraft, result: { result in
 
-                        if let cart = result.model, let id = cart.id, let version = cart.version, result.isSuccess {
-                            var orderDraft = OrderDraft()
-                            orderDraft.id = id
-                            orderDraft.version = version
+                        if let cart = result.model, result.isSuccess {
+                            let orderDraft = OrderDraft(id: cart.id, version: cart.version)
                             Order.create(orderDraft, expansion: nil, result: { result in
                                 if result.isSuccess {
                                     observer.send(value: ())

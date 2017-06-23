@@ -99,7 +99,7 @@ class ProductViewModelSpec: QuickSpec {
 
             context("when customer is shopping for selected store") {
                 beforeEach {
-                    AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
+                    AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = ReservationViewModelSpec.order.lineItems.first?.distributionChannel?.obj
                     productViewModel = ProductViewModel(product: self.product)
                     waitUntil { done in
                         productViewModel.isLoading.producer

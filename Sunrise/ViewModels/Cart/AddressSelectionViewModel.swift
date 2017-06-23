@@ -136,8 +136,8 @@ class AddressSelectionViewModel: BaseViewModel {
     }
 
     private func updateAddresses(for customer: Customer) {
-        defaultAddress.value = customer.addresses?.filter({ return $0.id == customer.defaultShippingAddressId }).first
-        addresses.value = customer.addresses?.filter({ $0.id != defaultAddress.value?.id }) ?? []
+        defaultAddress.value = customer.addresses.filter({ return $0.id == customer.defaultShippingAddressId }).first
+        addresses.value = customer.addresses.filter({ $0.id != defaultAddress.value?.id })
     }
 
     private func addAddressToCart(at indexPath: IndexPath) {
@@ -146,13 +146,9 @@ class AddressSelectionViewModel: BaseViewModel {
         let address = indexPath.section == 0 && defaultAddress.value != nil ? defaultAddress.value! : addresses.value[indexPath.row]
 
         Cart.active { result in
-            if let cart = result.model, let id = cart.id, let version = cart.version, result.isSuccess {
-                var shippingOptions = SetShippingAddressOptions()
-                shippingOptions.address = address
-                var billingOptions = SetBillingAddressOptions()
-                billingOptions.address = address
-                let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.setShippingAddress(options: shippingOptions), .setBillingAddress(options: billingOptions)])
-                Cart.update(id, actions: updateActions, result: { result in
+            if let cart = result.model, result.isSuccess {
+                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: [.setShippingAddress(address: address), .setBillingAddress(address: address)])
+                Cart.update(cart.id, actions: updateActions, result: { result in
                     if result.isSuccess {
                         self.performSegueObserver.send(value: ())
                     } else if let errors = result.errors as? [CTError], result.isFailure {

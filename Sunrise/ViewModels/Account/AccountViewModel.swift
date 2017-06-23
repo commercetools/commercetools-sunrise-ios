@@ -159,7 +159,7 @@ class AccountViewModel: BaseViewModel {
     }
 
     func totalPriceAtIndexPath(_ indexPath: IndexPath) -> String? {
-        return indexPath.section == 1 ? orders[indexPath.row].totalPrice?.description : reservations[indexPath.row].totalPrice?.description
+        return indexPath.section == 1 ? orders[indexPath.row].totalPrice.description : reservations[indexPath.row].totalPrice.description
     }
 
     // MARK: - Presenting reservation confirmation from push notification
@@ -229,9 +229,7 @@ class AccountViewModel: BaseViewModel {
         UserDefaults.standard.synchronize()
         Customer.addCustomTypeIfNotExists { version, errors in
             if let version = version, errors == nil {
-                var options = SetCustomFieldOptions()
-                options.name = "apnsToken"
-                let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.setCustomField(options: options)])
+                let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "apnsToken", value: nil)])
 
                 Customer.update(actions: updateActions) { _ in
                     DispatchQueue.main.async {

@@ -91,31 +91,16 @@ class NewAddressViewModel: BaseViewModel {
     }
 
     private func saveNewAddress() {
-        var address = Address()
-        address.title = title.value
-        address.firstName = firstName.value
-        address.lastName = lastName.value
-        address.streetName = address1.value
-        address.additionalAddressInfo = address2.value
-        address.postalCode = postCode.value
-        address.city = city.value
-        address.region = region.value
-        address.country = countries.value[country.value]
+        let address = Address(title: title.value, firstName: firstName.value, lastName: lastName.value, streetName: address1.value, city: city.value, region: region.value, postalCode: postCode.value, additionalStreetInfo: address2.value, country: countries.value[country.value] ?? "")
 
         Cart.active { result in
-            if let cart = result.model, let id = cart.id, let version = cart.version, result.isSuccess {
-                var shippingOptions = SetShippingAddressOptions()
-                shippingOptions.address = address
-                var billingOptions = SetBillingAddressOptions()
-                billingOptions.address = address
-                let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.setShippingAddress(options: shippingOptions), .setBillingAddress(options: billingOptions)])
-                Cart.update(id, actions: updateActions, result: { result in
+            if let cart = result.model, result.isSuccess {
+                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: [.setShippingAddress(address: address), .setBillingAddress(address: address)])
+                Cart.update(cart.id, actions: updateActions, result: { result in
                     if result.isSuccess {
                         Customer.profile { result in
-                            if let profile = result.model, let version = profile.version, result.isSuccess {
-                                var options = AddAddressOptions()
-                                options.address = address
-                                let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.addAddress(options: options)])
+                            if let profile = result.model, result.isSuccess {
+                                let updateActions = UpdateActions<CustomerUpdateAction>(version: profile.version, actions: [.addAddress(address: address)])
                                 Customer.update(actions: updateActions) { _ in
                                     self.performSegueObserver.send(value: ())
                                 }

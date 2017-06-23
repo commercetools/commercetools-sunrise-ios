@@ -8,10 +8,10 @@ extension ProductProjection {
 
     /// The `masterVariant` if it has price, or  the first from `variants` with price.
     var mainVariantWithPrice: ProductVariant? {
-        if let prices = masterVariant?.prices, prices.count > 0 {
+        if let prices = masterVariant.prices, prices.count > 0 {
             return masterVariant
         } else {
-            return variants?.filter({ ($0.prices?.count ?? 0) > 0 }).first
+            return variants.filter({ ($0.prices?.count ?? 0) > 0 }).first
         }
     }
 
@@ -24,10 +24,10 @@ extension ProductProjection {
     */
     func mainVariantWithPrice(for channel: Channel? = nil) -> ProductVariant? {
         if let channelId = channel?.id {
-            if let prices = masterVariant?.prices?.filter({ $0.channel?.id == channelId }), prices.count > 0 {
+            if let prices = masterVariant.prices?.filter({ $0.channel?.id == channelId }), prices.count > 0 {
                 return masterVariant
             } else {
-                return variants?.filter({ ($0.prices?.filter({ $0.channel?.id == channelId }).count ?? 0) > 0 }).first
+                return variants.filter({ ($0.prices?.filter({ $0.channel?.id == channelId }).count ?? 0) > 0 }).first
             }
         } else {
             return mainVariantWithPrice

@@ -71,6 +71,7 @@ class ProductViewModel: BaseViewModel {
     private let performSegueObserver: Observer<String, NoError>
     private let signInPromptObserver: Observer<Void, NoError>
     private var product: ProductProjection?
+    private var productType: ProductType?
     private let disposables = CompositeDisposable()
 
     // Attributes configuration
@@ -143,7 +144,7 @@ class ProductViewModel: BaseViewModel {
     // MARK: Bindings
 
     private func bindViewModelProducers() {
-        name.value = product?.name?.localizedString?.uppercased() ?? ""
+        name.value = product?.name.localizedString?.uppercased() ?? ""
 
         let allVariants = product?.allVariants(for: activeStore?.value)
 
@@ -180,24 +181,24 @@ class ProductViewModel: BaseViewModel {
         }
 
         imageCount <~ activeAttributes.producer.map { [weak self] _ in
-            SDWebImagePrefetcher.shared().prefetchURLs(self?.variantForActiveAttributes?.images?.flatMap({ URL(string: ($0.url ?? "")) }))
+            SDWebImagePrefetcher.shared().prefetchURLs(self?.variantForActiveAttributes?.images?.flatMap({ URL(string: ($0.url)) }))
             return self?.variantForActiveAttributes?.images?.count ?? 0
         }
 
         price <~ activeAttributes.producer.map { [weak self] _ in
-            guard let price = self?.priceForActiveAttributes, let value = price.value else { return "" }
+            guard let price = self?.priceForActiveAttributes else { return "" }
 
             if let discounted = price.discounted?.value {
                 return "\(discounted)"
             } else {
-                return "\(value)"
+                return "\(price.value)"
             }
         }
 
         oldPrice <~ activeAttributes.producer.map { [weak self] _ in
-            guard let price = self?.priceForActiveAttributes, let value = price.value, let _ = price.discounted?.value else { return "" }
+            guard let price = self?.priceForActiveAttributes, let _ = price.discounted?.value else { return "" }
 
-            return "\(value)"
+            return "\(price.value)"
         }
     }
 
@@ -213,7 +214,7 @@ class ProductViewModel: BaseViewModel {
 
     func attributeNameAtIndexPath(_ indexPath: IndexPath) -> String? {
         let attribute = indexPath.section == 0 ? selectableAttributes[indexPath.row] : displayableAttributes[indexPath.row]
-        return product?.productType?.obj?.attributes?.filter({ $0.name == attribute }).first?.label?.localizedString?.uppercased()
+        return productType?.attributes.filter({ $0.name == attribute }).first?.label.localizedString?.uppercased()
     }
 
     func attributeKeyAtIndexPath(_ indexPath: IndexPath) -> String {
@@ -241,7 +242,7 @@ class ProductViewModel: BaseViewModel {
     }
 
     private func typeForAttributeName(_ name: String) -> AttributeType? {
-        return product?.productType?.obj?.attributes?.filter({ $0.name == name }).first?.type
+        return productType?.attributes.filter({ $0.name == name }).first?.type
     }
 
     // MARK: - Cart interaction
@@ -250,14 +251,10 @@ class ProductViewModel: BaseViewModel {
         return SignalProducer { observer, disposable in
 
             Cart.active(result: { result in
-                if let cart = result.model, let cartId = cart.id, let version = cart.version, result.isSuccess {
+                if let cart = result.model, result.isSuccess {
                     // In case we already have an active cart, just add selected product
-                    var options = AddLineItemOptions()
-                    options.productId = self.product?.id
-                    options.variantId = self.currentVariantId()
-                    options.quantity = UInt(quantity)
-                    let updateActions = UpdateActions(version: version, actions: [CartUpdateAction.addLineItem(options: options)])
-                    Cart.update(cartId, actions: updateActions, result: { result in
+                    let updateActions = UpdateActions(version: cart.version, actions: [CartUpdateAction.addLineItem(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0, quantity: UInt(quantity), supplyChannel: nil, distributionChannel: nil, custom: nil)])
+                    Cart.update(cart.id, actions: updateActions, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
                         } else if let error = result.errors?.first as? CTError, result.isFailure {
@@ -269,13 +266,8 @@ class ProductViewModel: BaseViewModel {
                 } else if let error = result.errors?.first as? CTError, case .resourceNotFoundError(let reason) = error,
                           reason.message == "No active cart exists." {
                     // If there is no active cart, create one, with the selected product
-                    var cartDraft = CartDraft()
-                    cartDraft.currency = BaseViewModel.currencyCodeForCurrentLocale
-                    var lineItemDraft = LineItemDraft()
-                    lineItemDraft.productId = self.product?.id
-                    lineItemDraft.variantId = self.currentVariantId()
-                    lineItemDraft.quantity = UInt(quantity)
-                    cartDraft.lineItems = [lineItemDraft]
+                    let lineItemDraft = LineItemDraft(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0, quantity: UInt(quantity))
+                    let cartDraft = CartDraft(currency: BaseViewModel.currencyCodeForCurrentLocale, lineItems: [lineItemDraft])
 
                     Cart.create(cartDraft, result: { result in
                         if result.isSuccess {
@@ -301,6 +293,7 @@ class ProductViewModel: BaseViewModel {
         ProductProjection.byId(productId, expansion: ["productType"], result: { result in
             if let product = result.model, result.isSuccess {
                 self.product = product
+                self.productType = product.productType.obj
                 self.bindViewModelProducers()
                 if let size = size {
                     self.activeAttributes.value["size"] = size
@@ -314,12 +307,12 @@ class ProductViewModel: BaseViewModel {
     }
 
     private func retrieveProductType() {
-        guard let id = product?.productType?.id else { return }
+        guard let id = product?.productType.id else { return }
         isLoading.value = true
 
         ProductType.byId(id, expansion: nil, result: { result in
             if let productType = result.model, result.isSuccess {
-                self.product?.productType?.obj = productType
+                self.productType = productType
                 self.bindViewModelProducers()
 
             } else if let errors = result.errors as? [CTError], result.isFailure {

@@ -142,7 +142,7 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productNameAtIndexPath(_ indexPath: IndexPath) -> String {
-        return products[indexPath.row].name?.localizedString ?? ""
+        return products[indexPath.row].name.localizedString ?? ""
     }
 
     func productImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
@@ -151,22 +151,21 @@ class ProductOverviewViewModel: BaseViewModel {
 
     func productPriceAtIndexPath(_ indexPath: IndexPath) -> String {
         guard let variant = products[indexPath.row].mainVariantWithPrice(for: browsingStore.value),
-              let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!),
-              let value = price.value else { return "" }
+              let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!) else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
         } else {
-            return value.description
+            return price.value.description
         }
     }
 
     func productOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
         guard let variant = products[indexPath.row].mainVariantWithPrice(for: browsingStore.value),
               let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!),
-              let value = price.value, price.discounted?.value != nil else { return "" }
+              price.discounted?.value != nil else { return "" }
 
-        return value.description
+        return price.value.description
     }
 
     // MARK: - Commercetools product projections querying
@@ -208,7 +207,7 @@ class ProductOverviewViewModel: BaseViewModel {
     func presentProductDetails(for sku: String) {
         isLoading.value = true
         ProductProjection.search(filters: ["variants.sku:\"\(sku)\""]) { result in
-            if let product = result.model?.results?.first, result.isSuccess {
+            if let product = result.model?.results.first, result.isSuccess {
                 self.presentProductDetailsObserver.send(value: ProductViewModel(product: product))
 
             } else if result.model?.count == 0 {

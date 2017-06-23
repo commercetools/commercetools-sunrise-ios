@@ -101,10 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Commercetools.authState == .customerToken {
             Customer.addCustomTypeIfNotExists { version, errors in
                 if let version = version, errors == nil {
-                    var options = SetCustomFieldOptions()
-                    options.name = "apnsToken"
-                    options.value = self.deviceToken
-                    let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.setCustomField(options: options)])
+                    let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "apnsToken", value: self.deviceToken)])
 
                     Customer.update(actions: updateActions) { result in
                         if result.isFailure {

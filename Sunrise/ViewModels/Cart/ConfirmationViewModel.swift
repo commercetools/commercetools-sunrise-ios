@@ -121,9 +121,7 @@ class ConfirmationViewModel: BaseViewModel {
         guard let id = cart.value?.id, let version = cart.value?.version else { return }
         isLoading.value = false
 
-        var orderDraft = OrderDraft()
-        orderDraft.id = id
-        orderDraft.version = version
+        let orderDraft = OrderDraft(id: id, version: version)
 
         Order.create(orderDraft, expansion: nil, result: { result in
             if result.isSuccess {

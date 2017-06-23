@@ -43,7 +43,7 @@ class ScannerViewModel: BaseViewModel {
         isCapturing.value = false
 
         ProductProjection.search(limit: 1, filters: ["variants.sku:\"\(sku)\""], result: { result in
-            if let product = result.model?.results?.first, result.isSuccess {
+            if let product = result.model?.results.first, result.isSuccess {
                 self.scannedProduct.value = product
 
             } else if let errors = result.errors as? [CTError], result.isFailure {

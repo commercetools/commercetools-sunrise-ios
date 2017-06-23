@@ -18,7 +18,6 @@ extension ProductVariant {
     }
 
     func price(for channel: Channel) -> Price? {
-        guard let channelId = channel.id else { return nil }
-        return prices?.filter({ $0.channel?.id == channelId }).first
+        return prices?.filter({ $0.channel?.id == channel.id }).first
     }
 }
