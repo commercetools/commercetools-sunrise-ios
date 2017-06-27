@@ -20,7 +20,7 @@ class ShippingMethodsViewModelSpec: QuickSpec {
                 let shippingMethodsJSON = try! NSString(contentsOfFile: shippingMethodsPath, encoding: String.Encoding.utf8.rawValue)
                 let shippingMethods = Mapper<ShippingMethod>().mapArray(JSONString: shippingMethodsJSON as String)!
 
-                let cartPath = Bundle.currentTestBundle!.path(forResource: "cart", ofType: "json")!
+                let cartPath = Bundle.currentTestBundle!.path(forResource: "cartAndOrder", ofType: "json")!
                 let cartJSON = try! NSString(contentsOfFile: cartPath, encoding: String.Encoding.utf8.rawValue)
                 let cart = Mapper<Cart>().map(JSONString: cartJSON as String)!
 
