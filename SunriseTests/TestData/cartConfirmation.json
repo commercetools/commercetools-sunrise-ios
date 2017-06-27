@@ -418,7 +418,9 @@
           "currencyCode": "EUR",
           "centAmount": 37730
         }
-      }
+      },
+      "priceMode": "Platform",
+      "lineItemMode": "Standard"
     }
   ],
   "cartState": "Active",
@@ -552,5 +554,7 @@
   "discountCodes": [],
   "inventoryMode": "None",
   "taxMode": "Platform",
-  "taxRoundingMode": "HalfEven"
+  "taxRoundingMode": "HalfEven",
+  "lastMessageSequenceNumber": 0,
+  "refusedGifts": []
 }
