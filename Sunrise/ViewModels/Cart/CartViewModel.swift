@@ -11,6 +11,7 @@ class CartViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Observer<Void, NoError>
+    let addDiscountCodeObserver: Observer<String, NoError>
     let deleteLineItemObserver: Observer<IndexPath, NoError>
 
     // Outputs
@@ -22,6 +23,8 @@ class CartViewModel: BaseViewModel {
     let tax = MutableProperty("")
     let orderTotal = MutableProperty("")
     let contentChangesSignal: Signal<Changeset, NoError>
+    let discountsDetailsSignal: Signal<String, NoError>
+    let showDiscountDialogueSignal: Signal<Void, NoError>
     let availableQuantities = (1...9).map { String($0) }
     let performSegueSignal: Signal<String, NoError>
 
@@ -36,12 +39,36 @@ class CartViewModel: BaseViewModel {
             return SignalProducer.empty
         })
     }()
+    lazy var discountDetailsAction: Action<Void, Void, NoError> = { [weak self] in
+        return Action(enabledIf: Property(value: true), { [weak self] _ in
+            guard let discountsDetailsObserver = self?.discountsDetailsObserver,
+                  let discountsDetails = self?.discountsDetails else { return SignalProducer.empty }
+            discountsDetailsObserver.send(value: discountsDetails)
+            return SignalProducer.empty
+        })
+    }()
+    lazy var showDiscountDialogueAction: Action<Void, Void, NoError> = { [weak self] in
+        return Action(enabledIf: Property(value: true), { [weak self] _ in
+            self?.showDiscountDialogueObserver.send(value: ())
+            return SignalProducer.empty
+        })
+    }()
+
+    // Dialogue texts
+    let discountsTitle = NSLocalizedString("Discounts", comment: "Discounts")
+    let addDiscountMessage = NSLocalizedString("Add your discount code bellow:", comment: "Add discount code message")
+    // Placeholders
+    let discountCodePlaceholder = NSLocalizedString("Discount", comment: "Discount")
 
     let cart: MutableProperty<Cart?>
 
     private let contentChangesObserver: Observer<Changeset, NoError>
     private let deleteLineItemSignal: Signal<IndexPath, NoError>
     private let performSegueObserver: Observer<String, NoError>
+    private let discountsDetailsObserver: Observer<String, NoError>
+    private let showDiscountDialogueObserver: Observer<Void, NoError>
+    private let addDiscountCodeSignal: Signal<String, NoError>
+    private let discountCodesExpansion = ["discountCodes[*].discountCode.cartDiscounts[*]"]
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
@@ -49,6 +76,9 @@ class CartViewModel: BaseViewModel {
     override init() {
         isLoading = MutableProperty(false)
         (performSegueSignal, performSegueObserver) = Signal<String, NoError>.pipe()
+        (showDiscountDialogueSignal, showDiscountDialogueObserver) = Signal<Void, NoError>.pipe()
+        (discountsDetailsSignal, discountsDetailsObserver) = Signal<String, NoError>.pipe()
+        (addDiscountCodeSignal, addDiscountCodeObserver) = Signal<String, NoError>.pipe()
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
 
@@ -75,6 +105,10 @@ class CartViewModel: BaseViewModel {
             self?.queryForActiveCart()
         }
 
+        disposables += addDiscountCodeSignal.observeValues { [weak self] discountCode in
+            self?.add(discountCode: discountCode)
+        }
+
         disposables += deleteLineItemSignal.observeValues { [weak self] indexPath in
             self?.deleteLineItemAtIndexPath(indexPath)
         }
@@ -82,6 +116,14 @@ class CartViewModel: BaseViewModel {
 
     deinit {
         disposables.dispose()
+    }
+
+    private var discountsDetails: String {
+        guard let discounts = cart.value?.discountCodes, discounts.count > 0 else {
+            return NSLocalizedString("No discounts - please redeem a code.", comment: "No discounts")
+        }
+
+        return discounts.reduce("", { "\($0)\n\($1.discountCode.obj?.discountDetails ?? "")"})
     }
 
     // MARK: - Data Source
@@ -149,7 +191,7 @@ class CartViewModel: BaseViewModel {
 
             let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.changeLineItemQuantity(lineItemId: lineItemId, quantity: quantity),
                                                                                             .recalculate(updateProductData: nil)])
-            Cart.update(cartId, actions: updateActions, result: { result in
+            Cart.update(cartId, actions: updateActions, expansion: discountCodesExpansion, result: { result in
                 if let cart = result.model, result.isSuccess {
                     self.update(cart: cart)
                 } else if let errors = result.errors as? [CTError], result.isFailure {
@@ -174,7 +216,7 @@ class CartViewModel: BaseViewModel {
 
             let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.removeLineItem(lineItemId: lineItemId, quantity: nil),
                                                                                            .recalculate(updateProductData: nil)])
-            Cart.update(cartId, actions: updateActions, result: { result in
+            Cart.update(cartId, actions: updateActions, expansion: discountCodesExpansion, result: { result in
                 if let cart = result.model, result.isSuccess {
                     self.update(cart: cart)
                 } else if let errors = result.errors as? [CTError], result.isFailure {
@@ -194,7 +236,7 @@ class CartViewModel: BaseViewModel {
         Cart.active(result: { result in
             if let cart = result.model, result.isSuccess {
                 // Run recalculation before we present the refreshed cart
-                Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: [.recalculate(updateProductData: nil)]), result: { result in
+                Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: [.recalculate(updateProductData: nil)]), expansion: self.discountCodesExpansion, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
                         completion?(cart)
@@ -207,7 +249,7 @@ class CartViewModel: BaseViewModel {
             } else {
                 // If there is no active cart, create one, with the selected product
                 let cartDraft = CartDraft(currency: BaseViewModel.currencyCodeForCurrentLocale)
-                Cart.create(cartDraft, result: { result in
+                Cart.create(cartDraft, expansion: self.discountCodesExpansion, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
                         completion?(cart)
@@ -300,7 +342,25 @@ class CartViewModel: BaseViewModel {
                 actions.append(.addDiscountCode(code: discountCode))
             }
             self?.isLoading.value = true
-            Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: actions), result: { [weak self] result in
+            Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: actions), expansion: self?.discountCodesExpansion, result: { [weak self] result in
+                if let cart = result.model, result.isSuccess {
+                    self?.update(cart: cart)
+
+                } else if let errors = result.errors as? [CTError], result.isFailure {
+                    self?.alertMessageObserver.send(value: self?.alertMessage(for: errors) ?? "")
+                }
+                self?.isLoading.value = false
+            })
+        }
+    }
+
+    // MARK: - Apply discount code to the currently active cart
+
+    func add(discountCode: String) {
+        queryForActiveCart { [weak self] cart in
+            let actions = [CartUpdateAction.addDiscountCode(code: discountCode), .recalculate(updateProductData: nil)]
+            self?.isLoading.value = true
+            Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: actions), expansion: self?.discountCodesExpansion, result: { [weak self] result in
                 if let cart = result.model, result.isSuccess {
                     self?.update(cart: cart)
 
