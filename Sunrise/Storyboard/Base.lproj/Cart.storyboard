@@ -276,13 +276,16 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="243" height="50"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fd3-2e-SJN">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="243" height="18"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="243" height="32"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGI-Pf-ANu">
-                                                                                    <rect key="frame" x="0.0" y="18" width="243" height="32"/>
+                                                                                    <rect key="frame" x="0.0" y="32" width="243" height="18"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="18" id="f8D-8H-f1P"/>
+                                                                                    </constraints>
                                                                                     <state key="normal" title="Order Discount ℹ️">
                                                                                         <color key="titleColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     </state>

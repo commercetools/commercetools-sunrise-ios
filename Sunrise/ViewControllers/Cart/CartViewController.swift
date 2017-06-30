@@ -148,6 +148,13 @@ class CartViewController: UIViewController {
         summaryCell.checkoutButton.reactive.pressed = CocoaAction(viewModel.checkoutAction)
         summaryCell.discountInfoButton.reactive.pressed = CocoaAction(viewModel.discountDetailsAction)
         summaryCell.addDiscountButton?.reactive.pressed = CocoaAction(viewModel.showDiscountDialogueAction)
+        viewModel.orderDiscountButton.producer
+        .observe(on: UIScheduler())
+        .take(until: summaryCell.reactive.prepareForReuse)
+        .startWithValues { buttonProperties in
+            summaryCell.discountInfoButton?.setTitle(buttonProperties.text, for: .normal)
+            summaryCell.discountInfoButton?.isUserInteractionEnabled = buttonProperties.isEnabled
+        }
     }
 
     fileprivate func bindLineItemCell(_ lineItemCell: CartLineItemCell, indexPath: IndexPath) {

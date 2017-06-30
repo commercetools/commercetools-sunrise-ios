@@ -22,6 +22,7 @@ class CartViewModel: BaseViewModel {
     let orderDiscount = MutableProperty("")
     let tax = MutableProperty("")
     let orderTotal = MutableProperty("")
+    let orderDiscountButton: MutableProperty<(text: String, isEnabled: Bool)>
     let contentChangesSignal: Signal<Changeset, NoError>
     let discountsDetailsSignal: Signal<String, NoError>
     let showDiscountDialogueSignal: Signal<Void, NoError>
@@ -56,9 +57,10 @@ class CartViewModel: BaseViewModel {
 
     // Dialogue texts
     let discountsTitle = NSLocalizedString("Discounts", comment: "Discounts")
-    let addDiscountMessage = NSLocalizedString("Add your discount code bellow:", comment: "Add discount code message")
+    let addDiscountMessage = NSLocalizedString("Add your discount code:", comment: "Add discount code message")
     // Placeholders
-    let discountCodePlaceholder = NSLocalizedString("Discount", comment: "Discount")
+    let discountCodePlaceholder = NSLocalizedString("Discount code", comment: "Discount code")
+    private let discountCodeButtonText = NSLocalizedString("Order Discount", comment: "Order Discount")
 
     let cart: MutableProperty<Cart?>
 
@@ -92,6 +94,7 @@ class CartViewModel: BaseViewModel {
 
         cart = MutableProperty(nil)
         numberOfItems <~ cart.producer.map { cart in String(cart?.lineItems.count ?? 0) }
+        orderDiscountButton = MutableProperty(text: discountCodeButtonText, isEnabled: false)
 
         super.init()
 
@@ -100,6 +103,13 @@ class CartViewModel: BaseViewModel {
         tax <~ cart.producer.map { [unowned self] _ in self.calculateTax() }
         taxRowHidden <~ tax.producer.map { tax in tax == "" }
         orderDiscount <~ cart.producer.map { [unowned self] _ in self.calculateOrderDiscount() }
+        orderDiscountButton <~ cart.producer.map { [unowned self] cart in
+            if let discounts = cart?.discountCodes, discounts.count > 0 {
+                return (text: "\(self.discountCodeButtonText) ℹ️", isEnabled: true)
+            } else {
+                return (text: self.discountCodeButtonText, isEnabled: false)
+            }
+        }
 
         disposables += refreshSignal.observeValues { [weak self] in
             self?.queryForActiveCart()
@@ -118,10 +128,10 @@ class CartViewModel: BaseViewModel {
         disposables.dispose()
     }
 
+    // MARK: - Discount codes
+
     private var discountsDetails: String {
-        guard let discounts = cart.value?.discountCodes, discounts.count > 0 else {
-            return NSLocalizedString("No discounts - please redeem a code.", comment: "No discounts")
-        }
+        guard let discounts = cart.value?.discountCodes, discounts.count > 0 else { return "" }
 
         return discounts.reduce("", { "\($0)\n\($1.discountCode.obj?.discountDetails ?? "")"})
     }
