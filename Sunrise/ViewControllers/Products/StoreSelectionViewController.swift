@@ -37,16 +37,17 @@ class StoreSelectionViewController: UITableViewController {
         locationManager.distanceFilter = 50
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.startUpdatingLocation() // TODO monitor significant location change
+        locationManager.startMonitoringSignificantLocationChanges()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
     }
 
     // MARK: - Bindings
@@ -182,4 +183,7 @@ extension StoreSelectionViewController: CLLocationManagerDelegate {
         viewModel?.userLocation.value = locations.last
     }
 
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        debugPrint(error)
+    }
 }

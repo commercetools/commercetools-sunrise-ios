@@ -45,19 +45,20 @@ class MyStoreViewController: UIViewController {
         locationManager.distanceFilter = 50
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
 
         viewModel = MyStoreViewModel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
         viewModel?.isActive.value = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         viewModel?.isActive.value = false
-        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
         super.viewWillDisappear(animated)
     }
 
@@ -175,6 +176,10 @@ extension MyStoreViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         viewModel?.userLocation.value = locations.last
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        debugPrint(error)
     }
 }
 
