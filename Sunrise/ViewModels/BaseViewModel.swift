@@ -32,8 +32,8 @@ class BaseViewModel {
     let settingsAction = NSLocalizedString("Settings", comment: "Settings")
 
     // Customer title options
-    let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MRS.", comment: "MRS."),
-                        NSLocalizedString("MS.", comment: "MS."), NSLocalizedString("DR.", comment: "DR.")]
+    let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MS.", comment: "MS."),
+                        NSLocalizedString("DR.", comment: "DR.")]
 
     // My store
     var myStore: MutableProperty<Channel?>? {
