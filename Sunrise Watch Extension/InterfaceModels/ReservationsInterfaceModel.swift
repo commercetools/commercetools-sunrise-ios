@@ -12,7 +12,7 @@ class ReservationsInterfaceModel {
     static let sharedInstance = ReservationsInterfaceModel()
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -20,7 +20,7 @@ class ReservationsInterfaceModel {
     let numberOfRows: MutableProperty<Int>
     let presentReservationSignal: Signal<ReservationDetailsInterfaceModel, NoError>
 
-    private let presentReservationObserver: Observer<ReservationDetailsInterfaceModel, NoError>
+    private let presentReservationObserver: Signal<ReservationDetailsInterfaceModel, NoError>.Observer
     private var reservations = [Order]()
 
     // MARK: - Lifecycle

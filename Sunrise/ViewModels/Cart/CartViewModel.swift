@@ -10,9 +10,9 @@ import Commercetools
 class CartViewModel: BaseViewModel {
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
-    let addDiscountCodeObserver: Observer<String, NoError>
-    let deleteLineItemObserver: Observer<IndexPath, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
+    let addDiscountCodeObserver: Signal<String, NoError>.Observer
+    let deleteLineItemObserver: Signal<IndexPath, NoError>.Observer
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -31,28 +31,28 @@ class CartViewModel: BaseViewModel {
 
     // Actions
     lazy var checkoutAction: Action<Void, Void, NoError> = { [weak self] in
-        return Action(enabledIf: Property(value: true), { [weak self] _ in
+        return Action(enabledIf: Property(value: true)) { [weak self] _ in
             if Commercetools.authState == .customerToken {
                 self?.performSegueObserver.send(value: "showAddressSelection")
             } else {
                 self?.performSegueObserver.send(value: "showNewAddress")
             }
             return SignalProducer.empty
-        })
+        }
     }()
     lazy var discountDetailsAction: Action<Void, Void, NoError> = { [weak self] in
-        return Action(enabledIf: Property(value: true), { [weak self] _ in
+        return Action(enabledIf: Property(value: true)) { [weak self] _ in
             guard let discountsDetailsObserver = self?.discountsDetailsObserver,
                   let discountsDetails = self?.discountsDetails else { return SignalProducer.empty }
             discountsDetailsObserver.send(value: discountsDetails)
             return SignalProducer.empty
-        })
+        }
     }()
     lazy var showDiscountDialogueAction: Action<Void, Void, NoError> = { [weak self] in
-        return Action(enabledIf: Property(value: true), { [weak self] _ in
+        return Action(enabledIf: Property(value: true)) { [weak self] _ in
             self?.showDiscountDialogueObserver.send(value: ())
             return SignalProducer.empty
-        })
+        }
     }()
 
     // Dialogue texts
@@ -64,11 +64,11 @@ class CartViewModel: BaseViewModel {
 
     let cart: MutableProperty<Cart?>
 
-    private let contentChangesObserver: Observer<Changeset, NoError>
+    private let contentChangesObserver: Signal<Changeset, NoError>.Observer
     private let deleteLineItemSignal: Signal<IndexPath, NoError>
-    private let performSegueObserver: Observer<String, NoError>
-    private let discountsDetailsObserver: Observer<String, NoError>
-    private let showDiscountDialogueObserver: Observer<Void, NoError>
+    private let performSegueObserver: Signal<String, NoError>.Observer
+    private let discountsDetailsObserver: Signal<String, NoError>.Observer
+    private let showDiscountDialogueObserver: Signal<Void, NoError>.Observer
     private let addDiscountCodeSignal: Signal<String, NoError>
     private let discountCodesExpansion = ["discountCodes[*].discountCode.cartDiscounts[*]"]
     private let disposables = CompositeDisposable()
@@ -94,7 +94,7 @@ class CartViewModel: BaseViewModel {
 
         cart = MutableProperty(nil)
         numberOfItems <~ cart.producer.map { cart in String(cart?.lineItems.count ?? 0) }
-        orderDiscountButton = MutableProperty(text: discountCodeButtonText, isEnabled: false)
+        orderDiscountButton = MutableProperty((text: discountCodeButtonText, isEnabled: false))
 
         super.init()
 

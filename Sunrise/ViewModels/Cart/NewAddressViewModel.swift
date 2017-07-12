@@ -33,19 +33,19 @@ class NewAddressViewModel: BaseViewModel {
     let formGuide = NSLocalizedString("All mandatory fields (*) have to be filled", comment: "Address form instructions")
 
     lazy var continueCheckoutAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { [unowned self] _ in
+        return Action(enabledIf: Property(value: true)) { [unowned self] _ in
             if self.isAddressInputValid.value {
                 self.saveNewAddress()
             } else {
                 self.validationErrorObserver.send(value: ())
             }
             return SignalProducer.empty
-        })
+        }
     }()
 
     private let disposables = CompositeDisposable()
-    private let performSegueObserver: Observer<Void, NoError>
-    private let validationErrorObserver: Observer<Void, NoError>
+    private let performSegueObserver: Signal<Void, NoError>.Observer
+    private let validationErrorObserver: Signal<Void, NoError>.Observer
 
     // MARK: - Lifecycle
 
@@ -56,7 +56,7 @@ class NewAddressViewModel: BaseViewModel {
         super.init()
 
         isAddressInputValid <~ SignalProducer.combineLatest(firstName.producer, lastName.producer, address1.producer,
-                city.producer, postCode.producer, country.producer, email.producer).map { firstName, lastName, address, city, postCode, country, email in
+                city.producer, postCode.producer, country.producer, email.producer).map { let (firstName, lastName, address, city, postCode, country, email) = $0
             var isRegisterInputValid = true
             [firstName, lastName, address, city, postCode, country, email].forEach {
                 if $0.characters.count == 0 {

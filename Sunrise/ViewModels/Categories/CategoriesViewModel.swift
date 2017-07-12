@@ -13,8 +13,8 @@ class CategoriesViewModel: BaseViewModel {
     typealias Category = Commercetools.Category
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
-    let selectedRowObserver: Observer<IndexPath, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
+    let selectedRowObserver: Signal<IndexPath, NoError>.Observer
 
     // Outputs
     let isLoading = MutableProperty(false)
@@ -27,7 +27,7 @@ class CategoriesViewModel: BaseViewModel {
 
     // Actions
     lazy var selectRootCategoryAction: Action<String, Void, NoError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { categoryName in
+        return Action(enabledIf: Property(value: true)) { categoryName in
             if let rootCategory = self.rootCategories.value.filter({ $0.name.localizedString == categoryName }).first,
                self.activeCategories.value.count == 0 ||
                self.activeCategories.value.first?.name.localizedString != categoryName {
@@ -35,10 +35,10 @@ class CategoriesViewModel: BaseViewModel {
                 self.activeRootCategoryName.value = rootCategory.name.localizedString
             }
             return SignalProducer.empty
-        })
+        }
     }()
 
-    private let contentChangesObserver: Observer<Changeset, NoError>
+    private let contentChangesObserver: Signal<Changeset, NoError>.Observer
 
     private let rootCategories = MutableProperty([Category]())
     private let activeCategories = MutableProperty([Category]())

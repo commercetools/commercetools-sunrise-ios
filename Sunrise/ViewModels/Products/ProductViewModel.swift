@@ -11,7 +11,7 @@ class ProductViewModel: BaseViewModel {
 
     // Inputs
     let activeAttributes = MutableProperty([String: String]())
-    let refreshObserver: Observer<Void, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     let attributes = MutableProperty([String: [String]]())
@@ -44,13 +44,13 @@ class ProductViewModel: BaseViewModel {
 
     // Actions
     lazy var addToCartAction: Action<String, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { [unowned self] quantity in
+        return Action(enabledIf: Property(value: true)) { [unowned self] quantity in
             self.isLoading.value = true
             return self.addLineItem(quantity: quantity)
-        })
+        }
     }()
     lazy var reserveAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { [unowned self] in
+        return Action(enabledIf: Property(value: true)) { [unowned self] in
             if let store = self.activeStore?.value {
                 self.isLoading.value = true
                 return Order.reserve(product: self.product, variant: self.variantForActiveAttributes, in: store)
@@ -60,7 +60,7 @@ class ProductViewModel: BaseViewModel {
                 self.signInPromptObserver.send(value: ())
             }
             return SignalProducer.empty
-        })
+        }
     }()
 
     var storeSelectionViewModel: StoreSelectionViewModel? {
@@ -68,8 +68,8 @@ class ProductViewModel: BaseViewModel {
         return StoreSelectionViewModel(product: product, sku: sku.value)
     }
 
-    private let performSegueObserver: Observer<String, NoError>
-    private let signInPromptObserver: Observer<Void, NoError>
+    private let performSegueObserver: Signal<String, NoError>.Observer
+    private let signInPromptObserver: Signal<Void, NoError>.Observer
     private var product: ProductProjection?
     private var productType: ProductType?
     private let disposables = CompositeDisposable()

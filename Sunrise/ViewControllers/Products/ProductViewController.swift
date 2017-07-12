@@ -106,7 +106,7 @@ class ProductViewController: UITableViewController {
             .observe(on: UIScheduler())
             .startWithValues { [weak self] oldPrice in
                 let priceBeforeDiscount =  NSMutableAttributedString(string: oldPrice)
-                priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
+                priceBeforeDiscount.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
                 self?.priceBeforeDiscount.attributedText = priceBeforeDiscount
                 self?.priceBeforeDiscount.isHidden = oldPrice.characters.count == 0
             }

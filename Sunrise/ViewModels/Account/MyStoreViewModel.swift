@@ -12,9 +12,9 @@ import MapKit
 class MyStoreViewModel: BaseViewModel {
 
     // Inputs
-    let selectedIndexPathObserver: Observer<IndexPath, NoError>
-    let selectedPinCoordinateObserver: Observer<CLLocationCoordinate2D?, NoError>
-    let refreshObserver: Observer<Void, NoError>
+    let selectedIndexPathObserver: Signal<IndexPath, NoError>.Observer
+    let selectedPinCoordinateObserver: Signal<CLLocationCoordinate2D?, NoError>.Observer
+    let refreshObserver: Signal<Void, NoError>.Observer
     let userLocation: MutableProperty<CLLocation?>
     let isActive = MutableProperty(true)
 

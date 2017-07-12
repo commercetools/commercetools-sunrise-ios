@@ -121,7 +121,7 @@ class SignInViewController: UIViewController {
             self?.loginButton.isEnabled = inputIsValid
         })
 
-        let signInSuccess: ((Event<Void, CTError>) -> Void) = { [weak self] event in
+        let signInSuccess: ((Signal<Void, CTError>.Event) -> Void) = { [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
             case .completed:

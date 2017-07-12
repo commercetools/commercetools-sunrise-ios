@@ -11,7 +11,7 @@ import Commercetools
 class ReservationDetailsInterfaceModel {
 
     // Inputs
-    let getDirectionObserver: Observer<Void, NoError>
+    let getDirectionObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     var productName: String {

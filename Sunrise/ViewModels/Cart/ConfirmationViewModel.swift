@@ -39,15 +39,15 @@ class ConfirmationViewModel: BaseViewModel {
     let orderCreatedMessage = NSLocalizedString("Your order has been successfully created", comment: "Your order has been successfully created")
 
     lazy var continueCheckoutAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { [unowned self] _ in
+        return Action(enabledIf: Property(value: true)) { [unowned self] _ in
             self.createOrder()
             return SignalProducer.empty
-        })
+        }
     }()
 
     private let disposables = CompositeDisposable()
     private let cart: MutableProperty<Cart?>
-    private let orderCreatedObserver: Observer<Void, NoError>
+    private let orderCreatedObserver: Signal<Void, NoError>.Observer
     private let currentLocale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)
 
     // MARK: - Lifecycle
@@ -58,36 +58,36 @@ class ConfirmationViewModel: BaseViewModel {
 
         super.init()
 
-        shippingFirstName <~ self.cart.map { cart in
+        shippingFirstName <~ self.cart.map { cart -> String? in
             let address = cart?.shippingAddress
             if let title = address?.title, title != "" {
                 return "\(title) \(address?.firstName ?? "")"
             }
-            return address?.firstName ?? ""
+            return address?.firstName
         }
         shippingLastName <~ self.cart.map { return $0?.shippingAddress?.lastName }
         shippingStreetName <~ self.cart.map { return ($0?.shippingAddress?.streetName ?? "") + " " + ($0?.shippingAddress?.additionalStreetInfo ?? "") }
         shippingCity <~ self.cart.map { return $0?.shippingAddress?.city }
         shippingPostalCode <~ self.cart.map { return $0?.shippingAddress?.postalCode }
         shippingRegion <~ self.cart.map { return $0?.shippingAddress?.region }
-        shippingCountry <~ self.cart.map { [weak self] in
-            guard let countryCode = $0?.shippingAddress?.country else { return "" }
+        shippingCountry <~ self.cart.map { [weak self] cart -> String in
+            guard let countryCode = cart?.shippingAddress?.country else { return "" }
             return self?.currentLocale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
         }
-        billingFirstName <~ self.cart.map { cart in
+        billingFirstName <~ self.cart.map { cart -> String? in
             let address = cart?.billingAddress
             if let title = address?.title, title != "" {
                 return "\(title) \(address?.firstName ?? "")"
             }
-            return address?.firstName ?? ""
+            return address?.firstName
         }
         billingLastName <~ self.cart.map { return $0?.billingAddress?.lastName }
         billingStreetName <~ self.cart.map { return ($0?.billingAddress?.streetName ?? "") + " " + ($0?.billingAddress?.additionalStreetInfo ?? "") }
         billingCity <~ self.cart.map { return $0?.billingAddress?.city }
         billingPostalCode <~ self.cart.map { return $0?.billingAddress?.postalCode }
         billingRegion <~ self.cart.map { return $0?.billingAddress?.region }
-        billingCountry <~ self.cart.map { [weak self] in
-            guard let countryCode = $0?.billingAddress?.country else { return "" }
+        billingCountry <~ self.cart.map { [weak self] cart -> String in
+            guard let countryCode = cart?.billingAddress?.country else { return "" }
             return self?.currentLocale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode) ?? countryCode
         }
 

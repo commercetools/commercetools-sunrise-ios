@@ -10,8 +10,8 @@ import Commercetools
 class AddressSelectionViewModel: BaseViewModel {
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
-    let selectedIndexPathObserver: Observer<IndexPath, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
+    let selectedIndexPathObserver: Signal<IndexPath, NoError>.Observer
 
     // Outputs
     let isLoading = MutableProperty(false)
@@ -19,7 +19,7 @@ class AddressSelectionViewModel: BaseViewModel {
 
     private var defaultAddress: MutableProperty<Address?> = MutableProperty(nil)
     private var addresses: MutableProperty<[Address]> = MutableProperty([Address]())
-    private let performSegueObserver: Observer<Void, NoError>
+    private let performSegueObserver: Signal<Void, NoError>.Observer
     private let currentLocale = NSLocale.init(localeIdentifier: NSLocale.current.identifier)
     private let disposables = CompositeDisposable()
 

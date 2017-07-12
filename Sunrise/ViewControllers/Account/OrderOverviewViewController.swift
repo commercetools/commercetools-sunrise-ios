@@ -73,7 +73,7 @@ class OrderOverviewViewController: UIViewController {
         lineItemCell.productImageView.sd_setImage(with: URL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
 
         let priceBeforeDiscount =  NSMutableAttributedString(string: viewModel.lineItemOldPriceAtIndexPath(indexPath))
-        priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
+        priceBeforeDiscount.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
         lineItemCell.oldPriceLabel.attributedText = priceBeforeDiscount
     }
 

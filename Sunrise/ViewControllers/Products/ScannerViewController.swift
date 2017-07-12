@@ -13,7 +13,7 @@ import SVProgressHUD
 class ScannerViewController: UIViewController {
 
     private var captureSession: AVCaptureSession? = AVCaptureSession()
-    private let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+    private let videoCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video)
     private let metadataOutput = AVCaptureMetadataOutput()
     private let disposables = CompositeDisposable()
     
@@ -55,8 +55,8 @@ class ScannerViewController: UIViewController {
         Method used to setup video input from camera, add input and output to the session.
     */
     private func setupCaptureSessionAndPreview() {
-        guard let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice), let captureSession = captureSession,
-                captureSession.canAddInput(videoInput) && captureSession.canAddOutput(metadataOutput) else {
+        guard let videoCaptureDevice = videoCaptureDevice, let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice),
+              let captureSession = captureSession, captureSession.canAddInput(videoInput) && captureSession.canAddOutput(metadataOutput) else {
             self.captureSession = nil
             presentCaptureError()
             return
@@ -70,9 +70,9 @@ class ScannerViewController: UIViewController {
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 
-        previewLayer?.frame = view.layer.bounds
-        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        view.layer.addSublayer(previewLayer!)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        view.layer.addSublayer(previewLayer)
 
         viewModel?.isCapturing.value = true
     }
@@ -81,7 +81,7 @@ class ScannerViewController: UIViewController {
         Method used to present errors related to capture device capabilities and permissions.
     */
     private func presentCaptureError() {
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
 
         let alertController = UIAlertController(
                 title: viewModel?.errorTitle,
@@ -155,10 +155,10 @@ class ScannerViewController: UIViewController {
 
 extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
 
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if let readableObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject, let viewModel = viewModel {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            viewModel.scannedCode.value = readableObject.stringValue
+            viewModel.scannedCode.value = readableObject.stringValue! // TODO use CIBarcodeDescriptor after migrating to SDK 11
         }
     }
 
