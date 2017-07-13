@@ -23,7 +23,7 @@ class OrderOverviewViewModel: BaseViewModel {
     override init() {
         order = MutableProperty(nil)
 
-        numberOfItems <~ order.producer.map { order in String(order?.lineItems?.count ?? 0) }
+        numberOfItems <~ order.producer.map { order in String(order?.lineItems.count ?? 0) }
 
         super.init()
 
@@ -38,7 +38,7 @@ class OrderOverviewViewModel: BaseViewModel {
     // MARK: - Data Source
 
     func numberOfRowsInSection(_ section: Int) -> Int {
-        if let lineItemsCount = order.value?.lineItems?.count {
+        if let lineItemsCount = order.value?.lineItems.count {
             return lineItemsCount + 1
         } else {
             return 0
@@ -46,56 +46,56 @@ class OrderOverviewViewModel: BaseViewModel {
     }
 
     func lineItemNameAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems?[indexPath.row].name?.localizedString ?? ""
+        return order.value?.lineItems[indexPath.row].name.localizedString ?? ""
     }
 
     func lineItemSkuAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems?[indexPath.row].variant?.sku ?? ""
+        return order.value?.lineItems[indexPath.row].variant.sku ?? ""
     }
 
     func lineItemSizeAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems?[indexPath.row].variant?.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
+        return order.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
     }
 
     func lineItemImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems?[indexPath.row].variant?.images?.first?.url ?? ""
+        return order.value?.lineItems[indexPath.row].variant.images?.first?.url ?? ""
     }
 
     func lineItemOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let price = order.value?.lineItems?[indexPath.row].price, let value = price.value,
-        let _ = price.discounted?.value else { return "" }
+        guard let price = order.value?.lineItems[indexPath.row].price,
+              let _ = price.discounted?.value else { return "" }
 
-        return value.description
+        return price.value.description
     }
 
     func lineItemPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let price = order.value?.lineItems?[indexPath.row].price, let value = price.value else { return "" }
+        guard let price = order.value?.lineItems[indexPath.row].price else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
         } else {
-            return value.description
+            return price.value.description
         }
     }
 
     func lineItemQuantityAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems?[indexPath.row].quantity?.description ?? "0"
+        return order.value?.lineItems[indexPath.row].quantity.description ?? "0"
     }
 
     func lineItemTotalPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems?[indexPath.row].totalPrice?.description ?? "N/A"
+        return order.value?.lineItems[indexPath.row].totalPrice.description ?? "N/A"
     }
     
     // MARK: - Order overview calculations
     
     func calculateOrderTotal() -> String {
-        guard let order = order.value, let totalPrice = order.totalPrice else { return "" }
+        guard let order = order.value else { return "" }
         
         if let totalGross = order.taxedPrice?.totalGross {
             return totalGross.description
             
         } else {
-            return totalPrice.description
+            return order.totalPrice.description
         }
     }
 
@@ -105,10 +105,10 @@ class OrderOverviewViewModel: BaseViewModel {
     }
 
     func calculateTax() -> String {
-        guard let order = order.value, let totalGrossAmount = order.taxedPrice?.totalGross?.centAmount,
-        let totalNetAmount = order.taxedPrice?.totalNet?.centAmount else { return "" }
+        guard let order = order.value, let totalGrossAmount = order.taxedPrice?.totalGross.centAmount,
+        let totalNetAmount = order.taxedPrice?.totalNet.centAmount else { return "" }
 
-        return Money(currencyCode: order.lineItems?.first?.totalPrice?.currencyCode ?? "",
+        return Money(currencyCode: order.lineItems.first?.totalPrice.currencyCode ?? "",
                 centAmount: totalGrossAmount - totalNetAmount).description
     }
     

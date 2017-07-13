@@ -41,7 +41,7 @@ class StoreSelectionViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation() // TODO monitor significant location change
     }
 
     override func viewWillDisappear(_ animated: Bool) {

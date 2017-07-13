@@ -69,15 +69,15 @@ class ReservationsInterfaceModel {
     // MARK: - Data Source
 
     func reservationName(at row: Int) -> String? {
-        return reservations[row].lineItems?.first?.name?.localizedString
+        return reservations[row].lineItems.first?.name.localizedString
     }
 
     func reservationPrice(at row: Int) -> String? {
-        return reservations[row].totalPrice?.description
+        return reservations[row].totalPrice.description
     }
 
     func productImageUrl(at row: Int) -> String {
-        return reservations[row].lineItems?.first?.variant?.images?.first?.url ?? ""
+        return reservations[row].lineItems.first?.variant.images?.first?.url ?? ""
     }
 
     func reservationDetailsInterfaceModel(for row: Int) -> ReservationDetailsInterfaceModel {

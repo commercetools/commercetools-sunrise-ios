@@ -17,7 +17,7 @@ class AccountViewModelSpec: QuickSpec {
             var accountViewModel: AccountViewModel!
 
             beforeEach {
-                let path = Bundle.currentTestBundle!.path(forResource: "cart", ofType: "json")!
+                let path = Bundle.currentTestBundle!.path(forResource: "cartAndOrder", ofType: "json")!
                 let orderJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
                 let order = Mapper<Order>().map(JSONString: orderJSON as String)!
 

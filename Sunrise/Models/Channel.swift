@@ -78,7 +78,7 @@ extension Channel {
 extension Channel: Hashable {
 
     public var hashValue: Int {
-        return (id ?? "").hashValue
+        return id.hashValue
     }
 
 }

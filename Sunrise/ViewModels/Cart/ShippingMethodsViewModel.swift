@@ -63,19 +63,19 @@ class ShippingMethodsViewModel: BaseViewModel {
 
     func nameAndDescription(at indexPath: IndexPath) -> String? {
         let method = methods.value[indexPath.row]
-        let name = method.name ?? ""
+        let name = method.name
         let description = method.description ?? ""
         return "\(name) \(description)"
     }
 
     func price(at indexPath: IndexPath) -> String? {
         let method = methods.value[indexPath.row]
-        guard let total = calculateOrderTotal(for: cart), let totalPrice = total.centAmount,
-              let zoneRates = method.zoneRates else { return nil }
-        let shippingRate = zoneRates.flatMap({ $0.shippingRates }).flatMap({ $0 }).filter({ $0.isMatching == true }).first
-        if let shippingRate = shippingRate, let shippingPrice = shippingRate.price {
+        guard let total = calculateOrderTotal(for: cart) else { return nil }
+        let shippingRate = method.zoneRates.flatMap({ $0.shippingRates }).filter({ $0.isMatching == true }).first
+        if let shippingRate = shippingRate {
+            let shippingPrice = shippingRate.price
             let freeAbove = shippingRate.freeAbove?.centAmount ?? Int.max
-            return totalPrice > freeAbove || shippingPrice.centAmount == 0 ? NSLocalizedString("Free", comment: "Free shipping") : shippingPrice.description
+            return total.centAmount > freeAbove || shippingPrice.centAmount == 0 ? NSLocalizedString("Free", comment: "Free shipping") : shippingPrice.description
         }
         return nil
     }
@@ -108,14 +108,10 @@ class ShippingMethodsViewModel: BaseViewModel {
         let shippingMethod = methods.value[indexPath.row]
 
         Cart.active { result in
-            if let cart = result.model, let id = cart.id, let version = cart.version, result.isSuccess {
-                var options = SetShippingMethodOptions()
-                var shippingMethodReference = Reference<ShippingMethod>()
-                shippingMethodReference.id = shippingMethod.id
-                shippingMethodReference.typeId = "shipping-method"
-                options.shippingMethod = shippingMethodReference
-                let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.setShippingMethod(options: options)])
-                Cart.update(id, actions: updateActions, result: { result in
+            if let cart = result.model, result.isSuccess {
+                let shippingMethodReference = Reference<ShippingMethod>(id: shippingMethod.id, typeId: "shipping-method")
+                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: [.setShippingMethod(shippingMethod: shippingMethodReference, externalTaxRate: nil)])
+                Cart.update(cart.id, actions: updateActions, result: { result in
                     if result.isSuccess {
                         self.performSegueObserver.send(value: ())
                     } else if let errors = result.errors as? [CTError], result.isFailure {

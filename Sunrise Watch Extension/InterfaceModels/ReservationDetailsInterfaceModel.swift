@@ -15,18 +15,18 @@ class ReservationDetailsInterfaceModel {
 
     // Outputs
     var productName: String {
-        return reservation.lineItems?.first?.name?.localizedString ?? ""
+        return reservation.lineItems.first?.name.localizedString ?? ""
     }
     var productPrice: String? {
-        return reservation.totalPrice?.description
+        return reservation.totalPrice.description
     }
     var storeName: String? {
-        return reservation.lineItems?.first?.distributionChannel?.obj?.name?.localizedString
+        return reservation.lineItems.first?.distributionChannel?.obj?.name?.localizedString
     }
     var storeDistance: String? {
         if let lat = UserDefaults.standard.object(forKey: userLatitudeKey) as? Double,
            let lon = UserDefaults.standard.object(forKey: userLongitudeKey) as? Double,
-           let distance = reservation.lineItems?.first?.distributionChannel?.obj?.distance(from: CLLocation(latitude: lat, longitude: lon)) {
+           let distance = reservation.lineItems.first?.distributionChannel?.obj?.distance(from: CLLocation(latitude: lat, longitude: lon)) {
             if Locale.current.usesMetricSystem {
                 return String(format: "%.1f", arguments: [distance / 1000]) + " km away"
             } else {
@@ -36,19 +36,19 @@ class ReservationDetailsInterfaceModel {
         return nil
     }
     var storeLocation: CLLocation? {
-        return reservation.lineItems?.first?.distributionChannel?.obj?.location
+        return reservation.lineItems.first?.distributionChannel?.obj?.location
     }
     var productImageUrl: String {
-        return reservation.lineItems?.first?.variant?.images?.first?.url ?? ""
+        return reservation.lineItems.first?.variant.images?.first?.url ?? ""
     }
     var streetAndNumberInfo: String? {
-        return reservation.lineItems?.first?.distributionChannel?.obj?.streetAndNumberInfo
+        return reservation.lineItems.first?.distributionChannel?.obj?.streetAndNumberInfo
     }
     var zipAndCityInfo: String? {
-        return reservation.lineItems?.first?.distributionChannel?.obj?.zipAndCityInfo
+        return reservation.lineItems.first?.distributionChannel?.obj?.zipAndCityInfo
     }
     var openingTimes: String? {
-        return reservation.lineItems?.first?.distributionChannel?.obj?.openingTimes
+        return reservation.lineItems.first?.distributionChannel?.obj?.openingTimes
     }
 
     private let reservation: Order

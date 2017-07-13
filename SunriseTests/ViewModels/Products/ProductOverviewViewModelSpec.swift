@@ -71,7 +71,7 @@ class ProductOverviewViewModelSpec: QuickSpec {
                 let indexPath = IndexPath(item: 0, section: 0)
 
                 beforeEach {
-                    overviewViewModel.browsingStore.value = ReservationViewModelSpec.order.lineItems?.first?.distributionChannel?.obj
+                    overviewViewModel.browsingStore.value = ReservationViewModelSpec.order.lineItems.first?.distributionChannel?.obj
                 }
 
                 it("header shows my store name") {

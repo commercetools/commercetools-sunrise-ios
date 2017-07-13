@@ -238,7 +238,9 @@
       "totalPrice": {
         "currencyCode": "EUR",
         "centAmount": 17500
-      }
+      },
+      "priceMode": "Platform",
+      "lineItemMode": "Standard"
     },
     {
       "id": "4f5d05e3-f3b4-4e0c-ba20-f2936844df53",
@@ -458,7 +460,9 @@
       "totalPrice": {
         "currencyCode": "EUR",
         "centAmount": 12750
-      }
+      },
+      "priceMode": "Platform",
+      "lineItemMode": "Standard"
     },
     {
       "id": "19e472e8-7fca-4bff-8f8a-13ed7860ffb5",
@@ -660,7 +664,9 @@
       "totalPrice": {
         "currencyCode": "EUR",
         "centAmount": 31250
-      }
+      },
+      "priceMode": "Platform",
+      "lineItemMode": "Standard"
     }
   ],
   "cartState": "Active",
@@ -671,5 +677,11 @@
   "customLineItems": [],
   "discountCodes": [],
   "inventoryMode": "ReserveOnOrder",
-  "taxMode": "Platform"
+  "taxMode": "Platform",
+  "taxRoundingMode": "HalfEven",
+  "orderState": "Confirmed",
+  "syncInfo": [],
+  "returnInfo": [],
+  "lastMessageSequenceNumber": 0,
+  "refusedGifts": []
 }

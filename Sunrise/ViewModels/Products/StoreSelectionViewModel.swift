@@ -40,12 +40,12 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     private var productVariantPrice: String {
-        guard let price = currentVariant?.independentPrice, let value = price.value else { return "-" }
+        guard let price = currentVariant?.independentPrice else { return "-" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
         } else {
-            return value.description
+            return price.value.description
         }
     }
 
@@ -220,22 +220,20 @@ class StoreSelectionViewModel: BaseViewModel {
     }
 
     func priceForChannelAtIndexPath(_ indexPath: IndexPath) -> String {
-        if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id,
-                let price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
+        let channelId = channels[rowForChannelAtIndexPath(indexPath)].id
+        if let price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
             if let discounted = price.discounted?.value {
                 return discounted.description
-            } else if let value = price.value {
-                return value.description
+            } else {
+                return price.value.description
             }
         }
         return productVariantPrice
     }
 
     private func quantityForChannelAtIndexPath(_ indexPath: IndexPath) -> Int {
-        if let channelId = channels[rowForChannelAtIndexPath(indexPath)].id {
-            return currentVariant?.availability?.channels?[channelId]?.availableQuantity ?? 0
-        }
-        return 0
+        let channelId = channels[rowForChannelAtIndexPath(indexPath)].id
+        return currentVariant?.availability?.channels?[channelId]?.availableQuantity ?? 0
     }
 
     private func rowForChannelAtIndexPath(_ indexPath: IndexPath) -> Int {

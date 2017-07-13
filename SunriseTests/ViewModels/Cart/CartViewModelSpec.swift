@@ -16,7 +16,7 @@ class CartViewModelSpec: QuickSpec {
             var cartViewModel: CartViewModel!
 
             beforeEach {
-                let path = Bundle.currentTestBundle!.path(forResource: "cart", ofType: "json")!
+                let path = Bundle.currentTestBundle!.path(forResource: "cartAndOrder", ofType: "json")!
                 let cartJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
                 let cart = Mapper<Cart>().map(JSONString: cartJSON as String)!
 

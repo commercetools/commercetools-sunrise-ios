@@ -42,23 +42,23 @@ class ReservationViewModel {
         let (getDirectionSignal, getDirectionObserver) = Signal<Void, NoError>.pipe()
         self.getDirectionObserver = getDirectionObserver
 
-        productName = order.lineItems?.first?.name?.localizedString
-        productImageUrl = order.lineItems?.first?.variant?.images?.first?.url ?? ""
-        size = order.lineItems?.first?.variant?.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
-        quantity = String(order.lineItems?.first?.quantity ?? 1)
+        productName = order.lineItems.first?.name.localizedString
+        productImageUrl = order.lineItems.first?.variant.images?.first?.url ?? ""
+        size = order.lineItems.first?.variant.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
+        quantity = String(order.lineItems.first?.quantity ?? 1)
 
-        if let discounted = order.lineItems?.first?.price?.discounted?.value {
+        if let discounted = order.lineItems.first?.price.discounted?.value {
             price = discounted.description
-        } else if let price = order.lineItems?.first?.price?.value {
+        } else if let price = order.lineItems.first?.price.value {
             self.price = price.description
         } else {
             price = nil
         }
 
-        storeName = order.lineItems?.first?.distributionChannel?.obj?.name?.localizedString
-        streetAndNumberInfo = order.lineItems?.first?.distributionChannel?.obj?.streetAndNumberInfo
-        zipAndCityInfo = order.lineItems?.first?.distributionChannel?.obj?.zipAndCityInfo
-        openLine1Info = order.lineItems?.first?.distributionChannel?.obj?.openingTimes
+        storeName = order.lineItems.first?.distributionChannel?.obj?.name?.localizedString
+        streetAndNumberInfo = order.lineItems.first?.distributionChannel?.obj?.streetAndNumberInfo
+        zipAndCityInfo = order.lineItems.first?.distributionChannel?.obj?.zipAndCityInfo
+        openLine1Info = order.lineItems.first?.distributionChannel?.obj?.openingTimes
 
         disposables += getDirectionSignal.observeValues { [weak self] in
             if let location = self?.storeLocation.value {
@@ -78,7 +78,7 @@ class ReservationViewModel {
     // MARK: - Store address geocoding
 
     private func geocodeStoreAddress() {
-        if let channel = order.lineItems?.first?.distributionChannel?.obj, let zip = channel.address?.postalCode,
+        if let channel = order.lineItems.first?.distributionChannel?.obj, let zip = channel.address?.postalCode,
                 let city = channel.address?.city, let street = channel.address?.streetName, let number = channel.address?.streetNumber,
                 let country = channel.address?.country {
             self.geocoder.geocodeAddressString("\(number) \(street) \(zip) \(city) \(country)", completionHandler: { placemarks, error in

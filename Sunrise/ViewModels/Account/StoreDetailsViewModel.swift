@@ -72,11 +72,7 @@ class StoreDetailsViewModel: BaseViewModel {
         return SignalProducer { [weak self] observer, disposable in
             Customer.addCustomTypeIfNotExists { version, errors in
                 if let version = version, errors == nil {
-                    var options = SetCustomFieldOptions()
-                    options.name = "myStore"
-                    options.value = ["typeId": "channel", "id": self?.store.id ?? ""]
-
-                    let updateActions = UpdateActions<CustomerUpdateAction>(version: version, actions: [.setCustomField(options: options)])
+                    let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "myStore", value: ["typeId": "channel", "id": self?.store.id ?? ""])])
                     Customer.update(actions: updateActions) { result in
                         self?.isLoading.value = false
                         if result.isSuccess {

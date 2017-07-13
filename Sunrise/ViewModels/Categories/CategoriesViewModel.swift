@@ -28,11 +28,11 @@ class CategoriesViewModel: BaseViewModel {
     // Actions
     lazy var selectRootCategoryAction: Action<String, Void, NoError> = { [unowned self] in
         return Action(enabledIf: Property(value: true), { categoryName in
-            if let rootCategory = self.rootCategories.value.filter({ $0.name?.localizedString == categoryName }).first,
+            if let rootCategory = self.rootCategories.value.filter({ $0.name.localizedString == categoryName }).first,
                self.activeCategories.value.count == 0 ||
-               self.activeCategories.value.first?.name?.localizedString != categoryName {
+               self.activeCategories.value.first?.name.localizedString != categoryName {
                 self.activeCategories.value = [rootCategory]
-                self.activeRootCategoryName.value = rootCategory.name?.localizedString
+                self.activeRootCategoryName.value = rootCategory.name.localizedString
             }
             return SignalProducer.empty
         })
@@ -76,16 +76,16 @@ class CategoriesViewModel: BaseViewModel {
 
         super.init()
 
-        rootCategoryNames <~ rootCategories.producer.map { rootCategories in rootCategories.map({ $0.name?.localizedString }) }
+        rootCategoryNames <~ rootCategories.producer.map { rootCategories in rootCategories.map({ $0.name.localizedString }) }
         // set the first root category to be an active one
         activeCategories <~ rootCategories.producer.map { rootCategories in rootCategories.first != nil ? [rootCategories.first!] : [] }
-        activeRootCategoryName <~ activeCategories.producer.map { $0.first?.name?.localizedString }
+        activeRootCategoryName <~ activeCategories.producer.map { $0.first?.name.localizedString }
         activeCategories.combinePrevious(activeCategories.value).signal.observeValues { [weak self] previous, current in
             self?.updateActiveCategory(from: previous, to: current)
         }
         // Use hardcoded images till we get assets on categories
         backgroundImage <~ activeCategories.producer.map { (activeCategories: [Category]) -> UIImage? in
-            guard let rootCategoryName = activeCategories.first?.name?.localizedString else { return nil }
+            guard let rootCategoryName = activeCategories.first?.name.localizedString else { return nil }
             switch rootCategoryName {
                 case "Men":
                     return UIImage(named: "category_men")
@@ -103,7 +103,7 @@ class CategoriesViewModel: BaseViewModel {
         disposables += selectedRowSignal.observeValues { [weak self] indexPath in
             guard let activeCategoryId = self?.activeCategories.value.last?.id else { return }
             if let activeList = self?.childCategoriesCache[activeCategoryId], self?.activeCategories.value.count == 1 {
-                guard let selectedCategoryId = activeList[indexPath.row].id else { return }
+                let selectedCategoryId = activeList[indexPath.row].id
 
                 if self?.childCategoriesCache[selectedCategoryId] == nil ||
                    self?.childCategoriesCache[selectedCategoryId]?.count == 0 {
@@ -187,10 +187,10 @@ class CategoriesViewModel: BaseViewModel {
 
     func categoryName(at indexPath: IndexPath) -> String? {
         if activeCategories.value.count >= 2 && indexPath.row == 0 {
-            return activeCategories.value.last?.name?.localizedString
+            return activeCategories.value.last?.name.localizedString
         } else if let expandedCategoryId = activeCategories.value.last?.id,
                   let categoriesToShow = childCategoriesCache[expandedCategoryId] {
-            return categoriesToShow[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row].name?.localizedString
+            return categoriesToShow[activeCategories.value.count >= 2 ? indexPath.row - 1 : indexPath.row].name.localizedString
         }
         return nil
     }
@@ -214,10 +214,10 @@ class CategoriesViewModel: BaseViewModel {
         }
 
         Category.query(limit: kQueryLimit, offset: offset) { result in
-            if let queryResponse = result.model, let categories = queryResponse.results, let count = queryResponse.count,
-               let offset = queryResponse.offset, let total = queryResponse.total, result.isSuccess {
-                self.allCategories += categories
-                if offset + count < total {
+            if let queryResponse = result.model, result.isSuccess {
+                let offset = queryResponse.offset
+                self.allCategories += queryResponse.results
+                if offset + queryResponse.count < queryResponse.total {
                     self.queryForCategories(offset: offset + self.kQueryLimit)
                 } else {
                     self.process(categories: self.allCategories)
@@ -264,6 +264,6 @@ class CategoriesViewModel: BaseViewModel {
 // For the purpose of this view model, comparing categories by ID and name is sufficient
 extension Commercetools.Category: Equatable {
     public static func == (lhs: Commercetools.Category, rhs: Commercetools.Category) -> Bool {
-        return lhs.id == rhs.id && lhs.id != nil && rhs.id != nil
+        return lhs.id == rhs.id
     }
 }
