@@ -82,6 +82,35 @@ class CartViewController: UIViewController {
             tableView.endUpdates()
         })
 
+        disposables += viewModel.discountsDetailsSignal
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] alertMessage in
+            let alertController = UIAlertController(
+                    title: self?.viewModel?.discountsTitle,
+                    message: alertMessage,
+                    preferredStyle: .alert
+            )
+            alertController.addAction(UIAlertAction(title: self?.viewModel?.okAction, style: .default, handler: nil))
+            self?.present(alertController, animated: true, completion: nil)
+        })
+
+        disposables += viewModel.showDiscountDialogueSignal
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] _ in
+            let alertController = UIAlertController(
+                    title: self?.viewModel?.discountsTitle,
+                    message: self?.viewModel?.addDiscountMessage,
+                    preferredStyle: .alert
+            )
+            alertController.addTextField { $0.placeholder = self?.viewModel?.discountCodePlaceholder }
+            alertController.addAction(UIAlertAction(title: self?.viewModel?.okAction, style: .default, handler: { _ in
+                if let text = alertController.textFields?[0].text {
+                    self?.viewModel?.addDiscountCodeObserver.send(value: text)
+                }
+            }))
+            self?.present(alertController, animated: true, completion: nil)
+        })
+
         disposables += viewModel.performSegueSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] identifier in
@@ -117,6 +146,15 @@ class CartViewController: UIViewController {
         summaryCell.taxDescriptionLabel.isHidden = viewModel.taxRowHidden.value
         summaryCell.orderTotalLabel.text = viewModel.orderTotal.value
         summaryCell.checkoutButton.reactive.pressed = CocoaAction(viewModel.checkoutAction)
+        summaryCell.discountInfoButton.reactive.pressed = CocoaAction(viewModel.discountDetailsAction)
+        summaryCell.addDiscountButton?.reactive.pressed = CocoaAction(viewModel.showDiscountDialogueAction)
+        viewModel.orderDiscountButton.producer
+        .observe(on: UIScheduler())
+        .take(until: summaryCell.reactive.prepareForReuse)
+        .startWithValues { buttonProperties in
+            summaryCell.discountInfoButton?.setTitle(buttonProperties.text, for: .normal)
+            summaryCell.discountInfoButton?.isUserInteractionEnabled = buttonProperties.isEnabled
+        }
     }
 
     fileprivate func bindLineItemCell(_ lineItemCell: CartLineItemCell, indexPath: IndexPath) {

@@ -15,12 +15,13 @@ class CartSummaryCell: UITableViewCell {
     @IBOutlet weak var taxLabel: UILabel!
     @IBOutlet weak var taxDescriptionLabel: UILabel!
     @IBOutlet weak var orderTotalLabel: UILabel!
-    @IBOutlet weak var continueShippingButton: UIButton?
     @IBOutlet weak var checkoutButton: UIButton!
+    @IBOutlet weak var discountInfoButton: UIButton!
+    @IBOutlet weak var addDiscountButton: UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        continueShippingButton?.layer.borderColor = borderColor.cgColor
+        addDiscountButton?.layer.borderColor = borderColor.cgColor
     }
     
 }
