@@ -12,8 +12,8 @@ let kMyStoreId = "MyStoreId"
 class AccountViewModel: BaseViewModel {
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
-    let sectionExpandedObserver: Observer<Int, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
+    let sectionExpandedObserver: Signal<Int, NoError>.Observer
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -28,9 +28,9 @@ class AccountViewModel: BaseViewModel {
     var orders = [Order]()
     var reservations = [Order]()
 
-    private let contentChangesObserver: Observer<Changeset, NoError>
-    private let showReservationObserver: Observer<IndexPath, NoError>
-    private let showOrderObserver: Observer<IndexPath, NoError>
+    private let contentChangesObserver: Signal<Changeset, NoError>.Observer
+    private let showReservationObserver: Signal<IndexPath, NoError>.Observer
+    private let showOrderObserver: Signal<IndexPath, NoError>.Observer
     private let disposables = CompositeDisposable()
 
     /// The UUID of the reservation confirmation received via push notification, to be shown after next refresh.

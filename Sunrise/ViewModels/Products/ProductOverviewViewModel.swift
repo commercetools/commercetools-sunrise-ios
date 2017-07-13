@@ -14,10 +14,10 @@ class ProductOverviewViewModel: BaseViewModel {
     typealias Category = Commercetools.Category
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
-    let nextPageObserver: Observer<Void, NoError>
-    let selectOnlineStoreObserver: Observer<Void, NoError>
-    let selectMyStoreObserver: Observer<Void, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
+    let nextPageObserver: Signal<Void, NoError>.Observer
+    let selectOnlineStoreObserver: Signal<Void, NoError>.Observer
+    let selectMyStoreObserver: Signal<Void, NoError>.Observer
     let textSearch = MutableProperty(("", Locale.current))
 
     // Outputs
@@ -30,8 +30,8 @@ class ProductOverviewViewModel: BaseViewModel {
 
     let pageSize: UInt = 16
     var products: [ProductProjection]
-    private let presentProductDetailsObserver: Observer<ProductViewModel, NoError>
-    private let scrollToBeginningObserver: Observer<Void, NoError>
+    private let presentProductDetailsObserver: Signal<ProductViewModel, NoError>.Observer
+    private let scrollToBeginningObserver: Signal<Void, NoError>.Observer
     private var category: Category?
     private let disposables = CompositeDisposable()
 

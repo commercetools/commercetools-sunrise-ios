@@ -11,8 +11,8 @@ import CoreLocation
 class StoreSelectionViewModel: BaseViewModel {
 
     // Inputs
-    let selectedIndexPathObserver: Observer<IndexPath, NoError>
-    let refreshObserver: Observer<Void, NoError>
+    let selectedIndexPathObserver: Signal<IndexPath, NoError>.Observer
+    let refreshObserver: Signal<Void, NoError>.Observer
     let userLocation: MutableProperty<CLLocation?>
 
     // Outputs
@@ -51,15 +51,15 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // Actions
     lazy var reserveAction: Action<IndexPath, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true), { indexPath in
+        return Action(enabledIf: Property(value: true)) { indexPath in
             self.isLoading.value = true
             return self.reserveProductVariant(store: self.channels[self.rowForChannelAtIndexPath(indexPath)])
-        })
+        }
     }()
 
     private let expandedChannelIndexPath: MutableProperty<IndexPath?>
     private let selectedIndexPathSignal: Signal<IndexPath, NoError>
-    private let contentChangesObserver: Observer<Changeset, NoError>
+    private let contentChangesObserver: Signal<Changeset, NoError>.Observer
 
     var channels: [Channel]
     private var expandedChannel: Channel? {

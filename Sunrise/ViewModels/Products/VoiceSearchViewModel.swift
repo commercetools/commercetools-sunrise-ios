@@ -10,7 +10,7 @@ import Result
 class VoiceSearchViewModel: BaseViewModel {
 
     // Inputs
-    let dismissObserver: Observer<Void, NoError>
+    let dismissObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     let notAuthorizedSignal: Signal<Void, NoError>
@@ -28,7 +28,7 @@ class VoiceSearchViewModel: BaseViewModel {
     // Property set from within the speech recognition task, indicating whether a search will be performed, so we can
     // deactivate AVAudioSession or wait for the AVSpeechSynthesizer to complete the utterance.
     private var willPerformSearch = false
-    private let notAuthorizedObserver: Observer<Void, NoError>
+    private let notAuthorizedObserver: Signal<Void, NoError>.Observer
     private let disposables = CompositeDisposable()
 
     // MARK: Lifecycle

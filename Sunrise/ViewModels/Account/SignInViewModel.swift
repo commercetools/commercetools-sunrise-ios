@@ -31,16 +31,16 @@ class SignInViewModel: BaseViewModel {
 
     // Actions
     lazy var loginAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: self.isLoginInputValid, { _ in
+        return Action(enabledIf: self.isLoginInputValid) { _ in
             self.isLoading.value = true
             return self.login(username: self.username.value, password: self.password.value)
-        })
+        }
     }()
     lazy var registerAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: self.isRegisterInputValid, { _ in
+        return Action(enabledIf: self.isRegisterInputValid) { _ in
             self.isLoading.value = true
             return self.registerUser()
-        })
+        }
     }()
 
     // MARK: Lifecycle
@@ -50,12 +50,12 @@ class SignInViewModel: BaseViewModel {
 
         super.init()
 
-        isLoginInputValid <~ SignalProducer.combineLatest(username.producer, password.producer).map { username, password in
-            username.characters.count > 0 && password.characters.count > 0
+        isLoginInputValid <~ SignalProducer.combineLatest(username.producer, password.producer).map { let (username, password) = $0
+            return username.characters.count > 0 && password.characters.count > 0
         }
 
         isRegisterInputValid <~ SignalProducer.combineLatest(email.producer, firstName.producer, lastName.producer,
-                registrationPassword.producer, registrationPasswordConfirmation.producer).map { email, firstName, lastName, password, passwordConfirmation in
+                registrationPassword.producer, registrationPasswordConfirmation.producer).map { let (email, firstName, lastName, password, passwordConfirmation) = $0
             var isRegisterInputValid = true
             [email, firstName, lastName, password].forEach {
                 if $0.characters.count == 0 {
@@ -99,7 +99,7 @@ class SignInViewModel: BaseViewModel {
                     observer.send(error: error)
                 } else {
                     self?.login(username: username, password: password).startWithSignal { signal, signalDisposable in
-                        disposable.add(signalDisposable)
+                        disposable += signalDisposable
                         signal.observe { event in
                             switch event {
                                 case let .failed(error):
@@ -107,12 +107,10 @@ class SignInViewModel: BaseViewModel {
                                 default:
                                     observer.sendCompleted()
                             }
-
                         }
                     }
                 }
             })
         }
     }
-
 }

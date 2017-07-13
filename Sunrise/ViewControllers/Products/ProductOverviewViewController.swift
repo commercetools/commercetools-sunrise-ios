@@ -169,7 +169,7 @@ class ProductOverviewViewController: UICollectionViewController {
         cell.priceLabel.text = viewModel.productPriceAtIndexPath(indexPath)
 
         let priceBeforeDiscount =  NSMutableAttributedString(string: viewModel.productOldPriceAtIndexPath(indexPath))
-        priceBeforeDiscount.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
+        priceBeforeDiscount.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
         cell.oldPriceLabel.attributedText = priceBeforeDiscount
 
         cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrlAtIndexPath(indexPath)))

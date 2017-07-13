@@ -11,7 +11,7 @@ class BaseViewModel {
     // Outputs
     let alertMessageSignal: Signal<String, NoError>
 
-    let alertMessageObserver: Observer<String, NoError>
+    let alertMessageObserver: Signal<String, NoError>.Observer
 
     // Convenience property for obtaining currency code for user's locale
     static var currencyCodeForCurrentLocale: String {

@@ -58,7 +58,7 @@ class VoiceSearchViewController: UIViewController {
         viewModel?.dismissObserver.send(value: ())
     }
 
-    func updateMeter() {
+    @objc func updateMeter() {
         guard let amplitude = viewModel?.currentAudioMeterValue else { return }
         voiceLevelView.update(amplitude: CGFloat(amplitude))
     }

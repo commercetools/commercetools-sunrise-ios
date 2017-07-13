@@ -157,13 +157,13 @@ class AccountViewController: UIViewController {
         myStoreView.addGestureRecognizer(recognizer)
     }
 
-    func handleTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
         if let headerView = recognizer.view, let viewModel = viewModel {
             viewModel.sectionExpandedObserver.send(value: headerView.tag)
         }
     }
 
-    func showMyStores(_ recognizer: UITapGestureRecognizer? = nil) {
+    @objc func showMyStores(_ recognizer: UITapGestureRecognizer? = nil) {
         performSegue(withIdentifier: "showMyStore", sender: self)
     }
 

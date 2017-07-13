@@ -12,7 +12,7 @@ import Commercetools
 class ReservationViewModel {
 
     // Inputs
-    let getDirectionObserver: Observer<Void, NoError>
+    let getDirectionObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     let isLoading: MutableProperty<Bool>

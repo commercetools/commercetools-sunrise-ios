@@ -10,15 +10,15 @@ import Commercetools
 class ShippingMethodsViewModel: BaseViewModel {
 
     // Inputs
-    let refreshObserver: Observer<Void, NoError>
-    let selectedIndexPathObserver: Observer<IndexPath, NoError>
+    let refreshObserver: Signal<Void, NoError>.Observer
+    let selectedIndexPathObserver: Signal<IndexPath, NoError>.Observer
 
     // Outputs
     let isLoading = MutableProperty(false)
     let performSegueSignal: Signal<Void, NoError>
 
     private var methods: MutableProperty<[ShippingMethod]>
-    private let performSegueObserver: Observer<Void, NoError>
+    private let performSegueObserver: Signal<Void, NoError>.Observer
     private var cart: Cart?
     private let disposables = CompositeDisposable()
 

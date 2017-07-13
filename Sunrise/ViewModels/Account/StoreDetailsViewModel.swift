@@ -35,19 +35,19 @@ class StoreDetailsViewModel: BaseViewModel {
 
     // Actions
     lazy var getDirectionsAction: Action<Void, Void, NoError> = {
-        return Action(enabledIf: Property(value: true), { [weak self] _ in
+        return Action(enabledIf: Property(value: true)) { [weak self] _ in
             return SignalProducer { [weak self] observer, disposable in
                 if let location = self?.storeLocation {
                     self?.getDirections(for: location, name: self?.storeName)
                 }
                 observer.sendCompleted()
             }
-        })
+        }
     }()
     lazy var saveMyStoreAction: Action<Void, Void, CTError> = {
-        return Action(enabledIf: Property(value: true), { [unowned self] _ in
+        return Action(enabledIf: Property(value: true)) { [unowned self] _ in
             return self.saveMyStore()
-        })
+        }
     }()
 
     let store: Channel
