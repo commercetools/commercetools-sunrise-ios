@@ -5,6 +5,7 @@
 import UIKit
 import UserNotifications
 import Commercetools
+import Contentful
 import CoreLocation
 import AVFoundation
 import IQKeyboardManagerSwift
@@ -15,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
+
+    var contentfulClient: Client = {
+        let spaceId = Bundle.main.object(forInfoDictionaryKey: "ContentfulSpaceId") as? String ?? ""
+        let accessToken = Bundle.main.object(forInfoDictionaryKey: "ContentfulAccessToken") as? String ?? ""
+        return Client(spaceId: spaceId, accessToken: accessToken)
+    }()
 
     var window: UIWindow?
 
