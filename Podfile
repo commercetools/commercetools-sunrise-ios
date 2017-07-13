@@ -14,6 +14,7 @@ target 'Sunrise' do
   pod 'SDWebImage'
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
+  pod 'Contentful'
 end
 
 target 'ReservationNotification' do
