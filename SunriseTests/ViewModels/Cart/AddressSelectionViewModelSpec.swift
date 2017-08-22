@@ -5,7 +5,6 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import Result
 @testable import Sunrise
 
@@ -17,8 +16,8 @@ class AddressSelectionViewModelSpec: QuickSpec {
 
             beforeEach {
                 let path = Bundle.currentTestBundle!.path(forResource: "customer", ofType: "json")!
-                let customerJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-                let customer = Mapper<Customer>().map(JSONString: customerJSON as String)!
+                let customerJSON = try! String(contentsOfFile: path, encoding: .utf8)
+                let customer = try! jsonDecoder.decode(Customer.self, from: customerJSON.data(using: .utf8)!)
 
                 addressSelectionViewModel = AddressSelectionViewModel(customer: customer)
             }

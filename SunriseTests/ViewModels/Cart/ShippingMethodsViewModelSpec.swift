@@ -5,7 +5,6 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import Result
 @testable import Sunrise
 
@@ -17,12 +16,12 @@ class ShippingMethodsViewModelSpec: QuickSpec {
 
             beforeEach {
                 let shippingMethodsPath = Bundle.currentTestBundle!.path(forResource: "shipping-methods", ofType: "json")!
-                let shippingMethodsJSON = try! NSString(contentsOfFile: shippingMethodsPath, encoding: String.Encoding.utf8.rawValue)
-                let shippingMethods = Mapper<ShippingMethod>().mapArray(JSONString: shippingMethodsJSON as String)!
-
+                let shippingMethodsJSON = try! String(contentsOfFile: shippingMethodsPath, encoding: .utf8)
+                let shippingMethods = try! jsonDecoder.decode([ShippingMethod].self, from: shippingMethodsJSON.data(using: .utf8)!)
+                
                 let cartPath = Bundle.currentTestBundle!.path(forResource: "cartAndOrder", ofType: "json")!
-                let cartJSON = try! NSString(contentsOfFile: cartPath, encoding: String.Encoding.utf8.rawValue)
-                let cart = Mapper<Cart>().map(JSONString: cartJSON as String)!
+                let cartJSON = try! String(contentsOfFile: cartPath, encoding: .utf8)
+                let cart = try! jsonDecoder.decode(Cart.self, from: cartJSON.data(using: .utf8)!)
 
                 shippingMethodsViewModel = ShippingMethodsViewModel(shippingMethods: shippingMethods, cart: cart)
             }

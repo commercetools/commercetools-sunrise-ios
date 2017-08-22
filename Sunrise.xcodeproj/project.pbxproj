@@ -89,8 +89,8 @@
 		2147A3251DFA589A00981A30 /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147A3241DFA589A00981A30 /* ProductImageCell.swift */; };
 		2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		215C4F6A1CF286D100A99790 /* product-projection.json in Resources */ = {isa = PBXBuildFile; fileRef = 215C4F691CF286D100A99790 /* product-projection.json */; };
-		215C4F6B1CF28CC600A99790 /* NSBundle+CurrentTestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */; };
-		215C4F6C1CF28CC900A99790 /* NSBundle+CurrentTestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */; };
+		215C4F6B1CF28CC600A99790 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */; };
+		215C4F6C1CF28CC900A99790 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */; };
 		215C7C201D79A08C002EC074 /* SelectableAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C1F1D79A08C002EC074 /* SelectableAttributeCell.swift */; };
 		215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */; };
 		216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */; };
@@ -278,7 +278,7 @@
 		210BEF075187C528764BE4E1 /* ScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		210BEF1EB098A371261B95F3 /* OrderOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderOverviewViewController.swift; sourceTree = "<group>"; };
 		210BEF245CD8E09F98E37488 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
-		210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+CurrentTestBundle.swift"; sourceTree = "<group>"; };
+		210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		210BEF5CEEFACEC329BEB6C9 /* cartConfirmation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cartConfirmation.json; sourceTree = "<group>"; };
 		210BEF89190076C84ECE96A7 /* AddressSelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSelectionViewModel.swift; sourceTree = "<group>"; };
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
@@ -561,7 +561,7 @@
 		210BE796716A5AD3AC6ABD8C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				210BEF340733DC1B9B2DE4F9 /* NSBundle+CurrentTestBundle.swift */,
+				210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1563,7 +1563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				215C4F6B1CF28CC600A99790 /* NSBundle+CurrentTestBundle.swift in Sources */,
+				215C4F6B1CF28CC600A99790 /* TestUtils.swift in Sources */,
 				210BE89F75659C406EED2538 /* AccountViewModelSpec.swift in Sources */,
 				210BE5054327DB3532511127 /* CartViewModelSpec.swift in Sources */,
 				210BE805873D1551E2F8217A /* ReservationViewModelSpec.swift in Sources */,
@@ -1579,7 +1579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				215C4F6C1CF28CC900A99790 /* NSBundle+CurrentTestBundle.swift in Sources */,
+				215C4F6C1CF28CC900A99790 /* TestUtils.swift in Sources */,
 				21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

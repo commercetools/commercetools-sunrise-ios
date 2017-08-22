@@ -5,7 +5,6 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import ReactiveSwift
 import Result
 @testable import Sunrise
@@ -14,8 +13,8 @@ class ProductViewModelSpec: QuickSpec {
 
     lazy var product: ProductProjection = {
         let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
-        let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-        return Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
+        let productProjectionJSON = try! String(contentsOfFile: path, encoding: .utf8)
+        return try! jsonDecoder.decode(ProductProjection.self, from: productProjectionJSON.data(using: .utf8)!)
     }()
 
     override func spec() {
