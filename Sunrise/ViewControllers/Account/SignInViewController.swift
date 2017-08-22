@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import CoreNFC
 import Commercetools
 import ReactiveCocoa
 import ReactiveSwift
@@ -21,6 +22,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var nfcLoginButton: UIButton!
     
     @IBOutlet weak var titleField: IQDropDownTextField!
     @IBOutlet weak var registrationEmailField: UITextField!
@@ -29,8 +31,14 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var registrationPasswordField: UITextField!
     @IBOutlet weak var registrationPasswordConfirmationField: UITextField!
 
+    private var nfcSession: Any?
     private var loginAction: CocoaAction<Void>?
     private var registerAction: CocoaAction<Void>?
+    private let disposables = CompositeDisposable()
+    
+    deinit {
+        disposables.dispose()
+    }
 
     private var viewModel: SignInViewModel? {
         didSet {
@@ -80,6 +88,14 @@ class SignInViewController: UIViewController {
         }
     }
     
+    @IBAction func nfcLogIn(_ sender: UIButton) {
+        if #available(iOS 11.0, *) {
+            let nfcSession = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: true)
+            nfcSession.alertMessage = viewModel?.nfcGuide ?? ""
+            self.nfcSession = nfcSession
+            nfcSession.begin()
+        }
+    }
     
     // MARK: - Bindings
 
@@ -101,8 +117,10 @@ class SignInViewController: UIViewController {
         viewModel.title <~ titleField.reactive.textValues.map { $0 ?? "" }
         viewModel.registrationPassword <~ registrationPasswordField.reactive.continuousTextValues.map { $0 ?? "" }
         viewModel.registrationPasswordConfirmation <~ registrationPasswordConfirmationField.reactive.continuousTextValues.map { $0 ?? "" }
+        emailField.reactive.text <~ viewModel.nfcReadEmail.map { nfcReadEmail -> String? in nfcReadEmail != nil ? String(nfcReadEmail!.filter({ $0 != " " })[String.Index(encodedOffset: 3)...]) : nil }
 
         titleField.itemList = viewModel.titleOptions
+        nfcLoginButton.isHidden = !viewModel.nfcLogInAvailable
 
         viewModel.isLoading.producer
         .observe(on: UIScheduler())
@@ -142,10 +160,28 @@ class SignInViewController: UIViewController {
         viewModel.loginAction.events
         .observe(on: UIScheduler())
         .observeValues(signInSuccess)
+        
+        viewModel.nfcLoginAction.events
+        .observe(on: UIScheduler())
+        .observeValues(signInSuccess)
 
         viewModel.registerAction.events
         .observe(on: UIScheduler())
         .observeValues(signInSuccess)
+        
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
+}
+
+@available(iOS 11.0, *)
+extension SignInViewController: NFCNDEFReaderSessionDelegate {
+    func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {}
     
+    func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
+        if let payload = messages.first?.records.first?.payload {
+            viewModel?.nfcReadEmail.value = String(data: payload, encoding: .utf8)
+        } else {
+            viewModel?.nfcReadEmail.value = nil
+        }
+    }
 }

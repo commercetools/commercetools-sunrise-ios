@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ContentfulAccessToken</key>
-	<string>138eaaf7809d454402d81e46e5f7adfec8862462a09c3f79c466c2eb69a4b508</string>
-	<key>ContentfulSpaceId</key>
-	<string>2xzt2k8divi4</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -34,9 +30,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>97</string>
+	<string>108</string>
 	<key>Category cache expiration</key>
 	<integer>3600</integer>
+	<key>ContentfulAccessToken</key>
+	<string>138eaaf7809d454402d81e46e5f7adfec8862462a09c3f79c466c2eb69a4b508</string>
+	<key>ContentfulSpaceId</key>
+	<string>2xzt2k8divi4</string>
 	<key>Displayable attributes</key>
 	<array>
 		<string>colorFreeDefinition</string>
@@ -46,6 +46,8 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>You can log in using your NFC tag.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We use your camera in order to scan for product barcodes.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

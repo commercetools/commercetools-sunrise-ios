@@ -2,8 +2,8 @@ platform :ios, '10.0'
 use_frameworks!
 
 def common_pods
-  pod 'Commercetools'
-  pod 'ReactiveCocoa', :git => 'https://github.com/ReactiveCocoa/ReactiveCocoa.git', :tag => '6.0.0-rc.3'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'nfc-sunrise'
+  pod 'ReactiveCocoa'
   pod 'ReactiveObjC'
   pod 'DZNEmptyDataSet'
 end
@@ -24,8 +24,8 @@ end
 
 target 'Sunrise Watch Extension' do
   platform :watchos, '3.0'
-  pod 'Commercetools'
-  pod 'ReactiveSwift', :git => 'https://github.com/ReactiveCocoa/ReactiveSwift.git', :tag => '2.0.0-rc.3'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'nfc-sunrise'
+  pod 'ReactiveSwift'
   pod 'SDWebImage'
   pod 'NKWatchActivityIndicator'
 end
