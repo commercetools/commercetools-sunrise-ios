@@ -44,7 +44,7 @@ extension Channel {
     // MARK: - Physical store properties
 
     private var fields: [String: JsonValue]? {
-        return custom?.dictionary
+        return custom?.dictionary?["fields"]?.dictionary
     }
     var streetAndNumberInfo: String {
         if let street = address?.streetName, let number = address?.streetNumber {
