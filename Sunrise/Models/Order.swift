@@ -7,7 +7,7 @@ import ReactiveSwift
 
 extension Order {
     var isReservation: Bool {
-        return ((custom?["fields"] as? [String: Any])?["isReservation"] as? Bool) == true
+        return custom?.dictionary?["fields"]?.dictionary?["isReservation"]?.bool == true
     }
 
     #if os(iOS)
@@ -20,9 +20,9 @@ extension Order {
             }
 
             let selectedChannelReference = Reference<Channel>(id: store.id, typeId: "channel")
-            let lineItemDraft = LineItemDraft(productId: productId, variantId: variantId, supplyChannel: selectedChannelReference, distributionChannel: selectedChannelReference)
-            let customType = ["type": ["key": "reservationOrder"],
-                              "fields": ["isReservation": true]]
+            let lineItemDraft = LineItemDraft(productVariantSelection: .productVariant(productId: productId, variantId: variantId), supplyChannel: selectedChannelReference, distributionChannel: selectedChannelReference)
+            let customType = JsonValue.dictionary(value: ["type": .dictionary(value: ["key": .string(value: "reservationOrder")]),
+                                                           "fields": .dictionary(value: ["isReservation": .bool(value: true)])])
 
             Customer.profile { result in
                 if let profile = result.model, result.isSuccess {

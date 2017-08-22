@@ -5,7 +5,6 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import ReactiveCocoa
 import Result
 @testable import Sunrise
@@ -22,8 +21,8 @@ class ProductOverviewViewModelSpec: QuickSpec {
 
             beforeEach {
                 let path = Bundle.currentTestBundle!.path(forResource: "product-projection", ofType: "json")!
-                let productProjectionJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-                let product = Mapper<ProductProjection>().map(JSONString: productProjectionJSON as String)!
+                let productProjectionJSON = try! String(contentsOfFile: path, encoding: .utf8)
+                let product = try! jsonDecoder.decode(ProductProjection.self, from: productProjectionJSON.data(using: .utf8)!)
 
                 overviewViewModel = ProductOverviewViewModel()
                 overviewViewModel.products = [product]

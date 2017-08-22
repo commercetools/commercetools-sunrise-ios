@@ -5,7 +5,6 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import Result
 @testable import Sunrise
 
@@ -17,8 +16,8 @@ class ConfirmationViewModelSpec: QuickSpec {
 
             beforeEach {
                 let path = Bundle.currentTestBundle!.path(forResource: "cartConfirmation", ofType: "json")!
-                let cartJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-                let cart = Mapper<Cart>().map(JSONString: cartJSON as String)!
+                let cartJSON = try! String(contentsOfFile: path, encoding: .utf8)
+                let cart = try! jsonDecoder.decode(Cart.self, from: cartJSON.data(using: .utf8)!)
 
                 confirmationViewModel = ConfirmationViewModel(cart: cart)
             }

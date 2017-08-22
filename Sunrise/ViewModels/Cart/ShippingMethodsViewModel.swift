@@ -110,7 +110,7 @@ class ShippingMethodsViewModel: BaseViewModel {
         Cart.active { result in
             if let cart = result.model, result.isSuccess {
                 let shippingMethodReference = Reference<ShippingMethod>(id: shippingMethod.id, typeId: "shipping-method")
-                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: [.setShippingMethod(shippingMethod: shippingMethodReference, externalTaxRate: nil)])
+                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: [.setShippingMethod(shippingMethod: shippingMethodReference)])
                 Cart.update(cart.id, actions: updateActions, result: { result in
                     if result.isSuccess {
                         self.performSegueObserver.send(value: ())

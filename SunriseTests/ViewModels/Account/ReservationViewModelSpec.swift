@@ -5,16 +5,15 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import Result
 @testable import Sunrise
 
 class ReservationViewModelSpec: QuickSpec {
 
     static var order: Order = {
-        let path = Bundle.currentTestBundle!.path(forResource: "reservation", ofType: "json")!
-        let reservationJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-        return Mapper<Order>().map(JSONString: reservationJSON as String)!
+        let path = Bundle.currentTestBundle!.path(forResource: "reservation", ofType: "json")!   
+        let reservationJSON = try! String(contentsOfFile: path, encoding: .utf8)
+        return try! jsonDecoder.decode(Order.self, from: reservationJSON.data(using: .utf8)!)
     }()
     
     override func spec() {

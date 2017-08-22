@@ -5,7 +5,6 @@
 import Commercetools
 import Quick
 import Nimble
-import ObjectMapper
 import ReactiveCocoa
 import Result
 @testable import Sunrise
@@ -18,8 +17,8 @@ class AccountViewModelSpec: QuickSpec {
 
             beforeEach {
                 let path = Bundle.currentTestBundle!.path(forResource: "cartAndOrder", ofType: "json")!
-                let orderJSON = try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
-                let order = Mapper<Order>().map(JSONString: orderJSON as String)!
+                let orderJSON = try! String(contentsOfFile: path, encoding: .utf8)
+                let order = try! jsonDecoder.decode(Order.self, from: orderJSON.data(using: .utf8)!)
 
                 accountViewModel = AccountViewModel()
                 accountViewModel.orders = [order]

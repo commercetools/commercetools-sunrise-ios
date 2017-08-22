@@ -6,8 +6,8 @@ import Commercetools
 
 extension Customer {
 
-    var customType: [String: Any]? {
-        return custom?["type"] as? [String: Any]
+    var customType: [String: JsonValue]? {
+        return custom?.dictionary?["type"]?.dictionary
     }
 
     // MARK: - Helper method making it more easier to add necessary `iOSUser` customer custom type
@@ -31,12 +31,13 @@ extension Customer {
 
     // MARK: - My store
 
-    private var fields: [String: Any]? {
-        return custom?["fields"] as? [String: Any]
+    private var fields: [String: JsonValue]? {
+        return custom?.dictionary?["fields"]?.dictionary
     }
     var myStore: Reference<Channel>? {
-        if let myStoreJSON = fields?["myStore"] as? [String: Any] {
-            return Reference<Channel>(JSON: myStoreJSON)
+        if let myStoreJSON = fields?["myStore"]?.dictionary, let id = myStoreJSON["id"]?.string,
+           let typeId = myStoreJSON["typeId"]?.string {
+            return Reference<Channel>(id: id, typeId: typeId)
         }
         return nil
     }

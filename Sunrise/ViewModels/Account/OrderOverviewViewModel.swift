@@ -54,7 +54,7 @@ class OrderOverviewViewModel: BaseViewModel {
     }
 
     func lineItemSizeAtIndexPath(_ indexPath: IndexPath) -> String {
-        return order.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
+        return order.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == "size" }).first?.value.string ?? "N/A"
     }
 
     func lineItemImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {

@@ -66,9 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return true
 
             // PDP (e.g https://demo.commercetools.com/en/brunello-cucinelli-coat-mf9284762-cream-M0E20000000DQR5.html)
-            } else if var sku = pathComponents.last?.components(separatedBy: "-").last, sku.contains(".html") {
-                sku = sku.substring(to: sku.index(sku.endIndex, offsetBy: -5))
-                AppRouting.switchToProductDetails(for: sku)
+            } else if let sku = pathComponents.last?.components(separatedBy: "-").last, sku.count > 5, sku.contains(".html") {
+                AppRouting.switchToProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
                 return true
 
             // Orders (e.g https://demo.commercetools.com/en/user/orders/87896195?)

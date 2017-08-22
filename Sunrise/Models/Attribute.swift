@@ -12,6 +12,7 @@ extension Attribute {
     private var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         return dateFormatter
     }
 
@@ -19,46 +20,49 @@ extension Attribute {
         return representation(for: value, ofType: type)
     }
 
-    private func representation(for rawValue: Any?, ofType type: AttributeType) -> String? {
+    private func representation(for rawValue: JsonValue?, ofType type: AttributeType) -> String? {
+        guard let rawValue = rawValue else { return nil }
         switch (type.name, rawValue) {
-        case ("boolean", let rawValue as Bool):
-            return rawValue ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
-        case (let typeName, let rawValue as String) where ["text", "enum"].contains(typeName):
-            return rawValue
-        case ("ltext", let rawValue as [String: String]):
-            return rawValue.localizedString
-        case ("lenum", let rawValue as [String: AnyObject]):
-            return (rawValue["label"] as? [String: String])?.localizedString
-        case ("number", let rawValue as Int):
-            return String(rawValue)
-        case ("number", let rawValue as Double):
-            return String(rawValue)
-        case ("money", let rawValue):
-            return Mapper<Money>().map(JSONObject: rawValue)?.description
-        case ("date", let rawValue):
-            if let date = Commercetools.ISO8601DateTransform().transformFromJSON(rawValue) {
+        case ("boolean", .bool(let value)):
+            return value ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
+        case (let typeName, .string(let value)) where ["text", "enum"].contains(typeName):
+            return value
+        case ("ltext", .dictionary(let value)):
+            return localizedString(from: value)
+        case ("lenum", .dictionary(let value)):
+            guard let dictionary = value["label"]?.dictionary else { return nil }
+            return localizedString(from: dictionary)
+        case ("number", .int(let value)):
+            return String(value)
+        case ("number", .double(let value)):
+            return String(value)
+        case ("money", .dictionary(let value)):
+            guard let currencyCode = value["currencyCode"]?.string, let centAmount = value["centAmount"]?.int else { return nil }
+            return Money(currencyCode: currencyCode, centAmount: centAmount).description
+        case ("date", .string(let value)):
+            if let date = dateFormatter.date(from: value) {
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .none
                 return dateFormatter.string(from: date)
             }
             return nil
-        case ("time", let rawValue):
-            if let date = Commercetools.ISO8601DateTransform().transformFromJSON(rawValue) {
+        case ("time", .string(let value)):
+            if let date = dateFormatter.date(from: value) {
                 dateFormatter.dateStyle = .none
                 dateFormatter.timeStyle = .short
                 return dateFormatter.string(from: date)
             }
             return nil
-        case ("datetime", let rawValue):
-            if let date = Commercetools.ISO8601DateTransform().transformFromJSON(rawValue) {
+        case ("datetime", .string(let value)):
+            if let date = dateFormatter.date(from: value) {
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .short
                 return dateFormatter.string(from: date)
             }
             return nil
-        case ("set", let rawValues as [AnyObject]):
+        case ("set", .array(let values)):
             if let elementType = type.elementType {
-                return rawValues.reduce("") {
+                return values.reduce("") {
                     if let rawValue = self.representation(for: $1, ofType: elementType) {
                         return "\($0 ?? "") \(rawValue)"
                     }
