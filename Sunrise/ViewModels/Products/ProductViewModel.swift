@@ -253,7 +253,7 @@ class ProductViewModel: BaseViewModel {
             Cart.active(result: { result in
                 if let cart = result.model, result.isSuccess {
                     // In case we already have an active cart, just add selected product
-                    let updateActions = UpdateActions(version: cart.version, actions: [CartUpdateAction.addLineItem(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0, quantity: UInt(quantity), supplyChannel: nil, distributionChannel: nil, custom: nil)])
+                    let updateActions = UpdateActions(version: cart.version, actions: [CartUpdateAction.addLineItem(lineItemDraft: LineItemDraft(productVariantSelection: .productVariant(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0), quantity: UInt(quantity)))])
                     Cart.update(cart.id, actions: updateActions, result: { result in
                         if result.isSuccess {
                             observer.sendCompleted()
@@ -266,7 +266,7 @@ class ProductViewModel: BaseViewModel {
                 } else if let error = result.errors?.first as? CTError, case .resourceNotFoundError(let reason) = error,
                           reason.message == "No active cart exists." {
                     // If there is no active cart, create one, with the selected product
-                    let lineItemDraft = LineItemDraft(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0, quantity: UInt(quantity))
+                    let lineItemDraft = LineItemDraft(productVariantSelection: .productVariant(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0), quantity: UInt(quantity))
                     let cartDraft = CartDraft(currency: BaseViewModel.currencyCodeForCurrentLocale, lineItems: [lineItemDraft])
 
                     Cart.create(cartDraft, result: { result in

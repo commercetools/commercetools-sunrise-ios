@@ -43,8 +43,8 @@ extension Channel {
 
     // MARK: - Physical store properties
 
-    private var fields: [String: Any]? {
-        return custom?["fields"] as? [String: Any]
+    private var fields: [String: JsonValue]? {
+        return custom?.dictionary
     }
     var streetAndNumberInfo: String {
         if let street = address?.streetName, let number = address?.streetNumber {
@@ -59,19 +59,19 @@ extension Channel {
         return "-"
     }
     var openingTimes: String {
-        if let openingTimes = fields?["openingTimes"] as? [String: String] {
-            return openingTimes.localizedString ?? "-"
+        if let openingTimes = fields?["openingTimes"]?.dictionary {
+            return localizedString(from: openingTimes) ?? "-"
         }
         return "-"
     }
     var imageUrl: String? {
-        return fields?["imageUrl"] as? String
+        return fields?["imageUrl"]?.string
     }
     var latitude: String? {
-        return fields?["latitude"] as? String
+        return fields?["latitude"]?.string
     }
     var longitude: String? {
-        return fields?["longitude"] as? String
+        return fields?["longitude"]?.string
     }
 }
 
@@ -87,4 +87,14 @@ extension Channel: Equatable {}
 
 public func ==(lhs: Channel, rhs: Channel) -> Bool {
     return lhs.hashValue == rhs.hashValue
+}
+
+public func localizedString(from jsonDictionary: [String: JsonValue]) -> String? {
+    return jsonDictionary.reduce([String: String]()) { dict, item in
+        var openingTimes = dict
+        if let stringValue = item.1.string {
+            openingTimes[item.key] = stringValue
+        }
+        return openingTimes
+    }.localizedString
 }

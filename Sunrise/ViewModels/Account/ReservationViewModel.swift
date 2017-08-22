@@ -44,7 +44,7 @@ class ReservationViewModel {
 
         productName = order.lineItems.first?.name.localizedString
         productImageUrl = order.lineItems.first?.variant.images?.first?.url ?? ""
-        size = order.lineItems.first?.variant.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
+        size = order.lineItems.first?.variant.attributes?.filter({ $0.name == "size" }).first?.value.string ?? "N/A"
         quantity = String(order.lineItems.first?.quantity ?? 1)
 
         if let discounted = order.lineItems.first?.price.discounted?.value {

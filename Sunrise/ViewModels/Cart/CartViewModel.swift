@@ -159,7 +159,7 @@ class CartViewModel: BaseViewModel {
     }
 
     func lineItemSizeAtIndexPath(_ indexPath: IndexPath) -> String {
-        return cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == "size" }).first?.value as? String ?? "N/A"
+        return cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == "size" }).first?.value.string ?? "N/A"
     }
 
     func lineItemImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
@@ -347,7 +347,7 @@ class CartViewModel: BaseViewModel {
 
     func addProduct(id: String, variantId: Int, quantity: UInt, discountCode: String?) {
         queryForActiveCart { [weak self] cart in
-            var actions = [CartUpdateAction.addLineItem(productId: id, variantId: variantId, quantity: quantity, supplyChannel: nil, distributionChannel: nil, custom: nil)]
+            var actions = [CartUpdateAction.addLineItem(lineItemDraft: LineItemDraft(productVariantSelection: .productVariant(productId: id, variantId: variantId), quantity: quantity))]
             if let discountCode = discountCode {
                 actions.append(.addDiscountCode(code: discountCode))
             }
