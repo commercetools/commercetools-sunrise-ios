@@ -106,8 +106,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveDeviceTokenForCurrentCustomer() {
         if Commercetools.authState == .customerToken {
             Customer.addCustomTypeIfNotExists { version, errors in
-                if let version = version, errors == nil {
-                    let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "apnsToken", value: self.deviceToken)])
+                if let version = version, let deviceToken = self.deviceToken, errors == nil {
+                    let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "apnsToken", value: .string(value: deviceToken))])
 
                     Customer.update(actions: updateActions) { result in
                         if result.isFailure {
