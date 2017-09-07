@@ -145,6 +145,7 @@
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */; };
+		21D2AE9D1F6171E10087CB46 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */; };
 		21F7D1C71E717A910038ED7E /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7D1C61E717A910038ED7E /* AddressCell.swift */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
 		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
@@ -379,6 +380,7 @@
 		21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SunriseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseUITests.swift; sourceTree = "<group>"; };
 		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		21F7D1C61E717A910038ED7E /* AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -537,6 +539,7 @@
 		210BE518952AAA46B6CF72A6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				21D2AE9B1F6171B80087CB46 /* Onboarding */,
 				210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */,
 				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
 				210BE20DA42CC9A151627D9B /* Products */,
@@ -868,6 +871,14 @@
 				21CDC4BB1CE91D9B009D2638 /* Info.plist */,
 			);
 			path = SunriseUITests;
+			sourceTree = "<group>";
+		};
+		21D2AE9B1F6171B80087CB46 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		35E540A469E198E7F3ACD078 /* Pods */ = {
@@ -1571,6 +1582,7 @@
 				217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */,
 				215C7C201D79A08C002EC074 /* SelectableAttributeCell.swift in Sources */,
 				21B9001A1CFE07C700E053F9 /* CartLineItemCell.swift in Sources */,
+				21D2AE9D1F6171E10087CB46 /* SignUpViewController.swift in Sources */,
 				219B2EBC1D1B7348004579DD /* OrderCell.swift in Sources */,
 				21C0B62E1E7F3F3400D666F5 /* NewAddressViewModel.swift in Sources */,
 				210BE1FC59FA761E46E72C64 /* CommonViewBinding.swift in Sources */,

@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var locationManager: CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // TODO move to appropriate view controller once ready
+        let attributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Medium", size: 14)!]
+        UISegmentedControl.appearance().setTitleTextAttributes(attributes, for: .normal)
+
         AppRouting.setupInitiallyActiveTab()
 
         if let configuration = Project.config {
