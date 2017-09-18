@@ -41,20 +41,24 @@
             </objects>
             <point key="canvasLocation" x="-2726" y="-356"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="nqC-cd-glc">
             <objects>
-                <viewController id="HOR-jt-CTe" sceneMemberID="viewController">
+                <viewController id="HOR-jt-CTe" customClass="OnboardingViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AWw-Pu-T5j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTW-19-SzZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Adidas logo" translatesAutoresizingMaskIntoConstraints="NO" id="Jjl-bZ-j2f">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="462"/>
-                                <color key="backgroundColor" red="1" green="0.95686274510000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1n-VF-ES1">
-                                <rect key="frame" x="71.5" y="537.5" width="233" height="43"/>
+                                <rect key="frame" x="71.5" y="542.5" width="233" height="43"/>
                                 <string key="text">All of your favourite fashion
 brands in one awesome app</string>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -62,7 +66,7 @@ brands in one awesome app</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sunrise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TD-bE-U8o">
-                                <rect key="frame" x="71" y="487" width="234" height="36.5"/>
+                                <rect key="frame" x="71" y="492" width="234" height="36.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -90,16 +94,20 @@ brands in one awesome app</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="dru-Pk-Z5o" firstAttribute="bottom" secondItem="Jjl-bZ-j2f" secondAttribute="bottom" constant="205" id="77O-I7-Fwe"/>
+                            <constraint firstItem="DTW-19-SzZ" firstAttribute="height" secondItem="AWw-Pu-T5j" secondAttribute="height" multiplier="0.7" id="6JR-cs-1oi"/>
                             <constraint firstItem="Jjl-bZ-j2f" firstAttribute="trailing" secondItem="dru-Pk-Z5o" secondAttribute="trailing" id="Ddy-TL-517"/>
                             <constraint firstItem="V1n-VF-ES1" firstAttribute="top" secondItem="8TD-bE-U8o" secondAttribute="bottom" constant="14" id="Jxr-oy-Tf2"/>
                             <constraint firstItem="8TD-bE-U8o" firstAttribute="centerX" secondItem="AWw-Pu-T5j" secondAttribute="centerX" id="OhH-lW-Hgl"/>
+                            <constraint firstItem="Jjl-bZ-j2f" firstAttribute="height" secondItem="AWw-Pu-T5j" secondAttribute="height" multiplier="0.7" id="Qj4-6r-mOA"/>
                             <constraint firstItem="dru-Pk-Z5o" firstAttribute="trailing" secondItem="DW9-dR-Ub5" secondAttribute="trailing" constant="22" id="Y9N-sV-b0L"/>
                             <constraint firstItem="8TD-bE-U8o" firstAttribute="top" secondItem="Jjl-bZ-j2f" secondAttribute="bottom" constant="25" id="eRX-q3-2jP"/>
                             <constraint firstItem="dru-Pk-Z5o" firstAttribute="bottom" secondItem="yqP-oH-cxR" secondAttribute="bottom" constant="1" id="hQZ-e9-HVH"/>
+                            <constraint firstAttribute="trailing" secondItem="DTW-19-SzZ" secondAttribute="trailing" id="lM6-wP-m4u"/>
                             <constraint firstItem="DW9-dR-Ub5" firstAttribute="centerY" secondItem="yqP-oH-cxR" secondAttribute="centerY" id="pSJ-E6-XjJ"/>
                             <constraint firstItem="Jjl-bZ-j2f" firstAttribute="top" secondItem="AWw-Pu-T5j" secondAttribute="top" id="ujs-pv-MAf"/>
+                            <constraint firstItem="DTW-19-SzZ" firstAttribute="leading" secondItem="AWw-Pu-T5j" secondAttribute="leading" id="vDG-Bl-EyG"/>
                             <constraint firstItem="yqP-oH-cxR" firstAttribute="centerX" secondItem="AWw-Pu-T5j" secondAttribute="centerX" id="vDg-lz-Tsu"/>
+                            <constraint firstItem="DTW-19-SzZ" firstAttribute="top" secondItem="AWw-Pu-T5j" secondAttribute="top" id="vwa-1E-4nJ"/>
                             <constraint firstItem="Jjl-bZ-j2f" firstAttribute="leading" secondItem="dru-Pk-Z5o" secondAttribute="leading" id="zU8-lh-nfB"/>
                             <constraint firstItem="V1n-VF-ES1" firstAttribute="centerX" secondItem="AWw-Pu-T5j" secondAttribute="centerX" id="zth-ql-vGX"/>
                         </constraints>
@@ -109,6 +117,9 @@ brands in one awesome app</string>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="f96-hn-2h9"/>
+                    <connections>
+                        <outlet property="gradientView" destination="DTW-19-SzZ" id="7c2-sh-48y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1mc-MQ-6Ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Fey-4g-iUW">
@@ -119,15 +130,15 @@ brands in one awesome app</string>
             </objects>
             <point key="canvasLocation" x="-1994.4000000000001" y="-354.87256371814095"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="ZyR-im-bwM">
             <objects>
-                <viewController id="uRJ-pu-4js" sceneMemberID="viewController">
+                <viewController id="uRJ-pu-4js" customClass="OnboardingViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4tB-yT-Xcl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmd-8a-4G1">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmd-8a-4G1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_cards" translatesAutoresizingMaskIntoConstraints="NO" id="zEI-ST-vwL">
@@ -143,11 +154,11 @@ brands in one awesome app</string>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8n-tC-4Us">
-                                        <rect key="frame" x="43" y="376" width="86" height="85"/>
+                                        <rect key="frame" x="50.5" y="383" width="74" height="73"/>
                                         <state key="normal" image="reject_button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9a-4f-rHD">
-                                        <rect key="frame" x="253.5" y="386" width="67" height="65"/>
+                                        <rect key="frame" x="248.5" y="383" width="75" height="73"/>
                                         <state key="normal" image="accept_button"/>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tcF-qK-WQq">
@@ -160,23 +171,23 @@ brands in one awesome app</string>
                                             <segment title="women"/>
                                             <segment title="men"/>
                                         </segments>
-                                        <color key="tintColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </segmentedControl>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.95686274509803915" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zEI-ST-vwL" secondAttribute="trailing" constant="50" id="6PP-UR-A8o"/>
                                     <constraint firstItem="zEI-ST-vwL" firstAttribute="centerX" secondItem="dmd-8a-4G1" secondAttribute="centerX" id="Bjj-FU-jyX"/>
                                     <constraint firstAttribute="trailing" secondItem="fQW-BZ-0Ex" secondAttribute="trailing" constant="40" id="Hqu-k9-OPh"/>
                                     <constraint firstAttribute="bottom" secondItem="fQW-BZ-0Ex" secondAttribute="bottom" constant="53" id="JYw-yF-FaT"/>
                                     <constraint firstItem="fQW-BZ-0Ex" firstAttribute="centerX" secondItem="dmd-8a-4G1" secondAttribute="centerX" id="Njp-Nr-N3g"/>
-                                    <constraint firstItem="K8n-tC-4Us" firstAttribute="bottom" secondItem="fQW-BZ-0Ex" secondAttribute="bottom" constant="47" id="SER-lk-Qx6"/>
+                                    <constraint firstItem="K8n-tC-4Us" firstAttribute="bottom" secondItem="fQW-BZ-0Ex" secondAttribute="bottom" constant="42" id="SER-lk-Qx6"/>
                                     <constraint firstItem="tcF-qK-WQq" firstAttribute="centerX" secondItem="dmd-8a-4G1" secondAttribute="centerX" id="eqK-1E-KhE"/>
                                     <constraint firstItem="zEI-ST-vwL" firstAttribute="leading" secondItem="dmd-8a-4G1" secondAttribute="leading" constant="50" id="kSG-HK-ddx"/>
                                     <constraint firstItem="zEI-ST-vwL" firstAttribute="top" secondItem="fQW-BZ-0Ex" secondAttribute="top" constant="-24" id="ly6-lV-fwY"/>
-                                    <constraint firstItem="u9a-4f-rHD" firstAttribute="trailing" secondItem="fQW-BZ-0Ex" secondAttribute="trailing" constant="-14" id="njH-mr-P19"/>
-                                    <constraint firstItem="u9a-4f-rHD" firstAttribute="bottom" secondItem="fQW-BZ-0Ex" secondAttribute="bottom" constant="37" id="ocD-tR-5aU"/>
-                                    <constraint firstItem="K8n-tC-4Us" firstAttribute="leading" secondItem="fQW-BZ-0Ex" secondAttribute="leading" constant="3.5" id="t0E-Jz-JVK"/>
+                                    <constraint firstItem="u9a-4f-rHD" firstAttribute="trailing" secondItem="fQW-BZ-0Ex" secondAttribute="trailing" constant="-11" id="njH-mr-P19"/>
+                                    <constraint firstItem="u9a-4f-rHD" firstAttribute="bottom" secondItem="fQW-BZ-0Ex" secondAttribute="bottom" constant="42" id="ocD-tR-5aU"/>
+                                    <constraint firstItem="K8n-tC-4Us" firstAttribute="leading" secondItem="fQW-BZ-0Ex" secondAttribute="leading" constant="11" id="t0E-Jz-JVK"/>
                                     <constraint firstItem="fQW-BZ-0Ex" firstAttribute="leading" secondItem="dmd-8a-4G1" secondAttribute="leading" constant="40" id="w03-ir-XQN"/>
                                 </constraints>
                             </view>
@@ -235,6 +246,9 @@ recommend based on your style!</string>
                             <outletCollection property="gestureRecognizers" destination="vvd-zY-dXh" appends="YES" id="afH-Kl-j7J"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="gradientView" destination="dmd-8a-4G1" id="sQa-vv-9Yc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sce-UO-V73" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="vvd-zY-dXh">
@@ -245,15 +259,15 @@ recommend based on your style!</string>
             </objects>
             <point key="canvasLocation" x="-1260" y="-355.7721139430285"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="a59-UW-hV3">
             <objects>
-                <viewController id="Eol-gS-uua" sceneMemberID="viewController">
+                <viewController id="Eol-gS-uua" customClass="OnboardingViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yyw-o8-vfg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4Y-Zm-WDP">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4Y-Zm-WDP">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Czo-8J-i13">
@@ -264,8 +278,8 @@ recommend based on your style!</string>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewr-1X-wrB">
-                                        <rect key="frame" x="245" y="376" width="86" height="85"/>
-                                        <state key="normal" image="next_button"/>
+                                        <rect key="frame" x="248.5" y="383" width="75" height="73"/>
+                                        <state key="normal" image="accept_button"/>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sbF-Xk-rre">
                                         <rect key="frame" x="87.5" y="28" width="200" height="42"/>
@@ -277,12 +291,12 @@ recommend based on your style!</string>
                                             <segment title="women"/>
                                             <segment title="men"/>
                                         </segments>
-                                        <color key="tintColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ok got it!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0j-8y-RYb">
                                         <rect key="frame" x="87.5" y="187.5" width="199" height="66"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="40"/>
-                                        <color key="textColor" red="1" green="0.95686274509803915" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAh-5j-exm">
@@ -294,16 +308,16 @@ style for later</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.95686274510000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Czo-8J-i13" secondAttribute="bottom" constant="53" id="2tE-7F-xgD"/>
                                     <constraint firstItem="Czo-8J-i13" firstAttribute="top" secondItem="d0j-8y-RYb" secondAttribute="bottom" constant="-136" id="6xv-66-5TC"/>
                                     <constraint firstItem="wAh-5j-exm" firstAttribute="centerX" secondItem="r4Y-Zm-WDP" secondAttribute="centerX" id="DlM-Zm-eVJ"/>
                                     <constraint firstItem="d0j-8y-RYb" firstAttribute="centerX" secondItem="r4Y-Zm-WDP" secondAttribute="centerX" id="LWb-gn-tn4"/>
-                                    <constraint firstItem="Ewr-1X-wrB" firstAttribute="bottom" secondItem="Czo-8J-i13" secondAttribute="bottom" constant="47" id="Uz6-wY-UV9"/>
+                                    <constraint firstItem="Ewr-1X-wrB" firstAttribute="bottom" secondItem="Czo-8J-i13" secondAttribute="bottom" constant="42" id="Uz6-wY-UV9"/>
                                     <constraint firstItem="wAh-5j-exm" firstAttribute="top" secondItem="d0j-8y-RYb" secondAttribute="bottom" constant="1" id="Zxg-09-63v"/>
                                     <constraint firstItem="sbF-Xk-rre" firstAttribute="centerX" secondItem="r4Y-Zm-WDP" secondAttribute="centerX" id="jQf-DL-rPY"/>
-                                    <constraint firstItem="Ewr-1X-wrB" firstAttribute="trailing" secondItem="Czo-8J-i13" secondAttribute="trailing" constant="-3.5" id="n1s-o8-Kf8"/>
+                                    <constraint firstItem="Ewr-1X-wrB" firstAttribute="trailing" secondItem="Czo-8J-i13" secondAttribute="trailing" constant="-11" id="n1s-o8-Kf8"/>
                                     <constraint firstAttribute="trailing" secondItem="Czo-8J-i13" secondAttribute="trailing" constant="40" id="pb6-fm-cHP"/>
                                     <constraint firstItem="Czo-8J-i13" firstAttribute="leading" secondItem="r4Y-Zm-WDP" secondAttribute="leading" constant="40" id="sqs-9I-q5q"/>
                                     <constraint firstItem="Czo-8J-i13" firstAttribute="centerX" secondItem="r4Y-Zm-WDP" secondAttribute="centerX" id="xuh-8q-L1V"/>
@@ -364,6 +378,9 @@ recommend based on your style!</string>
                             <outletCollection property="gestureRecognizers" destination="zOD-OG-jaf" appends="YES" id="kD5-Yk-z4J"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="gradientView" destination="r4Y-Zm-WDP" id="bdh-6J-Ziz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hd6-6R-j6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="zOD-OG-jaf">
@@ -1554,7 +1571,7 @@ recommend based on your style!</string>
     </scenes>
     <resources>
         <image name="Adidas logo" width="139" height="135"/>
-        <image name="accept_button" width="67" height="65"/>
+        <image name="accept_button" width="75" height="73"/>
         <image name="active_tab_background" width="1" height="1"/>
         <image name="background_cards" width="275" height="292"/>
         <image name="banner1" width="375" height="272"/>
@@ -1574,13 +1591,12 @@ recommend based on your style!</string>
         <image name="nav_bar_bag" width="21" height="25"/>
         <image name="nav_bar_bag_badge" width="22" height="22"/>
         <image name="nav_bar_logo" width="146" height="46"/>
-        <image name="next_button" width="86" height="85"/>
         <image name="password_icon" width="19" height="21"/>
         <image name="product_image1" width="155" height="202"/>
         <image name="product_image2" width="156" height="202"/>
         <image name="profile_tab" width="16" height="18"/>
         <image name="profile_tab_sel" width="15" height="18"/>
-        <image name="reject_button" width="86" height="85"/>
+        <image name="reject_button" width="74" height="73"/>
         <image name="search_tab" width="18" height="18"/>
         <image name="search_tab_sel" width="18" height="18"/>
         <image name="style_sel1" width="295" height="296"/>

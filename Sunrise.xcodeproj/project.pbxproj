@@ -84,6 +84,7 @@
 		21265A391ECA0E2600229D96 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A3B1ECA0E2600229D96 /* Cart.storyboard */; };
 		21265A3E1ECA0E3600229D96 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A401ECA0E3600229D96 /* Account.storyboard */; };
 		21265A431ECA0E4D00229D96 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21265A451ECA0E4D00229D96 /* ProductDetails.storyboard */; };
+		212B14EF1F6FE9320017D594 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212B14EE1F6FE9320017D594 /* OnboardingViewController.swift */; };
 		212EB2F41F5F21EF0006611E /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2D81F5F21E80006611E /* Poppins-Bold.ttf */; };
 		212EB2F51F5F21EF0006611E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E31F5F21EA0006611E /* Poppins-Light.ttf */; };
 		212EB2F61F5F21EF0006611E /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2D91F5F21E90006611E /* Poppins-Medium.ttf */; };
@@ -315,6 +316,7 @@
 		21265A421ECA0E3B00229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Account.strings; sourceTree = "<group>"; };
 		21265A441ECA0E4D00229D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ProductDetails.storyboard; sourceTree = "<group>"; };
 		21265A471ECA0E5100229D96 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ProductDetails.strings; sourceTree = "<group>"; };
+		212B14EE1F6FE9320017D594 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		212EB2D61F5F21E80006611E /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
 		212EB2D71F5F21E80006611E /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		212EB2D81F5F21E80006611E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -883,6 +885,7 @@
 			isa = PBXGroup;
 			children = (
 				21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */,
+				212B14EE1F6FE9320017D594 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1648,6 +1651,7 @@
 				210BE42707A68CA941DD4365 /* PaymentsViewController.swift in Sources */,
 				210BE9E19FF2758A7FE3E2E5 /* VoiceSearchViewController.swift in Sources */,
 				210BED193C70A2F36D0D6477 /* VoiceSearchViewModel.swift in Sources */,
+				212B14EF1F6FE9320017D594 /* OnboardingViewController.swift in Sources */,
 				210BE91F37F1132ACF12CB18 /* VoiceLevelView.swift in Sources */,
 				210BED67E6A0FE06D4850643 /* DiscountCode.swift in Sources */,
 			);
