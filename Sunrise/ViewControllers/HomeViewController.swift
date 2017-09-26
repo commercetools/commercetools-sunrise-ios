@@ -63,7 +63,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 5 {
-            return 375
+            return 360
         } else {
             return UITableViewAutomaticDimension
         }
