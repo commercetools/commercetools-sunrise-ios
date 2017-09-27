@@ -7,7 +7,8 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var tableViewSafeZoneTopConstraint: NSLayoutConstraint!
+
     let newProductsViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "ProductsSectionViewController") as! ProductsSectionViewController
     let recommendedViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "RecommendedViewController") as! ProductsSectionViewController
     let onSaleViewController = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "OnSaleViewController") as! ProductsSectionViewController
@@ -17,6 +18,12 @@ class HomeViewController: UIViewController {
         
         newProductsViewController.numberOfItems = 3
         onSaleViewController.numberOfItems = 3
+        
+        if #available(iOS 11, *) {
+            tableViewSafeZoneTopConstraint.constant = 53
+        } else {
+            tableViewSafeZoneTopConstraint.constant = 33
+        }
     }
 }
 

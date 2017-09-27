@@ -757,6 +757,7 @@ recommend based on your style!</string>
                     </tabBarItem>
                     <connections>
                         <outlet property="tableView" destination="N4h-dj-aXd" id="SCq-QO-Pl0"/>
+                        <outlet property="tableViewSafeZoneTopConstraint" destination="uWb-9h-poZ" id="48H-ue-gXj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWg-Hh-GFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
