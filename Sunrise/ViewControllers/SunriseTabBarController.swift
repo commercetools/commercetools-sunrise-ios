@@ -5,8 +5,9 @@
 import UIKit
 
 class SunriseTabBarController: UITabBarController {
-
+    
     @IBOutlet var tabView: UIView!
+    @IBOutlet var navigationView: UIView!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var barcodeButton: UIButton!    
     @IBOutlet weak var searchButton: UIButton!
@@ -53,16 +54,40 @@ class SunriseTabBarController: UITabBarController {
         tabView.layer.shadowRadius = 4
         tabView.layer.shadowOffset = CGSize(width: 0, height: 4)
         tabView.layer.shadowOpacity = 0.5
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        view.addSubview(tabView)
-        var tabBarFrame = tabBar.frame
-        tabBarFrame.size.height = 53
-        tabView.frame = tabBarFrame
         
+        if #available(iOS 11, *) {
+            let guide = view.safeAreaLayoutGuide
+            
+            tabView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(tabView)
+            guide.leftAnchor.constraint(equalTo: tabView.leftAnchor).isActive = true
+            guide.rightAnchor.constraint(equalTo: tabView.rightAnchor).isActive = true
+            guide.bottomAnchor.constraint(equalTo: tabView.bottomAnchor).isActive = true
+            tabView.heightAnchor.constraint(equalToConstant: 53).isActive = true
+            
+            navigationView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(navigationView)
+            guide.leftAnchor.constraint(equalTo: navigationView.leftAnchor).isActive = true
+            guide.rightAnchor.constraint(equalTo: navigationView.rightAnchor).isActive = true
+            guide.topAnchor.constraint(equalTo: navigationView.topAnchor).isActive = true
+            navigationView.heightAnchor.constraint(equalToConstant: 53).isActive = true
+            
+        } else {
+            tabView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(tabView)
+            view.leftAnchor.constraint(equalTo: tabView.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: tabView.rightAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: tabView.bottomAnchor).isActive = true
+            tabView.heightAnchor.constraint(equalToConstant: 53).isActive = true
+            
+            navigationView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(navigationView)
+            view.leftAnchor.constraint(equalTo: navigationView.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: navigationView.rightAnchor).isActive = true
+            view.topAnchor.constraint(equalTo: navigationView.topAnchor).isActive = true
+            navigationView.heightAnchor.constraint(equalToConstant: 73).isActive = true
+        }
+
         tabBar.isHidden = true
     }
 
