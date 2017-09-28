@@ -55,6 +55,18 @@ class SunriseTabBarController: UITabBarController {
         tabView.layer.shadowOffset = CGSize(width: 0, height: 4)
         tabView.layer.shadowOpacity = 0.5
         
+        navigationView.layer.shadowColor = UIColor.black.cgColor
+        pathRect = navigationView.bounds
+        pathRect.size.height = 10
+        pathRect.origin.y += navigationView.bounds.size.height
+        if #available(iOS 11, *) {
+            pathRect.origin.y -= 20
+        }
+        navigationView.layer.shadowPath = UIBezierPath(rect: pathRect).cgPath
+        navigationView.layer.shadowRadius = 6
+        navigationView.layer.shadowOffset = CGSize(width: 0, height: 9)
+        navigationView.layer.shadowOpacity = 0.2
+        
         if #available(iOS 11, *) {
             let guide = view.safeAreaLayoutGuide
             
