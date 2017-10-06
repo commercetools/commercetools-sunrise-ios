@@ -3,11 +3,15 @@
 //
 
 import UIKit
+import Foundation
 
 class SunriseTabBarController: UITabBarController {
     
+    static var currentlyActive: SunriseTabBarController?
+    
     @IBOutlet var tabView: UIView!
     @IBOutlet var navigationView: UIView!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var barcodeButton: UIButton!    
     @IBOutlet weak var searchButton: UIButton!
@@ -38,6 +42,7 @@ class SunriseTabBarController: UITabBarController {
         super.viewDidLoad()
 
         delegate = self
+        SunriseTabBarController.currentlyActive = self
 
         homeButton.setImage(#imageLiteral(resourceName: "home_tab_sel"), for: [.selected, .highlighted])
         barcodeButton.setImage(#imageLiteral(resourceName: "barcode_tab_sel"), for: [.selected, .highlighted])
@@ -105,7 +110,14 @@ class SunriseTabBarController: UITabBarController {
 
     @IBAction func touchUpInside(_ sender: UIButton) {
         guard let index = tabButtons.index(of: sender) else { return }
+        if index == 2 && index == selectedIndex {
+            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.ResetSearch, object: nil, userInfo: nil)
+        }
         selectedIndex = index
+    }
+
+    @IBAction func backButtonTouchUpInside(_ sender: UIButton) {
+        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.BackButtonTapped, object: nil, userInfo: nil)
     }
 
     private func setupTabButtonAppearance() {
@@ -128,5 +140,13 @@ extension SunriseTabBarController: UITabBarControllerDelegate {
             return true
         }
     }
+}
 
+public extension Foundation.Notification.Name {
+    /// Used as a namespace for all notifications related to watch token synchronization.
+    public struct Navigation {
+        /// Posted when proper access tokens have been received from the iOS app.
+        public static let BackButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.backButtonTapped")
+        public static let ResetSearch = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.resetSearch")
+    }
 }

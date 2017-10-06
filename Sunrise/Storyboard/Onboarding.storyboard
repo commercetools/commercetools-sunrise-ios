@@ -58,7 +58,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1n-VF-ES1">
-                                <rect key="frame" x="71.5" y="542.5" width="233" height="43"/>
+                                <rect key="frame" x="72" y="542.5" width="233" height="43"/>
                                 <string key="text">All of your favourite fashion
 brands in one awesome app</string>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -66,7 +66,7 @@ brands in one awesome app</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sunrise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TD-bE-U8o">
-                                <rect key="frame" x="71" y="492" width="234" height="36.5"/>
+                                <rect key="frame" x="71.5" y="492" width="234" height="36.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -200,7 +200,7 @@ recommend based on your style!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build your style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuF-TY-erY">
-                                <rect key="frame" x="96" y="492" width="183" height="36.5"/>
+                                <rect key="frame" x="97" y="492" width="183" height="36.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -300,7 +300,7 @@ recommend based on your style!</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAh-5j-exm">
-                                        <rect key="frame" x="103" y="254.5" width="169" height="43"/>
+                                        <rect key="frame" x="104" y="254.5" width="169" height="43"/>
                                         <string key="text">Sign up to save your
 style for later</string>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -842,6 +842,15 @@ recommend based on your style!</string>
                                             <constraint firstAttribute="width" constant="22" id="O7o-X1-FGT"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcI-bO-NdA">
+                                        <rect key="frame" x="268.5" y="-5" width="53" height="53"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="53" id="8rZ-pk-bkQ"/>
+                                            <constraint firstAttribute="width" constant="53" id="VGM-jE-5ae"/>
+                                        </constraints>
+                                        <state key="normal" image="filter_button"/>
+                                        <state key="selected" image="filter_button_active"/>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_filed_line" translatesAutoresizingMaskIntoConstraints="NO" id="Vic-YA-2h6">
                                         <rect key="frame" x="67.5" y="43" width="240" height="2"/>
                                         <constraints>
@@ -853,9 +862,11 @@ recommend based on your style!</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="0e4-iG-L6p"/>
                                     <constraint firstItem="Vic-YA-2h6" firstAttribute="centerY" secondItem="60d-qF-RpH" secondAttribute="centerY" constant="16.5" id="9ll-P5-B6h"/>
+                                    <constraint firstItem="rcI-bO-NdA" firstAttribute="trailing" secondItem="Vic-YA-2h6" secondAttribute="trailing" constant="14" id="AVB-x7-qwb"/>
                                     <constraint firstItem="uyY-tK-szN" firstAttribute="centerY" secondItem="60d-qF-RpH" secondAttribute="centerY" constant="-5" id="B0z-l0-30J"/>
                                     <constraint firstItem="Bxs-dy-OVK" firstAttribute="leading" secondItem="Vic-YA-2h6" secondAttribute="leading" constant="20" id="JXy-nl-nl7"/>
                                     <constraint firstItem="Vic-YA-2h6" firstAttribute="centerX" secondItem="60d-qF-RpH" secondAttribute="centerX" id="NId-fe-a7j"/>
+                                    <constraint firstItem="Vic-YA-2h6" firstAttribute="top" secondItem="rcI-bO-NdA" secondAttribute="bottom" constant="-5" id="QP7-i6-xiH"/>
                                     <constraint firstItem="Vic-YA-2h6" firstAttribute="top" secondItem="Bxs-dy-OVK" secondAttribute="bottom" constant="12" id="TQg-Wh-6db"/>
                                     <constraint firstItem="uyY-tK-szN" firstAttribute="width" secondItem="60d-qF-RpH" secondAttribute="width" multiplier="0.86" constant="-48" id="sD4-JT-hYa"/>
                                     <constraint firstItem="uyY-tK-szN" firstAttribute="centerX" secondItem="60d-qF-RpH" secondAttribute="centerX" id="sWQ-89-ih2"/>
@@ -871,6 +882,21 @@ recommend based on your style!</string>
                                 <state key="normal" title="Women" image="category_dropdown_arrow">
                                     <color key="titleColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BOh-97-MP5" userLabel="filter button spacing">
+                                <rect key="frame" x="348" y="166" width="27" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Agj-QO-78s"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHw-HQ-dsr">
+                                <rect key="frame" x="295" y="140" width="53" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="5Ht-rk-4Vf"/>
+                                    <constraint firstAttribute="height" constant="53" id="um9-Wj-JlO"/>
+                                </constraints>
+                                <state key="normal" image="filter_button"/>
+                                <state key="selected" image="filter_button_active"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Sih-Cc-rql">
                                 <rect key="frame" x="10" y="197" width="355" height="368"/>
@@ -1009,7 +1035,7 @@ recommend based on your style!</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchSuggestion" rowHeight="50" id="9Le-wW-ZP9" customClass="SearchSuggestionCell" customModule="Sunrise" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchSuggestion" rowHeight="50" id="9Le-wW-ZP9" customClass="SearchSuggestionCell" customModule="Sunrise" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="355" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Le-wW-ZP9" id="HHw-ym-S50">
@@ -1039,7 +1065,7 @@ recommend based on your style!</string>
                                     <outlet property="delegate" destination="AIq-Y6-ty1" id="VdK-0r-jUP"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpT-Fw-Y8T">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpT-Fw-Y8T">
                                 <rect key="frame" x="0.0" y="197" width="375" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1052,14 +1078,19 @@ recommend based on your style!</string>
                             <constraint firstItem="2Ic-E2-Waj" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" constant="10" id="271-p6-sjq"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="BaN-vx-BpE" secondAttribute="trailing" id="28t-s9-Wcr"/>
                             <constraint firstItem="Sih-Cc-rql" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" constant="10" id="4dT-aE-T7C"/>
+                            <constraint firstItem="BOh-97-MP5" firstAttribute="width" secondItem="zoQ-76-y2t" secondAttribute="width" multiplier="0.072" id="7LA-ux-fnT"/>
+                            <constraint firstAttribute="trailing" secondItem="BOh-97-MP5" secondAttribute="trailing" id="7qg-y2-aHh"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="bottom" secondItem="Sih-Cc-rql" secondAttribute="bottom" constant="53" id="7yw-7H-o3W"/>
                             <constraint firstItem="Sih-Cc-rql" firstAttribute="top" secondItem="BaN-vx-BpE" secondAttribute="bottom" constant="12" id="8wB-fB-sTY"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="2Ic-E2-Waj" secondAttribute="trailing" constant="10" id="9bz-9v-Td3"/>
+                            <constraint firstItem="CHw-HQ-dsr" firstAttribute="centerY" secondItem="BaN-vx-BpE" secondAttribute="centerY" id="AY6-zv-1Er"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="bottom" secondItem="0Cs-hc-hgn" secondAttribute="bottom" constant="53" id="C8k-S9-ZHa"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="Sih-Cc-rql" secondAttribute="trailing" constant="10" id="Cj1-EC-ayG"/>
                             <constraint firstItem="BaN-vx-BpE" firstAttribute="centerX" secondItem="zoQ-76-y2t" secondAttribute="centerX" id="P4Q-As-Do2"/>
                             <constraint firstItem="BaN-vx-BpE" firstAttribute="top" secondItem="60d-qF-RpH" secondAttribute="bottom" constant="10" id="SdJ-Re-wTr"/>
                             <constraint firstItem="60d-qF-RpH" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" id="Syg-dC-61r"/>
+                            <constraint firstItem="BOh-97-MP5" firstAttribute="leading" secondItem="CHw-HQ-dsr" secondAttribute="trailing" id="UO5-ty-mzb"/>
+                            <constraint firstItem="BOh-97-MP5" firstAttribute="centerY" secondItem="CHw-HQ-dsr" secondAttribute="centerY" id="WCx-g0-OFB"/>
                             <constraint firstItem="Vic-YA-2h6" firstAttribute="width" secondItem="zoQ-76-y2t" secondAttribute="width" multiplier="0.86" id="a0C-8n-Cih"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="0Cs-hc-hgn" secondAttribute="trailing" constant="10" id="a5s-5R-VUo"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="bottom" secondItem="2Ic-E2-Waj" secondAttribute="bottom" constant="53" id="aqm-El-VHa"/>
@@ -1088,6 +1119,7 @@ recommend based on your style!</string>
                         <outlet property="categorySelectionButtonHeightConstraint" destination="eVq-1E-nLf" id="cyt-v5-z0F"/>
                         <outlet property="collectionViewLeadingConstraint" destination="4dT-aE-T7C" id="Gcd-Jq-00P"/>
                         <outlet property="collectionViewTrailingConstraint" destination="Cj1-EC-ayG" id="jfb-Bs-urf"/>
+                        <outlet property="filterButton" destination="CHw-HQ-dsr" id="4WA-71-igg"/>
                         <outlet property="gradientView" destination="kpT-Fw-Y8T" id="kOu-sz-wji"/>
                         <outlet property="magnifyingGlassImageView" destination="Bxs-dy-OVK" id="f6f-op-XBK"/>
                         <outlet property="productsCollectionView" destination="0Cs-hc-hgn" id="s9V-2i-L3c"/>
@@ -1095,6 +1127,7 @@ recommend based on your style!</string>
                         <outlet property="searchFieldLineWidthActiveConstraint" destination="a0C-8n-Cih" id="M4e-Ra-t8j"/>
                         <outlet property="searchFieldLineWidthInactiveConstraint" destination="lSq-Fo-VQL" id="htZ-IZ-fih"/>
                         <outlet property="searchFieldMagnifyingGlassLeadingSpaceConstraint" destination="JXy-nl-nl7" id="8BI-Gl-GfB"/>
+                        <outlet property="searchFilterButton" destination="rcI-bO-NdA" id="OWK-83-d2U"/>
                         <outlet property="searchSuggestionsTableView" destination="2Ic-E2-Waj" id="U51-2f-gcp"/>
                         <outlet property="searchView" destination="60d-qF-RpH" id="FJD-t9-EXP"/>
                         <outlet property="searchViewHeightConstraint" destination="0e4-iG-L6p" id="MfN-1M-Ngl"/>
@@ -1354,6 +1387,7 @@ recommend based on your style!</string>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="backButton" destination="pEx-ny-wGy" id="sq5-20-5xK"/>
                         <outlet property="barcodeButton" destination="OTd-zS-i9q" id="gwg-Ey-tyw"/>
                         <outlet property="homeButton" destination="RqP-qx-8LQ" id="feP-Ff-dU7"/>
                         <outlet property="navigationView" destination="tNk-RE-gQq" id="zrE-5u-LBC"/>
@@ -1388,12 +1422,26 @@ recommend based on your style!</string>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEx-ny-wGy">
+                            <rect key="frame" x="0.0" y="6" width="82" height="47"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="82" id="MKI-iS-lJg"/>
+                                <constraint firstAttribute="height" constant="47" id="nFd-2E-loG"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="-11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="back_button"/>
+                            <connections>
+                                <action selector="backButtonTouchUpInside:" destination="fzR-9P-qHj" eventType="touchUpInside" id="sDb-w9-is3"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="pEx-ny-wGy" firstAttribute="leading" secondItem="cg0-a1-uEV" secondAttribute="leading" id="7vw-2H-33M"/>
                         <constraint firstItem="LKa-Ut-51j" firstAttribute="centerX" secondItem="bDS-hw-7lm" secondAttribute="centerX" id="BAr-lo-xIy"/>
                         <constraint firstItem="Dw4-7y-Lpe" firstAttribute="centerX" secondItem="tNk-RE-gQq" secondAttribute="centerX" id="CJi-WM-byx"/>
                         <constraint firstItem="LKa-Ut-51j" firstAttribute="centerX" secondItem="N6D-HH-n4k" secondAttribute="centerX" constant="15" id="IXe-Fh-dQl"/>
+                        <constraint firstItem="cg0-a1-uEV" firstAttribute="bottom" secondItem="pEx-ny-wGy" secondAttribute="bottom" id="WXV-Sp-BNd"/>
                         <constraint firstItem="bDS-hw-7lm" firstAttribute="centerY" secondItem="LKa-Ut-51j" secondAttribute="centerY" constant="1" id="dSr-Fn-KHW"/>
                         <constraint firstAttribute="trailing" secondItem="N6D-HH-n4k" secondAttribute="trailing" constant="30" id="lhz-cA-Y1y"/>
                         <constraint firstAttribute="bottom" secondItem="Dw4-7y-Lpe" secondAttribute="bottom" constant="11" id="oxB-ao-jhb"/>
@@ -1467,7 +1515,7 @@ recommend based on your style!</string>
                                             <rect key="frame" x="43" y="11" width="17" height="17"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zl-ic-phB">
-                                            <rect key="frame" x="49" y="13" width="6.5" height="16.5"/>
+                                            <rect key="frame" x="48.5" y="12.5" width="6.5" height="16.5"/>
                                             <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="10"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -1963,6 +2011,7 @@ recommend based on your style!</string>
     <resources>
         <image name="Adidas logo" width="139" height="135"/>
         <image name="accept_button" width="75" height="73"/>
+        <image name="back_button" width="23" height="15"/>
         <image name="background_cards" width="275" height="292"/>
         <image name="banner1" width="375" height="272"/>
         <image name="banner2" width="375" height="273"/>
@@ -1976,6 +2025,8 @@ recommend based on your style!</string>
         <image name="category_dropdown_arrow" width="11" height="9"/>
         <image name="email_icon" width="20" height="16"/>
         <image name="facebook" width="60" height="60"/>
+        <image name="filter_button" width="23" height="20"/>
+        <image name="filter_button_active" width="53" height="53"/>
         <image name="google_plus" width="61" height="60"/>
         <image name="home_tab" width="21" height="19"/>
         <image name="home_tab_sel" width="22" height="20"/>
