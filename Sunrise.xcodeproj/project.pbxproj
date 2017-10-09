@@ -121,6 +121,7 @@
 		2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBC61DE8C26C00803640 /* Assets.xcassets */; };
 		2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
+		218948561F8BE2DE00F05933 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */; };
 		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		219657761DCB9B81002C7108 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		219657771DCB9BA2002C7108 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
@@ -356,6 +357,7 @@
 		2163EBC61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
+		218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReservationNotification.entitlements; sourceTree = "<group>"; };
 		21971C801EDCC397001144C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OrdersHeaderView.xib; sourceTree = "<group>"; };
 		21971C831EDCC39A001144C7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/OrdersHeaderView.strings; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 				210BE0F8B301B11FA001C21E /* ShippingMethodCell.swift */,
 				215EDBA81F81A71800BA87F9 /* CategoryCollectionViewCell.swift */,
 				2110BECD1F85A9E200E03A33 /* SearchSuggestionCell.swift */,
+				218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1622,6 +1625,7 @@
 				210BE928D44EA762B52DA93A /* Attribute.swift in Sources */,
 				210BE0D3C4E3336428ECAB34 /* Money.swift in Sources */,
 				213522E21E15FC7000433174 /* ProductCollectionHeaderView.swift in Sources */,
+				218948561F8BE2DE00F05933 /* CategoryTableViewCell.swift in Sources */,
 				2138467B1E7AAC6700A82C63 /* NewAddressViewController.swift in Sources */,
 				210BE02EA82049EFD1E1188C /* Channel.swift in Sources */,
 				210BEB6685337570C6EA3287 /* Customer.swift in Sources */,

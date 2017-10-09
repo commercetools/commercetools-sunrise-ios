@@ -8,11 +8,17 @@ class CategoryOverviewViewController: UIViewController {
 
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var gradientView: UIView!
+    @IBOutlet weak var categoriesDropdownGradientView: UIView!
     @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var categoriesDropdownView: UIView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchSuggestionsTableView: UITableView!
+    @IBOutlet weak var subcategoriesTableView: UITableView!
     @IBOutlet weak var magnifyingGlassImageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var snapshotBackgroundColorView: UIView!
+    @IBOutlet weak var whiteBackgroundColorView: UIView!
     @IBOutlet weak var categorySelectionButton: UIButton!
     @IBOutlet weak var searchFilterButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
@@ -24,20 +30,29 @@ class CategoryOverviewViewController: UIViewController {
     @IBOutlet weak var categorySelectionButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet var searchFieldLineWidthActiveConstraint: NSLayoutConstraint!
     @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
+    @IBOutlet weak var categoriesDropdownCenterXConstraint: NSLayoutConstraint!
 
-    let gradientLayer = CAGradientLayer()
+    private let gradientLayer = CAGradientLayer()
+    private let categoriesDropdownGradientLayer = CAGradientLayer()
+    private var screenSnapshot: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        gradientLayer.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
+        [gradientLayer, categoriesDropdownGradientLayer].forEach { $0.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor] }
         gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 13)
         gradientView.layer.insertSublayer(gradientLayer, at: 0)
+        categoriesDropdownCenterXConstraint.constant = 0.016 * view.bounds.width
+        categoriesDropdownGradientLayer.frame = categoriesDropdownGradientView.bounds
+        categoriesDropdownGradientView.layer.insertSublayer(categoriesDropdownGradientLayer, at: 0)
+        subcategoriesTableView.contentInset = UIEdgeInsetsMake(17, 0, 0, 0)
         
         let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red:0.34, green:0.37, blue:0.40, alpha:1.0)]
         searchField.attributedPlaceholder = NSAttributedString(string: "search", attributes: placeholderAttributes)
         
-        searchSuggestionsTableView.tableFooterView = UIView()
+        [searchSuggestionsTableView, subcategoriesTableView].forEach { $0.tableFooterView = UIView() }
+        subcategoriesTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: subcategoriesTableView.bounds.width, height: 0.5))
+        subcategoriesTableView.tableHeaderView?.backgroundColor = subcategoriesTableView.separatorColor
         
         NotificationCenter.default.addObserver(forName: Foundation.Notification.Name.Navigation.BackButtonTapped, object: nil, queue: .main) { [weak self] _ in
             guard let searchField = self?.searchField else { return }
@@ -105,6 +120,65 @@ class CategoryOverviewViewController: UIViewController {
             }
         })
     }
+    
+    @IBAction func changeCategory(_ sender: UIButton) {
+        guard !categoriesCollectionView.isDecelerating, !categoriesCollectionView.isTracking,
+              !productsCollectionView.isDecelerating, !productsCollectionView.isTracking else { return }
+        if categoriesDropdownView.alpha == 1 {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.snapshotBackgroundColorView.alpha = 0
+                self.categoriesDropdownView.alpha = 0
+            }, completion: { _ in
+                self.whiteBackgroundColorView.alpha = 0
+                UIView.transition(with: self.backgroundImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                    SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+                    self.backgroundImageView.image = self.screenSnapshot
+                }, completion: { _ in
+                    self.backgroundImageView.alpha = 0
+                })
+                UIView.transition(with: sender, duration: 0.3, options: .transitionCrossDissolve, animations: { sender.isSelected = false })
+            })
+        } else {
+            guard let snapshot = backgroundSnapshot else { return }
+            screenSnapshot = snapshot
+            backgroundImageView.image = snapshot
+            backgroundImageView.alpha = 1
+            let blurred = self.blur(image: snapshot)
+            UIView.transition(with: backgroundImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+                self.backgroundImageView.image = blurred
+            }, completion: { _ in
+                self.whiteBackgroundColorView.alpha = 1
+                UIView.animate(withDuration: 0.3) {
+                    self.backgroundImageView.alpha = 0.5
+                    self.snapshotBackgroundColorView.alpha = 0.5
+                    self.categoriesDropdownView.alpha = 1
+                }
+                UIView.transition(with: sender, duration: 0.3, options: .transitionCrossDissolve, animations: { sender.isSelected = true })
+            })
+        }
+    }
+    
+    private var backgroundSnapshot: UIImage? {
+        guard let window = UIApplication.shared.delegate?.window ?? nil else { return nil }
+        let renderer = UIGraphicsImageRenderer(size: window.frame.size)
+        return renderer.image { _ in
+            window.drawHierarchy(in: window.bounds, afterScreenUpdates: false)
+        }
+    }
+    
+    private func blur(image input: UIImage) -> UIImage? {
+        guard let clampFilter = CIFilter(name: "CIAffineClamp"),
+            let inputImage = CIImage(image: input) else  { return nil }
+        clampFilter.setValue(inputImage, forKey: kCIInputImageKey)
+        guard let blurFilter = CIFilter(name: "CIGaussianBlur"),
+            let clampedImage = clampFilter.outputImage else { return nil }
+        blurFilter.setValue(clampedImage, forKey: kCIInputImageKey)
+        let context = CIContext(options:nil)
+        guard let outputImage = blurFilter.outputImage,
+            let outputCgImage = context.createCGImage(outputImage, from: inputImage.extent) else { return nil }
+        return UIImage(cgImage: outputCgImage)
+    }
 }
 
 extension CategoryOverviewViewController: UICollectionViewDataSource {
@@ -157,13 +231,17 @@ extension CategoryOverviewViewController: UIScrollViewDelegate {
 
 extension CategoryOverviewViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 33
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let categoryCell = tableView.dequeueReusableCell(withIdentifier: "SearchSuggestion") as! SearchSuggestionCell
-
-        return categoryCell
+        if tableView == searchSuggestionsTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchSuggestion") as! SearchSuggestionCell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryTableViewCell
+            return cell
+        }
     }
 }
 

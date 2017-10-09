@@ -17,4 +17,3 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         categoryImageView.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
-
