@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCenter.delegate = self
         application.registerForRemoteNotifications()
         addNotificationCategories()
-        AppRouting.setupMyAccountRootViewController()
+//        AppRouting.setupMyAccountRootViewController()
 
         return true
     }

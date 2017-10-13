@@ -122,6 +122,7 @@
 		2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		218948561F8BE2DE00F05933 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */; };
+		218F840E1F8EB619005E03A4 /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F840D1F8EB619005E03A4 /* WishlistViewController.swift */; };
 		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		219657761DCB9B81002C7108 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
 		219657771DCB9BA2002C7108 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
@@ -358,6 +359,7 @@
 		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		218F840D1F8EB619005E03A4 /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
 		219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReservationNotification.entitlements; sourceTree = "<group>"; };
 		21971C801EDCC397001144C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OrdersHeaderView.xib; sourceTree = "<group>"; };
 		21971C831EDCC39A001144C7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/OrdersHeaderView.strings; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 		210BE518952AAA46B6CF72A6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				218F840C1F8EB4EA005E03A4 /* Wishlist */,
 				21D2AE9B1F6171B80087CB46 /* Onboarding */,
 				210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */,
 				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
@@ -801,6 +804,14 @@
 				210BED52081E8114BFFCFE33 /* RowControllers */,
 			);
 			path = "Sunrise Watch Extension";
+			sourceTree = "<group>";
+		};
+		218F840C1F8EB4EA005E03A4 /* Wishlist */ = {
+			isa = PBXGroup;
+			children = (
+				218F840D1F8EB619005E03A4 /* WishlistViewController.swift */,
+			);
+			path = Wishlist;
 			sourceTree = "<group>";
 		};
 		2199923C1DC9FAAB000E48FD /* ReservationNotification */ = {
@@ -1633,6 +1644,7 @@
 				21ACF36A1E87332700672CAE /* ConfirmationViewController.swift in Sources */,
 				210BEE9AF8567A17A425CEC1 /* LineItem.swift in Sources */,
 				210BE45FBF04AE34E5020021 /* ProductOverviewViewController.swift in Sources */,
+				218F840E1F8EB619005E03A4 /* WishlistViewController.swift in Sources */,
 				210BEB1F77D3DD96E3FEED5B /* ProductViewController.swift in Sources */,
 				210BED606E247CA3576F3583 /* StoreSelectionViewController.swift in Sources */,
 				210BEFEBE4DFCF3B09BB6E49 /* AccountViewController.swift in Sources */,

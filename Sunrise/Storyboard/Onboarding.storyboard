@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fzR-9P-qHj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g9I-8A-Ini">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -58,7 +58,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1n-VF-ES1">
-                                <rect key="frame" x="71.5" y="542.5" width="233" height="43"/>
+                                <rect key="frame" x="74" y="532" width="228.5" height="42"/>
                                 <string key="text">All of your favourite fashion
 brands in one awesome app</string>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -66,7 +66,7 @@ brands in one awesome app</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sunrise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TD-bE-U8o">
-                                <rect key="frame" x="71" y="492" width="234" height="36.5"/>
+                                <rect key="frame" x="90" y="492" width="196.5" height="26"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -192,7 +192,7 @@ brands in one awesome app</string>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDb-qH-gUg">
-                                <rect key="frame" x="52.5" y="542.5" width="271.5" height="43"/>
+                                <rect key="frame" x="56.5" y="532" width="264" height="42"/>
                                 <string key="text">Pick what you like here and we’ll
 recommend based on your style!</string>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -200,7 +200,7 @@ recommend based on your style!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build your style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuF-TY-erY">
-                                <rect key="frame" x="96.5" y="492" width="183" height="36.5"/>
+                                <rect key="frame" x="112.5" y="492" width="151.5" height="26"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -294,13 +294,13 @@ recommend based on your style!</string>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ok got it!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0j-8y-RYb">
-                                        <rect key="frame" x="87.5" y="187.5" width="199" height="66"/>
+                                        <rect key="frame" x="105" y="206.5" width="164" height="47"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="40"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAh-5j-exm">
-                                        <rect key="frame" x="103.5" y="254.5" width="169" height="43"/>
+                                        <rect key="frame" x="105.5" y="254.5" width="165.5" height="42"/>
                                         <string key="text">Sign up to save your
 style for later</string>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -324,7 +324,7 @@ style for later</string>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZa-fM-lvO">
-                                <rect key="frame" x="52" y="542.5" width="271.5" height="43"/>
+                                <rect key="frame" x="56" y="532" width="264" height="42"/>
                                 <string key="text">Pick what you like here and we’ll
 recommend based on your style!</string>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
@@ -332,7 +332,7 @@ recommend based on your style!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build your style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0r-Qj-zlV">
-                                <rect key="frame" x="96" y="492" width="183" height="36.5"/>
+                                <rect key="frame" x="112" y="492" width="151.5" height="26"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -400,31 +400,31 @@ recommend based on your style!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3n-7G-AK9">
-                                <rect key="frame" x="142.5" y="47.5" width="90.5" height="36.5"/>
+                                <rect key="frame" x="148" y="47.5" width="79.5" height="26"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect with your social accounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGu-J1-YPd">
-                                <rect key="frame" x="44" y="126.5" width="287" height="21"/>
+                                <rect key="frame" x="48.5" y="116" width="278" height="21"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                 <color key="textColor" red="0.3411764705882353" green="0.36862745098039218" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1t-h6-jpd">
-                                <rect key="frame" x="157" y="181" width="61" height="60"/>
+                                <rect key="frame" x="157" y="170.5" width="61" height="60"/>
                                 <state key="normal" image="google_plus"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Eh-CK-cj5">
-                                <rect key="frame" x="49" y="181" width="60" height="60"/>
+                                <rect key="frame" x="53.5" y="170.5" width="60" height="60"/>
                                 <state key="normal" image="facebook"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nby-XY-pzh">
-                                <rect key="frame" x="265" y="180.5" width="61" height="61"/>
+                                <rect key="frame" x="260.5" y="170" width="61" height="61"/>
                                 <state key="normal" image="instagram"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BT2-Rw-XPg">
-                                <rect key="frame" x="164" y="628" width="47" height="33"/>
+                                <rect key="frame" x="165" y="628" width="45" height="33"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Login">
@@ -515,13 +515,13 @@ recommend based on your style!</string>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" or " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFr-ZP-7Va">
-                                <rect key="frame" x="172.5" y="285.5" width="30.5" height="30"/>
+                                <rect key="frame" x="174.5" y="290" width="26.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                 <color key="textColor" red="0.3411764705882353" green="0.36862745098039218" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MS5-7c-7Rk">
-                                <rect key="frame" x="187" y="147.5" width="1" height="33.5"/>
+                                <rect key="frame" x="187" y="137" width="1" height="33.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="PZI-EF-CGl"/>
                                 </constraints>
@@ -539,7 +539,7 @@ recommend based on your style!</string>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shC-rp-jC5">
-                                <rect key="frame" x="187" y="84" width="1" height="42.5"/>
+                                <rect key="frame" x="187" y="73.5" width="1" height="42.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="bNJ-3t-aER"/>
                                 </constraints>
@@ -799,18 +799,147 @@ recommend based on your style!</string>
         <!--wishlist-->
         <scene sceneID="8Y3-yj-hqh">
             <objects>
-                <viewController id="A2r-yC-0rf" sceneMemberID="viewController">
+                <viewController id="A2r-yC-0rf" customClass="WishlistViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gYH-Jx-9uq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_background" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Jr-tBB">
+                                <rect key="frame" x="0.0" y="73" width="375" height="492"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-A3-tYB">
+                                <rect key="frame" x="18" y="157" width="339" height="378"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WishlistCell" rowHeight="200" id="BRZ-MM-Gvs">
+                                        <rect key="frame" x="0.0" y="28" width="339" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BRZ-MM-Gvs" id="8l4-fU-pX6">
+                                            <rect key="frame" x="0.0" y="0.0" width="339" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_shoe" translatesAutoresizingMaskIntoConstraints="NO" id="5C1-bI-I49">
+                                                    <rect key="frame" x="11" y="23" width="119" height="153.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLM-gZ-yv0">
+                                                    <rect key="frame" x="145" y="71" width="176" height="33"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oxt-dR-knQ">
+                                                    <rect key="frame" x="145" y="33" width="43.5" height="14"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="€160.99">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="12" name="Rubik-Bold"/>
+                                                                <integer key="NSStrikethrough" value="1"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Moo-uS-dcc">
+                                                    <rect key="frame" x="192.5" y="30" width="49" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
+                                                    <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeB-yE-iPG">
+                                                    <rect key="frame" x="289" y="24.5" width="32" height="30"/>
+                                                    <state key="normal" image="wishlist_icon"/>
+                                                    <state key="selected" image="wishlist_icon_active"/>
+                                                    <state key="highlighted" image="wishlist_icon_active"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gg-uW-Sl8">
+                                                    <rect key="frame" x="136" y="132" width="192" height="76"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="76" id="wxo-fP-LvH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="-29" maxX="27" maxY="0.0"/>
+                                                    <state key="normal" title="Add to bag" backgroundImage="wishlist_button">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" backgroundImage="wishlist_button"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5C1-bI-I49" firstAttribute="top" secondItem="8l4-fU-pX6" secondAttribute="top" constant="23" id="9Xp-5Z-xvp"/>
+                                                <constraint firstItem="0gg-uW-Sl8" firstAttribute="top" secondItem="QLM-gZ-yv0" secondAttribute="bottom" constant="28" id="PGA-qA-QdR"/>
+                                                <constraint firstItem="QLM-gZ-yv0" firstAttribute="trailing" secondItem="ZeB-yE-iPG" secondAttribute="trailing" id="QWc-h3-7kU"/>
+                                                <constraint firstItem="Moo-uS-dcc" firstAttribute="leading" secondItem="oxt-dR-knQ" secondAttribute="trailing" constant="4" id="RWh-iR-U3E"/>
+                                                <constraint firstAttribute="bottom" secondItem="5C1-bI-I49" secondAttribute="bottom" constant="23" id="WGX-Jf-Vnj"/>
+                                                <constraint firstItem="oxt-dR-knQ" firstAttribute="leading" secondItem="5C1-bI-I49" secondAttribute="trailing" constant="15" id="YeP-Ig-2Yr"/>
+                                                <constraint firstItem="ZeB-yE-iPG" firstAttribute="centerY" secondItem="Moo-uS-dcc" secondAttribute="centerY" id="aiV-fR-6nb"/>
+                                                <constraint firstItem="Moo-uS-dcc" firstAttribute="bottom" secondItem="oxt-dR-knQ" secondAttribute="bottom" constant="1.5" id="c2C-vz-SBr"/>
+                                                <constraint firstAttribute="trailing" secondItem="0gg-uW-Sl8" secondAttribute="trailing" constant="11" id="dNF-AO-tXi"/>
+                                                <constraint firstItem="5C1-bI-I49" firstAttribute="leading" secondItem="8l4-fU-pX6" secondAttribute="leading" constant="11" id="eB6-my-1pt"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZeB-yE-iPG" secondAttribute="trailing" constant="18" id="kPr-Zb-WGC"/>
+                                                <constraint firstItem="QLM-gZ-yv0" firstAttribute="top" secondItem="Moo-uS-dcc" secondAttribute="bottom" constant="22" id="oxX-Ez-2z2"/>
+                                                <constraint firstItem="0gg-uW-Sl8" firstAttribute="leading" secondItem="5C1-bI-I49" secondAttribute="trailing" constant="6" id="p5E-Ky-2ok"/>
+                                                <constraint firstItem="QLM-gZ-yv0" firstAttribute="leading" secondItem="5C1-bI-I49" secondAttribute="trailing" constant="15" id="urU-Wl-jGD"/>
+                                                <constraint firstItem="oxt-dR-knQ" firstAttribute="top" secondItem="5C1-bI-I49" secondAttribute="top" constant="10" id="vc4-hd-un0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="5C1-bI-I49" firstAttribute="width" secondItem="BRZ-MM-Gvs" secondAttribute="width" multiplier="0.351" id="p9s-Ii-A1t"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="A2r-yC-0rf" id="SFk-Gl-anp"/>
+                                    <outlet property="delegate" destination="A2r-yC-0rf" id="OTA-bT-Om6"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wishlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ9-XQ-yU4">
+                                <rect key="frame" x="149" y="108" width="76.5" height="26"/>
+                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
+                                <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_separator" translatesAutoresizingMaskIntoConstraints="NO" id="eH1-1h-WUT">
+                                <rect key="frame" x="67" y="150" width="240" height="2"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zz0-hI-4H7">
+                                <rect key="frame" x="18" y="157" width="339" height="18"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="5XZ-Ux-vev"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zz0-hI-4H7" firstAttribute="width" secondItem="eaB-A3-tYB" secondAttribute="width" id="0hR-dM-eDT"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="2e5-tt-b59"/>
+                            <constraint firstItem="Zz0-hI-4H7" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="8az-5U-aUX"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="DRB-bv-czt"/>
+                            <constraint firstItem="eH1-1h-WUT" firstAttribute="top" secondItem="rZ9-XQ-yU4" secondAttribute="bottom" constant="16" id="HVO-NA-bmX"/>
+                            <constraint firstItem="xx1-ti-hQ9" firstAttribute="trailing" secondItem="bZb-Jr-tBB" secondAttribute="trailing" id="MXX-Yj-2Dh"/>
+                            <constraint firstItem="rZ9-XQ-yU4" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="Mvc-ks-YNb"/>
+                            <constraint firstItem="bZb-Jr-tBB" firstAttribute="leading" secondItem="xx1-ti-hQ9" secondAttribute="leading" id="PxS-ig-qQT"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="-30" id="T7v-mb-hJ7"/>
+                            <constraint firstItem="rZ9-XQ-yU4" firstAttribute="top" secondItem="xx1-ti-hQ9" secondAttribute="top" constant="88" id="dsZ-h8-nvf"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.904" id="fls-p7-LE1"/>
+                            <constraint firstItem="bZb-Jr-tBB" firstAttribute="top" secondItem="xx1-ti-hQ9" secondAttribute="top" constant="53" id="hSK-S7-d1E"/>
+                            <constraint firstItem="xx1-ti-hQ9" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="53" id="m4L-v9-cgN"/>
+                            <constraint firstItem="Zz0-hI-4H7" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="oOQ-NV-Y5O"/>
+                            <constraint firstItem="eH1-1h-WUT" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="zam-TK-Wgc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xx1-ti-hQ9"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="wishlist" id="qs6-EQ-Jo8"/>
+                    <connections>
+                        <outlet property="gradientView" destination="Zz0-hI-4H7" id="csg-kC-HE2"/>
+                        <outlet property="tableView" destination="eaB-A3-tYB" id="rZk-Ca-lou"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7q-fV-UTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="1739"/>
+            <point key="canvasLocation" x="997.60000000000002" y="1738.3808095952024"/>
         </scene>
         <!--Search-->
         <scene sceneID="beC-3r-YoN">
@@ -908,7 +1037,7 @@ recommend based on your style!</string>
                                                     <rect key="frame" x="0.0" y="0.0" width="172" height="152"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shoes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qm-oh-W7g">
-                                                    <rect key="frame" x="4" y="120" width="164" height="30"/>
+                                                    <rect key="frame" x="4" y="129" width="164" height="21"/>
                                                     <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -962,7 +1091,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JSj-YU-htp">
-                                                    <rect key="frame" x="2.5" y="250" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="250" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -975,19 +1104,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7P2-D1-bH5">
-                                                    <rect key="frame" x="57" y="247" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="247" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLM-mk-JLR">
-                                                    <rect key="frame" x="2.5" y="276" width="167" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="276" width="167" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeh-Ye-WwA">
-                                                    <rect key="frame" x="145" y="246" width="22" height="22"/>
+                                                    <rect key="frame" x="135" y="246" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -1115,7 +1244,7 @@ recommend based on your style!</string>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dresses" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUD-Ye-Dc1">
-                                                            <rect key="frame" x="122.5" y="16.5" width="52" height="17"/>
+                                                            <rect key="frame" x="123.5" y="16.5" width="50.5" height="17"/>
                                                             <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                             <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1257,13 +1386,13 @@ recommend based on your style!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfO-sm-Qow">
-                                <rect key="frame" x="10" y="30" width="132" height="30"/>
+                                <rect key="frame" x="10" y="30" width="113.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="D8H-Cw-6UI">
-                                <rect key="frame" x="0.0" y="68" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="59" width="375" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="oxU-Vw-sIN"/>
@@ -1289,7 +1418,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6cX-IN-Jk7">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1302,19 +1431,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p6i-UN-Xqq">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333333333335" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0R-vt-Cbf">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juV-8w-hw9">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -1350,7 +1479,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TkO-Ge-tz7">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1363,19 +1492,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dV7-eA-2ke">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpW-WQ-hVl">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQ6-jO-0xb">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -1411,7 +1540,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="068-bk-3RU">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1424,19 +1553,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eR3-Fp-OhO">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQg-xG-glS">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-Jc-tNc">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -1528,7 +1657,7 @@ recommend based on your style!</string>
                             <rect key="frame" x="338.5" y="9.5" width="22" height="22"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDS-hw-7lm">
-                            <rect key="frame" x="343.5" y="11.5" width="13" height="20"/>
+                            <rect key="frame" x="343.5" y="14.5" width="13" height="14"/>
                             <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="12"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -1611,10 +1740,19 @@ recommend based on your style!</string>
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFW-eK-75j">
-                                    <rect key="frame" x="225" y="0.0" width="75" height="53"/>
+                                    <rect key="frame" x="225" y="1.5" width="75" height="50"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_wishlist_off_badge" translatesAutoresizingMaskIntoConstraints="NO" id="QpD-Zk-KD2">
+                                            <rect key="frame" x="43.5" y="9.5" width="17" height="17"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zl-ic-phB">
+                                            <rect key="frame" x="50" y="14" width="6" height="12"/>
+                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="10"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEt-c3-EtL">
-                                            <rect key="frame" x="0.0" y="0.0" width="75" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
                                             <state key="normal" image="wishlist_tab"/>
                                             <state key="selected" image="wishlist_tab_sel"/>
                                             <state key="highlighted" image="wishlist_tab"/>
@@ -1622,28 +1760,17 @@ recommend based on your style!</string>
                                                 <action selector="touchUpInside:" destination="fzR-9P-qHj" eventType="touchUpInside" id="te6-Cl-Fyd"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_wishlist_off_badge" translatesAutoresizingMaskIntoConstraints="NO" id="QpD-Zk-KD2">
-                                            <rect key="frame" x="43" y="11" width="17" height="17"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zl-ic-phB">
-                                            <rect key="frame" x="49" y="13" width="6.5" height="16.5"/>
-                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="10"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="UEt-c3-EtL" secondAttribute="bottom" id="4Yn-sQ-7ty"/>
-                                        <constraint firstItem="UEt-c3-EtL" firstAttribute="leading" secondItem="aFW-eK-75j" secondAttribute="leading" id="EA6-Iy-dKR"/>
-                                        <constraint firstAttribute="trailing" secondItem="UEt-c3-EtL" secondAttribute="trailing" id="M8F-pH-Gvo"/>
                                         <constraint firstItem="QpD-Zk-KD2" firstAttribute="centerX" secondItem="UEt-c3-EtL" secondAttribute="centerX" constant="14" id="NHP-bC-Osn"/>
-                                        <constraint firstItem="UEt-c3-EtL" firstAttribute="centerX" secondItem="aFW-eK-75j" secondAttribute="centerX" id="Xub-OI-PSM"/>
+                                        <constraint firstItem="UEt-c3-EtL" firstAttribute="leading" secondItem="aFW-eK-75j" secondAttribute="leading" id="UEh-Qs-STv"/>
+                                        <constraint firstAttribute="bottom" secondItem="UEt-c3-EtL" secondAttribute="bottom" id="UPs-WX-NFq"/>
                                         <constraint firstItem="2zl-ic-phB" firstAttribute="centerY" secondItem="QpD-Zk-KD2" secondAttribute="centerY" constant="1" id="bEl-Lz-7en"/>
                                         <constraint firstItem="QpD-Zk-KD2" firstAttribute="centerY" secondItem="UEt-c3-EtL" secondAttribute="centerY" constant="-7" id="iOv-S1-3kK"/>
-                                        <constraint firstItem="UEt-c3-EtL" firstAttribute="top" secondItem="aFW-eK-75j" secondAttribute="top" id="l4t-RJ-ltk"/>
-                                        <constraint firstItem="UEt-c3-EtL" firstAttribute="centerY" secondItem="aFW-eK-75j" secondAttribute="centerY" id="sgw-D6-Tpf"/>
+                                        <constraint firstItem="UEt-c3-EtL" firstAttribute="top" secondItem="aFW-eK-75j" secondAttribute="top" id="ifp-U4-bxQ"/>
                                         <constraint firstItem="2zl-ic-phB" firstAttribute="centerX" secondItem="QpD-Zk-KD2" secondAttribute="centerX" id="thH-ru-NME"/>
+                                        <constraint firstAttribute="trailing" secondItem="UEt-c3-EtL" secondAttribute="trailing" id="vuP-pK-WEh"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydh-TN-KS0">
@@ -1660,6 +1787,7 @@ recommend based on your style!</string>
                                 <constraint firstItem="OTd-zS-i9q" firstAttribute="top" secondItem="uDb-kf-lgT" secondAttribute="top" id="2cq-zo-DDo"/>
                                 <constraint firstItem="Ydh-TN-KS0" firstAttribute="top" secondItem="uDb-kf-lgT" secondAttribute="top" id="3fV-Gs-O8g"/>
                                 <constraint firstItem="RqP-qx-8LQ" firstAttribute="top" secondItem="uDb-kf-lgT" secondAttribute="top" id="G3p-LK-92E"/>
+                                <constraint firstItem="aFW-eK-75j" firstAttribute="height" secondItem="4CM-sM-i0O" secondAttribute="height" id="Vbb-nr-tIs"/>
                                 <constraint firstAttribute="bottom" secondItem="OTd-zS-i9q" secondAttribute="bottom" id="anH-lv-sei"/>
                                 <constraint firstAttribute="bottom" secondItem="RqP-qx-8LQ" secondAttribute="bottom" id="hkv-G9-Dfj"/>
                                 <constraint firstAttribute="bottom" secondItem="Ydh-TN-KS0" secondAttribute="bottom" id="jIO-NZ-YPd"/>
@@ -1687,13 +1815,13 @@ recommend based on your style!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended for you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FD5-m5-ham">
-                                <rect key="frame" x="10" y="30" width="218" height="30"/>
+                                <rect key="frame" x="10" y="30" width="184.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QPL-sy-ftT">
-                                <rect key="frame" x="0.0" y="68" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="59" width="375" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="oF3-2g-BXd"/>
@@ -1719,7 +1847,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ucX-r4-iJ4">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1732,19 +1860,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jAr-IT-QwM">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7u-sH-WDT">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htE-Oq-fKI">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -1783,7 +1911,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jsw-GW-jXE">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14.5"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1796,34 +1924,34 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="muA-Fu-7LF">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xz9-H5-Ieb">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lj-FZ-QcW">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="dxe-CF-2xW">
-                                                    <rect key="frame" x="17.5" y="85.5" width="118.5" height="30"/>
+                                                    <rect key="frame" x="26" y="90" width="101.5" height="21"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View more" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YaZ-Jr-kAY">
-                                                            <rect key="frame" x="0.0" y="0.0" width="101.5" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="84.5" height="21"/>
                                                             <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                                             <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="djP-7s-tGU">
-                                                            <rect key="frame" x="108.5" y="0.0" width="10" height="30"/>
+                                                            <rect key="frame" x="91.5" y="0.0" width="10" height="21"/>
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
@@ -1887,13 +2015,13 @@ recommend based on your style!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On sale" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zo6-Zx-ANI">
-                                <rect key="frame" x="10" y="30" width="72" height="30"/>
+                                <rect key="frame" x="10" y="30" width="61.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                 <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zKn-d6-NZs">
-                                <rect key="frame" x="0.0" y="68" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="59" width="375" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="hq7-q8-KKq"/>
@@ -1919,7 +2047,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mr3-6N-YG8">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1932,19 +2060,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QrY-h7-8LY">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpU-uG-lfh">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1KG-o5-q2v">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -1980,7 +2108,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiA-hy-oxq">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -1993,19 +2121,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CGd-WA-FHo">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPE-Jf-cCK">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYk-SD-2Zf">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -2041,7 +2169,7 @@ recommend based on your style!</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lwF-bz-Tmi">
-                                                    <rect key="frame" x="2.5" y="214.5" width="50" height="14"/>
+                                                    <rect key="frame" x="2.5" y="214.5" width="43.5" height="14"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="€160.99">
                                                             <attributes>
@@ -2054,19 +2182,19 @@ recommend based on your style!</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Dw4-2x-vWh">
-                                                    <rect key="frame" x="57" y="211.5" width="58" height="19"/>
+                                                    <rect key="frame" x="50.5" y="211.5" width="49" height="19"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                     <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfN-CX-RWX">
-                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33.5"/>
+                                                    <rect key="frame" x="2.5" y="244.5" width="147" height="33"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLF-yr-qpa">
-                                                    <rect key="frame" x="125" y="210.5" width="22" height="22"/>
+                                                    <rect key="frame" x="115" y="210.5" width="32" height="30"/>
                                                     <state key="normal" image="wishlist_icon"/>
                                                     <state key="selected" image="wishlist_icon_active"/>
                                                     <state key="highlighted" image="wishlist_icon_active"/>
@@ -2163,8 +2291,11 @@ recommend based on your style!</string>
         <image name="style_sel1" width="295" height="296"/>
         <image name="tab_wishlist_off_badge" width="17" height="17"/>
         <image name="view_more_overlay" width="155" height="201"/>
-        <image name="wishlist_icon" width="22" height="20"/>
-        <image name="wishlist_icon_active" width="20" height="18"/>
+        <image name="wishlist_background" width="375" height="544"/>
+        <image name="wishlist_button" width="215" height="85"/>
+        <image name="wishlist_icon" width="32" height="30"/>
+        <image name="wishlist_icon_active" width="32" height="30"/>
+        <image name="wishlist_separator" width="240" height="2"/>
         <image name="wishlist_tab" width="20" height="18"/>
         <image name="wishlist_tab_sel" width="20" height="18"/>
     </resources>
