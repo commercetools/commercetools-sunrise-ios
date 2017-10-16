@@ -30,6 +30,7 @@ class CategoryOverviewViewController: UIViewController {
     @IBOutlet weak var categorySelectionButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet var searchFieldLineWidthActiveConstraint: NSLayoutConstraint!
     @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchFieldLineCenterXConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoriesDropdownCenterXConstraint: NSLayoutConstraint!
 
     private let gradientLayer = CAGradientLayer()
@@ -84,8 +85,10 @@ class CategoryOverviewViewController: UIViewController {
             self.categorySelectionButton.alpha = 0
             self.searchFilterButton.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
+            self.searchFieldLineCenterXConstraint.constant = 0
             self.searchFieldLineWidthInactiveConstraint.isActive = false
             self.searchFieldLineWidthActiveConstraint.isActive = true
+            self.searchFieldLineWidthActiveConstraint.constant = 0
             [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
             self.searchView.layoutIfNeeded()
         }, completion: { _ in
@@ -104,6 +107,7 @@ class CategoryOverviewViewController: UIViewController {
                 self.searchFieldLineWidthActiveConstraint.isActive = false
                 self.searchFieldLineWidthInactiveConstraint.isActive = true
                 self.searchFieldMagnifyingGlassLeadingSpaceConstraint.constant = 20
+                self.searchFieldLineCenterXConstraint.constant = 0
                 self.searchSuggestionsTableView.alpha = 0
                 self.searchFilterButton.alpha = 0
                 self.searchView.layoutIfNeeded()
@@ -255,6 +259,9 @@ extension CategoryOverviewViewController: UITableViewDelegate {
             UIView.animate(withDuration: 0.3) {
                 self.productsCollectionView.alpha = 1
                 self.searchFilterButton.alpha = 1
+                self.searchFieldLineWidthActiveConstraint.constant = -44
+                self.searchFieldLineCenterXConstraint.constant = -22
+                self.searchView.layoutIfNeeded()
             }
         })
     }
