@@ -106,6 +106,7 @@
 		213553331EBB681F007E9A60 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 213553351EBB681F007E9A60 /* Localizable.strings */; };
 		2138467B1E7AAC6700A82C63 /* NewAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2138467A1E7AAC6700A82C63 /* NewAddressViewController.swift */; };
 		2147A3251DFA589A00981A30 /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2147A3241DFA589A00981A30 /* ProductImageCell.swift */; };
+		21531C121F9BCCA7003E2F75 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21531C111F9BCCA7003E2F75 /* FiltersViewController.swift */; };
 		2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		215C4F6A1CF286D100A99790 /* product-projection.json in Resources */ = {isa = PBXBuildFile; fileRef = 215C4F691CF286D100A99790 /* product-projection.json */; };
 		215C4F6B1CF28CC600A99790 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */; };
@@ -120,6 +121,7 @@
 		2163EBC51DE8C26C00803640 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */; };
 		2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBC61DE8C26C00803640 /* Assets.xcassets */; };
 		2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */; };
+		2171D0B31F9E52B10074C27D /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2171D0B21F9E52B10074C27D /* RangeSlider.swift */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		218948561F8BE2DE00F05933 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */; };
 		218F840E1F8EB619005E03A4 /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F840D1F8EB619005E03A4 /* WishlistViewController.swift */; };
@@ -344,6 +346,7 @@
 		2137FA901DCA776800A38A25 /* Sunrise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunrise.entitlements; sourceTree = "<group>"; };
 		2138467A1E7AAC6700A82C63 /* NewAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAddressViewController.swift; sourceTree = "<group>"; };
 		2147A3241DFA589A00981A30 /* ProductImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductImageCell.swift; sourceTree = "<group>"; };
+		21531C111F9BCCA7003E2F75 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		215C4F691CF286D100A99790 /* product-projection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "product-projection.json"; sourceTree = "<group>"; };
 		215C7C1F1D79A08C002EC074 /* SelectableAttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableAttributeCell.swift; sourceTree = "<group>"; };
 		215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayedAttributeCell.swift; sourceTree = "<group>"; };
@@ -357,6 +360,7 @@
 		2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		2163EBC61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2171D0B21F9E52B10074C27D /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		218F840D1F8EB619005E03A4 /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
@@ -513,6 +517,7 @@
 				210BE1EDEBBD979B88A2A693 /* ScannerViewController.swift */,
 				210BED6967903DABC089860A /* VoiceSearchViewController.swift */,
 				2108529A1F699DAF00423E4F /* ProductsSectionViewController.swift */,
+				21531C111F9BCCA7003E2F75 /* FiltersViewController.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -806,6 +811,14 @@
 			path = "Sunrise Watch Extension";
 			sourceTree = "<group>";
 		};
+		2171D0B11F9E52900074C27D /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				2171D0B21F9E52B10074C27D /* RangeSlider.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
 		218F840C1F8EB4EA005E03A4 /* Wishlist */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +882,7 @@
 		21CDC4961CE91D9B009D2638 /* Sunrise */ = {
 			isa = PBXGroup;
 			children = (
+				2171D0B11F9E52900074C27D /* Controls */,
 				2137FA901DCA776800A38A25 /* Sunrise.entitlements */,
 				21A8EEA91CEC64C0009A8CEB /* Supporting Files */,
 				21CDC4971CE91D9B009D2638 /* AppDelegate.swift */,
@@ -1447,7 +1461,6 @@
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Interstellar/Interstellar.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift-iOS/ReactiveSwift.framework",
@@ -1464,7 +1477,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Interstellar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
@@ -1612,6 +1624,7 @@
 				21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */,
 				21B518971F680AA60008B2B7 /* HomeViewController.swift in Sources */,
 				211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */,
+				2171D0B31F9E52B10074C27D /* RangeSlider.swift in Sources */,
 				210BEEE397C180AA40D0724D /* Common.swift in Sources */,
 				215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */,
 				217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */,
@@ -1633,6 +1646,7 @@
 				21A9CF031F7DD1A600D30186 /* CategoryOverviewViewController.swift in Sources */,
 				2147A3251DFA589A00981A30 /* ProductImageCell.swift in Sources */,
 				21C0B62A1E7F3ED300D666F5 /* ShippingMethodsViewModel.swift in Sources */,
+				21531C121F9BCCA7003E2F75 /* FiltersViewController.swift in Sources */,
 				210BE928D44EA762B52DA93A /* Attribute.swift in Sources */,
 				210BE0D3C4E3336428ECAB34 /* Money.swift in Sources */,
 				213522E21E15FC7000433174 /* ProductCollectionHeaderView.swift in Sources */,

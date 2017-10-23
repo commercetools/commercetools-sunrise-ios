@@ -17,7 +17,6 @@ class WishlistViewController: UIViewController {
         gradientLayer.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
         gradientLayer.frame = gradientView.bounds
         gradientView.layer.insertSublayer(gradientLayer, at: 0)
-//        tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
     }
 }
 

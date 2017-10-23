@@ -3,7 +3,6 @@
 //
 
 import Commercetools
-import ObjectMapper
 
 extension Attribute {
 
