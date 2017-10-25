@@ -7,6 +7,7 @@ import UIKit
 class CategoryOverviewViewController: UIViewController {
 
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var filtersView: UIView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var categoriesDropdownGradientView: UIView!
     @IBOutlet weak var searchView: UIView!
@@ -21,7 +22,9 @@ class CategoryOverviewViewController: UIViewController {
     @IBOutlet weak var whiteBackgroundColorView: UIView!
     @IBOutlet weak var categorySelectionButton: UIButton!
     @IBOutlet weak var searchFilterButton: UIButton!
+    @IBOutlet weak var searchFilterBackgroundTopImageView: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var filterBackgroundTopImageView: UIImageView!
 
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewLeadingConstraint: NSLayoutConstraint!
@@ -32,7 +35,10 @@ class CategoryOverviewViewController: UIViewController {
     @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchFieldLineCenterXConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoriesDropdownCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchFilterBackgroundTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var filterBackgroundTopConstraint: NSLayoutConstraint!
 
+    private weak var filtersViewController: FiltersViewController?
     private let gradientLayer = CAGradientLayer()
     private let categoriesDropdownGradientLayer = CAGradientLayer()
     private var screenSnapshot: UIImage?
@@ -76,6 +82,54 @@ class CategoryOverviewViewController: UIViewController {
                 }
             })
         }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "filtersSegue" {
+            filtersViewController = segue.destination as? FiltersViewController
+        }
+    }
+
+    @IBAction func searchFilter(_ sender: UIButton) {
+        if sender.isSelected {
+            UIView.animate(withDuration: 0.3) {
+                self.searchFilterBackgroundTopImageView.alpha = 0
+                self.filtersView.alpha = 0
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+            }
+
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.filterBackgroundTopConstraint.isActive = false
+                self.searchFilterBackgroundTopConstraint.isActive = true
+                self.searchFilterBackgroundTopImageView.alpha = 1
+                self.filtersView.alpha = 1
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+                self.view.layoutIfNeeded()
+            }
+        }
+        sender.isSelected = !sender.isSelected
+    }
+
+    @IBAction func filter(_ sender: UIButton) {
+        if sender.isSelected {
+            UIView.animate(withDuration: 0.3) {
+                self.filterBackgroundTopImageView.alpha = 0
+                self.filtersView.alpha = 0
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+            }
+
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.searchFilterBackgroundTopConstraint.isActive = false
+                self.filterBackgroundTopConstraint.isActive = true
+                self.filterBackgroundTopImageView.alpha = 1
+                self.filtersView.alpha = 1
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+                self.view.layoutIfNeeded()
+            }
+        }
+        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
