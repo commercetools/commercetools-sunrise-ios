@@ -11,12 +11,15 @@ class SunriseTabBarController: UITabBarController {
     
     @IBOutlet var tabView: UIView!
     @IBOutlet var navigationView: UIView!
+    @IBOutlet weak var navigationBarLogoImageView: UIImageView!
+
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var barcodeButton: UIButton!    
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var wishlistButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var cartButton: UIButton!
     @IBOutlet weak var wishlistBadgeImageView: UIImageView!
     @IBOutlet weak var wishlistBadgeLabel: UILabel!
     
@@ -32,10 +35,27 @@ class SunriseTabBarController: UITabBarController {
         }
     }
     
+    var navigationBarLightMode: Bool {
+        set {
+            navigationView.backgroundColor = newValue ? UIColor.clear : .white
+            navigationView.layer.shadowColor = newValue ? UIColor.clear.cgColor : UIColor.black.cgColor
+            navigationBarLogoImageView.alpha = newValue ? 0 : 1
+        }
+        get {
+            return navigationBarLogoImageView.isHidden
+        }
+    }
+
     override var selectedIndex: Int {
         didSet {
             setupTabButtonAppearance()
         }
+    }
+
+    override var traitCollection: UITraitCollection {
+        let currentTrait = super.traitCollection
+        let regularHorizontal = UITraitCollection(horizontalSizeClass: .regular)
+        return UITraitCollection(traitsFrom: [currentTrait, regularHorizontal])
     }
 
     override func viewDidLoad() {
@@ -49,6 +69,7 @@ class SunriseTabBarController: UITabBarController {
         searchButton.setImage(#imageLiteral(resourceName: "search_tab_sel"), for: [.selected, .highlighted])
         wishlistButton.setImage(#imageLiteral(resourceName: "wishlist_tab_sel"), for: [.selected, .highlighted])
         profileButton.setImage(#imageLiteral(resourceName: "profile_tab_sel"), for: [.selected, .highlighted])
+        cartButton.setImage(#imageLiteral(resourceName: "nav_bar_bag_active"), for: [.selected, .highlighted])
         
         homeButton.isSelected = true
         
@@ -111,19 +132,26 @@ class SunriseTabBarController: UITabBarController {
     @IBAction func touchUpInside(_ sender: UIButton) {
         guard let index = tabButtons.index(of: sender) else { return }
         if index == 2 && index == selectedIndex {
-            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.ResetSearch, object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
         }
         selectedIndex = index
     }
 
     @IBAction func backButtonTouchUpInside(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.BackButtonTapped, object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, userInfo: nil)
+    }
+
+    @IBAction func cartButtonTouchUpInside(_ sender: UIButton) {
+        guard !sender.isSelected else { return }
+        selectedIndex = tabButtons.count
+        sender.isSelected = true
     }
 
     private func setupTabButtonAppearance() {
         for (index, button) in tabButtons.enumerated() {
             button.isSelected = selectedIndex == index
         }
+        cartButton.isSelected = false
         wishlistBadgeImageView.image = selectedIndex == tabButtons.index(of: wishlistButton) ? #imageLiteral(resourceName: "tab_wishlist_badge") : #imageLiteral(resourceName: "tab_wishlist_off_badge")
     }
 }
@@ -145,8 +173,7 @@ extension SunriseTabBarController: UITabBarControllerDelegate {
 public extension Foundation.Notification.Name {
     /// Used as a namespace for all notifications related to watch token synchronization.
     public struct Navigation {
-        /// Posted when proper access tokens have been received from the iOS app.
-        public static let BackButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.backButtonTapped")
-        public static let ResetSearch = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.resetSearch")
+        public static let backButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.backButtonTapped")
+        public static let resetSearch = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.resetSearch")
     }
 }
