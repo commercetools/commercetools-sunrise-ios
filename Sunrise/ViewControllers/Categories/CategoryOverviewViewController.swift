@@ -61,13 +61,13 @@ class CategoryOverviewViewController: UIViewController {
         subcategoriesTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: subcategoriesTableView.bounds.width, height: 0.5))
         subcategoriesTableView.tableHeaderView?.backgroundColor = subcategoriesTableView.separatorColor
         
-        NotificationCenter.default.addObserver(forName: Foundation.Notification.Name.Navigation.BackButtonTapped, object: nil, queue: .main) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, queue: .main) { [weak self] _ in
             guard let searchField = self?.searchField else { return }
             searchField.text = ""
             self?.searchField.resignFirstResponder()
         }
         
-        NotificationCenter.default.addObserver(forName: Foundation.Notification.Name.Navigation.ResetSearch, object: nil, queue: .main) { [unowned self] _ in
+        NotificationCenter.default.addObserver(forName: Foundation.Notification.Name.Navigation.resetSearch, object: nil, queue: .main) { [unowned self] _ in
             UIView.animate(withDuration: 0.3, animations: {
                 self.productsCollectionView.alpha = 0
                 self.filterButton.alpha = 0
