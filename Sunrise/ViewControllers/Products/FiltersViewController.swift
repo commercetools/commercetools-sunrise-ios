@@ -92,7 +92,7 @@ extension FiltersViewController: UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard scrollView == productTypesCollectionView else { return }
-        scrollToPage(scrollView, withVelocity: CGPoint(x:0, y:0))
+        scrollToPage(scrollView, withVelocity: CGPoint(x: 0, y: 0))
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

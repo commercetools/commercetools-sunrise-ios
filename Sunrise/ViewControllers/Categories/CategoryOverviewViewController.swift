@@ -183,12 +183,12 @@ class CategoryOverviewViewController: UIViewController {
         guard !categoriesCollectionView.isDecelerating, !categoriesCollectionView.isTracking,
               !productsCollectionView.isDecelerating, !productsCollectionView.isTracking else { return }
         if categoriesDropdownView.alpha == 1 {
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.15, animations: {
                 self.snapshotBackgroundColorView.alpha = 0
                 self.categoriesDropdownView.alpha = 0
             }, completion: { _ in
                 self.whiteBackgroundColorView.alpha = 0
-                UIView.transition(with: self.backgroundImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                UIView.transition(with: self.backgroundImageView, duration: 0.15, options: .transitionCrossDissolve, animations: {
                     SunriseTabBarController.currentlyActive?.tabView.alpha = 1
                     self.backgroundImageView.image = self.screenSnapshot
                 }, completion: { _ in
@@ -202,12 +202,12 @@ class CategoryOverviewViewController: UIViewController {
             backgroundImageView.image = snapshot
             backgroundImageView.alpha = 1
             let blurred = self.blur(image: snapshot)
-            UIView.transition(with: backgroundImageView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            UIView.transition(with: backgroundImageView, duration: 0.15, options: .transitionCrossDissolve, animations: {
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 0
                 self.backgroundImageView.image = blurred
             }, completion: { _ in
                 self.whiteBackgroundColorView.alpha = 1
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.15) {
                     self.backgroundImageView.alpha = 0.5
                     self.snapshotBackgroundColorView.alpha = 0.5
                     self.categoriesDropdownView.alpha = 1
@@ -215,27 +215,6 @@ class CategoryOverviewViewController: UIViewController {
                 UIView.transition(with: sender, duration: 0.3, options: .transitionCrossDissolve, animations: { sender.isSelected = true })
             })
         }
-    }
-    
-    private var backgroundSnapshot: UIImage? {
-        guard let window = UIApplication.shared.delegate?.window ?? nil else { return nil }
-        let renderer = UIGraphicsImageRenderer(size: window.frame.size)
-        return renderer.image { _ in
-            window.drawHierarchy(in: window.bounds, afterScreenUpdates: false)
-        }
-    }
-    
-    private func blur(image input: UIImage) -> UIImage? {
-        guard let clampFilter = CIFilter(name: "CIAffineClamp"),
-            let inputImage = CIImage(image: input) else  { return nil }
-        clampFilter.setValue(inputImage, forKey: kCIInputImageKey)
-        guard let blurFilter = CIFilter(name: "CIGaussianBlur"),
-            let clampedImage = clampFilter.outputImage else { return nil }
-        blurFilter.setValue(clampedImage, forKey: kCIInputImageKey)
-        let context = CIContext(options:nil)
-        guard let outputImage = blurFilter.outputImage,
-            let outputCgImage = context.createCGImage(outputImage, from: inputImage.extent) else { return nil }
-        return UIImage(cgImage: outputCgImage)
     }
 }
 
@@ -318,5 +297,28 @@ extension CategoryOverviewViewController: UITableViewDelegate {
                 self.searchView.layoutIfNeeded()
             }
         })
+    }
+}
+
+extension UIViewController {
+    var backgroundSnapshot: UIImage? {
+        guard let window = UIApplication.shared.delegate?.window ?? nil else { return nil }
+        let renderer = UIGraphicsImageRenderer(size: window.frame.size)
+        return renderer.image { _ in
+            window.drawHierarchy(in: window.bounds, afterScreenUpdates: false)
+        }
+    }
+
+    func blur(image input: UIImage) -> UIImage? {
+        guard let clampFilter = CIFilter(name: "CIAffineClamp"),
+              let inputImage = CIImage(image: input) else  { return nil }
+        clampFilter.setValue(inputImage, forKey: kCIInputImageKey)
+        guard let blurFilter = CIFilter(name: "CIGaussianBlur"),
+              let clampedImage = clampFilter.outputImage else { return nil }
+        blurFilter.setValue(clampedImage, forKey: kCIInputImageKey)
+        let context = CIContext(options:nil)
+        guard let outputImage = blurFilter.outputImage,
+              let outputCgImage = context.createCGImage(outputImage, from: inputImage.extent) else { return nil }
+        return UIImage(cgImage: outputCgImage)
     }
 }
