@@ -131,7 +131,7 @@ class AppRouting {
     static func switchToCartAndAdd(product: String, variantId: Int, quantity: UInt, discountCode: String?) {
         switchToCartOverview()
         _ = cartViewController?.view
-        cartViewController?.viewModel?.addProduct(id: product, variantId: variantId, quantity: quantity, discountCode: discountCode)
+//        cartViewController?.viewModel?.addProduct(id: product, variantId: variantId, quantity: quantity, discountCode: discountCode)
     }
 
     /**
