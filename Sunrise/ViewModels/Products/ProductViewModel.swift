@@ -51,10 +51,7 @@ class ProductViewModel: BaseViewModel {
     }()
     lazy var reserveAction: Action<Void, Void, CTError> = { [unowned self] in
         return Action(enabledIf: Property(value: true)) { [unowned self] in
-            if let store = self.activeStore?.value {
-                self.isLoading.value = true
-                return Order.reserve(product: self.product, variant: self.variantForActiveAttributes, in: store)
-            } else if self.isLoggedIn {
+            if self.isLoggedIn {
                 self.performSegueObserver.send(value: "showStoreSelection")
             } else {
                 self.signInPromptObserver.send(value: ())
@@ -84,7 +81,7 @@ class ProductViewModel: BaseViewModel {
 
     // Product variant for currently active (selected) attributes
     private var variantForActiveAttributes: ProductVariant? {
-        let allVariants = product?.allVariants(for: activeStore?.value)
+        let allVariants = product?.allVariants(for: nil)
         return allVariants?.filter({ variant in
             for activeAttribute in activeAttributes.value {
                 if let type = typeForAttributeName(activeAttribute.0),
@@ -119,10 +116,6 @@ class ProductViewModel: BaseViewModel {
         .observeValues({ [weak self] _ in
             self?.isLoading.value = false
         })
-
-        if let myStore = activeStore {
-            displayAddToCartSection <~ myStore.map { return $0 == nil }
-        }
     }
 
     convenience init(product: ProductProjection) {
@@ -146,19 +139,19 @@ class ProductViewModel: BaseViewModel {
     private func bindViewModelProducers() {
         name.value = product?.name.localizedString?.uppercased() ?? ""
 
-        let allVariants = product?.allVariants(for: activeStore?.value)
+        let allVariants = product?.allVariants(for: nil)
 
         (selectableAttributes + displayableAttributes).forEach { attribute in
             if let type = typeForAttributeName(attribute) {
                 var values = [String]()
 
                 // We want to show attribute values only for those variants that have prices available
-                if let masterVariant = product?.masterVariant, let prices = masterVariant.prices?.filter({ activeStore?.value == nil ? true : $0.channel?.id == activeStore?.value?.id }),
+                if let masterVariant = product?.masterVariant, let prices = masterVariant.prices,
                    let defaultValue = masterVariant.attributes?.filter({ $0.name == attribute }).first?.value(type),
                    prices.count > 0 {
                     values.append(defaultValue)
                 }
-                allVariants?.filter({ ($0.prices?.filter({ activeStore?.value == nil ? true : $0.channel?.id == activeStore?.value?.id }).count ?? 0) > 0 }).forEach { variant in
+                allVariants?.filter({ ($0.prices?.count ?? 0) > 0 }).forEach { variant in
                     if let value = variant.attributes?.filter({ $0.name == attribute }).first?.value(type) {
                         if !values.contains(value) {
                             values.append(value)
@@ -234,11 +227,11 @@ class ProductViewModel: BaseViewModel {
     // MARK: Internal Helpers
 
     private var priceForActiveAttributes: Price? {
-        return activeStore?.value == nil ? variantForActiveAttributes?.independentPrice : variantForActiveAttributes?.price(for: activeStore!.value!)
+        return variantForActiveAttributes?.independentPrice
     }
 
     private func currentVariantId() -> Int? {
-        return product?.allVariants(for: activeStore?.value).filter({ $0.sku == sku.value }).first?.id
+        return product?.allVariants(for: nil).filter({ $0.sku == sku.value }).first?.id
     }
 
     private func typeForAttributeName(_ name: String) -> AttributeType? {
