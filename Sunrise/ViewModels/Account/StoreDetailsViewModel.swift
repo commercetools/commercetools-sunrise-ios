@@ -44,11 +44,6 @@ class StoreDetailsViewModel: BaseViewModel {
             }
         }
     }()
-    lazy var saveMyStoreAction: Action<Void, Void, CTError> = {
-        return Action(enabledIf: Property(value: true)) { [unowned self] _ in
-            return self.saveMyStore()
-        }
-    }()
 
     let store: Channel
 
@@ -63,33 +58,5 @@ class StoreDetailsViewModel: BaseViewModel {
         let destination = MKMapItem(placemark: MKPlacemark(coordinate: location.coordinate))
         destination.name = name
         MKMapItem.openMaps(with: [destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
-    }
-
-    // MARK: - Saving my store to the customer endpoint
-
-    private func saveMyStore() -> SignalProducer<Void, CTError> {
-        isLoading.value = true
-        return SignalProducer { [weak self] observer, disposable in
-            Customer.addCustomTypeIfNotExists { version, errors in
-                if let version = version, errors == nil {
-                    let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "myStore", value: .dictionary(value: ["typeId": .string(value: "channel"), "id": .string(value: self?.store.id ?? "")]))])
-                    Customer.update(actions: updateActions) { result in
-                        self?.isLoading.value = false
-                        if result.isSuccess {
-                            AppRouting.accountViewController?.viewModel?.currentStore.value = self?.store
-                            guard let myStoreId = self?.store.id else { return }
-                            UserDefaults.standard.set(myStoreId, forKey: kMyStoreId)
-                            observer.sendCompleted()
-                        } else if let error = result.errors?.first as? CTError, result.isFailure {
-                            observer.send(error: error)
-                        }
-                    }
-
-                } else if let error = errors?.first as? CTError {
-                    self?.isLoading.value = false
-                    observer.send(error: error)
-                }
-            }
-        }
     }
 }

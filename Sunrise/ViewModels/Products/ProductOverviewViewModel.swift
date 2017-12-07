@@ -39,7 +39,6 @@ class ProductOverviewViewModel: BaseViewModel {
     let browsingOptionsTitle = NSLocalizedString("Browsing Options", comment: "Browsing Options")
     let browsingOptionsMessage = NSLocalizedString("Which store would you like to browse?", comment: "Which store would you like to browse")
     let selectOnlineStoreOption = NSLocalizedString("Select Online Store", comment: "Select Online Store")
-    var selectMyStoreOption: String { return String(format: NSLocalizedString("Select %@", comment: "Select My Store"), myStore?.value?.name?.localizedString ?? "") }
     let changeMyStoreOption = NSLocalizedString("Change My Store", comment: "Change My Store")
     let cancelOption = NSLocalizedString("Cancel", comment: "Cancel")
     let onlineStoreName = NSLocalizedString("Online Store", comment: "Online Store")
@@ -72,17 +71,6 @@ class ProductOverviewViewModel: BaseViewModel {
 
         super.init()
 
-        // Querying for product projections needs to done only when the profile / account info is not loading
-        // (the results depend on if and which store is selected)
-        if let accountInfoIsLoading = AppRouting.accountViewController?.viewModel?.isLoading {
-            disposables += accountInfoIsLoading.combinePrevious(accountInfoIsLoading.value)
-            .signal.observeValues { [weak self] previous, current in
-                if previous && !current {
-                    self?.queryForProductProjections(offset: 0)
-                }
-            }
-        }
-
         disposables += refreshSignal
         .observeValues { [weak self] in
             self?.queryForProductProjections(offset: 0)
@@ -100,26 +88,6 @@ class ProductOverviewViewModel: BaseViewModel {
             guard previous != current else { return }
             self?.queryForProductProjections(offset: 0)
         })
-
-        browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? myStore?.value : nil
-        browsingStore <~ selectOnlineStoreSignal.map { return nil }
-        browsingStore <~ selectMyStoreSignal.map { [weak self] in return self?.myStore?.value }
-        disposables += browsingStore.combinePrevious(browsingStore.value).signal.observe(on: QueueScheduler())
-        .observeValues { [weak self] previousStore, currentStore in
-            guard previousStore != currentStore else { return }
-            UserDefaults.standard.set(currentStore != nil, forKey: kStorePreference)
-            // If set from category specific POP, update the main POP
-            if let rootProductOverviewViewModel = AppRouting.productOverviewViewController?.viewModel, rootProductOverviewViewModel !== self {
-                rootProductOverviewViewModel.browsingStore.value = currentStore
-            } else if let categoryProductOverviewViewModel = AppRouting.categoryProductOverviewViewController?.viewModel, categoryProductOverviewViewModel !== self {
-                categoryProductOverviewViewModel.browsingStore.value = currentStore
-            }
-
-            // Perform new search after the store has changed
-            if self?.textSearch.value.0 == "" {
-                self?.queryForProductProjections(offset: 0)
-            }
-        }
 
         browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
 
@@ -171,7 +139,6 @@ class ProductOverviewViewModel: BaseViewModel {
     // MARK: - Commercetools product projections querying
 
     private func queryForProductProjections(offset: UInt) {
-        guard AppRouting.accountViewController?.viewModel?.isLoading.value != true else { return }
         let text = textSearch.value.0
         let locale = textSearch.value.1
         isLoading.value = true
