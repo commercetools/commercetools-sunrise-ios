@@ -35,15 +35,6 @@ class BaseViewModel {
     let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MS.", comment: "MS."),
                         NSLocalizedString("DR.", comment: "DR.")]
 
-    // My store
-    var myStore: MutableProperty<Channel?>? {
-        return AppRouting.accountViewController?.viewModel?.currentStore
-    }
-    // Store currently browsing
-    var activeStore: MutableProperty<Channel?>? {
-        return AppRouting.productOverviewViewController?.viewModel?.browsingStore
-    }
-
     // MARK: - Lifecycle
 
     init() {

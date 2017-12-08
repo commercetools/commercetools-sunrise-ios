@@ -142,11 +142,7 @@ class ScannerViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let productViewController = segue.destination as? ProductViewController, let viewModel = viewModel,
-                let product = viewModel.scannedProduct.value {
-            let productDetailsViewModel = ProductViewModel(product: product)
-            productViewController.viewModel = productDetailsViewModel
-        }
+
     }
 
 }

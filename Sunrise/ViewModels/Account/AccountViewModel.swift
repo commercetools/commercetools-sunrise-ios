@@ -100,21 +100,6 @@ class AccountViewModel: BaseViewModel {
         }
 
         myStoreName <~ currentStore.map { return $0?.name?.localizedString ?? NSLocalizedString("Not selected", comment: "Not selected") }
-
-        currentStore.producer
-        .observe(on: UIScheduler())
-        .startWithValues { currentStore in
-            AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = UserDefaults.standard.bool(forKey: kStorePreference) ? currentStore : nil
-        }
-
-        currentStore.producer
-        .observe(on: UIScheduler())
-        .skip(first: 2)
-        .startWithValues { currentStore in
-            // When my store changes, always pop to product overview, in case the customer was on a store specific PDP
-            AppRouting.popHomeToProductOverview()
-            AppRouting.popCategoryToRoot()
-        }
     }
 
     deinit {
@@ -234,13 +219,11 @@ class AccountViewModel: BaseViewModel {
                 Customer.update(actions: updateActions) { _ in
                     DispatchQueue.main.async {
                         Commercetools.logoutCustomer()
-                        AppRouting.setupMyAccountRootViewController()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
                     Commercetools.logoutCustomer()
-                    AppRouting.setupMyAccountRootViewController()
                 }
             }
         }
