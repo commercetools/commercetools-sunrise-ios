@@ -34,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Medium", size: 14)!]
         UISegmentedControl.appearance().setTitleTextAttributes(attributes, for: .normal)
 
-        AppRouting.setupInitiallyActiveTab()
-
         if let configuration = Project.config {
             Commercetools.config = configuration
         } else {
@@ -66,24 +64,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // POP (e.g https://demo.commercetools.com/en/search?q=jeans)
             if let indexOfSearch = pathComponents.index(of: "search"), let urlComponents = URLComponents(string: url.absoluteString),
                let query = urlComponents.queryItems, indexOfSearch > 0 {
-                AppRouting.switchToSearch(query: query["q"] ?? "", locale: Locale(identifier: pathComponents[indexOfSearch - 1]))
+//                AppRouting.switchToSearch(query: query["q"] ?? "", locale: Locale(identifier: pathComponents[indexOfSearch - 1]))
                 return true
 
             // PDP (e.g https://demo.commercetools.com/en/brunello-cucinelli-coat-mf9284762-cream-M0E20000000DQR5.html)
             } else if let sku = pathComponents.last?.components(separatedBy: "-").last, sku.count > 5, sku.contains(".html") {
-                AppRouting.switchToProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
+//                AppRouting.switchToProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
                 return true
 
             // Orders (e.g https://demo.commercetools.com/en/user/orders/87896195?)
             } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last {
-                AppRouting.showOrderDetails(orderNumber: orderNumber)
+//                AppRouting.showOrderDetails(orderNumber: orderNumber)
                 return true
 
             // Add to cart (e.g https://demo.commercetools.com/en/cart/add?productId=eedf1d96-8eec-43c9-877c-76ebab6d5c7f&variantId=1&quantity=2&discountCode=SUNRISE)
             } else if let index = pathComponents.index(of: "cart"), pathComponents.count >= index + 1 && pathComponents[index + 1] == "add",
                       let urlComponents = URLComponents(string: url.absoluteString), let query = urlComponents.queryItems {
                 guard let product = query["productId"], let variantId = Int(query["variantId"] ?? "") else { return false }
-                AppRouting.switchToCartAndAdd(product: product, variantId: variantId, quantity: UInt(query["quantity"] ?? "") ?? 1, discountCode: query["discountCode"])
+//                AppRouting.switchToCartAndAdd(product: product, variantId: variantId, quantity: UInt(query["quantity"] ?? "") ?? 1, discountCode: query["discountCode"])
                 return true
             }
         }
@@ -92,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func handleNotification(notificationInfo: [AnyHashable: Any]) {
         if let reservationId = notificationInfo["reservation-id"] as? String {
-            AppRouting.showReservationDetails(id: reservationId)
+//            AppRouting.showReservationDetails(id: reservationId)
         }
     }
 
@@ -155,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 )
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-                    AppRouting.accountViewController?.viewModel?.logoutCustomer()
+//                    AppRouting.accountViewController?.viewModel?.logoutCustomer()
                     Commercetools.logoutCustomer()
                     Project.update(config: projectConfig as NSDictionary)
                     exit(0)
