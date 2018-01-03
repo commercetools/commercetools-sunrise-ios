@@ -142,6 +142,11 @@
 		21BBDC241D34199500C516FD /* StoreDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBDC231D34199500C516FD /* StoreDetailsCell.swift */; };
 		21C0B62A1E7F3ED300D666F5 /* ShippingMethodsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0B6291E7F3ED300D666F5 /* ShippingMethodsViewModel.swift */; };
 		21C0B62E1E7F3F3400D666F5 /* NewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0B62D1E7F3F3400D666F5 /* NewAddressViewModel.swift */; };
+		21C3C99120024303006BA0A6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C3C99020024303006BA0A6 /* Home.storyboard */; };
+		21C3C9932002448D006BA0A6 /* Categories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C3C9922002448D006BA0A6 /* Categories.storyboard */; };
+		21C3C9952002454C006BA0A6 /* Wishlist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C3C9942002454C006BA0A6 /* Wishlist.storyboard */; };
+		21C3C9992002B4A7006BA0A6 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C3C9982002B4A7006BA0A6 /* Cart.storyboard */; };
+		21C3C99B2003A15A006BA0A6 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C3C99A2003A15A006BA0A6 /* ProductDetails.storyboard */; };
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */; };
@@ -365,6 +370,11 @@
 		21BBDC231D34199500C516FD /* StoreDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailsCell.swift; sourceTree = "<group>"; };
 		21C0B6291E7F3ED300D666F5 /* ShippingMethodsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShippingMethodsViewModel.swift; sourceTree = "<group>"; };
 		21C0B62D1E7F3F3400D666F5 /* NewAddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAddressViewModel.swift; sourceTree = "<group>"; };
+		21C3C99020024303006BA0A6 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		21C3C9922002448D006BA0A6 /* Categories.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Categories.storyboard; sourceTree = "<group>"; };
+		21C3C9942002454C006BA0A6 /* Wishlist.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wishlist.storyboard; sourceTree = "<group>"; };
+		21C3C9982002B4A7006BA0A6 /* Cart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
+		21C3C99A2003A15A006BA0A6 /* ProductDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		21C4966A1E7BFA8E00D8A699 /* Sunrise Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Sunrise Watch Extension.entitlements"; sourceTree = "<group>"; };
 		21CDC4941CE91D9B009D2638 /* Sunrise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunrise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4971CE91D9B009D2638 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -615,6 +625,11 @@
 			children = (
 				2161539E1D1AA03B006C9627 /* LaunchScreen.storyboard */,
 				212EB3031F5F2B4A0006611E /* Onboarding.storyboard */,
+				21C3C9982002B4A7006BA0A6 /* Cart.storyboard */,
+				21C3C9942002454C006BA0A6 /* Wishlist.storyboard */,
+				21C3C9922002448D006BA0A6 /* Categories.storyboard */,
+				21C3C99A2003A15A006BA0A6 /* ProductDetails.storyboard */,
+				21C3C99020024303006BA0A6 /* Home.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1211,13 +1226,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				212EB2FB1F5F21EF0006611E /* Rubik-Bold.ttf in Resources */,
+				21C3C99120024303006BA0A6 /* Home.storyboard in Resources */,
 				212EB2F91F5F21EF0006611E /* Rubik-Black.ttf in Resources */,
+				21C3C99B2003A15A006BA0A6 /* ProductDetails.storyboard in Resources */,
+				21C3C9992002B4A7006BA0A6 /* Cart.storyboard in Resources */,
 				212EB2FA1F5F21EF0006611E /* Rubik-BlackItalic.ttf in Resources */,
 				212EB2F61F5F21EF0006611E /* Poppins-Medium.ttf in Resources */,
 				212EB2FC1F5F21EF0006611E /* Rubik-BoldItalic.ttf in Resources */,
 				212EB2F51F5F21EF0006611E /* Poppins-Light.ttf in Resources */,
 				213553331EBB681F007E9A60 /* Localizable.strings in Resources */,
 				212EB2F81F5F21EF0006611E /* Poppins-SemiBold.ttf in Resources */,
+				21C3C9952002454C006BA0A6 /* Wishlist.storyboard in Resources */,
 				212EB2FF1F5F21EF0006611E /* Rubik-LightItalic.ttf in Resources */,
 				212EB2FD1F5F21EF0006611E /* Rubik-Italic.ttf in Resources */,
 				21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */,
@@ -1229,6 +1248,7 @@
 				21A8EEAB1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist in Resources */,
 				216153A01D1AA03B006C9627 /* LaunchScreen.storyboard in Resources */,
 				212EB3011F5F21EF0006611E /* Rubik-MediumItalic.ttf in Resources */,
+				21C3C9932002448D006BA0A6 /* Categories.storyboard in Resources */,
 				212EB3021F5F21EF0006611E /* Rubik-Regular.ttf in Resources */,
 				212EB2FE1F5F21EF0006611E /* Rubik-Light.ttf in Resources */,
 			);
