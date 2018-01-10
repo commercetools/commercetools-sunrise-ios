@@ -37,7 +37,7 @@ class CartViewController: UIViewController {
     }
 
     @IBAction func checkout(_ sender: UIButton) {
-        guard let snapshot = backgroundSnapshot else { return }
+        guard let snapshot = performSnapshot() else { return }
         screenSnapshot = snapshot
         backgroundImageView.image = snapshot
         backgroundImageView.alpha = 1
@@ -54,6 +54,16 @@ class CartViewController: UIViewController {
                 self.loginPromptView.alpha = 1
             }
         })
+    }
+
+    func performSnapshot() -> UIImage? {
+        guard let window = UIApplication.shared.delegate?.window ?? nil else { return nil }
+        UIGraphicsBeginImageContextWithOptions(window.bounds.size, window.isOpaque, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        window.layer.render(in: context)
+        let fullSnapshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return fullSnapshot
     }
 }
 

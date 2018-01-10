@@ -210,7 +210,6 @@ class AccountViewModel: BaseViewModel {
         isLoading.value = true
         currentStore.value = nil
         UserDefaults.standard.removeObject(forKey: kLoggedInUsername)
-        UserDefaults.standard.set(false, forKey: kStorePreference)
         UserDefaults.standard.synchronize()
         Customer.addCustomTypeIfNotExists { version, errors in
             if let version = version, errors == nil {
