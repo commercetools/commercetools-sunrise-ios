@@ -17,7 +17,14 @@ extension ProductVariant {
         }).first
     }
 
-    func price(for channel: Channel) -> Price? {
-        return prices?.filter({ $0.channel?.id == channel.id }).first
+    func price(country: String? = nil, currency: String? = nil, customerGroup: Reference<CustomerGroup>? = nil) -> Price? {
+        var price = prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).first
+        if price == nil, customerGroup != nil {
+            price = prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).first
+        }
+        if price == nil {
+            price = independentPrice
+        }
+        return price
     }
 }
