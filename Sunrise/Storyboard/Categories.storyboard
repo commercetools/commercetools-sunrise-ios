@@ -41,7 +41,7 @@
         <!--Search-->
         <scene sceneID="beC-3r-YoN">
             <objects>
-                <viewController id="AIq-Y6-ty1" customClass="CategoryOverviewViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AIq-Y6-ty1" customClass="MainViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zoQ-76-y2t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,6 +146,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="categoryImageView" destination="vcg-dC-1DN" id="MhV-Yr-lOR"/>
+                                            <outlet property="categoryNameLabel" destination="1Qm-oh-W7g" id="sWt-jK-lqf"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -168,7 +169,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="KL5-iU-gWo">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="KL5-iU-gWo" customClass="ProductOverviewCell" customModule="Sunrise" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="13" width="172" height="311"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -233,6 +234,11 @@
                                             <constraint firstItem="JSj-YU-htp" firstAttribute="leading" secondItem="KL5-iU-gWo" secondAttribute="leading" constant="2.7000000000000002" id="wt3-Tu-Bfe"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="oldPriceLabel" destination="JSj-YU-htp" id="L4r-FM-MSL"/>
+                                            <outlet property="priceLabel" destination="7P2-D1-bH5" id="s6i-cl-hyb"/>
+                                            <outlet property="productImageView" destination="Tjj-Fc-hX7" id="apR-he-a6t"/>
+                                            <outlet property="productNameLabel" destination="WLM-mk-JLR" id="pTf-Ss-uVb"/>
+                                            <outlet property="wishlistButton" destination="aeh-Ye-WwA" id="2bE-t1-4dy"/>
                                             <segue destination="TIU-Dd-jEr" kind="show" id="nKN-oZ-8Ev"/>
                                         </connections>
                                     </collectionViewCell>
@@ -314,7 +320,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeCategory:" destination="AIq-Y6-ty1" eventType="touchUpInside" id="nee-iF-tZU"/>
+                                    <action selector="switchCategory:" destination="AIq-Y6-ty1" eventType="touchUpInside" id="nee-iF-tZU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHw-HQ-dsr">
@@ -387,6 +393,7 @@
                                         </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="AIq-Y6-ty1" id="zie-DK-OeW"/>
+                                            <outlet property="delegate" destination="AIq-Y6-ty1" id="rLh-6P-rg9"/>
                                         </connections>
                                     </tableView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cG-Xo-twa">
