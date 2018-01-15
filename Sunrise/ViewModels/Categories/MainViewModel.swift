@@ -35,6 +35,16 @@ class MainViewModel: BaseViewModel {
     private let kQueryLimit: UInt = 500
     private let disposables = CompositeDisposable()
 
+    private let recentSearchesKey = "recentSearches"
+    private var recentSearches: [String] {
+        get {
+            return (UserDefaults.standard.object(forKey: recentSearchesKey) as? [String]) ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: recentSearchesKey)
+        }
+    }
+
     // Configuration parameters
     private let navigationExternalId: String? = {
         return Bundle.main.object(forInfoDictionaryKey: "Navigation external ID") as? String
@@ -81,6 +91,15 @@ class MainViewModel: BaseViewModel {
             self.productsViewModel.category.value = active
         }
 
+        disposables += productsViewModel.textSearch.producer
+        .filter { $0.0 != "" }
+        .startWithValues { [unowned self] in
+            if let index = self.recentSearches.index(of: $0.0) {
+                self.recentSearches.remove(at: index)
+            }
+            self.recentSearches.insert($0.0, at: 0)
+        }
+
         disposables += NotificationCenter.default.reactive
         .notifications(forName: .UIApplicationDidBecomeActive)
         .observeValues { [weak self] _ in
@@ -96,6 +115,19 @@ class MainViewModel: BaseViewModel {
 
     // MARK: - Data Source
 
+    var numberOfCategoryRows: Int {
+        guard let activeCategory = activeCategory.value else { return rootCategories.value.count }
+        return rootCategories.value.contains(activeCategory) ? rootCategories.value.count : childCategoriesCache[activeCategory.parent?.id ?? ""]?.count ?? 0
+    }
+
+    var numberOfCategoryItems: Int {
+        return childCategoriesCache[activeCategory.value?.id ?? ""]?.count ?? 0
+    }
+
+    var numberOfRecentSearches: Int {
+        return recentSearches.count
+    }
+
     func categoryName(for view: UIScrollView, at indexPath: IndexPath) -> String? {
         guard let activeCategory = activeCategory.value else { return nil }
         if view is UITableView {
@@ -110,13 +142,8 @@ class MainViewModel: BaseViewModel {
         return rootCategories.value.contains(activeCategory) ? rootCategories.value[indexPath.row] == activeCategory : childCategoriesCache[activeCategory.parent?.id ?? ""]?[indexPath.row] == activeCategory
     }
 
-    var numberOfCategoryRows: Int {
-        guard let activeCategory = activeCategory.value else { return rootCategories.value.count }
-        return rootCategories.value.contains(activeCategory) ? rootCategories.value.count : childCategoriesCache[activeCategory.parent?.id ?? ""]?.count ?? 0
-    }
-
-    var numberOfCategoryItems: Int {
-        return childCategoriesCache[activeCategory.value?.id ?? ""]?.count ?? 0
+    func recentSearch(at indexPath: IndexPath) -> String {
+        return recentSearches[indexPath.row]
     }
 
     // MARK: - Categories retrieval

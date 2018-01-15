@@ -130,6 +130,13 @@ class MainViewController: UIViewController {
             self?.updateBackgroundSnapshot()
         }
 
+        disposables += searchField.reactive.textValues
+        .filter { $0 != "" }
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] _ in
+            self?.presentSearchResults()
+        }
+
         disposables += observeAlertMessageSignal(viewModel: viewModel)
         bindProductsViewModel()
     }
@@ -139,6 +146,7 @@ class MainViewController: UIViewController {
 
         disposables += viewModel.isLoading.producer
         .filter { !$0 }
+        .skip(first: 2)
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] _ in
             self.productsCollectionView.reloadData()
@@ -148,6 +156,16 @@ class MainViewController: UIViewController {
                     self.updateBackgroundSnapshot()
                 }
             }
+        }
+
+        disposables += viewModel.textSearch <~ searchField.reactive.textValues.map { ($0 ?? "", Locale.current) }
+
+        disposables += searchField.reactive.textValues
+        .filter { $0 != "" }
+        .delay(0.1, on: QueueScheduler(qos: .userInteractive))
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] _ in
+            self?.searchSuggestionsTableView.reloadData()
         }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
@@ -207,6 +225,7 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
+        viewModel?.productsViewModel.clearProductsObserver.send(value: ())
         UIView.animate(withDuration: 0.3, animations: {
             self.magnifyingGlassImageView.image = #imageLiteral(resourceName: "search_field_icon_active")
             self.searchFieldMagnifyingGlassLeadingSpaceConstraint.constant = 0
@@ -315,13 +334,29 @@ class MainViewController: UIViewController {
         })
     }
 
+    private func presentSearchResults() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.searchSuggestionsTableView.alpha = 0
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.productsCollectionView.alpha = 1
+                self.searchFilterButton.alpha = 1
+                self.searchFieldLineWidthActiveConstraint.constant = -44
+                self.searchFieldLineCenterXConstraint.constant = -22
+                self.searchView.layoutIfNeeded()
+            }
+        })
+    }
+
+    // MARK: - Blurring effect
+
     private func updateBackgroundSnapshot() {
-//        guard let backgroundSnapshot = takeSnapshot() else { return }
-//        self.backgroundSnapshot = backgroundSnapshot
-//        blurredSnapshot = blur(image: backgroundSnapshot)
-//        if backgroundImageView.alpha > 0 {
-//            backgroundImageView.image = blurredSnapshot
-//        }
+        guard let backgroundSnapshot = takeSnapshot() else { return }
+        self.backgroundSnapshot = backgroundSnapshot
+        blurredSnapshot = blur(image: backgroundSnapshot)
+        if backgroundImageView.alpha > 0 {
+            backgroundImageView.image = blurredSnapshot
+        }
     }
 
     private func takeSnapshot() -> UIImage? {
@@ -393,6 +428,7 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard collectionView == categoriesCollectionView else { return }
         isTransitioningToProducts = true
+        viewModel?.productsViewModel.clearProductsObserver.send(value: ())
         viewModel?.selectedCategoryCollectionItemObserver.send(value: indexPath)
         UIView.animate(withDuration: 0.3, animations: {
             self.searchView.alpha = 0
@@ -458,12 +494,13 @@ extension MainViewController: UIScrollViewDelegate {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableView == subcategoriesTableView ? viewModel?.numberOfCategoryRows ?? 0 : 33
+        return tableView == subcategoriesTableView ? viewModel?.numberOfCategoryRows ?? 0 : viewModel?.numberOfRecentSearches ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == searchSuggestionsTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchSuggestion") as! SearchSuggestionCell
+            cell.suggestionLabel.text = viewModel?.recentSearch(at: indexPath)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryTableViewCell
@@ -479,19 +516,8 @@ extension MainViewController: UITableViewDelegate {
         if tableView == subcategoriesTableView {
             viewModel?.selectedCategoryTableRowObserver.send(value: indexPath)
         } else {
-            searchField.text = "Black top"
+            searchField.text = viewModel?.recentSearch(at: indexPath)
             searchField.resignFirstResponder()
-            UIView.animate(withDuration: 0.3, animations: {
-                self.searchSuggestionsTableView.alpha = 0
-            }, completion: { _ in
-                UIView.animate(withDuration: 0.3) {
-                    self.productsCollectionView.alpha = 1
-                    self.searchFilterButton.alpha = 1
-                    self.searchFieldLineWidthActiveConstraint.constant = -44
-                    self.searchFieldLineCenterXConstraint.constant = -22
-                    self.searchView.layoutIfNeeded()
-                }
-            })
         }
     }
 }
@@ -514,10 +540,8 @@ extension UIViewController {
               let clampedImage = clampFilter.outputImage else { return nil }
         blurFilter.setValue(clampedImage, forKey: kCIInputImageKey)
         let context = CIContext(options:nil)
-        let start = CFAbsoluteTimeGetCurrent()
         guard let outputImage = blurFilter.outputImage,
               let outputCgImage = context.createCGImage(outputImage, from: inputImage.extent) else { return nil }
-        print("\(CFAbsoluteTimeGetCurrent() - start)")
         return UIImage(cgImage: outputCgImage)
     }
 }

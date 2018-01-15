@@ -81,7 +81,7 @@ class ProductViewModel: BaseViewModel {
 
     // Product variant for currently active (selected) attributes
     private var variantForActiveAttributes: ProductVariant? {
-        let allVariants = product?.allVariants(for: nil)
+        let allVariants = product?.allVariants
         return allVariants?.filter({ variant in
             for activeAttribute in activeAttributes.value {
                 if let type = typeForAttributeName(activeAttribute.0),
@@ -139,7 +139,7 @@ class ProductViewModel: BaseViewModel {
     private func bindViewModelProducers() {
         name.value = product?.name.localizedString?.uppercased() ?? ""
 
-        let allVariants = product?.allVariants(for: nil)
+        let allVariants = product?.allVariants
 
         (selectableAttributes + displayableAttributes).forEach { attribute in
             if let type = typeForAttributeName(attribute) {
@@ -231,7 +231,7 @@ class ProductViewModel: BaseViewModel {
     }
 
     private func currentVariantId() -> Int? {
-        return product?.allVariants(for: nil).filter({ $0.sku == sku.value }).first?.id
+        return product?.allVariants.filter({ $0.sku == sku.value }).first?.id
     }
 
     private func typeForAttributeName(_ name: String) -> AttributeType? {
