@@ -18,7 +18,16 @@ extension ProductVariant {
     }
 
     func price(country: String? = nil, currency: String? = nil, customerGroup: Reference<CustomerGroup>? = nil) -> Price? {
-        var price = prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).first
+        let now = Date()
+        var price = prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).first
+        if price == nil, customerGroup != nil {
+            price = prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                    && $0.country == country && $0.value.currencyCode == currency }).first
+        }
+        if price == nil {
+            price = prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).first
+        }
         if price == nil, customerGroup != nil {
             price = prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).first
         }

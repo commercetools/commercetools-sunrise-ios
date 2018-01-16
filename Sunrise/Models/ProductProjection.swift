@@ -7,7 +7,19 @@ import Commercetools
 extension ProductProjection {
 
     func displayVariant(country: String? = nil, currency: String? = nil, customerGroup: Reference<CustomerGroup>? = nil) -> ProductVariant? {
-        var displayVariant = allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        var displayVariant = allVariants.filter({ $0.isMatchingVariant == true }).first
+        let now = Date()
+        if displayVariant == nil {
+            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                    && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        }
+        if displayVariant == nil, customerGroup != nil {
+            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                    && $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        }
+        if displayVariant == nil {
+            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        }
         if displayVariant == nil, customerGroup != nil {
             displayVariant = allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
         }
