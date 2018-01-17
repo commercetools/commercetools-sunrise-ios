@@ -2,12 +2,10 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
+import CoreLocation
 import ReactiveSwift
 import Result
 import Commercetools
-
-/// The key used for whether the user was using online or physical store
-let kStorePreference = "StorePreference"
 
 class ProductOverviewViewModel: BaseViewModel {
 
@@ -16,44 +14,34 @@ class ProductOverviewViewModel: BaseViewModel {
     // Inputs
     let refreshObserver: Signal<Void, NoError>.Observer
     let nextPageObserver: Signal<Void, NoError>.Observer
-    let selectOnlineStoreObserver: Signal<Void, NoError>.Observer
-    let selectMyStoreObserver: Signal<Void, NoError>.Observer
+    let clearProductsObserver: Signal<Void, NoError>.Observer
     let textSearch = MutableProperty(("", Locale.current))
+    let userLocation: MutableProperty<CLLocation?> = MutableProperty(nil)
 
     // Outputs
-    let title: String
     let isLoading: MutableProperty<Bool>
-    let browsingStoreName: MutableProperty<String?>
-    let browsingStore: MutableProperty<Channel?>
     let presentProductDetailsSignal: Signal<ProductViewModel, NoError>
     let scrollToBeginningSignal: Signal<Void, NoError>
 
+    let category: MutableProperty<Category?> = MutableProperty(nil)
     let pageSize: UInt = 16
-    var products: [ProductProjection]
+
+    private var products: [ProductProjection]
     private let presentProductDetailsObserver: Signal<ProductViewModel, NoError>.Observer
     private let scrollToBeginningObserver: Signal<Void, NoError>.Observer
-    private var category: Category?
-    private let disposables = CompositeDisposable()
 
-    // Dialogue texts
-    let browsingOptionsTitle = NSLocalizedString("Browsing Options", comment: "Browsing Options")
-    let browsingOptionsMessage = NSLocalizedString("Which store would you like to browse?", comment: "Which store would you like to browse")
-    let selectOnlineStoreOption = NSLocalizedString("Select Online Store", comment: "Select Online Store")
-    let changeMyStoreOption = NSLocalizedString("Change My Store", comment: "Change My Store")
-    let cancelOption = NSLocalizedString("Cancel", comment: "Cancel")
-    let onlineStoreName = NSLocalizedString("Online Store", comment: "Online Store")
+    private let geocoder = CLGeocoder()
+    private var currentCountry: String?
+    private var currentCurrency: String?
+    private var customerGroup: Reference<CustomerGroup>?
+    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
-    init(category: Category? = nil) {
+    override init() {
         products = []
-        self.category = category
-
-        title = NSLocalizedString("Products", comment: "POP Title")
-        browsingStoreName = MutableProperty(onlineStoreName)
 
         isLoading = MutableProperty(true)
-        browsingStore = MutableProperty(nil)
         (presentProductDetailsSignal, presentProductDetailsObserver) = Signal<ProductViewModel, NoError>.pipe()
         (scrollToBeginningSignal, scrollToBeginningObserver) = Signal<Void, NoError>.pipe()
 
@@ -63,63 +51,94 @@ class ProductOverviewViewModel: BaseViewModel {
         let (nextPageSignal, pageObserver) = Signal<Void, NoError>.pipe()
         nextPageObserver = pageObserver
 
-        let (selectOnlineStoreSignal, selectOnlineStoreObserver) = Signal<Void, NoError>.pipe()
-        self.selectOnlineStoreObserver = selectOnlineStoreObserver
-
-        let (selectMyStoreSignal, selectMyStoreObserver) = Signal<Void, NoError>.pipe()
-        self.selectMyStoreObserver = selectMyStoreObserver
+        let (clearProductsSignal, clearProductsObserver) = Signal<Void, NoError>.pipe()
+        self.clearProductsObserver = clearProductsObserver
 
         super.init()
 
         disposables += refreshSignal
+        .observe(on: QueueScheduler(qos: .userInitiated))
         .observeValues { [weak self] in
             self?.queryForProductProjections(offset: 0)
         }
 
+        disposables += category.producer
+        .observe(on: QueueScheduler(qos: .userInitiated))
+        .startWithValues { [weak self] _ in
+            self?.queryForProductProjections(offset: 0)
+        }
+
         disposables += nextPageSignal
+        .observe(on: QueueScheduler(qos: .userInitiated))
         .observeValues { [weak self] in
             if let productCount = self?.products.count, productCount > 0 {
                 self?.queryForProductProjections(offset: UInt(productCount))
             }
         }
 
+        disposables += NotificationCenter.default.reactive.notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
+        .delay(0.8, on: QueueScheduler())
+        .observeValues { [weak self] _ in
+            self?.textSearch.value.0 = ""
+            self?.category.value = nil
+        }
+
+        disposables += clearProductsSignal.observeValues { [weak self] in
+            self?.products = []
+            self?.isLoading.value = false
+        }
+
         disposables += textSearch.combinePrevious(textSearch.value).signal
+        .observe(on: QueueScheduler(qos: .userInitiated))
         .observeValues({ [weak self] previous, current in
-            guard previous != current else { return }
             self?.queryForProductProjections(offset: 0)
         })
 
-        browsingStoreName <~ browsingStore.map { [weak self] in $0?.name?.localizedString ?? self?.onlineStoreName }
-
-        textSearch <~ browsingStore.map { _ in return ("", Locale.current) }
+        disposables += userLocation.producer
+        .observe(on: QueueScheduler(qos: .userInteractive))
+        .startWithValues { [weak self] location in
+            guard let location = location else {
+                self?.currentCountry = nil
+                self?.currentCurrency = nil
+                return
+            }
+            self?.geocoder.reverseGeocodeLocation(location) { placemarks, _ in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    guard let isoCountryCode = placemarks?.first?.isoCountryCode else { return }
+                    self?.currentCountry = isoCountryCode
+                    self?.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
+                    self?.queryForProductProjections(offset: 0)
+                }
+            }
+        }
     }
 
     deinit {
         disposables.dispose()
     }
 
-    func productDetailsViewModelForProductAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel {
+    func productDetailsViewModelForProduct(at indexPath: IndexPath) -> ProductViewModel {
         let product = products[indexPath.row]
         return ProductViewModel(product: product)
     }
 
     // MARK: - Data Source
 
-    func numberOfProductsInSection(_ section: Int) -> Int {
+    func numberOfProducts(in section: Int) -> Int {
         return products.count
     }
 
-    func productNameAtIndexPath(_ indexPath: IndexPath) -> String {
+    func productName(at indexPath: IndexPath) -> String {
         return products[indexPath.row].name.localizedString ?? ""
     }
 
-    func productImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return products[indexPath.row].mainVariantWithPrice(for: browsingStore.value)?.images?.first?.url ?? ""
+    func productImageUrl(at indexPath: IndexPath) -> String {
+        return products[indexPath.row].displayVariant(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup)?.images?.first?.url ?? ""
     }
 
-    func productPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let variant = products[indexPath.row].mainVariantWithPrice(for: browsingStore.value),
-              let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!) else { return "" }
+    func productPrice(at indexPath: IndexPath) -> String {
+        guard let variant = products[indexPath.row].displayVariant(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup),
+              let price = variant.independentPrice else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -128,9 +147,9 @@ class ProductOverviewViewModel: BaseViewModel {
         }
     }
 
-    func productOldPriceAtIndexPath(_ indexPath: IndexPath) -> String {
-        guard let variant = products[indexPath.row].mainVariantWithPrice(for: browsingStore.value),
-              let price = browsingStore.value == nil ? variant.independentPrice : variant.price(for: browsingStore.value!),
+    func productOldPrice(at indexPath: IndexPath) -> String {
+        guard let variant = products[indexPath.row].displayVariant(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup),
+              let price = variant.price(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup),
               price.discounted?.value != nil else { return "" }
 
         return price.value.description
@@ -145,11 +164,8 @@ class ProductOverviewViewModel: BaseViewModel {
 
         // When the user is browsing store inventory, include a filter, to limit POP results accordingly
         var filters = [String]()
-        if let myStoreId = browsingStore.value?.id {
-            filters.append("variants.availability.channels.\(myStoreId).isOnStock:true")
-        }
         // If the POP is being presented from the categories selection screen, filter by the category ID
-        if let categoryId = category?.id {
+        if let categoryId = category.value?.id {
             filters.append("categories.id:subtree(\"\(categoryId)\")")
         }
 
