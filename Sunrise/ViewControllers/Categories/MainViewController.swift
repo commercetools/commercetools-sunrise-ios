@@ -125,6 +125,7 @@ class MainViewController: UIViewController {
         .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
         .observe(on: UIScheduler())
         .observeValues { [weak self] _ in
+            guard self?.view.window != nil else { return }
             self?.searchField.text = ""
             self?.searchField.resignFirstResponder()
             self?.updateBackgroundSnapshot()
@@ -146,7 +147,6 @@ class MainViewController: UIViewController {
 
         disposables += viewModel.isLoading.producer
         .filter { !$0 }
-        .skip(first: 2)
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] _ in
             self.productsCollectionView.reloadData()

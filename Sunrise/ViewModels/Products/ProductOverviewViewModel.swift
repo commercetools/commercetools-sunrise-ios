@@ -63,6 +63,7 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         disposables += category.producer
+        .filter { $0 != nil }
         .observe(on: QueueScheduler(qos: .userInitiated))
         .startWithValues { [weak self] _ in
             self?.queryForProductProjections(offset: 0)
@@ -88,11 +89,13 @@ class ProductOverviewViewModel: BaseViewModel {
             self?.isLoading.value = false
         }
 
-        disposables += textSearch.combinePrevious(textSearch.value).signal
+        disposables += textSearch.producer
+        .skipRepeats { $0.0 == $1.0 && $0.1 == $1.1 }
+        .filter { $0.0 != "" }
         .observe(on: QueueScheduler(qos: .userInitiated))
-        .observeValues({ [weak self] previous, current in
+        .startWithValues { [weak self] previous, current in
             self?.queryForProductProjections(offset: 0)
-        })
+        }
 
         disposables += userLocation.producer
         .observe(on: QueueScheduler(qos: .userInteractive))
@@ -107,7 +110,9 @@ class ProductOverviewViewModel: BaseViewModel {
                     guard let isoCountryCode = placemarks?.first?.isoCountryCode else { return }
                     self?.currentCountry = isoCountryCode
                     self?.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
-                    self?.queryForProductProjections(offset: 0)
+                    if self?.products.count ?? 0 > 0 {
+                        self?.queryForProductProjections(offset: 0)
+                    }
                 }
             }
         }
