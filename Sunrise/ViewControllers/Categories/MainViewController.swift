@@ -168,6 +168,7 @@ class MainViewController: UIViewController {
             self?.searchSuggestionsTableView.reloadData()
         }
 
+        viewModel.filtersViewModel = filtersViewController?.viewModel
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
@@ -179,6 +180,7 @@ class MainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filtersSegue" {
             filtersViewController = segue.destination as? FiltersViewController
+            _ = filtersViewController?.view
         }
     }
 
@@ -416,7 +418,8 @@ extension MainViewController: UICollectionViewDataSource {
             guard let viewModel = viewModel?.productsViewModel else { return cell }
             cell.productNameLabel.text = viewModel.productName(at: indexPath)
             cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)))
-            cell.oldPriceLabel.text  = viewModel.productOldPrice(at: indexPath)
+            let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+            cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.productOldPrice(at: indexPath), attributes: oldPriceAttributes)
             cell.priceLabel.text = viewModel.productPrice(at: indexPath)
             cell.priceLabel.textColor = viewModel.productOldPrice(at: indexPath).count == 0 ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
             return cell

@@ -599,7 +599,7 @@ Type</string>
                                                                                                         <constraint firstAttribute="width" constant="150" id="cUn-hj-Mh9"/>
                                                                                                     </constraints>
                                                                                                 </imageView>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sneakers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV4-V2-wew">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fV4-V2-wew">
                                                                                                     <rect key="frame" x="0.0" y="109" width="150" height="17"/>
                                                                                                     <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
                                                                                                     <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -783,7 +783,7 @@ Type</string>
                                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="13" minimumInteritemSpacing="13" id="hmJ-ph-d1M">
                                                                                     <size key="itemSize" width="83" height="83"/>
                                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                                    <size key="footerReferenceSize" width="83" height="83"/>
                                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                                 </collectionViewFlowLayout>
                                                                                 <cells>
@@ -843,6 +843,10 @@ Type</string>
                                                                                         </connections>
                                                                                     </collectionViewCell>
                                                                                 </cells>
+                                                                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="34j-4f-PoB">
+                                                                                    <rect key="frame" x="83" y="0.0" width="83" height="83"/>
+                                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                                </collectionReusableView>
                                                                                 <connections>
                                                                                     <outlet property="dataSource" destination="zC4-iH-VKp" id="PbQ-23-eK5"/>
                                                                                     <outlet property="delegate" destination="zC4-iH-VKp" id="xSa-7g-bYi"/>
@@ -912,6 +916,20 @@ Type</string>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="46" id="czc-lf-42e"/>
                                                                         </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
+                                                                                <real key="value" value="1000"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="lowerValue">
+                                                                                <real key="value" value="0.0"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="upperValue">
+                                                                                <real key="value" value="1000"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jef-dJ-pUw">
                                                                         <rect key="frame" x="0.0" y="86.5" width="253.5" height="40.5"/>
@@ -1119,7 +1137,7 @@ Type</string>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NX8-0G-As7">
                                                                         <rect key="frame" x="0.0" y="34.5" width="275" height="44"/>
                                                                         <subviews>
-                                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6UF-K5-dsg">
+                                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6UF-K5-dsg">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dQF-qB-ajh">
@@ -1253,6 +1271,9 @@ Type</string>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="closeFilters:" destination="zC4-iH-VKp" eventType="touchUpInside" id="ywp-44-0bQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
