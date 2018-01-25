@@ -26,13 +26,19 @@ class ProductOverviewViewModel: BaseViewModel {
     let category: MutableProperty<Category?> = MutableProperty(nil)
     let pageSize: UInt = 16
 
+    var filtersViewModel: FiltersViewModel? {
+        didSet {
+            filtersViewModel?.productsViewModel = self
+            bindFiltersViewModel()
+        }
+    }
     private var products: [ProductProjection]
     private let presentProductDetailsObserver: Signal<ProductViewModel, NoError>.Observer
     private let scrollToBeginningObserver: Signal<Void, NoError>.Observer
 
     private let geocoder = CLGeocoder()
     private var currentCountry: String?
-    private var currentCurrency: String?
+    var currentCurrency: String?
     private var customerGroup: Reference<CustomerGroup>?
     private let disposables = CompositeDisposable()
 
@@ -84,7 +90,9 @@ class ProductOverviewViewModel: BaseViewModel {
             self?.category.value = nil
         }
 
-        disposables += clearProductsSignal.observeValues { [weak self] in
+        disposables += clearProductsSignal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] in
             self?.products = []
             self?.isLoading.value = false
         }
@@ -110,11 +118,47 @@ class ProductOverviewViewModel: BaseViewModel {
                     guard let isoCountryCode = placemarks?.first?.isoCountryCode else { return }
                     self?.currentCountry = isoCountryCode
                     self?.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
+                    // Update price slider price formatting
+                    self?.filtersViewModel?.priceRange.value = self?.filtersViewModel?.priceRange.value ?? (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
+                    // Refresh products if needed
                     if self?.products.count ?? 0 > 0 {
                         self?.queryForProductProjections(offset: 0)
                     }
                 }
             }
+        }
+    }
+
+    func bindFiltersViewModel() {
+        guard let viewModel = filtersViewModel else { return }
+
+        disposables += viewModel.activeBrands.producer
+        .skipRepeats()
+        .filter { [unowned self] _ in self.filtersViewModel?.isActive.value == true }
+        .startWithValues { [weak self] _ in
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += viewModel.activeSizes.producer
+        .skipRepeats()
+        .filter { [unowned self] _ in self.filtersViewModel?.isActive.value == true }
+        .startWithValues { [weak self] _ in
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += viewModel.activeColors.producer
+        .skipRepeats()
+        .filter { [unowned self] _ in self.filtersViewModel?.isActive.value == true }
+        .startWithValues { [weak self] _ in
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += viewModel.priceSetSignal?.observeValues { [weak self] in
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += viewModel.resetFiltersAction.values.observeValues { [weak self] in
+            self?.queryForProductProjections(offset: 0)
         }
     }
 
@@ -167,26 +211,45 @@ class ProductOverviewViewModel: BaseViewModel {
         let locale = textSearch.value.1
         isLoading.value = true
 
-        // When the user is browsing store inventory, include a filter, to limit POP results accordingly
         var filters = [String]()
-        // If the POP is being presented from the categories selection screen, filter by the category ID
+        var filterQuery = [String]()
+        var facets = [String]()
+
         if let categoryId = category.value?.id {
-            filters.append("categories.id:subtree(\"\(categoryId)\")")
+            filterQuery.append("categories.id:subtree(\"\(categoryId)\")")
+        }
+        if let lower = filtersViewModel?.priceRange.value.0, let upper = filtersViewModel?.priceRange.value.1, currentCurrency != nil {
+            filterQuery.append("variants.price.centAmount:range (\(lower * 100) to \(upper == FiltersViewModel.kPriceMax ? "*" : (upper * 100).description))")
+        }
+
+        [(FiltersViewModel.kBrandAttributeName, filtersViewModel?.activeBrands.value),
+         (FiltersViewModel.kSizeAttributeName, filtersViewModel?.activeSizes.value),
+         (FiltersViewModel.kColorsAttributeName, filtersViewModel?.activeColors.value)].forEach {
+            if let activeValues = $1, activeValues.count > 0 {
+                var filterValue = activeValues.reduce("", { "\($0),\"\($1)\"" })
+                filterValue.removeFirst()
+                filters.append("variants.attributes.\($0).key:\(filterValue)")
+            }
+
+            facets.append("variants.attributes.\($0).key")
         }
 
         ProductProjection.search(limit: pageSize, offset: offset, lang: locale, text: text,
-                                 filters: filters, result: { result in
-            if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
-                if offset == 0 && products.count > 0 && self.products.count > 0 {
-                    self.scrollToBeginningObserver.send(value: ())
+                                 filters: filters, filterQuery: filterQuery, facets: facets, result: { result in
+            DispatchQueue.main.async {
+                if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
+                    if offset == 0 && products.count > 0 && self.products.count > 0 {
+                        self.scrollToBeginningObserver.send(value: ())
+                    }
+                    self.products = offset == 0 ? products : self.products + products
+                    self.filtersViewModel?.facets.value = result.model?.facets
+
+                } else if let errors = result.errors as? [CTError], result.isFailure {
+                    super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+
                 }
-                self.products = offset == 0 ? products : self.products + products
-
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-
+                self.isLoading.value = false
             }
-            self.isLoading.value = false
         })
     }
 
