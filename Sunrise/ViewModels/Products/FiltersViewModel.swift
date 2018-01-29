@@ -24,6 +24,10 @@ class FiltersViewModel: BaseViewModel {
     let activeBrandButtonIndex = MutableProperty(0)
     let lowerPrice = MutableProperty("")
     let higherPrice = MutableProperty("")
+    var hasFiltersApplied: Bool {
+        return !activeBrands.value.isEmpty || !activeSizes.value.isEmpty || !activeColors.value.isEmpty
+                || priceRange.value != (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
+    }
 
     var priceSetSignal: Signal<Void, NoError>?
     let activeBrands = MutableProperty(Set<String>())

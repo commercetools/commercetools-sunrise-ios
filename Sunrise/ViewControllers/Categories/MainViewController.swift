@@ -185,12 +185,13 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func searchFilter(_ sender: UIButton) {
-        if sender.isSelected {
+        if filtersView.alpha == 1 {
             UIView.animate(withDuration: 0.3) {
                 self.searchFilterBackgroundTopImageView.alpha = 0
                 self.filtersView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
             }
+            sender.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
 
         } else {
             UIView.animate(withDuration: 0.3) {
@@ -201,17 +202,18 @@ class MainViewController: UIViewController {
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 0
                 self.view.layoutIfNeeded()
             }
+            sender.isSelected = true
         }
-        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func filter(_ sender: UIButton) {
-        if sender.isSelected {
+        if filtersView.alpha == 1 {
             UIView.animate(withDuration: 0.3) {
                 self.filterBackgroundTopImageView.alpha = 0
                 self.filtersView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
             }
+            sender.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
 
         } else {
             UIView.animate(withDuration: 0.3) {
@@ -222,8 +224,8 @@ class MainViewController: UIViewController {
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 0
                 self.view.layoutIfNeeded()
             }
+            sender.isSelected = true
         }
-        sender.isSelected = !sender.isSelected
     }
 
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
