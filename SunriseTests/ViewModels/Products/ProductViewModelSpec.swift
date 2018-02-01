@@ -19,14 +19,14 @@ class ProductViewModelSpec: QuickSpec {
 
     override func spec() {
         describe("ProductViewModel") {
-            var productViewModel: ProductViewModel!
+            var productViewModel: ProductDetailsViewModel!
 
             beforeSuite {
                 Commercetools.config = Config(path: "CommercetoolsStagingConfig")
                 // For my store test context, we need to load product overview view controller.
                 AppRouting.switchToHome()
                 _ = AppRouting.productOverviewViewController?.view
-                productViewModel = ProductViewModel(product: self.product)
+                productViewModel = ProductDetailsViewModel(product: self.product)
                 waitUntil { done in
                     productViewModel.isLoading.producer
                     .startWithValues({ isLoading in
@@ -99,7 +99,7 @@ class ProductViewModelSpec: QuickSpec {
             context("when customer is shopping for selected store") {
                 beforeEach {
                     AppRouting.productOverviewViewController?.viewModel?.browsingStore.value = ReservationViewModelSpec.order.lineItems.first?.distributionChannel?.obj
-                    productViewModel = ProductViewModel(product: self.product)
+                    productViewModel = ProductDetailsViewModel(product: self.product)
                     waitUntil { done in
                         productViewModel.isLoading.producer
                         .startWithValues({ isLoading in

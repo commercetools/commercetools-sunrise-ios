@@ -28,7 +28,7 @@ class ScannerViewModel: BaseViewModel {
         super.init()
 
         disposables += scannedCode.signal.observeValues { [weak self] sku in
-            if sku.characters.count > 0 {
+            if sku.count > 0 {
                 self?.searchForProduct(sku)
             }
         }

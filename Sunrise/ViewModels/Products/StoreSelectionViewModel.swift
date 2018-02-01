@@ -7,73 +7,46 @@ import Commercetools
 import ReactiveSwift
 import Result
 import CoreLocation
+import MapKit
 
 class StoreSelectionViewModel: BaseViewModel {
 
     // Inputs
-    let selectedIndexPathObserver: Signal<IndexPath, NoError>.Observer
-    let refreshObserver: Signal<Void, NoError>.Observer
-    let userLocation: MutableProperty<CLLocation?>
+    let selectedStoreCoordinate: MutableProperty<CLLocationCoordinate2D?> = MutableProperty(nil)
+    let userLocation: MutableProperty<CLLocation?> = MutableProperty(nil)
+    var reserveAction: Action<Void, Void, CTError>!
 
     // Outputs
-    let title: String
-    let isLoading: MutableProperty<Bool>
-    let contentChangesSignal: Signal<Changeset, NoError>
-    var channelDetailsIndexPath: IndexPath? {
-        if let expandedChannelIndexPath = expandedChannelIndexPath.value {
-            return IndexPath(row: expandedChannelIndexPath.row + 1, section: expandedChannelIndexPath.section)
-        }
-        return nil
+    let isLoading = MutableProperty(true)
+    let visibleMapRect = MutableProperty(MKMapRectNull)
+    let storeLocations = MutableProperty([CLLocation]())
+    let productName: MutableProperty<String?> = MutableProperty(nil)
+    let productImageUrl = MutableProperty("")
+    let distance: MutableProperty<String?> = MutableProperty(nil)
+    let storeName: MutableProperty<String?> = MutableProperty(nil)
+    let openingTimes: MutableProperty<String?> = MutableProperty(nil)
+    let storeAddress: MutableProperty<String?> = MutableProperty(nil)
+    let size: MutableProperty<String?> = MutableProperty(nil)
+    let quantity: MutableProperty<String?> = MutableProperty(nil)
+    let isOnStock: MutableProperty<NSAttributedString?> = MutableProperty(nil)
+    let productColor: MutableProperty<UIColor?> = MutableProperty(nil)
+
+    // Dialogue texts
+    let outOfStockMessage = NSLocalizedString("Product is not available at the selected store. Try picking a different store.", comment: "Out of Stock")
+
+    var reservationConfirmationViewModel: ReservationConfirmationViewModel? {
+        guard let channel = selectedStore.value else { return nil }
+        return ReservationConfirmationViewModel(store: channel)
     }
 
-    // Store information for currently expanded channel
-    var streetAndNumberInfo: String? {
-        return expandedChannel?.streetAndNumberInfo
-    }
-
-    var zipAndCityInfo: String? {
-        return expandedChannel?.zipAndCityInfo
-    }
-
-    var openingTimes: String? {
-        return expandedChannel?.openingTimes
-    }
-
-    private var productVariantPrice: String {
-        guard let price = currentVariant?.independentPrice else { return "-" }
-
-        if let discounted = price.discounted?.value {
-            return discounted.description
-        } else {
-            return price.value.description
-        }
-    }
-
-    // Actions
-    lazy var reserveAction: Action<IndexPath, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: Property(value: true)) { indexPath in
-            self.isLoading.value = true
-            return self.reserveProductVariant(store: self.channels[self.rowForChannelAtIndexPath(indexPath)])
-        }
-    }()
-
-    private let expandedChannelIndexPath: MutableProperty<IndexPath?>
-    private let selectedIndexPathSignal: Signal<IndexPath, NoError>
-    private let contentChangesObserver: Signal<Changeset, NoError>.Observer
-
-    var channels: [Channel]
-    private var expandedChannel: Channel? {
-        if let expandedChannelIndexPath = expandedChannelIndexPath.value {
-            return channels[rowForChannelAtIndexPath(expandedChannelIndexPath)]
-        }
-        return nil
-    }
     private var currentVariant: ProductVariant? {
         return product.allVariants.filter({ $0.sku == sku }).first
     }
-
+    private let channels = MutableProperty([Channel]())
+    private let selectedStore: MutableProperty<Channel?> = MutableProperty(nil)
     private let product: ProductProjection
     private let sku: String
+    private let distanceFormatter = MKDistanceFormatter()
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
@@ -82,182 +55,86 @@ class StoreSelectionViewModel: BaseViewModel {
         self.product = product
         self.sku = sku
 
-        isLoading = MutableProperty(true)
-        channels = []
-        expandedChannelIndexPath = MutableProperty(nil)
-        userLocation = MutableProperty(nil)
-        title = NSLocalizedString("Store Location", comment: "Store Location")
-
-        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
-        self.refreshObserver = refreshObserver
-
-        let (selectedIndexPathSignal, selectedIndexPathObserver) = Signal<IndexPath, NoError>.pipe()
-        self.selectedIndexPathSignal = selectedIndexPathSignal
-        self.selectedIndexPathObserver = selectedIndexPathObserver
-
-        let (contentChangesSignal, contentChangesObserver) = Signal<Changeset, NoError>.pipe()
-        self.contentChangesSignal = contentChangesSignal
-        self.contentChangesObserver = contentChangesObserver
-
         super.init()
 
-        disposables += selectedIndexPathSignal.observeValues { [unowned self] selectedIndexPath in
-            let previouslyExpandedIndexPath = self.expandedChannelIndexPath.value
+        distanceFormatter.unitStyle = .abbreviated
 
-            if previouslyExpandedIndexPath == selectedIndexPath || self.channelDetailsIndexPath == selectedIndexPath {
-                self.expandedChannelIndexPath.value = nil
-            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath, selectedIndexPath.row > previouslyExpandedIndexPath.row {
-                self.expandedChannelIndexPath.value = IndexPath(row: selectedIndexPath.row - 1, section: selectedIndexPath.section)
+        productName.value = product.name.localizedString
+        size.value = currentVariant?.attributes?.first(where: { $0.name == FiltersViewModel.kSizeAttributeName })?.valueLabel
+        if let colorValue = currentVariant?.attributes?.first(where: { $0.name == FiltersViewModel.kColorsAttributeName })?.valueKey {
+            productColor.value = FiltersViewModel.colorValues[colorValue]
+        }
+        productImageUrl.value = currentVariant?.images?.first?.url ?? ""
+        quantity.value = "x1"
+        disposables += storeLocations <~ channels.map { channels in channels.flatMap({ $0.location }) }
+        disposables += selectedStore <~ selectedStoreCoordinate.map { [weak self] selectedCoordinate in self?.channels.value.first { $0.location?.coordinate == selectedCoordinate } }
+        disposables += storeName <~ selectedStore.map { $0?.name?.localizedString }
+        disposables += openingTimes <~ selectedStore.map { $0?.openingTimes }
+        disposables += storeAddress <~ selectedStore.map { "\($0?.streetAndNumberInfo ?? "")\n\($0?.zipAndCityInfo ?? "")" }
+        disposables += distance <~ selectedStore.combineLatest(with: userLocation).map { [weak self] store, userLocation -> String? in
+            guard let store = store, let userLocation = userLocation, let distance = store.distance(from: userLocation) else { return "-" }
+            return self?.distanceFormatter.string(fromDistance: distance)
+        }
+        disposables += isOnStock <~ selectedStore.map { [unowned self] store -> NSAttributedString? in
+            guard let store = store else { return nil }
+            if self.currentVariant?.availability?.channels?[store.id]?.isOnStock == true {
+                let onStockAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.38, green: 0.65, blue: 0.08, alpha: 1.0)]
+                return NSAttributedString(string: self.onStock, attributes: onStockAttributes)
             } else {
-                self.expandedChannelIndexPath.value = selectedIndexPath
+                let notAvailableAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.82, green: 0.01, blue: 0.11, alpha: 1.0)]
+                return NSAttributedString(string: self.notAvailable, attributes: notAvailableAttributes)
             }
-
-            var changeset = Changeset()
-
-            if let channelDetailsIndexPath = self.channelDetailsIndexPath, let expandedChannelIndexPath = self.expandedChannelIndexPath.value,
-                    previouslyExpandedIndexPath == nil {
-                changeset.insertions = [channelDetailsIndexPath]
-                changeset.modifications = [expandedChannelIndexPath]
-            } else if let previouslyExpandedIndexPath = previouslyExpandedIndexPath, self.expandedChannelIndexPath.value == nil {
-                changeset.modifications = [previouslyExpandedIndexPath]
-                changeset.deletions = [IndexPath(row: previouslyExpandedIndexPath.row + 1, section: previouslyExpandedIndexPath.section)]
-            } else if let channelDetailsIndexPath = self.channelDetailsIndexPath, let previouslyExpandedIndexPath = previouslyExpandedIndexPath,
-                    let expandedChannelIndexPath = self.expandedChannelIndexPath.value {
-                let expandedChannelToModify = expandedChannelIndexPath.row > previouslyExpandedIndexPath.row ? IndexPath(row: expandedChannelIndexPath.row + 1, section: expandedChannelIndexPath.section) : expandedChannelIndexPath
-
-                changeset.modifications = [previouslyExpandedIndexPath, expandedChannelToModify]
-                changeset.insertions = [channelDetailsIndexPath]
-                changeset.deletions = [IndexPath(row: previouslyExpandedIndexPath.row + 1, section: previouslyExpandedIndexPath.section)]
-            }
-            self.contentChangesObserver.send(value: changeset)
         }
 
-        disposables += refreshSignal.observeValues { [weak self] in
-            self?.retrieveStores()
-        }
-
-        userLocation.producer
-        .startWithValues({ [weak self] userLocation in
-            if let userLocation = userLocation, let stores = self?.channels {
-                self?.channels = Channel.sortStoresByDistance(stores: stores, userLocation: userLocation)
+        disposables += userLocation.producer
+        .startWithValues { [weak self] userLocation in
+            if let userLocation = userLocation, let stores = self?.channels.value {
+                self?.channels.value = Channel.sortStoresByDistance(stores: stores, userLocation: userLocation)
             }
             self?.isLoading.value = false
-        })
+        }
 
-        reserveAction.events
-        .observeValues({ [weak self] _ in
-            self?.isLoading.value = false
-        })
+        disposables += selectedStoreCoordinate <~ channels.map { channels -> CLLocationCoordinate2D? in channels.first?.location?.coordinate }
+
+        disposables += visibleMapRect <~ userLocation.combineLatest(with: channels).map { userLocation, channels in
+            var visibleLocations = [CLLocation]()
+            if let userLocation = userLocation, let nearestStore = channels.first?.location {
+                visibleLocations = [userLocation, nearestStore]
+            } else {
+                visibleLocations = channels.flatMap { $0.location }
+            }
+
+            var zoomRect = MKMapRectNull
+            let visibleRects = visibleLocations.map { location in
+                MKMapRect(origin: MKMapPointForCoordinate(location.coordinate), size: MKMapSize(width: 0.1, height: 0.1))
+            }
+            visibleRects.forEach {
+                zoomRect = MKMapRectUnion(zoomRect, $0)
+            }
+            return zoomRect
+        }
+
+        reserveAction = Action(enabledIf: Property(value: true)) { [unowned self] in
+            if self.isOnStock.value?.string == self.notAvailable {
+                return SignalProducer(error: CTError.generalError(reason: CTError.FailureReason(message: self.outOfStockMessage, details: nil)))
+            } else if let store = self.selectedStore.value {
+                self.isLoading.value = true
+                return self.reserveProductVariant(store: store)
+            }
+            return SignalProducer.empty
+        }
 
         retrieveStores()
-
     }
 
     deinit {
         disposables.dispose()
     }
 
-    // MARK: - Data Source
-
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        return channels.count + (expandedChannelIndexPath.value != nil ? 1 : 0)
-    }
-
-    func storeNameAtIndexPath(_ indexPath: IndexPath) -> String {
-        return channels[rowForChannelAtIndexPath(indexPath)].name?.localizedString ?? ""
-    }
-
-    func storeImageUrlAtIndexPath(_ indexPath: IndexPath) -> String {
-        return channels[rowForChannelAtIndexPath(indexPath)].imageUrl ?? ""
-    }
-
-    func expansionTextAtIndexPath(_ indexPath: IndexPath) -> String {
-        if indexPath == expandedChannelIndexPath.value {
-            return NSLocalizedString("Less", comment: "Less")
-        } else {
-            return NSLocalizedString("More", comment: "More")
-        }
-    }
-
-    func reserveButtonEnabledAtIndexPath(_ indexPath: IndexPath) -> Bool {
-        let quantity = quantityForChannelAtIndexPath(indexPath)
-        return quantity > 0
-    }
-
-    func storeDistanceAtIndexPath(_ indexPath: IndexPath) -> String {
-        let store = channels[rowForChannelAtIndexPath(indexPath)]
-
-        if let userLocation = userLocation.value, let storeDistance = store.distance(from: userLocation) {
-            return String(format: "%.1f", arguments: [storeDistance / 1000]) + " km"
-        }
-        return "-"
-    }
-
-    func availabilityAtIndexPath(_ indexPath: IndexPath) -> String {
-        let quantity = quantityForChannelAtIndexPath(indexPath)
-
-        switch quantity {
-        case 0:
-            return NSLocalizedString("not available", comment: "Item not available")
-        case 1..<3:
-            return NSLocalizedString("hurry up, few items left", comment: "Few items left")
-        default:
-            return NSLocalizedString("available", comment: "Item available")
-        }
-    }
-
-    func availabilityColorAtIndexPath(_ indexPath: IndexPath) -> UIColor {
-        let quantity = quantityForChannelAtIndexPath(indexPath)
-
-        switch quantity {
-        case 0:
-            return UIColor(red:1.00, green:0.00, blue:0.00, alpha:1.0)
-        case 1..<3:
-            return UIColor(red:1.00, green:0.46, blue:0.10, alpha:1.0)
-        default:
-            return UIColor(red:0.55, green:0.78, blue:0.25, alpha:1.0)
-        }
-    }
-
-    func priceForChannelAtIndexPath(_ indexPath: IndexPath) -> String {
-        let channelId = channels[rowForChannelAtIndexPath(indexPath)].id
-        if let price = currentVariant?.prices?.filter({ $0.channel?.id == channelId }).first {
-            if let discounted = price.discounted?.value {
-                return discounted.description
-            } else {
-                return price.value.description
-            }
-        }
-        return productVariantPrice
-    }
-
-    private func quantityForChannelAtIndexPath(_ indexPath: IndexPath) -> Int {
-        let channelId = channels[rowForChannelAtIndexPath(indexPath)].id
-        return currentVariant?.availability?.channels?[channelId]?.availableQuantity ?? 0
-    }
-
-    private func rowForChannelAtIndexPath(_ indexPath: IndexPath) -> Int {
-        var channelRow = indexPath.row
-        if let expandedRow = expandedChannelIndexPath.value?.row, channelRow > expandedRow {
-            channelRow -= 1
-        }
-        return channelRow
-    }
-
-    private func indexPathForChannel(_ channel: Channel) -> IndexPath? {
-        if var channelRow = channels.index(of: channel) {
-            if let expandedRow = expandedChannelIndexPath.value?.row, channelRow >= expandedRow {
-                channelRow += 1
-            }
-            return IndexPath(row: channelRow, section: 0)
-        }
-        return nil
-    }
-
     // MARK: - Creating a reservation
 
     private func reserveProductVariant(store: Channel) -> SignalProducer<Void, CTError> {
-        return Order.reserve(product: product, variant: currentVariant, in: store)
+        return Order.reserveProduct(sku: sku, in: store)
     }
 
     // MARK: - Querying for physical stores
@@ -269,9 +146,10 @@ class StoreSelectionViewModel: BaseViewModel {
 
         Channel.physicalStores { [weak self] result in
             if let channels = result.model?.results, result.isSuccess {
-                self?.channels = channels
                 if let userLocation = self?.userLocation.value {
-                    self?.channels = Channel.sortStoresByDistance(stores: channels, userLocation: userLocation)
+                    self?.channels.value = Channel.sortStoresByDistance(stores: channels, userLocation: userLocation)
+                } else {
+                    self?.channels.value = channels
                 }
 
             } else if let errors = result.errors as? [CTError], let message = self?.alertMessage(for: errors), result.isFailure {
@@ -281,5 +159,4 @@ class StoreSelectionViewModel: BaseViewModel {
             self?.isLoading.value = false
         }
     }
-
 }
