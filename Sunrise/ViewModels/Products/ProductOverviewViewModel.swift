@@ -20,7 +20,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // Outputs
     let isLoading: MutableProperty<Bool>
-    let presentProductDetailsSignal: Signal<ProductViewModel, NoError>
+    let presentProductDetailsSignal: Signal<ProductDetailsViewModel, NoError>
     let scrollToBeginningSignal: Signal<Void, NoError>
 
     let category: MutableProperty<Category?> = MutableProperty(nil)
@@ -28,18 +28,14 @@ class ProductOverviewViewModel: BaseViewModel {
 
     var filtersViewModel: FiltersViewModel? {
         didSet {
-            filtersViewModel?.productsViewModel = self
             bindFiltersViewModel()
         }
     }
     private var products: [ProductProjection]
-    private let presentProductDetailsObserver: Signal<ProductViewModel, NoError>.Observer
+    private let presentProductDetailsObserver: Signal<ProductDetailsViewModel, NoError>.Observer
     private let scrollToBeginningObserver: Signal<Void, NoError>.Observer
 
     private let geocoder = CLGeocoder()
-    private var currentCountry: String?
-    var currentCurrency: String?
-    private var customerGroup: Reference<CustomerGroup>?
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
@@ -48,7 +44,7 @@ class ProductOverviewViewModel: BaseViewModel {
         products = []
 
         isLoading = MutableProperty(true)
-        (presentProductDetailsSignal, presentProductDetailsObserver) = Signal<ProductViewModel, NoError>.pipe()
+        (presentProductDetailsSignal, presentProductDetailsObserver) = Signal<ProductDetailsViewModel, NoError>.pipe()
         (scrollToBeginningSignal, scrollToBeginningObserver) = Signal<Void, NoError>.pipe()
 
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
@@ -105,19 +101,17 @@ class ProductOverviewViewModel: BaseViewModel {
             self?.queryForProductProjections(offset: 0)
         }
 
+        AppDelegate.currentCurrency = Locale.current.currencyCode
+        AppDelegate.currentCountry = (Locale.current as NSLocale).countryCode
         disposables += userLocation.producer
         .observe(on: QueueScheduler(qos: .userInteractive))
         .startWithValues { [weak self] location in
-            guard let location = location else {
-                self?.currentCountry = nil
-                self?.currentCurrency = nil
-                return
-            }
+            guard let location = location else { return }
             self?.geocoder.reverseGeocodeLocation(location) { placemarks, _ in
                 DispatchQueue.global(qos: .userInitiated).async {
                     guard let isoCountryCode = placemarks?.first?.isoCountryCode else { return }
-                    self?.currentCountry = isoCountryCode
-                    self?.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
+                    AppDelegate.currentCountry = isoCountryCode
+                    AppDelegate.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
                     // Update price slider price formatting
                     self?.filtersViewModel?.priceRange.value = self?.filtersViewModel?.priceRange.value ?? (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
                     // Refresh products if needed
@@ -166,9 +160,11 @@ class ProductOverviewViewModel: BaseViewModel {
         disposables.dispose()
     }
 
-    func productDetailsViewModelForProduct(at indexPath: IndexPath) -> ProductViewModel {
+    func productDetailsViewModelForProduct(at indexPath: IndexPath) -> ProductDetailsViewModel {
         let product = products[indexPath.row]
-        return ProductViewModel(product: product)
+        let variant = products[indexPath.row].displayVariant()
+        let viewModel = ProductDetailsViewModel(product: product, variantId: variant?.id, productsViewModel: self)
+        return viewModel
     }
 
     // MARK: - Data Source
@@ -182,12 +178,12 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productImageUrl(at indexPath: IndexPath) -> String {
-        return products[indexPath.row].displayVariant(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup)?.images?.first?.url ?? ""
+        return products[indexPath.row].displayVariant()?.images?.first?.url ?? ""
     }
 
     func productPrice(at indexPath: IndexPath) -> String {
-        guard let variant = products[indexPath.row].displayVariant(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup),
-              let price = variant.independentPrice else { return "" }
+        guard let variant = products[indexPath.row].displayVariant(),
+              let price = variant.price() else { return "" }
 
         if let discounted = price.discounted?.value {
             return discounted.description
@@ -197,8 +193,8 @@ class ProductOverviewViewModel: BaseViewModel {
     }
 
     func productOldPrice(at indexPath: IndexPath) -> String {
-        guard let variant = products[indexPath.row].displayVariant(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup),
-              let price = variant.price(country: currentCountry, currency: currentCurrency, customerGroup: customerGroup),
+        guard let variant = products[indexPath.row].displayVariant(),
+              let price = variant.price(),
               price.discounted?.value != nil else { return "" }
 
         return price.value.description
@@ -218,7 +214,10 @@ class ProductOverviewViewModel: BaseViewModel {
         if let categoryId = category.value?.id {
             filterQuery.append("categories.id:subtree(\"\(categoryId)\")")
         }
-        if let lower = filtersViewModel?.priceRange.value.0, let upper = filtersViewModel?.priceRange.value.1, currentCurrency != nil {
+        if let mainProductTypeId = filtersViewModel?.mainProductType?.id {
+            filterQuery.append("productType.id:\"\(mainProductTypeId)\"")
+        }
+        if let lower = filtersViewModel?.priceRange.value.0, let upper = filtersViewModel?.priceRange.value.1, AppDelegate.currentCurrency != nil {
             filterQuery.append("variants.price.centAmount:range (\(lower * 100) to \(upper == FiltersViewModel.kPriceMax ? "*" : (upper * 100).description))")
         }
 
@@ -259,7 +258,7 @@ class ProductOverviewViewModel: BaseViewModel {
         isLoading.value = true
         ProductProjection.search(filters: ["variants.sku:\"\(sku)\""]) { result in
             if let product = result.model?.results.first, result.isSuccess {
-                self.presentProductDetailsObserver.send(value: ProductViewModel(product: product))
+                self.presentProductDetailsObserver.send(value: ProductDetailsViewModel(product: product))
 
             } else if result.model?.count == 0 {
                 super.alertMessageObserver.send(value: NSLocalizedString("The product could not be found", comment: "Product not found"))

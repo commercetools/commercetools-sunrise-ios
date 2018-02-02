@@ -35,12 +35,12 @@ class FiltersViewModel: BaseViewModel {
     let activeColors = MutableProperty(Set<String>())
     let facets: MutableProperty<JsonValue?> = MutableProperty(nil)
 
-    weak var productsViewModel: ProductOverviewViewModel?
+    static let colorValues: [String: UIColor] = ["black": UIColor.black, "grey": UIColor.gray, "beige": UIColor(red: 0.96, green: 0.96, blue: 0.86, alpha: 1.0), "white": .white, "blue": .blue, "brown": .brown, "turquoise": UIColor(red: 0.25, green: 0.88, blue: 0.82, alpha: 1.0), "petrol": UIColor(red: 0.09, green: 0.45, blue: 0.56, alpha: 1.0), "green": .green, "red": .red, "purple": .purple, "pink": UIColor(red: 1.00, green: 0.75, blue: 0.80, alpha: 1.0), "orange": .orange, "yellow": .yellow, "oliv": UIColor(red: 0.50, green: 0.50, blue: 0.00, alpha: 1.0), "gold": UIColor(red: 1.00, green: 0.84, blue: 0.00, alpha: 1.0), "silver": UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0), "multicolored": UIColor(patternImage: #imageLiteral(resourceName: "multicolor"))]
 
+    var mainProductType: ProductType?
     private var brands = [AttributeType.EnumValue]()
     private var sizes = [AttributeType.EnumValue]()
     private var colors = [AttributeType.EnumValue]()
-    private var mainProductType: ProductType?
     private let disposables = CompositeDisposable()
 
     static let kBrandAttributeName = "designer"
@@ -74,13 +74,13 @@ class FiltersViewModel: BaseViewModel {
         disposables += isLoading <~ activeSizes.map { _ in false }
         disposables += isLoading <~ activeColors.map { _ in false }
 
-        disposables += lowerPrice <~ priceRange.map { [weak self] in Money(currencyCode: self?.productsViewModel?.currentCurrency ?? "", centAmount: $0.0 * 100).description }
-        disposables += higherPrice <~ priceRange.map { [weak self] in Money(currencyCode: self?.productsViewModel?.currentCurrency ?? "", centAmount: $0.1 * 100).description + ($0.1 == FiltersViewModel.kPriceMax ? "+" : "") }
+        disposables += lowerPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.0 * 100).description }
+        disposables += higherPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.1 * 100).description + ($0.1 == FiltersViewModel.kPriceMax ? "+" : "") }
 
         disposables += facets.producer
         .observe(on: UIScheduler())
-        .startWithValues { [unowned self] in
-            self.updateFilters(from: $0)
+        .startWithValues { [unowned self] _ in
+            self.updateFilters()
         }
 
         disposables += toggleBrandSignal.observeValues { [unowned self] in
@@ -155,9 +155,9 @@ class FiltersViewModel: BaseViewModel {
     }
 
     private func resetFilters() {
-        [activeBrands, activeSizes, activeColors].forEach { $0.value = [] }
-        updateFilters(from: nil)
+        updateFilters()
         priceRange.value = (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
+        [activeBrands, activeSizes, activeColors].forEach { $0.value = [] }
     }
 
     deinit {
@@ -179,49 +179,47 @@ class FiltersViewModel: BaseViewModel {
     }
 
     func color(at indexPath: IndexPath) -> UIColor? {
-        return colorValues[colors[indexPath.row].key]
+        return FiltersViewModel.colorValues[colors[indexPath.item].key]
     }
 
     func isColorActive(at indexPath: IndexPath) -> Bool {
-        return activeColors.value.contains(colors[indexPath.row].key)
+        return activeColors.value.contains(colors[indexPath.item].key)
     }
 
     func sizeName(at indexPath: IndexPath) -> String? {
-        return sizes[indexPath.row].stringLabel
+        return sizes[indexPath.item].stringLabel
     }
 
     func isSizeActive(at indexPath: IndexPath) -> Bool {
-        return activeSizes.value.contains(sizes[indexPath.row].key)
+        return activeSizes.value.contains(sizes[indexPath.item].key)
     }
 
     func brandName(at indexPath: IndexPath) -> String? {
-        return brands[indexPath.row].stringLabel
+        return brands[indexPath.item].stringLabel
     }
 
     func isBrandActive(at indexPath: IndexPath) -> Bool {
-        return activeBrands.value.contains(brands[indexPath.row].key)
+        return activeBrands.value.contains(brands[indexPath.item].key)
     }
-
-    private let colorValues: [String: UIColor] = ["black": UIColor.black, "grey": UIColor.gray, "beige": UIColor(red: 0.96, green: 0.96, blue: 0.86, alpha: 1.0), "white": .white, "blue": .blue, "brown": .brown, "turquoise": UIColor(red: 0.25, green: 0.88, blue: 0.82, alpha: 1.0), "petrol": UIColor(red: 0.09, green: 0.45, blue: 0.56, alpha: 1.0), "green": .green, "red": .red, "purple": .purple, "pink": UIColor(red: 1.00, green: 0.75, blue: 0.80, alpha: 1.0), "orange": .orange, "yellow": .yellow, "oliv": UIColor(red: 0.50, green: 0.50, blue: 0.00, alpha: 1.0), "gold": UIColor(red: 1.00, green: 0.84, blue: 0.00, alpha: 1.0), "silver": UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0), "multicolored": UIColor(patternImage: #imageLiteral(resourceName: "multicolor"))]
 
     // MARK: Attributes extraction
 
-    private func updateFilters(from facets: JsonValue?) {
+    private func updateFilters() {
         colors = mainProductType?.attributes.filter({ $0.name == FiltersViewModel.kColorsAttributeName }).first?.type.values ?? []
         sizes = mainProductType?.attributes.filter({ $0.name == FiltersViewModel.kSizeAttributeName }).first?.type.values ?? []
         brands = mainProductType?.attributes.filter({ $0.name == FiltersViewModel.kBrandAttributeName }).first?.type.values?.sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" } ?? []
 
-        if let terms = facets?.dictionary?["variants.attributes.\(FiltersViewModel.kBrandAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
+        if let terms = facets.value?.dictionary?["variants.attributes.\(FiltersViewModel.kBrandAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
             brands = brands.filter({ terms.contains($0.key) }).sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" }
             activeBrands.value = activeBrands.value.filter { terms.contains($0) }
         }
 
-        if let terms = facets?.dictionary?["variants.attributes.\(FiltersViewModel.kSizeAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
+        if let terms = facets.value?.dictionary?["variants.attributes.\(FiltersViewModel.kSizeAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
             sizes = sizes.filter({ terms.contains($0.key) })
             activeSizes.value = activeSizes.value.filter { terms.contains($0) }
         }
 
-        if let terms = facets?.dictionary?["variants.attributes.\(FiltersViewModel.kColorsAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
+        if let terms = facets.value?.dictionary?["variants.attributes.\(FiltersViewModel.kColorsAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
             colors = colors.filter({ terms.contains($0.key) })
             activeColors.value = activeColors.value.filter { terms.contains($0) }
         }
@@ -235,7 +233,7 @@ class FiltersViewModel: BaseViewModel {
             DispatchQueue.main.async {
                 if let mainProductType = result.model?.results.first {
                     self?.mainProductType = mainProductType
-                    self?.updateFilters(from: nil)
+                    self?.updateFilters()
                 }
                 self?.isLoading.value = false
             }
