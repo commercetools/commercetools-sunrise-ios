@@ -31,6 +31,10 @@ class BaseViewModel {
     let okAction = NSLocalizedString("OK", comment: "OK")
     let settingsAction = NSLocalizedString("Settings", comment: "Settings")
 
+    // Availability texts
+    let onStock = NSLocalizedString("in stock", comment: "In Stock")
+    let notAvailable = NSLocalizedString("not available", comment: "Not Available")
+
     // Customer title options
     let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MS.", comment: "MS."),
                         NSLocalizedString("DR.", comment: "DR.")]

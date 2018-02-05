@@ -6,6 +6,7 @@ import Foundation
 import ReactiveSwift
 import Result
 import Commercetools
+import SDWebImage
 
 class MainViewModel: BaseViewModel {
 
@@ -137,6 +138,11 @@ class MainViewModel: BaseViewModel {
         }
     }
 
+    func categoryImageUrl(at indexPath: IndexPath) -> String {
+        guard let activeCategory = activeCategory.value else { return "" }
+        return childCategoriesCache[activeCategory.id]?[indexPath.row].iosImageUrl ?? ""
+    }
+
     func isCategorySelected(at indexPath: IndexPath) -> Bool {
         guard let activeCategory = activeCategory.value else { return false }
         return rootCategories.value.contains(activeCategory) ? rootCategories.value[indexPath.row] == activeCategory : childCategoriesCache[activeCategory.parent?.id ?? ""]?[indexPath.row] == activeCategory
@@ -186,6 +192,7 @@ class MainViewModel: BaseViewModel {
         var rootCategories = [Category]()
         var childCategories = [String: [Category]]()
         var navigationId: String? = nil
+        var assetUrls = [URL]()
         categories.forEach { category in
             let parentCategoryId = category.parent?.id ?? ""
             if category.parent == nil {
@@ -199,7 +206,12 @@ class MainViewModel: BaseViewModel {
             if category.externalId != nil && category.externalId == navigationExternalId {
                 navigationId = category.id
             }
+
+            if let coverUrlString = category.iosImageUrl, let url = URL(string: coverUrlString) {
+                assetUrls.append(url)
+            }
         }
+        SDWebImagePrefetcher.shared().prefetchURLs(assetUrls)
         if let navigationId = navigationId {
             rootCategories = childCategories[navigationId] ?? []
         }
@@ -216,5 +228,11 @@ class MainViewModel: BaseViewModel {
 extension Commercetools.Category: Equatable {
     public static func == (lhs: Commercetools.Category, rhs: Commercetools.Category) -> Bool {
         return lhs.id == rhs.id
+    }
+}
+
+extension Commercetools.Category {
+    var iosImageUrl: String? {
+        return assets.first(where: { $0.key?.hasSuffix("-ios") == true })?.sources.first(where: { $0.key == "3x" })?.uri
     }
 }

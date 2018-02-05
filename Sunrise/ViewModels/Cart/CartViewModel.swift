@@ -213,9 +213,9 @@ class CartViewModel: BaseViewModel {
         }
     }
 
-    func productDetailsViewModelForLineItemAtIndexPath(_ indexPath: IndexPath) -> ProductViewModel? {
+    func productDetailsViewModelForLineItemAtIndexPath(_ indexPath: IndexPath) -> ProductDetailsViewModel? {
         if let productId = cart.value?.lineItems[indexPath.row].productId {
-            return ProductViewModel(productId: productId, size: lineItemSizeAtIndexPath(indexPath))
+            return ProductDetailsViewModel(productId: productId, size: lineItemSizeAtIndexPath(indexPath))
         }
         return nil
     }
@@ -258,7 +258,7 @@ class CartViewModel: BaseViewModel {
                 })
             } else {
                 // If there is no active cart, create one, with the selected product
-                let cartDraft = CartDraft(currency: BaseViewModel.currencyCodeForCurrentLocale)
+                let cartDraft = CartDraft(currency: AppDelegate.currentCurrency ?? BaseViewModel.currencyCodeForCurrentLocale)
                 Cart.create(cartDraft, expansion: self.discountCodesExpansion, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
