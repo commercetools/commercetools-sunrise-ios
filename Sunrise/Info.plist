@@ -55,11 +55,6 @@
 	<string>138eaaf7809d454402d81e46e5f7adfec8862462a09c3f79c466c2eb69a4b508</string>
 	<key>ContentfulSpaceId</key>
 	<string>2xzt2k8divi4</string>
-	<key>Displayable attributes</key>
-	<array>
-		<string>colorFreeDefinition</string>
-		<string>designer</string>
-	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -76,11 +71,6 @@
 	<string>We use your photo library in order to look for product barcodes.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Search for products without having to type!</string>
-	<key>Selectable attributes</key>
-	<array>
-		<string>size</string>
-		<string>color</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -106,6 +96,10 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>Product description attributes</key>
+	<array>
+		<string>designer</string>
 	</array>
 </dict>
 </plist>
