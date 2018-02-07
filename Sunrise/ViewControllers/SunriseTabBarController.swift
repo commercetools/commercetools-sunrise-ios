@@ -127,6 +127,8 @@ class SunriseTabBarController: UITabBarController {
         }
 
         tabBar.isHidden = true
+
+        _ = (viewControllers?[2] as? UINavigationController)?.topViewController?.view
     }
 
     @IBAction func touchUpInside(_ sender: UIButton) {
