@@ -6,27 +6,29 @@ import Commercetools
 
 extension ProductProjection {
 
-    func displayVariant(country: String? = nil, currency: String? = nil, customerGroup: Reference<CustomerGroup>? = nil) -> ProductVariant? {
-        var displayVariant = allVariants.filter({ $0.isMatchingVariant == true }).first
+    func displayVariant(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> ProductVariant? {
+        return displayVariants(country: country, currency: currency, customerGroup: customerGroup).first
+    }
+
+    func displayVariants(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> [ProductVariant] {
+        var displayVariants = [ProductVariant]()
         let now = Date()
-        if displayVariant == nil {
-            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
-                    && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        displayVariants += allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        if displayVariants.isEmpty, customerGroup != nil {
+            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                    && $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
         }
-        if displayVariant == nil, customerGroup != nil {
-            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
-                    && $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        if displayVariants.isEmpty {
+            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
         }
-        if displayVariant == nil {
-            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        if displayVariants.isEmpty, customerGroup != nil {
+            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
         }
-        if displayVariant == nil, customerGroup != nil {
-            displayVariant = allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 }).first
+        if let mainVariantWithPrice = mainVariantWithPrice, displayVariants.isEmpty {
+            displayVariants.append(mainVariantWithPrice)
         }
-        if displayVariant == nil {
-            displayVariant = mainVariantWithPrice
-        }
-        return displayVariant
+        return displayVariants
     }
 
     /// The `masterVariant` if it has price, or  the first from `variants` with price.

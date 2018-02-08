@@ -7,7 +7,7 @@ import Commercetools
 extension ProductVariant {
 
     /// The price without channel, customerGroup, country and validUntil/validFrom
-    var independentPrice: Price? {
+    private var independentPrice: Price? {
         return prices?.filter({ price in
             if price.channel == nil && price.customerGroup == nil && price.country == nil
                && price.validFrom == nil && price.validUntil == nil {
@@ -17,7 +17,7 @@ extension ProductVariant {
         }).first
     }
 
-    func price(country: String? = nil, currency: String? = nil, customerGroup: Reference<CustomerGroup>? = nil) -> Price? {
+    func price(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> Price? {
         let now = Date()
         var price = prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
                 && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).first
