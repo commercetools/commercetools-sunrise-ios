@@ -605,7 +605,7 @@ recommend based on your style!</string>
         <!--Barcode-->
         <scene sceneID="NvQ-Ky-U5X">
             <objects>
-                <viewController id="6rw-3H-LCM" sceneMemberID="viewController">
+                <viewController id="6rw-3H-LCM" customClass="ScannerViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkb-y1-6os">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -613,10 +613,21 @@ recommend based on your style!</string>
                         <viewLayoutGuide key="safeArea" id="TOg-8r-ARz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Barcode" id="eI0-ZJ-hbd"/>
+                    <connections>
+                        <segue destination="t34-mq-UQz" kind="show" identifier="showProductDetails" id="OPx-Mf-SGO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7d-rH-c4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="998" y="493"/>
+        </scene>
+        <!--ProductDetailsViewController-->
+        <scene sceneID="mni-Yo-rSv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProductDetails" referencedIdentifier="ProductDetailsViewController" id="t34-mq-UQz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cs0-ga-2Aa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="997" y="942"/>
         </scene>
         <!--profile-->
         <scene sceneID="GO7-98-iXD">
