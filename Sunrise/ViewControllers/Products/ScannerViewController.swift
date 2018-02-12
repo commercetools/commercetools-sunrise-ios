@@ -81,7 +81,7 @@ class ScannerViewController: UIViewController {
         Method used to present errors related to capture device capabilities and permissions.
     */
     private func presentCaptureError() {
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
 
         let alertController = UIAlertController(
                 title: viewModel?.errorTitle,
@@ -93,11 +93,11 @@ class ScannerViewController: UIViewController {
                 if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
                     UIApplication.shared.open(appSettingsURL)
                 }
-                _ = self.navigationController?.popViewController(animated: true)
+                SunriseTabBarController.currentlyActive?.selectedIndex = 0
             }))
         }
         alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default, handler: { _ in
-            _ = self.navigationController?.popViewController(animated: true)
+            SunriseTabBarController.currentlyActive?.selectedIndex = 0
         }))
 
         present(alertController, animated: true, completion: nil)
@@ -108,7 +108,7 @@ class ScannerViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
-        viewModel.isLoading.producer
+        disposables += viewModel.isLoading.producer
         .observe(on: UIScheduler())
         .startWithValues({ isLoading in
             if isLoading {
@@ -118,7 +118,7 @@ class ScannerViewController: UIViewController {
             }
         })
 
-        viewModel.isCapturing.producer
+        disposables += viewModel.isCapturing.producer
         .observe(on: UIScheduler())
         .startWithValues({ [weak self] isCapturing in
             if isCapturing {
@@ -128,11 +128,11 @@ class ScannerViewController: UIViewController {
             }
         })
 
-        viewModel.scannedProduct.producer
+        disposables += viewModel.scannedProduct.producer
         .observe(on: UIScheduler())
         .startWithValues({ [weak self] scannedProduct in
             if scannedProduct != nil {
-                self?.performSegue(withIdentifier: "showScannedProduct", sender: self)
+                self?.performSegue(withIdentifier: "showProductDetails", sender: self)
             }
         })
 
@@ -144,7 +144,6 @@ class ScannerViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     }
-
 }
 
 // MARK: - AVCaptureMetadataOutputObjectsDelegate
@@ -157,5 +156,4 @@ extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             viewModel.scannedCode.value = readableObject.stringValue! // TODO use CIBarcodeDescriptor after migrating to SDK 11
         }
     }
-
 }

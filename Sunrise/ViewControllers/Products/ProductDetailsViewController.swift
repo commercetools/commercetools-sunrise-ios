@@ -3,6 +3,9 @@
 //
 
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
+import SVProgressHUD
 
 class ProductDetailsViewController: UIViewController {
 
@@ -10,8 +13,11 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var colorsCollectionView: UICollectionView!
     @IBOutlet weak var similarItemsCollectionView: UICollectionView!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var productDescriptionTableView: UITableView!
     @IBOutlet weak var imagesCollectionViewFlowLayout: UICollectionViewFlowLayout!
-
+    @IBOutlet weak var similarItemsGradientView: UIView!
+    @IBOutlet weak var isOnStockImageView: UIImageView!
+    
     @IBOutlet weak var imagesPageControl: UIPageControl!
 
     @IBOutlet weak var productDescriptionButton: UIButton!
@@ -20,71 +26,243 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var wishlistButton: UIButton!
     
+    @IBOutlet weak var oldPriceLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
-
-    @IBOutlet weak var productDescriptionHeight: NSLayoutConstraint!
+    @IBOutlet weak var isOnStockLabel: UILabel!
+    
+    @IBOutlet weak var productDescriptionHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var productDescriptionSeparatorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var colorSectionWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var oldAndActivePriceSpacingConstraint: NSLayoutConstraint!
+
+    private let gradientLayer = CAGradientLayer()
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
+
+    var viewModel: ProductDetailsViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollableHeightConstraint.constant -= productDescriptionHeight.constant
-        productDescriptionHeight.constant = 0
+        scrollableHeightConstraint.constant -= productDescriptionHeightConstraint.constant
+        productDescriptionHeightConstraint.constant = 0
         NotificationCenter.default.addObserver(forName: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, queue: .main) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }
         imagesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.size.width, height: 500)
-        colorsCollectionView.reloadSections([0])
-        scrollViewDidScroll(colorsCollectionView)
+        gradientLayer.colors = [UIColor.white.withAlphaComponent(0).cgColor, UIColor.white.withAlphaComponent(0.6).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientLayer.frame = similarItemsGradientView.bounds
+        similarItemsGradientView.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIView.animate(withDuration: 0.3) {
-            SunriseTabBarController.currentlyActive?.navigationBarLightMode = true
-            SunriseTabBarController.currentlyActive?.backButton.alpha = 1
+            SunriseTabBarController.currentlyActive?.navigationView.alpha = 0
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         UIView.animate(withDuration: 0.3) {
-            SunriseTabBarController.currentlyActive?.navigationBarLightMode = false
-            SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+            SunriseTabBarController.currentlyActive?.navigationView.alpha = 1
         }
         super.viewWillDisappear(animated)
+    }
+
+    private func bindViewModel() {
+        guard let viewModel = viewModel, isViewLoaded else { return }
+
+        disposables += productNameLabel.reactive.text <~ viewModel.name
+        disposables += priceLabel.reactive.text <~ viewModel.price
+        disposables += priceLabel.reactive.textColor <~ viewModel.priceColor
+        disposables += oldPriceLabel.reactive.attributedText <~ viewModel.oldPrice
+        disposables += isOnStockLabel.reactive.attributedText <~ viewModel.isOnStock
+
+        disposables += viewModel.oldPrice.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] in
+            self?.oldAndActivePriceSpacingConstraint.constant = $0 == nil || $0?.string.isEmpty == true ? 0 : 8
+        }
+
+        disposables += viewModel.isOnStock.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] in
+            self.isOnStockImageView.image = $0?.string == self.viewModel?.onStock ? #imageLiteral(resourceName: "in_stock_checkmark") : #imageLiteral(resourceName: "not_available")
+        }
+
+        addToBagButton.reactive.pressed = CocoaAction(viewModel.addToCartAction)
+
+        disposables += viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
+
+        disposables += viewModel.recommendations.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] _ in self?.similarItemsCollectionView.reloadData() }
+
+        disposables += viewModel.activeAttributes.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] _ in
+            self?.colorSectionWidthConstraint.constant = self?.viewModel?.numberOfColors ?? 0 > 1 ? 191 : 148
+            [self?.sizesCollectionView, self?.colorsCollectionView, self?.imagesCollectionView].forEach { $0?.reloadData() }
+            self?.productDescriptionTableView.reloadData()
+        }
+
+        disposables += viewModel.imageCount.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] imageCount in
+            if imageCount < 2 {
+                self?.imagesPageControl.isHidden = true
+            } else {
+                self?.imagesPageControl.isHidden = false
+                self?.imagesPageControl.numberOfPages = imageCount
+            }
+        }
+
+        disposables += viewModel.addToCartAction.events
+        .observe(on: UIScheduler())
+        .observeValues({ [weak self] event in
+            SVProgressHUD.dismiss()
+            switch event {
+            case .completed:
+                self?.presentAfterAddingToCartOptions()
+            case let .failed(error):
+                let alertController = UIAlertController(
+                        title: self?.viewModel?.couldNotAddToCartTitle,
+                        message: self?.viewModel?.alertMessage(for: [error]),
+                        preferredStyle: .alert
+                )
+                alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
+                self?.present(alertController, animated: true, completion: nil)
+            default:
+                return
+            }
+        })
+
+//        colorsCollectionView.reloadSections([0])
+//        scrollViewDidScroll(colorsCollectionView)
+    }
+    
+    // MARK: - Product description
+    
+    @IBAction func showHideProductDescription(_ sender: UIButton) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        sender.isSelected = !sender.isSelected
+        if !sender.isSelected {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.scrollableHeightConstraint.constant -= self.productDescriptionHeightConstraint.constant
+                self.productDescriptionSeparatorHeightConstraint.constant = 0
+                self.productDescriptionHeightConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.productDescriptionHeightConstraint.constant = CGFloat(self.viewModel?.numberOfDescriptionCells ?? 0) * 70 + 1
+                self.productDescriptionSeparatorHeightConstraint.constant = 1
+                self.scrollableHeightConstraint.constant += self.productDescriptionHeightConstraint.constant
+                self.view.layoutIfNeeded()
+            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
+        }
+    }
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let storeSelectionViewController = segue.destination as? StoreSelectionViewController {
+            _ = storeSelectionViewController.view
+            storeSelectionViewController.viewModel = viewModel?.storeSelectionViewModel
+        } else if let detailsViewController = segue.destination as? ProductDetailsViewController, let cell = sender as? UICollectionViewCell,
+                  let indexPath = similarItemsCollectionView.indexPath(for: cell) {
+            _ = detailsViewController.view
+            detailsViewController.viewModel = viewModel?.productDetailsViewModelForRecommendation(at: indexPath)
+        }
+    }
+    
+    @IBAction func backAction(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    private func presentAfterAddingToCartOptions() {
+        let alertController = UIAlertController(
+                title: viewModel?.addToCartSuccessTitle,
+                message: viewModel?.addToCartSuccessMessage,
+                preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }))
+        alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .default, handler: { _ in
+//            AppRouting.switchToCartOverview()
+        }))
+        present(alertController, animated: true, completion: nil)
     }
 }
 
 extension ProductDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        switch collectionView {
+            case sizesCollectionView:
+                return viewModel?.numberOfSizes ?? 0
+            case colorsCollectionView:
+                return viewModel?.numberOfColors ?? 0
+            case imagesCollectionView:
+                return viewModel?.imageCount.value ?? 0
+            default:
+                return viewModel?.numberOfRecommendations ?? 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == sizesCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeCell", for: indexPath) as! SizeCell
-            cell.selectedSizeImageView.isHidden = indexPath.row != 0
-            return cell
-
-        } else if collectionView == colorsCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
-            cell.selectedColorImageView.isHidden = indexPath.item != 0
-            return cell
-
-        } else if collectionView == imagesCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
-            return cell
-
-        } else {
-            switch indexPath.row {
-            case 0:
-                return collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath)
-            case 1:
-                return collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell2", for: indexPath)
+        guard let viewModel = viewModel else { return UICollectionViewCell() }
+        switch collectionView {
+            case sizesCollectionView:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeCell", for: indexPath) as! SizeCell
+                cell.sizeLabel.text = viewModel.sizeName(at: indexPath)
+                cell.selectedSizeImageView.isHidden = !viewModel.isSizeActive(at: indexPath)
+                cell.sizeLabel.textColor = viewModel.isSizeActive(at: indexPath) ? .white : UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0)
+                return cell
+            case colorsCollectionView:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
+                cell.colorView.backgroundColor = viewModel.color(at: indexPath)
+                cell.selectedColorImageView.isHidden = !viewModel.isColorActive(at: indexPath)
+                return cell
+            case imagesCollectionView:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
+                cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)), placeholderImage: UIImage(named: "sun-placeholder"))
+                return cell
             default:
-                return collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell3", for: indexPath)
-            }
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductOverviewCell
+                cell.productNameLabel.text = viewModel.recommendationName(at: indexPath)
+                cell.productImageView.sd_setImage(with: URL(string: viewModel.recommendationImageUrl(at: indexPath)))
+                let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+                cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.recommendationOldPrice(at: indexPath), attributes: oldPriceAttributes)
+                cell.priceLabel.text = viewModel.recommendationPrice(at: indexPath)
+                cell.priceLabel.textColor = viewModel.recommendationOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
+                return cell
         }
+    }
+}
+
+extension ProductDetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel?.numberOfDescriptionCells ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDescriptionCell") as! ProductDescriptionCell
+        cell.descriptionTitleLabel.text = viewModel?.descriptionTitle(at: indexPath)
+        cell.descriptionValueLabel.text = viewModel?.descriptionValue(at: indexPath)
+        return cell
     }
 }
 
@@ -116,11 +294,12 @@ extension ProductDetailsViewController: UIScrollViewDelegate {
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        guard scrollView == colorsCollectionView || scrollView == sizesCollectionView else { return }
+        guard scrollView == colorsCollectionView || scrollView == sizesCollectionView
+                && (!scrollView.isTracking || !scrollView.isDragging)  else { return }
         scrollToPage(scrollView, withVelocity: velocity)
     }
 
-    func scrollToPage(_ scrollView: UIScrollView, withVelocity velocity: CGPoint) {
+    private func scrollToPage(_ scrollView: UIScrollView, withVelocity velocity: CGPoint) {
         let cellWidth = scrollView == colorsCollectionView ? CGFloat(44) : CGFloat(61)
         let cellPadding = scrollView == colorsCollectionView ? CGFloat(5) : CGFloat(10)
 
@@ -134,5 +313,7 @@ extension ProductDetailsViewController: UIScrollViewDelegate {
         page = max(page, 0)
         let newOffset: CGFloat = CGFloat(page) * (cellWidth + cellPadding)
         scrollView.setContentOffset(CGPoint(x: newOffset, y: 0), animated: true)
+        guard let selectedIndexPath = (scrollView as? UICollectionView)?.indexPathForItem(at: CGPoint(x: newOffset + cellWidth, y: 0)) else { return }
+        scrollView == colorsCollectionView ? viewModel?.selectColorObserver.send(value: selectedIndexPath) : viewModel?.selectSizeObserver.send(value: selectedIndexPath)
     }
 }

@@ -1,9 +1,58 @@
 //
-//  ReservationConfirmationViewController.swift
-//  Sunrise
-//
-//  Created by Nikola Mladenovic on 2/21/18.
-//  Copyright © 2018 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import MapKit
+import ReactiveSwift
+import ReactiveCocoa
+import SVProgressHUD
+
+class ReservationConfirmationViewController: UIViewController {
+    
+    @IBOutlet weak var getDirectionsButton: UIButton!
+    
+    @IBOutlet weak var storeNameLabel: UILabel!
+    @IBOutlet weak var openHoursLabel: UILabel!
+    @IBOutlet weak var storeAddressLabel: UILabel!
+
+    private let disposables = CompositeDisposable()
+
+    deinit {
+        disposables.dispose()
+    }
+
+    var viewModel: ReservationConfirmationViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 1
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+        super.viewDidDisappear(animated)
+    }
+
+    private func bindViewModel() {
+        guard let viewModel = viewModel, isViewLoaded else { return }
+
+        disposables += storeNameLabel.reactive.text <~ viewModel.storeName
+        disposables += openHoursLabel.reactive.text <~ viewModel.openingTimes
+        disposables += storeAddressLabel.reactive.text <~ viewModel.storeAddress
+
+        getDirectionsButton.reactive.pressed = CocoaAction(viewModel.getDirectionsAction)
+    }
+    
+    @IBAction func continueShopping(_ sender: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
