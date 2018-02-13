@@ -20,7 +20,6 @@ class FiltersViewController: UIViewController {
     
     @IBOutlet weak var priceSlider: RangeSlider!
 
-    @IBOutlet weak var productTypesCollectionView: UICollectionView!
     @IBOutlet weak var brandsCollectionView: UICollectionView!
     @IBOutlet weak var sizesCollectionView: UICollectionView!
     @IBOutlet weak var colorsCollectionView: UICollectionView!
@@ -52,11 +51,6 @@ class FiltersViewController: UIViewController {
         viewModel?.isActive.value = false
         super.viewWillDisappear(animated)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        scrollViewDidScroll(productTypesCollectionView)
-    }
 
     func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
@@ -65,8 +59,7 @@ class FiltersViewController: UIViewController {
         .filter { !$0 }
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] _ in
-            [self.productTypesCollectionView, self.brandsCollectionView,
-             self.sizesCollectionView, self.colorsCollectionView].forEach { $0.reloadData() }
+            [self.brandsCollectionView, self.sizesCollectionView, self.colorsCollectionView].forEach { $0.reloadData() }
             if let visibleIndexPath = self.brandsCollectionView.indexPathForItem(at: self.brandsCollectionView.contentOffset) {
                 self.viewModel?.visibleBrandIndex.value = visibleIndexPath
             }
@@ -181,55 +174,5 @@ extension FiltersViewController: UIScrollViewDelegate {
         if let visibleIndexPath = brandsCollectionView.indexPathForItem(at: scrollView.contentOffset), scrollView == brandsCollectionView {
             viewModel?.visibleBrandIndex.value = visibleIndexPath
         }
-
-        guard scrollView == productTypesCollectionView else { return }
-
-        let centerX = scrollView.contentOffset.x + 75
-        for cell in (scrollView as! UICollectionView).visibleCells as! [ProductTypeCell] {
-
-            var offsetX = centerX - cell.center.x
-            if offsetX < 0 {
-                offsetX *= -1
-            }
-
-            cell.transform = CGAffineTransform(scaleX: 1, y: 1)
-            if offsetX > 30 {
-                var scaleX = 1 - (offsetX - 30) / view.bounds.width
-                scaleX = scaleX < 0.6 ? 0.6 : scaleX
-                let productImageAlpha = 1.5 * scaleX - 0.5
-                let productTitleAlpha = 3.33 * scaleX - 2.33
-
-                cell.transform = CGAffineTransform(scaleX: scaleX, y: scaleX)
-                cell.productImageView.alpha = productImageAlpha
-                cell.selectedProductImageView.alpha = productImageAlpha
-                cell.productNameLabel.alpha = productTitleAlpha
-            }
-        }
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard scrollView == productTypesCollectionView else { return }
-        scrollToPage(scrollView, withVelocity: CGPoint(x: 0, y: 0))
-    }
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        guard scrollView == productTypesCollectionView else { return }
-        scrollToPage(scrollView, withVelocity: velocity)
-    }
-
-    func scrollToPage(_ scrollView: UIScrollView, withVelocity velocity: CGPoint) {
-        let cellWidth = CGFloat(150)
-        let cellPadding = CGFloat(10)
-
-        var page: Int = Int((scrollView.contentOffset.x - cellWidth / 2) / (cellWidth + cellPadding) + 1)
-        if velocity.x > 0 {
-            page += 1
-        }
-        if velocity.x < 0 {
-            page -= 1
-        }
-        page = max(page, 0)
-        let newOffset: CGFloat = CGFloat(page) * (cellWidth + cellPadding)
-        scrollView.setContentOffset(CGPoint(x: newOffset, y: 0), animated: true)
     }
 }

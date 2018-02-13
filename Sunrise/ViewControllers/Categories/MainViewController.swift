@@ -178,52 +178,58 @@ class MainViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "filtersSegue" {
-            filtersViewController = segue.destination as? FiltersViewController
-            _ = filtersViewController?.view
+        if let filtersViewController = segue.destination as? FiltersViewController {
+            self.filtersViewController = filtersViewController
+            _ = filtersViewController.view
+        } else if let detailsViewController = segue.destination as? ProductDetailsViewController, let cell = sender as? UICollectionViewCell,
+                  let indexPath = productsCollectionView.indexPath(for: cell) {
+            _ = detailsViewController.view
+            detailsViewController.viewModel = viewModel?.productsViewModel.productDetailsViewModelForProduct(at: indexPath)
         }
     }
 
     @IBAction func searchFilter(_ sender: UIButton) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
         if filtersView.alpha == 1 {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.searchFilterBackgroundTopImageView.alpha = 0
                 self.filtersView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
-            }
+            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
             sender.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
 
         } else {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.filterBackgroundTopConstraint.isActive = false
                 self.searchFilterBackgroundTopConstraint.isActive = true
                 self.searchFilterBackgroundTopImageView.alpha = 1
                 self.filtersView.alpha = 1
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 0
                 self.view.layoutIfNeeded()
-            }
+            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
             sender.isSelected = true
         }
     }
 
     @IBAction func filter(_ sender: UIButton) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
         if filtersView.alpha == 1 {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.filterBackgroundTopImageView.alpha = 0
                 self.filtersView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
-            }
+            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
             sender.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
 
         } else {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.searchFilterBackgroundTopConstraint.isActive = false
                 self.filterBackgroundTopConstraint.isActive = true
                 self.filterBackgroundTopImageView.alpha = 1
                 self.filtersView.alpha = 1
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 0
                 self.view.layoutIfNeeded()
-            }
+            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
             sender.isSelected = true
         }
     }
@@ -332,6 +338,7 @@ class MainViewController: UIViewController {
                 self.searchView.alpha = 1
                 self.categoriesCollectionView.alpha = 1
             }, completion: { _ in
+                [self.filterButton, self.searchFilterButton].forEach { $0.isSelected = false }
                 self.isTransitioningToProducts = false
                 self.updateBackgroundSnapshot()
             })
@@ -355,12 +362,12 @@ class MainViewController: UIViewController {
     // MARK: - Blurring effect
 
     private func updateBackgroundSnapshot() {
-        guard let backgroundSnapshot = takeSnapshot() else { return }
-        self.backgroundSnapshot = backgroundSnapshot
-        blurredSnapshot = blur(image: backgroundSnapshot)
-        if backgroundImageView.alpha > 0 {
-            backgroundImageView.image = blurredSnapshot
-        }
+//        guard let backgroundSnapshot = takeSnapshot() else { return }
+//        self.backgroundSnapshot = backgroundSnapshot
+//        blurredSnapshot = blur(image: backgroundSnapshot)
+//        if backgroundImageView.alpha > 0 {
+//            backgroundImageView.image = blurredSnapshot
+//        }
     }
 
     private func takeSnapshot() -> UIImage? {
@@ -408,11 +415,12 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionView == categoriesCollectionView ? viewModel?.numberOfCategoryItems ?? 0 : viewModel?.productsViewModel.numberOfProducts(in: section) ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoriesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
             cell.categoryNameLabel.text = viewModel?.categoryName(for: collectionView, at: indexPath)
+            cell.categoryImageView.sd_setImage(with: URL(string: viewModel?.categoryImageUrl(at: indexPath) ?? ""))
             return cell
 
         } else {
@@ -423,7 +431,7 @@ extension MainViewController: UICollectionViewDataSource {
             let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
             cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.productOldPrice(at: indexPath), attributes: oldPriceAttributes)
             cell.priceLabel.text = viewModel.productPrice(at: indexPath)
-            cell.priceLabel.textColor = viewModel.productOldPrice(at: indexPath).count == 0 ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
+            cell.priceLabel.textColor = viewModel.productOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
             return cell
         }
     }
