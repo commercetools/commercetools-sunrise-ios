@@ -133,7 +133,7 @@ class SunriseTabBarController: UITabBarController {
 
     @IBAction func touchUpInside(_ sender: UIButton) {
         guard let index = tabButtons.index(of: sender) else { return }
-        if index == 2 && index == selectedIndex {
+        if index == 2 && index == selectedIndex, let searchNavigationController = viewControllers?[index] as? UINavigationController, searchNavigationController.viewControllers.count < 2 {
             NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
         }
         selectedIndex = index
