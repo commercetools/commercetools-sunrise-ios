@@ -9,10 +9,10 @@ class AppRouting {
 
     enum TabIndex: Int {
         case homeTab = 0
-        case searchTab
-        case categoriesTab
-        case myAccountTab
-        case cartTab
+        case barcodeTab
+        case mainTab
+        case wishlistTab
+        case profileTab
 
         var index: Int {
             return self.rawValue
@@ -27,7 +27,11 @@ class AppRouting {
         return AuthManager.sharedInstance.state == .customerToken
     }
 
-    static var cartViewController: CartViewController? {
-        return (tabBarController?.viewControllers?[TabIndex.cartTab.index] as? UINavigationController)?.viewControllers.first as? CartViewController
+    static func showProductDetails(for sku: String) {
+        guard let mainTabNavigationController = SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.mainTab.index] as? UINavigationController else { return }
+        guard let mainViewController = mainTabNavigationController.viewControllers.first as? MainViewController else { return }
+        mainTabNavigationController.popToRootViewController(animated: false)
+        SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.mainTab.index
+        mainViewController.viewModel?.productsViewModel.presentProductDetails(for: sku)
     }
 }

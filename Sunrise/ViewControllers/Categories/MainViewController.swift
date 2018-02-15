@@ -168,6 +168,12 @@ class MainViewController: UIViewController {
             self?.searchSuggestionsTableView.reloadData()
         }
 
+        disposables += viewModel.presentProductDetailsSignal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] productViewModel in
+            self?.performSegue(withIdentifier: "showProductDetails", sender: productViewModel)
+        }
+
         viewModel.filtersViewModel = filtersViewController?.viewModel
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
@@ -181,10 +187,13 @@ class MainViewController: UIViewController {
         if let filtersViewController = segue.destination as? FiltersViewController {
             self.filtersViewController = filtersViewController
             _ = filtersViewController.view
-        } else if let detailsViewController = segue.destination as? ProductDetailsViewController, let cell = sender as? UICollectionViewCell,
-                  let indexPath = productsCollectionView.indexPath(for: cell) {
+        } else if let detailsViewController = segue.destination as? ProductDetailsViewController {
             _ = detailsViewController.view
-            detailsViewController.viewModel = viewModel?.productsViewModel.productDetailsViewModelForProduct(at: indexPath)
+            if let cell = sender as? UICollectionViewCell, let indexPath = productsCollectionView.indexPath(for: cell) {
+                detailsViewController.viewModel = viewModel?.productsViewModel.productDetailsViewModelForProduct(at: indexPath)
+            } else if let viewModel = sender as? ProductDetailsViewModel {
+                detailsViewController.viewModel = viewModel
+            }
         }
     }
 
