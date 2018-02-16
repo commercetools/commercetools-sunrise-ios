@@ -12,7 +12,9 @@ import SVProgressHUD
 
 class ScannerViewController: UIViewController {
 
-    private var captureSession: AVCaptureSession? = AVCaptureSession()
+    @IBOutlet weak var previewView: UIView!
+
+    private var captureSession: AVCaptureSession?
     private let videoCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video)
     private let metadataOutput = AVCaptureMetadataOutput()
     private let disposables = CompositeDisposable()
@@ -31,8 +33,6 @@ class ScannerViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = ScannerViewModel()
-
-        setupCaptureSessionAndPreview()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,6 +45,11 @@ class ScannerViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        if captureSession == nil {
+            captureSession = AVCaptureSession()
+            setupCaptureSessionAndPreview()
+        }
 
         if let captureSession = captureSession, !captureSession.isRunning {
             captureSession.startRunning()
@@ -70,9 +75,9 @@ class ScannerViewController: UIViewController {
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = previewView.layer.bounds
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        view.layer.addSublayer(previewLayer)
+        previewView.layer.addSublayer(previewLayer)
 
         viewModel?.isCapturing.value = true
     }
@@ -110,39 +115,21 @@ class ScannerViewController: UIViewController {
 
         disposables += viewModel.isLoading.producer
         .observe(on: UIScheduler())
-        .startWithValues({ isLoading in
-            if isLoading {
-                SVProgressHUD.show()
-            } else {
-                SVProgressHUD.dismiss()
-            }
-        })
+        .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
 
         disposables += viewModel.isCapturing.producer
         .observe(on: UIScheduler())
-        .startWithValues({ [weak self] isCapturing in
-            if isCapturing {
-                self?.captureSession?.startRunning()
-            } else {
-                self?.captureSession?.stopRunning()
-            }
-        })
+        .startWithValues { [weak self] in $0 ? self?.captureSession?.startRunning() : self?.captureSession?.stopRunning() }
 
         disposables += viewModel.scannedProduct.producer
         .observe(on: UIScheduler())
-        .startWithValues({ [weak self] scannedProduct in
-            if scannedProduct != nil {
-                self?.performSegue(withIdentifier: "showProductDetails", sender: self)
+        .startWithValues { scannedProduct in
+            if let sku = scannedProduct?.allVariants.first(where: { $0.isMatchingVariant == true })?.sku {
+                AppRouting.showProductDetails(for: sku)
             }
-        })
+        }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
-    }
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
     }
 }
 
