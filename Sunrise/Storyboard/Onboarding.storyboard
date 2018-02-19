@@ -609,25 +609,29 @@ recommend based on your style!</string>
                     <view key="view" contentMode="scaleToFill" id="Xkb-y1-6os">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuC-hK-xHC">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TOg-8r-ARz" firstAttribute="trailing" secondItem="yuC-hK-xHC" secondAttribute="trailing" id="7Nb-30-mG0"/>
+                            <constraint firstItem="yuC-hK-xHC" firstAttribute="top" secondItem="TOg-8r-ARz" secondAttribute="top" id="8cB-Mu-JGT"/>
+                            <constraint firstItem="yuC-hK-xHC" firstAttribute="leading" secondItem="TOg-8r-ARz" secondAttribute="leading" id="EOz-Ub-EmK"/>
+                            <constraint firstItem="TOg-8r-ARz" firstAttribute="bottom" secondItem="yuC-hK-xHC" secondAttribute="bottom" id="REc-yh-TJU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TOg-8r-ARz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Barcode" id="eI0-ZJ-hbd"/>
                     <connections>
-                        <segue destination="t34-mq-UQz" kind="show" identifier="showProductDetails" id="OPx-Mf-SGO"/>
+                        <outlet property="previewView" destination="yuC-hK-xHC" id="tuX-tB-EKd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7d-rH-c4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="998" y="493"/>
-        </scene>
-        <!--ProductDetailsViewController-->
-        <scene sceneID="mni-Yo-rSv">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ProductDetails" referencedIdentifier="ProductDetailsViewController" id="t34-mq-UQz" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cs0-ga-2Aa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="997" y="942"/>
         </scene>
         <!--profile-->
         <scene sceneID="GO7-98-iXD">

@@ -239,7 +239,7 @@
                                             <outlet property="productImageView" destination="Tjj-Fc-hX7" id="apR-he-a6t"/>
                                             <outlet property="productNameLabel" destination="WLM-mk-JLR" id="pTf-Ss-uVb"/>
                                             <outlet property="wishlistButton" destination="aeh-Ye-WwA" id="2bE-t1-4dy"/>
-                                            <segue destination="TIU-Dd-jEr" kind="show" id="nKN-oZ-8Ev"/>
+                                            <segue destination="TIU-Dd-jEr" kind="show" identifier="showProductDetails" id="nKN-oZ-8Ev"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
