@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import Commercetools
@@ -13,35 +13,14 @@ class SignInViewModel: BaseViewModel {
     // Inputs
     let username = MutableProperty("")
     let password = MutableProperty("")
-    let title = MutableProperty("")
-    let firstName = MutableProperty("")
-    let lastName = MutableProperty("")
-    let email = MutableProperty("")
-    let registrationPassword = MutableProperty("")
-    let registrationPasswordConfirmation = MutableProperty("")
+    var loginAction: Action<Void, Void, CTError>!
 
     // Outputs
     let isLoading: MutableProperty<Bool>
     let isLoginInputValid = MutableProperty(false)
-    let isRegisterInputValid = MutableProperty(false)
-    let registrationGuide = NSLocalizedString("All mandatory fields (*) have to be filled, and your password and confirmation must match", comment: "Registration form instructions")
     var isLoggedIn: Bool {
         return AppRouting.isLoggedIn
     }
-
-    // Actions
-    lazy var loginAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: self.isLoginInputValid) { _ in
-            self.isLoading.value = true
-            return self.login(username: self.username.value, password: self.password.value)
-        }
-    }()
-    lazy var registerAction: Action<Void, Void, CTError> = { [unowned self] in
-        return Action(enabledIf: self.isRegisterInputValid) { _ in
-            self.isLoading.value = true
-            return self.registerUser()
-        }
-    }()
 
     // MARK: Lifecycle
 
@@ -50,22 +29,11 @@ class SignInViewModel: BaseViewModel {
 
         super.init()
 
-        isLoginInputValid <~ SignalProducer.combineLatest(username.producer, password.producer).map { let (username, password) = $0
-            return username.characters.count > 0 && password.characters.count > 0
-        }
+        isLoginInputValid <~ username.combineLatest(with: password).map { !$0.isEmpty && !$1.isEmpty }
 
-        isRegisterInputValid <~ SignalProducer.combineLatest(email.producer, firstName.producer, lastName.producer,
-                registrationPassword.producer, registrationPasswordConfirmation.producer).map { let (email, firstName, lastName, password, passwordConfirmation) = $0
-            var isRegisterInputValid = true
-            [email, firstName, lastName, password].forEach {
-                if $0.characters.count == 0 {
-                    isRegisterInputValid = false
-                }
-            }
-            if password != passwordConfirmation {
-                isRegisterInputValid = false
-            }
-            return isRegisterInputValid
+        loginAction = Action(enabledIf: self.isLoginInputValid) { _ in
+            self.isLoading.value = true
+            return self.login(username: self.username.value, password: self.password.value)
         }
     }
 
@@ -82,35 +50,11 @@ class SignInViewModel: BaseViewModel {
                     // Save username to user defaults for displaying it later on in the app
                     UserDefaults.standard.set(username, forKey: kLoggedInUsername)
                     UserDefaults.standard.synchronize()
+                    AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
+                    AppRouting.wishListViewController?.viewModel?.refreshObserver.send(value: ())
                 }
                 self?.isLoading.value = false
             }
-        }
-    }
-
-    private func registerUser() -> SignalProducer<Void, CTError> {
-        let username = email.value
-        let password = registrationPassword.value
-        let draft = CustomerDraft(email: username, password: password, firstName: firstName.value, lastName: lastName.value, title: title.value)
-
-        return SignalProducer { [weak self] observer, disposable in
-            Commercetools.signUpCustomer(draft, result: { result in
-                if let error = result.errors?.first as? CTError, result.isFailure {
-                    observer.send(error: error)
-                } else {
-                    self?.login(username: username, password: password).startWithSignal { signal, signalDisposable in
-                        disposable += signalDisposable
-                        signal.observe { event in
-                            switch event {
-                                case let .failed(error):
-                                    observer.send(error: error)
-                                default:
-                                    observer.sendCompleted()
-                            }
-                        }
-                    }
-                }
-            })
         }
     }
 }
