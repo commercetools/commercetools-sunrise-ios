@@ -15,6 +15,7 @@ class ProductOverviewViewModel: BaseViewModel {
     let refreshObserver: Signal<Void, NoError>.Observer
     let nextPageObserver: Signal<Void, NoError>.Observer
     let clearProductsObserver: Signal<Void, NoError>.Observer
+    let toggleWishListObserver: Signal<IndexPath, NoError>.Observer
     let textSearch = MutableProperty(("", Locale.current))
     let userLocation: MutableProperty<CLLocation?> = MutableProperty(nil)
 
@@ -56,6 +57,9 @@ class ProductOverviewViewModel: BaseViewModel {
         let (clearProductsSignal, clearProductsObserver) = Signal<Void, NoError>.pipe()
         self.clearProductsObserver = clearProductsObserver
 
+        let (toggleWishListSignal, toggleWishListObserver) = Signal<IndexPath, NoError>.pipe()
+        self.toggleWishListObserver = toggleWishListObserver
+
         super.init()
 
         disposables += refreshSignal
@@ -91,6 +95,15 @@ class ProductOverviewViewModel: BaseViewModel {
         .observeValues { [weak self] in
             self?.products = []
             self?.isLoading.value = false
+        }
+
+        disposables += toggleWishListSignal
+        .observeValues { [unowned self] in
+            let product = self.products[$0.item]
+            self.disposables += AppRouting.wishListViewController?.viewModel?.toggleWishListAction.apply((product.id, product.displayVariant()?.id))
+            .startWithCompleted { [unowned self] in
+                self.isLoading.value = false
+            }
         }
 
         disposables += textSearch.producer
@@ -198,6 +211,11 @@ class ProductOverviewViewModel: BaseViewModel {
               price.discounted?.value != nil else { return "" }
 
         return price.value.description
+    }
+
+    func isProductInWishList(at indexPath: IndexPath) -> Bool {
+        let product = products[indexPath.row]
+        return AppRouting.wishListViewController?.viewModel?.lineItems.value.contains { $0.productId == product.id && $0.variantId == product.displayVariant()?.id} == true
     }
 
     // MARK: - Commercetools product projections querying

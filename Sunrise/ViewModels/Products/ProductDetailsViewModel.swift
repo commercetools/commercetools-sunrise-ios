@@ -13,6 +13,8 @@ class ProductDetailsViewModel: BaseViewModel {
     let refreshObserver: Signal<Void, NoError>.Observer
     let selectSizeObserver: Signal<IndexPath, NoError>.Observer
     let selectColorObserver: Signal<IndexPath, NoError>.Observer
+    var toggleWishListObserver: Signal<IndexPath, NoError>.Observer
+    var toggleWishListAction: Action<Void, Void, CTError>!
     var addToCartAction: Action<Void, Void, CTError>!
     var reserveAction: Action<Void, Void, CTError>!
 
@@ -22,6 +24,7 @@ class ProductDetailsViewModel: BaseViewModel {
     let priceColor = MutableProperty(UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0))
     let oldPrice: MutableProperty<NSAttributedString?> = MutableProperty(nil)
     let isOnStock: MutableProperty<NSAttributedString?> = MutableProperty(nil)
+    let isProductInWishList = MutableProperty(false)
     let imageCount = MutableProperty(0)
     let isLoading = MutableProperty(false)
     let recommendations = MutableProperty([ProductProjection]())
@@ -94,6 +97,9 @@ class ProductDetailsViewModel: BaseViewModel {
         let (selectColorSignal, selectColorObserver) = Signal<IndexPath, NoError>.pipe()
         self.selectColorObserver = selectColorObserver
 
+        let (toggleWishListSignal, toggleWishListObserver) = Signal<IndexPath, NoError>.pipe()
+        self.toggleWishListObserver = toggleWishListObserver
+
         (performSegueSignal, performSegueObserver) = Signal<String, NoError>.pipe()
         (signInPromptSignal, signInPromptObserver) = Signal<Void, NoError>.pipe()
 
@@ -118,7 +124,11 @@ class ProductDetailsViewModel: BaseViewModel {
 
         addToCartAction = Action(enabledIf: Property(value: true)) { [unowned self] in
             self.isLoading.value = true
-            return self.addLineItem()
+            return AppRouting.cartViewController?.viewModel?.addProduct(id: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0, quantity: 1, discountCode: nil) ?? SignalProducer.empty
+        }
+
+        toggleWishListAction = Action(enabledIf: Property(value: true)) { [unowned self] in
+            return AppRouting.wishListViewController?.viewModel?.toggleWishList(productId: self.product?.id ?? "", variantId: self.currentVariantId()) ?? SignalProducer.empty
         }
 
         reserveAction = Action(enabledIf: Property(value: true)) { [unowned self] in
@@ -130,10 +140,19 @@ class ProductDetailsViewModel: BaseViewModel {
             return SignalProducer.empty
         }
 
+        disposables += toggleWishListSignal
+        .observeValues { [unowned self] in
+            let recommendation = self.recommendations.value[$0.item]
+            self.disposables += AppRouting.wishListViewController?.viewModel?.toggleWishListAction.apply((recommendation.id, recommendation.displayVariant()?.id))
+            .startWithCompleted { [unowned self] in
+                self.recommendations.value = self.recommendations.value
+            }
+        }
+
         disposables += reserveAction.events
-        .observeValues({ [weak self] _ in
+        .observeValues { [weak self] _ in
             self?.isLoading.value = false
-        })
+        }
     }
 
     convenience init(product: ProductProjection, variantId: Int? = nil, productsViewModel: ProductOverviewViewModel? = nil) {
@@ -216,6 +235,8 @@ class ProductDetailsViewModel: BaseViewModel {
             }
         }
 
+        disposables += isProductInWishList <~ activeAttributes.map { [unowned self] _ in AppRouting.wishListViewController?.viewModel?.lineItems.value.contains { $0.productId == self.product?.id && $0.variantId == self.currentVariantId() } == true }
+
         disposables += priceColor <~ oldPrice.map { $0 == nil || $0?.string.isEmpty == true ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0) }
     }
 
@@ -284,6 +305,11 @@ class ProductDetailsViewModel: BaseViewModel {
         return price.value.description
     }
 
+    func isProductInWishList(at indexPath: IndexPath) -> Bool {
+        let recommendation = recommendations.value[indexPath.row]
+        return AppRouting.wishListViewController?.viewModel?.lineItems.value.contains { $0.productId == recommendation.id && $0.variantId == recommendation.displayVariant()?.id} == true
+    }
+
     func productDetailsViewModelForRecommendation(at indexPath: IndexPath) -> ProductDetailsViewModel {
         let product = recommendations.value[indexPath.row]
         let variant = recommendations.value[indexPath.row].displayVariant()
@@ -314,46 +340,6 @@ class ProductDetailsViewModel: BaseViewModel {
 
     private func currentVariantId() -> Int? {
         return variantForActiveAttributes?.id
-    }
-
-    // MARK: - Cart interaction
-
-    private func addLineItem(quantity: String = "1") -> SignalProducer<Void, CTError> {
-        return SignalProducer { observer, disposable in
-
-            Cart.active(result: { result in
-                if let cart = result.model, result.isSuccess {
-                    // In case we already have an active cart, just add selected product
-                    let updateActions = UpdateActions(version: cart.version, actions: [CartUpdateAction.addLineItem(lineItemDraft: LineItemDraft(productVariantSelection: .productVariant(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0), quantity: UInt(quantity)))])
-                    Cart.update(cart.id, actions: updateActions, result: { result in
-                        if result.isSuccess {
-                            observer.sendCompleted()
-                        } else if let error = result.errors?.first as? CTError, result.isFailure {
-                            observer.send(error: error)
-                        }
-                        self.isLoading.value = false
-                    })
-
-                } else if let error = result.errors?.first as? CTError, case .resourceNotFoundError(let reason) = error, reason.message == "No active cart exists." {
-                    // If there is no active cart, create one, with the selected product
-                    let lineItemDraft = LineItemDraft(productVariantSelection: .productVariant(productId: self.product?.id ?? "", variantId: self.currentVariantId() ?? 0), quantity: UInt(quantity))
-                    let cartDraft = CartDraft(currency: AppDelegate.currentCurrency ?? BaseViewModel.currencyCodeForCurrentLocale, lineItems: [lineItemDraft])
-
-                    Cart.create(cartDraft, result: { result in
-                        if result.isSuccess {
-                            observer.sendCompleted()
-                        } else if let error = result.errors?.first as? CTError, result.isFailure {
-                            observer.send(error: error)
-                        }
-                        self.isLoading.value = false
-                    })
-
-                } else if let error = result.errors?.first as? CTError {
-                    observer.send(error: error)
-                    self.isLoading.value = false
-                }
-            })
-        }
     }
 
     // MARK: - Product retrieval
