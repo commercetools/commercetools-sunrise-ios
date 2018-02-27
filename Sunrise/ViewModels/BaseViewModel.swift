@@ -10,6 +10,9 @@ class BaseViewModel {
 
     // Outputs
     let alertMessageSignal: Signal<String, NoError>
+    var isAuthenticated: Bool {
+        return Commercetools.authState == .customerToken
+    }
 
     let alertMessageObserver: Signal<String, NoError>.Observer
 
@@ -39,6 +42,9 @@ class BaseViewModel {
     let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MS.", comment: "MS."),
                         NSLocalizedString("DR.", comment: "DR.")]
 
+    // Common expansions
+    let discountCodesExpansion = ["discountCodes[*].discountCode.cartDiscounts[*]"]
+
     // MARK: - Lifecycle
 
     init() {
@@ -49,6 +55,26 @@ class BaseViewModel {
 
     func alertMessage(for errors: [CTError]) -> String {
         return errors.map({ $0.errorDescription ?? "" }).joined(separator: "\n")
+    }
+
+    // MARK: - Cart overview calculations
+
+    func calculateSubtotal(for cart: Cart?) -> String {
+        guard let lineItems = cart?.lineItems else { return "" }
+        return calculateSubtotal(lineItems)
+    }
+
+    func calculateTax(for cart: Cart?) -> String {
+        guard let cart = cart, let totalGrossAmount = cart.taxedPrice?.totalGross.centAmount,
+              let totalNetAmount = cart.taxedPrice?.totalNet.centAmount else { return "" }
+
+        return Money(currencyCode: cart.lineItems.first?.totalPrice.currencyCode ?? "",
+                centAmount: totalGrossAmount - totalNetAmount).description
+    }
+
+    func calculateOrderDiscount(for cart: Cart?) -> String {
+        guard let lineItems = cart?.lineItems else { return "" }
+        return calculateOrderDiscount(lineItems)
     }
 
     // MARK: - Cart or order overview calculations
@@ -73,8 +99,7 @@ class BaseViewModel {
 
     func calculateOrderDiscount(_ lineItems: [LineItem]) -> String {
         let totalOrderDiscountAmount = lineItems.reduce(0, { $0 + calculateCartDiscountForLineItem($1) })
-        return Money(currencyCode: lineItems.first?.totalPrice.currencyCode ?? "",
-                centAmount: totalOrderDiscountAmount).description
+        return totalOrderDiscountAmount > 0 ? Money(currencyCode: lineItems.first?.totalPrice.currencyCode ?? "", centAmount: totalOrderDiscountAmount).description : ""
     }
 
     func calculateCartDiscountForLineItem(_ lineItem: LineItem) -> Int {
