@@ -1,19 +1,16 @@
 //
-// Copyright (c) 2017 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import UIKit
 
 class OrderConfirmationViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
     @IBAction func continueShopping(_ sender: UIButton) {
-        (((presentingViewController as? UINavigationController)?.viewControllers.last as? UITabBarController)?.viewControllers?[5] as? UINavigationController)?.popViewController(animated: false)
-        dismiss(animated: true)
+        AppRouting.showMainTab()
+        SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+        SunriseTabBarController.currentlyActive?.navigationView.alpha = 1
+        AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
+        dismiss(animated: false)
     }
 }

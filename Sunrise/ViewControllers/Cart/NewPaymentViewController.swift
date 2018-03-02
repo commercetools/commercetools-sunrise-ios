@@ -13,6 +13,6 @@ class NewPaymentViewController: UIViewController {
     }
 
     @IBAction func backToCheckout(_ sender: UIButton) {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
