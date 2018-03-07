@@ -11,8 +11,9 @@ class AppRouting {
         case homeTab = 0
         case barcodeTab
         case mainTab
-        case wishlistTab
+        case wishListTab
         case profileTab
+        case cartTab
 
         var index: Int {
             return self.rawValue
@@ -23,15 +24,38 @@ class AppRouting {
 
     static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
 
+    static var mainTabNavigationController: UINavigationController? = {
+        return SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.mainTab.index] as? UINavigationController
+    }()
+
+    static var mainViewController: MainViewController? = {
+        return mainTabNavigationController?.viewControllers.first as? MainViewController
+    }()
+
+    static var cartViewController: CartViewController? = {
+        return (SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.cartTab.index] as? UINavigationController)?.viewControllers.first as? CartViewController
+    }()
+
+    static var wishListViewController: WishListViewController? = {
+        return SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.wishListTab.index] as? WishListViewController
+    }()
+
     static var isLoggedIn: Bool {
         return AuthManager.sharedInstance.state == .customerToken
     }
 
-    static func showProductDetails(for sku: String) {
-        guard let mainTabNavigationController = SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.mainTab.index] as? UINavigationController else { return }
-        guard let mainViewController = mainTabNavigationController.viewControllers.first as? MainViewController else { return }
-        mainTabNavigationController.popToRootViewController(animated: false)
+    static func showMainTab() {
+        mainTabNavigationController?.popToRootViewController(animated: false)
         SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.mainTab.index
-        mainViewController.viewModel?.productsViewModel.presentProductDetails(for: sku)
+    }
+
+    static func showProductDetails(for sku: String) {
+        showMainTab()
+        mainViewController?.viewModel?.productsViewModel.presentProductDetails(for: sku)
+    }
+
+    static func switchToCartTab() {
+        SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.cartTab.index
+        SunriseTabBarController.currentlyActive?.cartButton.isSelected = true
     }
 }
