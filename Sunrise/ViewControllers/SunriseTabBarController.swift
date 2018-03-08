@@ -17,21 +17,31 @@ class SunriseTabBarController: UITabBarController {
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var barcodeButton: UIButton!    
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var wishlistButton: UIButton!
+    @IBOutlet weak var wishListButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var cartButton: UIButton!
-    @IBOutlet weak var wishlistBadgeImageView: UIImageView!
-    @IBOutlet weak var wishlistBadgeLabel: UILabel!
+    @IBOutlet weak var wishListBadgeImageView: UIImageView!
+    @IBOutlet weak var wishListBadgeLabel: UILabel!
+    @IBOutlet weak var cartBadgeImageView: UIImageView!
+    @IBOutlet weak var cartBadgeLabel: UILabel!
     
     private lazy var tabButtons: [UIButton] = {
-        return [homeButton, barcodeButton, searchButton, wishlistButton, profileButton]
+        return [homeButton, barcodeButton, searchButton, wishListButton, profileButton]
     }()
     
-    var wishlistBadge: Int = 1 {
+    var wishListBadge: Int = 1 {
         didSet {
-            wishlistBadgeLabel.text = String(wishlistBadge)
-            wishlistBadgeLabel.isHidden = wishlistBadge < 1
-            wishlistBadgeImageView.isHidden = wishlistBadge < 1
+            wishListBadgeLabel.text = String(wishListBadge)
+            wishListBadgeLabel.isHidden = wishListBadge < 1
+            wishListBadgeImageView.isHidden = wishListBadge < 1
+        }
+    }
+
+    var cartBadge: Int = 1 {
+        didSet {
+            cartBadgeLabel.text = String(cartBadge)
+            cartBadgeLabel.isHidden = cartBadge < 1
+            cartBadgeImageView.isHidden = cartBadge < 1
         }
     }
     
@@ -67,7 +77,7 @@ class SunriseTabBarController: UITabBarController {
         homeButton.setImage(#imageLiteral(resourceName: "home_tab_sel"), for: [.selected, .highlighted])
         barcodeButton.setImage(#imageLiteral(resourceName: "barcode_tab_sel"), for: [.selected, .highlighted])
         searchButton.setImage(#imageLiteral(resourceName: "search_tab_sel"), for: [.selected, .highlighted])
-        wishlistButton.setImage(#imageLiteral(resourceName: "wishlist_tab_sel"), for: [.selected, .highlighted])
+        wishListButton.setImage(#imageLiteral(resourceName: "wishlist_tab_sel"), for: [.selected, .highlighted])
         profileButton.setImage(#imageLiteral(resourceName: "profile_tab_sel"), for: [.selected, .highlighted])
         cartButton.setImage(#imageLiteral(resourceName: "nav_bar_bag_active"), for: [.selected, .highlighted])
         
@@ -128,7 +138,10 @@ class SunriseTabBarController: UITabBarController {
 
         tabBar.isHidden = true
 
-        _ = (viewControllers?[2] as? UINavigationController)?.topViewController?.view
+        // Load view controllers, so view models can start fetching data
+        _ = (viewControllers?[AppRouting.TabIndex.mainTab.index] as? UINavigationController)?.topViewController?.view
+        _ = viewControllers?[AppRouting.TabIndex.wishListTab.index].view
+        _ = (viewControllers?[AppRouting.TabIndex.cartTab.index] as? UINavigationController)?.topViewController?.view
     }
 
     @IBAction func touchUpInside(_ sender: UIButton) {
@@ -154,7 +167,7 @@ class SunriseTabBarController: UITabBarController {
             button.isSelected = selectedIndex == index
         }
         cartButton.isSelected = false
-        wishlistBadgeImageView.image = selectedIndex == tabButtons.index(of: wishlistButton) ? #imageLiteral(resourceName: "tab_wishlist_badge") : #imageLiteral(resourceName: "tab_wishlist_off_badge")
+        wishListBadgeImageView.image = selectedIndex == tabButtons.index(of: wishListButton) ? #imageLiteral(resourceName: "tab_wishlist_badge") : #imageLiteral(resourceName: "tab_wishlist_off_badge")
     }
 }
 
