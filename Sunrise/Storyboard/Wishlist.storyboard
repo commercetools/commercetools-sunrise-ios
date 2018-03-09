@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A2r-yC-0rf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,19 +25,19 @@
         <!--wishlist-->
         <scene sceneID="8Y3-yj-hqh">
             <objects>
-                <viewController id="A2r-yC-0rf" customClass="WishlistViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A2r-yC-0rf" customClass="WishListViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gYH-Jx-9uq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_background" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Jr-tBB">
-                                <rect key="frame" x="0.0" y="73" width="375" height="492"/>
+                                <rect key="frame" x="0.0" y="73" width="375" height="541"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-A3-tYB">
-                                <rect key="frame" x="18" y="167.5" width="339" height="367.5"/>
+                                <rect key="frame" x="18" y="167.5" width="339" height="416.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WishlistCell" rowHeight="200" id="BRZ-MM-Gvs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WishListCell" rowHeight="200" id="BRZ-MM-Gvs" customClass="WishListCell" customModule="Sunrise" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="339" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BRZ-MM-Gvs" id="8l4-fU-pX6">
@@ -113,6 +117,14 @@
                                         <constraints>
                                             <constraint firstItem="5C1-bI-I49" firstAttribute="width" secondItem="BRZ-MM-Gvs" secondAttribute="width" multiplier="0.351" id="p9s-Ii-A1t"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="addToBagButton" destination="0gg-uW-Sl8" id="FIq-gX-nGx"/>
+                                            <outlet property="oldPriceLabel" destination="oxt-dR-knQ" id="2Un-j7-Shn"/>
+                                            <outlet property="priceLabel" destination="Moo-uS-dcc" id="jXs-cx-BUO"/>
+                                            <outlet property="productImageView" destination="5C1-bI-I49" id="R1c-lJ-N13"/>
+                                            <outlet property="productNameLabel" destination="QLM-gZ-yv0" id="dfI-NL-oDh"/>
+                                            <outlet property="wishListButton" destination="ZeB-yE-iPG" id="v9b-oc-lNV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

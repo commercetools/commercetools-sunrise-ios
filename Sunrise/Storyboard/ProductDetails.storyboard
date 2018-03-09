@@ -89,6 +89,9 @@
                                                 <state key="normal" image="nav_bar_bag"/>
                                                 <state key="selected" image="nav_bar_bag_active"/>
                                                 <state key="highlighted" image="nav_bar_bag_active"/>
+                                                <connections>
+                                                    <action selector="showCartTab:" destination="ctK-h7-7LY" eventType="touchUpInside" id="Xiz-YT-BvP"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_bar_bag_badge" translatesAutoresizingMaskIntoConstraints="NO" id="eqi-FR-0m7">
                                                 <rect key="frame" x="337.5" y="9.5" width="22" height="22"/>
@@ -587,7 +590,7 @@
                                                             <outlet property="priceLabel" destination="bL6-lV-KYG" id="Sge-Sx-44W"/>
                                                             <outlet property="productImageView" destination="PYk-Nf-sff" id="owf-nr-95n"/>
                                                             <outlet property="productNameLabel" destination="zY9-7t-hq9" id="bKG-F3-tSA"/>
-                                                            <outlet property="wishlistButton" destination="rzU-X7-U0K" id="nKP-Gt-tMM"/>
+                                                            <outlet property="wishListButton" destination="rzU-X7-U0K" id="nKP-Gt-tMM"/>
                                                             <segue destination="ctK-h7-7LY" kind="show" id="cTZ-52-KNB"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -717,6 +720,8 @@
                     <size key="freeformSize" width="375" height="1600"/>
                     <connections>
                         <outlet property="addToBagButton" destination="CLM-hD-0Un" id="rMQ-EY-uzu"/>
+                        <outlet property="cartBadgeImageView" destination="eqi-FR-0m7" id="KkN-cd-kbj"/>
+                        <outlet property="cartBadgeLabel" destination="bFl-PX-zBf" id="aah-Mc-cOA"/>
                         <outlet property="colorSectionWidthConstraint" destination="jqu-ge-EVB" id="kbP-Bh-E6p"/>
                         <outlet property="colorsCollectionView" destination="2k2-WV-CWd" id="M9M-qm-e3i"/>
                         <outlet property="imagesCollectionView" destination="gow-0o-5ma" id="GWZ-3S-h9E"/>
@@ -738,7 +743,7 @@
                         <outlet property="similarItemsCollectionView" destination="AbG-tn-qNk" id="bQO-KL-847"/>
                         <outlet property="similarItemsGradientView" destination="GDv-87-1lp" id="zyQ-hI-FWb"/>
                         <outlet property="sizesCollectionView" destination="K5U-9g-ekU" id="yzU-n5-sIj"/>
-                        <outlet property="wishlistButton" destination="Ay2-ks-oLJ" id="EPk-JG-8MN"/>
+                        <outlet property="wishListButton" destination="Ay2-ks-oLJ" id="EPk-JG-8MN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="thN-gb-BqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -808,8 +813,8 @@
                                                 <color key="textColor" red="0.3411764705882353" green="0.36862745098039218" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise Store Berlin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="gkv-3L-3D9">
-                                                <rect key="frame" x="14" y="362.5" width="188" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Sunrise Store Berlin" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="gkv-3L-3D9">
+                                                <rect key="frame" x="14" y="362.5" width="279" height="30"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1053,6 +1058,7 @@ Open until 18:00 tomorrow</string>
                                             <constraint firstItem="Iny-Bp-rlO" firstAttribute="leading" secondItem="99L-Hl-BYU" secondAttribute="trailing" constant="13" id="p5W-qb-2oE"/>
                                             <constraint firstItem="86O-u2-3IZ" firstAttribute="centerX" secondItem="s5W-ng-nUh" secondAttribute="centerX" id="qYe-Ei-Gbo"/>
                                             <constraint firstItem="vFw-F8-yWL" firstAttribute="leading" secondItem="gc2-0g-enf" secondAttribute="trailing" id="qb0-aI-Phj"/>
+                                            <constraint firstItem="s5W-ng-nUh" firstAttribute="leading" secondItem="gkv-3L-3D9" secondAttribute="trailing" constant="8" id="qhS-YH-zP0"/>
                                             <constraint firstItem="V04-64-43H" firstAttribute="top" secondItem="NRz-PC-vou" secondAttribute="bottom" constant="17" id="ujG-y4-kDk"/>
                                             <constraint firstAttribute="trailing" secondItem="OaR-6V-RWo" secondAttribute="trailing" constant="10" id="wla-EV-7kv"/>
                                             <constraint firstItem="vFw-F8-yWL" firstAttribute="centerY" secondItem="gc2-0g-enf" secondAttribute="centerY" id="wmG-fn-b2s"/>
@@ -1098,7 +1104,7 @@ Open until 18:00 tomorrow</string>
                         <outlet property="sizeLabel" destination="8EQ-QB-IYa" id="k9r-JY-Lyl"/>
                         <outlet property="storeAddressLabel" destination="FX9-TN-Y2W" id="Vyd-bt-rwk"/>
                         <outlet property="storeNameLabel" destination="gkv-3L-3D9" id="qrM-OY-W0i"/>
-                        <outlet property="wishlistButton" destination="5Q7-Sb-cfI" id="9YQ-YY-Ef6"/>
+                        <outlet property="wishListButton" destination="5Q7-Sb-cfI" id="9YQ-YY-Ef6"/>
                         <segue destination="xhv-Ck-ajK" kind="show" identifier="showConfirmation" id="wIQ-bt-6Tf"/>
                     </connections>
                 </viewController>
