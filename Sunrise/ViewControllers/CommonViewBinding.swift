@@ -16,7 +16,9 @@ extension UIViewController {
                     message: alertMessage,
                     preferredStyle: .alert
             )
-            alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }))
             self?.present(alertController, animated: true, completion: nil)
         })
     }
