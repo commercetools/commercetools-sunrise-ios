@@ -1,10 +1,12 @@
 //
-// Copyright (c) 2017 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import UIKit
 
 class ShippingMethodCell: UITableViewCell {
-    @IBOutlet weak var nameAndDescriptionLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
 }
