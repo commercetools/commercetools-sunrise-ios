@@ -15,7 +15,7 @@ class StoreSelectionViewController: UIViewController {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productColorView: UIView!
 
-    @IBOutlet weak var wishlistButton: UIButton!
+    @IBOutlet weak var wishListButton: UIButton!
     @IBOutlet weak var reserveButton: UIButton!
 
     @IBOutlet weak var productNameLabel: UILabel!

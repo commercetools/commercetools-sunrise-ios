@@ -12,6 +12,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.opacity = 0.35
         let screenWidth = UIScreen.main.bounds.width
         let cellWidth = (screenWidth - 30) / 2
         gradientLayer.frame = CGRect(x: 0, y: cellWidth * 0.523, width: cellWidth, height: cellWidth * 0.360)

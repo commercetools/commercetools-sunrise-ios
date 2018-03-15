@@ -17,19 +17,21 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var imagesCollectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var similarItemsGradientView: UIView!
     @IBOutlet weak var isOnStockImageView: UIImageView!
-    
+    @IBOutlet weak var cartBadgeImageView: UIImageView!
+
     @IBOutlet weak var imagesPageControl: UIPageControl!
 
     @IBOutlet weak var productDescriptionButton: UIButton!
     @IBOutlet weak var reserveInStoreButton: UIButton!
     @IBOutlet weak var addToBagButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var wishlistButton: UIButton!
+    @IBOutlet weak var wishListButton: UIButton!
     
     @IBOutlet weak var oldPriceLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var isOnStockLabel: UILabel!
+    @IBOutlet weak var cartBadgeLabel: UILabel!
     
     @IBOutlet weak var productDescriptionHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var productDescriptionSeparatorHeightConstraint: NSLayoutConstraint!
@@ -63,6 +65,12 @@ class ProductDetailsViewController: UIViewController {
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         gradientLayer.frame = similarItemsGradientView.bounds
         similarItemsGradientView.layer.insertSublayer(gradientLayer, at: 0)
+
+        wishListButton.setImage(#imageLiteral(resourceName: "wishlist_icon_active"), for: [.selected, .highlighted])
+
+        cartBadgeLabel.text = SunriseTabBarController.currentlyActive?.cartBadgeLabel.text
+        cartBadgeLabel.isHidden = SunriseTabBarController.currentlyActive?.cartBadgeLabel.isHidden ?? true
+        cartBadgeImageView.isHidden = SunriseTabBarController.currentlyActive?.cartBadgeImageView.isHidden ?? true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +95,7 @@ class ProductDetailsViewController: UIViewController {
         disposables += priceLabel.reactive.textColor <~ viewModel.priceColor
         disposables += oldPriceLabel.reactive.attributedText <~ viewModel.oldPrice
         disposables += isOnStockLabel.reactive.attributedText <~ viewModel.isOnStock
+        disposables += wishListButton.reactive.isSelected <~ viewModel.isProductInWishList
 
         disposables += viewModel.oldPrice.producer
         .observe(on: UIScheduler())
@@ -101,6 +110,7 @@ class ProductDetailsViewController: UIViewController {
         }
 
         addToBagButton.reactive.pressed = CocoaAction(viewModel.addToCartAction)
+        wishListButton.reactive.pressed = CocoaAction(viewModel.toggleWishListAction)
 
         disposables += viewModel.isLoading.producer
         .observe(on: UIScheduler())
@@ -114,6 +124,7 @@ class ProductDetailsViewController: UIViewController {
         .observe(on: UIScheduler())
         .startWithValues { [weak self] _ in
             self?.colorSectionWidthConstraint.constant = self?.viewModel?.numberOfColors ?? 0 > 1 ? 191 : 148
+            self?.colorsCollectionView.isScrollEnabled = self?.viewModel?.numberOfColors ?? 0 > 1
             [self?.sizesCollectionView, self?.colorsCollectionView, self?.imagesCollectionView].forEach { $0?.reloadData() }
             self?.productDescriptionTableView.reloadData()
         }
@@ -129,12 +140,18 @@ class ProductDetailsViewController: UIViewController {
             }
         }
 
+        disposables += wishListButton.reactive.controlEvents(.touchUpInside)
+        .observeValues { [unowned self] _ in
+            self.wishListButton.isSelected = !self.wishListButton.isSelected
+        }
+
         disposables += viewModel.addToCartAction.events
         .observe(on: UIScheduler())
         .observeValues({ [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
             case .completed:
+                AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
                 self?.presentAfterAddingToCartOptions()
             case let .failed(error):
                 let alertController = UIAlertController(
@@ -148,9 +165,6 @@ class ProductDetailsViewController: UIViewController {
                 return
             }
         })
-
-//        colorsCollectionView.reloadSections([0])
-//        scrollViewDidScroll(colorsCollectionView)
     }
     
     // MARK: - Product description
@@ -192,6 +206,10 @@ class ProductDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func showCartTab(_ sender: UIButton) {
+        AppRouting.switchToCartTab()
+    }
+
     private func presentAfterAddingToCartOptions() {
         let alertController = UIAlertController(
                 title: viewModel?.addToCartSuccessTitle,
@@ -201,8 +219,9 @@ class ProductDetailsViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .default, handler: { [weak self] _ in
             self?.navigationController?.popToRootViewController(animated: true)
         }))
-        alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .default, handler: { _ in
-//            AppRouting.switchToCartOverview()
+        alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .default, handler: { [weak self] _ in
+            AppRouting.switchToCartTab()
+            self?.navigationController?.popToRootViewController(animated: false)
         }))
         present(alertController, animated: true, completion: nil)
     }
@@ -248,6 +267,13 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
                 cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.recommendationOldPrice(at: indexPath), attributes: oldPriceAttributes)
                 cell.priceLabel.text = viewModel.recommendationPrice(at: indexPath)
                 cell.priceLabel.textColor = viewModel.recommendationOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
+                cell.wishListButton.isSelected = viewModel.isProductInWishList(at: indexPath)
+                disposables += cell.wishListButton.reactive.controlEvents(.touchUpInside)
+                .take(until: cell.reactive.prepareForReuse)
+                .observeValues { [weak self] _ in
+                    cell.wishListButton.isSelected = !cell.wishListButton.isSelected
+                    self?.viewModel?.toggleWishListObserver.send(value: indexPath)
+                }
                 return cell
         }
     }

@@ -34,12 +34,12 @@ class MainViewController: UIViewController {
     @IBOutlet weak var collectionViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchFieldMagnifyingGlassLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var categorySelectionButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var searchFieldLineWidthActiveConstraint: NSLayoutConstraint!
-    @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchFieldLineCenterXConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoriesDropdownCenterXConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchFilterBackgroundTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var filterBackgroundTopConstraint: NSLayoutConstraint!
+    @IBOutlet var searchFieldLineWidthActiveConstraint: NSLayoutConstraint!
+    @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
 
     private weak var filtersViewController: FiltersViewController?
     private let gradientLayer = CAGradientLayer()
@@ -73,7 +73,7 @@ class MainViewController: UIViewController {
         categoriesDropdownGradientView.layer.insertSublayer(categoriesDropdownGradientLayer, at: 0)
         subcategoriesTableView.contentInset = UIEdgeInsetsMake(17, 0, 0, 0)
 
-        let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red:0.34, green:0.37, blue:0.40, alpha:1.0)]
+        let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
         searchField.attributedPlaceholder = NSAttributedString(string: "search", attributes: placeholderAttributes)
 
         [searchSuggestionsTableView, subcategoriesTableView].forEach { $0.tableFooterView = UIView() }
@@ -87,7 +87,14 @@ class MainViewController: UIViewController {
 
         viewModel = MainViewModel()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if productsCollectionView.alpha == 1 {
+            productsCollectionView.reloadData()
+        }
+    }
+
     func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
@@ -371,12 +378,12 @@ class MainViewController: UIViewController {
     // MARK: - Blurring effect
 
     private func updateBackgroundSnapshot() {
-//        guard let backgroundSnapshot = takeSnapshot() else { return }
-//        self.backgroundSnapshot = backgroundSnapshot
-//        blurredSnapshot = blur(image: backgroundSnapshot)
-//        if backgroundImageView.alpha > 0 {
-//            backgroundImageView.image = blurredSnapshot
-//        }
+        guard let backgroundSnapshot = takeSnapshot() else { return }
+        self.backgroundSnapshot = backgroundSnapshot
+        blurredSnapshot = blur(image: backgroundSnapshot)
+        if backgroundImageView.alpha > 0 {
+            backgroundImageView.image = blurredSnapshot
+        }
     }
 
     private func takeSnapshot() -> UIImage? {
@@ -441,6 +448,13 @@ extension MainViewController: UICollectionViewDataSource {
             cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.productOldPrice(at: indexPath), attributes: oldPriceAttributes)
             cell.priceLabel.text = viewModel.productPrice(at: indexPath)
             cell.priceLabel.textColor = viewModel.productOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
+            cell.wishListButton.isSelected = viewModel.isProductInWishList(at: indexPath)
+            disposables += cell.wishListButton.reactive.controlEvents(.touchUpInside)
+            .take(until: cell.reactive.prepareForReuse)
+            .observeValues { [weak self] _ in
+                cell.wishListButton.isSelected = !cell.wishListButton.isSelected
+                self?.viewModel?.productsViewModel.toggleWishListObserver.send(value: indexPath)
+            }
             return cell
         }
     }

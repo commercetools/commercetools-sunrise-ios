@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 
+    static var currentCountry: String?
+    static var currentCurrency: String?
+    static var customerGroup: Reference<CustomerGroup>?
+
     var contentfulClient: Client = {
         let spaceId = Bundle.main.object(forInfoDictionaryKey: "ContentfulSpaceId") as? String ?? ""
         let accessToken = Bundle.main.object(forInfoDictionaryKey: "ContentfulAccessToken") as? String ?? ""
@@ -36,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let configuration = Project.config {
             Commercetools.config = configuration
+
         } else {
             // Inform user about the configuration error
         }
