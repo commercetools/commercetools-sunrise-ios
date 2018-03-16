@@ -496,6 +496,7 @@
                     <tabBarItem key="tabBarItem" title="Cart" id="JAH-7t-9Hn"/>
                     <navigationItem key="navigationItem" id="DOB-SE-v5w"/>
                     <connections>
+                        <outlet property="applePayButton" destination="I4B-RH-De3" id="T4f-Yo-x5t"/>
                         <outlet property="backgroundImageView" destination="vh8-5h-pAs" id="cDi-Ca-CmQ"/>
                         <outlet property="checkoutButton" destination="RH1-Lr-Hy3" id="js8-Og-Mnw"/>
                         <outlet property="headerView" destination="lmi-i2-5m3" id="D5f-Bp-FDE"/>

@@ -121,10 +121,11 @@ class CheckoutViewController: UIViewController {
 
         disposables += placeOrderButton.reactive.isEnabled <~ viewModel.isOrderValid
 
-        disposables += viewModel.isBillingSameAsShipping.signal
+        disposables += viewModel.isBillingSameAsShipping.combinePrevious(true).signal
+        .filter { !$0  || !$1 }
         .observe(on: UIScheduler())
-        .observeValues { [unowned self] in
-            self.setBillingSectionHidden($0)
+        .observeValues { [unowned self] _, current in
+            self.setBillingSectionHidden(current)
         }
 
         disposables += viewModel.isBillingSameAsShipping.signal
@@ -139,11 +140,12 @@ class CheckoutViewController: UIViewController {
         .observeValues { [unowned self] in self.presentNoActiveCartError() }
 
         disposables += viewModel.isLoading.producer
-        .filter { !$0 }
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] in
             $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss()
-            self.shippingMethodsTableView.reloadData()
+            if !$0 {
+                self.shippingMethodsTableView.reloadData()
+            }
         }
 
         disposables += viewModel.numberOfLineItems.producer
@@ -215,9 +217,11 @@ class CheckoutViewController: UIViewController {
             if hidden {
                 self.billingNotSameAsShippingConstraints.forEach { $0.isActive = false }
                 self.billingSameAsShippingConstraints.forEach { $0.isActive = true }
+                self.scrollViewContentHeight.constant -= 228
             } else {
                 self.billingSameAsShippingConstraints.forEach { $0.isActive = false }
                 self.billingNotSameAsShippingConstraints.forEach { $0.isActive = true }
+                self.scrollViewContentHeight.constant += 228
             }
             self.view.layoutIfNeeded()
         }

@@ -59,6 +59,12 @@ class SignInViewController: UIViewController {
 
         logInButton.reactive.pressed = CocoaAction(viewModel.loginAction)
 
+        disposables += viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .startWithValues {
+            $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss()
+        }
+
         disposables += viewModel.loginAction.events
         .observe(on: UIScheduler())
         .observeValues { [weak self] event in

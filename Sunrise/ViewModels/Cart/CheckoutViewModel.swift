@@ -123,7 +123,7 @@ class CheckoutViewModel: BaseViewModel {
             if self.isAuthenticated {
                 return cart?.shippingInfo != nil
             } else {
-                return cart?.shippingInfo != nil && guestEmail?.isEmpty == false && guestPassword?.isEmpty == false && guestPasswordConfirmation?.isEmpty == false
+                return cart?.shippingInfo != nil && guestEmail?.isEmpty == false && (guestPassword?.isEmpty == true || (guestPassword?.isEmpty == false && guestPassword == guestPasswordConfirmation))
             }
         }
 
@@ -214,7 +214,7 @@ class CheckoutViewModel: BaseViewModel {
     func addressDetails(at indexPath: IndexPath, for type: AddressType) -> String? {
         let address = type == .shipping ? shippingAddresses.value[indexPath.item] : billingAddresses.value[indexPath.item]
         var details = ""
-        details += address.streetName ?? ""
+        details += address.streetName != nil ? "\(address.streetName!) " : ""
         details += address.additionalStreetInfo ?? ""
         details += "\n"
         details += address.city != nil ? "\(address.city!)\n" : ""
@@ -310,6 +310,7 @@ class CheckoutViewModel: BaseViewModel {
                 billingAddresses.value = [billingAddress]
             }
             setShippingAndBillingIfEmpty()
+            isLoading.value = false
         } else {
             Customer.profile { result in
                 if let customer = result.model, result.isSuccess {
@@ -439,6 +440,7 @@ class CheckoutViewModel: BaseViewModel {
                         let orderDraft = OrderDraft(id: cart.id, version: cart.version)
                         Order.create(orderDraft) { result in
                             if result.isSuccess {
+                                self.addToAddressBook(from:  cart)
                                 observer.send(value: ())
                             } else if let error = result.errors?.first as? CTError, result.isFailure {
                                 self.isLoading.value = false
@@ -490,6 +492,30 @@ class CheckoutViewModel: BaseViewModel {
         }
         _ = semaphore.wait(timeout: .distantFuture)
         return error != nil ? Result<Void, CTError>.failure(error!) : .success(())
+    }
+
+    private func addToAddressBook(from cart: Cart) {
+        guard isAuthenticated else { return }
+        var addressesToAdd = [Address]()
+        if let shippingAddress = cart.shippingAddress, shippingAddress.id == nil {
+            addressesToAdd.append(shippingAddress)
+        }
+        if let billingAddress = cart.billingAddress, billingAddress.id == nil {
+            addressesToAdd.append(billingAddress)
+        }
+        guard addressesToAdd.count > 0 else { return }
+        let semaphore = DispatchSemaphore(value: 0)
+        Customer.profile { result in
+            if let profile = result.model, result.isSuccess {
+                let updateActions = UpdateActions(version: profile.version, actions: addressesToAdd.map { CustomerUpdateAction.addAddress(address: $0) })
+                Customer.update(actions: updateActions) { _ in
+                    semaphore.signal()
+                }
+            } else {
+                semaphore.signal()
+            }
+        }
+        _ = semaphore.wait(timeout: .distantFuture)
     }
 
     enum AddressType {

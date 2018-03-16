@@ -20,6 +20,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var orderTotalLabel: UILabel!
     
     @IBOutlet weak var checkoutButton: UIButton!
+    @IBOutlet weak var applePayButton: UIButton!
     
     private var backgroundSnapshot: UIImage?
     private var blurredSnapshot: UIImage?
@@ -86,6 +87,7 @@ class CartViewController: UIViewController {
         disposables += numerOfItemsLabel.reactive.text <~ viewModel.numberOfItems
         disposables += orderTotalLabel.reactive.text <~ viewModel.orderTotal
         disposables += checkoutButton.reactive.isEnabled <~ viewModel.isCheckoutEnabled
+        disposables += applePayButton.reactive.isEnabled <~ viewModel.isCheckoutEnabled
 
         disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
