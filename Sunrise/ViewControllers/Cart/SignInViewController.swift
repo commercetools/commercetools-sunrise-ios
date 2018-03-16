@@ -46,7 +46,6 @@ class SignInViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         UIView.animate(withDuration: 0.15) {
-            SunriseTabBarController.currentlyActive?.navigationView.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 0
         }
         super.viewWillDisappear(animated)

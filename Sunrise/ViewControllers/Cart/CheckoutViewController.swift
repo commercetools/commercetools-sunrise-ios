@@ -83,18 +83,23 @@ class CheckoutViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        SunriseTabBarController.currentlyActive?.navigationView.alpha = 1
+        super.viewWillDisappear(animated)
+    }
+
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
         placeOrderButton.reactive.pressed = CocoaAction(viewModel.orderAction)
 
-        totalLabels.forEach {
-            disposables += $0.reactive.text <~ viewModel.orderTotal
-        }
+        totalLabels.forEach { disposables += $0.reactive.text <~ viewModel.orderTotal }
 
         disposables += viewModel.isBillingSameAsShipping <~ billingAsShippingSwitch.reactive.isOnValues
 
         disposables += viewModel.discountCode <~ discountCodeField.reactive.textValues
+        disposables += subtotalLabel.reactive.text <~ viewModel.subtotal
+        disposables += deliveryLabel.reactive.text <~ viewModel.shippingPrice
         disposables += appliedDiscountCodeInfoLabel.reactive.text <~ viewModel.appliedDiscountCodeInfo
 
         disposables += viewModel.guestEmail <~ guestEmailField.reactive.continuousTextValues

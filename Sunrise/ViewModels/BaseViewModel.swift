@@ -66,7 +66,7 @@ class BaseViewModel {
 
     func calculateTax(for cart: Cart?) -> String {
         guard let cart = cart, let totalGrossAmount = cart.taxedPrice?.totalGross.centAmount,
-              let totalNetAmount = cart.taxedPrice?.totalNet.centAmount else { return "" }
+              let totalNetAmount = cart.taxedPrice?.totalNet.centAmount else { return "-" }
 
         return Money(currencyCode: cart.lineItems.first?.totalPrice.currencyCode ?? "",
                 centAmount: totalGrossAmount - totalNetAmount).description
@@ -95,6 +95,11 @@ class BaseViewModel {
             return money.description
         }
         return ""
+    }
+
+    func shippingPrice(for cart: Cart?) -> String {
+        guard let money = cart?.shippingInfo?.price else { return "-" }
+        return money.centAmount == 0 ? NSLocalizedString("Free", comment: "Free shipping") : money.description
     }
 
     func calculateOrderDiscount(_ lineItems: [LineItem]) -> String {

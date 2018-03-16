@@ -26,6 +26,7 @@ class CheckoutViewModel: BaseViewModel {
     let isLoading = MutableProperty(true)
     let numberOfLineItems = MutableProperty(0)
     let subtotal = MutableProperty("")
+    let shippingPrice = MutableProperty("")
     let orderDiscount = MutableProperty("")
     let tax = MutableProperty("")
     let orderTotal = MutableProperty("")
@@ -59,6 +60,7 @@ class CheckoutViewModel: BaseViewModel {
 
         disposables += numberOfLineItems <~ cart.map { $0?.lineItems.count ?? 0 }
         disposables += subtotal <~ cart.map { [unowned self] in self.calculateSubtotal(for: $0) }
+        disposables += shippingPrice <~ cart.map { [unowned self] in self.shippingPrice(for: $0) }
         disposables += orderTotal <~ cart.map { [unowned self] in self.orderTotal(for: $0) }
         disposables += tax <~ cart.map { [unowned self] in self.calculateTax(for: $0) }
         disposables += orderDiscount <~ cart.map { [unowned self] in self.calculateOrderDiscount(for: $0) }
