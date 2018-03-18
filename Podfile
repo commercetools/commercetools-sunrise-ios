@@ -15,6 +15,9 @@ target 'Sunrise' do
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
   pod 'Contentful'
+  pod 'Reveal-SDK', '~> 10', :configurations => ['Debug Prod']
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
 
 target 'ReservationNotification' do

@@ -55,9 +55,9 @@ class StoreSelectionViewController: UIViewController {
         SunriseTabBarController.currentlyActive?.backButton.alpha = 1
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         SunriseTabBarController.currentlyActive?.backButton.alpha = 0
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
     }
 
     private func bindViewModel() {
@@ -136,12 +136,18 @@ class StoreSelectionViewController: UIViewController {
             }
         }
 
+        disposables += viewModel.showLoginSignal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            self?.performSegue(withIdentifier: "showLogin", sender: self)
+        }
+
         disposables += viewModel.reserveAction.events
         .observe(on: UIScheduler())
         .observeValues({ [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
-                case .completed:
+                case .value:
                     self?.performSegue(withIdentifier: "showConfirmation", sender: self)
                 case let .failed(error):
                     let alertController = UIAlertController(

@@ -34,12 +34,7 @@ class ReservationConfirmationViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        SunriseTabBarController.currentlyActive?.backButton.alpha = 1
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
         SunriseTabBarController.currentlyActive?.backButton.alpha = 0
-        super.viewDidDisappear(animated)
     }
 
     private func bindViewModel() {

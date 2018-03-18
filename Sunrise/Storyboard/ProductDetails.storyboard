@@ -1106,6 +1106,7 @@ Open until 18:00 tomorrow</string>
                         <outlet property="storeNameLabel" destination="gkv-3L-3D9" id="qrM-OY-W0i"/>
                         <outlet property="wishListButton" destination="5Q7-Sb-cfI" id="9YQ-YY-Ef6"/>
                         <segue destination="xhv-Ck-ajK" kind="show" identifier="showConfirmation" id="wIQ-bt-6Tf"/>
+                        <segue destination="j6j-qG-jlz" kind="show" identifier="showLogin" id="xu0-bf-epX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YzF-FX-yjf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1283,6 +1284,14 @@ Sat: 09:00 - 16:00</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AFn-GC-MIi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4466" y="1830"/>
+        </scene>
+        <!--SignInViewController-->
+        <scene sceneID="o6i-dr-mUc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" referencedIdentifier="SignInViewController" id="j6j-qG-jlz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z9b-V0-mih" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3632" y="2366"/>
         </scene>
     </scenes>
     <resources>

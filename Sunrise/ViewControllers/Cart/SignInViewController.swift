@@ -45,9 +45,7 @@ class SignInViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.15) {
-            SunriseTabBarController.currentlyActive?.backButton.alpha = 0
-        }
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 0
         super.viewWillDisappear(animated)
     }
 
@@ -71,8 +69,12 @@ class SignInViewController: UIViewController {
             SVProgressHUD.dismiss()
             switch event {
                 case .completed:
-                    self?.performSegue(withIdentifier: "showCheckout", sender: self)
-                    self?.navigationController?.popViewController(animated: false) // exclude popping to root if used outside cart tab
+                    if SunriseTabBarController.currentlyActive?.selectedIndex == AppRouting.TabIndex.cartTab.index {
+                        self?.performSegue(withIdentifier: "showCheckout", sender: self)
+                        self?.navigationController?.popViewController(animated: false)
+                    } else {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 case let .failed(error):
                     let alertController = UIAlertController(
                             title: viewModel.failedTitle,
@@ -87,13 +89,6 @@ class SignInViewController: UIViewController {
         }
 
         disposables += logInButton.reactive.isEnabled <~ viewModel.isLoginInputValid
-
-        disposables += NotificationCenter.default.reactive
-        .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
-        .observe(on: UIScheduler())
-        .observeValues { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
-        }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }

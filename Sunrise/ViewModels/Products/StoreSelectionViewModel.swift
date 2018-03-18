@@ -30,6 +30,7 @@ class StoreSelectionViewModel: BaseViewModel {
     let quantity: MutableProperty<String?> = MutableProperty(nil)
     let isOnStock: MutableProperty<NSAttributedString?> = MutableProperty(nil)
     let productColor: MutableProperty<UIColor?> = MutableProperty(nil)
+    let showLoginSignal: Signal<Void, NoError>
 
     // Dialogue texts
     let outOfStockMessage = NSLocalizedString("Product is not available at the selected store. Try picking a different store.", comment: "Out of Stock")
@@ -54,6 +55,9 @@ class StoreSelectionViewModel: BaseViewModel {
     init(product: ProductProjection, sku: String) {
         self.product = product
         self.sku = sku
+
+        let (showLoginSignal, showLoginObserver) = Signal<Void, NoError>.pipe()
+        self.showLoginSignal = showLoginSignal
 
         super.init()
 
@@ -115,7 +119,9 @@ class StoreSelectionViewModel: BaseViewModel {
         }
 
         reserveAction = Action(enabledIf: Property(value: true)) { [unowned self] in
-            if self.isOnStock.value?.string == self.notAvailable {
+            if !self.isAuthenticated {
+                showLoginObserver.send(value: ())
+            } else if self.isOnStock.value?.string == self.notAvailable {
                 return SignalProducer(error: CTError.generalError(reason: CTError.FailureReason(message: self.outOfStockMessage, details: nil)))
             } else if let store = self.selectedStore.value {
                 self.isLoading.value = true

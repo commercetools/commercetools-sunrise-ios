@@ -107,6 +107,13 @@ class CartViewController: UIViewController {
             }
         }
 
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+
         viewModel.refreshObserver.send(value: ())
     }
 
