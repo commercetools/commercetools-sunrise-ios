@@ -22,6 +22,8 @@ class CartViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var applePayButton: UIButton!
     
+    @IBOutlet var emptyStateVerticalSpaceConstraints: [NSLayoutConstraint]!
+    
     private var backgroundSnapshot: UIImage?
     private var blurredSnapshot: UIImage?
     private let refreshControl = UIRefreshControl()
@@ -41,8 +43,12 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableHeaderView = headerView
+
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
+
+        emptyStateVerticalSpaceConstraints.forEach { $0.constant = 0.25 * view.bounds.height - 129 }
+
         viewModel = CartViewModel()
     }
 
@@ -74,6 +80,7 @@ class CartViewController: UIViewController {
         .startWithValues { [unowned self] _ in
             UIView.animate(withDuration: 0.1, animations: {
                 self.refreshControl.endRefreshing()
+                self.tableView.alpha = self.viewModel?.numberOfLineItems == 0 ? 0 : 1
             }, completion: { finished in
                 if !self.tableView.isDecelerating, !self.tableView.isTracking {
                     DispatchQueue.main.async {
@@ -117,6 +124,13 @@ class CartViewController: UIViewController {
         viewModel.refreshObserver.send(value: ())
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let recommendationsViewController = segue.destination as? InlineProductOverviewViewController {
+            _ = recommendationsViewController.view
+            recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
+        }
+    }
+
     @objc private func refresh() {
         viewModel?.refreshObserver.send(value: ())
     }
@@ -144,12 +158,12 @@ class CartViewController: UIViewController {
     }
 
     private func updateBackgroundSnapshot() {
-        guard let backgroundSnapshot = takeSnapshot() else { return }
-        self.backgroundSnapshot = backgroundSnapshot
-        blurredSnapshot = blur(image: backgroundSnapshot)
-        if backgroundImageView.alpha > 0 {
-            backgroundImageView.image = blurredSnapshot
-        }
+//        guard let backgroundSnapshot = takeSnapshot() else { return }
+//        self.backgroundSnapshot = backgroundSnapshot
+//        blurredSnapshot = blur(image: backgroundSnapshot)
+//        if backgroundImageView.alpha > 0 {
+//            backgroundImageView.image = blurredSnapshot
+//        }
     }
 
     private func takeSnapshot() -> UIImage? {

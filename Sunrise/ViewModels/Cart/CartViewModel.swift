@@ -94,6 +94,10 @@ class CartViewModel: BaseViewModel {
         disposables.dispose()
     }
 
+    static var recommendationsViewModel: InlineProductOverviewViewModel? {
+        return InlineProductOverviewViewModel(title: NSLocalizedString("Recommended for you", comment: "Recommended for you"), filterQuery: [])
+    }
+
     // MARK: - Data Source
 
     var numberOfLineItems: Int {
