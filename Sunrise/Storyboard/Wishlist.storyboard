@@ -33,6 +33,52 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_background" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Jr-tBB">
                                 <rect key="frame" x="0.0" y="73" width="375" height="541"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_separator" translatesAutoresizingMaskIntoConstraints="NO" id="eH1-1h-WUT">
+                                <rect key="frame" x="67" y="160" width="240" height="2"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8K3-XS-0Si">
+                                <rect key="frame" x="17.5" y="167" width="339" height="417"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no products in your whishlist." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOX-CC-i75">
+                                        <rect key="frame" x="42" y="17" width="255" height="17"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use the ❤️ icon to add products to your whishlist." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2N7-dn-3RV">
+                                        <rect key="frame" x="6" y="46" width="327" height="17"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFi-aJ-HBo">
+                                        <rect key="frame" x="9.5" y="103" width="319" height="95"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="zey-CR-9lZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="-32" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Continue Shopping" backgroundImage="button_background">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueShopping:" destination="A2r-yC-0rf" eventType="touchUpInside" id="JK8-U1-PdV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="2N7-dn-3RV" firstAttribute="top" secondItem="LOX-CC-i75" secondAttribute="bottom" constant="12" id="0gG-ba-Deo"/>
+                                    <constraint firstItem="KFi-aJ-HBo" firstAttribute="centerX" secondItem="8K3-XS-0Si" secondAttribute="centerX" id="2sA-Uc-UX3"/>
+                                    <constraint firstItem="2N7-dn-3RV" firstAttribute="centerX" secondItem="8K3-XS-0Si" secondAttribute="centerX" id="IpJ-yN-zfI"/>
+                                    <constraint firstItem="LOX-CC-i75" firstAttribute="centerX" secondItem="8K3-XS-0Si" secondAttribute="centerX" id="Yhg-ea-3F8"/>
+                                    <constraint firstItem="2N7-dn-3RV" firstAttribute="leading" secondItem="8K3-XS-0Si" secondAttribute="leading" constant="6" id="a8k-XG-9Se"/>
+                                    <constraint firstItem="LOX-CC-i75" firstAttribute="top" secondItem="8K3-XS-0Si" secondAttribute="top" constant="17" id="qDU-cp-XEf"/>
+                                    <constraint firstItem="KFi-aJ-HBo" firstAttribute="top" secondItem="2N7-dn-3RV" secondAttribute="bottom" constant="40" id="vD5-T0-B2o"/>
+                                    <constraint firstAttribute="trailing" secondItem="2N7-dn-3RV" secondAttribute="trailing" constant="6" id="wdL-LK-8Tn"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-A3-tYB">
                                 <rect key="frame" x="18" y="167.5" width="339" height="416.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -138,9 +184,6 @@
                                 <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_separator" translatesAutoresizingMaskIntoConstraints="NO" id="eH1-1h-WUT">
-                                <rect key="frame" x="67" y="160.5" width="240" height="2"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zz0-hI-4H7">
                                 <rect key="frame" x="18" y="167.5" width="339" height="18"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -156,15 +199,20 @@
                             <constraint firstItem="Zz0-hI-4H7" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="8az-5U-aUX"/>
                             <constraint firstItem="eaB-A3-tYB" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="DRB-bv-czt"/>
                             <constraint firstItem="eH1-1h-WUT" firstAttribute="top" secondItem="rZ9-XQ-yU4" secondAttribute="bottom" constant="16" id="HVO-NA-bmX"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="-30" id="JzX-Z3-hjL"/>
                             <constraint firstItem="xx1-ti-hQ9" firstAttribute="trailing" secondItem="bZb-Jr-tBB" secondAttribute="trailing" id="MXX-Yj-2Dh"/>
                             <constraint firstItem="rZ9-XQ-yU4" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="Mvc-ks-YNb"/>
                             <constraint firstItem="bZb-Jr-tBB" firstAttribute="leading" secondItem="xx1-ti-hQ9" secondAttribute="leading" id="PxS-ig-qQT"/>
                             <constraint firstItem="eaB-A3-tYB" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="-30" id="T7v-mb-hJ7"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="ZKe-Fr-Ayr"/>
                             <constraint firstItem="rZ9-XQ-yU4" firstAttribute="top" secondItem="xx1-ti-hQ9" secondAttribute="top" constant="88" id="dsZ-h8-nvf"/>
                             <constraint firstItem="eaB-A3-tYB" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.904" id="fls-p7-LE1"/>
                             <constraint firstItem="bZb-Jr-tBB" firstAttribute="top" secondItem="xx1-ti-hQ9" secondAttribute="top" constant="53" id="hSK-S7-d1E"/>
                             <constraint firstItem="xx1-ti-hQ9" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="53" id="m4L-v9-cgN"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="nSB-mO-lqN"/>
                             <constraint firstItem="Zz0-hI-4H7" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="oOQ-NV-Y5O"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.904" id="wjr-89-pIg"/>
+                            <constraint firstItem="KFi-aJ-HBo" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.85" id="yBe-6c-ikR"/>
                             <constraint firstItem="eH1-1h-WUT" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="zam-TK-Wgc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xx1-ti-hQ9"/>
@@ -181,6 +229,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="button_background" width="330" height="99"/>
         <image name="product_shoe" width="177" height="236"/>
         <image name="wishlist_background" width="375" height="544"/>
         <image name="wishlist_button" width="215" height="85"/>

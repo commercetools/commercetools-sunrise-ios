@@ -28,7 +28,9 @@ class WishListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        tableView.tableFooterView = UIView()
+
         viewModel = WishListViewModel()
     }
 
@@ -58,9 +60,22 @@ class WishListViewController: UIViewController {
             tableView.reloadRows(at: changeset.modifications, with: .none)
             tableView.insertRows(at: changeset.insertions, with: .automatic)
             tableView.endUpdates()
+
+            tableView.alpha = self?.viewModel?.numberOfLineItems == 0 ? 0 : 1
         }
 
         viewModel.refreshObserver.send(value: ())
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let recommendationsViewController = segue.destination as? InlineProductOverviewViewController {
+            _ = recommendationsViewController.view
+            recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
+        }
+    }
+
+    @IBAction func continueShopping(_ sender: UIButton) {
+        AppRouting.showMainTab()
     }
 }
 
