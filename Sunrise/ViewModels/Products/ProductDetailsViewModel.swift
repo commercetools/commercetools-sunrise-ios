@@ -30,9 +30,6 @@ class ProductDetailsViewModel: BaseViewModel {
     let recommendations = MutableProperty([ProductProjection]())
     let performSegueSignal: Signal<String, NoError>
     let signInPromptSignal: Signal<Void, NoError>
-    var isLoggedIn: Bool {
-        return AppRouting.isLoggedIn
-    }
 
     // Dialogue texts
     let addToCartSuccessTitle = NSLocalizedString("Product added to cart", comment: "Product added to cart")
@@ -132,7 +129,7 @@ class ProductDetailsViewModel: BaseViewModel {
         }
 
         reserveAction = Action(enabledIf: Property(value: true)) { [unowned self] in
-            if self.isLoggedIn {
+            if self.isAuthenticated {
                 self.performSegueObserver.send(value: "showStoreSelection")
             } else {
                 self.signInPromptObserver.send(value: ())

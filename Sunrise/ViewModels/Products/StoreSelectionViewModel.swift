@@ -14,6 +14,7 @@ class StoreSelectionViewModel: BaseViewModel {
     // Inputs
     let selectedStoreCoordinate: MutableProperty<CLLocationCoordinate2D?> = MutableProperty(nil)
     let userLocation: MutableProperty<CLLocation?> = MutableProperty(nil)
+    var toggleWishListAction: Action<Void, Void, CTError>!
     var reserveAction: Action<Void, Void, CTError>!
 
     // Outputs
@@ -30,6 +31,7 @@ class StoreSelectionViewModel: BaseViewModel {
     let quantity: MutableProperty<String?> = MutableProperty(nil)
     let isOnStock: MutableProperty<NSAttributedString?> = MutableProperty(nil)
     let productColor: MutableProperty<UIColor?> = MutableProperty(nil)
+    let isProductInWishList: Bool
     let showLoginSignal: Signal<Void, NoError>
 
     // Dialogue texts
@@ -58,6 +60,8 @@ class StoreSelectionViewModel: BaseViewModel {
 
         let (showLoginSignal, showLoginObserver) = Signal<Void, NoError>.pipe()
         self.showLoginSignal = showLoginSignal
+
+        isProductInWishList = AppRouting.wishListViewController?.viewModel?.lineItems.value.contains { $0.productId == product.id && $0.variantId == product.allVariants.first(where: { $0.sku == sku })?.id } == true
 
         super.init()
 
@@ -128,6 +132,10 @@ class StoreSelectionViewModel: BaseViewModel {
                 return self.reserveProductVariant(store: store)
             }
             return SignalProducer.empty
+        }
+
+        toggleWishListAction = Action(enabledIf: Property(value: true)) { [unowned self] in
+            return AppRouting.wishListViewController?.viewModel?.toggleWishList(productId: self.product.id, variantId: self.product.allVariants.first(where: { $0.sku == sku })?.id) ?? SignalProducer.empty
         }
 
         retrieveStores()

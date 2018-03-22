@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var categoriesDropdownGradientView: UIView!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var categoriesDropdownView: UIView!
+    @IBOutlet weak var emptyStateView: UIScrollView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchSuggestionsTableView: UITableView!
@@ -109,6 +110,7 @@ class MainViewController: UIViewController {
             self?.subcategoriesTableView.reloadData()
             guard self?.isTransitioningToProducts == false else { return }
             self?.categoriesCollectionView.reloadData()
+            self?.checkAndPresentEmptyState()
             DispatchQueue.main.async {
                 self?.updateBackgroundSnapshot()
             }
@@ -157,6 +159,7 @@ class MainViewController: UIViewController {
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] _ in
             self.productsCollectionView.reloadData()
+            self.checkAndPresentEmptyState()
             SVProgressHUD.dismiss()
             if !self.productsCollectionView.isDecelerating, !self.productsCollectionView.isTracking {
                 DispatchQueue.main.async {
@@ -194,6 +197,9 @@ class MainViewController: UIViewController {
         if let filtersViewController = segue.destination as? FiltersViewController {
             self.filtersViewController = filtersViewController
             _ = filtersViewController.view
+        } else if let recommendationsViewController = segue.destination as? InlineProductOverviewViewController {
+            _ = recommendationsViewController.view
+            recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
         } else if let detailsViewController = segue.destination as? ProductDetailsViewController {
             _ = detailsViewController.view
             if let cell = sender as? UICollectionViewCell, let indexPath = productsCollectionView.indexPath(for: cell) {
@@ -253,6 +259,7 @@ class MainViewController: UIViewController {
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
         viewModel?.productsViewModel.clearProductsObserver.send(value: ())
         UIView.animate(withDuration: 0.3, animations: {
+            self.checkAndPresentEmptyState()
             self.magnifyingGlassImageView.image = #imageLiteral(resourceName: "search_field_icon_active")
             self.searchFieldMagnifyingGlassLeadingSpaceConstraint.constant = 0
             self.categorySelectionButton.alpha = 0
@@ -344,6 +351,7 @@ class MainViewController: UIViewController {
         isTransitioningToProducts = true
         UIView.animate(withDuration: 0.3, animations: {
             self.productsCollectionView.alpha = 0
+            self.emptyStateView.alpha = 0
             self.filterButton.alpha = 0
             self.searchViewHeightConstraint.constant = 55
             self.view.layoutIfNeeded()
@@ -353,6 +361,7 @@ class MainViewController: UIViewController {
             UIView.animate(withDuration: 0.3, animations: {
                 self.searchView.alpha = 1
                 self.categoriesCollectionView.alpha = 1
+                self.checkAndPresentEmptyState()
             }, completion: { _ in
                 [self.filterButton, self.searchFilterButton].forEach { $0.isSelected = false }
                 self.isTransitioningToProducts = false
@@ -361,12 +370,22 @@ class MainViewController: UIViewController {
         })
     }
 
+    private func checkAndPresentEmptyState() {
+        guard !searchField.isFirstResponder, viewModel?.isLoading.value == false, viewModel?.productsViewModel.isLoading.value == false else {
+            emptyStateView.alpha = 0
+            return
+        }
+        let emptyStateAlpha: CGFloat = productsCollectionView.alpha == 1 ? (viewModel?.productsViewModel.numberOfProducts(in: 0) == 0 ? 1 : 0) : categoriesCollectionView.alpha == 1 && viewModel?.numberOfCategoryItems == 0 ? 1 : 0
+        emptyStateView.alpha = emptyStateAlpha
+    }
+
     private func presentSearchResults() {
         UIView.animate(withDuration: 0.3, animations: {
             self.searchSuggestionsTableView.alpha = 0
         }, completion: { _ in
             UIView.animate(withDuration: 0.3) {
                 self.productsCollectionView.alpha = 1
+                self.checkAndPresentEmptyState()
                 self.searchFilterButton.alpha = 1
                 self.searchFieldLineWidthActiveConstraint.constant = -44
                 self.searchFieldLineCenterXConstraint.constant = -22
@@ -474,6 +493,7 @@ extension MainViewController: UICollectionViewDelegate {
         }, completion: { _ in
             UIView.animate(withDuration: 0.3, animations: {
                 self.productsCollectionView.alpha = 1
+                self.checkAndPresentEmptyState()
                 self.filterButton.alpha = 1
             }, completion: { _ in
                 self.isTransitioningToProducts = false

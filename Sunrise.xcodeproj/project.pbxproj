@@ -164,6 +164,8 @@
 		21E7096420484EB30059FAE4 /* CheckoutLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */; };
 		21EFBA361FB37BBC0022D845 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EFBA351FB37BBC0022D845 /* CartViewController.swift */; };
 		21F7D1C71E717A910038ED7E /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7D1C61E717A910038ED7E /* AddressCell.swift */; };
+		21F96DF12061A6F5004CD31A /* InlineProductOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F96DF02061A6F5004CD31A /* InlineProductOverviewViewController.swift */; };
+		21F96DF32061A760004CD31A /* InlineProductOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F96DF22061A760004CD31A /* InlineProductOverviewViewModel.swift */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
 		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
@@ -410,6 +412,8 @@
 		21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutLineItemCell.swift; sourceTree = "<group>"; };
 		21EFBA351FB37BBC0022D845 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		21F7D1C61E717A910038ED7E /* AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		21F96DF02061A6F5004CD31A /* InlineProductOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineProductOverviewViewController.swift; sourceTree = "<group>"; };
+		21F96DF22061A760004CD31A /* InlineProductOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineProductOverviewViewModel.swift; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -525,6 +529,7 @@
 				211CB36D1FA8D5EB003CB5D8 /* ProductDetailsViewController.swift */,
 				210ABDE52039174200BF2457 /* StoreSelectionViewController.swift */,
 				21162106203DB7D600EBE25D /* ReservationConfirmationViewController.swift */,
+				21F96DF02061A6F5004CD31A /* InlineProductOverviewViewController.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -604,6 +609,7 @@
 				210BE275997C032CA0F01AF3 /* VoiceSearchViewModel.swift */,
 				2107392D2023794900EF14CB /* FiltersViewModel.swift */,
 				21162108203DB80F00EBE25D /* ReservationConfirmationViewModel.swift */,
+				21F96DF22061A760004CD31A /* InlineProductOverviewViewModel.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -1670,6 +1676,7 @@
 				215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */,
 				217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */,
 				213B7C731F9FA01B008B90B5 /* SizeCell.swift in Sources */,
+				21F96DF32061A760004CD31A /* InlineProductOverviewViewModel.swift in Sources */,
 				21E7096420484EB30059FAE4 /* CheckoutLineItemCell.swift in Sources */,
 				21E70962204842010059FAE4 /* CheckoutViewModel.swift in Sources */,
 				21162109203DB80F00EBE25D /* ReservationConfirmationViewModel.swift in Sources */,
@@ -1683,6 +1690,7 @@
 				21C0B62E1E7F3F3400D666F5 /* NewAddressViewModel.swift in Sources */,
 				219B84ED20391C720014BC4D /* ProductDescriptionCell.swift in Sources */,
 				210BE1FC59FA761E46E72C64 /* CommonViewBinding.swift in Sources */,
+				21F96DF12061A6F5004CD31A /* InlineProductOverviewViewController.swift in Sources */,
 				2108529B1F699DAF00423E4F /* ProductsSectionViewController.swift in Sources */,
 				210BE5531A46D49DC5FC045F /* BaseViewModel.swift in Sources */,
 				210BE3FDCF3E7FD1AD829994 /* CartSummaryCell.swift in Sources */,

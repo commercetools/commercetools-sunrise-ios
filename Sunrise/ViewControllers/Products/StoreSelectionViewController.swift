@@ -43,6 +43,8 @@ class StoreSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        wishListButton.setImage(#imageLiteral(resourceName: "wishlist_icon_active"), for: [.selected, .highlighted])
+
         locationManager.delegate = self
         locationManager.distanceFilter = 50
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -71,8 +73,10 @@ class StoreSelectionViewController: UIViewController {
         disposables += isOnStockLabel.reactive.attributedText <~ viewModel.isOnStock
         disposables += sizeLabel.reactive.text <~ viewModel.size
         disposables += quantityLabel.reactive.text <~ viewModel.quantity
+        wishListButton.isSelected = viewModel.isProductInWishList
 
         reserveButton.reactive.pressed = CocoaAction(viewModel.reserveAction)
+        wishListButton.reactive.pressed = CocoaAction(viewModel.toggleWishListAction)
 
         disposables += viewModel.isLoading.producer
         .observe(on: UIScheduler())
@@ -140,6 +144,11 @@ class StoreSelectionViewController: UIViewController {
         .observe(on: UIScheduler())
         .observeValues { [weak self] in
             self?.performSegue(withIdentifier: "showLogin", sender: self)
+        }
+
+        disposables += wishListButton.reactive.controlEvents(.touchUpInside)
+        .observeValues { [unowned self] _ in
+            self.wishListButton.isSelected = !self.wishListButton.isSelected
         }
 
         disposables += viewModel.reserveAction.events

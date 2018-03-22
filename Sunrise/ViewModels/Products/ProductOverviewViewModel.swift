@@ -107,7 +107,6 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         disposables += textSearch.producer
-        .skipRepeats { $0.0 == $1.0 && $0.1 == $1.1 }
         .filter { $0.0 != "" }
         .observe(on: QueueScheduler(qos: .userInitiated))
         .startWithValues { [weak self] previous, current in

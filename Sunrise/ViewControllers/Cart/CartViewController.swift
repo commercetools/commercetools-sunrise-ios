@@ -158,12 +158,12 @@ class CartViewController: UIViewController {
     }
 
     private func updateBackgroundSnapshot() {
-//        guard let backgroundSnapshot = takeSnapshot() else { return }
-//        self.backgroundSnapshot = backgroundSnapshot
-//        blurredSnapshot = blur(image: backgroundSnapshot)
-//        if backgroundImageView.alpha > 0 {
-//            backgroundImageView.image = blurredSnapshot
-//        }
+        guard let backgroundSnapshot = takeSnapshot() else { return }
+        self.backgroundSnapshot = backgroundSnapshot
+        blurredSnapshot = blur(image: backgroundSnapshot)
+        if backgroundImageView.alpha > 0 {
+            backgroundImageView.image = blurredSnapshot
+        }
     }
 
     private func takeSnapshot() -> UIImage? {
