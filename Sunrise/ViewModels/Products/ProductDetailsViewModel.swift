@@ -26,6 +26,7 @@ class ProductDetailsViewModel: BaseViewModel {
     let isOnStock: MutableProperty<NSAttributedString?> = MutableProperty(nil)
     let isProductInWishList = MutableProperty(false)
     let imageCount = MutableProperty(0)
+    let shareUrl = MutableProperty("")
     let isLoading = MutableProperty(false)
     let recommendations = MutableProperty([ProductProjection]())
     let performSegueSignal: Signal<String, NoError>
@@ -61,6 +62,13 @@ class ProductDetailsViewModel: BaseViewModel {
     private var product: ProductProjection?
     private lazy var productType: ProductType? = {
         return productsViewModel?.filtersViewModel?.mainProductType
+    }()
+    private var shareBaseURL: String = {
+        var baseUrl = Bundle.main.object(forInfoDictionaryKey: "Sharing base URL") as! String
+        if !baseUrl.hasSuffix("/") {
+            baseUrl.append("/")
+        }
+        return baseUrl
     }()
     private let disposables = CompositeDisposable()
 
@@ -162,7 +170,7 @@ class ProductDetailsViewModel: BaseViewModel {
         let availableAttributes = productType?.attributes.map { $0.name } ?? []
         productDescriptionAttributes = productDescriptionAttributes.filter { availableAttributes.contains($0) }
 
-        bindViewModelProducers()
+        bindViewModelProperties()
 
         guard let variant = product.allVariants.first(where: { $0.id == variantId }) ?? product.mainVariantWithPrice else { return }
         let color = variant.attributes?.first { $0.name == FiltersViewModel.kColorsAttributeName }
@@ -188,7 +196,7 @@ class ProductDetailsViewModel: BaseViewModel {
 
     // MARK: Bindings
 
-    private func bindViewModelProducers() {
+    private func bindViewModelProperties() {
         name.value = product?.name.localizedString ?? ""
 
         product?.displayVariants().forEach {
@@ -231,6 +239,9 @@ class ProductDetailsViewModel: BaseViewModel {
                 return NSAttributedString(string: self.notAvailable, attributes: notAvailableAttributes)
             }
         }
+
+        let currentLocaleCode = Locale.components(fromIdentifier: Locale.current.identifier)[NSLocale.Key.languageCode.rawValue] ?? ""
+        disposables += shareUrl <~ activeAttributes.map { [unowned self] _ in "\(self.shareBaseURL)\(currentLocaleCode)/\(self.product?.slug.localizedString ?? "")-\(self.variantForActiveAttributes?.sku ?? "").html" }
 
         disposables += isProductInWishList <~ activeAttributes.map { [unowned self] _ in AppRouting.wishListViewController?.viewModel?.lineItems.value.contains { $0.productId == self.product?.id && $0.variantId == self.currentVariantId() } == true }
 
@@ -347,7 +358,7 @@ class ProductDetailsViewModel: BaseViewModel {
             if let product = result.model, result.isSuccess {
                 self.product = product
                 self.productType = product.productType.obj
-                self.bindViewModelProducers()
+                self.bindViewModelProperties()
                 // TODO Set size
 //                if let size = size {
 //                    self.activeAttributes.value["size"] = size

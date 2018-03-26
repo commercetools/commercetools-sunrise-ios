@@ -24,7 +24,6 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productDescriptionButton: UIButton!
     @IBOutlet weak var reserveInStoreButton: UIButton!
     @IBOutlet weak var addToBagButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var wishListButton: UIButton!
     
     @IBOutlet weak var oldPriceLabel: UILabel!
@@ -208,6 +207,12 @@ class ProductDetailsViewController: UIViewController {
 
     @IBAction func showCartTab(_ sender: UIButton) {
         AppRouting.switchToCartTab()
+    }
+
+    @IBAction func share(_ sender: UIButton) {
+        guard let viewModel = viewModel else { return }
+        let activityViewController = UIActivityViewController(activityItems: [viewModel.name.value, URL(string: viewModel.shareUrl.value)!], applicationActivities: nil)
+        present(activityViewController, animated: true)
     }
 
     private func presentAfterAddingToCartOptions() {

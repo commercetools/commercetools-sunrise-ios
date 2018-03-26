@@ -62,17 +62,13 @@ class SunriseTabBarController: UITabBarController {
         }
     }
 
-    override var traitCollection: UITraitCollection {
-        let currentTrait = super.traitCollection
-        let regularHorizontal = UITraitCollection(horizontalSizeClass: .regular)
-        return UITraitCollection(traitsFrom: [currentTrait, regularHorizontal])
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         delegate = self
         SunriseTabBarController.currentlyActive = self
+        // Hide navigation bar from more navigation controller
+        moreNavigationController.navigationBar.isHidden = true
 
         homeButton.setImage(#imageLiteral(resourceName: "home_tab_sel"), for: [.selected, .highlighted])
         barcodeButton.setImage(#imageLiteral(resourceName: "barcode_tab_sel"), for: [.selected, .highlighted])
@@ -138,10 +134,10 @@ class SunriseTabBarController: UITabBarController {
 
         tabBar.isHidden = true
 
-        // Load view controllers, so view models can start fetching data
-        _ = (viewControllers?[AppRouting.TabIndex.mainTab.index] as? UINavigationController)?.topViewController?.view
-        _ = viewControllers?[AppRouting.TabIndex.wishListTab.index].view
-        _ = (viewControllers?[AppRouting.TabIndex.cartTab.index] as? UINavigationController)?.topViewController?.view
+        // Load views, so view models can start fetching data
+        _ = AppRouting.mainViewController?.view
+        _ = AppRouting.wishListViewController?.view
+        _ = AppRouting.cartViewController?.view
     }
 
     @IBAction func touchUpInside(_ sender: UIButton) {

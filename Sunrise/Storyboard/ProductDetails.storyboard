@@ -251,6 +251,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYY-vk-s3U">
                                                 <rect key="frame" x="334" y="530.5" width="18" height="26"/>
                                                 <state key="normal" image="share_button"/>
+                                                <connections>
+                                                    <action selector="share:" destination="ctK-h7-7LY" eventType="touchUpInside" id="lmV-6V-YTP"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ay2-ks-oLJ">
                                                 <rect key="frame" x="322" y="561.5" width="40" height="40"/>
@@ -739,7 +742,6 @@
                         <outlet property="productNameLabel" destination="Kbt-1j-BPs" id="Lsb-2N-vCE"/>
                         <outlet property="reserveInStoreButton" destination="PbF-4t-IFA" id="Trj-fp-Bco"/>
                         <outlet property="scrollableHeightConstraint" destination="Mhq-qF-qDz" id="SEW-wP-BDf"/>
-                        <outlet property="shareButton" destination="hYY-vk-s3U" id="U2S-L3-Dht"/>
                         <outlet property="similarItemsCollectionView" destination="AbG-tn-qNk" id="bQO-KL-847"/>
                         <outlet property="similarItemsGradientView" destination="GDv-87-1lp" id="zyQ-hI-FWb"/>
                         <outlet property="sizesCollectionView" destination="K5U-9g-ekU" id="yzU-n5-sIj"/>

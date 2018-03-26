@@ -339,6 +339,18 @@
                                     <constraint firstAttribute="height" constant="70" id="UKU-4r-gUd"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHw-HQ-dsr">
+                                <rect key="frame" x="295" y="140" width="53" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="5Ht-rk-4Vf"/>
+                                    <constraint firstAttribute="height" constant="53" id="um9-Wj-JlO"/>
+                                </constraints>
+                                <state key="normal" image="filter_button"/>
+                                <state key="selected" image="filter_button_active"/>
+                                <connections>
+                                    <action selector="filter:" destination="AIq-Y6-ty1" eventType="touchUpInside" id="5vq-7n-SmP"/>
+                                </connections>
+                            </button>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lfd-bH-wnE" userLabel="White Background Color">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -352,7 +364,7 @@
                                 <color key="backgroundColor" red="0.3411764705882353" green="0.36862745098039218" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaN-vx-BpE">
-                                <rect key="frame" x="0.0" y="148" width="375" height="37"/>
+                                <rect key="frame" x="83" y="148" width="209" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="eVq-1E-nLf"/>
                                 </constraints>
@@ -366,18 +378,6 @@
                                 </state>
                                 <connections>
                                     <action selector="switchCategory:" destination="AIq-Y6-ty1" eventType="touchUpInside" id="nee-iF-tZU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHw-HQ-dsr">
-                                <rect key="frame" x="295" y="140" width="53" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="53" id="5Ht-rk-4Vf"/>
-                                    <constraint firstAttribute="height" constant="53" id="um9-Wj-JlO"/>
-                                </constraints>
-                                <state key="normal" image="filter_button"/>
-                                <state key="selected" image="filter_button_active"/>
-                                <connections>
-                                    <action selector="filter:" destination="AIq-Y6-ty1" eventType="touchUpInside" id="5vq-7n-SmP"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filters_background_top" translatesAutoresizingMaskIntoConstraints="NO" id="2iY-tz-wfa">
@@ -469,7 +469,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2Ic-E2-Waj" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" constant="10" id="271-p6-sjq"/>
-                            <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="BaN-vx-BpE" secondAttribute="trailing" id="28t-s9-Wcr"/>
                             <constraint firstItem="Sih-Cc-rql" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" constant="10" id="4dT-aE-T7C"/>
                             <constraint firstItem="BOh-97-MP5" firstAttribute="width" secondItem="zoQ-76-y2t" secondAttribute="width" multiplier="0.072" id="7LA-ux-fnT"/>
                             <constraint firstAttribute="trailing" secondItem="BOh-97-MP5" secondAttribute="trailing" id="7qg-y2-aHh"/>
@@ -478,6 +477,7 @@
                             <constraint firstItem="Lfd-bH-wnE" firstAttribute="top" secondItem="zoQ-76-y2t" secondAttribute="top" id="9Yd-Bx-K7F"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="2Ic-E2-Waj" secondAttribute="trailing" constant="10" id="9bz-9v-Td3"/>
                             <constraint firstItem="CHw-HQ-dsr" firstAttribute="centerY" secondItem="BaN-vx-BpE" secondAttribute="centerY" id="AY6-zv-1Er"/>
+                            <constraint firstItem="CHw-HQ-dsr" firstAttribute="leading" secondItem="BaN-vx-BpE" secondAttribute="trailing" constant="3" id="Bee-Ag-E3H"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="bottom" secondItem="0Cs-hc-hgn" secondAttribute="bottom" constant="53" id="C8k-S9-ZHa"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="Sih-Cc-rql" secondAttribute="trailing" constant="10" id="Cj1-EC-ayG"/>
                             <constraint firstItem="Otq-Tp-98j" firstAttribute="top" secondItem="zoQ-76-y2t" secondAttribute="top" id="Csc-BS-Oyl"/>
@@ -516,7 +516,6 @@
                             <constraint firstItem="ar7-0D-Ssd" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" id="nvL-g1-qG6"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="naQ-qG-1Xy" secondAttribute="trailing" id="qKQ-DC-pH0"/>
                             <constraint firstItem="Lfd-bH-wnE" firstAttribute="leading" secondItem="zoQ-76-y2t" secondAttribute="leading" id="qku-hQ-oar"/>
-                            <constraint firstItem="BaN-vx-BpE" firstAttribute="leading" secondItem="gSF-4Y-CZR" secondAttribute="leading" id="sps-Ab-3bD"/>
                             <constraint firstItem="gSF-4Y-CZR" firstAttribute="trailing" secondItem="60d-qF-RpH" secondAttribute="trailing" id="t0v-TX-oOs"/>
                             <constraint firstItem="ar7-0D-Ssd" firstAttribute="top" secondItem="2iY-tz-wfa" secondAttribute="bottom" id="u5x-7h-1Ap"/>
                             <constraint firstAttribute="bottom" secondItem="Lfd-bH-wnE" secondAttribute="bottom" id="uoK-dI-2qF"/>
