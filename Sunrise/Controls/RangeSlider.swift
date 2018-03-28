@@ -51,7 +51,7 @@ class RangeSliderThumbLayer: CALayer {
     }
 }
 
-@IBDesignable
+//@IBDesignable
 public class RangeSlider: UIControl {
     @IBInspectable public var minimumValue: Double = 0.0 {
         willSet(newValue) {

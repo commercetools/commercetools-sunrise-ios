@@ -633,32 +633,6 @@ recommend based on your style!</string>
             </objects>
             <point key="canvasLocation" x="998" y="493"/>
         </scene>
-        <!--profile-->
-        <scene sceneID="GO7-98-iXD">
-            <objects>
-                <viewController id="Ldk-IX-40F" customClass="ProfileViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wlA-Hv-ve1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yoh-tQ-O28">
-                                <rect key="frame" x="16" y="194" width="64" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Logout"/>
-                                <connections>
-                                    <action selector="logout:" destination="Ldk-IX-40F" eventType="touchUpInside" id="fcO-SC-9vF"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="mMh-hJ-nyQ"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="profile" id="as0-fK-YfK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IwZ-tE-Z7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1901.5999999999999" y="492.50374812593708"/>
-        </scene>
         <!--Sunrise Tab Bar Controller-->
         <scene sceneID="M5w-KW-UIF">
             <objects>
@@ -687,8 +661,8 @@ recommend based on your style!</string>
                         <segue destination="6rw-3H-LCM" kind="relationship" relationship="viewControllers" id="Jw2-Yd-U4v"/>
                         <segue destination="aHS-k2-bMb" kind="relationship" relationship="viewControllers" id="fVb-E3-MuP"/>
                         <segue destination="wfV-fN-gq6" kind="relationship" relationship="viewControllers" id="86c-Fm-x4p"/>
-                        <segue destination="Ldk-IX-40F" kind="relationship" relationship="viewControllers" id="RRm-e8-HPl"/>
-                        <segue destination="6DV-sL-UvG" kind="relationship" relationship="viewControllers" id="Jzk-2A-sQY"/>
+                        <segue destination="Smp-B4-PYw" kind="relationship" relationship="viewControllers" id="FqA-nO-TqS"/>
+                        <segue destination="6DV-sL-UvG" kind="relationship" relationship="viewControllers" id="CLe-Lg-HYd"/>
                     </connections>
                 </tabBarController>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNk-RE-gQq">
@@ -871,7 +845,7 @@ recommend based on your style!</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNa-3l-2LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3158" y="-357"/>
+            <point key="canvasLocation" x="1750" y="-263"/>
         </scene>
         <!--UINavigationController-Acy-Xe-Tha-->
         <scene sceneID="zOh-Lb-tRI">
@@ -881,7 +855,7 @@ recommend based on your style!</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jfk-at-Duk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2284" y="-356"/>
+            <point key="canvasLocation" x="1780" y="-355"/>
         </scene>
         <!--Wishlist-->
         <scene sceneID="n9G-e7-l7m">
@@ -891,7 +865,7 @@ recommend based on your style!</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="geF-EP-bOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2646" y="-355"/>
+            <point key="canvasLocation" x="1647" y="-309"/>
         </scene>
         <!--UINavigationController-BSY-xs-hSU-->
         <scene sceneID="nYO-Fp-CQX">
@@ -901,7 +875,7 @@ recommend based on your style!</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h96-7n-IN6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1766" y="-357"/>
+            <point key="canvasLocation" x="1782" y="-408"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="hHR-T4-EAa">
@@ -1123,6 +1097,16 @@ recommend based on your style!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTm-RT-d54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="147" y="491"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="3bk-Bq-yw1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="Smp-B4-PYw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="SJh-bV-han"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B0m-Aw-EhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1846" y="493"/>
         </scene>
     </scenes>
     <resources>

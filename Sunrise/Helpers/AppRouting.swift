@@ -32,12 +32,16 @@ class AppRouting {
         return mainTabNavigationController?.viewControllers.first as? MainViewController
     }()
 
-    static var cartViewController: CartViewController? = {
-        return (SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.cartTab.index] as? UINavigationController)?.viewControllers.first as? CartViewController
-    }()
-
     static var wishListViewController: WishListViewController? = {
         return SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.wishListTab.index] as? WishListViewController
+    }()
+
+    static var profileViewController: ProfileViewController? = {
+        return (SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.profileTab.index] as? UINavigationController)?.viewControllers.first as? ProfileViewController
+    }()
+
+    static var cartViewController: CartViewController? = {
+        return (SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.cartTab.index] as? UINavigationController)?.viewControllers.first as? CartViewController
     }()
 
     static var isLoggedIn: Bool {
