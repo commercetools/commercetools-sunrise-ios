@@ -38,6 +38,7 @@ class SignInViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard !(parent is ProfileViewController) else { return }
         UIView.animate(withDuration: 0.15) {
             SunriseTabBarController.currentlyActive?.navigationView.alpha = 1
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
@@ -45,6 +46,7 @@ class SignInViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        guard !(parent is ProfileViewController) else { return }
         SunriseTabBarController.currentlyActive?.backButton.alpha = 0
         super.viewWillDisappear(animated)
     }
@@ -72,9 +74,10 @@ class SignInViewController: UIViewController {
                     if SunriseTabBarController.currentlyActive?.selectedIndex == AppRouting.TabIndex.cartTab.index {
                         self?.performSegue(withIdentifier: "showCheckout", sender: self)
                         self?.navigationController?.popViewController(animated: false)
-                    } else {
+                    } else if SunriseTabBarController.currentlyActive?.selectedIndex != AppRouting.TabIndex.profileTab.index {
                         self?.navigationController?.popViewController(animated: true)
                     }
+                    [self?.emailField, self?.passwordField].forEach { $0?.text = "" }
                 case let .failed(error):
                     let alertController = UIAlertController(
                             title: viewModel.failedTitle,

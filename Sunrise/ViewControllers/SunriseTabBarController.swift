@@ -137,6 +137,7 @@ class SunriseTabBarController: UITabBarController {
         // Load views, so view models can start fetching data
         _ = AppRouting.mainViewController?.view
         _ = AppRouting.wishListViewController?.view
+        _ = AppRouting.profileViewController?.view
         _ = AppRouting.cartViewController?.view
     }
 
