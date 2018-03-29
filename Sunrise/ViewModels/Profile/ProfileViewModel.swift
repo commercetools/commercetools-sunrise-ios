@@ -35,7 +35,8 @@ class ProfileViewModel: BaseViewModel {
 
         super.init()
 
-        disposables += isLoginHidden <~ profile.map { [unowned self] _ in Commercetools.authState == .customerToken }
+        disposables += isLoginHidden <~ profile.map { _ in Commercetools.authState == .customerToken }
+        disposables += refreshSignal.observeValues { [unowned self] in self.retrieveProfile() }
         disposables += logoutSignal.observeValues { [unowned self] in
             Commercetools.logoutCustomer()
             AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
