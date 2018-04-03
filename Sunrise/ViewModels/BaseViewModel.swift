@@ -133,4 +133,15 @@ class BaseViewModel {
         }
     }
 
+    func price(for lineItem: LineItem) -> String {
+        if let discounted = lineItem.price.discounted?.value {
+            return discounted.description
+
+        } else if let discounted = lineItem.discountedPricePerQuantity.first?.discountedPrice.value {
+            return discounted.description
+
+        } else {
+            return lineItem.price.value.description
+        }
+    }
 }

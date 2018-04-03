@@ -108,8 +108,23 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 7 {
-            viewModel?.logoutObserver.send(value: ())
+        switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: "showMyOrders", sender: self)
+            case 1:
+                performSegue(withIdentifier: "showMyReservations", sender: self)
+            case 2:
+                print("my style")
+            case 3:
+                print("address book")
+            case 4:
+                print("my payments")
+            case 5:
+                print("store finder")
+            case 6:
+                print("settings")
+            default:
+                viewModel?.logoutObserver.send(value: ())
         }
     }
 }
