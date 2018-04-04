@@ -32,7 +32,7 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var placeOrderButton: UIButton!
     @IBOutlet weak var billingAsShippingSwitch: UISwitch!
     
-    @IBOutlet weak var scrollViewContentHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewContentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var lineItemsTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var shippingMethodsTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var taxDeliveryVerticalSpaceConstraint: NSLayoutConstraint!
@@ -154,7 +154,7 @@ class CheckoutViewController: UIViewController {
             self.lineItemsTableView.reloadData()
             DispatchQueue.main.async {
                 let newHeight = (0..<numberOfLineItems).reduce(CGFloat(0), { $0 + self.lineItemsTableView.rectForRow(at: IndexPath(row: $1, section: 0)).height })
-                self.scrollViewContentHeight.constant += newHeight - self.lineItemsTableViewHeightConstraint.constant
+                self.scrollViewContentHeightConstraint.constant += newHeight - self.lineItemsTableViewHeightConstraint.constant
                 self.lineItemsTableViewHeightConstraint.constant = newHeight
             }
         }
@@ -165,7 +165,7 @@ class CheckoutViewController: UIViewController {
             self.shippingMethodsTableView.reloadData()
             DispatchQueue.main.async {
                 let newHeight = (0..<methods.count).reduce(CGFloat(0), { $0 + self.shippingMethodsTableView.rectForRow(at: IndexPath(row: $1, section: 0)).height })
-                self.scrollViewContentHeight.constant += newHeight - self.shippingMethodsTableViewHeightConstraint.constant
+                self.scrollViewContentHeightConstraint.constant += newHeight - self.shippingMethodsTableViewHeightConstraint.constant
                 self.shippingMethodsTableViewHeightConstraint.constant = newHeight
             }
         }
@@ -217,11 +217,11 @@ class CheckoutViewController: UIViewController {
             if hidden {
                 self.billingNotSameAsShippingConstraints.forEach { $0.isActive = false }
                 self.billingSameAsShippingConstraints.forEach { $0.isActive = true }
-                self.scrollViewContentHeight.constant -= 228
+                self.scrollViewContentHeightConstraint.constant -= 228
             } else {
                 self.billingSameAsShippingConstraints.forEach { $0.isActive = false }
                 self.billingNotSameAsShippingConstraints.forEach { $0.isActive = true }
-                self.scrollViewContentHeight.constant += 228
+                self.scrollViewContentHeightConstraint.constant += 228
             }
             self.view.layoutIfNeeded()
         }

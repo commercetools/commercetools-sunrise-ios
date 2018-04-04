@@ -312,7 +312,7 @@ class MainViewController: UIViewController {
     }
 
     private func presentCategoriesDropdownPicker() {
-        guard let snapshot = backgroundSnapshot else { return }
+        guard let snapshot = backgroundSnapshot, filtersView.alpha == 0 else { return }
         screenSnapshot = snapshot
         backgroundImageView.image = snapshot
         backgroundImageView.alpha = 1

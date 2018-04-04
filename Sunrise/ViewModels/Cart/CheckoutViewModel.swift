@@ -163,15 +163,7 @@ class CheckoutViewModel: BaseViewModel {
     func lineItemPrice(at indexPath: IndexPath) -> String {
         guard let lineItem = cart.value?.lineItems[indexPath.row] else { return "" }
 
-        if let discounted = lineItem.price.discounted?.value {
-            return discounted.description
-
-        } else if let discounted = lineItem.discountedPricePerQuantity.first?.discountedPrice.value {
-            return discounted.description
-
-        } else {
-            return lineItem.price.value.description
-        }
+        return price(for: lineItem)
     }
 
     // MARK: - Shipping Methods Data Source
@@ -213,16 +205,7 @@ class CheckoutViewModel: BaseViewModel {
 
     func addressDetails(at indexPath: IndexPath, for type: AddressType) -> String? {
         let address = type == .shipping ? shippingAddresses.value[indexPath.item] : billingAddresses.value[indexPath.item]
-        var details = ""
-        details += address.streetName != nil ? "\(address.streetName!) " : ""
-        details += address.additionalStreetInfo ?? ""
-        details += "\n"
-        details += address.city != nil ? "\(address.city!)\n" : ""
-        details += address.region ?? address.state ?? ""
-        details += address.postalCode ?? ""
-        details += "\n"
-        details += (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: address.country) ?? address.country
-        return details
+        return address.description
     }
 
     func isAddressSelected(at indexPath: IndexPath, for type: AddressType) -> Bool {

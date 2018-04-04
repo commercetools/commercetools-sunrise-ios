@@ -21,6 +21,22 @@ extension Dictionary where Key: ExpressibleByStringLiteral, Value: ExpressibleBy
     }
 }
 
+extension Address: CustomStringConvertible {
+    /// The textual representation used when written to an output stream, with locale based format
+    public var description: String {
+        var description = ""
+        description += streetName != nil ? "\(streetName!) " : ""
+        description += additionalStreetInfo ?? ""
+        description += "\n"
+        description += city != nil ? "\(city!)\n" : ""
+        description += region ?? state ?? ""
+        description += postalCode ?? ""
+        description += "\n"
+        description += (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: country) ?? country
+        return description
+    }
+}
+
 struct Project {
     private static let kProjectConfig = "ProjectConfig"
     private static let kSuiteName = "group.com.commercetools.Sunrise"

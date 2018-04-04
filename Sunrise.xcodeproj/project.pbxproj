@@ -97,6 +97,8 @@
 		2131ADE82056DB8900AEB694 /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131ADE72056DB8900AEB694 /* WishlistViewModel.swift */; };
 		213522E21E15FC7000433174 /* ProductCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213522E11E15FC7000433174 /* ProductCollectionHeaderView.swift */; };
 		213553331EBB681F007E9A60 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 213553351EBB681F007E9A60 /* Localizable.strings */; };
+		213A90FD20710E4B006C3F06 /* OrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A90FC20710E4B006C3F06 /* OrderDetailsViewModel.swift */; };
+		213A90FF20710EB0006C3F06 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A90FE20710EB0006C3F06 /* OrderDetailsViewController.swift */; };
 		213B7C711F9F9EF8008B90B5 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B7C701F9F9EF8008B90B5 /* BrandCell.swift */; };
 		213B7C731F9FA01B008B90B5 /* SizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B7C721F9FA01B008B90B5 /* SizeCell.swift */; };
 		213B7C751F9FA75B008B90B5 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B7C741F9FA75B008B90B5 /* ColorCell.swift */; };
@@ -125,6 +127,10 @@
 		218AF30A206C51EF00C7F9E7 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF309206C51EF00C7F9E7 /* ProfileViewModel.swift */; };
 		218AF30C206C52ED00C7F9E7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF30B206C52ED00C7F9E7 /* ProfileCell.swift */; };
 		218AF30E206C611700C7F9E7 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218AF30D206C611700C7F9E7 /* Profile.storyboard */; };
+		218AF310206DAA7D00C7F9E7 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF30F206DAA7D00C7F9E7 /* MyOrdersViewController.swift */; };
+		218AF312206DAA9300C7F9E7 /* MyReservationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF311206DAA9300C7F9E7 /* MyReservationsViewController.swift */; };
+		218AF314206DAAA300C7F9E7 /* MyOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF313206DAAA300C7F9E7 /* MyOrdersViewModel.swift */; };
+		218AF316206DAAB000C7F9E7 /* MyReservationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF315206DAAB000C7F9E7 /* MyReservationsViewModel.swift */; };
 		218F840E1F8EB619005E03A4 /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F840D1F8EB619005E03A4 /* WishListViewController.swift */; };
 		219657751DCB9B38002C7108 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
 		219657761DCB9B81002C7108 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
@@ -162,6 +168,9 @@
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */; };
 		21D2AE9D1F6171E10087CB46 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */; };
+		21DEDD9B20737F8700DF6ADF /* MyReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9A20737F8700DF6ADF /* MyReservationCell.swift */; };
+		21DEDD9D20739B4600DF6ADF /* ReservationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */; };
+		21DEDD9F20739B5700DF6ADF /* ReservationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9E20739B5700DF6ADF /* ReservationDetailsViewController.swift */; };
 		21E7096020463DFD0059FAE4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E7095F20463DFD0059FAE4 /* SignInViewController.swift */; };
 		21E70962204842010059FAE4 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E70961204842010059FAE4 /* CheckoutViewModel.swift */; };
 		21E7096420484EB30059FAE4 /* CheckoutLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */; };
@@ -344,6 +353,8 @@
 		213522E11E15FC7000433174 /* ProductCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionHeaderView.swift; sourceTree = "<group>"; };
 		2135533A1EBB799B007E9A60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2137FA901DCA776800A38A25 /* Sunrise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunrise.entitlements; sourceTree = "<group>"; };
+		213A90FC20710E4B006C3F06 /* OrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewModel.swift; sourceTree = "<group>"; };
+		213A90FE20710EB0006C3F06 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
 		213B7C701F9F9EF8008B90B5 /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		213B7C721F9FA01B008B90B5 /* SizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCell.swift; sourceTree = "<group>"; };
 		213B7C741F9FA75B008B90B5 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
@@ -371,6 +382,10 @@
 		218AF309206C51EF00C7F9E7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		218AF30B206C52ED00C7F9E7 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		218AF30D206C611700C7F9E7 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		218AF30F206DAA7D00C7F9E7 /* MyOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
+		218AF311206DAA9300C7F9E7 /* MyReservationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationsViewController.swift; sourceTree = "<group>"; };
+		218AF313206DAAA300C7F9E7 /* MyOrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewModel.swift; sourceTree = "<group>"; };
+		218AF315206DAAB000C7F9E7 /* MyReservationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationsViewModel.swift; sourceTree = "<group>"; };
 		218F840D1F8EB619005E03A4 /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
 		219657731DCB8D3D002C7108 /* ReservationNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReservationNotification.entitlements; sourceTree = "<group>"; };
 		219992371DC9FAAB000E48FD /* ReservationNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReservationNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -413,6 +428,9 @@
 		21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseUITests.swift; sourceTree = "<group>"; };
 		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		21DEDD9A20737F8700DF6ADF /* MyReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationCell.swift; sourceTree = "<group>"; };
+		21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailsViewModel.swift; sourceTree = "<group>"; };
+		21DEDD9E20739B5700DF6ADF /* ReservationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailsViewController.swift; sourceTree = "<group>"; };
 		21E7095F20463DFD0059FAE4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		21E70961204842010059FAE4 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutLineItemCell.swift; sourceTree = "<group>"; };
@@ -763,6 +781,7 @@
 				219B84EC20391C720014BC4D /* ProductDescriptionCell.swift */,
 				21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */,
 				21B5594820580EE200775E76 /* WishListCell.swift */,
+				21DEDD9A20737F8700DF6ADF /* MyReservationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -884,6 +903,10 @@
 			isa = PBXGroup;
 			children = (
 				218AF309206C51EF00C7F9E7 /* ProfileViewModel.swift */,
+				218AF313206DAAA300C7F9E7 /* MyOrdersViewModel.swift */,
+				218AF315206DAAB000C7F9E7 /* MyReservationsViewModel.swift */,
+				213A90FC20710E4B006C3F06 /* OrderDetailsViewModel.swift */,
+				21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -892,6 +915,10 @@
 			isa = PBXGroup;
 			children = (
 				21B55956205A96AA00775E76 /* ProfileViewController.swift */,
+				218AF30F206DAA7D00C7F9E7 /* MyOrdersViewController.swift */,
+				218AF311206DAA9300C7F9E7 /* MyReservationsViewController.swift */,
+				213A90FE20710EB0006C3F06 /* OrderDetailsViewController.swift */,
+				21DEDD9E20739B5700DF6ADF /* ReservationDetailsViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1153,7 +1180,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Commercetools;
 				TargetAttributes = {
 					2163EBB01DE8C26C00803640 = {
@@ -1503,7 +1530,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commercetools-iOS/Commercetools.framework",
 				"${BUILT_PRODUCTS_DIR}/Contentful/Contentful.framework",
-				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Interstellar/Interstellar.framework",
@@ -1519,7 +1546,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commercetools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Contentful.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Interstellar.framework",
@@ -1585,7 +1612,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commercetools-iOS/Commercetools.framework",
-				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift-iOS/ReactiveSwift.framework",
@@ -1596,7 +1622,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commercetools.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
@@ -1667,8 +1692,11 @@
 			files = (
 				210556801D36FFA00036493C /* StoreInfoCell.swift in Sources */,
 				21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */,
+				213A90FD20710E4B006C3F06 /* OrderDetailsViewModel.swift in Sources */,
+				218AF316206DAAB000C7F9E7 /* MyReservationsViewModel.swift in Sources */,
 				2117CBE91FD4C58E001915AE /* NewPaymentViewController.swift in Sources */,
 				21A30D111D3005300029DB7E /* SunriseTabBarController.swift in Sources */,
+				213A90FF20710EB0006C3F06 /* OrderDetailsViewController.swift in Sources */,
 				21B518971F680AA60008B2B7 /* HomeViewController.swift in Sources */,
 				211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */,
 				2171D0B31F9E52B10074C27D /* RangeSlider.swift in Sources */,
@@ -1710,6 +1738,7 @@
 				2120C428204F491400BD2761 /* AddressViewModel.swift in Sources */,
 				21C0B62A1E7F3ED300D666F5 /* ShippingMethodsViewModel.swift in Sources */,
 				2107392E2023794900EF14CB /* FiltersViewModel.swift in Sources */,
+				218AF312206DAA9300C7F9E7 /* MyReservationsViewController.swift in Sources */,
 				210ABDE62039174200BF2457 /* StoreSelectionViewController.swift in Sources */,
 				21531C121F9BCCA7003E2F75 /* FiltersViewController.swift in Sources */,
 				210BE928D44EA762B52DA93A /* Attribute.swift in Sources */,
@@ -1720,19 +1749,24 @@
 				210BEB6685337570C6EA3287 /* Customer.swift in Sources */,
 				218AF30C206C52ED00C7F9E7 /* ProfileCell.swift in Sources */,
 				210BE9B1CA0CF2B5C27D5392 /* Order.swift in Sources */,
+				218AF310206DAA7D00C7F9E7 /* MyOrdersViewController.swift in Sources */,
 				210BEE9AF8567A17A425CEC1 /* LineItem.swift in Sources */,
 				218F840E1F8EB619005E03A4 /* WishListViewController.swift in Sources */,
+				218AF314206DAAA300C7F9E7 /* MyOrdersViewModel.swift in Sources */,
 				214BC4FE1FD35A4E009FCD71 /* CheckoutViewController.swift in Sources */,
 				215EDBA91F81A71800BA87F9 /* CategoryCollectionViewCell.swift in Sources */,
 				21EFBA361FB37BBC0022D845 /* CartViewController.swift in Sources */,
 				210BEDDA9D420A7976E51B91 /* ScannerViewController.swift in Sources */,
 				210BE6EDF0C65C5C4FBDFD64 /* AccountViewModel.swift in Sources */,
+				21DEDD9D20739B4600DF6ADF /* ReservationDetailsViewModel.swift in Sources */,
 				21F7D1C71E717A910038ED7E /* AddressCell.swift in Sources */,
 				218AF30A206C51EF00C7F9E7 /* ProfileViewModel.swift in Sources */,
 				210BE4C34E381E1AE7B88F85 /* SignInViewModel.swift in Sources */,
 				211CB36E1FA8D5EB003CB5D8 /* ProductDetailsViewController.swift in Sources */,
 				210BE1516E9C5F2A146A20B2 /* StoreDetailsViewModel.swift in Sources */,
+				21DEDD9F20739B5700DF6ADF /* ReservationDetailsViewController.swift in Sources */,
 				210BEF6467E8C9F3A49D9F04 /* OrderOverviewViewModel.swift in Sources */,
+				21DEDD9B20737F8700DF6ADF /* MyReservationCell.swift in Sources */,
 				2110BECE1F85A9E200E03A33 /* SearchSuggestionCell.swift in Sources */,
 				21B5594920580EE200775E76 /* WishListCell.swift in Sources */,
 				210BE5E967A2BDC98E469127 /* ReservationViewModel.swift in Sources */,
@@ -2546,12 +2580,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2656,12 +2692,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2760,12 +2798,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -2817,12 +2857,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -54,6 +54,8 @@ class ProfileViewModel: BaseViewModel {
         disposables += profile <~ signInViewModel.loginAction.values.map { $0.customer }
     }
 
+    // MARK: - Profile retrieval
+
     private func retrieveProfile() {
         Customer.profile { result in
             self.profile.value = result.model
