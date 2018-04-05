@@ -74,6 +74,10 @@ class MyReservationsViewController: UIViewController {
             detailsViewController.viewModel = viewModel?.reservationDetailsViewModelForOrder(at: indexPath)
         }
     }
+
+    @IBAction func continueShopping(_ sender: UIButton) {
+        AppRouting.showMainTab()
+    }
 }
 
 extension MyReservationsViewController: UITableViewDataSource {

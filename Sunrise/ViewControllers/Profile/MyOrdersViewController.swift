@@ -67,12 +67,16 @@ class MyOrdersViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell), let detailsViewController = segue.destination as? OrderDetailsViewController {
             _ = detailsViewController.view
             detailsViewController.viewModel = viewModel?.orderDetailsViewModelForOrder(at: indexPath)
         }
+    }
+
+    @IBAction func continueShopping(_ sender: UIButton) {
+        AppRouting.showMainTab()
     }
 }
 
