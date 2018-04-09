@@ -21,8 +21,6 @@ class ReservationDetailsViewModel: BaseViewModel {
     let storeOpeningHours: MutableProperty<String?>
     let storeLocation: MutableProperty<CLLocation?>
 
-    private let disposables = CompositeDisposable()
-    
     // MARK: - Lifecycle
     
     init(reservation: Order) {
@@ -37,9 +35,5 @@ class ReservationDetailsViewModel: BaseViewModel {
         storeLocation = MutableProperty(reservedProduct?.distributionChannel?.obj?.location)
 
         super.init()
-    }
-    
-    deinit {
-        disposables.dispose()
     }
 }

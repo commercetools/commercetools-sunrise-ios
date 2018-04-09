@@ -52,6 +52,7 @@ class WishListViewModel: BaseViewModel {
         }
 
         disposables += addToBagSignal.observeValues { [unowned self] in
+            self.isLoading.value = true
             let lineItem = self.lineItems.value[$0.row]
             self.disposables += AppRouting.cartViewController?.viewModel?.addToCartAction.apply((lineItem.productId, lineItem.variantId ?? 0)).start()
         }
@@ -105,6 +106,7 @@ class WishListViewModel: BaseViewModel {
         isLoading.value = true
         wishListShoppingList { list in
             self.update(lineItems: list?.lineItems ?? [])
+            self.isLoading.value = false
         }
     }
 
@@ -169,7 +171,7 @@ class WishListViewModel: BaseViewModel {
         wishListShoppingList { list in
             guard let list = list else { return }
             let updateActions = UpdateActions(version: list.version, actions: [ShoppingListUpdateAction.removeLineItem(lineItemId: lineItem.id, quantity: nil)])
-            ShoppingList.update(list.id, actions: updateActions) { result in
+            ShoppingList.update(list.id, actions: updateActions, expansion: self.kShoppingListVariantExpansion) { result in
                 if let list = result.model, result.isSuccess {
                     self.update(lineItems: list.lineItems)
                 } else if let errors = result.errors as? [CTError], result.isFailure {
@@ -198,6 +200,7 @@ class WishListViewModel: BaseViewModel {
             }
         }
         changeset.deletions = deletions
+        changeset.modifications = modifications
 
         var insertions = [IndexPath]()
         for (i, lineItem) in newLineItems.enumerated() {

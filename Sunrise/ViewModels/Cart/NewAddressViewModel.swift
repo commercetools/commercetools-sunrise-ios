@@ -59,7 +59,7 @@ class NewAddressViewModel: BaseViewModel {
                 city.producer, postCode.producer, country.producer, email.producer).map { let (firstName, lastName, address, city, postCode, country, email) = $0
             var isRegisterInputValid = true
             [firstName, lastName, address, city, postCode, country, email].forEach {
-                if $0.characters.count == 0 {
+                if $0.isEmpty {
                     isRegisterInputValid = false
                 }
             }

@@ -19,7 +19,6 @@ class OrderDetailsViewModel: BaseViewModel {
     let orderTotal: MutableProperty<String?>
 
     private let order: Order
-    private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
@@ -32,10 +31,6 @@ class OrderDetailsViewModel: BaseViewModel {
         orderTotal = MutableProperty(String(format: NSLocalizedString("Total %@", comment: "Order Total"), order.taxedPrice?.totalGross.description ?? order.totalPrice.description))
 
         super.init()
-    }
-
-    deinit {
-        disposables.dispose()
     }
 
     // MARK: - Data Source

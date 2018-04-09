@@ -34,6 +34,14 @@ class BaseViewModel {
     let okAction = NSLocalizedString("OK", comment: "OK")
     let settingsAction = NSLocalizedString("Settings", comment: "Settings")
 
+    // Cart and WishList dialogues
+    let addToCartSuccessTitle = NSLocalizedString("Product added to cart", comment: "Product added to cart")
+    let addToCartSuccessMessage = NSLocalizedString("Would you like to continue looking for more, or go to cart overview?", comment: "Product added to cart message")
+    let continueTitle = NSLocalizedString("Continue", comment: "Continue")
+    let cartOverviewTitle = NSLocalizedString("Cart overview", comment: "Cart overview")
+    let couldNotAddToCartTitle = NSLocalizedString("Could not add to cart", comment: "Could not add to cart")
+    let addToCartFailedTitle = NSLocalizedString("Couldn't add product to cart", comment: "Adding product to cart failed")
+
     // Availability texts
     let onStock = NSLocalizedString("in stock", comment: "In Stock")
     let notAvailable = NSLocalizedString("not available", comment: "Not Available")

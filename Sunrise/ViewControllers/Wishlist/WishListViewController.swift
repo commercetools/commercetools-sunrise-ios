@@ -50,6 +50,10 @@ class WishListViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
+        disposables += viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
+
         disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues { [weak self] changeset in
@@ -64,6 +68,28 @@ class WishListViewController: UIViewController {
             tableView.alpha = self?.viewModel?.numberOfLineItems == 0 ? 0 : 1
         }
 
+        disposables += AppRouting.cartViewController?.viewModel?.addToCartAction.events
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] event in
+            guard self?.view.window != nil else { return }
+            SVProgressHUD.dismiss()
+            switch event {
+                case .completed:
+                    AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
+                    self?.presentAfterAddingToCartOptions()
+                case let .failed(error):
+                    let alertController = UIAlertController(
+                            title: self?.viewModel?.couldNotAddToCartTitle,
+                            message: self?.viewModel?.alertMessage(for: [error]),
+                            preferredStyle: .alert
+                    )
+                    alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
+                    self?.present(alertController, animated: true, completion: nil)
+                default:
+                    return
+            }
+        }
+
         viewModel.refreshObserver.send(value: ())
     }
 
@@ -76,6 +102,22 @@ class WishListViewController: UIViewController {
 
     @IBAction func continueShopping(_ sender: UIButton) {
         AppRouting.showMainTab()
+    }
+
+    private func presentAfterAddingToCartOptions() {
+        let alertController = UIAlertController(
+                title: viewModel?.addToCartSuccessTitle,
+                message: viewModel?.addToCartSuccessMessage,
+                preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: viewModel?.continueTitle, style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+        }))
+        alertController.addAction(UIAlertAction(title: viewModel?.cartOverviewTitle, style: .default, handler: { [weak self] _ in
+            AppRouting.switchToCartTab()
+            self?.navigationController?.popToRootViewController(animated: false)
+        }))
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -96,7 +138,6 @@ extension WishListViewController: UITableViewDataSource {
         disposables += cell.addToBagButton.reactive.controlEvents(.touchUpInside)
         .take(until: cell.reactive.prepareForReuse)
         .observeValues { [weak self] _ in self?.viewModel?.addToBagObserver.send(value: indexPath) }
-        cell.productImageView.sd_setImage(with: URL(string: viewModel.lineItemImageUrl(at: indexPath)), placeholderImage: UIImage(named: "transparent"))
         disposables += cell.wishListButton.reactive.controlEvents(.touchUpInside)
         .take(until: cell.reactive.prepareForReuse)
         .observeValues { [weak self] _ in self?.viewModel?.deleteObserver.send(value: indexPath) }

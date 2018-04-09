@@ -262,6 +262,7 @@ class CartViewModel: BaseViewModel {
                 }
             }
             changeset.deletions = deletions
+            changeset.modifications = modifications
 
             var insertions = [IndexPath]()
             for (i, lineItem) in newLineItems.enumerated() {
