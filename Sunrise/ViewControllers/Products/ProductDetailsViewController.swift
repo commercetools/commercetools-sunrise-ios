@@ -149,19 +149,19 @@ class ProductDetailsViewController: UIViewController {
         .observeValues({ [weak self] event in
             SVProgressHUD.dismiss()
             switch event {
-            case .completed:
-                AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
-                self?.presentAfterAddingToCartOptions()
-            case let .failed(error):
-                let alertController = UIAlertController(
-                        title: self?.viewModel?.couldNotAddToCartTitle,
-                        message: self?.viewModel?.alertMessage(for: [error]),
-                        preferredStyle: .alert
-                )
-                alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
-                self?.present(alertController, animated: true, completion: nil)
-            default:
-                return
+                case .completed:
+                    AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
+                    self?.presentAfterAddingToCartOptions()
+                case let .failed(error):
+                    let alertController = UIAlertController(
+                            title: self?.viewModel?.couldNotAddToCartTitle,
+                            message: self?.viewModel?.alertMessage(for: [error]),
+                            preferredStyle: .alert
+                    )
+                    alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .cancel, handler: nil))
+                    self?.present(alertController, animated: true, completion: nil)
+                default:
+                    return
             }
         })
     }

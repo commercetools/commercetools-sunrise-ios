@@ -282,7 +282,7 @@ class MainViewController: UIViewController {
 
     @IBAction func searchEditingDidEnd(_ sender: UITextField) {
         UIView.animate(withDuration: 0.3, animations: {
-            if (sender.text ?? "").count == 0 {
+            if (sender.text ?? "").isEmpty {
                 self.magnifyingGlassImageView.image = #imageLiteral(resourceName: "search_field_icon")
                 self.searchFieldLineWidthActiveConstraint.isActive = false
                 self.searchFieldLineWidthInactiveConstraint.isActive = true

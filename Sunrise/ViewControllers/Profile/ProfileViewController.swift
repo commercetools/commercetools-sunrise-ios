@@ -120,7 +120,7 @@ extension ProfileViewController: UITableViewDelegate {
             case 4:
                 print("my payments")
             case 5:
-                print("store finder")
+                performSegue(withIdentifier: "showStoreFinder", sender: self)
             case 6:
                 print("settings")
             default:
