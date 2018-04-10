@@ -17,6 +17,9 @@
         <array key="Rubik-Bold.ttf">
             <string>Rubik-Bold</string>
         </array>
+        <array key="Rubik-Light.ttf">
+            <string>Rubik-Light</string>
+        </array>
         <array key="Rubik-Regular.ttf">
             <string>Rubik-Regular</string>
         </array>
@@ -112,6 +115,7 @@
                         <segue destination="H4I-vu-CXC" kind="show" identifier="showMyOrders" id="JsG-Sk-gnb"/>
                         <segue destination="OOI-G0-MVz" kind="show" identifier="showMyReservations" id="Vx0-i9-3ON"/>
                         <segue destination="LSZ-S8-sYq" kind="show" identifier="showStoreFinder" id="e9i-Nk-WC1"/>
+                        <segue destination="nHk-ND-5KQ" kind="show" identifier="showAddressBook" id="FoM-JT-cDw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwZ-tE-Z7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -326,7 +330,7 @@
         <scene sceneID="6uw-Y3-12v">
             <objects>
                 <viewController id="hea-b8-9oQ" customClass="OrderDetailsViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" tag="333" contentMode="scaleToFill" id="wOO-x1-AE0">
+                    <view key="view" contentMode="scaleToFill" id="wOO-x1-AE0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -729,7 +733,7 @@
             <objects>
                 <viewController id="LSZ-S8-sYq" customClass="StoreFinderViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H9i-Gq-s2o">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhi-tv-Nrr">
@@ -807,7 +811,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" estimatedRowHeight="-1" sectionHeaderHeight="30" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GTF-w1-xGO">
-                                <rect key="frame" x="0.0" y="454" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="454" width="375" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="27" minY="0.0" maxX="27" maxY="0.0"/>
                                 <prototypes>
@@ -863,7 +867,7 @@
                                 </connections>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dho-YY-YJx">
-                                <rect key="frame" x="0.0" y="454" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="454" width="375" height="160"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sD-Ap-OfV">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="285"/>
@@ -1001,7 +1005,6 @@ Sat: 09:00 - 16:00</string>
                             </mask>
                         </variation>
                     </view>
-                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="magnifyingGlassImageView" destination="jcf-4b-jUI" id="L4c-zf-iB6"/>
                         <outlet property="mapView" destination="aFR-1L-ovc" id="AZQ-DW-7U4"/>
@@ -1022,7 +1025,233 @@ Sat: 09:00 - 16:00</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reN-0j-vam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3741.5999999999999" y="2057.7211394302849"/>
+            <point key="canvasLocation" x="3742" y="1938"/>
+        </scene>
+        <!--Address Book View Controller-->
+        <scene sceneID="J2L-gJ-Hko">
+            <objects>
+                <viewController id="nHk-ND-5KQ" customClass="AddressBookViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cf7-do-YAf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="198" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h3t-U8-gB4">
+                                <rect key="frame" x="0.0" y="117" width="375" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddressCell" rowHeight="198" id="jT5-GX-1N3">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="198"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="333" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jT5-GX-1N3" id="Wsa-qG-UUJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="197.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QZU-ef-3Pj">
+                                <rect key="frame" x="0.0" y="117" width="375" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BCo-C2-wmS">
+                                    <size key="itemSize" width="375" height="198"/>
+                                    <size key="headerReferenceSize" width="375" height="144"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddressCell" id="6ff-TX-K0d" customClass="AddressCell" customModule="Sunrise" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="144" width="375" height="198"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address_book_cell_background" translatesAutoresizingMaskIntoConstraints="NO" id="wwY-yG-ycs">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="197.5"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nx9-M2-P87">
+                                                    <rect key="frame" x="36" y="29" width="38" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="38" id="cmY-aR-GNy"/>
+                                                        <constraint firstAttribute="width" constant="38" id="dh0-Lv-G4n"/>
+                                                    </constraints>
+                                                    <state key="normal" image="shipping_button"/>
+                                                    <state key="selected" image="shipping_button_active"/>
+                                                    <state key="highlighted" image="shipping_button_active"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5SF-zh-5DI">
+                                                    <rect key="frame" x="271" y="133.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="OYt-us-7Ch"/>
+                                                        <constraint firstAttribute="height" constant="30" id="dbS-1e-wXR"/>
+                                                    </constraints>
+                                                    <state key="normal" image="edit_address_icon"/>
+                                                    <state key="highlighted" image="edit_address_icon_active"/>
+                                                    <connections>
+                                                        <segue destination="lWA-VG-Nc2" kind="show" id="NcE-Gh-f5w"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APq-He-t10">
+                                                    <rect key="frame" x="305" y="133.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="d9n-tT-Sk1"/>
+                                                        <constraint firstAttribute="height" constant="30" id="gMC-Wa-O4v"/>
+                                                    </constraints>
+                                                    <state key="normal" image="remove_address_icon"/>
+                                                    <state key="highlighted" image="remove_address_icon_active"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Bloggs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NTh-zA-muP">
+                                                    <rect key="frame" x="75" y="63" width="87.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdR-q6-KVP">
+                                                    <rect key="frame" x="75" y="80" width="192" height="66.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <string key="text">Adams-Lehmann-Str. 44, 
+Building 2, Floor 2 Door 3
+80797 Munich
+Germany</string>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg0-gl-s6N">
+                                                    <rect key="frame" x="35" y="0.0" width="112" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" red="0.3411764705882353" green="0.36862745098039218" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwx-5g-Osu">
+                                                    <rect key="frame" x="35" y="0.0" width="81" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Nx9-M2-P87" firstAttribute="top" secondItem="6ff-TX-K0d" secondAttribute="top" constant="29" id="2iM-8G-cV8"/>
+                                            <constraint firstItem="wwY-yG-ycs" firstAttribute="top" secondItem="6ff-TX-K0d" secondAttribute="top" id="3ZM-la-eqf"/>
+                                            <constraint firstAttribute="trailing" secondItem="wwY-yG-ycs" secondAttribute="trailing" id="ABv-51-aZt"/>
+                                            <constraint firstItem="Iwx-5g-Osu" firstAttribute="top" secondItem="6ff-TX-K0d" secondAttribute="top" id="CJ7-Pu-dj4"/>
+                                            <constraint firstItem="fg0-gl-s6N" firstAttribute="top" secondItem="6ff-TX-K0d" secondAttribute="top" id="JM8-xB-4Aa"/>
+                                            <constraint firstItem="Iwx-5g-Osu" firstAttribute="leading" secondItem="6ff-TX-K0d" secondAttribute="leading" constant="35" id="LOE-7z-Lbm"/>
+                                            <constraint firstAttribute="trailing" secondItem="APq-He-t10" secondAttribute="trailing" constant="40" id="Nzc-bt-mU9"/>
+                                            <constraint firstItem="Nx9-M2-P87" firstAttribute="leading" secondItem="6ff-TX-K0d" secondAttribute="leading" constant="36" id="Oty-Qn-dV8"/>
+                                            <constraint firstItem="fg0-gl-s6N" firstAttribute="leading" secondItem="6ff-TX-K0d" secondAttribute="leading" constant="35" id="S8S-b2-WTN"/>
+                                            <constraint firstAttribute="bottom" secondItem="wwY-yG-ycs" secondAttribute="bottom" id="VgU-PP-sXe"/>
+                                            <constraint firstAttribute="bottom" secondItem="APq-He-t10" secondAttribute="bottom" constant="34" id="WNp-rK-Zdy"/>
+                                            <constraint firstAttribute="bottom" secondItem="5SF-zh-5DI" secondAttribute="bottom" constant="34" id="em8-Nc-0qm"/>
+                                            <constraint firstItem="wwY-yG-ycs" firstAttribute="leading" secondItem="6ff-TX-K0d" secondAttribute="leading" id="ifw-z2-pMJ"/>
+                                            <constraint firstItem="NTh-zA-muP" firstAttribute="leading" secondItem="6ff-TX-K0d" secondAttribute="leading" constant="75" id="lcQ-eR-31l"/>
+                                            <constraint firstItem="NTh-zA-muP" firstAttribute="top" secondItem="6ff-TX-K0d" secondAttribute="top" constant="63" id="nXE-Ui-jvN"/>
+                                            <constraint firstItem="APq-He-t10" firstAttribute="leading" secondItem="5SF-zh-5DI" secondAttribute="trailing" constant="4" id="zDh-xb-K91"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="defaultAddressLabel" destination="fg0-gl-s6N" id="2Pw-ea-oW4"/>
+                                            <outlet property="detailsLabel" destination="NdR-q6-KVP" id="yge-r3-W1c"/>
+                                            <outlet property="editButton" destination="5SF-zh-5DI" id="ena-0V-uXs"/>
+                                            <outlet property="makeDefaultAddressLabel" destination="Iwx-5g-Osu" id="MxT-uG-Qqw"/>
+                                            <outlet property="makeDefaultButton" destination="Nx9-M2-P87" id="RPk-A5-pM5"/>
+                                            <outlet property="nameLabel" destination="NTh-zA-muP" id="XFS-gw-LU0"/>
+                                            <outlet property="removeButton" destination="APq-He-t10" id="GwF-eF-CcA"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddNewCell" id="f4o-8a-rAc">
+                                        <rect key="frame" x="0.0" y="342" width="375" height="198"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jrn-j1-BSX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                                    <state key="normal" image="address_book_add_cell_background"/>
+                                                    <state key="highlighted" image="address_book_add_cell_background_active"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="contentHorizontalAlignment">
+                                                            <integer key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="contentVerticalAlignment">
+                                                            <integer key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <segue destination="lWA-VG-Nc2" kind="show" id="i1R-dK-A6f"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="Jrn-j1-BSX" firstAttribute="top" secondItem="f4o-8a-rAc" secondAttribute="top" id="EOb-GE-9Jw"/>
+                                            <constraint firstItem="Jrn-j1-BSX" firstAttribute="leading" secondItem="f4o-8a-rAc" secondAttribute="leading" id="PHO-md-2OG"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jrn-j1-BSX" secondAttribute="trailing" id="V3M-W8-YYN"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jrn-j1-BSX" secondAttribute="bottom" id="hwo-We-IOW"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HeaderView" id="gDP-3i-SO2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFx-aP-FqB">
+                                            <rect key="frame" x="108" y="27" width="159" height="36.5"/>
+                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
+                                            <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWu-Cl-vVC">
+                                            <rect key="frame" x="100" y="78.5" width="174" height="33.5"/>
+                                            <string key="text">Select an address below to
+make it your default.</string>
+                                            <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                            <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MFx-aP-FqB" firstAttribute="top" secondItem="gDP-3i-SO2" secondAttribute="top" constant="27" id="Nr6-sK-5xT"/>
+                                        <constraint firstItem="eWu-Cl-vVC" firstAttribute="top" secondItem="MFx-aP-FqB" secondAttribute="bottom" constant="15" id="Nzc-KK-AqR"/>
+                                        <constraint firstItem="eWu-Cl-vVC" firstAttribute="centerX" secondItem="gDP-3i-SO2" secondAttribute="centerX" id="mqo-Fb-Mfn"/>
+                                        <constraint firstItem="MFx-aP-FqB" firstAttribute="centerX" secondItem="gDP-3i-SO2" secondAttribute="centerX" id="xSc-lX-IEl"/>
+                                    </constraints>
+                                </collectionReusableView>
+                                <connections>
+                                    <outlet property="dataSource" destination="nHk-ND-5KQ" id="afD-v7-3pI"/>
+                                    <outlet property="delegate" destination="nHk-ND-5KQ" id="H68-vo-6p8"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="h3t-U8-gB4" firstAttribute="top" secondItem="Egm-a6-Q4E" secondAttribute="top" constant="53" id="CRW-D2-m4q"/>
+                            <constraint firstItem="QZU-ef-3Pj" firstAttribute="leading" secondItem="Egm-a6-Q4E" secondAttribute="leading" id="Fbc-VZ-P6Y"/>
+                            <constraint firstItem="Egm-a6-Q4E" firstAttribute="bottom" secondItem="h3t-U8-gB4" secondAttribute="bottom" constant="53" id="JZT-Zc-8Bp"/>
+                            <constraint firstItem="Egm-a6-Q4E" firstAttribute="bottom" secondItem="QZU-ef-3Pj" secondAttribute="bottom" constant="53" id="O4c-lv-RhN"/>
+                            <constraint firstItem="QZU-ef-3Pj" firstAttribute="top" secondItem="Egm-a6-Q4E" secondAttribute="top" constant="53" id="bh4-U8-Hk2"/>
+                            <constraint firstItem="Egm-a6-Q4E" firstAttribute="trailing" secondItem="h3t-U8-gB4" secondAttribute="trailing" id="jhs-q5-f2R"/>
+                            <constraint firstItem="h3t-U8-gB4" firstAttribute="leading" secondItem="Egm-a6-Q4E" secondAttribute="leading" id="lT3-9E-tg2"/>
+                            <constraint firstItem="Egm-a6-Q4E" firstAttribute="trailing" secondItem="QZU-ef-3Pj" secondAttribute="trailing" id="mou-Vt-k03"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Egm-a6-Q4E"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="QZU-ef-3Pj" id="qnU-HS-olD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VhE-kf-yWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3742" y="2765"/>
+        </scene>
+        <!--AddressViewController-->
+        <scene sceneID="Gct-Y4-pwS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cart" referencedIdentifier="AddressViewController" id="lWA-VG-Nc2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VkP-Ju-6cG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4363" y="2764"/>
         </scene>
         <!--Reservation Details View Controller-->
         <scene sceneID="JEk-Qn-6Ti">
@@ -1227,7 +1456,12 @@ Sat: 09:00 - 16:00</string>
         </scene>
     </scenes>
     <resources>
+        <image name="address_book_add_cell_background" width="375" height="198"/>
+        <image name="address_book_add_cell_background_active" width="375" height="198"/>
+        <image name="address_book_cell_background" width="375" height="198"/>
         <image name="button_background" width="330" height="99"/>
+        <image name="edit_address_icon" width="19" height="19"/>
+        <image name="edit_address_icon_active" width="19" height="19"/>
         <image name="map_zoom_in" width="33" height="33"/>
         <image name="map_zoom_out" width="33" height="33"/>
         <image name="my_reservations" width="24" height="24"/>
@@ -1236,6 +1470,8 @@ Sat: 09:00 - 16:00</string>
         <image name="profile_cell_accessory" width="8" height="13"/>
         <image name="profile_close_button" width="22" height="22"/>
         <image name="profile_header_background" width="375" height="136"/>
+        <image name="remove_address_icon" width="19" height="24"/>
+        <image name="remove_address_icon_active" width="19" height="24"/>
         <image name="reservation_cell_background" width="375" height="166"/>
         <image name="reservation_map_shadow_bottom" width="375" height="11"/>
         <image name="reservation_map_shadow_top" width="375" height="11"/>
@@ -1245,4 +1481,7 @@ Sat: 09:00 - 16:00</string>
         <image name="shipping_button_active" width="38" height="38"/>
         <image name="store_finder_default_cell_pin" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="i1R-dK-A6f"/>
+    </inferredMetricsTieBreakers>
 </document>

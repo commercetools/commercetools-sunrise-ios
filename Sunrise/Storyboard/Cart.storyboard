@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1653,7 +1653,7 @@ Spain</string>
                         <outlet property="passwordMatchImageView" destination="Dor-Ou-ZwW" id="j85-XS-Y2j"/>
                         <outlet property="paymentCollectionView" destination="M0G-3t-Pha" id="9QU-7h-yus"/>
                         <outlet property="placeOrderButton" destination="cXv-Aa-Ntp" id="HHP-Id-rge"/>
-                        <outlet property="scrollViewContentHeight" destination="0Wl-Pg-8bF" id="bXM-yx-tLq"/>
+                        <outlet property="scrollViewContentHeightConstraint" destination="0Wl-Pg-8bF" id="bXM-yx-tLq"/>
                         <outlet property="shippingMethodsTableView" destination="k1U-N6-vpi" id="zfU-al-53B"/>
                         <outlet property="shippingMethodsTableViewHeightConstraint" destination="cGF-Ik-bFG" id="VU5-CD-uvK"/>
                         <outlet property="subtotalLabel" destination="via-J2-iTa" id="AFS-O6-kho"/>
@@ -1810,7 +1810,7 @@ account for the best Sunrise experience.</string>
         <!--Address View Controller-->
         <scene sceneID="Khz-GC-nqU">
             <objects>
-                <viewController id="pb8-b0-BBj" customClass="AddressViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressViewController" id="pb8-b0-BBj" customClass="AddressViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iqe-Mq-a0y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1821,13 +1821,13 @@ account for the best Sunrise experience.</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EOi-3F-7SA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="860"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOH-gb-2MX">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOH-gb-2MX">
                                                 <rect key="frame" x="131" y="16" width="113" height="36.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcy-bi-stL">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcy-bi-stL">
                                                 <rect key="frame" x="0.0" y="6" width="82" height="47"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="47" id="CEr-c1-yMi"/>
@@ -1839,14 +1839,14 @@ account for the best Sunrise experience.</string>
                                                     <action selector="backToCheckout:" destination="pb8-b0-BBj" eventType="touchUpInside" id="bqn-wW-NKg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gP6-GA-orb">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gP6-GA-orb">
                                                 <rect key="frame" x="330" y="21.5" width="27" height="27"/>
                                                 <state key="normal" image="close_checkout"/>
                                                 <connections>
                                                     <action selector="backToCheckout:" destination="pb8-b0-BBj" eventType="touchUpInside" id="qKG-vy-ExJ"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYg-TY-flf">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYg-TY-flf">
                                                 <rect key="frame" x="8" y="56" width="359" height="1"/>
                                                 <color key="backgroundColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -2135,6 +2135,10 @@ account for the best Sunrise experience.</string>
                         <outlet property="saveButton" destination="X7e-4c-uhY" id="dVe-jz-gBM"/>
                         <outlet property="stateField" destination="poV-q3-5Ax" id="lKa-lY-ACy"/>
                         <outlet property="titleLabel" destination="2Pg-Al-CFw" id="U54-Yv-llo"/>
+                        <outletCollection property="checkoutHeaderViews" destination="UOH-gb-2MX" collectionClass="NSMutableArray" id="jGV-ZY-O8j"/>
+                        <outletCollection property="checkoutHeaderViews" destination="wcy-bi-stL" collectionClass="NSMutableArray" id="ojX-or-a4S"/>
+                        <outletCollection property="checkoutHeaderViews" destination="gP6-GA-orb" collectionClass="NSMutableArray" id="glG-fR-NKZ"/>
+                        <outletCollection property="checkoutHeaderViews" destination="rYg-TY-flf" collectionClass="NSMutableArray" id="dN8-ve-P9j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qsw-Z2-Kmi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -21316,6 +21320,6 @@ yVDbUN5Q4wAAAAAAAAIBAAAAAAAAAFkAAAAAAAAAAAAAAAAAAFDlA
         <image name="wishlist_icon_active" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GR7-Nr-BS1"/>
+        <segue reference="LVk-Xo-dDH"/>
     </inferredMetricsTieBreakers>
 </document>

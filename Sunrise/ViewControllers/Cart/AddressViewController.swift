@@ -24,6 +24,8 @@ class AddressViewController: UIViewController {
     
     @IBOutlet weak var addFromContacts: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    
+    @IBOutlet var checkoutHeaderViews: [UIView]!
 
     private let disposables = CompositeDisposable()
 
@@ -47,6 +49,16 @@ class AddressViewController: UIViewController {
         }
 
         stateField.itemList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 1
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+        super.viewWillDisappear(animated)
     }
     
     private func bindViewModel() {
@@ -125,6 +137,14 @@ class AddressViewController: UIViewController {
                 default:
                     return
             }
+        }
+
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] _ in
+            guard self.view.window != nil else { return }
+            self.navigationController?.popViewController(animated: true)
         }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
