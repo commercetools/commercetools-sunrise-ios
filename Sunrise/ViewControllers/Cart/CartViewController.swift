@@ -121,6 +121,7 @@ class CartViewController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
 
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
         viewModel.refreshObserver.send(value: ())
     }
 

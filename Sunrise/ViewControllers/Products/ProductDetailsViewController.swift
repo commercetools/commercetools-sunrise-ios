@@ -164,6 +164,8 @@ class ProductDetailsViewController: UIViewController {
                     return
             }
         })
+
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
     
     // MARK: - Product description

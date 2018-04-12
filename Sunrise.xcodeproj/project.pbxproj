@@ -66,6 +66,8 @@
 		210C66F5207BC9EB00902979 /* StoreFinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C66F4207BC9EB00902979 /* StoreFinderViewModel.swift */; };
 		210C66F7207BCA0800902979 /* StoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C66F6207BCA0700902979 /* StoreCell.swift */; };
 		2110BECE1F85A9E200E03A33 /* SearchSuggestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2110BECD1F85A9E200E03A33 /* SearchSuggestionCell.swift */; };
+		21123EC2207F8D6200B54275 /* AddressBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21123EC1207F8D6200B54275 /* AddressBookViewController.swift */; };
+		21123EC4207F8D6E00B54275 /* AddressBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21123EC3207F8D6E00B54275 /* AddressBookViewModel.swift */; };
 		211468B21D1F4FF00011A944 /* OrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */; };
 		21162107203DB7D600EBE25D /* ReservationConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21162106203DB7D600EBE25D /* ReservationConfirmationViewController.swift */; };
 		21162109203DB80F00EBE25D /* ReservationConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21162108203DB80F00EBE25D /* ReservationConfirmationViewModel.swift */; };
@@ -324,6 +326,8 @@
 		210C66F4207BC9EB00902979 /* StoreFinderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreFinderViewModel.swift; sourceTree = "<group>"; };
 		210C66F6207BCA0700902979 /* StoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCell.swift; sourceTree = "<group>"; };
 		2110BECD1F85A9E200E03A33 /* SearchSuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionCell.swift; sourceTree = "<group>"; };
+		21123EC1207F8D6200B54275 /* AddressBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookViewController.swift; sourceTree = "<group>"; };
+		21123EC3207F8D6E00B54275 /* AddressBookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookViewModel.swift; sourceTree = "<group>"; };
 		211468B11D1F4FF00011A944 /* OrdersHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersHeaderView.swift; sourceTree = "<group>"; };
 		21162106203DB7D600EBE25D /* ReservationConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationViewController.swift; sourceTree = "<group>"; };
 		21162108203DB80F00EBE25D /* ReservationConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationViewModel.swift; sourceTree = "<group>"; };
@@ -906,6 +910,7 @@
 		21B55954205A964300775E76 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				21123EC3207F8D6E00B54275 /* AddressBookViewModel.swift */,
 				210C66F4207BC9EB00902979 /* StoreFinderViewModel.swift */,
 				218AF309206C51EF00C7F9E7 /* ProfileViewModel.swift */,
 				218AF313206DAAA300C7F9E7 /* MyOrdersViewModel.swift */,
@@ -919,6 +924,7 @@
 		21B55955205A964F00775E76 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				21123EC1207F8D6200B54275 /* AddressBookViewController.swift */,
 				210C66F2207BC9D300902979 /* StoreFinderViewController.swift */,
 				21B55956205A96AA00775E76 /* ProfileViewController.swift */,
 				218AF30F206DAA7D00C7F9E7 /* MyOrdersViewController.swift */,
@@ -1748,6 +1754,7 @@
 				210ABDE62039174200BF2457 /* StoreSelectionViewController.swift in Sources */,
 				21531C121F9BCCA7003E2F75 /* FiltersViewController.swift in Sources */,
 				210BE928D44EA762B52DA93A /* Attribute.swift in Sources */,
+				21123EC2207F8D6200B54275 /* AddressBookViewController.swift in Sources */,
 				210BE0D3C4E3336428ECAB34 /* Money.swift in Sources */,
 				213522E21E15FC7000433174 /* ProductCollectionHeaderView.swift in Sources */,
 				218948561F8BE2DE00F05933 /* CategoryTableViewCell.swift in Sources */,
@@ -1783,6 +1790,7 @@
 				210BECED11503ECBB44863D2 /* ProductDetailsViewModel.swift in Sources */,
 				210BE7CA78E498637732C1A2 /* ProductOverviewViewModel.swift in Sources */,
 				210BE4EC1D17B276BFE3AF7D /* ScannerViewModel.swift in Sources */,
+				21123EC4207F8D6E00B54275 /* AddressBookViewModel.swift in Sources */,
 				210BEEE146D00DE0F827421D /* CartViewModel.swift in Sources */,
 				210BE5814D87695EC433E82E /* MainViewModel.swift in Sources */,
 				210BEDC0D114AB6A2CDB75EF /* CategoryCell.swift in Sources */,

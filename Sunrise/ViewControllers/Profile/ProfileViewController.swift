@@ -116,7 +116,7 @@ extension ProfileViewController: UITableViewDelegate {
             case 2:
                 print("my style")
             case 3:
-                print("address book")
+                performSegue(withIdentifier: "showAddressBook", sender: self)
             case 4:
                 print("my payments")
             case 5:

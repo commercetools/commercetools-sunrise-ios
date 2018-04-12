@@ -230,8 +230,10 @@ class CheckoutViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let addressViewController = segue.destination as? AddressViewController else { return }
+        _ = addressViewController.view
+        _ = addressViewController.checkoutHeaderViews.forEach { $0.isHidden = false }
         if let sender = sender as? UIButton, let cell = sender.superview?.superview as? AddressCell, let addressViewController = segue.destination as? AddressViewController {
-            _ = addressViewController.view
             if let indexPath = deliveryAddressCollectionView.indexPath(for: cell), let viewModel = viewModel?.addressViewModelForAddress(at: indexPath, type: .shipping) {
                 addressViewController.viewModel = viewModel
             } else if let indexPath = billingAddressCollectionView.indexPath(for: cell), let viewModel = viewModel?.addressViewModelForAddress(at: indexPath, type: .billing) {
@@ -239,7 +241,6 @@ class CheckoutViewController: UIViewController {
             }
 
         } else if let sender = sender as? UICollectionViewCell, let addressViewController = segue.destination as? AddressViewController {
-            _ = addressViewController.view
             addressViewController.viewModel = AddressViewModel(address: nil, type: deliveryAddressCollectionView.indexPath(for: sender) != nil ? .shipping : .billing)
         }
     }
@@ -286,7 +287,7 @@ extension CheckoutViewController: UICollectionViewDataSource {
                 resetScale(for: cell)
                 cell.nameLabel.text = viewModel?.addressName(at: indexPath, for: type)
                 cell.detailsLabel.text = viewModel?.addressDetails(at: indexPath, for: type)
-                cell.cellSelectedImageView.alpha = viewModel?.isAddressSelected(at: indexPath, for: type) == true ? 1 : 0
+                cell.cellSelectedImageView?.alpha = viewModel?.isAddressSelected(at: indexPath, for: type) == true ? 1 : 0
                 return cell
             case (_, collectionView.numberOfItems(inSection: 0) - 1):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddNewCell", for: indexPath)
@@ -348,7 +349,7 @@ extension CheckoutViewController: UIScrollViewDelegate {
                 cell.contentView.alpha = scaleX
                 cell.contentView.center = CGPoint(x: cell.contentView.bounds.width / 2 - (1 - scaleX) * cell.contentView.bounds.width / 2, y: cell.contentView.bounds.height / 2)
                 if let cell = cell as? AddressCell {
-                    cell.cellSelectedImageView.alpha = scaleX * 2.488 - 1.488
+                    cell.cellSelectedImageView?.alpha = scaleX * 2.488 - 1.488
                 }
             }
         }
@@ -359,7 +360,7 @@ extension CheckoutViewController: UIScrollViewDelegate {
         cell.contentView.alpha = 1
         cell.contentView.center = CGPoint(x: cell.contentView.bounds.width / 2, y: cell.contentView.bounds.height / 2)
         if let cell = cell as? AddressCell {
-            cell.cellSelectedImageView.alpha = 1
+            cell.cellSelectedImageView?.alpha = 1
         }
     }
 

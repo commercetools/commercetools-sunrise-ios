@@ -66,6 +66,8 @@ class MyReservationsViewController: UIViewController {
             guard self.view.window != nil else { return }
             self.navigationController?.popViewController(animated: true)
         }
+
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

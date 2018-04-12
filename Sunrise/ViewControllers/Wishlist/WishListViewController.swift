@@ -90,6 +90,7 @@ class WishListViewController: UIViewController {
             }
         }
 
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
         viewModel.refreshObserver.send(value: ())
     }
 

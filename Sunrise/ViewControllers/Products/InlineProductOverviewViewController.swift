@@ -44,6 +44,8 @@ class InlineProductOverviewViewController: UIViewController {
         .filter { !$0 }
         .observe(on: UIScheduler())
         .startWithValues { [weak self] _ in self?.collectionView.reloadData() }
+
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 }
 

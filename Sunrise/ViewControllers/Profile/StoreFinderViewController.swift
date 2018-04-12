@@ -49,7 +49,7 @@ class StoreFinderViewController: UIViewController {
 
         locationManager.delegate = self
         locationManager.distanceFilter = 50
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
 
@@ -141,6 +141,8 @@ class StoreFinderViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+
+        disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
