@@ -43,6 +43,8 @@ class CheckoutViewModel: BaseViewModel {
     let billingAddresses = MutableProperty([Address]())
 
     private let noActiveCartObserver: Signal<Void, NoError>.Observer
+    /// The serial queue used for processing cart update requests.
+    private let cartUpdateQueue = DispatchQueue(label: "com.commercetools.cartUpdate")
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
@@ -213,19 +215,52 @@ class CheckoutViewModel: BaseViewModel {
         return type == .shipping ? cart.value?.shippingAddress?.id == address.id : cart.value?.billingAddress?.id == address.id
     }
 
-    // MARK: - Cart retrieval
+    // MARK: - Cart management
 
     private func queryForActiveCart() {
         isLoading.value = true
 
-        Cart.active { result in
-            if let activeCart = result.model, result.isSuccess {
+        activeCart { activeCart in
+            if let activeCart = activeCart {
                 self.cart.value = activeCart
                 self.retrieveShippingMethods()
-            } else {
+            }
+        }
+    }
+
+    private func activeCart(completion: @escaping (Cart?) -> Void) {
+        Cart.active { result in
+            if result.isFailure, result.statusCode == 404 {
                 self.noActiveCartObserver.send(value: ())
                 self.isLoading.value = false
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+                self.isLoading.value = false
             }
+            completion(result.model)
+        }
+    }
+
+    private func updateActiveCart(actions: [CartUpdateAction], completion: ((Cart?) -> Void)? = nil) {
+        cartUpdateQueue.async { [unowned self] in
+            let semaphore = DispatchSemaphore(value: 0)
+            self.activeCart { activeCart in
+                if let cart = activeCart {
+                    Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: actions), expansion: self.discountCodesExpansion) { result in
+                        if let cart = result.model, result.isSuccess {
+                            self.cart.value = cart
+                        } else if let errors = result.errors as? [CTError], result.isFailure {
+                            self.alertMessageObserver.send(value: self.alertMessage(for: errors))
+                        }
+                        self.isLoading.value = false
+                        completion?(result.model)
+                        semaphore.signal()
+                    }
+                } else {
+                    semaphore.signal()
+                }
+            }
+            _ = semaphore.wait(timeout: .distantFuture)
         }
     }
 
@@ -253,26 +288,8 @@ class CheckoutViewModel: BaseViewModel {
         isLoading.value = true
         let shippingMethod = methods.value[indexPath.row]
 
-        Cart.active { result in
-            if let cart = result.model, cart.id == self.cart.value?.id, result.isSuccess {
-                let shippingMethodReference = Reference<ShippingMethod>(id: shippingMethod.id, typeId: "shipping-method")
-                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: [.setShippingMethod(shippingMethod: shippingMethodReference), .recalculate(updateProductData: nil)])
-                Cart.update(cart.id, actions: updateActions, result: { result in
-                    if let cart = result.model, result.isSuccess {
-                        self.cart.value = cart
-                    } else if let errors = result.errors as? [CTError], result.isFailure {
-                        super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                    }
-                    self.isLoading.value = false
-                })
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                self.isLoading.value = false
-            } else {
-                self.noActiveCartObserver.send(value: ())
-                self.isLoading.value = false
-            }
-        }
+        let shippingMethodReference = Reference<ShippingMethod>(id: shippingMethod.id, typeId: "shipping-method")
+        updateActiveCart(actions: [.setShippingMethod(shippingMethod: shippingMethodReference), .recalculate(updateProductData: nil)])
     }
 
     // MARK: - Retrieving customer addresses
@@ -350,31 +367,19 @@ class CheckoutViewModel: BaseViewModel {
 
     private func update(address: Address, type: AddressType) {
         isLoading.value = true
-        Cart.active { result in
-            if let cart = result.model, result.isSuccess {
-                var actions = [CartUpdateAction]()
-                switch type {
-                    case .shipping:
-                        actions.append(.setShippingAddress(address: address))
-                    case .billing:
-                        actions.append(.setBillingAddress(address: address))
-                    case .both:
-                        actions += [.setShippingAddress(address: address), .setBillingAddress(address: address)]
-                }
-                actions.append(.recalculate(updateProductData: nil))
-                let updateActions = UpdateActions<CartUpdateAction>(version: cart.version, actions: actions)
-                Cart.update(cart.id, actions: updateActions, result: { result in
-                    if let cart = result.model, result.isSuccess {
-                        self.cart.value = cart
-                        self.retrieveShippingMethods()
-                    } else if let errors = result.errors as? [CTError], result.isFailure {
-                        super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                        self.isLoading.value = false
-                    }
-                })
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                self.isLoading.value = false
+        var actions = [CartUpdateAction]()
+        switch type {
+            case .shipping:
+                actions.append(.setShippingAddress(address: address))
+            case .billing:
+                actions.append(.setBillingAddress(address: address))
+            case .both:
+                actions += [.setShippingAddress(address: address), .setBillingAddress(address: address)]
+            }
+        actions.append(.recalculate(updateProductData: nil))
+        updateActiveCart(actions: actions) { updatedCart in
+            if updatedCart != nil {
+                self.retrieveShippingMethods()
             }
         }
     }
@@ -383,23 +388,11 @@ class CheckoutViewModel: BaseViewModel {
 
     private func apply(discountCode: String) {
         isLoading.value = true
-        Cart.active { result in
-            if let cart = result.model, result.isSuccess {
-                let updateActions = UpdateActions(version: cart.version, actions: [CartUpdateAction.addDiscountCode(code: discountCode), .recalculate(updateProductData: nil)])
-                Cart.update(cart.id, actions: updateActions, expansion: self.discountCodesExpansion, result: { result in
-                    if let cart = result.model, result.isSuccess {
-                        self.cart.value = cart
-                        if let appliedDiscountCodeInfo = cart.discountCodes.first(where: { $0.discountCode.obj?.code == discountCode }), let appliedDiscountCode = appliedDiscountCodeInfo.discountCode.obj {
-                            self.appliedDiscountCodeInfo.value = "\(appliedDiscountCode.name?.localizedString ?? "") \(appliedDiscountCode.description?.localizedString ?? "")"
-                        }
-                    } else if let errors = result.errors as? [CTError], result.isFailure {
-                        super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                    }
-                    self.isLoading.value = false
-                })
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                self.isLoading.value = false
+        updateActiveCart(actions: [.addDiscountCode(code: discountCode), .recalculate(updateProductData: nil)]) { updatedCart in
+            if let cart = updatedCart {
+                if let appliedDiscountCodeInfo = cart.discountCodes.first(where: { $0.discountCode.obj?.code == discountCode }), let appliedDiscountCode = appliedDiscountCodeInfo.discountCode.obj {
+                    self.appliedDiscountCodeInfo.value = "\(appliedDiscountCode.name?.localizedString ?? "") \(appliedDiscountCode.description?.localizedString ?? "")"
+                }
             }
         }
     }
@@ -418,12 +411,12 @@ class CheckoutViewModel: BaseViewModel {
                         return
                     }
                 }
-                Cart.active { result in
-                    if let cart = result.model, result.isSuccess {
+                self.activeCart { activeCart in
+                    if let cart = activeCart {
                         let orderDraft = OrderDraft(id: cart.id, version: cart.version)
                         Order.create(orderDraft) { result in
                             if result.isSuccess {
-                                self.addToAddressBook(from:  cart)
+                                self.addToAddressBook(from: cart)
                                 observer.send(value: ())
                             } else if let error = result.errors?.first as? CTError, result.isFailure {
                                 self.isLoading.value = false
@@ -431,9 +424,7 @@ class CheckoutViewModel: BaseViewModel {
                             }
                             observer.sendCompleted()
                         }
-                    } else if let error = result.errors?.first as? CTError, result.isFailure {
-                        self.isLoading.value = false
-                        observer.send(error: error)
+                    } else {
                         observer.sendCompleted()
                     }
                 }
@@ -444,15 +435,8 @@ class CheckoutViewModel: BaseViewModel {
     private func setCustomerEmail() {
         guard !isAuthenticated else { return }
         let semaphore = DispatchSemaphore(value: 0)
-        Cart.active { result in
-            if let cart = result.model, result.isSuccess {
-                let updateActions = UpdateActions(version: cart.version, actions: [CartUpdateAction.setCustomerEmail(email: self.guestEmail.value)])
-                Cart.update(cart.id, actions: updateActions) { _ in
-                    semaphore.signal()
-                }
-            } else {
-                semaphore.signal()
-            }
+        updateActiveCart(actions: [.setCustomerEmail(email: self.guestEmail.value)]) { _ in
+            semaphore.signal()
         }
         _ = semaphore.wait(timeout: .distantFuture)
     }
