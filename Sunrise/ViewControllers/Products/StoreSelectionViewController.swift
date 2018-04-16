@@ -47,7 +47,7 @@ class StoreSelectionViewController: UIViewController {
 
         locationManager.delegate = self
         locationManager.distanceFilter = 50
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }

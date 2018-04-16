@@ -23,6 +23,7 @@ class MainViewModel: BaseViewModel {
     let activeCategoryName = MutableProperty("")
     let selectedCategoryTableRowSignal: Signal<IndexPath, NoError>
     let selectedCategoryCollectionItemSignal: Signal<IndexPath, NoError>
+    let presentProductOverviewSignal: Signal<Void, NoError>
 
     let productsViewModel = ProductOverviewViewModel()
 
@@ -59,8 +60,11 @@ class MainViewModel: BaseViewModel {
     // MARK: - Lifecycle
 
     override init() {
-        let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
-        refreshObserver = observer
+        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
+        self.refreshObserver = refreshObserver
+
+        let (presentProductOverviewSignal, presentProductOverviewObserver) = Signal<Void, NoError>.pipe()
+        self.presentProductOverviewSignal = presentProductOverviewSignal
 
         (selectedCategoryTableRowSignal, selectedCategoryTableRowObserver) = Signal<IndexPath, NoError>.pipe()
         (selectedCategoryCollectionItemSignal, selectedCategoryCollectionItemObserver) = Signal<IndexPath, NoError>.pipe()
@@ -86,10 +90,14 @@ class MainViewModel: BaseViewModel {
             self?.retrieveCategories()
         }
 
-        disposables += activeCategory.producer
-        .startWithValues { [unowned self] active in
-            guard let active = active, !self.rootCategories.value.contains(active) else { return }
-            self.productsViewModel.category.value = active
+        disposables += activeCategory.producer.combinePrevious()
+        .startWithValues { [unowned self] previous, active in
+            if let active = active, !self.rootCategories.value.contains(active) {
+                self.productsViewModel.category.value = active
+            }
+            if previous?.parent == nil, active?.parent != nil {
+                presentProductOverviewObserver.send(value: ())
+            }
         }
 
         disposables += productsViewModel.textSearch.producer
@@ -222,6 +230,36 @@ class MainViewModel: BaseViewModel {
         lastRefresh = Date()
         categoriesRetrievalSemaphore?.signal()
     }
+
+    // MARK: - Externally managing the main view states
+
+    func setActiveCategory(id: String) {
+        guard let category = allCategories.first(where: { $0.id == id }) else { return }
+        if activeCategory.value?.parent != nil {
+            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
+        }
+        // Show new active category after reset animations have completed
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            if !self.rootCategories.value.contains(category) {
+                var rootParentCategory: Category? = category
+                var lastDisplayableCategory: Category?
+                while rootParentCategory?.parent != nil {
+                    lastDisplayableCategory = rootParentCategory
+                    rootParentCategory = self.allCategories.first(where: { $0.id == rootParentCategory?.parent?.id })
+                }
+                self.activeCategory.value = lastDisplayableCategory
+            } else {
+                self.activeCategory.value = category
+            }
+        }
+    }
+
+    func showProductsOverview(with additionalFilters: [String] = []) {
+        productsViewModel.additionalFilterQuery.value = additionalFilters
+        guard let activeCategoryId = activeCategory.value?.id, productsViewModel.textSearch.value.0.isEmpty && activeCategory.value?.parent == nil else { return }
+        activeCategory.value = childCategoriesCache[activeCategoryId]?.first
+    }
+
 }
 
 // For the purpose of this view model, comparing categories by ID and name is sufficient

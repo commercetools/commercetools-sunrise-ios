@@ -843,18 +843,28 @@
                                                     <color key="textColor" red="0.050980392156862744" green="0.61568627450980395" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_cell_accessory" translatesAutoresizingMaskIntoConstraints="NO" id="icx-Z9-KOg">
+                                                    <rect key="frame" x="359" y="34" width="8" height="13"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="13" id="0Pt-R8-9Pz"/>
+                                                        <constraint firstAttribute="width" constant="8" id="lbb-sm-Kcd"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="4Ba-RP-Zo2" secondAttribute="trailing" constant="24" id="Anv-16-qWk"/>
                                                 <constraint firstItem="4Ba-RP-Zo2" firstAttribute="centerY" secondItem="nzU-BJ-PhR" secondAttribute="centerY" id="D3j-n3-E9d"/>
+                                                <constraint firstItem="icx-Z9-KOg" firstAttribute="centerY" secondItem="nzU-BJ-PhR" secondAttribute="centerY" id="MGl-1z-QPe"/>
                                                 <constraint firstItem="0bm-iU-e7X" firstAttribute="centerY" secondItem="nzU-BJ-PhR" secondAttribute="centerY" id="RPI-ti-Oac"/>
                                                 <constraint firstItem="0bm-iU-e7X" firstAttribute="leading" secondItem="qNR-xj-Emj" secondAttribute="trailing" constant="8" id="TG8-m2-lDm"/>
                                                 <constraint firstItem="qNR-xj-Emj" firstAttribute="leading" secondItem="nzU-BJ-PhR" secondAttribute="leading" constant="24" id="Yue-HQ-ogS"/>
                                                 <constraint firstItem="qNR-xj-Emj" firstAttribute="centerY" secondItem="nzU-BJ-PhR" secondAttribute="centerY" id="a27-ik-taE"/>
                                                 <constraint firstItem="4Ba-RP-Zo2" firstAttribute="leading" secondItem="0bm-iU-e7X" secondAttribute="trailing" constant="4" id="zE1-aF-C4v"/>
+                                                <constraint firstItem="icx-Z9-KOg" firstAttribute="leading" secondItem="4Ba-RP-Zo2" secondAttribute="trailing" constant="8" id="zaD-3K-9Qo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="accessoryImageView" destination="icx-Z9-KOg" id="DDC-xO-dFh"/>
                                             <outlet property="addressLabel" destination="0bm-iU-e7X" id="Bk6-8t-CYT"/>
                                             <outlet property="distanceLabel" destination="4Ba-RP-Zo2" id="Krk-1h-lmC"/>
                                             <outlet property="pinImageView" destination="qNR-xj-Emj" id="UIU-0s-Cua"/>

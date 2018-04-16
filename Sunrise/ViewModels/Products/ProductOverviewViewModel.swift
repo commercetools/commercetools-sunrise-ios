@@ -13,11 +13,12 @@ class ProductOverviewViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Signal<Void, NoError>.Observer
-    let nextPageObserver: Signal<Void, NoError>.Observer
     let clearProductsObserver: Signal<Void, NoError>.Observer
     let toggleWishListObserver: Signal<IndexPath, NoError>.Observer
     let textSearch = MutableProperty(("", Locale.current))
     let userLocation: MutableProperty<CLLocation?> = MutableProperty(nil)
+    let additionalFilterQuery = MutableProperty([String]())
+    let hasReachedLowerHalfOfProducts = MutableProperty(false)
 
     // Outputs
     let isLoading: MutableProperty<Bool>
@@ -51,9 +52,6 @@ class ProductOverviewViewModel: BaseViewModel {
         let (refreshSignal, observer) = Signal<Void, NoError>.pipe()
         refreshObserver = observer
 
-        let (nextPageSignal, pageObserver) = Signal<Void, NoError>.pipe()
-        nextPageObserver = pageObserver
-
         let (clearProductsSignal, clearProductsObserver) = Signal<Void, NoError>.pipe()
         self.clearProductsObserver = clearProductsObserver
 
@@ -75,9 +73,18 @@ class ProductOverviewViewModel: BaseViewModel {
             self?.queryForProductProjections(offset: 0)
         }
 
-        disposables += nextPageSignal
+        disposables += additionalFilterQuery.producer
+        .filter { !$0.isEmpty }
         .observe(on: QueueScheduler(qos: .userInitiated))
-        .observeValues { [weak self] in
+        .startWithValues { [weak self] _ in
+            self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += hasReachedLowerHalfOfProducts.producer
+        .observe(on: QueueScheduler(qos: .userInitiated))
+        .skipRepeats()
+        .filter { $0 }
+        .startWithValues { [weak self] _ in
             if let productCount = self?.products.count, productCount > 0 {
                 self?.queryForProductProjections(offset: UInt(productCount))
             }
@@ -88,6 +95,7 @@ class ProductOverviewViewModel: BaseViewModel {
         .observeValues { [weak self] _ in
             self?.textSearch.value.0 = ""
             self?.category.value = nil
+            self?.additionalFilterQuery.value = []
         }
 
         disposables += clearProductsSignal
@@ -228,6 +236,7 @@ class ProductOverviewViewModel: BaseViewModel {
         var filterQuery = [String]()
         var facets = [String]()
 
+        filterQuery += additionalFilterQuery.value
         if let categoryId = category.value?.id {
             filterQuery.append("categories.id:subtree(\"\(categoryId)\")")
         }
@@ -251,21 +260,24 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         ProductProjection.search(limit: pageSize, offset: offset, lang: locale, text: text,
-                                 filters: filters, filterQuery: filterQuery, facets: facets, result: { result in
-            DispatchQueue.main.async {
-                if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
+                                 filters: filters, filterQuery: filterQuery, facets: facets, markMatchingVariants: true,
+                                 priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
+                                 priceCustomerGroup: AppDelegate.customerGroup?.id, result: { result in
+            
+            if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
+                DispatchQueue.main.async {
                     if offset == 0 && products.count > 0 && self.products.count > 0 {
                         self.scrollToBeginningObserver.send(value: ())
                     }
                     self.products = offset == 0 ? products : self.products + products
                     self.filtersViewModel?.facets.value = result.model?.facets
-
-                } else if let errors = result.errors as? [CTError], result.isFailure {
-                    super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-
                 }
-                self.isLoading.value = false
+
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+
             }
+            self.isLoading.value = false
         })
     }
 

@@ -190,6 +190,7 @@ extension StoreFinderViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoreCell") as! StoreCell
         guard let viewModel = viewModel else { return cell }
         cell.pinImageView.image = viewModel.isSelected(at: indexPath) ? #imageLiteral(resourceName: "store_finder_active_cell_pin") : #imageLiteral(resourceName: "store_finder_default_cell_pin")
+        cell.accessoryImageView.isHidden = !viewModel.isSelected(at: indexPath)
         cell.addressLabel.text = viewModel.address(at: indexPath)
         cell.distanceLabel.text = viewModel.distance(at: indexPath)
         cell.distanceLabel.textColor = viewModel.isSelected(at: indexPath) ? UIColor(red: 1.00, green: 0.51, blue: 0.33, alpha: 1.0) : UIColor(red: 0.05, green: 0.62, blue: 0.97, alpha: 1.0)

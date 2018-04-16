@@ -123,6 +123,12 @@ class MainViewController: UIViewController {
             self.removeCategoriesDropdownPicker()
         }
 
+        disposables += viewModel.presentProductOverviewSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.presentProductOverview()
+        }
+
         disposables += NotificationCenter.default.reactive
         .notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
         .observe(on: UIScheduler())
@@ -394,6 +400,27 @@ class MainViewController: UIViewController {
         })
     }
 
+    private func presentProductOverview() {
+        guard categoriesCollectionView.alpha == 1, !isTransitioningToProducts else { return }
+        isTransitioningToProducts = true
+        viewModel?.productsViewModel.clearProductsObserver.send(value: ())
+        UIView.animate(withDuration: 0.3, animations: {
+            self.searchView.alpha = 0
+            self.categoriesCollectionView.alpha = 0
+            self.searchViewHeightConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.productsCollectionView.alpha = 1
+                self.checkAndPresentEmptyState()
+                self.filterButton.alpha = 1
+            }, completion: { _ in
+                self.isTransitioningToProducts = false
+                self.updateBackgroundSnapshot()
+            })
+        })
+    }
+
     // MARK: - Blurring effect
 
     private func updateBackgroundSnapshot() {
@@ -482,24 +509,8 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard collectionView == categoriesCollectionView else { return }
-        isTransitioningToProducts = true
-        viewModel?.productsViewModel.clearProductsObserver.send(value: ())
+        presentProductOverview()
         viewModel?.selectedCategoryCollectionItemObserver.send(value: indexPath)
-        UIView.animate(withDuration: 0.3, animations: {
-            self.searchView.alpha = 0
-            self.categoriesCollectionView.alpha = 0
-            self.searchViewHeightConstraint.constant = 0
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.3, animations: {
-                self.productsCollectionView.alpha = 1
-                self.checkAndPresentEmptyState()
-                self.filterButton.alpha = 1
-            }, completion: { _ in
-                self.isTransitioningToProducts = false
-                self.updateBackgroundSnapshot()
-            })
-        })
     }
 }
 
@@ -529,10 +540,9 @@ extension MainViewController: UIScrollViewDelegate {
             let topOfMiddleCell = scrollView.contentSize.height - scrollView.frame.height - CGFloat(viewModel.pageSize) * productsCellHeight / 4
 
             // Load new results when the y offset still hasn't reached the bottom.
+            viewModel.hasReachedLowerHalfOfProducts.value = scrollView.contentOffset.y >= topOfMiddleCell
+
             // In case it did reach the bottom (i.e user scrolled fast), show the the progress as well.
-            if scrollView.contentOffset.y >= topOfMiddleCell && !viewModel.isLoading.value {
-                viewModel.nextPageObserver.send(value: ())
-            }
             if scrollView.contentOffset.y >= bottomOfLastCell && viewModel.isLoading.value && !SVProgressHUD.isVisible() {
                 SVProgressHUD.show()
             }

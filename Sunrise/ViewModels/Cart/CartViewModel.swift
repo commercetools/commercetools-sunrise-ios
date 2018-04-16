@@ -95,7 +95,7 @@ class CartViewModel: BaseViewModel {
     }
 
     static var recommendationsViewModel: InlineProductOverviewViewModel? {
-        return InlineProductOverviewViewModel(title: NSLocalizedString("Recommended for you", comment: "Recommended for you"), filterQuery: [])
+        return InlineProductOverviewViewModel(title: NSLocalizedString("Recommended for you", comment: "Recommended for you"))
     }
 
     // MARK: - Data Source

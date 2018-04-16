@@ -17,16 +17,14 @@ class InlineProductOverviewViewModel: BaseViewModel {
     let isLoading = MutableProperty(false)
 
     private var products: [ProductProjection]
-    private let filterQuery: [String]
     private let disposables = CompositeDisposable()
     
     
     // MARK: - Lifecycle
     
-    init(title: String, filterQuery: [String]) {
+    init(title: String, filterQuery: [String]? = nil, sort: [String]? = nil) {
         products = []
         self.title = title
-        self.filterQuery = filterQuery
 
         let (toggleWishListSignal, toggleWishListObserver) = Signal<IndexPath, NoError>.pipe()
         self.toggleWishListObserver = toggleWishListObserver
@@ -42,7 +40,7 @@ class InlineProductOverviewViewModel: BaseViewModel {
             }
         }
 
-        queryForProductProjections(filterQuery: filterQuery)
+        queryForProductProjections(filterQuery: filterQuery, sort: sort)
     }
     
     deinit {
@@ -93,10 +91,12 @@ class InlineProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections(filterQuery: [String]) {
+    private func queryForProductProjections(filterQuery: [String]?, sort: [String]?) {
         isLoading.value = true
 
-        ProductProjection.search(limit: 10, filterQuery: filterQuery, result: { result in
+        ProductProjection.search(sort: sort, limit: 10, filterQuery: filterQuery, markMatchingVariants: true,
+                                 priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
+                                 priceCustomerGroup: AppDelegate.customerGroup?.id, result: { result in
             DispatchQueue.main.async {
                 if let products = result.model?.results, result.isSuccess {
                     self.products = products

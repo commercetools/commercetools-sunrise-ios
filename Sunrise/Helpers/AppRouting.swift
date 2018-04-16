@@ -22,6 +22,8 @@ class AppRouting {
 
     static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
+    static let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+
     static let tabBarController = UIApplication.shared.delegate?.window??.rootViewController as? UITabBarController
 
     static var mainTabNavigationController: UINavigationController? = {
@@ -56,6 +58,16 @@ class AppRouting {
     static func showProductDetails(for sku: String) {
         showMainTab()
         mainViewController?.viewModel?.productsViewModel.presentProductDetails(for: sku)
+    }
+
+    static func showCategory(id: String) {
+        showMainTab()
+        mainViewController?.viewModel?.setActiveCategory(id: id)
+    }
+
+    static func showProductOverview(with additionalFilters: [String]) {
+        showMainTab()
+        mainViewController?.viewModel?.showProductsOverview(with: additionalFilters)
     }
 
     static func switchToCartTab() {
