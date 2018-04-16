@@ -12,6 +12,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet var headerView: UIView!
     @IBOutlet weak var signInContainerView: UIView!
     private weak var signInViewController: SignInViewController?
+    
+    @IBOutlet weak var helloCustomerLabel: UILabel!
+    
     private let disposables = CompositeDisposable()
 
     deinit {
@@ -32,8 +35,15 @@ class ProfileViewController: UIViewController {
         viewModel = ProfileViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.refreshObserver.send(value: ())
+    }
+
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
+
+        disposables += helloCustomerLabel.reactive.text <~ viewModel.helloCustomer
 
         disposables += viewModel.isLoginHidden.producer
         .skipRepeats()

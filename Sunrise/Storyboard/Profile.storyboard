@@ -110,12 +110,14 @@
                     <navigationItem key="navigationItem" id="ZGT-Kv-BH6"/>
                     <connections>
                         <outlet property="headerView" destination="PIl-Jh-PcZ" id="tGl-ef-QQP"/>
+                        <outlet property="helloCustomerLabel" destination="osu-R0-DVU" id="Ain-Ux-xob"/>
                         <outlet property="signInContainerView" destination="FYU-t1-G2J" id="zx5-8g-avv"/>
                         <outlet property="tableView" destination="uiM-wD-jay" id="7Bq-zb-7zl"/>
                         <segue destination="H4I-vu-CXC" kind="show" identifier="showMyOrders" id="JsG-Sk-gnb"/>
                         <segue destination="OOI-G0-MVz" kind="show" identifier="showMyReservations" id="Vx0-i9-3ON"/>
                         <segue destination="LSZ-S8-sYq" kind="show" identifier="showStoreFinder" id="e9i-Nk-WC1"/>
                         <segue destination="nHk-ND-5KQ" kind="show" identifier="showAddressBook" id="FoM-JT-cDw"/>
+                        <segue destination="bZH-ro-PfR" kind="show" id="4zG-Qe-hhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwZ-tE-Z7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1134,7 +1136,7 @@ Germany</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set to default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwx-5g-Osu">
-                                                    <rect key="frame" x="35" y="0.0" width="81" height="17"/>
+                                                    <rect key="frame" x="35" y="0.0" width="85.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik" pointSize="14"/>
                                                     <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1254,6 +1256,21 @@ make it your default.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VhE-kf-yWC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3742" y="2765"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wBn-fC-2uo">
+            <objects>
+                <viewController id="bZH-ro-PfR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A5k-hy-JiD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="QrT-wc-cde"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wBD-tt-P5o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3742" y="3432"/>
         </scene>
         <!--AddressViewController-->
         <scene sceneID="Gct-Y4-pwS">

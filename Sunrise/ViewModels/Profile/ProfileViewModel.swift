@@ -14,6 +14,7 @@ class ProfileViewModel: BaseViewModel {
     let logoutObserver: Signal<Void, NoError>.Observer
     
     // Outputs
+    let helloCustomer = MutableProperty("")
     let isLoginHidden = MutableProperty(Commercetools.authState == .customerToken)
 
     weak var signInViewModel: SignInViewModel? {
@@ -36,12 +37,17 @@ class ProfileViewModel: BaseViewModel {
         super.init()
 
         disposables += isLoginHidden <~ profile.map { _ in Commercetools.authState == .customerToken }
+        disposables += helloCustomer <~ profile.map { $0 == nil ? NSLocalizedString("Welcome back", comment: "Welcome back") : String(format: NSLocalizedString("Hey %@", comment: "Hey to Customer"), $0?.firstName ?? "") }
         disposables += refreshSignal.observeValues { [unowned self] in self.retrieveProfile() }
         disposables += logoutSignal.observeValues { [unowned self] in
             Commercetools.logoutCustomer()
             AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
             AppRouting.wishListViewController?.viewModel?.refreshObserver.send(value: ())
             self.isLoginHidden.value = Commercetools.authState == .customerToken
+        }
+
+        if Commercetools.authState == .customerToken {
+            retrieveProfile()
         }
     }
 
