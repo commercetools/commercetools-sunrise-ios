@@ -34,24 +34,31 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if viewModel?.element(at: indexPath) == .banner {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BannerCell") as! BannerCell
-            cell.bannerImageView.image = viewModel?.bannerImage(at: indexPath)
-            return cell
+        switch viewModel?.element(at: indexPath) {
+            case .some(.banner):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BannerCell") as! BannerCell
+                cell.bannerImageView.image = viewModel?.bannerImage(at: indexPath)
+                return cell
+            case .some(.inlinePOP):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "InlinePopCell")!
+                let viewController = inlinePopViewControllers[indexPath, default: AppRouting.homeStoryboard.instantiateViewController(withIdentifier: "InlineProductOverviewViewController") as! InlineProductOverviewViewController]
+                if viewController.viewModel == nil {
+                    _ = viewController.view
+                    viewController.viewModel = viewModel?.inlineProductOverviewViewModel(at: indexPath)
+                    inlinePopViewControllers[indexPath] = viewController
+                }
+                addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
+                viewController.view.frame = cell.contentView.bounds
+                cell.contentView.addSubview(viewController.view)
+                return cell
+            case .some(.title):
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell") as! HomeTitleCell
+                cell.sectionTitleLabel.text = viewModel?.title(at: indexPath)
+                return cell
+            default:
+                return UITableViewCell()
         }
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InlinePopCell")!
-        let viewController = inlinePopViewControllers[indexPath, default: AppRouting.homeStoryboard.instantiateViewController(withIdentifier: "InlineProductOverviewViewController") as! InlineProductOverviewViewController]
-        if viewController.viewModel == nil {
-            _ = viewController.view
-            viewController.viewModel = viewModel?.inlineProductOverviewViewModel(at: indexPath)
-            inlinePopViewControllers[indexPath] = viewController
-        }
-        addChildViewController(viewController)
-        viewController.didMove(toParentViewController: self)
-        viewController.view.frame = cell.contentView.bounds
-        cell.contentView.addSubview(viewController.view)
-        return cell
     }
 }
 
@@ -62,9 +69,13 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let viewModel = viewModel else { return 0 }
-        if viewModel.element(at: indexPath) == .banner {
-            return view.bounds.width / viewModel.aspectRatioForBanner(at: indexPath)
+        switch viewModel.element(at: indexPath) {
+            case .banner:
+                return view.bounds.width / viewModel.aspectRatioForBanner(at: indexPath)
+            case .inlinePOP:
+                return 360
+            case .title:
+                return 48
         }
-        return 360
     }
 }

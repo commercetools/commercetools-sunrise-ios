@@ -11,6 +11,7 @@ class HomeViewModel: BaseViewModel {
     enum HomeElement {
         case banner
         case inlinePOP
+        case title
     }
     
     // Inputs
@@ -39,6 +40,10 @@ class HomeViewModel: BaseViewModel {
                     AppRouting.showCategory(id: "96ac6204-4631-41d3-9540-22b7629f468d")
                 case 3:
                     AppRouting.showProductOverview(with: ["variants.scopedPriceDiscounted:true"])
+                case 5:
+                    AppRouting.showCategory(id: "f8587a7d-7756-4072-8b1f-6360357218c2")
+                case 6:
+                    AppRouting.showCategory(id: "e2191d36-21ab-4ea7-9cee-d9ff576948d1")
                 default:
                     return
             }
@@ -59,11 +64,20 @@ class HomeViewModel: BaseViewModel {
     // MARK: - Data Source
 
     var numberOfElements: Int {
-        return 4
+        return 7
     }
 
     func element(at indexPath: IndexPath) -> HomeElement {
-        return [0, 1, 3].contains(indexPath.row) ? .banner : .inlinePOP
+        switch indexPath.row {
+            case 0, 1, 3, 5, 6:
+                return .banner
+            case 2:
+                return .inlinePOP
+            case 4:
+                return .title
+            default:
+                fatalError("Element type for indexPath: \(indexPath) not defined")
+        }
     }
 
     func bannerImage(at indexPath: IndexPath) -> UIImage? {
@@ -74,12 +88,27 @@ class HomeViewModel: BaseViewModel {
                 return #imageLiteral(resourceName: "looks_we_love_banner")
             case 3:
                 return #imageLiteral(resourceName: "on_sale_banner")
+            case 5:
+                return #imageLiteral(resourceName: "women_banner")
+            case 6:
+                return #imageLiteral(resourceName: "man_banner")
             default:
                 return nil
         }
     }
 
     func aspectRatioForBanner(at indexPath: IndexPath) -> CGFloat {
-        return [0, 1].contains(indexPath.row) ? 1.37 : 2.68
+        switch indexPath.row {
+            case 0, 1:
+                return 1.37
+            case 3, 5, 6:
+                return 2.68
+            default:
+                return 0
+        }
+    }
+
+    func title(at indexPath: IndexPath) -> String? {
+        return indexPath.row == 4 ? NSLocalizedString("Shop by category", comment: "Shop by category") : nil
     }
 }
