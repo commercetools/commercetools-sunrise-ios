@@ -61,7 +61,6 @@ class ProfileViewController: UIViewController {
         if let signInViewController = segue.destination as? SignInViewController {
             self.signInViewController = signInViewController
         }
-
     }
 }
 
@@ -132,7 +131,7 @@ extension ProfileViewController: UITableViewDelegate {
             case 5:
                 performSegue(withIdentifier: "showStoreFinder", sender: self)
             case 6:
-                print("settings")
+                performSegue(withIdentifier: "showSettings", sender: self)
             default:
                 viewModel?.logoutObserver.send(value: ())
         }

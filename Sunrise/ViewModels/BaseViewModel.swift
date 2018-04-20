@@ -32,6 +32,7 @@ class BaseViewModel {
     let oopsTitle = NSLocalizedString("Oops!", comment: "Oops!")
     let failedTitle = NSLocalizedString("Failed", comment: "Failed")
     let okAction = NSLocalizedString("OK", comment: "OK")
+    let cancelAction = NSLocalizedString("Cancel", comment: "Cancel")
     let settingsAction = NSLocalizedString("Settings", comment: "Settings")
 
     // Cart and WishList dialogues
