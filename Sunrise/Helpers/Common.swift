@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import PassKit
 import Commercetools
 
 extension Dictionary where Key: ExpressibleByStringLiteral, Value: ExpressibleByStringLiteral {
@@ -34,6 +35,46 @@ extension Address: CustomStringConvertible {
         description += "\n"
         description += (Locale.current as NSLocale).displayName(forKey: NSLocale.Key.countryCode, value: country) ?? country
         return description
+    }
+}
+
+extension Address {
+    var pkContact: PKContact {
+        let contact = PKContact()
+        var nameComponents = PersonNameComponents()
+        nameComponents.givenName = firstName
+        nameComponents.familyName = lastName
+        contact.name = nameComponents
+        let postalAddress = CNMutablePostalAddress()
+        postalAddress.isoCountryCode = country
+        postalAddress.city = city ?? ""
+        postalAddress.street = "\(streetName ?? "") \(streetNumber ?? "")"
+        postalAddress.postalCode = postalCode ?? ""
+        if let state = state {
+            postalAddress.state = state
+        }
+        contact.postalAddress = postalAddress
+        contact.emailAddress = email
+        if let phone = phone {
+            contact.phoneNumber = CNPhoneNumber(stringValue: phone)
+        }
+        return contact
+    }
+}
+
+extension PKContact {
+    var ctAddress: Address {
+        return Address(firstName: name?.givenName, lastName: name?.familyName, streetName: postalAddress?.street, city: postalAddress?.city, postalCode: postalAddress?.postalCode, state: postalAddress?.state, country: postalAddress?.isoCountryCode ?? "", phone: phoneNumber?.stringValue, email: emailAddress)
+    }
+}
+
+extension ShippingMethod {
+    func matchingPrice(for totalCentAmount: Int) -> Money? {
+        if let shippingRate = zoneRates.flatMap({ $0.shippingRates }).filter({ $0.isMatching == true }).first {
+            let freeAbove = shippingRate.freeAbove?.centAmount ?? Int.max
+            return totalCentAmount > freeAbove ? Money(currencyCode: shippingRate.price.currencyCode, centAmount: 0) : shippingRate.price
+        }
+        return nil
     }
 }
 
