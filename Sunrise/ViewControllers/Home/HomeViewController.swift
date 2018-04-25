@@ -73,9 +73,9 @@ extension HomeViewController: UITableViewDelegate {
             case .banner:
                 return view.bounds.width / viewModel.aspectRatioForBanner(at: indexPath)
             case .inlinePOP:
-                return 360
+                return 376
             case .title:
-                return 48
+                return 66
         }
     }
 }
