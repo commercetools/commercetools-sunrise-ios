@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fzR-9P-qHj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fzR-9P-qHj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -886,27 +885,27 @@ recommend based on your style!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyP-wL-oTf">
-                                <rect key="frame" x="153" y="100.5" width="69.5" height="36.5"/>
+                                <rect key="frame" x="153" y="86.5" width="69.5" height="36.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with your social accounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFZ-Xg-Anc">
-                                <rect key="frame" x="54" y="158.5" width="267" height="21"/>
+                                <rect key="frame" x="54" y="144.5" width="267" height="21"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                 <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2j-GY-dP1">
-                                <rect key="frame" x="157" y="199.5" width="61" height="60"/>
+                                <rect key="frame" x="157" y="185.5" width="61" height="60"/>
                                 <state key="normal" image="google_plus"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLI-en-KV7">
-                                <rect key="frame" x="49" y="199.5" width="60" height="60"/>
+                                <rect key="frame" x="49" y="185.5" width="60" height="60"/>
                                 <state key="normal" image="facebook"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbY-5S-1Bk">
-                                <rect key="frame" x="265" y="199" width="61" height="61"/>
+                                <rect key="frame" x="265" y="185" width="61" height="61"/>
                                 <state key="normal" image="instagram"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rmk-nY-yrR">
@@ -935,6 +934,12 @@ recommend based on your style!</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" or " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm0-Ee-sOq">
+                                <rect key="frame" x="172" y="295" width="30.5" height="30"/>
+                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
+                                <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OoL-l1-rfZ">
                                 <rect key="frame" x="27" y="451" width="321" height="60"/>
                                 <subviews>
@@ -986,14 +991,8 @@ recommend based on your style!</string>
                                     <constraint firstItem="WSf-xE-3vX" firstAttribute="centerY" secondItem="cXB-UQ-O92" secondAttribute="centerY" id="wI1-MO-M5H"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" or " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm0-Ee-sOq">
-                                <rect key="frame" x="172.5" y="295.5" width="30.5" height="30"/>
-                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
-                                <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-Dx-03r">
-                                <rect key="frame" x="187" y="179.5" width="1" height="20"/>
+                                <rect key="frame" x="187" y="165.5" width="1" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="wRA-9K-kbI"/>
                                 </constraints>
@@ -1005,13 +1004,13 @@ recommend based on your style!</string>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vG6-nE-aAr">
-                                <rect key="frame" x="187" y="20" width="1" height="80.5"/>
+                                <rect key="frame" x="187" y="20" width="1" height="66.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="vML-be-6iY"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vha-Ml-CXx">
-                                <rect key="frame" x="187" y="137" width="1" height="21.5"/>
+                                <rect key="frame" x="187" y="123" width="1" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="qOJ-xs-nMI"/>
                                 </constraints>
@@ -1064,7 +1063,7 @@ recommend based on your style!</string>
                             <constraint firstItem="p3w-Xf-d3m" firstAttribute="trailing" secondItem="4aC-mP-HkT" secondAttribute="trailing" id="kjp-8T-xvt"/>
                             <constraint firstItem="lA9-bM-W5E" firstAttribute="leading" secondItem="E90-B4-EHe" secondAttribute="leading" constant="27" id="lhe-RF-5pf"/>
                             <constraint firstItem="NFZ-Xg-Anc" firstAttribute="trailing" secondItem="EbY-5S-1Bk" secondAttribute="trailing" constant="-5" id="oap-Ms-MDj"/>
-                            <constraint firstItem="vG6-nE-aAr" firstAttribute="height" secondItem="SOO-Hr-B3i" secondAttribute="height" multiplier="0.041" constant="53" id="poa-fq-f3r"/>
+                            <constraint firstItem="vG6-nE-aAr" firstAttribute="height" secondItem="SOO-Hr-B3i" secondAttribute="height" multiplier="0.041" constant="39" id="poa-fq-f3r"/>
                             <constraint firstItem="cXB-UQ-O92" firstAttribute="leading" secondItem="E90-B4-EHe" secondAttribute="leading" constant="27" id="pzQ-rG-Qxi"/>
                             <constraint firstItem="E90-B4-EHe" firstAttribute="top" secondItem="vG6-nE-aAr" secondAttribute="top" id="qjO-3V-jEz"/>
                             <constraint firstItem="E90-B4-EHe" firstAttribute="trailing" secondItem="cXB-UQ-O92" secondAttribute="trailing" constant="27" id="qzq-Pq-hh9"/>
