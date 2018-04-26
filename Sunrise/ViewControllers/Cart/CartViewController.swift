@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import PassKit
 import ReactiveSwift
 import ReactiveCocoa
 import SVProgressHUD
@@ -46,6 +47,8 @@ class CartViewController: UIViewController {
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
+
+        applePayButton.isEnabled = PKPaymentAuthorizationViewController.canMakePayments()
 
         emptyStateVerticalSpaceConstraints.forEach { $0.constant = 0.25 * view.bounds.height - 129 }
 
@@ -91,10 +94,17 @@ class CartViewController: UIViewController {
             SVProgressHUD.dismiss()
         }
 
+        disposables += viewModel.isLoading.producer
+        .filter { $0 }
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] _ in SVProgressHUD.show() }
+
         disposables += numerOfItemsLabel.reactive.text <~ viewModel.numberOfItems
         disposables += orderTotalLabel.reactive.text <~ viewModel.orderTotal
         disposables += checkoutButton.reactive.isEnabled <~ viewModel.isCheckoutEnabled
         disposables += applePayButton.reactive.isEnabled <~ viewModel.isCheckoutEnabled
+
+        applePayButton.reactive.pressed = CocoaAction(viewModel.applePayAction)
 
         disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
@@ -119,6 +129,14 @@ class CartViewController: UIViewController {
         .observe(on: UIScheduler())
         .observeValues { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
+        }
+
+        disposables += viewModel.presentAuthorizationSignal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            guard let authorizationViewController = PKPaymentAuthorizationViewController(paymentRequest: $0) else { return }
+            authorizationViewController.delegate = self
+            self?.present(authorizationViewController, animated: true)
         }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
@@ -239,5 +257,29 @@ extension CartViewController: UIScrollViewDelegate {
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         updateBackgroundSnapshot()
+    }
+}
+
+extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
+
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: {
+            if self.viewModel?.shouldPresentOrderConfirmation.value == true {
+                self.viewModel?.shouldPresentOrderConfirmation.value = false
+                self.performSegue(withIdentifier: "presentOrderConfirmation", sender: self)
+            }
+        })
+    }
+
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler: @escaping (PKPaymentAuthorizationResult) -> Swift.Void) {
+        viewModel?.createOrder(with: payment, completion: handler)
+    }
+
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelect shippingMethod: PKShippingMethod, handler: @escaping (PKPaymentRequestShippingMethodUpdate) -> Swift.Void) {
+        viewModel?.select(shippingMethod: shippingMethod, completion: handler)
+    }
+
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelectShippingContact contact: PKContact, handler: @escaping (PKPaymentRequestShippingContactUpdate) -> Swift.Void) {
+        viewModel?.update(shippingAddress: contact, completion: handler)
     }
 }
