@@ -107,7 +107,7 @@ class ConfirmationViewModel: BaseViewModel {
     // MARK: - Cart retrieval, order creation
 
     private func retrieveCart() {
-        Cart.active(expansion: ["shippingInfo.shippingMethod"]) { result in
+        Cart.active(expansion: shippingMethodExpansion) { result in
             if let cart = result.model, result.isSuccess {
                 self.cart.value = cart
             } else if let errors = result.errors as? [CTError], result.isFailure {

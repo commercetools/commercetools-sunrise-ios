@@ -53,6 +53,7 @@ class BaseViewModel {
 
     // Common expansions
     let discountCodesExpansion = ["discountCodes[*].discountCode.cartDiscounts[*]"]
+    let shippingMethodExpansion = ["shippingInfo.shippingMethod"]
 
     // MARK: - Lifecycle
 
