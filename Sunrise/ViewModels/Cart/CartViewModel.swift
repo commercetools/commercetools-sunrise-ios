@@ -455,13 +455,8 @@ class CartViewModel: BaseViewModel {
         request.supportedNetworks = PKPaymentRequest.availableNetworks()
         request.merchantCapabilities = [.capabilityDebit, .capabilityCredit, .capability3DS, .capabilityEMV]
         request.merchantIdentifier = "merchant"
-        if #available(iOS 11, *) {
-            request.requiredShippingContactFields = [.name, .emailAddress, .postalAddress]
-            request.requiredBillingContactFields = [.name, .emailAddress, .postalAddress]
-        } else {
-            request.requiredShippingAddressFields = [.name, .email, .postalAddress]
-            request.requiredBillingAddressFields = [.name, .email, .postalAddress]
-        }
+        request.requiredShippingContactFields = [.name, .emailAddress, .postalAddress]
+        request.requiredBillingContactFields = [.name, .emailAddress, .postalAddress]
         let semaphore = DispatchSemaphore(value: 0)
         if let shippingAddress = shippingAddress {
             Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: [.setShippingAddress(address: shippingAddress), .recalculate(updateProductData: nil)]), expansion: shippingMethodExpansion) { result in

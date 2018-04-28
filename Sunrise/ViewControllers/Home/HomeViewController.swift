@@ -20,11 +20,7 @@ class HomeViewController: UIViewController {
         tableView.tableFooterView = UIView()
         viewModel = HomeViewModel()
         
-        if #available(iOS 11, *) {
-            tableViewSafeZoneTopConstraint.constant = 53
-        } else {
-            tableViewSafeZoneTopConstraint.constant = 33
-        }
+        tableViewSafeZoneTopConstraint.constant = 53
     }
 }
 
