@@ -20,6 +20,10 @@ class AppRouting {
         }
     }
 
+    struct ShowReservationDetailsRequest {
+        let reservationId: String
+    }
+
     static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     static let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
@@ -55,14 +59,21 @@ class AppRouting {
         SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.mainTab.index
     }
 
+    static func showProfileTab() {
+        profileViewController?.navigationController?.popToRootViewController(animated: false)
+        SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.profileTab.index
+    }
+
     static func showProductDetails(for sku: String) {
         showMainTab()
         mainViewController?.viewModel?.productsViewModel.presentProductDetails(for: sku)
     }
 
     static func showCategory(id: String) {
+        resetMainViewControllerState {
+            mainViewController?.viewModel?.setActiveCategory(id: id)
+        }
         showMainTab()
-        mainViewController?.viewModel?.setActiveCategory(id: id)
     }
 
     static func showProductOverview(with additionalFilters: [String]) {
@@ -70,8 +81,44 @@ class AppRouting {
         mainViewController?.viewModel?.showProductsOverview(with: additionalFilters)
     }
 
+    static func showMyOrders() {
+        showProfileTab()
+        profileViewController?.performSegue(withIdentifier: "showMyOrders", sender: profileViewController)
+    }
+
+    static func showReservationDetails(for reservationId: String) {
+        showProfileTab()
+        profileViewController?.performSegue(withIdentifier: "showMyReservations", sender: ShowReservationDetailsRequest(reservationId: reservationId))
+    }
+
+    static func search(query: String, filters: [URLQueryItem]) {
+        resetMainViewControllerState {
+            showMainTab()
+            guard let mainViewController = mainViewController, let filtersViewModel = mainViewController.viewModel?.productsViewModel.filtersViewModel else { return }
+            filtersViewModel.activeColors.value = Set(filters[FiltersViewModel.kColorsAttributeName])
+            filtersViewModel.activeBrands.value = Set(filters[FiltersViewModel.kBrandAttributeName])
+            filtersViewModel.activeSizes.value = Set(filters["size"]) // Sunrise web is using different attribute for size filter, but values mostly match
+            mainViewController.searchFilterButton.isSelected = filtersViewModel.hasFiltersApplied
+            mainViewController.searchField.becomeFirstResponder()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                mainViewController.searchField.text = query
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    mainViewController.searchField.resignFirstResponder()
+                }
+            }
+        }
+    }
+
     static func switchToCartTab() {
         SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.cartTab.index
         SunriseTabBarController.currentlyActive?.cartButton.isSelected = true
+    }
+
+    private static func resetMainViewControllerState(completion: @escaping () -> Swift.Void) {
+        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
+        // Continue after reset animations have completed
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            completion()
+        }
     }
 }

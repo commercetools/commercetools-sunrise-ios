@@ -104,7 +104,7 @@ struct Project {
 }
 
 extension Collection where Iterator.Element == URLQueryItem {
-    subscript(key: String) -> String? {
-        return self.filter({ $0.name == key }).first?.value
+    subscript(key: String) -> [String] {
+        return self.filter({ $0.name == key }).flatMap { $0.value }
     }
 }

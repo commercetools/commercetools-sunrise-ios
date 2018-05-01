@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -642,7 +641,7 @@
                                             <outlet property="productNameLabel" destination="BZh-3h-Wk2" id="6cj-PU-46M"/>
                                             <outlet property="reservationDate" destination="3tS-mi-3jN" id="0Yi-T0-OX8"/>
                                             <outlet property="totalLabel" destination="Pra-x8-UKO" id="NJP-YD-pJG"/>
-                                            <segue destination="nHh-rc-Ir1" kind="show" id="y0a-xW-mjQ"/>
+                                            <segue destination="nHh-rc-Ir1" kind="show" identifier="showReservationDetails" id="y0a-xW-mjQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
