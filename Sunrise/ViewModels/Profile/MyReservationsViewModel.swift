@@ -13,10 +13,13 @@ class MyReservationsViewModel: BaseViewModel {
 
     // Inputs
     let refreshObserver: Signal<Void, NoError>.Observer
+    let pendingReservationDetailsId = MutableProperty<String?>(nil)
 
     // Outputs
     let isLoading = MutableProperty(true)
+    let showReservationDetailsSignal: Signal<IndexPath, NoError>
 
+    private let showReservationDetailsObserver: Signal<IndexPath, NoError>.Observer
     private var reservations = [Order]()
     private let disposables = CompositeDisposable()
 
@@ -25,6 +28,8 @@ class MyReservationsViewModel: BaseViewModel {
     override init() {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
+
+        (showReservationDetailsSignal, showReservationDetailsObserver) = Signal<IndexPath, NoError>.pipe()
 
         super.init()
 
@@ -70,6 +75,12 @@ class MyReservationsViewModel: BaseViewModel {
             if let orders = result.model?.results, result.isSuccess {
                 self.reservations = orders.filter { $0.isReservation == true }
                 self.isLoading.value = false
+
+                if let pendingRow = self.reservations.index(where: { $0.id == self.pendingReservationDetailsId.value }) {
+                    self.pendingReservationDetailsId.value = nil
+                    self.showReservationDetailsObserver.send(value: IndexPath(row: pendingRow, section: 0))
+                }
+
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }

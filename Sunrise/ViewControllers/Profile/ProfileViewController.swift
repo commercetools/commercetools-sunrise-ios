@@ -60,6 +60,9 @@ class ProfileViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let signInViewController = segue.destination as? SignInViewController {
             self.signInViewController = signInViewController
+        } else if let myReservationsViewController = segue.destination as? MyReservationsViewController {
+            _ = myReservationsViewController.view
+            myReservationsViewController.viewModel?.pendingReservationDetailsId.value = (sender as? AppRouting.ShowReservationDetailsRequest)?.reservationId
         }
     }
 }

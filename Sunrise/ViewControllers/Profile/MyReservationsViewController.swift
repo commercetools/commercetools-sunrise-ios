@@ -59,6 +59,12 @@ class MyReservationsViewController: UIViewController {
             }
         }
 
+        disposables += viewModel.showReservationDetailsSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.performSegue(withIdentifier: "showReservationDetails", sender: self.tableView.cellForRow(at: $0))
+        }
+
         disposables += NotificationCenter.default.reactive
         .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
         .observe(on: UIScheduler())
