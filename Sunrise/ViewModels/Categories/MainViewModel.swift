@@ -235,22 +235,16 @@ class MainViewModel: BaseViewModel {
 
     func setActiveCategory(id: String) {
         guard let category = allCategories.first(where: { $0.id == id }) else { return }
-        if activeCategory.value?.parent != nil {
-            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
-        }
-        // Show new active category after reset animations have completed
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            if !self.rootCategories.value.contains(category) {
-                var rootParentCategory: Category? = category
-                var lastDisplayableCategory: Category?
-                while rootParentCategory?.parent != nil {
-                    lastDisplayableCategory = rootParentCategory
-                    rootParentCategory = self.allCategories.first(where: { $0.id == rootParentCategory?.parent?.id })
-                }
-                self.activeCategory.value = lastDisplayableCategory
-            } else {
-                self.activeCategory.value = category
+        if !rootCategories.value.contains(category) {
+            var rootParentCategory: Category? = category
+            var lastDisplayableCategory: Category?
+            while rootParentCategory?.parent != nil {
+                lastDisplayableCategory = rootParentCategory
+                rootParentCategory = allCategories.first(where: { $0.id == rootParentCategory?.parent?.id })
             }
+            activeCategory.value = lastDisplayableCategory
+        } else {
+            activeCategory.value = category
         }
     }
 
