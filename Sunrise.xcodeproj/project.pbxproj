@@ -164,6 +164,8 @@
 		21B5594920580EE200775E76 /* WishListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B5594820580EE200775E76 /* WishListCell.swift */; };
 		21B55957205A96AA00775E76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B55956205A96AA00775E76 /* ProfileViewController.swift */; };
 		21B7675B207F9D59009C402D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B7675A207F9D59009C402D /* HomeViewModel.swift */; };
+		21B7FA4A209CB49600C9C0F9 /* MyStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B7FA49209CB49600C9C0F9 /* MyStyleViewController.swift */; };
+		21B7FA4C209CCBD900C9C0F9 /* MyStyleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B7FA4B209CCBD900C9C0F9 /* MyStyleViewModel.swift */; };
 		21B9001A1CFE07C700E053F9 /* CartLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B900191CFE07C700E053F9 /* CartLineItemCell.swift */; };
 		21C0B62A1E7F3ED300D666F5 /* ShippingMethodsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0B6291E7F3ED300D666F5 /* ShippingMethodsViewModel.swift */; };
 		21C0B62E1E7F3F3400D666F5 /* NewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C0B62D1E7F3F3400D666F5 /* NewAddressViewModel.swift */; };
@@ -426,6 +428,8 @@
 		21B5594820580EE200775E76 /* WishListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListCell.swift; sourceTree = "<group>"; };
 		21B55956205A96AA00775E76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		21B7675A207F9D59009C402D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		21B7FA49209CB49600C9C0F9 /* MyStyleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyleViewController.swift; sourceTree = "<group>"; };
+		21B7FA4B209CCBD900C9C0F9 /* MyStyleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStyleViewModel.swift; sourceTree = "<group>"; };
 		21B900191CFE07C700E053F9 /* CartLineItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartLineItemCell.swift; sourceTree = "<group>"; };
 		21C0B6291E7F3ED300D666F5 /* ShippingMethodsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShippingMethodsViewModel.swift; sourceTree = "<group>"; };
 		21C0B62D1E7F3F3400D666F5 /* NewAddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAddressViewModel.swift; sourceTree = "<group>"; };
@@ -931,6 +935,7 @@
 				213A90FC20710E4B006C3F06 /* OrderDetailsViewModel.swift */,
 				21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */,
 				21088E9120863EE00009289C /* SettingsViewModel.swift */,
+				21B7FA4B209CCBD900C9C0F9 /* MyStyleViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				213A90FE20710EB0006C3F06 /* OrderDetailsViewController.swift */,
 				21DEDD9E20739B5700DF6ADF /* ReservationDetailsViewController.swift */,
 				21088E8F20863E250009289C /* SettingsViewController.swift */,
+				21B7FA49209CB49600C9C0F9 /* MyStyleViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1776,6 +1782,7 @@
 				21E7096020463DFD0059FAE4 /* SignInViewController.swift in Sources */,
 				210BE8603FFDCB26D5443788 /* AppRouting.swift in Sources */,
 				210BE7E5E4522D03EF0BB7B8 /* Changeset.swift in Sources */,
+				21B7FA4A209CB49600C9C0F9 /* MyStyleViewController.swift in Sources */,
 				2117CBE71FD4C57D001915AE /* AddressViewController.swift in Sources */,
 				21B7675B207F9D59009C402D /* HomeViewModel.swift in Sources */,
 				210BE953F6CBCBB4AD333A05 /* ProductProjection.swift in Sources */,
@@ -1784,6 +1791,7 @@
 				21A9CF031F7DD1A600D30186 /* MainViewController.swift in Sources */,
 				2147A3251DFA589A00981A30 /* ProductImageCell.swift in Sources */,
 				2120C428204F491400BD2761 /* AddressViewModel.swift in Sources */,
+				21B7FA4C209CCBD900C9C0F9 /* MyStyleViewModel.swift in Sources */,
 				21C0B62A1E7F3ED300D666F5 /* ShippingMethodsViewModel.swift in Sources */,
 				2107392E2023794900EF14CB /* FiltersViewModel.swift in Sources */,
 				218AF312206DAA9300C7F9E7 /* MyReservationsViewController.swift in Sources */,

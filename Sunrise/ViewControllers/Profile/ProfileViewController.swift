@@ -126,7 +126,7 @@ extension ProfileViewController: UITableViewDelegate {
             case 1:
                 performSegue(withIdentifier: "showMyReservations", sender: self)
             case 2:
-                print("my style")
+                performSegue(withIdentifier: "showMyStyle", sender: self)
             case 3:
                 performSegue(withIdentifier: "showAddressBook", sender: self)
             case 4:
