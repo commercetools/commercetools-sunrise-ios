@@ -233,6 +233,11 @@ class MainViewModel: BaseViewModel {
 
     // MARK: - Externally managing the main view states
 
+    func setActiveCategory(locale: String, slug: String) {
+        guard let category = allCategories.first(where: { $0.slug[locale] == slug }) else { return }
+        setActiveCategory(id: category.id)
+    }
+
     func setActiveCategory(id: String) {
         guard let category = allCategories.first(where: { $0.id == id }) else { return }
         if !rootCategories.value.contains(category) {

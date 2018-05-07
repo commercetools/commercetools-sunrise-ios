@@ -24,6 +24,10 @@ class AppRouting {
         let reservationId: String
     }
 
+    struct ShowOrderDetailsRequest {
+        let orderNumber: String
+    }
+
     static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     static let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
@@ -71,7 +75,18 @@ class AppRouting {
 
     static func showCategory(id: String) {
         resetMainViewControllerState {
-            mainViewController?.viewModel?.setActiveCategory(id: id)
+            DispatchQueue.global().async {
+                mainViewController?.viewModel?.setActiveCategory(id: id)
+            }
+        }
+        showMainTab()
+    }
+
+    static func showCategory(locale: String, slug: String) {
+        resetMainViewControllerState {
+            DispatchQueue.global().async {
+                mainViewController?.viewModel?.setActiveCategory(locale: locale, slug: slug)
+            }
         }
         showMainTab()
     }
@@ -89,6 +104,11 @@ class AppRouting {
     static func showReservationDetails(for reservationId: String) {
         showProfileTab()
         profileViewController?.performSegue(withIdentifier: "showMyReservations", sender: ShowReservationDetailsRequest(reservationId: reservationId))
+    }
+
+    static func showOrderDetails(for orderNumber: String) {
+        showProfileTab()
+        profileViewController?.performSegue(withIdentifier: "showMyOrders", sender: ShowOrderDetailsRequest(orderNumber: orderNumber))
     }
 
     static func search(query: String, filters: [URLQueryItem]) {

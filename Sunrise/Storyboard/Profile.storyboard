@@ -241,7 +241,7 @@
                                             <outlet property="createdLabel" destination="rye-1D-QsR" id="JA8-Wq-NCG"/>
                                             <outlet property="orderNumberLabel" destination="wEN-6I-EME" id="xqo-Gz-sbD"/>
                                             <outlet property="totalPriceLabel" destination="fOW-0j-IHI" id="vhM-T2-2cl"/>
-                                            <segue destination="hea-b8-9oQ" kind="show" id="moV-Yn-5rW"/>
+                                            <segue destination="hea-b8-9oQ" kind="show" identifier="showOrderDetails" id="moV-Yn-5rW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1600,7 +1600,7 @@ Sat: 09:00 - 16:00</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="731"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxL-ur-HMY">
-                                                <rect key="frame" x="137.5" y="27" width="100" height="36.5"/>
+                                                <rect key="frame" x="138" y="27" width="100" height="36.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

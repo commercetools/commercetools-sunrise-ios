@@ -34,10 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var locationManager: CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // TODO move to appropriate view controller once ready
-        let attributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Medium", size: 14)!]
-        UISegmentedControl.appearance().setTitleTextAttributes(attributes, for: .normal)
-
         if let configuration = Project.config {
             Commercetools.config = configuration
 
@@ -76,10 +72,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 AppRouting.showProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
                 return true
 
-            // Orders (e.g https://demo.commercetools.com/en/user/orders/87896195?)
-            } else if pathComponents.contains("orders") {
+            // Orders (e.g https://demo.commercetools.com/en/user/orders)
+            } else if pathComponents.last?.contains("orders") == true {
                 AppRouting.showMyOrders()
                 return true
+
+            // Order details (e.g https://demo.commercetools.com/en/user/orders/87896195?)
+            } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last, !orderNumber.contains("orders") {
+                AppRouting.showOrderDetails(for: orderNumber)
+
+            // Category overview (e.g https://demo.commercetools.com/en/women-clothing-blazer)
+            } else if pathComponents.count == 3, pathComponents[1].count == 2 {
+                AppRouting.showCategory(locale: pathComponents[1], slug: pathComponents[2])
             }
         }
         return false

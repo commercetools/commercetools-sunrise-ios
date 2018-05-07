@@ -97,7 +97,7 @@ class CartViewController: UIViewController {
         disposables += viewModel.isLoading.producer
         .filter { $0 }
         .observe(on: UIScheduler())
-        .startWithValues { [unowned self] _ in SVProgressHUD.show() }
+        .startWithValues { _ in SVProgressHUD.show() }
 
         disposables += numerOfItemsLabel.reactive.text <~ viewModel.numberOfItems
         disposables += orderTotalLabel.reactive.text <~ viewModel.orderTotal

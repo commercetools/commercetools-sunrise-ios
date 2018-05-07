@@ -67,13 +67,23 @@ class MyOrdersViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
 
+        disposables += viewModel.pendingOrderDetails
+        .delay(1, on: QueueScheduler())
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.performSegue(withIdentifier: "showOrderDetails", sender: $0)
+        }
+
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell), let detailsViewController = segue.destination as? OrderDetailsViewController {
-            _ = detailsViewController.view
+        guard let detailsViewController = segue.destination as? OrderDetailsViewController else { return }
+        _ = detailsViewController.view
+        if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             detailsViewController.viewModel = viewModel?.orderDetailsViewModelForOrder(at: indexPath)
+        } else if let viewModel = sender as? OrderDetailsViewModel {
+            detailsViewController.viewModel = viewModel
         }
     }
 

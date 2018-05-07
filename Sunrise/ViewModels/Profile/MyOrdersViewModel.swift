@@ -12,12 +12,15 @@ class MyOrdersViewModel: BaseViewModel {
     
     // Inputs
     let refreshObserver: Signal<Void, NoError>.Observer
+    let pendingOrderNumber = MutableProperty<String?>(nil)
     
     // Outputs
+    let pendingOrderDetails: Signal<OrderDetailsViewModel, NoError>
     let isLoading = MutableProperty(true)
     
     
     private var orders = [Order]()
+    private let presentOrderDetailsObserver: Signal<OrderDetailsViewModel, NoError>.Observer
     private let disposables = CompositeDisposable()
     
     // MARK: - Lifecycle
@@ -25,9 +28,17 @@ class MyOrdersViewModel: BaseViewModel {
     override init() {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
-        
+
+        (pendingOrderDetails, presentOrderDetailsObserver) = Signal<OrderDetailsViewModel, NoError>.pipe()
+
         super.init()
-        
+
+        disposables += pendingOrderNumber.producer
+        .filter { $0 != nil }
+        .startWithValues { [unowned self] in
+            self.presentDetailsForOrder(with: $0!)
+        }
+
         disposables += refreshSignal.observeValues { [unowned self] in self.retrieveOrders() }
     }
     
@@ -58,7 +69,17 @@ class MyOrdersViewModel: BaseViewModel {
     }
 
     // MARK: - Orders retrieval
-    
+
+    private func presentDetailsForOrder(with number: String) {
+        isLoading.value = true
+        Order.query(predicates: ["orderNumber = \"\(number)\""], limit: 1) { result in
+            if let order = result.model?.results.first, result.isSuccess {
+                self.presentOrderDetailsObserver.send(value: OrderDetailsViewModel(order: order))
+            }
+            self.isLoading.value = false
+        }
+    }
+
     private func retrieveOrders() {
         isLoading.value = true
         // TODO Add paging
