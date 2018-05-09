@@ -1618,7 +1618,7 @@ Sat: 09:00 - 16:00</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XWB-7N-pee">
                                                 <rect key="frame" x="0.0" y="126" width="18" height="548"/>
                                             </stackView>
-                                            <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QrD-hV-cx4">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QrD-hV-cx4">
                                                 <rect key="frame" x="18" y="126" width="357" height="548"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PSF-Om-xc1">
@@ -1670,12 +1670,8 @@ Sat: 09:00 - 16:00</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrX-qs-WcV">
                                                         <rect key="frame" x="0.0" y="135" width="357" height="1"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RlX-wt-Mcj">
-                                                                <rect key="frame" x="0.0" y="0.0" width="16" height="1"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dr2-Gr-KY5">
-                                                                <rect key="frame" x="16" y="0.0" width="325" height="1"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jS-dV-A08">
@@ -1888,12 +1884,8 @@ Sat: 09:00 - 16:00</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6g-NE-Zuo">
                                                         <rect key="frame" x="0.0" y="306" width="357" height="1"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NsL-sA-ra4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="16" height="1"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wRh-on-wck">
-                                                                <rect key="frame" x="16" y="0.0" width="325" height="1"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ylv-7b-Z5n">
@@ -2019,12 +2011,8 @@ Sat: 09:00 - 16:00</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3tJ-jq-nVp">
                                                         <rect key="frame" x="0.0" y="434" width="357" height="1"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="716-bB-X7D">
-                                                                <rect key="frame" x="0.0" y="0.0" width="16" height="1"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23W-cQ-sI4">
-                                                                <rect key="frame" x="16" y="0.0" width="325" height="1"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFf-MW-7E5">
@@ -2177,7 +2165,7 @@ Sat: 09:00 - 16:00</string>
                                     <constraint firstAttribute="height" constant="55" id="28W-hs-Nhb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
-                                <state key="normal" title="Reset filters">
+                                <state key="normal" title="Reset">
                                     <color key="titleColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -2187,7 +2175,7 @@ Sat: 09:00 - 16:00</string>
                                     <constraint firstAttribute="height" constant="55" id="uBF-c9-HFq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Save">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
@@ -2205,7 +2193,6 @@ Sat: 09:00 - 16:00</string>
                             <constraint firstItem="DmX-zH-Big" firstAttribute="width" secondItem="5hj-ID-m7y" secondAttribute="width" multiplier="0.219" id="UK0-c1-pLk"/>
                             <constraint firstItem="lKc-AF-Ygi" firstAttribute="bottom" secondItem="Nya-U8-KCh" secondAttribute="bottom" constant="55" id="Xeb-s0-xEF"/>
                             <constraint firstItem="Nya-U8-KCh" firstAttribute="top" secondItem="lKc-AF-Ygi" secondAttribute="top" constant="53" id="Xqw-Nj-6XR"/>
-                            <constraint firstItem="RlX-wt-Mcj" firstAttribute="width" secondItem="5hj-ID-m7y" secondAttribute="width" multiplier="0.043" id="a3b-ng-gbD"/>
                             <constraint firstItem="xiV-wY-N2h" firstAttribute="width" secondItem="Lvz-FM-rGE" secondAttribute="width" multiplier="0.5" id="aKt-cF-VUx"/>
                             <constraint firstItem="lKc-AF-Ygi" firstAttribute="trailing" secondItem="Nya-U8-KCh" secondAttribute="trailing" id="cqt-LC-BzP"/>
                             <constraint firstItem="Ylv-7b-Z5n" firstAttribute="width" secondItem="5hj-ID-m7y" secondAttribute="width" multiplier="0.043" id="gV7-95-XkS"/>
@@ -2214,8 +2201,6 @@ Sat: 09:00 - 16:00</string>
                             <constraint firstItem="FNa-zx-M55" firstAttribute="width" secondItem="5hj-ID-m7y" secondAttribute="width" multiplier="0.1" id="lCz-bk-xg3"/>
                             <constraint firstItem="lKc-AF-Ygi" firstAttribute="trailing" secondItem="xiV-wY-N2h" secondAttribute="trailing" id="lb7-KG-mo3"/>
                             <constraint firstItem="Nya-U8-KCh" firstAttribute="leading" secondItem="lKc-AF-Ygi" secondAttribute="leading" id="p2M-bz-37p"/>
-                            <constraint firstItem="716-bB-X7D" firstAttribute="width" secondItem="5hj-ID-m7y" secondAttribute="width" multiplier="0.043" id="sat-gO-gKg"/>
-                            <constraint firstItem="NsL-sA-ra4" firstAttribute="width" secondItem="5hj-ID-m7y" secondAttribute="width" multiplier="0.043" id="vvI-le-ryh"/>
                             <constraint firstItem="lKc-AF-Ygi" firstAttribute="trailing" secondItem="Lvz-FM-rGE" secondAttribute="trailing" id="wAh-tk-Ua4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lKc-AF-Ygi"/>
@@ -2225,11 +2210,11 @@ Sat: 09:00 - 16:00</string>
                         <outlet property="aToGBrandButton" destination="C1D-Av-0xh" id="6Hn-QQ-dMj"/>
                         <outlet property="brandsCollectionView" destination="6Ef-IC-ud5" id="cOW-9d-NJw"/>
                         <outlet property="colorsCollectionView" destination="jX3-cG-XQ4" id="kpN-Es-UvR"/>
-                        <outlet property="doneButton" destination="xiV-wY-N2h" id="3y8-68-nJo"/>
+                        <outlet property="saveButton" destination="xiV-wY-N2h" id="3y8-68-nJo"/>
                         <outlet property="genderSegmentedControl" destination="Kci-Er-b4p" id="KMh-gI-Fwn"/>
                         <outlet property="hToQBrandButton" destination="QGP-Lz-Ns5" id="ayX-Xc-Frj"/>
                         <outlet property="rToZBrandButton" destination="dYj-Rj-pKK" id="YJF-JS-1uM"/>
-                        <outlet property="resetFiltersButton" destination="1Bp-hP-DVg" id="oGc-Zh-bIT"/>
+                        <outlet property="resetButton" destination="1Bp-hP-DVg" id="oGc-Zh-bIT"/>
                         <outlet property="sizesCollectionView" destination="xVF-5k-Bxk" id="7tZ-7v-6dV"/>
                         <outlet property="styleSettingsStackView" destination="QrD-hV-cx4" id="aww-QH-PCF"/>
                         <outlet property="symbolBrandButton" destination="mU6-s1-8Oj" id="VVj-FY-t5B"/>

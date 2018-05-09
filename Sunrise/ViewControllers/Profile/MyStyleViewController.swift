@@ -13,8 +13,8 @@ class MyStyleViewController: UIViewController {
     @IBOutlet weak var hToQBrandButton: UIButton!
     @IBOutlet weak var rToZBrandButton: UIButton!
     @IBOutlet weak var symbolBrandButton: UIButton!
-    @IBOutlet weak var resetFiltersButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var styleSettingsStackView: UIStackView!
@@ -46,10 +46,12 @@ class MyStyleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 1
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 0
         super.viewWillDisappear(animated)
     }
 
@@ -78,6 +80,14 @@ class MyStyleViewController: UIViewController {
             brandButtons[$0]?.isSelected = true
         }
 
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] _ in
+            guard self.view.window != nil else { return }
+            self.navigationController?.popViewController(animated: true)
+        }
+
         disposables += viewModel.scrollBrandAction.values
         .filter { $0 != nil }
         .observe(on: UIScheduler())
@@ -98,8 +108,8 @@ class MyStyleViewController: UIViewController {
         hToQBrandButton.reactive.pressed = CocoaAction(viewModel.scrollBrandAction) { _ in return 1 }
         rToZBrandButton.reactive.pressed = CocoaAction(viewModel.scrollBrandAction) { _ in return 2 }
         symbolBrandButton.reactive.pressed = CocoaAction(viewModel.scrollBrandAction) { _ in return 3 }
-        resetFiltersButton.reactive.pressed = CocoaAction(viewModel.resetSettingsAction)
-        doneButton.reactive.pressed = CocoaAction(viewModel.saveSettingsAction)
+        resetButton.reactive.pressed = CocoaAction(viewModel.resetSettingsAction)
+        saveButton.reactive.pressed = CocoaAction(viewModel.saveSettingsAction)
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
