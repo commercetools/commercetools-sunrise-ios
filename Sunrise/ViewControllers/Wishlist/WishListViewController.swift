@@ -50,10 +50,6 @@ class WishListViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
-        disposables += viewModel.isLoading.producer
-        .observe(on: UIScheduler())
-        .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
-
         disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
         .observeValues { [weak self] changeset in
@@ -92,13 +88,6 @@ class WishListViewController: UIViewController {
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
         viewModel.refreshObserver.send(value: ())
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let recommendationsViewController = segue.destination as? InlineProductOverviewViewController {
-            _ = recommendationsViewController.view
-            recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
-        }
     }
 
     @IBAction func continueShopping(_ sender: UIButton) {
