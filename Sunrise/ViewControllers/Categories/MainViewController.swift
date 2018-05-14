@@ -166,6 +166,7 @@ class MainViewController: UIViewController {
         .startWithValues { [unowned self] _ in
             self.productsCollectionView.reloadData()
             self.checkAndPresentEmptyState()
+            self.updateFilterButtonSelectedState()
             SVProgressHUD.dismiss()
             if !self.productsCollectionView.isDecelerating, !self.productsCollectionView.isTracking {
                 DispatchQueue.main.async {
@@ -383,6 +384,12 @@ class MainViewController: UIViewController {
         }
         let emptyStateAlpha: CGFloat = productsCollectionView.alpha == 1 ? (viewModel?.productsViewModel.numberOfProducts(in: 0) == 0 ? 1 : 0) : categoriesCollectionView.alpha == 1 && viewModel?.numberOfCategoryItems == 0 ? 1 : 0
         emptyStateView.alpha = emptyStateAlpha
+    }
+
+    private func updateFilterButtonSelectedState() {
+        guard filtersView.alpha == 0 else { return }
+        filterButton.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
+        searchFilterButton.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
     }
 
     private func presentSearchResults() {

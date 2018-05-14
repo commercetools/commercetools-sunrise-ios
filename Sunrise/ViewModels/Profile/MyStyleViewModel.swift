@@ -14,7 +14,7 @@ class MyStyleViewModel: BaseViewModel {
     let toggleBrandObserver: Signal<IndexPath, NoError>.Observer
     let toggleSizeObserver: Signal<IndexPath, NoError>.Observer
     let toggleColorObserver: Signal<IndexPath, NoError>.Observer
-    let isWomen = MutableProperty(UserDefaults.standard.bool(forKey: kIsWomenSettings))
+    let isWomen = MutableProperty(isWomenSetting)
     let priceRange = MutableProperty((FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax))
     var scrollBrandAction: Action<Int, IndexPath?, NoError>!
     var resetSettingsAction: Action<Void, Void, NoError>!
@@ -24,9 +24,22 @@ class MyStyleViewModel: BaseViewModel {
     let isLoading = MutableProperty(true)
     let activeBrandButtonIndex = MutableProperty(0)
 
-    let activeBrands = MutableProperty(Set(UserDefaults.standard.stringArray(forKey: kBrandsSettings) ?? []))
-    let activeSizes = MutableProperty(Set(UserDefaults.standard.stringArray(forKey: kSizesSettings) ?? []))
-    let activeColors = MutableProperty(Set(UserDefaults.standard.stringArray(forKey: kColorsSettings) ?? []))
+    let activeBrands = MutableProperty(brandsSettings)
+    let activeSizes = MutableProperty(sizesSettings)
+    let activeColors = MutableProperty(colorsSettings)
+
+    static var brandsSettings: Set<String> {
+        return Set(UserDefaults.standard.stringArray(forKey: kBrandsSettings) ?? [])
+    }
+    static var sizesSettings: Set<String> {
+        return Set(UserDefaults.standard.stringArray(forKey: kSizesSettings) ?? [])
+    }
+    static var colorsSettings: Set<String> {
+        return Set(UserDefaults.standard.stringArray(forKey: kColorsSettings) ?? [])
+    }
+    static var isWomenSetting: Bool {
+        return UserDefaults.standard.bool(forKey: kIsWomenSettings)
+    }
 
     private var brands = [AttributeType.EnumValue]()
     private var sizes = [AttributeType.EnumValue]()

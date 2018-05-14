@@ -11,24 +11,30 @@ class InlineProductOverviewViewModel: BaseViewModel {
     
     // Inputs
     let toggleWishListObserver: Signal<IndexPath, NoError>.Observer
+    let refreshObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     let title: String
     let isLoading = MutableProperty(false)
 
+    private let useMyStyleSettings: Bool
     private var products: [ProductProjection]
     private let disposables = CompositeDisposable()
     
     
     // MARK: - Lifecycle
     
-    init(title: String, filterQuery: [String]? = nil, sort: [String]? = nil) {
+    init(title: String, useMyStyleSettings: Bool = false, filterQuery: [String]? = nil, sort: [String]? = nil) {
         products = []
         self.title = title
+        self.useMyStyleSettings = useMyStyleSettings
 
         let (toggleWishListSignal, toggleWishListObserver) = Signal<IndexPath, NoError>.pipe()
         self.toggleWishListObserver = toggleWishListObserver
-        
+
+        let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
+        self.refreshObserver = refreshObserver
+
         super.init()
 
         disposables += toggleWishListSignal
@@ -40,9 +46,19 @@ class InlineProductOverviewViewModel: BaseViewModel {
             }
         }
 
-        queryForProductProjections(filterQuery: filterQuery, sort: sort)
+        disposables += refreshSignal
+        .observeValues { [weak self] _ in
+            guard self?.useMyStyleSettings == true else { return }
+            self?.queryForMyStyleProductProjections(sort: sort)
+        }
+
+        if useMyStyleSettings {
+            queryForMyStyleProductProjections(sort: sort)
+        } else {
+            queryForProductProjections(filterQuery: filterQuery, failbackFilterQuery: [], sort: sort)
+        }
     }
-    
+
     deinit {
         disposables.dispose()
     }
@@ -91,20 +107,41 @@ class InlineProductOverviewViewModel: BaseViewModel {
 
     // MARK: - Commercetools product projections querying
 
-    private func queryForProductProjections(filterQuery: [String]?, sort: [String]?) {
+    private func queryForMyStyleProductProjections(sort: [String]?) {
+        var filterQuery = [String]()
+        if Commercetools.authState == .customerToken {
+            [(FiltersViewModel.kBrandAttributeName, MyStyleViewModel.brandsSettings),
+             (FiltersViewModel.kSizeAttributeName, MyStyleViewModel.sizesSettings),
+             (FiltersViewModel.kColorsAttributeName, MyStyleViewModel.colorsSettings)].forEach {
+                if !$1.isEmpty {
+                    var filterValue = $1.reduce("", { "\($0),\"\($1)\"" })
+                    filterValue.removeFirst()
+                    filterQuery.append("variants.attributes.\($0).key:\(filterValue)")
+                }
+            }
+            filterQuery.append("categories.id: subtree(\"\(MyStyleViewModel.isWomenSetting ? "f8587a7d-7756-4072-8b1f-6360357218c2" : "e2191d36-21ab-4ea7-9cee-d9ff576948d1")\")")
+        }
+        queryForProductProjections(filterQuery: filterQuery, failbackFilterQuery: [], sort: sort)
+    }
+
+    private func queryForProductProjections(filterQuery: [String]?, failbackFilterQuery: [String]? = nil, sort: [String]?, applyFailbackFilterQuery: Bool = false) {
         isLoading.value = true
 
-        ProductProjection.search(sort: sort, limit: 10, filterQuery: filterQuery, markMatchingVariants: true,
+        ProductProjection.search(sort: sort, limit: 10, filterQuery: applyFailbackFilterQuery ? failbackFilterQuery : filterQuery, markMatchingVariants: true,
                                  priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
                                  priceCustomerGroup: AppDelegate.customerGroup?.id, result: { result in
-            DispatchQueue.main.async {
-                if let products = result.model?.results, result.isSuccess {
-                    self.products = products
-
-                } else if let errors = result.errors as? [CTError], result.isFailure {
-                    super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-
+            if let products = result.model?.results, result.isSuccess {
+                if products.isEmpty && !applyFailbackFilterQuery {
+                    self.queryForProductProjections(filterQuery: filterQuery, failbackFilterQuery: failbackFilterQuery, sort: sort, applyFailbackFilterQuery: true)
+                    return
                 }
+                DispatchQueue.main.async {
+                    self.products = products
+                    self.isLoading.value = false
+                }
+
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
                 self.isLoading.value = false
             }
         })

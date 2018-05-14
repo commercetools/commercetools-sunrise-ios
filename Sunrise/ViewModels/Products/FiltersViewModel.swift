@@ -111,6 +111,8 @@ class FiltersViewModel: BaseViewModel {
         }
 
         disposables += NotificationCenter.default.reactive.notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
+        .delay(0.8, on: QueueScheduler())
+        .observe(on: QueueScheduler())
         .observeValues { [unowned self] _ in
             self.resetFilters()
         }

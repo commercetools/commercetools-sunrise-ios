@@ -33,6 +33,10 @@ class ProductOverviewViewModel: BaseViewModel {
             bindFiltersViewModel()
         }
     }
+    /// The default flag whether my style filters should be included.
+    private var shouldIncludeMyStyleFilters = true
+    /// The serial queue used for performing product projection requests.
+    private let productRetrievalQueue = OperationQueue()
     private var products: [ProductProjection]
     private let presentProductDetailsObserver: Signal<ProductDetailsViewModel, NoError>.Observer
     private let scrollToBeginningObserver: Signal<Void, NoError>.Observer
@@ -59,6 +63,9 @@ class ProductOverviewViewModel: BaseViewModel {
         self.toggleWishListObserver = toggleWishListObserver
 
         super.init()
+
+        productRetrievalQueue.maxConcurrentOperationCount = 1
+        productRetrievalQueue.qualityOfService = .userInteractive
 
         disposables += refreshSignal
         .observe(on: QueueScheduler(qos: .userInitiated))
@@ -91,11 +98,19 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         disposables += NotificationCenter.default.reactive.notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
-        .delay(0.8, on: QueueScheduler())
+        .observeValues { [weak self] _ in
+            self?.productRetrievalQueue.isSuspended = true
+        }
+
+        disposables += NotificationCenter.default.reactive.notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
+        .delay(0.9, on: QueueScheduler())
         .observeValues { [weak self] _ in
             self?.textSearch.value.0 = ""
             self?.category.value = nil
             self?.additionalFilterQuery.value = []
+            self?.shouldIncludeMyStyleFilters = true
+            self?.productRetrievalQueue.cancelAllOperations()
+            self?.productRetrievalQueue.isSuspended = false
         }
 
         disposables += clearProductsSignal
@@ -172,6 +187,7 @@ class ProductOverviewViewModel: BaseViewModel {
         }
 
         disposables += viewModel.resetFiltersAction.values.observeValues { [weak self] in
+            self?.shouldIncludeMyStyleFilters = false
             self?.queryForProductProjections(offset: 0)
         }
     }
@@ -228,57 +244,84 @@ class ProductOverviewViewModel: BaseViewModel {
     // MARK: - Commercetools product projections querying
 
     private func queryForProductProjections(offset: UInt) {
-        let text = textSearch.value.0
-        let locale = textSearch.value.1
-        isLoading.value = true
+        let includeMyStyleFilters = shouldIncludeMyStyleFilters
+        productRetrievalQueue.addOperation {
+            let text = self.textSearch.value.0
+            let locale = self.textSearch.value.1
+            self.isLoading.value = true
 
-        var filters = [String]()
-        var filterQuery = [String]()
-        var facets = [String]()
+            var filters = [String]()
+            var filterQuery = [String]()
+            var facets = [String]()
 
-        filterQuery += additionalFilterQuery.value
-        if let categoryId = category.value?.id {
-            filterQuery.append("categories.id:subtree(\"\(categoryId)\")")
-        }
-        if let mainProductTypeId = filtersViewModel?.mainProductType?.id {
-            filterQuery.append("productType.id:\"\(mainProductTypeId)\"")
-        }
-        if let lower = filtersViewModel?.priceRange.value.0, let upper = filtersViewModel?.priceRange.value.1, AppDelegate.currentCurrency != nil {
-            filterQuery.append("variants.price.centAmount:range (\(lower * 100) to \(upper == FiltersViewModel.kPriceMax ? "*" : (upper * 100).description))")
-        }
+            // Only include my style filters when there're no additional filters applied
+            if includeMyStyleFilters && self.filtersViewModel?.hasFiltersApplied == false && self.isAuthenticated {
+                self.filtersViewModel?.activeBrands.value = MyStyleViewModel.brandsSettings
+                self.filtersViewModel?.activeSizes.value = MyStyleViewModel.sizesSettings
+                self.filtersViewModel?.activeColors.value = MyStyleViewModel.colorsSettings
 
-        [(FiltersViewModel.kBrandAttributeName, filtersViewModel?.activeBrands.value),
-         (FiltersViewModel.kSizeAttributeName, filtersViewModel?.activeSizes.value),
-         (FiltersViewModel.kColorsAttributeName, filtersViewModel?.activeColors.value)].forEach {
-            if let activeValues = $1, activeValues.count > 0 {
-                var filterValue = activeValues.reduce("", { "\($0),\"\($1)\"" })
-                filterValue.removeFirst()
-                filters.append("variants.attributes.\($0).key:\(filterValue)")
+                // Reset previously applied my style filters if `includeMyStyleFilters` is false
+            } else if !includeMyStyleFilters && self.isAuthenticated && self.filtersViewModel?.activeBrands.value == MyStyleViewModel.brandsSettings
+                              && self.filtersViewModel?.activeSizes.value == MyStyleViewModel.sizesSettings
+                              && self.filtersViewModel?.activeSizes.value == MyStyleViewModel.sizesSettings {
+                self.filtersViewModel?.activeBrands.value = []
+                self.filtersViewModel?.activeSizes.value = []
+                self.filtersViewModel?.activeColors.value = []
             }
 
-            facets.append("variants.attributes.\($0).key")
-        }
+            filterQuery += self.additionalFilterQuery.value
+            if let categoryId = self.category.value?.id {
+                filterQuery.append("categories.id:subtree(\"\(categoryId)\")")
+            }
+            if let mainProductTypeId = self.filtersViewModel?.mainProductType?.id {
+                filterQuery.append("productType.id:\"\(mainProductTypeId)\"")
+            }
+            if let lower = self.filtersViewModel?.priceRange.value.0, let upper = self.filtersViewModel?.priceRange.value.1, AppDelegate.currentCurrency != nil {
+                filterQuery.append("variants.price.centAmount:range (\(lower * 100) to \(upper == FiltersViewModel.kPriceMax ? "*" : (upper * 100).description))")
+            }
 
-        ProductProjection.search(limit: pageSize, offset: offset, lang: locale, text: text,
-                                 filters: filters, filterQuery: filterQuery, facets: facets, markMatchingVariants: true,
-                                 priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
-                                 priceCustomerGroup: AppDelegate.customerGroup?.id, result: { result in
-            
-            if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
-                DispatchQueue.main.async {
-                    if offset == 0 && products.count > 0 && self.products.count > 0 {
-                        self.scrollToBeginningObserver.send(value: ())
-                    }
-                    self.products = offset == 0 ? products : self.products + products
-                    self.filtersViewModel?.facets.value = result.model?.facets
+            [(FiltersViewModel.kBrandAttributeName, self.filtersViewModel?.activeBrands.value),
+             (FiltersViewModel.kSizeAttributeName, self.filtersViewModel?.activeSizes.value),
+             (FiltersViewModel.kColorsAttributeName, self.filtersViewModel?.activeColors.value)].forEach {
+                if let activeValues = $1, activeValues.count > 0 {
+                    var filterValue = activeValues.reduce("", { "\($0),\"\($1)\"" })
+                    filterValue.removeFirst()
+                    filters.append("variants.attributes.\($0).key:\(filterValue)")
                 }
 
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
-
+                facets.append("variants.attributes.\($0).key")
             }
-            self.isLoading.value = false
-        })
+
+            let semaphore = DispatchSemaphore(value: 0)
+            ProductProjection.search(limit: self.pageSize, offset: offset, lang: locale, text: text,
+                    filters: filters, filterQuery: filterQuery, facets: facets, markMatchingVariants: true,
+                    priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
+                    priceCustomerGroup: AppDelegate.customerGroup?.id) { [unowned self] result in
+
+                if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
+                    // If there were no results with my style filters applied, try again without them
+                    if offset == 0 && products.count == 0 && includeMyStyleFilters {
+                        self.shouldIncludeMyStyleFilters = false
+                        self.queryForProductProjections(offset: 0)
+                        semaphore.signal()
+                    }
+                    DispatchQueue.main.async {
+                        if offset == 0 && products.count > 0 && self.products.count > 0 {
+                            self.scrollToBeginningObserver.send(value: ())
+                        }
+                        self.products = offset == 0 ? products : self.products + products
+                        self.filtersViewModel?.facets.value = result.model?.facets
+                    }
+
+                } else if let errors = result.errors as? [CTError], result.isFailure {
+                    self.alertMessageObserver.send(value: self.alertMessage(for: errors))
+
+                }
+                self.isLoading.value = false
+                semaphore.signal()
+            }
+            _ = semaphore.wait(timeout: .distantFuture)
+        }
     }
 
     // MARK: - Presenting product details from the universal links

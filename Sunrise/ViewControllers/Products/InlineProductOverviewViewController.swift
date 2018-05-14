@@ -46,7 +46,10 @@ class InlineProductOverviewViewController: UIViewController {
         .startWithValues { [weak self] _ in self?.collectionView.reloadData() }
 
         disposables += reactive.trigger(for: #selector(viewWillAppear(_:)))
-        .observeValues { [weak self] _ in self?.collectionView.reloadData() }
+        .observeValues { [weak self] _ in
+            self?.collectionView.reloadData()
+            self?.viewModel?.refreshObserver.send(value: ())
+        }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }

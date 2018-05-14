@@ -61,7 +61,7 @@ class MyOrdersViewModel: BaseViewModel {
     }
 
     func orderNumber(at indexPath: IndexPath) -> String {
-        return String(format: NSLocalizedString("Order # %@", comment: "Order Number"), orders[indexPath.row].orderNumber ?? "N/A")
+        return String(format: NSLocalizedString("Order # %@", comment: "Order Number"), orders[indexPath.row].orderNumber ?? "—")
     }
 
     func totalPrice(at indexPath: IndexPath) -> String {
