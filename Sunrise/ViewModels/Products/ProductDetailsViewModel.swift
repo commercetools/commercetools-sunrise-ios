@@ -165,12 +165,16 @@ class ProductDetailsViewModel: BaseViewModel {
         bindViewModelProperties()
 
         guard let variant = product.allVariants.first(where: { $0.id == variantId }) ?? product.mainVariantWithPrice else { return }
-        let color = variant.attributes?.first { $0.name == FiltersViewModel.kColorsAttributeName }
-        let size = variant.attributes?.first { $0.name == FiltersViewModel.kSizeAttributeName }
-        if let color = color {
+        let colors = variant.attributes?.filter { $0.name == FiltersViewModel.kColorsAttributeName } ?? []
+        if let color = colors.first(where: { MyStyleViewModel.colorsSettings.contains($0.valueKey ?? "") }), isAuthenticated {
+            activeAttributes.value.append(color)
+        } else if let color = colors.first {
             activeAttributes.value.append(color)
         }
-        if let size = size {
+        let sizes = variant.attributes?.filter { $0.name == FiltersViewModel.kSizeAttributeName } ?? []
+        if let size = sizes.first(where: { MyStyleViewModel.sizesSettings.contains($0.valueLabel ?? "") }), isAuthenticated {
+            activeAttributes.value.append(size)
+        } else if let size = sizes.first {
             activeAttributes.value.append(size)
         }
 
