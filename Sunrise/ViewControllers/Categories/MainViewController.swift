@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var categorySelectionButton: UIButton!
     @IBOutlet weak var searchFilterButton: UIButton!
     @IBOutlet weak var searchFilterBackgroundTopImageView: UIImageView!
+    @IBOutlet weak var searchFilterMyStyleAppliedImageView: UIImageView!
+    @IBOutlet weak var filterMyStyleAppliedImageView: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var filterBackgroundTopImageView: UIImageView!
 
@@ -192,7 +194,27 @@ class MainViewController: UIViewController {
         }
 
         viewModel.filtersViewModel = filtersViewController?.viewModel
+
+        bindFiltersViewModel()
+
         disposables += observeAlertMessageSignal(viewModel: viewModel)
+    }
+
+    func bindFiltersViewModel() {
+        guard let viewModel = viewModel?.productsViewModel.filtersViewModel, isViewLoaded else { return }
+
+        disposables += viewModel.isMyStyleApplied.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] in
+            switch ($0, self.filterButton.isSelected) {
+                case (true, true):
+                    self.filterMyStyleAppliedImageView.alpha = 1
+                case (true, false):
+                    self.searchFilterMyStyleAppliedImageView.alpha = 1
+                case (false, _):
+                    [self.filterMyStyleAppliedImageView, self.searchFilterMyStyleAppliedImageView].forEach { $0.alpha = 0 }
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -431,12 +453,12 @@ class MainViewController: UIViewController {
     // MARK: - Blurring effect
 
     private func updateBackgroundSnapshot() {
-        guard let backgroundSnapshot = takeSnapshot() else { return }
-        self.backgroundSnapshot = backgroundSnapshot
-        blurredSnapshot = blur(image: backgroundSnapshot)
-        if backgroundImageView.alpha > 0 {
-            backgroundImageView.image = blurredSnapshot
-        }
+//        guard let backgroundSnapshot = takeSnapshot() else { return }
+//        self.backgroundSnapshot = backgroundSnapshot
+//        blurredSnapshot = blur(image: backgroundSnapshot)
+//        if backgroundImageView.alpha > 0 {
+//            backgroundImageView.image = blurredSnapshot
+//        }
     }
 
     private func takeSnapshot() -> UIImage? {

@@ -19,6 +19,8 @@ class FiltersViewController: UIViewController {
     @IBOutlet weak var higherPriceLabel: UILabel!
     
     @IBOutlet weak var priceSlider: RangeSlider!
+    
+    @IBOutlet weak var myStyleSwitch: UISwitch!
 
     @IBOutlet weak var brandsCollectionView: UICollectionView!
     @IBOutlet weak var sizesCollectionView: UICollectionView!
@@ -38,6 +40,8 @@ class FiltersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        myStyleSwitch.onTintColor = UIColor(patternImage: #imageLiteral(resourceName: "switch_background"))
 
         viewModel = FiltersViewModel()
     }
@@ -89,10 +93,16 @@ class FiltersViewController: UIViewController {
             self.priceSlider.upperValue = Double($0.1)
         }
 
+        disposables += myStyleSwitch.reactive.isOnValues
+        .observeValues { [unowned self] in
+            self.viewModel?.toggleMyStyleObserver.send(value: $0)
+        }
+
         disposables += viewModel.priceRange <~ priceSlider.reactive.mapControlEvents(.valueChanged) { (Int($0.lowerValue), Int($0.upperValue)) }
         viewModel.priceSetSignal = priceSlider.reactive.mapControlEvents(.editingDidEnd) { _ in }
         disposables += lowerPriceLabel.reactive.text <~ viewModel.lowerPrice
         disposables += higherPriceLabel.reactive.text <~ viewModel.higherPrice
+        disposables += myStyleSwitch.reactive.isOn <~ viewModel.isMyStyleApplied
 
         aToGBrandButton.reactive.pressed = CocoaAction(viewModel.scrollBrandAction) { _ in return 0 }
         hToQBrandButton.reactive.pressed = CocoaAction(viewModel.scrollBrandAction) { _ in return 1 }
