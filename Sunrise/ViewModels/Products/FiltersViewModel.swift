@@ -14,6 +14,7 @@ class FiltersViewModel: BaseViewModel {
     let toggleBrandObserver: Signal<IndexPath, NoError>.Observer
     let toggleSizeObserver: Signal<IndexPath, NoError>.Observer
     let toggleColorObserver: Signal<IndexPath, NoError>.Observer
+    let toggleMyStyleObserver: Signal<Bool, NoError>.Observer
     let priceRange = MutableProperty((FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax))
     let isActive = MutableProperty(false)
     var scrollBrandAction: Action<Int, IndexPath?, NoError>!
@@ -24,10 +25,13 @@ class FiltersViewModel: BaseViewModel {
     let activeBrandButtonIndex = MutableProperty(0)
     let lowerPrice = MutableProperty("")
     let higherPrice = MutableProperty("")
+    let isMyStyleApplied = MutableProperty(false)
     var hasFiltersApplied: Bool {
         return !activeBrands.value.isEmpty || !activeSizes.value.isEmpty || !activeColors.value.isEmpty
                 || priceRange.value != (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
     }
+    /// The flag indicating whether filters have been manually edited / applied (or are being set by POP to match my style).
+    var manuallyAppliedFilters = false
 
     var priceSetSignal: Signal<Void, NoError>?
     let activeBrands = MutableProperty(Set<String>())
@@ -61,6 +65,9 @@ class FiltersViewModel: BaseViewModel {
         let (toggleColorSignal, toggleColorObserver) = Signal<IndexPath, NoError>.pipe()
         self.toggleColorObserver = toggleColorObserver
 
+        let (toggleMyStyleSignal, toggleMyStyleObserver) = Signal<Bool, NoError>.pipe()
+        self.toggleMyStyleObserver = toggleMyStyleObserver
+
         super.init()
 
         queryForMainProductType()
@@ -77,6 +84,10 @@ class FiltersViewModel: BaseViewModel {
         disposables += lowerPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.0 * 100).description }
         disposables += higherPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.1 * 100).description + ($0.1 == FiltersViewModel.kPriceMax ? "+" : "") }
 
+        disposables += isLoading.signal.observeValues { [unowned self] _ in
+            self.isMyStyleApplied.value = self.isAuthenticated && MyStyleViewModel.brandsSettings == self.activeBrands.value && MyStyleViewModel.sizesSettings == self.activeSizes.value && MyStyleViewModel.colorsSettings == self.activeColors.value
+        }
+
         disposables += facets.producer
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] _ in
@@ -84,6 +95,7 @@ class FiltersViewModel: BaseViewModel {
         }
 
         disposables += toggleBrandSignal.observeValues { [unowned self] in
+            self.manuallyAppliedFilters = true
             let brand = self.brands[$0.row].key
             if self.activeBrands.value.contains(brand) {
                 self.activeBrands.value.remove(brand)
@@ -93,6 +105,7 @@ class FiltersViewModel: BaseViewModel {
         }
 
         disposables += toggleSizeSignal.observeValues { [unowned self] in
+            self.manuallyAppliedFilters = true
             let size = self.sizes[$0.row].key
             if self.activeSizes.value.contains(size) {
                 self.activeSizes.value.remove(size)
@@ -102,6 +115,7 @@ class FiltersViewModel: BaseViewModel {
         }
 
         disposables += toggleColorSignal.observeValues { [unowned self] in
+            self.manuallyAppliedFilters = true
             let color = self.colors[$0.row].key
             if self.activeColors.value.contains(color) {
                 self.activeColors.value.remove(color)
@@ -150,6 +164,23 @@ class FiltersViewModel: BaseViewModel {
             return SignalProducer(value: nil)
         }
 
+        disposables += toggleMyStyleSignal.observeValues { [unowned self] in
+            self.manuallyAppliedFilters = true
+            guard self.isAuthenticated else {
+                AppRouting.showProfileTab()
+                self.isMyStyleApplied.value = false
+                return
+            }
+            if $0 {
+                self.activeBrands.value = MyStyleViewModel.brandsSettings
+                self.activeSizes.value = MyStyleViewModel.sizesSettings
+                self.activeColors.value = MyStyleViewModel.colorsSettings
+            } else {
+                [self.activeBrands, self.activeSizes, self.activeColors].forEach { $0.value = [] }
+            }
+            self.isLoading.value = false
+        }
+
         resetFiltersAction = Action(enabledIf: Property(value: true)) { [unowned self] _ in
             self.resetFilters()
             return SignalProducer(value: ())
@@ -157,6 +188,7 @@ class FiltersViewModel: BaseViewModel {
     }
 
     private func resetFilters() {
+        manuallyAppliedFilters = false
         updateFilters()
         priceRange.value = (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
         [activeBrands, activeSizes, activeColors].forEach { $0.value = [] }

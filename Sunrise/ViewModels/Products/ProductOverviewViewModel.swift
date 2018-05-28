@@ -254,14 +254,15 @@ class ProductOverviewViewModel: BaseViewModel {
             var filterQuery = [String]()
             var facets = [String]()
 
-            // Only include my style filters when there're no additional filters applied
-            if includeMyStyleFilters && self.filtersViewModel?.hasFiltersApplied == false && self.isAuthenticated {
+            // Only include my style filters when there're no additional filters applied, and customer hasn't applied any manual filters (i.e `manuallyAppliedFilters` is false)
+            if includeMyStyleFilters && self.filtersViewModel?.hasFiltersApplied == false && self.filtersViewModel?.manuallyAppliedFilters == false && self.isAuthenticated {
                 self.filtersViewModel?.activeBrands.value = MyStyleViewModel.brandsSettings
                 self.filtersViewModel?.activeSizes.value = MyStyleViewModel.sizesSettings
                 self.filtersViewModel?.activeColors.value = MyStyleViewModel.colorsSettings
 
-                // Reset previously applied my style filters if `includeMyStyleFilters` is false
-            } else if !includeMyStyleFilters && self.isAuthenticated && self.filtersViewModel?.activeBrands.value == MyStyleViewModel.brandsSettings
+            // Reset previously applied my style filters if `includeMyStyleFilters` is false, and customer hasn't applied any manual filters (i.e `manuallyAppliedFilters` is false)
+            } else if !includeMyStyleFilters && self.isAuthenticated && self.filtersViewModel?.manuallyAppliedFilters == false
+                              && self.filtersViewModel?.activeBrands.value == MyStyleViewModel.brandsSettings
                               && self.filtersViewModel?.activeSizes.value == MyStyleViewModel.sizesSettings
                               && self.filtersViewModel?.activeSizes.value == MyStyleViewModel.sizesSettings {
                 self.filtersViewModel?.activeBrands.value = []
