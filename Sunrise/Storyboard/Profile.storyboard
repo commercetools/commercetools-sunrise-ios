@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ebt-Qz-Wb8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ebt-Qz-Wb8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -118,6 +118,7 @@
                         <segue destination="nHk-ND-5KQ" kind="show" identifier="showAddressBook" id="FoM-JT-cDw"/>
                         <segue destination="bZH-ro-PfR" kind="show" identifier="showSettings" id="4zG-Qe-hhA"/>
                         <segue destination="kDD-bb-Dbt" kind="show" identifier="showMyStyle" id="pht-59-TwL"/>
+                        <segue destination="RLv-H2-J9R" kind="show" identifier="showPayments" id="hxI-Sz-xns"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwZ-tE-Z7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1374,7 +1375,7 @@ make it your default.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wBD-tt-P5o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3742" y="3432"/>
+            <point key="canvasLocation" x="3742" y="4307"/>
         </scene>
         <!--AddressViewController-->
         <scene sceneID="Gct-Y4-pwS">
@@ -2210,11 +2211,11 @@ Sat: 09:00 - 16:00</string>
                         <outlet property="aToGBrandButton" destination="C1D-Av-0xh" id="6Hn-QQ-dMj"/>
                         <outlet property="brandsCollectionView" destination="6Ef-IC-ud5" id="cOW-9d-NJw"/>
                         <outlet property="colorsCollectionView" destination="jX3-cG-XQ4" id="kpN-Es-UvR"/>
-                        <outlet property="saveButton" destination="xiV-wY-N2h" id="3y8-68-nJo"/>
                         <outlet property="genderSegmentedControl" destination="Kci-Er-b4p" id="KMh-gI-Fwn"/>
                         <outlet property="hToQBrandButton" destination="QGP-Lz-Ns5" id="ayX-Xc-Frj"/>
                         <outlet property="rToZBrandButton" destination="dYj-Rj-pKK" id="YJF-JS-1uM"/>
                         <outlet property="resetButton" destination="1Bp-hP-DVg" id="oGc-Zh-bIT"/>
+                        <outlet property="saveButton" destination="xiV-wY-N2h" id="3y8-68-nJo"/>
                         <outlet property="sizesCollectionView" destination="xVF-5k-Bxk" id="7tZ-7v-6dV"/>
                         <outlet property="styleSettingsStackView" destination="QrD-hV-cx4" id="aww-QH-PCF"/>
                         <outlet property="symbolBrandButton" destination="mU6-s1-8Oj" id="VVj-FY-t5B"/>
@@ -2222,7 +2223,247 @@ Sat: 09:00 - 16:00</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryP-ur-Vvq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3742" y="4211"/>
+            <point key="canvasLocation" x="3742" y="5087"/>
+        </scene>
+        <!--Payments View Controller-->
+        <scene sceneID="n8x-xZ-bNm">
+            <objects>
+                <viewController id="RLv-H2-J9R" userLabel="Payments View Controller" customClass="PaymentsViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gyc-MY-udS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="198" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A75-SQ-BhZ">
+                                <rect key="frame" x="0.0" y="117" width="375" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AddressCell" rowHeight="198" id="2Cx-62-67N">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="198"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="333" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Cx-62-67N" id="dBN-aw-HzQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="197.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qyJ-gF-lIO">
+                                <rect key="frame" x="0.0" y="117" width="375" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="cbJ-fO-nnm">
+                                    <size key="itemSize" width="375" height="198"/>
+                                    <size key="headerReferenceSize" width="375" height="144"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PaymentCell" id="dWh-Qk-faj" customClass="PaymentCell" customModule="Sunrise" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="144" width="375" height="198"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address_book_cell_background" translatesAutoresizingMaskIntoConstraints="NO" id="4k6-e1-73C">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="197.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="XXXX-XXXX-XXXX-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dQb-Xf-cAM">
+                                                    <rect key="frame" x="75" y="99" width="123" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YQ-ue-vqu">
+                                                    <rect key="frame" x="36" y="29" width="38" height="38"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="38" id="DTl-Pw-Mkm"/>
+                                                        <constraint firstAttribute="height" constant="38" id="Fc7-kt-naK"/>
+                                                    </constraints>
+                                                    <state key="normal" image="shipping_button"/>
+                                                    <state key="selected" image="shipping_button_active"/>
+                                                    <state key="highlighted" image="shipping_button_active"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3F-3c-ttr">
+                                                    <rect key="frame" x="271" y="133.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="MLM-yI-gSH"/>
+                                                        <constraint firstAttribute="height" constant="30" id="hS1-0s-4an"/>
+                                                    </constraints>
+                                                    <state key="normal" image="edit_address_icon"/>
+                                                    <state key="highlighted" image="edit_address_icon_active"/>
+                                                    <connections>
+                                                        <segue destination="UeS-3D-4Ue" kind="show" id="4nM-R6-mU7"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDz-et-Wzj">
+                                                    <rect key="frame" x="305" y="133.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="DfW-Nx-Mcx"/>
+                                                        <constraint firstAttribute="height" constant="30" id="YiQ-wZ-NoE"/>
+                                                    </constraints>
+                                                    <state key="normal" image="remove_address_icon"/>
+                                                    <state key="highlighted" image="remove_address_icon_active"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Bloggs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1sF-aI-LHG">
+                                                    <rect key="frame" x="75" y="80" width="87.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default payment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8c-N0-Zke">
+                                                    <rect key="frame" x="35" y="0.0" width="118" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set to default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekl-dt-wov">
+                                                    <rect key="frame" x="35" y="0.0" width="85.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa_logo" translatesAutoresizingMaskIntoConstraints="NO" id="GAW-v5-Vu1">
+                                                    <rect key="frame" x="286" y="40" width="49" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="CxB-pp-OrY"/>
+                                                        <constraint firstAttribute="height" constant="16" id="FFx-p6-fIR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0091" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dLc-3G-zwu">
+                                                    <rect key="frame" x="198" y="99" width="35.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="7YQ-ue-vqu" firstAttribute="top" secondItem="dWh-Qk-faj" secondAttribute="top" constant="29" id="3qP-2B-9bz"/>
+                                            <constraint firstItem="dQb-Xf-cAM" firstAttribute="top" secondItem="1sF-aI-LHG" secondAttribute="bottom" constant="2" id="77L-sJ-ZWr"/>
+                                            <constraint firstItem="GAW-v5-Vu1" firstAttribute="centerY" secondItem="7YQ-ue-vqu" secondAttribute="centerY" id="DRI-ef-dau"/>
+                                            <constraint firstItem="1sF-aI-LHG" firstAttribute="leading" secondItem="dWh-Qk-faj" secondAttribute="leading" constant="75" id="Gi7-vs-VV7"/>
+                                            <constraint firstAttribute="trailing" secondItem="bDz-et-Wzj" secondAttribute="trailing" constant="40" id="HcL-82-5RH"/>
+                                            <constraint firstAttribute="bottom" secondItem="4k6-e1-73C" secondAttribute="bottom" id="J8P-o4-5DS"/>
+                                            <constraint firstItem="bDz-et-Wzj" firstAttribute="leading" secondItem="a3F-3c-ttr" secondAttribute="trailing" constant="4" id="LEd-ff-Ch8"/>
+                                            <constraint firstItem="w8c-N0-Zke" firstAttribute="top" secondItem="dWh-Qk-faj" secondAttribute="top" id="Lz0-zE-x7v"/>
+                                            <constraint firstItem="dQb-Xf-cAM" firstAttribute="leading" secondItem="1sF-aI-LHG" secondAttribute="leading" id="Mmi-RZ-eVc"/>
+                                            <constraint firstItem="1sF-aI-LHG" firstAttribute="top" secondItem="dWh-Qk-faj" secondAttribute="top" constant="80" id="PcH-un-QM9"/>
+                                            <constraint firstItem="4k6-e1-73C" firstAttribute="leading" secondItem="dWh-Qk-faj" secondAttribute="leading" id="Sbw-Pc-HFV"/>
+                                            <constraint firstItem="dLc-3G-zwu" firstAttribute="leading" secondItem="dQb-Xf-cAM" secondAttribute="trailing" id="be6-jJ-RUd"/>
+                                            <constraint firstItem="Ekl-dt-wov" firstAttribute="top" secondItem="dWh-Qk-faj" secondAttribute="top" id="c0M-Tx-0Je"/>
+                                            <constraint firstItem="GAW-v5-Vu1" firstAttribute="trailing" secondItem="bDz-et-Wzj" secondAttribute="trailing" id="ddk-bo-yag"/>
+                                            <constraint firstItem="dLc-3G-zwu" firstAttribute="centerY" secondItem="dQb-Xf-cAM" secondAttribute="centerY" id="j6n-MP-iD5"/>
+                                            <constraint firstAttribute="bottom" secondItem="a3F-3c-ttr" secondAttribute="bottom" constant="34" id="mPU-F1-VMT"/>
+                                            <constraint firstItem="w8c-N0-Zke" firstAttribute="leading" secondItem="dWh-Qk-faj" secondAttribute="leading" constant="35" id="nNw-3l-htb"/>
+                                            <constraint firstItem="7YQ-ue-vqu" firstAttribute="leading" secondItem="dWh-Qk-faj" secondAttribute="leading" constant="36" id="sbx-6T-3qg"/>
+                                            <constraint firstItem="Ekl-dt-wov" firstAttribute="leading" secondItem="dWh-Qk-faj" secondAttribute="leading" constant="35" id="srS-zD-tSi"/>
+                                            <constraint firstAttribute="bottom" secondItem="bDz-et-Wzj" secondAttribute="bottom" constant="34" id="xvC-W7-wqm"/>
+                                            <constraint firstAttribute="trailing" secondItem="4k6-e1-73C" secondAttribute="trailing" id="ynu-Pq-jEi"/>
+                                            <constraint firstItem="4k6-e1-73C" firstAttribute="top" secondItem="dWh-Qk-faj" secondAttribute="top" id="zQU-X4-n0x"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="defaultPaymentLabel" destination="w8c-N0-Zke" id="dAu-Dh-BXP"/>
+                                            <outlet property="editButton" destination="a3F-3c-ttr" id="brn-lJ-52c"/>
+                                            <outlet property="last4DigitsLabel" destination="dLc-3G-zwu" id="0Pa-34-1me"/>
+                                            <outlet property="makeDefaultButton" destination="7YQ-ue-vqu" id="FOg-Qf-Oio"/>
+                                            <outlet property="makeDefaultPaymentLabel" destination="Ekl-dt-wov" id="y8l-cS-0h7"/>
+                                            <outlet property="nameLabel" destination="1sF-aI-LHG" id="yu9-Qt-gGf"/>
+                                            <outlet property="removeButton" destination="bDz-et-Wzj" id="W4J-tp-HfM"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddNewCell" id="Xwa-QJ-6A4">
+                                        <rect key="frame" x="0.0" y="342" width="375" height="198"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGK-Um-Mkq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
+                                                    <state key="normal" image="address_book_add_cell_background"/>
+                                                    <state key="highlighted" image="address_book_add_cell_background_active"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="contentHorizontalAlignment">
+                                                            <integer key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="contentVerticalAlignment">
+                                                            <integer key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <segue destination="UeS-3D-4Ue" kind="show" id="vcY-OI-Ut8"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="FGK-Um-Mkq" firstAttribute="top" secondItem="Xwa-QJ-6A4" secondAttribute="top" id="1CK-gp-p8U"/>
+                                            <constraint firstAttribute="trailing" secondItem="FGK-Um-Mkq" secondAttribute="trailing" id="S0r-kJ-nwG"/>
+                                            <constraint firstAttribute="bottom" secondItem="FGK-Um-Mkq" secondAttribute="bottom" id="njT-tN-vES"/>
+                                            <constraint firstItem="FGK-Um-Mkq" firstAttribute="leading" secondItem="Xwa-QJ-6A4" secondAttribute="leading" id="rL0-Ic-02d"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HeaderView" id="YJA-iQ-Ydh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3y-Z4-XT6">
+                                            <rect key="frame" x="91" y="27" width="193.5" height="36.5"/>
+                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
+                                            <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w41-vJ-mQJ">
+                                            <rect key="frame" x="101.5" y="78.5" width="171.5" height="33.5"/>
+                                            <string key="text">Select a payment below to
+make it your default.</string>
+                                            <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                            <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="T3y-Z4-XT6" firstAttribute="top" secondItem="YJA-iQ-Ydh" secondAttribute="top" constant="27" id="F07-Rb-U8j"/>
+                                        <constraint firstItem="T3y-Z4-XT6" firstAttribute="centerX" secondItem="YJA-iQ-Ydh" secondAttribute="centerX" id="RRd-8i-h5S"/>
+                                        <constraint firstItem="w41-vJ-mQJ" firstAttribute="top" secondItem="T3y-Z4-XT6" secondAttribute="bottom" constant="15" id="Rjb-6R-9lu"/>
+                                        <constraint firstItem="w41-vJ-mQJ" firstAttribute="centerX" secondItem="YJA-iQ-Ydh" secondAttribute="centerX" id="i1Y-vd-D97"/>
+                                    </constraints>
+                                </collectionReusableView>
+                                <connections>
+                                    <outlet property="dataSource" destination="RLv-H2-J9R" id="nuv-JL-LtU"/>
+                                    <outlet property="delegate" destination="RLv-H2-J9R" id="muW-NK-rjm"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="A75-SQ-BhZ" firstAttribute="leading" secondItem="QKU-X4-wnd" secondAttribute="leading" id="3rV-V1-zLz"/>
+                            <constraint firstItem="QKU-X4-wnd" firstAttribute="trailing" secondItem="A75-SQ-BhZ" secondAttribute="trailing" id="5T1-VO-zGA"/>
+                            <constraint firstItem="qyJ-gF-lIO" firstAttribute="leading" secondItem="QKU-X4-wnd" secondAttribute="leading" id="LU0-7U-KsY"/>
+                            <constraint firstItem="QKU-X4-wnd" firstAttribute="trailing" secondItem="qyJ-gF-lIO" secondAttribute="trailing" id="Qqn-u0-sMA"/>
+                            <constraint firstItem="QKU-X4-wnd" firstAttribute="bottom" secondItem="qyJ-gF-lIO" secondAttribute="bottom" constant="53" id="eeM-7j-b94"/>
+                            <constraint firstItem="QKU-X4-wnd" firstAttribute="bottom" secondItem="A75-SQ-BhZ" secondAttribute="bottom" constant="53" id="h7K-Re-NhL"/>
+                            <constraint firstItem="qyJ-gF-lIO" firstAttribute="top" secondItem="QKU-X4-wnd" secondAttribute="top" constant="53" id="xqY-3n-iKk"/>
+                            <constraint firstItem="A75-SQ-BhZ" firstAttribute="top" secondItem="QKU-X4-wnd" secondAttribute="top" constant="53" id="yQz-Eo-ehL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QKU-X4-wnd"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="qyJ-gF-lIO" id="5tY-vZ-r6q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WrU-30-Smv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3742" y="3448"/>
+        </scene>
+        <!--PaymentViewController-->
+        <scene sceneID="bEv-Tf-KqS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Cart" referencedIdentifier="PaymentViewController" id="UeS-3D-4Ue" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mje-FB-0Fl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4362" y="3447"/>
         </scene>
     </scenes>
     <resources>
@@ -2257,8 +2498,10 @@ Sat: 09:00 - 16:00</string>
         <image name="shipping_button" width="38" height="38"/>
         <image name="shipping_button_active" width="38" height="38"/>
         <image name="store_finder_default_cell_pin" width="50" height="50"/>
+        <image name="visa_logo" width="49" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i1R-dK-A6f"/>
+        <segue reference="4nM-R6-mU7"/>
+        <segue reference="NcE-Gh-f5w"/>
     </inferredMetricsTieBreakers>
 </document>
