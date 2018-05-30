@@ -59,9 +59,6 @@ class CheckoutViewController: UIViewController {
         lineItemsTableView.rowHeight = UITableViewAutomaticDimension
         shippingMethodsTableView.rowHeight = UITableViewAutomaticDimension
 
-        paymentCollectionView.reloadSections([0])
-        scrollViewDidScroll(paymentCollectionView)
-        
         billingAsShippingSwitch.onTintColor = UIColor(patternImage: #imageLiteral(resourceName: "switch_background"))
         hiddenWhenAuthenticatedViews.forEach { $0.isHidden = true }
 
@@ -188,6 +185,18 @@ class CheckoutViewController: UIViewController {
             self.scrollViewDidScroll(self.billingAddressCollectionView)
         }
 
+        disposables += viewModel.creditCards.producer
+        .skip(first: 2)
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] _ in
+            self.paymentCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+            self.paymentCollectionView.reloadSections([0])
+            self.scrollViewDidScroll(self.paymentCollectionView)
+        }
+
+        self.paymentCollectionView.reloadSections([0])
+        self.scrollViewDidScroll(self.paymentCollectionView)
+
         disposables += viewModel.orderAction.events
         .observe(on: UIScheduler())
         .observeValues { [weak self] event in
@@ -230,19 +239,35 @@ class CheckoutViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let addressViewController = segue.destination as? AddressViewController else { return }
-        _ = addressViewController.view
-        _ = addressViewController.checkoutHeaderViews.forEach { $0.isHidden = false }
-        if let sender = sender as? UIButton, let cell = sender.superview?.superview as? AddressCell, let addressViewController = segue.destination as? AddressViewController {
-            if let indexPath = deliveryAddressCollectionView.indexPath(for: cell), let viewModel = viewModel?.addressViewModelForAddress(at: indexPath, type: .shipping) {
-                addressViewController.viewModel = viewModel
-            } else if let indexPath = billingAddressCollectionView.indexPath(for: cell), let viewModel = viewModel?.addressViewModelForAddress(at: indexPath, type: .billing) {
-                addressViewController.viewModel = viewModel
-            }
+        switch segue.destination {
+            case let addressViewController as AddressViewController:
+                _ = addressViewController.view
+                _ = addressViewController.checkoutHeaderViews.forEach { $0.isHidden = false }
+                if let sender = sender as? UIButton, let cell = sender.superview?.superview as? AddressCell {
+                    if let indexPath = deliveryAddressCollectionView.indexPath(for: cell), let viewModel = viewModel?.addressViewModelForAddress(at: indexPath, type: .shipping) {
+                        addressViewController.viewModel = viewModel
+                    } else if let indexPath = billingAddressCollectionView.indexPath(for: cell), let viewModel = viewModel?.addressViewModelForAddress(at: indexPath, type: .billing) {
+                        addressViewController.viewModel = viewModel
+                    }
 
-        } else if let sender = sender as? UICollectionViewCell, let addressViewController = segue.destination as? AddressViewController {
-            addressViewController.viewModel = AddressViewModel(address: nil, type: deliveryAddressCollectionView.indexPath(for: sender) != nil ? .shipping : .billing)
+                } else if let sender = sender as? UICollectionViewCell {
+                    addressViewController.viewModel = AddressViewModel(address: nil, type: deliveryAddressCollectionView.indexPath(for: sender) != nil ? .shipping : .billing)
+                }
+            case let paymentViewController as PaymentViewController:
+                _ = paymentViewController.view
+                _ = paymentViewController.checkoutHeaderViews.forEach { $0.isHidden = false }
+                if let sender = sender as? UIButton, let cell = sender.superview?.superview as? PaymentCell {
+                    if let indexPath = paymentCollectionView.indexPath(for: cell), let viewModel = viewModel?.paymentViewModelForPayment(at: indexPath) {
+                        paymentViewController.viewModel = viewModel
+                    }
+
+                } else if sender is UICollectionViewCell {
+                    paymentViewController.viewModel = PaymentViewModel()
+                }
+            default:
+                return
         }
+
     }
 
     private func presentNoActiveCartError() {
@@ -274,8 +299,10 @@ extension CheckoutViewController: UICollectionViewDataSource {
                 return (viewModel?.shippingAddresses.value.count ?? 0) + 1
             case billingAddressCollectionView:
                 return (viewModel?.billingAddresses.value.count ?? 0) + 1
+            case paymentCollectionView:
+                return (viewModel?.creditCards.value.count ?? 0) + 1
             default:
-                return 2
+                return 0
         }
     }
 
@@ -294,7 +321,11 @@ extension CheckoutViewController: UICollectionViewDataSource {
                 resetScale(for: cell)
                 return cell
             default:
-                return collectionView.dequeueReusableCell(withReuseIdentifier: "PaymentCell", for: indexPath)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PaymentCell", for: indexPath) as! PaymentCell
+                resetScale(for: cell)
+                cell.last4DigitsLabel.text = viewModel?.cardLast4Digits(at: indexPath)
+                cell.nameLabel.text = viewModel?.cardName(at: indexPath)
+                return cell
         }
     }
 }
@@ -351,6 +382,9 @@ extension CheckoutViewController: UIScrollViewDelegate {
                 if let cell = cell as? AddressCell {
                     cell.cellSelectedImageView?.alpha = scaleX * 2.488 - 1.488
                 }
+                if let cell = cell as? PaymentCell {
+                    cell.cellSelectedImageView?.alpha = scaleX * 2.488 - 1.488
+                }
             }
         }
     }
@@ -390,6 +424,15 @@ extension CheckoutViewController: UIScrollViewDelegate {
         let newOffset: CGFloat = CGFloat(page) * (cellWidth + cellPadding)
         scrollView.setContentOffset(CGPoint(x: newOffset, y: 0), animated: true)
         guard let selectedIndexPath = (scrollView as? UICollectionView)?.indexPathForItem(at: CGPoint(x: newOffset, y: 0)) else { return }
-        scrollView == deliveryAddressCollectionView ? (viewModel?.selectedShippingAddressIndexPath.value = selectedIndexPath) : (viewModel?.selectedBillingAddressIndexPath.value = selectedIndexPath)
+        switch scrollView {
+            case deliveryAddressCollectionView:
+                viewModel?.selectedShippingAddressIndexPath.value = selectedIndexPath
+            case billingAddressCollectionView:
+                viewModel?.selectedBillingAddressIndexPath.value = selectedIndexPath
+            case paymentCollectionView:
+                viewModel?.selectedPaymentIndexPath.value = selectedIndexPath
+            default:
+                return
+        }
     }
 }
