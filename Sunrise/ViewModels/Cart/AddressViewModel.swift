@@ -42,7 +42,7 @@ class AddressViewModel: BaseViewModel {
         self.address = address
 
         if address == nil {
-            self.title.value = String(format: NSLocalizedString("Add %@ address", comment: "Add new address"), type == .shipping ? delivery : billing)//NSLocalizedString("Add new %@ address", comment: "Add new address", type == .shipping ? delivery : billing)
+            self.title.value = String(format: NSLocalizedString("Add %@ address", comment: "Add new address"), type == .shipping ? delivery : billing)
         } else {
             self.title.value = String(format: NSLocalizedString("Edit %@ address", comment: "Edit address"), type == .shipping ? delivery : billing)
         }

@@ -133,7 +133,7 @@ extension ProfileViewController: UITableViewDelegate {
             case 3:
                 performSegue(withIdentifier: "showAddressBook", sender: self)
             case 4:
-                print("my payments")
+                performSegue(withIdentifier: "showPayments", sender: self)
             case 5:
                 performSegue(withIdentifier: "showStoreFinder", sender: self)
             case 6:

@@ -16,6 +16,7 @@ class CheckoutViewModel: BaseViewModel {
     let isBillingSameAsShipping = MutableProperty(true)
     let selectedShippingAddressIndexPath: MutableProperty<IndexPath?> = MutableProperty(nil)
     let selectedBillingAddressIndexPath: MutableProperty<IndexPath?> = MutableProperty(nil)
+    let selectedPaymentIndexPath: MutableProperty<IndexPath?> = MutableProperty(nil)
     let discountCode: MutableProperty<String?> = MutableProperty(nil)
     let guestEmail: MutableProperty<String?> = MutableProperty(nil)
     let guestPassword: MutableProperty<String?> = MutableProperty(nil)
@@ -41,7 +42,9 @@ class CheckoutViewModel: BaseViewModel {
     let methods = MutableProperty([ShippingMethod]())
     let shippingAddresses = MutableProperty([Address]())
     let billingAddresses = MutableProperty([Address]())
+    let creditCards = MutableProperty<[CreditCard]>(CreditCardStore.sharedInstance.creditCards)
 
+    private var selectedCreditCardId = MutableProperty<String?>(CreditCardStore.sharedInstance.creditCards!.first?.id)
     private let noActiveCartObserver: Signal<Void, NoError>.Observer
     /// The serial queue used for processing cart update requests.
     private let cartUpdateQueue = DispatchQueue(label: "com.commercetools.cartUpdate")
@@ -104,6 +107,13 @@ class CheckoutViewModel: BaseViewModel {
             }
         }
 
+        disposables += selectedPaymentIndexPath.signal
+        .skipRepeats { $0?.item == $1?.item }
+        .filter { $0 != nil }
+        .observeValues { [unowned self] in
+            self.selectedCreditCardId.value = self.creditCards.value[$0!.item].id
+        }
+
         disposables += isBillingSameAsShipping.signal
         .skipRepeats()
         .observeValues { [unowned self] in
@@ -139,6 +149,7 @@ class CheckoutViewModel: BaseViewModel {
             self.selectedBillingAddressIndexPath.value = nil
             self.shippingAddresses.value = []
             self.billingAddresses.value = []
+            self.creditCards.value = CreditCardStore.sharedInstance.creditCards
             self.queryForActiveCart()
         }
     }
@@ -150,6 +161,10 @@ class CheckoutViewModel: BaseViewModel {
     func addressViewModelForAddress(at indexPath: IndexPath, type: AddressType) -> AddressViewModel {
         let address = type == .shipping ? shippingAddresses.value[indexPath.item] : billingAddresses.value[indexPath.item]
         return AddressViewModel(address: address, type: type)
+    }
+
+    func paymentViewModelForPayment(at indexPath: IndexPath) -> PaymentViewModel {
+        return PaymentViewModel(creditCard: creditCards.value[indexPath.item])
     }
 
     // MARK: - Line Items Data Source
@@ -213,6 +228,18 @@ class CheckoutViewModel: BaseViewModel {
     func isAddressSelected(at indexPath: IndexPath, for type: AddressType) -> Bool {
         let address = type == .shipping ? shippingAddresses.value[indexPath.item] : billingAddresses.value[indexPath.item]
         return type == .shipping ? cart.value?.shippingAddress?.id == address.id : cart.value?.billingAddress?.id == address.id
+    }
+
+    // MARK: - Payments Data Source
+
+    func cardLast4Digits(at indexPath: IndexPath) -> String? {
+        let fullNumber = creditCards.value[indexPath.item].number
+        guard fullNumber.count >= 4 else { return nil }
+        return String(fullNumber.suffix(from: fullNumber.index(fullNumber.endIndex, offsetBy: -4)))
+    }
+
+    func cardName(at indexPath: IndexPath) -> String {
+        return creditCards.value[indexPath.item].name
     }
 
     // MARK: - Cart management
