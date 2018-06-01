@@ -1247,7 +1247,7 @@
 					2163EBB01DE8C26C00803640 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = H2968B9CHK;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes.watchos.app = {
@@ -1258,7 +1258,7 @@
 					2163EBBC1DE8C26C00803640 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = H2968B9CHK;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -1275,7 +1275,7 @@
 					219992361DC9FAAB000E48FD = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = H2968B9CHK;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -1289,7 +1289,7 @@
 					21CDC4931CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = H2968B9CHK;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 1;
@@ -1313,12 +1313,12 @@
 					};
 					21CDC4A91CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 21CDC4931CE91D9B009D2638;
 					};
 					21CDC4B41CE91D9B009D2638 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						TestTargetID = 21CDC4931CE91D9B009D2638;
 					};
 				};
@@ -1592,8 +1592,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
-				"${BUILT_PRODUCTS_DIR}/BraintreeDropIn/BraintreeDropIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Commercetools-iOS/Commercetools.framework",
 				"${BUILT_PRODUCTS_DIR}/Contentful/Contentful.framework",
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
@@ -1610,8 +1608,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BraintreeDropIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commercetools.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Contentful.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",

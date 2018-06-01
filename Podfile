@@ -5,19 +5,19 @@ def common_pods
   pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'nfc-sunrise'
   pod 'ReactiveCocoa'
   pod 'ReactiveObjC'
-  pod 'DZNEmptyDataSet'
 end
 
 target 'Sunrise' do
   common_pods
+  pod 'CardIO'
   pod 'IQKeyboardManagerSwift'
   pod 'SDWebImage'
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
   pod 'Contentful'
-  pod 'Reveal-SDK', '~> 10', :configurations => ['Debug Prod']
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'DateToolsSwift'
 end
 
 target 'ReservationNotification' do
