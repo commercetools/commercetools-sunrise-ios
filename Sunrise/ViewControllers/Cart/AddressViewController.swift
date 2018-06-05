@@ -7,6 +7,7 @@ import ReactiveSwift
 import ReactiveCocoa
 import IQDropDownTextField
 import SVProgressHUD
+import ContactsUI
 
 class AddressViewController: UIViewController {
 
@@ -22,7 +23,6 @@ class AddressViewController: UIViewController {
     @IBOutlet weak var stateField: IQDropDownTextField!
     @IBOutlet weak var countryField: IQDropDownTextField!
     
-    @IBOutlet weak var addFromContacts: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     
     @IBOutlet var checkoutHeaderViews: [UIView]!
@@ -150,7 +150,30 @@ class AddressViewController: UIViewController {
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
+    @IBAction func addFromContacts(_ sender: UIButton) {
+        let pickerViewController = CNContactPickerViewController()
+        pickerViewController.delegate = self
+        present(pickerViewController, animated: true)
+    }
+    
     @IBAction func backToCheckout(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension AddressViewController: CNContactPickerDelegate {
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        firstNameField.text = contact.givenName
+        lastNameField.text = contact.familyName
+        phoneField.text = contact.phoneNumbers.first?.value.stringValue
+        let address = contact.postalAddresses.first?.value
+        addressLine1Field.text = address?.street
+        addressLine2Field.text = address?.subLocality
+        cityField.text = address?.city
+        postalCodeField.text = address?.postalCode
+        countryField.selectedItem = address?.country
+        // setting selected item doesn't trigger `reactive.continuousTextValues` signal
+        viewModel?.country.value = countryField.selectedItem
+        stateField.selectedItem = address?.state
     }
 }
