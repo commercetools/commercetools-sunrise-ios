@@ -48,15 +48,10 @@ class PaymentViewModel: BaseViewModel {
         super.init()
 
         disposables += isPaymentValid <~ SignalProducer.combineLatest(cardNumber.producer, name.producer, expiryMonth.producer,
-                expiryYear.producer, ccv.producer).map { let (cardNumber, name, expiryMonth, expiryYear, ccv) = $0
-            guard cardNumber?.count == 16 else { return false }
-            var isPaymentInputValid = true
-            [cardNumber, name, expiryMonth, expiryYear, ccv].forEach {
-                if $0 == nil || $0?.isEmpty == true {
-                    isPaymentInputValid = false
-                }
-            }
-            return isPaymentInputValid
+                expiryYear.producer, ccv.producer).map { [unowned self] in
+            let (cardNumber, name, expiryMonth, expiryYear, ccv) = $0
+            return self.isCardNumberValid(cardNumber: cardNumber) && self.isExpiryMonthValid(expiryMonth: expiryMonth)
+                    && self.isExpiryYearValid(expiryYear: expiryYear) && self.isCcvValid(ccv: ccv) && name?.count ?? 0 > 0
         }
 
         saveAction = Action(enabledIf: isPaymentValid) { [unowned self] _ in
@@ -68,6 +63,47 @@ class PaymentViewModel: BaseViewModel {
     deinit {
         disposables.dispose()
     }
+
+    // MARK: - Validation
+
+    func isCardNumberValid(cardNumber: String?) -> Bool {
+        return cardNumber != nil && Int(cardNumber!) != nil && cardNumber!.count == 16
+    }
+
+    func isExpiryMonthValid(expiryMonth: String?) -> Bool {
+        return expiryMonth != nil && (Int(expiryMonth!) ?? Int.max) <= 12
+    }
+
+    func isExpiryYearValid(expiryYear: String?) -> Bool {
+        return expiryYear?.count == 2
+    }
+
+    func isCcvValid(ccv: String?) -> Bool {
+        return ccv?.count == 3
+    }
+
+    func transformInvalidCardNumber(input: String?) -> String {
+        let numericOnly = String((input ?? "").unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) })
+        return String(numericOnly.prefix(16))
+    }
+
+    func transformInvalidExpiryMonth(input: String?) -> String {
+        let numericOnly = String((input ?? "").unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) })
+        return String(numericOnly.prefix(1))
+    }
+
+    func transformInvalidExpiryYear(input: String?) -> String {
+        let numericOnly = String((input ?? "").unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) })
+        return String(numericOnly.prefix(2))
+    }
+
+    func transformInvalidCcv(input: String?) -> String {
+        let numericOnly = String((input ?? "").unicodeScalars.filter { CharacterSet.decimalDigits.contains($0) })
+        return String(numericOnly.prefix(3))
+    }
+
+
+    // MARK: - Storing payments
 
     private func savePayment() -> SignalProducer<Void, CTError> {
         return SignalProducer { [unowned self] observer, disposable in

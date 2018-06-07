@@ -33,7 +33,17 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        CardIOUtilities.preloadCardIO()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 1
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+        super.viewWillDisappear(animated)
     }
 
     private func bindViewModel() {
@@ -45,18 +55,46 @@ class PaymentViewController: UIViewController {
 
         cardNumberField.text = viewModel.cardNumber.value
         disposables += viewModel.cardNumber <~ cardNumberField.reactive.continuousTextValues
+        disposables += cardNumberField.reactive.continuousTextValues.signal
+        .filter { [unowned self] in self.viewModel?.isCardNumberValid(cardNumber: $0) == false }
+        .observeValues { [unowned self] in
+            let correctedValue = self.viewModel?.transformInvalidCardNumber(input: $0)
+            self.cardNumberField.text = correctedValue
+            self.viewModel?.cardNumber.value = correctedValue
+        }
 
         nameField.text = viewModel.name.value
         disposables += viewModel.name <~ nameField.reactive.continuousTextValues
 
         mmField.text = viewModel.expiryMonth.value
         disposables += viewModel.expiryMonth <~ mmField.reactive.continuousTextValues
+        disposables += mmField.reactive.continuousTextValues.signal
+        .filter { [unowned self] in self.viewModel?.isExpiryMonthValid(expiryMonth: $0) == false }
+        .observeValues { [unowned self] in
+            let correctedValue = self.viewModel?.transformInvalidExpiryMonth(input: $0)
+            self.mmField.text = correctedValue
+            self.viewModel?.expiryMonth.value = correctedValue
+        }
 
         yyField.text = viewModel.expiryYear.value
         disposables += viewModel.expiryYear <~ yyField.reactive.continuousTextValues
+        disposables += yyField.reactive.continuousTextValues.signal
+        .filter { [unowned self] in self.viewModel?.isExpiryYearValid(expiryYear: $0) == false }
+        .observeValues { [unowned self] in
+            let correctedValue = self.viewModel?.transformInvalidExpiryYear(input: $0)
+            self.yyField.text = correctedValue
+            self.viewModel?.expiryYear.value = correctedValue
+        }
 
         cvvField.text = viewModel.ccv.value
         disposables += viewModel.ccv <~ cvvField.reactive.continuousTextValues
+        disposables += cvvField.reactive.continuousTextValues.signal
+        .filter { [unowned self] in self.viewModel?.isCcvValid(ccv: $0) == false }
+        .observeValues { [unowned self] in
+            let correctedValue = self.viewModel?.transformInvalidCcv(input: $0)
+            self.cvvField.text = correctedValue
+            self.viewModel?.ccv.value = correctedValue
+        }
 
         disposables += saveButton.reactive.isEnabled <~ viewModel.isPaymentValid
 
@@ -76,8 +114,31 @@ class PaymentViewController: UIViewController {
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
-
+    
+    
+    @IBAction func scanCard(_ sender: UIButton) {
+        guard let scanViewController = CardIOPaymentViewController(paymentDelegate: self) else { return }
+        scanViewController.hideCardIOLogo = true
+        present(scanViewController, animated: true)
+    }
+    
     @IBAction func backToCheckout(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension PaymentViewController: CardIOPaymentViewControllerDelegate {
+    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+        paymentViewController.dismiss(animated: true)
+    }
+    
+    func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+        cardNumberField.text = cardInfo.cardNumber
+        nameField.text = cardInfo.cardholderName
+        mmField.text = String(format: "%02d", cardInfo.expiryMonth)
+        let expiryYear = "\(cardInfo.expiryYear)"
+        yyField.text = expiryYear.count > 2 ? String(expiryYear.suffix(from: expiryYear.index(expiryYear.endIndex, offsetBy: -2))) : expiryYear
+        cvvField.text = cardInfo.cvv
+        paymentViewController.dismiss(animated: true)
     }
 }
