@@ -421,7 +421,7 @@ class CartViewModel: BaseViewModel {
                         }
                     }
                 } else {
-                    completion(PKPaymentRequestShippingContactUpdate(errors: [NSError(domain: PKPassKitError._nsErrorDomain, code: PKPassKitError.unknownError.rawValue)], paymentSummaryItems: [], shippingMethods: []))
+                    completion(PKPaymentRequestShippingContactUpdate(errors: [NSError(domain: PKPassKitError.errorDomain, code: PKPassKitError.unknownError.rawValue)], paymentSummaryItems: [], shippingMethods: []))
                 }
             }
         }
@@ -454,7 +454,7 @@ class CartViewModel: BaseViewModel {
         request.currencyCode = cart.totalPrice.currencyCode
         request.supportedNetworks = PKPaymentRequest.availableNetworks()
         request.merchantCapabilities = [.capabilityDebit, .capabilityCredit, .capability3DS, .capabilityEMV]
-        request.merchantIdentifier = "merchant"
+        request.merchantIdentifier = ""
         request.requiredShippingContactFields = [.name, .emailAddress, .postalAddress]
         request.requiredBillingContactFields = [.name, .emailAddress, .postalAddress]
         let semaphore = DispatchSemaphore(value: 0)
@@ -492,7 +492,7 @@ class CartViewModel: BaseViewModel {
 
     private func shippingMethods(completion: @escaping ([PKShippingMethod], [Error]) -> Swift.Void) {
         guard let cart = cart.value else {
-            completion([], [NSError(domain: PKPassKitError._nsErrorDomain, code: PKPassKitError.unknownError.rawValue)])
+            completion([], [NSError(domain: PKPassKitError.errorDomain, code: PKPassKitError.unknownError.rawValue)])
             return
         }
         ShippingMethod.for(cart: cart) { result in
@@ -517,7 +517,7 @@ class CartViewModel: BaseViewModel {
                         self.cart.value = cart
                         completion(shippingMethods, [])
                     } else {
-                        completion([], [NSError(domain: PKPassKitError._nsErrorDomain, code: PKPassKitError.unknownError.rawValue)])
+                        completion([], [NSError(domain: PKPassKitError.errorDomain, code: PKPassKitError.unknownError.rawValue)])
                     }
                 }
             } else {
