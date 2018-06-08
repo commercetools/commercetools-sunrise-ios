@@ -109,7 +109,7 @@ class CheckoutViewModel: BaseViewModel {
 
         disposables += selectedPaymentIndexPath.signal
         .skipRepeats { $0?.item == $1?.item }
-        .filter { $0 != nil }
+        .filter { [unowned self] in $0 != nil && self.creditCards.value.count > $0!.item }
         .observeValues { [unowned self] in
             self.selectedCreditCardId.value = self.creditCards.value[$0!.item].id
         }
