@@ -4,16 +4,9 @@
 
 import Commercetools
 
-extension Money {
-    init(currencyCode: String, centAmount: Int) {
-        self.currencyCode = currencyCode
-        self.centAmount = centAmount
-    }
-}
-
 // MARK: - CustomStringConvertible
 
-extension Money: CustomStringConvertible {
+extension BaseMoney {
     /// The textual representation used when written to an output stream, with locale based format
     public var description: String {
         if let currencySymbol = (Locale(identifier: currencyCode) as NSLocale).displayName(forKey: NSLocale.Key.currencySymbol, value: currencyCode) {

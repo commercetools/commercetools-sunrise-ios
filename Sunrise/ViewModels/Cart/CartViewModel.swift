@@ -213,8 +213,8 @@ class CartViewModel: BaseViewModel {
         if let cartId = cart.value?.id, let version = cart.value?.version, let lineItemId = cart.value?.lineItems[indexPath.row].id {
             self.isLoading.value = true
 
-            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.removeLineItem(lineItemId: lineItemId, quantity: nil),
-                                                                                           .recalculate(updateProductData: nil)])
+            let updateActions = UpdateActions<CartUpdateAction>(version: version, actions: [.removeLineItem(lineItemId: lineItemId, quantity: nil, shippingDetailsToRemove: nil),
+                                                                                            .recalculate(updateProductData: nil)])
             Cart.update(cartId, actions: updateActions, expansion: shippingMethodExpansion, result: { result in
                 if let cart = result.model, result.isSuccess {
                     self.update(cart: cart)

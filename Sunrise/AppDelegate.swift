@@ -5,7 +5,6 @@
 import UIKit
 import UserNotifications
 import Commercetools
-import Contentful
 import CoreLocation
 import AVFoundation
 import IQKeyboardManagerSwift
@@ -20,12 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var currentCountry: String?
     static var currentCurrency: String?
     static var customerGroup: Reference<CustomerGroup>?
-
-    var contentfulClient: Client = {
-        let spaceId = Bundle.main.object(forInfoDictionaryKey: "ContentfulSpaceId") as? String ?? ""
-        let accessToken = Bundle.main.object(forInfoDictionaryKey: "ContentfulAccessToken") as? String ?? ""
-        return Client(spaceId: spaceId, accessToken: accessToken)
-    }()
 
     var window: UIWindow?
 
@@ -43,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         locationManager = CLLocationManager()
         locationManager?.requestWhenInUseAuthorization()
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
 
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.requestAuthorization(options: [.badge, .alert, .sound]) { success, _ in
@@ -154,7 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 )
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-//                    AppRouting.accountViewController?.viewModel?.logoutCustomer()
                     Commercetools.logoutCustomer()
                     Project.update(config: projectConfig as NSDictionary)
                     exit(0)

@@ -14,9 +14,6 @@ target 'Sunrise' do
   pod 'SDWebImage'
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
-  pod 'Contentful'
-  pod 'Fabric'
-  pod 'Crashlytics'
   pod 'DateToolsSwift'
 end
 
