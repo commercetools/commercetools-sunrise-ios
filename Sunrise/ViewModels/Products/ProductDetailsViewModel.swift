@@ -213,9 +213,9 @@ class ProductDetailsViewModel: BaseViewModel {
             guard let price = self?.priceForActiveAttributes else { return "" }
 
             if let discounted = price.discounted?.value {
-                return "\(discounted)"
+                return discounted.description
             } else {
-                return "\(price.value)"
+                return price.value.description
             }
         }
 
@@ -223,7 +223,7 @@ class ProductDetailsViewModel: BaseViewModel {
             let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 18)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
             guard let price = self?.priceForActiveAttributes, let _ = price.discounted?.value else { return nil }
 
-            return NSAttributedString(string: "\(price.value)", attributes: oldPriceAttributes)
+            return NSAttributedString(string: price.value.description, attributes: oldPriceAttributes)
         }
 
         disposables += isOnStock <~ activeAttributes.map { [unowned self] _ -> NSAttributedString? in
