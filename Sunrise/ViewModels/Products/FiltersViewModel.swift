@@ -85,7 +85,7 @@ class FiltersViewModel: BaseViewModel {
         disposables += higherPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.1 * 100).description + ($0.1 == FiltersViewModel.kPriceMax ? "+" : "") }
 
         disposables += isLoading.signal.observeValues { [unowned self] _ in
-            self.isMyStyleApplied.value = self.isAuthenticated && MyStyleViewModel.brandsSettings == self.activeBrands.value && MyStyleViewModel.sizesSettings == self.activeSizes.value && MyStyleViewModel.colorsSettings == self.activeColors.value
+            self.isMyStyleApplied.value = self.isAuthenticated && self.hasFiltersApplied && MyStyleViewModel.brandsSettings == self.activeBrands.value && MyStyleViewModel.sizesSettings == self.activeSizes.value && MyStyleViewModel.colorsSettings == self.activeColors.value
         }
 
         disposables += facets.producer
