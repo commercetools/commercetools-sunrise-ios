@@ -39,7 +39,7 @@ class HomeViewModel: BaseViewModel {
                 case 1:
                     AppRouting.showCategory(id: "96ac6204-4631-41d3-9540-22b7629f468d")
                 case 3:
-                    AppRouting.showProductOverview(with: ["variants.scopedPriceDiscounted:true"])
+                    AppRouting.showCategory(id: MyStyleViewModel.isWomenSetting ? "1d9f82b4-4fb8-4830-91b0-61b876da7b93" : "c35ef50c-c62a-42bf-851d-2a0692d07f24")
                 case 5:
                     AppRouting.showCategory(id: "f8587a7d-7756-4072-8b1f-6360357218c2")
                 case 6:
