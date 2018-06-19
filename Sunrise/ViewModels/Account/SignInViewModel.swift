@@ -33,7 +33,7 @@ class SignInViewModel: BaseViewModel {
 
         disposables += isLoginInputValid <~ username.combineLatest(with: password).map { !$0.isEmpty && !$1.isEmpty }
 
-        loginAction = Action(enabledIf: self.isLoginInputValid) { _ in
+        loginAction = Action(enabledIf: self.isLoginInputValid) { [unowned self] _ in
             self.isLoading.value = true
             return self.login(username: self.username.value, password: self.password.value)
         }

@@ -58,9 +58,7 @@ class BaseViewModel {
     // MARK: - Lifecycle
 
     init() {
-        let (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
-        self.alertMessageSignal = alertMessageSignal
-        self.alertMessageObserver = alertMessageObserver
+        (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
     }
 
     func alertMessage(for errors: [CTError]) -> String {
