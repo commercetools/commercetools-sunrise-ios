@@ -154,6 +154,10 @@ class MainViewController: UIViewController {
         .observeValues { [weak self] _ in
             self?.presentSearchResults()
         }
+        
+        disposables += viewModel.isLoading.producer
+        .observe(on: UIScheduler())
+        .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
         bindProductsViewModel()
@@ -174,6 +178,16 @@ class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.updateBackgroundSnapshot()
                 }
+            }
+        }
+        
+        disposables += viewModel.isLoading.producer
+        .filter { $0 }
+        .delay(0.3, on: QueueScheduler())
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] _ in
+            if self.viewModel?.productsViewModel.isLoading.value == true, self.filtersView.alpha == 0 {
+                SVProgressHUD.show()
             }
         }
 
@@ -215,6 +229,31 @@ class MainViewController: UIViewController {
                     [self.filterMyStyleAppliedImageView, self.searchFilterMyStyleAppliedImageView].forEach { $0.alpha = 0 }
             }
         }
+        
+        disposables += viewModel.isLoading.producer
+        .filter { $0 }
+        .delay(0.5, on: QueueScheduler())
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] _ in
+            if self.viewModel?.productsViewModel.filtersViewModel?.isLoading.value == true {
+                SVProgressHUD.show()
+            }
+        }
+
+        disposables += viewModel.isLoading.producer
+        .filter { $0 }
+        .delay(0.5, on: QueueScheduler())
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] _ in
+            if self.viewModel?.productsViewModel.filtersViewModel?.isLoading.value == true {
+                SVProgressHUD.show()
+            }
+        }
+
+        disposables += viewModel.isLoading.producer
+        .filter { !$0 }
+        .observe(on: UIScheduler())
+        .startWithValues { _ in SVProgressHUD.dismiss() }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -246,7 +285,12 @@ class MainViewController: UIViewController {
                 self.searchFilterBackgroundTopImageView.alpha = 0
                 self.filtersView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
-            }, completion: { _ in UIApplication.shared.endIgnoringInteractionEvents() })
+            }, completion: { _ in
+                UIApplication.shared.endIgnoringInteractionEvents()
+                if self.viewModel?.productsViewModel.isLoading.value == true {
+                    SVProgressHUD.show()
+                }
+            })
             sender.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
 
         } else {

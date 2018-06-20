@@ -50,4 +50,9 @@ class ReservationConfirmationViewController: UIViewController {
     @IBAction func continueShopping(_ sender: UIButton) {
         navigationController?.popToRootViewController(animated: true)
     }
+    
+    @IBAction func showProfile(_ sender: UIButton) {
+        AppRouting.showProfileTab()
+        navigationController?.popToRootViewController(animated: false)
+    }
 }
