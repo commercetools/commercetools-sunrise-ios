@@ -164,16 +164,23 @@ class AddressViewController: UIViewController {
 extension AddressViewController: CNContactPickerDelegate {
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         firstNameField.text = contact.givenName
+        viewModel?.firstName.value = contact.givenName
         lastNameField.text = contact.familyName
+        viewModel?.lastName.value = contact.familyName
         phoneField.text = contact.phoneNumbers.first?.value.stringValue
+        viewModel?.phone.value = phoneField.text
         let address = contact.postalAddresses.first?.value
         addressLine1Field.text = address?.street
+        viewModel?.address1.value = addressLine1Field.text
         addressLine2Field.text = address?.subLocality
+        viewModel?.address2.value = addressLine2Field.text
         cityField.text = address?.city
+        viewModel?.city.value = cityField.text
         postalCodeField.text = address?.postalCode
+        viewModel?.postCode.value = postalCodeField.text
         countryField.selectedItem = address?.country
-        // setting selected item doesn't trigger `reactive.continuousTextValues` signal
         viewModel?.country.value = countryField.selectedItem
         stateField.selectedItem = address?.state
+        viewModel?.state.value = stateField.selectedItem
     }
 }

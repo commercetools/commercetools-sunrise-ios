@@ -134,11 +134,16 @@ extension PaymentViewController: CardIOPaymentViewControllerDelegate {
     
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
         cardNumberField.text = cardInfo.cardNumber
+        viewModel?.cardNumber.value = cardInfo.cardNumber
         nameField.text = cardInfo.cardholderName
+        viewModel?.name.value = cardInfo.cardholderName
         mmField.text = String(format: "%02d", cardInfo.expiryMonth)
+        viewModel?.expiryMonth.value = mmField.text
         let expiryYear = "\(cardInfo.expiryYear)"
         yyField.text = expiryYear.count > 2 ? String(expiryYear.suffix(from: expiryYear.index(expiryYear.endIndex, offsetBy: -2))) : expiryYear
+        viewModel?.expiryYear.value = yyField.text
         cvvField.text = cardInfo.cvv
+        viewModel?.ccv.value = cardInfo.cvv
         paymentViewController.dismiss(animated: true)
     }
 }
