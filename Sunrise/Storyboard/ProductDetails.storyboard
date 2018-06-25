@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -387,7 +386,7 @@
                                                     <constraint firstAttribute="width" constant="11" id="gz2-kT-oau"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5X-uT-67D">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="S5X-uT-67D">
                                                 <rect key="frame" x="290" y="693.5" width="43.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                 <color key="textColor" red="0.37647058823529411" green="0.65098039215686276" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -576,6 +575,7 @@
                                                         </view>
                                                         <constraints>
                                                             <constraint firstItem="1oL-Lz-dpy" firstAttribute="top" secondItem="PYk-Nf-sff" secondAttribute="bottom" constant="14" id="1ll-jX-il1"/>
+                                                            <constraint firstItem="rzU-X7-U0K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bL6-lV-KYG" secondAttribute="trailing" id="4dc-Ie-lfG"/>
                                                             <constraint firstAttribute="trailing" secondItem="PYk-Nf-sff" secondAttribute="trailing" id="80Q-up-Upt"/>
                                                             <constraint firstItem="1oL-Lz-dpy" firstAttribute="leading" secondItem="mCu-b1-UUg" secondAttribute="leading" constant="2.7000000000000002" id="GIc-2C-kaa"/>
                                                             <constraint firstAttribute="trailing" secondItem="rzU-X7-U0K" secondAttribute="trailing" constant="5" id="HRU-mf-8S5"/>
@@ -688,6 +688,7 @@
                                             <constraint firstItem="EJM-eW-Bil" firstAttribute="leading" secondItem="hLK-IK-hic" secondAttribute="trailing" constant="8" id="pit-Gz-8CN"/>
                                             <constraint firstItem="AbG-tn-qNk" firstAttribute="leading" secondItem="rEX-YE-WQW" secondAttribute="leading" id="rYK-B7-o8D"/>
                                             <constraint firstItem="2k2-WV-CWd" firstAttribute="centerY" secondItem="yCT-wv-njm" secondAttribute="centerY" id="rlE-9p-NAB"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="S5X-uT-67D" secondAttribute="trailing" constant="16" id="tcP-zG-GFr"/>
                                             <constraint firstItem="CLM-hD-0Un" firstAttribute="top" secondItem="K5U-9g-ekU" secondAttribute="bottom" constant="74" id="tdb-eZ-aW2"/>
                                             <constraint firstAttribute="trailing" secondItem="cuJ-qp-QUg" secondAttribute="trailing" id="uhZ-rU-Y1W"/>
                                             <constraint firstItem="LAY-LC-1KZ" firstAttribute="centerX" secondItem="rEX-YE-WQW" secondAttribute="centerX" id="xKx-6j-qnY"/>
@@ -830,7 +831,7 @@ Open until 18:00 tomorrow</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FX9-TN-Y2W">
-                                                <rect key="frame" x="14" y="448" width="243.5" height="33"/>
+                                                <rect key="frame" x="14" y="448" width="243.5" height="33.5"/>
                                                 <string key="text">Annenstraße 4A
 10179 Berlin, Germany</string>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
@@ -847,51 +848,51 @@ Open until 18:00 tomorrow</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faE-de-Kpx">
-                                                <rect key="frame" x="282.5" y="465" width="70.5" height="14"/>
+                                                <rect key="frame" x="282.5" y="465.5" width="70.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                 <color key="textColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="not_available" translatesAutoresizingMaskIntoConstraints="NO" id="ymo-pX-lkF">
-                                                <rect key="frame" x="265.5" y="468" width="7" height="8"/>
+                                                <rect key="frame" x="265.5" y="468.5" width="7" height="8"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="7" id="Ki9-en-fAF"/>
                                                     <constraint firstAttribute="height" constant="8" id="frI-g9-tH9"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nN-0r-wP9">
-                                                <rect key="frame" x="0.0" y="511" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="511.5" width="375" height="1"/>
                                                 <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="hb9-x6-puh"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pdp_test_image" translatesAutoresizingMaskIntoConstraints="NO" id="99L-Hl-BYU">
-                                                <rect key="frame" x="14" y="521" width="134" height="178"/>
+                                                <rect key="frame" x="14" y="521.5" width="134" height="178"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="178" id="28O-wm-JgM"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€120.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-Bp-rlO">
-                                                <rect key="frame" x="161" y="524" width="75" height="21"/>
+                                                <rect key="frame" x="161" y="524.5" width="75" height="21"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="18"/>
                                                 <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Adidas Stan Smith limited edition Wimbledon." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="OaR-6V-RWo">
-                                                <rect key="frame" x="161" y="565" width="204" height="33.5"/>
+                                                <rect key="frame" x="161" y="565.5" width="204" height="33.5"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nm-ag-ppr">
-                                                <rect key="frame" x="161" y="612.5" width="30.5" height="15.5"/>
+                                                <rect key="frame" x="161" y="613" width="30.5" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik" pointSize="13"/>
                                                 <color key="textColor" red="0.3411764705882353" green="0.36862745098039218" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0C-6e-ejz">
-                                                <rect key="frame" x="224.5" y="605" width="30" height="30"/>
+                                                <rect key="frame" x="224.5" y="605.5" width="30" height="30"/>
                                                 <color key="backgroundColor" red="0.0" green="0.3411764705882353" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="8vO-Tx-4VY"/>
@@ -904,13 +905,13 @@ Open until 18:00 tomorrow</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gc2-0g-enf">
-                                                <rect key="frame" x="286.5" y="612" width="25" height="15.5"/>
+                                                <rect key="frame" x="286.5" y="612.5" width="25" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik" pointSize="13"/>
                                                 <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVE-1w-q3J">
-                                                <rect key="frame" x="320" y="600.5" width="40" height="40"/>
+                                                <rect key="frame" x="320" y="601" width="40" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EQ-QB-IYa">
                                                         <rect key="frame" x="1.5" y="13.5" width="38" height="14"/>
@@ -936,13 +937,13 @@ Open until 18:00 tomorrow</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5f-Ol-MTx">
-                                                <rect key="frame" x="161" y="661" width="50" height="15.5"/>
+                                                <rect key="frame" x="161" y="661.5" width="50" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Light" family="Rubik" pointSize="13"/>
                                                 <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRI-oW-oIL">
-                                                <rect key="frame" x="220" y="648" width="40" height="40"/>
+                                                <rect key="frame" x="220" y="648.5" width="40" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RG-lT-yku">
                                                         <rect key="frame" x="1.5" y="13.5" width="38" height="14"/>
@@ -968,7 +969,7 @@ Open until 18:00 tomorrow</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Q7-Sb-cfI">
-                                                <rect key="frame" x="327" y="520" width="32" height="30"/>
+                                                <rect key="frame" x="327" y="520.5" width="32" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="ehh-x1-aa8"/>
                                                     <constraint firstAttribute="height" constant="30" id="s0a-ej-XbB"/>
@@ -978,7 +979,7 @@ Open until 18:00 tomorrow</string>
                                                 <state key="highlighted" image="wishlist_icon_active"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzg-eI-KJa">
-                                                <rect key="frame" x="10" y="743" width="355" height="95"/>
+                                                <rect key="frame" x="10" y="743.5" width="355" height="95"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="95" id="fh3-Wl-dY8"/>
@@ -991,13 +992,13 @@ Open until 18:00 tomorrow</string>
                                                 </state>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JWT-eY-BCH">
-                                                <rect key="frame" x="191.5" y="619" width="33" height="1"/>
+                                                <rect key="frame" x="191.5" y="619.5" width="33" height="1"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="I6X-lJ-Y7D"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vFw-F8-yWL">
-                                                <rect key="frame" x="311.5" y="619.5" width="8.5" height="1"/>
+                                                <rect key="frame" x="311.5" y="620" width="8.5" height="1"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="98H-sa-L4v"/>
                                                 </constraints>
@@ -1148,7 +1149,7 @@ Open until 18:00 tomorrow</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7n-Bo-9yQ">
-                                                <rect key="frame" x="8" y="139.5" width="359" height="34"/>
+                                                <rect key="frame" x="8" y="139.5" width="359" height="33.5"/>
                                                 <string key="text">Annenstraße 4A
 10179 Berlin, Germany</string>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
@@ -1156,13 +1157,13 @@ Open until 18:00 tomorrow</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This store is open:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SyR-9M-bxq">
-                                                <rect key="frame" x="8" y="203" width="359" height="17"/>
+                                                <rect key="frame" x="8" y="202.5" width="359" height="17"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8E-Ij-5ug">
-                                                <rect key="frame" x="8" y="240" width="359" height="50"/>
+                                                <rect key="frame" x="8" y="239.5" width="359" height="50"/>
                                                 <string key="text">Mon - Fri: 12:00 -18:00
 Sat: 09:00 - 20:00
 Sat: 09:00 - 16:00</string>
@@ -1171,7 +1172,7 @@ Sat: 09:00 - 16:00</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMj-1X-d8x">
-                                                <rect key="frame" x="10" y="307" width="355" height="95"/>
+                                                <rect key="frame" x="10" y="306.5" width="355" height="95"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="95" id="HWZ-gk-xUo"/>
@@ -1184,7 +1185,7 @@ Sat: 09:00 - 16:00</string>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDq-So-duT">
-                                                <rect key="frame" x="10" y="376" width="355" height="95"/>
+                                                <rect key="frame" x="10" y="375.5" width="355" height="95"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="95" id="sXm-mq-eWW"/>
@@ -1200,7 +1201,7 @@ Sat: 09:00 - 16:00</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="giM-yh-oI3">
-                                                <rect key="frame" x="8" y="461" width="359" height="29"/>
+                                                <rect key="frame" x="8" y="460.5" width="359" height="29"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="Go to ">
@@ -1224,6 +1225,9 @@ Sat: 09:00 - 16:00</string>
                                                         </fragment>
                                                     </attributedString>
                                                 </state>
+                                                <connections>
+                                                    <action selector="showProfile:" destination="xhv-Ck-ajK" eventType="touchUpInside" id="qdd-49-oIc"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
