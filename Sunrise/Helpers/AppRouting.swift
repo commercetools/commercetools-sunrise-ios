@@ -137,7 +137,7 @@ class AppRouting {
     private static func resetMainViewControllerState(completion: @escaping () -> Swift.Void) {
         NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
         // Continue after reset animations have completed
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             completion()
         }
     }
