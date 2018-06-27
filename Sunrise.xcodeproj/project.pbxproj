@@ -1056,7 +1056,6 @@
 				2163EBBA1DE8C26C00803640 /* Frameworks */,
 				2163EBBB1DE8C26C00803640 /* Resources */,
 				ED80737083E382773B1B9C12 /* [CP] Embed Pods Frameworks */,
-				0984A8AD2DF40569A114EB90 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1075,7 +1074,6 @@
 				219992331DC9FAAB000E48FD /* Sources */,
 				219992341DC9FAAB000E48FD /* Frameworks */,
 				219992351DC9FAAB000E48FD /* Resources */,
-				456C84DA3E12DE9C243E0A7D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1095,7 +1093,6 @@
 				21CDC4911CE91D9B009D2638 /* Frameworks */,
 				21CDC4921CE91D9B009D2638 /* Resources */,
 				C51C4638AF67D6B89CE5675E /* [CP] Embed Pods Frameworks */,
-				65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */,
 				2199924B1DC9FAAB000E48FD /* Embed App Extensions */,
 				2163EBD71DE8C26C00803640 /* Embed Watch Content */,
 			);
@@ -1119,7 +1116,6 @@
 				21CDC4A71CE91D9B009D2638 /* Frameworks */,
 				21CDC4A81CE91D9B009D2638 /* Resources */,
 				FEFDCFB8952F3B692E80AF65 /* [CP] Embed Pods Frameworks */,
-				FA62B30873B9CA8D581F910C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1139,7 +1135,6 @@
 				21CDC4B11CE91D9B009D2638 /* Sources */,
 				21CDC4B21CE91D9B009D2638 /* Frameworks */,
 				21CDC4B31CE91D9B009D2638 /* Resources */,
-				68B0478F9AD978C779595ABF /* [CP] Copy Pods Resources */,
 				094B2A358611C082A08615B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -1365,21 +1360,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0984A8AD2DF40569A114EB90 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1398,21 +1378,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		456C84DA3E12DE9C243E0A7D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4D60F9E0DF7AF87D33414337 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1429,36 +1394,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		65B0A653A7509D406E466E72 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		68B0478F9AD978C779595ABF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A0614FCAE11E8DA7C682DF54 /* [CP] Check Pods Manifest.lock */ = {
@@ -1505,32 +1440,26 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commercetools-iOS/Commercetools.framework",
-				"${BUILT_PRODUCTS_DIR}/Contentful/Contentful.framework",
 				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Interstellar/Interstellar.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift-iOS/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result-iOS/Result.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer-10/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commercetools.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Contentful.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Interstellar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
@@ -1563,21 +1492,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA62B30873B9CA8D581F910C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FEFDCFB8952F3B692E80AF65 /* [CP] Embed Pods Frameworks */ = {
