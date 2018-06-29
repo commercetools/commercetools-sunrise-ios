@@ -205,7 +205,7 @@ class ProductDetailsViewModel: BaseViewModel {
         }
 
         disposables += imageCount <~ activeAttributes.map { [weak self] _ in
-            SDWebImagePrefetcher.shared().prefetchURLs(self?.variantForActiveAttributes?.images?.flatMap({ URL(string: ($0.url)) }))
+            SDWebImagePrefetcher.shared().prefetchURLs(self?.variantForActiveAttributes?.images?.compactMap({ URL(string: ($0.url)) }))
             return self?.variantForActiveAttributes?.images?.count ?? 0
         }
 

@@ -74,7 +74,7 @@ class StoreSelectionViewModel: BaseViewModel {
         }
         productImageUrl.value = currentVariant?.images?.first?.url ?? ""
         quantity.value = "x1"
-        disposables += storeLocations <~ channels.map { channels in channels.flatMap({ $0.location }) }
+        disposables += storeLocations <~ channels.map { channels in channels.compactMap({ $0.location }) }
         disposables += selectedStore <~ selectedStoreCoordinate.map { [weak self] selectedCoordinate in self?.channels.value.first { $0.location?.coordinate == selectedCoordinate } }
         disposables += storeName <~ selectedStore.map { $0?.name?.localizedString }
         disposables += openingTimes <~ selectedStore.map { $0?.openingTimes }
@@ -109,7 +109,7 @@ class StoreSelectionViewModel: BaseViewModel {
             if let userLocation = userLocation, let nearestStore = channels.first?.location {
                 visibleLocations = [userLocation, nearestStore]
             } else {
-                visibleLocations = channels.flatMap { $0.location }
+                visibleLocations = channels.compactMap { $0.location }
             }
 
             var zoomRect = MKMapRectNull

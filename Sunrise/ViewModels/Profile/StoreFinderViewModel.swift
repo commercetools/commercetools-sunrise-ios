@@ -110,7 +110,7 @@ class StoreFinderViewModel: BaseViewModel {
             } else if let nearestStore = nearestStore {
                 visibleLocations = [nearestStore]
             } else {
-                visibleLocations = $0.0.1.flatMap { $0.location }
+                visibleLocations = $0.0.1.compactMap { $0.location }
             }
 
             var zoomRect = MKMapRectNull
