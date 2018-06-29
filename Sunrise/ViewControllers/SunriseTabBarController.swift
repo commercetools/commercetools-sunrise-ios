@@ -124,14 +124,18 @@ class SunriseTabBarController: UITabBarController {
 
     @IBAction func touchUpInside(_ sender: UIButton) {
         guard let index = tabButtons.index(of: sender) else { return }
-        if index == 2 && index == selectedIndex, let searchNavigationController = viewControllers?[index] as? UINavigationController, searchNavigationController.viewControllers.count < 2 {
+        if index == AppRouting.TabIndex.mainTab.index && AppRouting.isProductOverviewOnMainTabPresented {
             NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
         }
         selectedIndex = index
     }
 
     @IBAction func backButtonTouchUpInside(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, userInfo: nil)
+        if AppRouting.isProductOverviewOnMainTabPresented {
+            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
+        } else {
+            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, userInfo: nil)
+        }
     }
 
     @IBAction func cartButtonTouchUpInside(_ sender: UIButton) {

@@ -95,7 +95,13 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         if productsCollectionView.alpha == 1 {
             productsCollectionView.reloadData()
+            SunriseTabBarController.currentlyActive?.backButton.alpha = 1
         }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+        super.viewWillDisappear(animated)
     }
 
     func bindViewModel() {
@@ -220,10 +226,12 @@ class MainViewController: UIViewController {
         disposables += viewModel.isMyStyleApplied.producer
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] in
-            switch ($0, self.filterButton.isSelected) {
+            switch ($0, self.filterButton.alpha == 1) {
                 case (true, true):
                     self.filterMyStyleAppliedImageView.alpha = 1
+                    self.searchFilterMyStyleAppliedImageView.alpha = 0
                 case (true, false):
+                    self.filterMyStyleAppliedImageView.alpha = 0
                     self.searchFilterMyStyleAppliedImageView.alpha = 1
                 case (false, _):
                     [self.filterMyStyleAppliedImageView, self.searchFilterMyStyleAppliedImageView].forEach { $0.alpha = 0 }
@@ -426,6 +434,7 @@ class MainViewController: UIViewController {
             self.productsCollectionView.alpha = 0
             self.emptyStateView.alpha = 0
             self.filterButton.alpha = 0
+            [self.filterMyStyleAppliedImageView, self.searchFilterMyStyleAppliedImageView].forEach { $0.alpha = 0 }
             self.searchViewHeightConstraint.constant = 55
             self.view.layoutIfNeeded()
             self.searchField.text = ""
@@ -466,6 +475,7 @@ class MainViewController: UIViewController {
                 self.productsCollectionView.alpha = 1
                 self.checkAndPresentEmptyState()
                 self.searchFilterButton.alpha = 1
+                SunriseTabBarController.currentlyActive?.backButton.alpha = 1
                 self.searchFieldLineWidthActiveConstraint.constant = -44
                 self.searchFieldLineCenterXConstraint.constant = -22
                 self.searchView.layoutIfNeeded()
@@ -485,6 +495,7 @@ class MainViewController: UIViewController {
         }, completion: { _ in
             UIView.animate(withDuration: 0.3, animations: {
                 self.productsCollectionView.alpha = 1
+                SunriseTabBarController.currentlyActive?.backButton.alpha = 1
                 self.checkAndPresentEmptyState()
                 self.filterButton.alpha = 1
             }, completion: { _ in

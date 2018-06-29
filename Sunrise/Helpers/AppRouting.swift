@@ -58,6 +58,10 @@ class AppRouting {
         return AuthManager.sharedInstance.state == .customerToken
     }
 
+    static var isProductOverviewOnMainTabPresented: Bool {
+        return SunriseTabBarController.currentlyActive?.selectedIndex == TabIndex.mainTab.index && (SunriseTabBarController.currentlyActive?.viewControllers?[TabIndex.mainTab.index] as? UINavigationController)?.viewControllers.count ?? 0 < 2
+    }
+
     static func showMainTab() {
         mainTabNavigationController?.popToRootViewController(animated: false)
         SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.mainTab.index
