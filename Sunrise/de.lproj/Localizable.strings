@@ -1,56 +1,8 @@
-/* Address form instructions */
-"All mandatory fields (*) have to be filled" = "Alle Pflichtfelder (*) müssen ausgefüllt sein";
+/* New Products */
+"New Products" = "Neue Produkte";
 
-/* Registration form instructions */
-"All mandatory fields (*) have to be filled, and your password and confirmation must match" = "Alle Pflichtfelder (*) müssen ausgefüllt sein und Passwort und Passwortbestätigung müssen übereinstimmen. ";
-
-/* Cancel */
-"Cancel" = "Abbrechen";
-
-/* Cart overview */
-"Cart overview" = "Zum Warenkorb";
-
-/* Categories */
-"Categories" = "Kategorien";
-
-/* Change My Store */
-"Change My Store" = "Meine Filiale ändern";
-
-/* Continue */
-"Continue" = "Weiter";
-
-/* Continue shopping */
-"Continue shopping" = "Weiter einkaufen";
-
-/* Could not add to cart */
-"Could not add to cart" = "Produkt wurde nicht in den Warenkorb gelegt";
-
-/* Scanning error title */
-"Could not scan" = "Barcode nicht erkannt";
-
-/* Adding product to cart failed */
-"Couldn't add product to cart" = "Entschuldigung, das Produkt konnte nicht in den Warenkorb gelegt werden";
-
-/* Default Shipping Address */
-"Default Shipping Address" = "Standard-Versandadresse";
-
-/* Error */
-"Error" = "Fehler";
-
-/* Failed */
-"Failed" = "Fehlgeschlagen";
-
-/* Free shipping */
-"Free" = "Gratis";
-
-/* Reservation log in prompt */
-"In order to make a reservation, you have to log in first." = "Bitte melden sie sich an, um eine Reservierung vorzunehmen. ";
-
-/* Camera permissions error */
-"In order to scan products, please go to settings and grant the Camera permission." = "Bitte öffnen sie die iPhone-Einstellungen und erlauben sie SUNRISE Kamerazugriff, um Barcodes scannen zu können. ";
-
-/* Less */
-"Less" = "Weniger";
+/* Shop by category */
+"Shop by category" = "Nach Kategorie einkaufen";
 
 /* Log In To Continue */
 "Log In To Continue" = "Bitte melden sie sich an";
@@ -58,11 +10,185 @@
 /* Log in */
 "Log in" = "Anmelden";
 
+/* Cancel */
+"Cancel" = "Abbrechen";
+
+/* Out of Stock */
+"Product is not available at the selected store. Try picking a different store." = "Das Produkt ist im ausgewählten Store nicht verfügbar. Wählen Sie einen anderen Store aus.";
+
+/* Speech black sneakers suggestion */
+"Try: \"black sneakers\"" = "Probieren Sie: \"Blaue Weste\"";
+
+/* Speech permissions error */
+"Microphone and speech recognition have to be activated for this feature." = "Sie müssen Mikrofonzugriff und Spracherkennung aktiviert haben, um diese Funktion zu nutzen.";
+
+/* Showing matching items message */
+"Showing items matching %@" = "Zeige Artikel, die zu %@ passen";
+
+/* Product not found */
+"The product could not be found" = "Das Produkt konnte nicht gefunden werden";
+
+/* Scanning error title */
+"Could not scan" = "Barcode nicht erkannt";
+
+/* Capabilities scanning error */
+"Your device is not capable of performing barcode scanning." = "Ihr Gerät kann leider keine Strichcodes scannen.";
+
+/* Camera permissions error */
+"In order to scan products, please go to settings and grant the Camera permission." = "Bitte öffnen sie die iPhone-Einstellungen und erlauben sie SUNRISE Kamerazugriff, um Barcodes scannen zu können. ";
+
+/* Scanned product not found */
+"Scanned product could not be found." = "Das gescannte Produkt konnte nicht gefunden werden.";
+
+/* Successful reservation */
+"Product has been reserved" = "Produkt wurde reserviert";
+
+/* Successful reservation message */
+"You will get the notification once your product is ready for pickup" = "Sie werden benachrichtigt sobald ihr Produkt zur Abholung bereitliegt";
+
+/* Continue shopping */
+"Continue shopping" = "Weiter einkaufen";
+
+/* Oops! */
+"Oops!" = "Oh!";
+
+/* Failed */
+"Failed" = "Fehlgeschlagen";
+
+/* OK */
+"OK" = "OK";
+
+/* Settings */
+"Settings" = "Einstellungen";
+
+/* Product added to cart */
+"Product added to cart" = "Produkt wurde in den Warenkorb gelegt";
+
+/* Product added to cart message */
+"Would you like to continue looking for more, or go to cart overview?" = "Möchten sie weitersuchen oder zum Warenkorb?";
+
+/* Continue */
+"Continue" = "Weiter";
+
+/* Cart overview */
+"Cart overview" = "Zum Warenkorb";
+
+/* Could not add to cart */
+"Could not add to cart" = "Produkt wurde nicht in den Warenkorb gelegt";
+
+/* Adding product to cart failed */
+"Couldn't add product to cart" = "Entschuldigung, das Produkt konnte nicht in den Warenkorb gelegt werden";
+
+/* In Stock */
+"in stock" = "verfügbar";
+
+/* Not Available */
+"not available" = "nicht verfügbar";
+
 /* MR. */
 "MR." = "Herr";
 
 /* MS. */
 "MS." = "Frau";
+
+/* DR. */
+"DR." = "DR.";
+
+/* Free shipping */
+"Free" = "Gratis";
+
+/* Order Total */
+"Total %@" = "Gesamt %@";
+
+/* Location Services */
+"Location Services" = "Ortungsdienste";
+
+/* Location permission prompt */
+"Please enable location permission for Sunrise app" = "Bitte erlauben Sie Ortungsdienste für die Sunrise App";
+
+/* Disable location instruction */
+"Use settings to disable location permission for Sunrise app" = "Nutzen Sie Einstellungen um die Erlaubnis für die Ortungsdienste der Sunrise App zu deaktivieren";
+
+/* Notifications */
+"Notifications" = "Benachrichtigungen";
+
+/* Notification permission prompt */
+"Please enable notification permission for Sunrise app" = "Bitte aktivieren Sie die Benachrichtigungen für die Sunrise App";
+
+/* Disable notification instruction */
+"Use settings to disable notification permission for Sunrise app" = "Nutzen Sie Einstellungen um die Benachrichtigungen für die Sunrise App zu deaktivieren";
+
+/* Change Password */
+"Change Password" = "Passwort ändern";
+
+/* Change Password Message */
+"Please enter your current password, and the new one you would like to use:" = "Bitte geben Sie Ihr aktuelles sowie neues Passwort ein:";
+
+/* Password Change Success */
+"Password successfully changed" = "Ihr Passwort wurde erfolgreich geändert";
+
+/* Passwords do not match */
+"New password and confirmation do not match" = "Das Neue Passwort und die Bestätitung stimmen nicht überein";
+
+/* Order Created Ago */
+"Created %@" = "%@ erstellt";
+
+/* Order Number */
+"Order # %@" = "Order # %@";
+
+/* Welcome back */
+"Welcome back" = "Willkommen zurück";
+
+/* Hey to Customer */
+"Hey %@" = "Hallo %@";
+
+/* Add new payment */
+"Add payment details" = "Zahlungsdetails hinzufügen";
+
+/* Edit existing payment */
+"Edit payment details" = "Zahlungsdetails bearbeiten";
+
+/* Default Shipping Address */
+"Default Shipping Address" = "Standard Versandadresse";
+
+/* Saved Addresses */
+"Saved Addresses" = "Gespeicherte Adressen";
+
+/* No active cart checkout message */
+"Looks like there's no active cart present. Cannot proceed checkout." = "Es scheint, als ob es keinen aktiven Warenkorb gibt. Der Bestellvorgang kann nicht ausgeführt werden.";
+
+/* Order Created */
+"Thank you " = "Danke ";
+
+/* Your order has been successfully created */
+"Your order has been successfully created" = "Ihre Bestellung wurde aufgegeben";
+
+/* Prepaid */
+"Prepaid" = "Vorkasse";
+
+/* Recommended for you */
+"Recommended for you" = "Für Sie empfohlen";
+
+/* Total */
+"Total" = "Gesamt";
+
+/* billing */
+"billing" = "Rechnungsadresse";
+
+/* delivery */
+"delivery" = "Versandadresse";
+
+/* Add new address */
+"Add %@ address" = "%@ hinzufügen";
+
+/* Edit address */
+"Edit %@ address" = "%@ bearbeiten";
+
+/* Order not found */
+"The order could not be found" = "Die Bestellung konnte nicht gefunden werden";
+
+/* Not selected */
+"Not selected" = "Nichts ausgewählt";
 
 /* My orders */
 "MY ORDERS" = "MEINE BESTELLUNGEN";
@@ -70,118 +196,52 @@
 /* My reservations */
 "MY RESERVATIONS" = "MEINE RESERVATIONEN";
 
-/* Speech permissions error */
-"Microphone and speech recognition have to be activated for this feature." = "Sie müssen Mikrofonzugriff und Spracherkennung aktiviert haben, um diese Funktion zu nutzen.";
-
-/* More */
-"More" = "Mehr";
-
 /* My store saved */
 "My Store Saved" = "Filiale gespeichert";
-
-/* No */
-"No" = "Nein";
-
-/* Not selected */
-"Not selected" = "Nichts ausgewählt";
-
-/* OK */
-"OK" = "OK";
-
-/* Online Store */
-"Online Store" = "Webshop";
-
-/* Oops! */
-"Oops!" = "Oh!";
-
-/* Prepaid */
-"Prepaid" = "Vorkasse";
-
-/* Product added to cart */
-"Product added to cart" = "Produkt wurde in den Warenkorb gelegt";
-
-/* Successful reservation */
-"Product has been reserved" = "Produkt wurde reserviert";
-
-/* POP Title */
-"Products" = "Produkte";
-
-/* Saved Addresses */
-"Saved Addresses" = "Gespeicherte Adressen";
-
-/* Scanned product not found */
-"Scanned product could not be found." = "Das gescannte Produkt konnte nicht gefunden werden.";
-
-/* Select My Store */
-"Select %@" = "Wähle %@";
-
-/* Select Online Store */
-"Select Online Store" = "Wähle den Webshop";
-
-/* Settings */
-"Settings" = "Einstellungen";
-
-/* Showing matching items message */
-"Showing items matching %@" = "Zeige Artikel, die zu %@ passen";
-
-/* Store Location */
-"Store Location" = "Filiale wählen";
-
-/* Order Created */
-"Thank you " = "Danke ";
-
-/* Order not found */
-"The order could not be found" = "Die Bestellung konnte nicht gefunden werden";
-
-/* Product not found */
-"The product could not be found" = "Das Produkt konnte nicht gefunden werden";
-
-/* Speech black sneakers suggestion */
-"Try: \"black sneakers\"" = "Probieren Sie: \"Blaue Weste\"";
-
-/* Which store would you like to browse */
-"Which store would you like to browse?" = "In welcher Filiale möchten sie stöbern?";
-
-/* Product added to cart message */
-"Would you like to continue looking for more, or go to cart overview?" = "Möchten sie weitersuchen oder zum Warenkorb?";
 
 /* Yes */
 "Yes" = "Ja";
 
-/* Successful reservation message */
-"You will get the notification once your product is ready for pickup" = "Sie werden benachrichtigt sobald ihr Produkt zur Abholung bereitliegt";
+/* No */
+"No" = "Nein";
 
-/* Capabilities scanning error */
-"Your device is not capable of performing barcode scanning." = "Ihr Gerät kann leider keine Strichcodes scannen.";
+/* search */
+"search" = "suche";
 
-/* Your order has been successfully created */
-"Your order has been successfully created" = "Ihre Bestellung wurde aufgegeben";
+/* My Orders */
+"My Orders" = "Meine bestellungen";
 
-/* Item available */
-"available" = "verfügbar";
+/* Reservations */
+"Reservations" = "Reservationen";
 
-/* Few items left */
-"hurry up, few items left" = "nur noch wenige verfügbar";
+/* My Style */
+"My Style" = "My Style";
 
-/* Item not available */
-"not available" = "nicht verfügbar";
+/* Address Book */
+"Address Book" = "Adressbuch";
+
+/* Payment Details */
+"Payment Details" = "Zahlungsdetails";
+
+/* Store Finder */
+"Store Finder" = "Store Finder";
+
+/* Logout */
+"Logout" = "Abmelden";
+
+/* Current Password */
+"Current Password" = "Aktuelles Passwort";
+
+/* New Password */
+"New Password" = "Neues Passowort";
+
+/* Confirm Password */
+"Confirm Password" = "Passwort bestätigen";
 
 /* View */
 "View" = "Ansehen";
 
 /* Get Directions */
 "Get Directions" = "Anfahrt";
-
-/* Discounts */
-"Discounts" = "Rabatte";
-
-/* Add discount code message */
-"Add your discount code:" = "Rabattcode hinzufügen:";
-
-/* Order Discount */
-"Order Discount" = "Rabatt";
-
-/* Discount code */
-"Discount code" = "Coupon";
 
 "RESERVATION_READY" = "Ihre Reservation liegt zur Abholung bereit.";

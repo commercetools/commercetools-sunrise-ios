@@ -380,14 +380,14 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="in_stock_checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="NNR-n7-vL1">
-                                                <rect key="frame" x="272" y="695.5" width="11" height="9"/>
+                                                <rect key="frame" x="268" y="695.5" width="11" height="9"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="9" id="EOA-cZ-R7W"/>
                                                     <constraint firstAttribute="width" constant="11" id="gz2-kT-oau"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in stock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="S5X-uT-67D">
-                                                <rect key="frame" x="290" y="693.5" width="43.5" height="14"/>
+                                                <rect key="frame" x="286" y="693.5" width="43.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                 <color key="textColor" red="0.37647058823529411" green="0.65098039215686276" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -654,7 +654,7 @@
                                             <constraint firstItem="Ay2-ks-oLJ" firstAttribute="leading" secondItem="Kbt-1j-BPs" secondAttribute="trailing" constant="4" id="Pkv-KK-4aM"/>
                                             <constraint firstItem="NNR-n7-vL1" firstAttribute="centerY" secondItem="K5U-9g-ekU" secondAttribute="centerY" id="R8v-p0-Ris"/>
                                             <constraint firstItem="Ay2-ks-oLJ" firstAttribute="top" secondItem="hYY-vk-s3U" secondAttribute="bottom" constant="5" id="R9u-LO-sAD"/>
-                                            <constraint firstItem="NNR-n7-vL1" firstAttribute="leading" secondItem="K5U-9g-ekU" secondAttribute="trailing" constant="37" id="RRV-V2-Elj"/>
+                                            <constraint firstItem="NNR-n7-vL1" firstAttribute="leading" secondItem="K5U-9g-ekU" secondAttribute="trailing" constant="33" id="RRV-V2-Elj"/>
                                             <constraint firstItem="7Hr-tr-bMJ" firstAttribute="top" secondItem="6YL-0g-Cm6" secondAttribute="bottom" constant="63" id="RU2-uO-jul"/>
                                             <constraint firstItem="02h-a1-Did" firstAttribute="bottom" secondItem="gow-0o-5ma" secondAttribute="bottom" constant="31" id="Sjv-kl-N4F"/>
                                             <constraint firstItem="hLK-IK-hic" firstAttribute="bottom" secondItem="hYY-vk-s3U" secondAttribute="bottom" constant="3" id="SnY-eJ-0L0"/>
