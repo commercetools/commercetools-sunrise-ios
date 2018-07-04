@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fzR-9P-qHj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fzR-9P-qHj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -935,7 +935,7 @@ recommend based on your style!</string>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" or " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm0-Ee-sOq">
-                                <rect key="frame" x="172" y="295" width="30.5" height="30"/>
+                                <rect key="frame" x="172" y="297.5" width="30.5" height="30"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                 <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1057,7 +1057,7 @@ recommend based on your style!</string>
                             <constraint firstItem="Rmk-nY-yrR" firstAttribute="centerX" secondItem="SOO-Hr-B3i" secondAttribute="centerX" id="cQ4-My-sKj"/>
                             <constraint firstItem="OoL-l1-rfZ" firstAttribute="leading" secondItem="E90-B4-EHe" secondAttribute="leading" constant="27" id="dBQ-ep-r7a"/>
                             <constraint firstItem="EbY-5S-1Bk" firstAttribute="centerY" secondItem="j2j-GY-dP1" secondAttribute="centerY" id="h6F-tH-6rw"/>
-                            <constraint firstItem="Xm0-Ee-sOq" firstAttribute="centerY" secondItem="SOO-Hr-B3i" secondAttribute="centerY" constant="-23" id="hi2-Sz-rvB"/>
+                            <constraint firstItem="Xm0-Ee-sOq" firstAttribute="centerY" secondItem="SOO-Hr-B3i" secondAttribute="centerY" constant="-21" id="hi2-Sz-rvB"/>
                             <constraint firstItem="bUc-Dx-03r" firstAttribute="height" secondItem="SOO-Hr-B3i" secondAttribute="height" multiplier="0.03" id="iyP-VS-iLR"/>
                             <constraint firstItem="NFZ-Xg-Anc" firstAttribute="top" secondItem="vha-Ml-CXx" secondAttribute="bottom" id="jeh-ns-Zl7"/>
                             <constraint firstItem="p3w-Xf-d3m" firstAttribute="trailing" secondItem="4aC-mP-HkT" secondAttribute="trailing" id="kjp-8T-xvt"/>
@@ -1079,8 +1079,10 @@ recommend based on your style!</string>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="Mw4-o2-emC" id="SyB-Ab-6De"/>
+                        <outlet property="forgotPasswordButton" destination="p3w-Xf-d3m" id="ANf-vY-vfb"/>
                         <outlet property="logInButton" destination="lA9-bM-W5E" id="rRt-2k-LyI"/>
                         <outlet property="passwordField" destination="4aC-mP-HkT" id="I8P-d9-VIX"/>
+                        <outlet property="signUpButton" destination="Rmk-nY-yrR" id="xiR-W9-MU7"/>
                         <segue destination="tbY-25-RFG" kind="presentation" identifier="showCheckout" id="BGk-Hx-oJm"/>
                     </connections>
                 </viewController>
