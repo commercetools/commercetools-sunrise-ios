@@ -455,11 +455,11 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hd-HV-afB">
-                                        <rect key="frame" x="56.5" y="114" width="217" height="90"/>
+                                        <rect key="frame" x="45" y="114" width="240" height="90"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="CEm-AP-oRU"/>
-                                            <constraint firstAttribute="width" constant="217" id="VAU-ra-EpA"/>
+                                            <constraint firstAttribute="width" constant="240" id="VAU-ra-EpA"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="-30" maxX="0.0" maxY="0.0"/>
@@ -478,11 +478,11 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoB-sr-aG8">
-                                        <rect key="frame" x="56.5" y="189" width="217" height="90"/>
+                                        <rect key="frame" x="45" y="189" width="240" height="90"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="a1k-ds-kLL"/>
-                                            <constraint firstAttribute="width" constant="217" id="w56-zG-qNI"/>
+                                            <constraint firstAttribute="width" constant="240" id="w56-zG-qNI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="-30" maxX="0.0" maxY="0.0"/>
@@ -1425,8 +1425,8 @@ Spain</string>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Checkout Faster Next Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-BT-eyn">
-                                                <rect key="frame" x="79.5" y="1184" width="216.5" height="19"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Checkout Faster Next Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-BT-eyn">
+                                                <rect key="frame" x="8" y="1184" width="359" height="19"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1549,6 +1549,7 @@ Spain</string>
                                             <constraint firstAttribute="trailing" secondItem="X5t-iL-Sb2" secondAttribute="trailing" id="JRV-e4-5ck"/>
                                             <constraint firstAttribute="trailing" secondItem="M0G-3t-Pha" secondAttribute="trailing" id="Jfn-3p-6bI"/>
                                             <constraint firstAttribute="trailing" secondItem="8vz-mb-VaN" secondAttribute="trailing" constant="13" id="LSY-0q-KU9"/>
+                                            <constraint firstAttribute="trailing" secondItem="aTf-BT-eyn" secondAttribute="trailing" constant="8" id="Lwj-ml-0i1"/>
                                             <constraint firstAttribute="trailing" secondItem="5A9-Sr-37O" secondAttribute="trailing" constant="8" id="NOx-z6-4Hb"/>
                                             <constraint firstItem="c2Q-ax-2qS" firstAttribute="top" secondItem="2W4-Jn-VYQ" secondAttribute="bottom" constant="14" id="Ni8-N3-kmd"/>
                                             <constraint firstItem="XWX-kP-ioA" firstAttribute="top" secondItem="M0G-3t-Pha" secondAttribute="bottom" constant="7" id="Nns-1R-uB0"/>
@@ -1580,6 +1581,7 @@ Spain</string>
                                             <constraint firstItem="9sJ-fW-Lng" firstAttribute="top" secondItem="aWh-b7-nJO" secondAttribute="bottom" priority="999" constant="32" id="dPH-5U-jqy"/>
                                             <constraint firstItem="8jD-Wn-W2W" firstAttribute="leading" secondItem="7dm-oo-xLv" secondAttribute="trailing" constant="9" id="e6n-ha-CNe"/>
                                             <constraint firstAttribute="trailing" secondItem="45R-9R-bG6" secondAttribute="trailing" constant="27" id="el6-8g-mTJ"/>
+                                            <constraint firstItem="aTf-BT-eyn" firstAttribute="leading" secondItem="wxs-9p-OSl" secondAttribute="leading" constant="8" id="fA0-QG-Beg"/>
                                             <constraint firstItem="TU7-1N-74M" firstAttribute="top" secondItem="aTf-BT-eyn" secondAttribute="bottom" constant="15" id="gnT-xe-rYT"/>
                                             <constraint firstItem="mgj-gY-DiE" firstAttribute="trailing" secondItem="8vz-mb-VaN" secondAttribute="trailing" id="jhl-xs-74p"/>
                                             <constraint firstItem="1fK-1L-KsE" firstAttribute="trailing" secondItem="BLL-7H-Blq" secondAttribute="trailing" id="jzo-UF-Lsk"/>
@@ -2211,7 +2213,7 @@ Spain</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expiry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="NHg-Og-5hb">
-                                                <rect key="frame" x="162.5" y="499.5" width="44.5" height="17"/>
+                                                <rect key="frame" x="162.5" y="500" width="44.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -2370,7 +2372,7 @@ Spain</string>
                                                 <rect key="frame" x="162" y="35" width="51" height="52"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-kh-Y7H">
-                                                <rect key="frame" x="74.5" y="120" width="227.5" height="36.5"/>
+                                                <rect key="frame" x="74" y="120" width="227.5" height="36.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
