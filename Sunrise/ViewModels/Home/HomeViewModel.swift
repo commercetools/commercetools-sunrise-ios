@@ -81,17 +81,18 @@ class HomeViewModel: BaseViewModel {
     }
 
     func bannerImage(at indexPath: IndexPath) -> UIImage? {
+        let isGermanLocaleActive = Locale.current.identifier.contains("de")
         switch indexPath.row {
             case 0:
-                return #imageLiteral(resourceName: "summer_accessories_banner")
+                return isGermanLocaleActive ? #imageLiteral(resourceName: "summer_accessories_banner_de") : #imageLiteral(resourceName: "summer_accessories_banner_de")
             case 1:
-                return #imageLiteral(resourceName: "looks_we_love_banner")
+                return isGermanLocaleActive ? #imageLiteral(resourceName: "looks_we_love_banner_de") : #imageLiteral(resourceName: "looks_we_love_banner")
             case 3:
-                return #imageLiteral(resourceName: "on_sale_banner")
+                return isGermanLocaleActive ? #imageLiteral(resourceName: "on_sale_banner_de") : #imageLiteral(resourceName: "on_sale_banner")
             case 5:
-                return #imageLiteral(resourceName: "women_banner")
+                return isGermanLocaleActive ? #imageLiteral(resourceName: "women_banner_de") : #imageLiteral(resourceName: "women_banner")
             case 6:
-                return #imageLiteral(resourceName: "man_banner")
+                return isGermanLocaleActive ? #imageLiteral(resourceName: "man_banner_de") : #imageLiteral(resourceName: "man_banner")
             default:
                 return nil
         }

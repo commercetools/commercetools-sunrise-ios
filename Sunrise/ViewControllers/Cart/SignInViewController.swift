@@ -11,7 +11,9 @@ class SignInViewController: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    
     @IBOutlet weak var logInButton: UIButton!
 
     private let disposables = CompositeDisposable()
@@ -29,9 +31,17 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let signUpButtonTitle = signUpButton.attributedTitle(for: .normal)!.mutableCopy() as! NSMutableAttributedString
+        signUpButtonTitle.mutableString.setString(NSLocalizedString("Don't have an account?", comment: "Don't have an account?"))
+        signUpButton.setAttributedTitle(signUpButtonTitle, for: .normal)
+        
+        let forgotPasswordTitle = forgotPasswordButton.attributedTitle(for: .normal)!.mutableCopy() as! NSMutableAttributedString
+        forgotPasswordTitle.mutableString.setString(NSLocalizedString("Forgot password?", comment: "Forgot password?"))
+        forgotPasswordButton.setAttributedTitle(forgotPasswordTitle, for: .normal)
+
         let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
-        emailField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: placeholderAttributes)
-        passwordField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: placeholderAttributes)
+        emailField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Username", comment: "Username"), attributes: placeholderAttributes)
+        passwordField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Password", comment: "Password"), attributes: placeholderAttributes)
 
         viewModel = SignInViewModel()
     }
