@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
         subcategoriesTableView.contentInset = UIEdgeInsetsMake(17, 0, 0, 0)
 
         let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
-        searchField.attributedPlaceholder = NSAttributedString(string: "search", attributes: placeholderAttributes)
+        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes)
 
         [searchSuggestionsTableView, subcategoriesTableView].forEach { $0.tableFooterView = UIView() }
         subcategoriesTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: subcategoriesTableView.bounds.width, height: 0.5))
