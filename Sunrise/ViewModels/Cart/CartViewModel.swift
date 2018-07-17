@@ -20,9 +20,6 @@ class CartViewModel: BaseViewModel {
     // Outputs
     let isLoading: MutableProperty<Bool>
     let numberOfItems = MutableProperty("")
-    let subtotal = MutableProperty("")
-    let orderDiscount = MutableProperty("")
-    let tax = MutableProperty("")
     let orderTotal = MutableProperty("")
     let isCheckoutEnabled = MutableProperty(false)
     let shouldPresentOrderConfirmation = MutableProperty(false)
@@ -64,10 +61,7 @@ class CartViewModel: BaseViewModel {
 
         super.init()
 
-        disposables += subtotal <~ cart.map { [unowned self] in self.calculateSubtotal(for: $0) }
         disposables += orderTotal <~ cart.map { [unowned self] in self.orderTotal(for: $0) }
-        disposables += tax <~ cart.map { [unowned self] in self.calculateTax(for: $0) }
-        disposables += orderDiscount <~ cart.map { [unowned self] in self.calculateOrderDiscount(for: $0) }
         disposables += isCheckoutEnabled <~ cart.map { $0?.lineItems.count ?? 0 > 0 }
 
         disposables += cart.signal
@@ -168,10 +162,6 @@ class CartViewModel: BaseViewModel {
     func lineItemColor(at indexPath: IndexPath) -> UIColor? {
         guard let colorKey = cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == FiltersViewModel.kColorsAttributeName }).first?.valueKey else { return nil }
         return FiltersViewModel.colorValues[colorKey]
-    }
-
-    func lineItemTotalPrice(at indexPath: IndexPath) -> String {
-        return cart.value?.lineItems[indexPath.row].totalPrice.description ?? "N/A"
     }
 
     func isLineItemInWishList(at indexPath: IndexPath) -> Bool {

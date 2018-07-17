@@ -1,0 +1,1576 @@
+{
+  "type": "Cart",
+  "id": "a6f0cbac-27a4-45e8-a9fb-46a2fb2c3db1",
+  "version": 27,
+  "customerId": "d596d9f0-ac06-4991-a7ec-e540c95bcb06",
+  "customerEmail": "nikola.mladenovic@commercetools.de",
+  "createdAt": "2018-07-12T23:23:17.781Z",
+  "lastModifiedAt": "2018-07-29T12:23:02.285Z",
+  "lineItems": [
+    {
+      "id": "e6098018-5664-4b81-8f6c-c8e6a8fd943a",
+      "productId": "8dce623e-6ae8-4d1e-8398-a71883c6a29d",
+      "name": {
+        "de": "Jacke Michael Kors dunkelblau",
+        "en": "Jacket Michael Kors dark blue"
+      },
+      "productType": {
+        "typeId": "product-type",
+        "id": "d59b3983-cb99-4b80-a4db-090521592bfa"
+      },
+      "productSlug": {
+        "en": "michaelkors-jacket-mh41easc64-darkblue",
+        "de": "michaelkors-jacke-mh41easc64-dunkelblau"
+      },
+      "variant": {
+        "id": 1,
+        "sku": "M0E20000000DLUW",
+        "prices": [
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 24375,
+              "fractionDigits": 2
+            },
+            "id": "14d6adbd-4de4-4e4c-975d-962ae951236a"
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 15984,
+              "fractionDigits": 2
+            },
+            "id": "32041ada-17f7-4224-b9b8-d2b3dd07fea3",
+            "customerGroup": {
+              "typeId": "customer-group",
+              "id": "2bfe6b6b-2c46-4bbb-9eb6-b1893d4f7ba6"
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 19500,
+              "fractionDigits": 2
+            },
+            "id": "71f1b191-8ec5-494d-aafd-d0b0ec541cc3",
+            "country": "DE"
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 19500,
+              "fractionDigits": 2
+            },
+            "id": "19517472-d6ad-478e-829f-bb6591a020a2",
+            "country": "IT"
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 19500,
+              "fractionDigits": 2
+            },
+            "id": "f079fbd5-51ba-43b6-8a03-4c8f09ea8c54",
+            "country": "GB"
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 17550,
+              "fractionDigits": 2
+            },
+            "id": "5418f1a6-a19d-41d8-88b6-a3cbc59a956a",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "0a5f2b5b-c623-4004-a197-459717d62a5a"
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 19890,
+              "fractionDigits": 2
+            },
+            "id": "9adb6bab-dbf8-4b22-8eb1-007974f04058",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "eeff7b26-f179-4739-b88d-6b8814da4e5a"
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 19500,
+              "fractionDigits": 2
+            },
+            "id": "d0304f1e-8cde-40fc-9b3e-f96e8c27dd5a",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "7ef24a9b-5f76-4bb4-bf69-3f365e29e095"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 17550,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "7b9fd246-7218-4cde-8794-aee275952d6e"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 26325,
+              "fractionDigits": 2
+            },
+            "id": "afdc691c-ea4f-47b3-98fa-d9f8046a4aea",
+            "channel": {
+              "typeId": "channel",
+              "id": "6a3880f9-eea9-48ec-9fbc-e90eefac2926"
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 18720,
+              "fractionDigits": 2
+            },
+            "id": "e9505691-33a6-4ab9-b01d-0a2c1ce5edbe",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "67d22367-d959-4dfe-9ea4-d2fbcbdbff25"
+            }
+          }
+        ],
+        "images": [
+          {
+            "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/072769_1_large.jpg",
+            "dimensions": {
+              "w": 0,
+              "h": 0
+            }
+          }
+        ],
+        "attributes": [
+          {
+            "name": "articleNumberManufacturer",
+            "value": "MH41EASC64 390 NAVY"
+          },
+          {
+            "name": "articleNumberMax",
+            "value": "72769"
+          },
+          {
+            "name": "matrixId",
+            "value": "M0E20000000DLUW"
+          },
+          {
+            "name": "baseId",
+            "value": "72769"
+          },
+          {
+            "name": "designer",
+            "value": {
+              "key": "michaelkors",
+              "label": "Michael Kors"
+            }
+          },
+          {
+            "name": "madeInItaly",
+            "value": {
+              "key": "no",
+              "label": "no"
+            }
+          },
+          {
+            "name": "completeTheLook",
+            "value": [
+              ""
+            ]
+          },
+          {
+            "name": "commonSize",
+            "value": {
+              "key": "xxs",
+              "label": "XXS"
+            }
+          },
+          {
+            "name": "size",
+            "value": "34"
+          },
+          {
+            "name": "color",
+            "value": {
+              "key": "blue",
+              "label": {
+                "en": "blue",
+                "it": "blu",
+                "de": "blau"
+              }
+            }
+          },
+          {
+            "name": "colorFreeDefinition",
+            "value": {
+              "de": "dunkelblau",
+              "en": "dark blue"
+            }
+          },
+          {
+            "name": "style",
+            "value": {
+              "key": "sporty",
+              "label": "sporty"
+            }
+          },
+          {
+            "name": "gender",
+            "value": {
+              "key": "women",
+              "label": "Damen"
+            }
+          },
+          {
+            "name": "season",
+            "value": "s15"
+          },
+          {
+            "name": "lookProducts",
+            "value": [
+              ""
+            ]
+          },
+          {
+            "name": "sapExternalId",
+            "value": "M0E20000000DLUW"
+          }
+        ],
+        "assets": [],
+        "availability": {
+          "channels": {
+            "6a3880f9-eea9-48ec-9fbc-e90eefac2926": {
+              "isOnStock": true,
+              "availableQuantity": 6
+            },
+            "0a5f2b5b-c623-4004-a197-459717d62a5a": {
+              "isOnStock": true,
+              "availableQuantity": 8
+            },
+            "7ef24a9b-5f76-4bb4-bf69-3f365e29e095": {
+              "isOnStock": true,
+              "availableQuantity": 719
+            },
+            "67d22367-d959-4dfe-9ea4-d2fbcbdbff25": {
+              "isOnStock": true,
+              "availableQuantity": 9
+            },
+            "2b3e92de-a012-41f4-a68d-2642f8b2e6e4": {
+              "isOnStock": true,
+              "availableQuantity": 133
+            },
+            "eeff7b26-f179-4739-b88d-6b8814da4e5a": {
+              "isOnStock": false,
+              "availableQuantity": 0
+            },
+            "7e7eca6e-8c02-4010-9199-1d5594a30021": {
+              "isOnStock": true,
+              "availableQuantity": 104
+            }
+          }
+        }
+      },
+      "price": {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 19500,
+          "fractionDigits": 2
+        },
+        "id": "71f1b191-8ec5-494d-aafd-d0b0ec541cc3",
+        "country": "DE"
+      },
+      "quantity": 1,
+      "discountedPrice": {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 15600,
+          "fractionDigits": 2
+        },
+        "includedDiscounts": [
+          {
+            "discount": {
+              "typeId": "cart-discount",
+              "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07"
+            },
+            "discountedAmount": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 3900,
+              "fractionDigits": 2
+            }
+          }
+        ]
+      },
+      "discountedPricePerQuantity": [
+        {
+          "quantity": 1,
+          "discountedPrice": {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 15600,
+              "fractionDigits": 2
+            },
+            "includedDiscounts": [
+              {
+                "discount": {
+                  "typeId": "cart-discount",
+                  "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07"
+                },
+                "discountedAmount": {
+                  "type": "centPrecision",
+                  "currencyCode": "EUR",
+                  "centAmount": 3900,
+                  "fractionDigits": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "taxRate": {
+        "name": "standard",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "gpHy-nob",
+        "subRates": []
+      },
+      "state": [
+        {
+          "quantity": 1,
+          "state": {
+            "typeId": "state",
+            "id": "db2b1109-27bd-4d67-a18a-526eb5e0062d"
+          }
+        }
+      ],
+      "priceMode": "Platform",
+      "totalPrice": {
+        "type": "centPrecision",
+        "currencyCode": "EUR",
+        "centAmount": 15600,
+        "fractionDigits": 2
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 13109,
+          "fractionDigits": 2
+        },
+        "totalGross": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 15600,
+          "fractionDigits": 2
+        }
+      },
+      "lineItemMode": "Standard"
+    },
+    {
+      "id": "368c03dd-1df6-43e3-846c-1a70e239329d",
+      "productId": "67123c65-db06-4aad-a168-8f0e07be8444",
+      "name": {
+        "en": "Perfume ”Ki” Mirko Buffini 100ml",
+        "de": "Parfüm „Ki” Mirko Buffini 100ml"
+      },
+      "productType": {
+        "typeId": "product-type",
+        "id": "d59b3983-cb99-4b80-a4db-090521592bfa"
+      },
+      "productSlug": {
+        "en": "mirko-buffini-perfume-ki-100ml",
+        "de": "mirko-buffini-parfum-ki-100ml"
+      },
+      "variant": {
+        "id": 1,
+        "sku": "A0E2000000025FY",
+        "prices": [
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 18000,
+              "fractionDigits": 2
+            },
+            "id": "15ba4bca-28f8-43be-bd25-b94eb3196e95",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 12600,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 11803,
+              "fractionDigits": 2
+            },
+            "id": "7b12cefb-dcfa-47cd-9d31-ea6b613b6951",
+            "customerGroup": {
+              "typeId": "customer-group",
+              "id": "2bfe6b6b-2c46-4bbb-9eb6-b1893d4f7ba6"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 8262,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 14400,
+              "fractionDigits": 2
+            },
+            "id": "cf93de10-3f69-4aac-aa39-a2cc193f569b",
+            "country": "DE",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 10080,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 14400,
+              "fractionDigits": 2
+            },
+            "id": "a369175b-a5c2-4c67-951d-3e8a1f7d7737",
+            "country": "IT",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 10080,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 14400,
+              "fractionDigits": 2
+            },
+            "id": "f558ee9e-cbcb-4cb0-a381-533b13316cb2",
+            "country": "GB",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 10080,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 14256,
+              "fractionDigits": 2
+            },
+            "id": "a10e0d29-e630-4866-8c25-7984159de084",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "0a5f2b5b-c623-4004-a197-459717d62a5a"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 9979,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 14112,
+              "fractionDigits": 2
+            },
+            "id": "108a2cab-a98f-463a-b4bc-db9f0b5bacd4",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "eeff7b26-f179-4739-b88d-6b8814da4e5a"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 9878,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 13392,
+              "fractionDigits": 2
+            },
+            "id": "5bb41bb0-9d98-4212-8773-287de9fd2fe6",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "7ef24a9b-5f76-4bb4-bf69-3f365e29e095"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 12053,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "7b9fd246-7218-4cde-8794-aee275952d6e"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 18000,
+              "fractionDigits": 2
+            },
+            "id": "6e9af45f-ce93-4a89-ae48-3ff869838c7d",
+            "channel": {
+              "typeId": "channel",
+              "id": "6a3880f9-eea9-48ec-9fbc-e90eefac2926"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 12600,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 14688,
+              "fractionDigits": 2
+            },
+            "id": "27a3b647-822f-486b-85f9-1ea30d740020",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "67d22367-d959-4dfe-9ea4-d2fbcbdbff25"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 10282,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          }
+        ],
+        "images": [
+          {
+            "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081441_1_medium.jpg",
+            "dimensions": {
+              "w": 0,
+              "h": 0
+            }
+          }
+        ],
+        "attributes": [
+          {
+            "name": "articleNumberManufacturer",
+            "value": "KI 100ML"
+          },
+          {
+            "name": "articleNumberMax",
+            "value": "81441"
+          },
+          {
+            "name": "matrixId",
+            "value": "A0E2000000025FY"
+          },
+          {
+            "name": "baseId",
+            "value": "81441"
+          },
+          {
+            "name": "designer",
+            "value": {
+              "label": "Mirko Buffini",
+              "key": "mirko"
+            }
+          },
+          {
+            "name": "completeTheLook",
+            "value": [
+              ""
+            ]
+          },
+          {
+            "name": "commonSize",
+            "value": {
+              "label": "one Size",
+              "key": "oneSize"
+            }
+          },
+          {
+            "name": "size",
+            "value": "one size"
+          },
+          {
+            "name": "colorFreeDefinition",
+            "value": {
+              "en": "",
+              "de": ""
+            }
+          },
+          {
+            "name": "style",
+            "value": {
+              "label": "sporty",
+              "key": "sporty"
+            }
+          },
+          {
+            "name": "gender",
+            "value": {
+              "label": "Damen",
+              "key": "women"
+            }
+          },
+          {
+            "name": "season",
+            "value": "s15"
+          },
+          {
+            "name": "isOnStock",
+            "value": true
+          },
+          {
+            "name": "lookProducts",
+            "value": [
+              ""
+            ]
+          },
+          {
+            "name": "sapExternalId",
+            "value": "A0E2000000025FY"
+          }
+        ],
+        "assets": [],
+        "availability": {
+          "channels": {
+            "6a3880f9-eea9-48ec-9fbc-e90eefac2926": {
+              "isOnStock": true,
+              "availableQuantity": 91
+            },
+            "0a5f2b5b-c623-4004-a197-459717d62a5a": {
+              "isOnStock": true,
+              "availableQuantity": 110
+            },
+            "7ef24a9b-5f76-4bb4-bf69-3f365e29e095": {
+              "isOnStock": true,
+              "availableQuantity": 909
+            },
+            "67d22367-d959-4dfe-9ea4-d2fbcbdbff25": {
+              "isOnStock": true,
+              "availableQuantity": 4
+            },
+            "2b3e92de-a012-41f4-a68d-2642f8b2e6e4": {
+              "isOnStock": true,
+              "availableQuantity": 215
+            },
+            "eeff7b26-f179-4739-b88d-6b8814da4e5a": {
+              "isOnStock": true,
+              "availableQuantity": 5
+            },
+            "7e7eca6e-8c02-4010-9199-1d5594a30021": {
+              "isOnStock": true,
+              "availableQuantity": 208
+            }
+          }
+        }
+      },
+      "price": {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 14400,
+          "fractionDigits": 2
+        },
+        "id": "cf93de10-3f69-4aac-aa39-a2cc193f569b",
+        "country": "DE",
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "EUR",
+            "centAmount": 10080,
+            "fractionDigits": 2
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+          }
+        }
+      },
+      "quantity": 1,
+      "discountedPrice": {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 8064,
+          "fractionDigits": 2
+        },
+        "includedDiscounts": [
+          {
+            "discount": {
+              "typeId": "cart-discount",
+              "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07"
+            },
+            "discountedAmount": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 2016,
+              "fractionDigits": 2
+            }
+          }
+        ]
+      },
+      "discountedPricePerQuantity": [
+        {
+          "quantity": 1,
+          "discountedPrice": {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 8064,
+              "fractionDigits": 2
+            },
+            "includedDiscounts": [
+              {
+                "discount": {
+                  "typeId": "cart-discount",
+                  "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07"
+                },
+                "discountedAmount": {
+                  "type": "centPrecision",
+                  "currencyCode": "EUR",
+                  "centAmount": 2016,
+                  "fractionDigits": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "taxRate": {
+        "name": "standard",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "gpHy-nob",
+        "subRates": []
+      },
+      "state": [
+        {
+          "quantity": 1,
+          "state": {
+            "typeId": "state",
+            "id": "db2b1109-27bd-4d67-a18a-526eb5e0062d"
+          }
+        }
+      ],
+      "priceMode": "Platform",
+      "totalPrice": {
+        "type": "centPrecision",
+        "currencyCode": "EUR",
+        "centAmount": 8064,
+        "fractionDigits": 2
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 6776,
+          "fractionDigits": 2
+        },
+        "totalGross": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 8064,
+          "fractionDigits": 2
+        }
+      },
+      "lineItemMode": "Standard"
+    },
+    {
+      "id": "eef3c27c-ca2c-4445-ad60-a9cefdc0f1c1",
+      "productId": "337ea998-a48f-4334-a37e-4c72f9dd6b23",
+      "name": {
+        "de": "Top Brunello Cucinelli kalk",
+        "en": "Top Brunello Cucinelli chalk"
+      },
+      "productType": {
+        "typeId": "product-type",
+        "id": "d59b3983-cb99-4b80-a4db-090521592bfa"
+      },
+      "productSlug": {
+        "en": "brunello-cucinelli-tshirt-mf920r6360-white",
+        "de": "brunello-cucinelli-tshirt-mf920r6360-weiss"
+      },
+      "variant": {
+        "id": 1,
+        "sku": "M0E20000000DQTX",
+        "prices": [
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 113750,
+              "fractionDigits": 2
+            },
+            "id": "a62e8342-62aa-4112-ae1a-090d82e69aae",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 79625,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 74590,
+              "fractionDigits": 2
+            },
+            "id": "6bf70698-b566-4b47-9929-d06f3e561699",
+            "customerGroup": {
+              "typeId": "customer-group",
+              "id": "2bfe6b6b-2c46-4bbb-9eb6-b1893d4f7ba6"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 52213,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 91000,
+              "fractionDigits": 2
+            },
+            "id": "613bbeda-f74e-422e-bb07-6ea91c72d690",
+            "country": "DE",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 63700,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 91000,
+              "fractionDigits": 2
+            },
+            "id": "d387e3ff-b2dc-4f5f-b0f9-fccce9159ad6",
+            "country": "IT",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 63700,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 91000,
+              "fractionDigits": 2
+            },
+            "id": "82a3143d-b093-4d3d-9ecd-2534b1d0df80",
+            "country": "GB",
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 63700,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 94640,
+              "fractionDigits": 2
+            },
+            "id": "1e5d4513-0b4c-40e0-974c-a18defd8a80c",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "0a5f2b5b-c623-4004-a197-459717d62a5a"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 66248,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 100100,
+              "fractionDigits": 2
+            },
+            "id": "69943ebd-e8ab-4fa1-a5e5-9bcbc8432889",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "eeff7b26-f179-4739-b88d-6b8814da4e5a"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 70070,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 100100,
+              "fractionDigits": 2
+            },
+            "id": "8bed7290-aa56-485d-b23d-199e0229d12b",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "7ef24a9b-5f76-4bb4-bf69-3f365e29e095"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 90090,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "7b9fd246-7218-4cde-8794-aee275952d6e"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 114888,
+              "fractionDigits": 2
+            },
+            "id": "4f0117b9-8f9f-4cf1-a255-8615f862646c",
+            "channel": {
+              "typeId": "channel",
+              "id": "6a3880f9-eea9-48ec-9fbc-e90eefac2926"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 80422,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          },
+          {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 99190,
+              "fractionDigits": 2
+            },
+            "id": "ab8f04d2-48e2-4dc3-8852-87a5005afc7e",
+            "country": "DE",
+            "channel": {
+              "typeId": "channel",
+              "id": "67d22367-d959-4dfe-9ea4-d2fbcbdbff25"
+            },
+            "discounted": {
+              "value": {
+                "type": "centPrecision",
+                "currencyCode": "EUR",
+                "centAmount": 69433,
+                "fractionDigits": 2
+              },
+              "discount": {
+                "typeId": "product-discount",
+                "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+              }
+            }
+          }
+        ],
+        "images": [
+          {
+            "url": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/073477_1_medium.jpg",
+            "dimensions": {
+              "w": 0,
+              "h": 0
+            }
+          }
+        ],
+        "attributes": [
+          {
+            "name": "articleNumberManufacturer",
+            "value": "MF920R6360 CS604"
+          },
+          {
+            "name": "articleNumberMax",
+            "value": "73477"
+          },
+          {
+            "name": "matrixId",
+            "value": "M0E20000000DQTX"
+          },
+          {
+            "name": "baseId",
+            "value": "73477"
+          },
+          {
+            "name": "designer",
+            "value": {
+              "key": "brunello",
+              "label": "Brunello Cucinelli"
+            }
+          },
+          {
+            "name": "madeInItaly",
+            "value": {
+              "key": "yes",
+              "label": "yes"
+            }
+          },
+          {
+            "name": "completeTheLook",
+            "value": [
+              "078870",
+              "072657",
+              "082400"
+            ]
+          },
+          {
+            "name": "commonSize",
+            "value": {
+              "key": "xxs",
+              "label": "XXS"
+            }
+          },
+          {
+            "name": "size",
+            "value": "XXS"
+          },
+          {
+            "name": "color",
+            "value": {
+              "key": "white",
+              "label": {
+                "en": "white",
+                "de": "weiss",
+                "it": "blanco"
+              }
+            }
+          },
+          {
+            "name": "colorFreeDefinition",
+            "value": {
+              "de": "kalk",
+              "en": "chalk"
+            }
+          },
+          {
+            "name": "style",
+            "value": {
+              "key": "business",
+              "label": "business"
+            }
+          },
+          {
+            "name": "gender",
+            "value": {
+              "key": "women",
+              "label": "Damen"
+            }
+          },
+          {
+            "name": "season",
+            "value": "s15"
+          },
+          {
+            "name": "lookProducts",
+            "value": [
+              ""
+            ]
+          },
+          {
+            "name": "sapExternalId",
+            "value": "M0E20000000DQTX"
+          }
+        ],
+        "assets": [],
+        "availability": {
+          "channels": {
+            "6a3880f9-eea9-48ec-9fbc-e90eefac2926": {
+              "isOnStock": true,
+              "availableQuantity": 10
+            },
+            "0a5f2b5b-c623-4004-a197-459717d62a5a": {
+              "isOnStock": true,
+              "availableQuantity": 1
+            },
+            "7ef24a9b-5f76-4bb4-bf69-3f365e29e095": {
+              "isOnStock": true,
+              "availableQuantity": 10
+            },
+            "67d22367-d959-4dfe-9ea4-d2fbcbdbff25": {
+              "isOnStock": true,
+              "availableQuantity": 788
+            },
+            "2b3e92de-a012-41f4-a68d-2642f8b2e6e4": {
+              "isOnStock": true,
+              "availableQuantity": 265
+            },
+            "eeff7b26-f179-4739-b88d-6b8814da4e5a": {
+              "isOnStock": true,
+              "availableQuantity": 2
+            },
+            "7e7eca6e-8c02-4010-9199-1d5594a30021": {
+              "isOnStock": true,
+              "availableQuantity": 156
+            }
+          }
+        }
+      },
+      "price": {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 91000,
+          "fractionDigits": 2
+        },
+        "id": "613bbeda-f74e-422e-bb07-6ea91c72d690",
+        "country": "DE",
+        "discounted": {
+          "value": {
+            "type": "centPrecision",
+            "currencyCode": "EUR",
+            "centAmount": 63700,
+            "fractionDigits": 2
+          },
+          "discount": {
+            "typeId": "product-discount",
+            "id": "cf9e730f-7a6a-4517-b977-4b717ea2709c"
+          }
+        }
+      },
+      "quantity": 2,
+      "discountedPrice": {
+        "value": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 50960,
+          "fractionDigits": 2
+        },
+        "includedDiscounts": [
+          {
+            "discount": {
+              "typeId": "cart-discount",
+              "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07"
+            },
+            "discountedAmount": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 12740,
+              "fractionDigits": 2
+            }
+          }
+        ]
+      },
+      "discountedPricePerQuantity": [
+        {
+          "quantity": 2,
+          "discountedPrice": {
+            "value": {
+              "type": "centPrecision",
+              "currencyCode": "EUR",
+              "centAmount": 50960,
+              "fractionDigits": 2
+            },
+            "includedDiscounts": [
+              {
+                "discount": {
+                  "typeId": "cart-discount",
+                  "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07"
+                },
+                "discountedAmount": {
+                  "type": "centPrecision",
+                  "currencyCode": "EUR",
+                  "centAmount": 12740,
+                  "fractionDigits": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "taxRate": {
+        "name": "standard",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "id": "gpHy-nob",
+        "subRates": []
+      },
+      "state": [
+        {
+          "quantity": 2,
+          "state": {
+            "typeId": "state",
+            "id": "db2b1109-27bd-4d67-a18a-526eb5e0062d"
+          }
+        }
+      ],
+      "priceMode": "Platform",
+      "totalPrice": {
+        "type": "centPrecision",
+        "currencyCode": "EUR",
+        "centAmount": 101920,
+        "fractionDigits": 2
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 85647,
+          "fractionDigits": 2
+        },
+        "totalGross": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 101920,
+          "fractionDigits": 2
+        }
+      },
+      "lineItemMode": "Standard"
+    }
+  ],
+  "cartState": "Active",
+  "totalPrice": {
+    "type": "centPrecision",
+    "currencyCode": "EUR",
+    "centAmount": 126584,
+    "fractionDigits": 2
+  },
+  "taxedPrice": {
+    "totalNet": {
+      "type": "centPrecision",
+      "currencyCode": "EUR",
+      "centAmount": 106372,
+      "fractionDigits": 2
+    },
+    "totalGross": {
+      "type": "centPrecision",
+      "currencyCode": "EUR",
+      "centAmount": 126584,
+      "fractionDigits": 2
+    },
+    "taxPortions": [
+      {
+        "rate": 0.19,
+        "amount": {
+          "type": "centPrecision",
+          "currencyCode": "EUR",
+          "centAmount": 20212,
+          "fractionDigits": 2
+        },
+        "name": "standard"
+      }
+    ]
+  },
+  "country": "DE",
+  "shippingInfo": {
+    "shippingMethodName": "Express",
+    "price": {
+      "type": "centPrecision",
+      "currencyCode": "EUR",
+      "centAmount": 1000,
+      "fractionDigits": 2
+    },
+    "shippingRate": {
+      "price": {
+        "type": "centPrecision",
+        "currencyCode": "EUR",
+        "centAmount": 1000,
+        "fractionDigits": 2
+      },
+      "tiers": []
+    },
+    "taxRate": {
+      "name": "standard",
+      "amount": 0.19,
+      "includedInPrice": true,
+      "country": "DE",
+      "id": "gpHy-nob",
+      "subRates": []
+    },
+    "taxCategory": {
+      "typeId": "tax-category",
+      "id": "d54da6fe-072d-4d00-939c-a292c18adfc0"
+    },
+    "deliveries": [],
+    "shippingMethod": {
+      "typeId": "shipping-method",
+      "id": "69b7098c-166f-4015-a5f9-ee82454ef17e"
+    },
+    "taxedPrice": {
+      "totalNet": {
+        "type": "centPrecision",
+        "currencyCode": "EUR",
+        "centAmount": 840,
+        "fractionDigits": 2
+      },
+      "totalGross": {
+        "type": "centPrecision",
+        "currencyCode": "EUR",
+        "centAmount": 1000,
+        "fractionDigits": 2
+      }
+    },
+    "shippingMethodState": "MatchesCart"
+  },
+  "customLineItems": [],
+  "discountCodes": [
+    {
+      "discountCode": {
+        "typeId": "discount-code",
+        "id": "e22cab7d-d130-4bd1-81bd-6515db054493",
+        "obj": {
+          "id": "e22cab7d-d130-4bd1-81bd-6515db054493",
+          "version": 12,
+          "code": "FB20",
+          "name": {
+            "en": "20% Off Facebook!"
+          },
+          "description": {
+            "en": "20% Off for Facebook Users!"
+          },
+          "cartDiscounts": [
+            {
+              "typeId": "cart-discount",
+              "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07",
+              "obj": {
+                "id": "9e0be069-4b3f-4ac9-89cf-77b7fb6e1a07",
+                "version": 5,
+                "value": {
+                  "type": "relative",
+                  "permyriad": 2000
+                },
+                "cartPredicate": "1 = 1",
+                "target": {
+                  "type": "lineItems",
+                  "predicate": "1 = 1"
+                },
+                "name": {
+                  "en": "20% Off Mens Suits"
+                },
+                "validFrom": "2017-02-13T16:18:59.000Z",
+                "stackingMode": "Stacking",
+                "isActive": true,
+                "requiresDiscountCode": true,
+                "sortOrder": "0.11",
+                "references": [],
+                "attributeTypes": {},
+                "cartFieldTypes": {},
+                "lineItemFieldTypes": {},
+                "customLineItemFieldTypes": {},
+                "createdAt": "2017-02-13T21:22:00.671Z",
+                "lastModifiedAt": "2017-02-13T21:29:04.105Z"
+              }
+            }
+          ],
+          "isActive": true,
+          "maxApplications": 10000,
+          "maxApplicationsPerCustomer": 1000,
+          "references": [],
+          "attributeTypes": {},
+          "cartFieldTypes": {},
+          "lineItemFieldTypes": {},
+          "customLineItemFieldTypes": {},
+          "applicationVersion": 9,
+          "createdAt": "2017-02-13T21:23:13.320Z",
+          "lastModifiedAt": "2018-04-25T12:12:43.295Z",
+          "groups": []
+        }
+      },
+      "state": "MatchesCart"
+    }
+  ],
+  "inventoryMode": "None",
+  "taxMode": "Platform",
+  "taxRoundingMode": "HalfEven",
+  "taxCalculationMode": "LineItemLevel",
+  "refusedGifts": [],
+  "origin": "Customer",
+  "shippingAddress": {
+    "country": "DE"
+  },
+  "billingAddress": {
+    "country": "DE"
+  },
+  "itemShippingAddresses": []
+}

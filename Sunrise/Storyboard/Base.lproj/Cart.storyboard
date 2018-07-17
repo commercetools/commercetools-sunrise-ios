@@ -60,7 +60,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="480"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Bag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXu-zA-5fT">
-                                                <rect key="frame" x="143" y="27" width="87.5" height="36.5"/>
+                                                <rect key="frame" x="143.5" y="27" width="87.5" height="36.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -105,7 +105,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Bag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyu-hk-wKX">
-                                                            <rect key="frame" x="144" y="27" width="87.5" height="36.5"/>
+                                                            <rect key="frame" x="144.5" y="27" width="87.5" height="36.5"/>
                                                             <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                             <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2076,7 +2076,7 @@ Spain</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yy7-E6-UxI">
-                                                <rect key="frame" x="330" y="21" width="27" height="27"/>
+                                                <rect key="frame" x="330" y="21.5" width="27" height="27"/>
                                                 <state key="normal" image="close_checkout"/>
                                                 <connections>
                                                     <action selector="backToCheckout:" destination="ZP8-KY-pkM" eventType="touchUpInside" id="fwr-rA-KjT"/>
@@ -2213,7 +2213,7 @@ Spain</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expiry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="NHg-Og-5hb">
-                                                <rect key="frame" x="162.5" y="500" width="44.5" height="17"/>
+                                                <rect key="frame" x="162.5" y="499.5" width="44.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -2222,7 +2222,7 @@ Spain</string>
                                                 <rect key="frame" x="35" y="499.5" width="49" height="16"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="RMM-IU-dQM">
-                                                <rect key="frame" x="89" y="619" width="197" height="55"/>
+                                                <rect key="frame" x="89.5" y="619" width="197" height="55"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CVV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4My-cB-xyh">
                                                         <rect key="frame" x="0.0" y="0.0" width="27" height="55"/>
@@ -2372,7 +2372,7 @@ Spain</string>
                                                 <rect key="frame" x="162" y="35" width="51" height="52"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-kh-Y7H">
-                                                <rect key="frame" x="74" y="120" width="227.5" height="36.5"/>
+                                                <rect key="frame" x="74.5" y="120" width="227.5" height="36.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
                                                 <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
