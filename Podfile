@@ -32,6 +32,7 @@ end
 def testing_pods
   pod 'Quick'
   pod 'Nimble'
+  pod 'CardIO'
 end
 
 target 'SunriseTests' do
