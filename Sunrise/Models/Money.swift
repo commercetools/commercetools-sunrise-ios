@@ -13,7 +13,7 @@ extension BaseMoney {
             let currencyFormatter = NumberFormatter()
             currencyFormatter.numberStyle = .currency
             currencyFormatter.currencySymbol = currencySymbol
-            currencyFormatter.locale = Locale.current
+            currencyFormatter.locale = Locale(identifier: currencyCode)
             return currencyFormatter.string(from: NSNumber(value: Double(centAmount) / 100)) ?? ""
         }
         return ""

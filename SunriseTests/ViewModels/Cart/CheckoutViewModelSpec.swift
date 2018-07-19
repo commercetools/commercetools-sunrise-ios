@@ -33,30 +33,30 @@ class CheckoutViewModelSpec: QuickSpec {
             }
 
             it("has the correct subtotal amount") {
-                expect(checkoutViewModel.subtotal.value).to(equal("1.569,80 €"))
+                expect(checkoutViewModel.subtotal.value).to(equal("€ 1569.80"))
             }
 
             it("has the correct shipping price amount") {
-                expect(checkoutViewModel.shippingPrice.value).to(equal("10,00 €"))
+                expect(checkoutViewModel.shippingPrice.value).to(equal("€ 10.00"))
             }
 
             it("has the correct order discount amount") {
-                expect(checkoutViewModel.orderDiscount.value).to(equal("313,96 €"))
+                expect(checkoutViewModel.orderDiscount.value).to(equal("€ 313.96"))
             }
 
             it("has the correct tax amount") {
-                expect(checkoutViewModel.tax.value).to(equal("202,12 €"))
+                expect(checkoutViewModel.tax.value).to(equal("€ 202.12"))
             }
 
             it("has the correct order total") {
-                expect(checkoutViewModel.orderTotal.value).to(equal("1.265,84 €"))
+                expect(checkoutViewModel.orderTotal.value).to(equal("€ 1265.84"))
             }
 
             context("retrieving data for the first line item") {
                 let indexPath = IndexPath(row: 0, section: 0)
 
                 it("has the correct name") {
-                    expect(checkoutViewModel.lineItemName(at: indexPath)).to(equal("Jacke Michael Kors dunkelblau"))
+                    expect(checkoutViewModel.lineItemName(at: indexPath)).to(equal("Jacket Michael Kors dark blue"))
                 }
 
                 it("has the correct quantity") {
@@ -64,7 +64,7 @@ class CheckoutViewModelSpec: QuickSpec {
                 }
 
                 it("has the correct price") {
-                    expect(checkoutViewModel.lineItemPrice(at: indexPath)).to(equal("156,00 €"))
+                    expect(checkoutViewModel.lineItemPrice(at: indexPath)).to(equal("€ 156.00"))
                 }
 
             }
@@ -81,7 +81,7 @@ class CheckoutViewModelSpec: QuickSpec {
                 }
 
                 it("has the correct price") {
-                    expect(checkoutViewModel.shippingMethodPrice(at: indexPath)).to(equal("10,00 €"))
+                    expect(checkoutViewModel.shippingMethodPrice(at: indexPath)).to(equal("€ 10.00"))
                 }
 
             }

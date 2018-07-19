@@ -32,14 +32,14 @@ class CartViewModelSpec: QuickSpec {
             }
 
             it("has the correct total") {
-                expect(cartViewModel.orderTotal.value).to(equal("1.265,84 €"))
+                expect(cartViewModel.orderTotal.value).to(equal("€ 1265.84"))
             }
 
             context("retrieving data for the first line item") {
                 let indexPath = IndexPath(row: 0, section: 0)
 
                 it("has the correct line item name") {
-                    expect(cartViewModel.lineItemName(at: indexPath)).to(equal("Jacke Michael Kors dunkelblau"))
+                    expect(cartViewModel.lineItemName(at: indexPath)).to(equal("Jacket Michael Kors dark blue"))
                 }
 
                 it("has the correct line item sku") {
@@ -55,11 +55,11 @@ class CartViewModelSpec: QuickSpec {
                 }
 
                 it("has the correct old price for the line item") {
-                    expect(cartViewModel.lineItemOldPrice(at: indexPath)).to(equal("195,00 €"))
+                    expect(cartViewModel.lineItemOldPrice(at: indexPath)).to(equal("€ 195.00"))
                 }
 
                 it("has the correct current price for the line item") {
-                    expect(cartViewModel.lineItemPrice(at: indexPath)).to(equal("156,00 €"))
+                    expect(cartViewModel.lineItemPrice(at: indexPath)).to(equal("€ 156.00"))
                 }
 
                 it("has the correct quantity for the line item") {
@@ -75,11 +75,11 @@ class CartViewModelSpec: QuickSpec {
                 let indexPath = IndexPath(row: 2, section: 0)
 
                 it("has the correct old price for the line item") {
-                    expect(cartViewModel.lineItemOldPrice(at: indexPath)).to(equal("910,00 €"))
+                    expect(cartViewModel.lineItemOldPrice(at: indexPath)).to(equal("€ 910.00"))
                 }
 
                 it("has the correct current price for the line item") {
-                    expect(cartViewModel.lineItemPrice(at: indexPath)).to(equal("637,00 €"))
+                    expect(cartViewModel.lineItemPrice(at: indexPath)).to(equal("€ 637.00"))
                 }
 
                 it("has the correct quantity for the line item") {
