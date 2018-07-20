@@ -113,6 +113,8 @@
 		2163EBC51DE8C26C00803640 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */; };
 		2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2163EBC61DE8C26C00803640 /* Assets.xcassets */; };
 		2163EBCB1DE8C26C00803640 /* Sunrise Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2163EBB11DE8C26C00803640 /* Sunrise Watch.app */; };
+		21680E37210F845F0086FD0F /* order.json in Resources */ = {isa = PBXBuildFile; fileRef = 21680E36210F845F0086FD0F /* order.json */; };
+		21680E3A210F866A0086FD0F /* OrderDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21680E39210F866A0086FD0F /* OrderDetailsViewModelSpec.swift */; };
 		2171D0B31F9E52B10074C27D /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2171D0B21F9E52B10074C27D /* RangeSlider.swift */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		217928A121090CA0005BDCDA /* cart.json in Resources */ = {isa = PBXBuildFile; fileRef = 217928A021090CA0005BDCDA /* cart.json */; };
@@ -373,6 +375,8 @@
 		2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		2163EBC61DE8C26C00803640 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2163EBC81DE8C26C00803640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21680E36210F845F0086FD0F /* order.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = order.json; sourceTree = "<group>"; };
+		21680E39210F866A0086FD0F /* OrderDetailsViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewModelSpec.swift; sourceTree = "<group>"; };
 		2171D0B21F9E52B10074C27D /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		217928A021090CA0005BDCDA /* cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cart.json; sourceTree = "<group>"; };
@@ -574,6 +578,7 @@
 		210BE4C853D0D55D83858A34 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				21680E38210F86440086FD0F /* Profile */,
 				210BE79CDD3B7FFDBA130AF1 /* Cart */,
 			);
 			path = ViewModels;
@@ -819,6 +824,14 @@
 			path = "Sunrise Watch Extension";
 			sourceTree = "<group>";
 		};
+		21680E38210F86440086FD0F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				21680E39210F866A0086FD0F /* OrderDetailsViewModelSpec.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		2171D0B11F9E52900074C27D /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -830,6 +843,7 @@
 		2179289D21090C12005BDCDA /* TestData */ = {
 			isa = PBXGroup;
 			children = (
+				21680E36210F845F0086FD0F /* order.json */,
 				217928A021090CA0005BDCDA /* cart.json */,
 				2151A40A210DF918002AF5B0 /* shipping-methods.json */,
 			);
@@ -1344,6 +1358,7 @@
 			files = (
 				2151A40B210DF918002AF5B0 /* shipping-methods.json in Resources */,
 				217928A121090CA0005BDCDA /* cart.json in Resources */,
+				21680E37210F845F0086FD0F /* order.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1707,6 +1722,7 @@
 				21BBA586210B4362008E1263 /* CheckoutViewModelSpec.swift in Sources */,
 				215C4F6B1CF28CC600A99790 /* TestUtils.swift in Sources */,
 				210BEF25D391E5579E7EC8F2 /* CartViewModelSpec.swift in Sources */,
+				21680E3A210F866A0086FD0F /* OrderDetailsViewModelSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
