@@ -39,7 +39,3 @@ target 'SunriseTests' do
   testing_pods
   common_pods
 end
-
-target 'SunriseUITests' do
-  testing_pods
-end

@@ -102,7 +102,6 @@
 		21531C121F9BCCA7003E2F75 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21531C111F9BCCA7003E2F75 /* FiltersViewController.swift */; };
 		2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		215C4F6B1CF28CC600A99790 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */; };
-		215C4F6C1CF28CC900A99790 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEF340733DC1B9B2DE4F9 /* TestUtils.swift */; };
 		215C7C201D79A08C002EC074 /* SelectableAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C1F1D79A08C002EC074 /* SelectableAttributeCell.swift */; };
 		215C7C221D79A0B4002EC074 /* DisplayedAttributeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C7C211D79A0B4002EC074 /* DisplayedAttributeCell.swift */; };
 		215EDBA91F81A71800BA87F9 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215EDBA81F81A71800BA87F9 /* CategoryCollectionViewCell.swift */; };
@@ -162,7 +161,6 @@
 		21C3C99120024303006BA0A6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C3C99020024303006BA0A6 /* Home.storyboard */; };
 		21CDC4981CE91D9B009D2638 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4971CE91D9B009D2638 /* AppDelegate.swift */; };
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
-		21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */; };
 		21D2AE9D1F6171E10087CB46 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */; };
 		21DEDD9B20737F8700DF6ADF /* MyReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9A20737F8700DF6ADF /* MyReservationCell.swift */; };
 		21DEDD9D20739B4600DF6ADF /* ReservationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */; };
@@ -177,7 +175,6 @@
 		21F96DF32061A760004CD31A /* InlineProductOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F96DF22061A760004CD31A /* InlineProductOverviewViewModel.swift */; };
 		21FAD0C62080A6C50069695A /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FAD0C52080A6C50069695A /* BannerCell.swift */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
-		60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
 		C3E67B54573794A35CE64ACE /* Pods_Sunrise_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */; };
 		D78C254EAC84E3853FB82002 /* Pods_ReservationNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */; };
@@ -206,13 +203,6 @@
 			remoteInfo = ReservationNotification;
 		};
 		21CDC4AB1CE91D9B009D2638 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 21CDC4931CE91D9B009D2638;
-			remoteInfo = Sunrise;
-		};
-		21CDC4B61CE91D9B009D2638 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
 			proxyType = 1;
@@ -425,9 +415,6 @@
 		21CDC4A51CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21CDC4AA1CE91D9B009D2638 /* SunriseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SunriseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CDC4B01CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SunriseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseUITests.swift; sourceTree = "<group>"; };
-		21CDC4BB1CE91D9B009D2638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		21DEDD9A20737F8700DF6ADF /* MyReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationCell.swift; sourceTree = "<group>"; };
 		21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -500,14 +487,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		21CDC4B21CE91D9B009D2638 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				60AA51A6DFFE7922EA4180E4 /* Pods_SunriseUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,7 +916,6 @@
 				21CDC4961CE91D9B009D2638 /* Sunrise */,
 				212EB2D51F5F21BD0006611E /* Resources */,
 				21CDC4AD1CE91D9B009D2638 /* SunriseTests */,
-				21CDC4B81CE91D9B009D2638 /* SunriseUITests */,
 				2199923C1DC9FAAB000E48FD /* ReservationNotification */,
 				2163EBB21DE8C26C00803640 /* Sunrise Watch */,
 				2163EBC11DE8C26C00803640 /* Sunrise Watch Extension */,
@@ -952,7 +930,6 @@
 			children = (
 				21CDC4941CE91D9B009D2638 /* Sunrise.app */,
 				21CDC4AA1CE91D9B009D2638 /* SunriseTests.xctest */,
-				21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */,
 				219992371DC9FAAB000E48FD /* ReservationNotification.appex */,
 				2163EBB11DE8C26C00803640 /* Sunrise Watch.app */,
 				2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */,
@@ -988,15 +965,6 @@
 				210BE4C853D0D55D83858A34 /* ViewModels */,
 			);
 			path = SunriseTests;
-			sourceTree = "<group>";
-		};
-		21CDC4B81CE91D9B009D2638 /* SunriseUITests */ = {
-			isa = PBXGroup;
-			children = (
-				21CDC4B91CE91D9B009D2638 /* SunriseUITests.swift */,
-				21CDC4BB1CE91D9B009D2638 /* Info.plist */,
-			);
-			path = SunriseUITests;
 			sourceTree = "<group>";
 		};
 		21D2AE9B1F6171B80087CB46 /* Onboarding */ = {
@@ -1156,26 +1124,6 @@
 			productReference = 21CDC4AA1CE91D9B009D2638 /* SunriseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		21CDC4B41CE91D9B009D2638 /* SunriseUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 21CDC4C41CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "SunriseUITests" */;
-			buildPhases = (
-				FF64BBFEEB8C34F3C2743D4D /* [CP] Check Pods Manifest.lock */,
-				21CDC4B11CE91D9B009D2638 /* Sources */,
-				21CDC4B21CE91D9B009D2638 /* Frameworks */,
-				21CDC4B31CE91D9B009D2638 /* Resources */,
-				094B2A358611C082A08615B5 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				21CDC4B71CE91D9B009D2638 /* PBXTargetDependency */,
-			);
-			name = SunriseUITests;
-			productName = SunriseUITests;
-			productReference = 21CDC4B51CE91D9B009D2638 /* SunriseUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1258,11 +1206,6 @@
 						LastSwiftMigration = 1000;
 						TestTargetID = 21CDC4931CE91D9B009D2638;
 					};
-					21CDC4B41CE91D9B009D2638 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 1000;
-						TestTargetID = 21CDC4931CE91D9B009D2638;
-					};
 				};
 			};
 			buildConfigurationList = 21CDC48F1CE91D9B009D2638 /* Build configuration list for PBXProject "Sunrise" */;
@@ -1281,7 +1224,6 @@
 			targets = (
 				21CDC4931CE91D9B009D2638 /* Sunrise */,
 				21CDC4A91CE91D9B009D2638 /* SunriseTests */,
-				21CDC4B41CE91D9B009D2638 /* SunriseUITests */,
 				219992361DC9FAAB000E48FD /* ReservationNotification */,
 				2163EBB01DE8C26C00803640 /* Sunrise Watch */,
 				2163EBBC1DE8C26C00803640 /* Sunrise Watch Extension */,
@@ -1362,36 +1304,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21CDC4B31CE91D9B009D2638 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		094B2A358611C082A08615B5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1552,24 +1467,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF64BBFEEB8C34F3C2743D4D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SunriseUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1726,15 +1623,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21CDC4B11CE91D9B009D2638 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				215C4F6C1CF28CC900A99790 /* TestUtils.swift in Sources */,
-				21CDC4BA1CE91D9B009D2638 /* SunriseUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1757,11 +1645,6 @@
 			isa = PBXTargetDependency;
 			target = 21CDC4931CE91D9B009D2638 /* Sunrise */;
 			targetProxy = 21CDC4AB1CE91D9B009D2638 /* PBXContainerItemProxy */;
-		};
-		21CDC4B71CE91D9B009D2638 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 21CDC4931CE91D9B009D2638 /* Sunrise */;
-			targetProxy = 21CDC4B61CE91D9B009D2638 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2636,21 +2519,6 @@
 			};
 			name = "Debug Staging";
 		};
-		21A8EEA41CEC614C009A8CEB /* Debug Staging */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = SunriseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = Sunrise;
-			};
-			name = "Debug Staging";
-		};
 		21A8EEA51CEC615A009A8CEB /* Release Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2739,21 +2607,6 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sunrise.app/Sunrise";
-			};
-			name = "Release Staging";
-		};
-		21A8EEA81CEC615A009A8CEB /* Release Staging */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = SunriseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = Sunrise;
 			};
 			name = "Release Staging";
 		};
@@ -2945,36 +2798,6 @@
 			};
 			name = "Release Prod";
 		};
-		21CDC4C51CE91D9B009D2638 /* Debug Prod */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8080A3FE3BC2FE4CAC9A3A23 /* Pods-SunriseUITests.debug prod.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = SunriseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = Sunrise;
-			};
-			name = "Debug Prod";
-		};
-		21CDC4C61CE91D9B009D2638 /* Release Prod */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = SunriseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.sunrise.SunriseUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = Sunrise;
-			};
-			name = "Release Prod";
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3040,17 +2863,6 @@
 				21A8EEA31CEC614C009A8CEB /* Debug Staging */,
 				21CDC4C31CE91D9B009D2638 /* Release Prod */,
 				21A8EEA71CEC615A009A8CEB /* Release Staging */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Release Prod";
-		};
-		21CDC4C41CE91D9B009D2638 /* Build configuration list for PBXNativeTarget "SunriseUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				21CDC4C51CE91D9B009D2638 /* Debug Prod */,
-				21A8EEA41CEC614C009A8CEB /* Debug Staging */,
-				21CDC4C61CE91D9B009D2638 /* Release Prod */,
-				21A8EEA81CEC615A009A8CEB /* Release Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = "Release Prod";

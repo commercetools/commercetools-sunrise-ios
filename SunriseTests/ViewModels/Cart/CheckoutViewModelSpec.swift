@@ -83,7 +83,6 @@ class CheckoutViewModelSpec: QuickSpec {
                 it("has the correct price") {
                     expect(checkoutViewModel.shippingMethodPrice(at: indexPath)).to(equal("€ 10.00"))
                 }
-
             }
         }
     }

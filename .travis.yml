@@ -14,5 +14,5 @@ xcode_sdk: iphonesimulator11.3
 script:
   - set -o pipefail
   - xcodebuild -showsdks
-  - xcodebuild -workspace Sunrise.xcworkspace -scheme "Sunrise Staging" -destination "platform=iOS Simulator,name=iPhone SE" clean build build-for-testing | xcpretty -c;
-  - xcodebuild -workspace Sunrise.xcworkspace -scheme "Sunrise Staging" -destination "platform=iOS Simulator,name=iPhone SE" test-without-building | xcpretty -c;
+  - xcodebuild -workspace Sunrise.xcworkspace -scheme "Sunrise Prod" -destination "platform=iOS Simulator,name=iPhone SE" clean build build-for-testing | xcpretty -c;
+  - xcodebuild -workspace Sunrise.xcworkspace -scheme "Sunrise Prod" -destination "platform=iOS Simulator,name=iPhone SE" test-without-building | xcpretty -c;

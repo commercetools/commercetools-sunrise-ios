@@ -295,13 +295,13 @@ class CheckoutViewModel: BaseViewModel {
 
     private func retrieveShippingMethods() {
         guard let cart = cart.value else { return }
-        let shippingMethodResultHandler: ((Commercetools.Result<ShippingMethods>) -> Void) = { [unowned self] result in
+        let shippingMethodResultHandler: ((Commercetools.Result<ShippingMethods>) -> Void) = { [weak self] result in
             if let methods = result.model, result.isSuccess {
-                self.methods.value = methods
-                self.retrieveCustomerAddresses()
-            } else if let errors = result.errors as? [CTError], result.isFailure {
-                self.alertMessageObserver.send(value: self.alertMessage(for: errors))
-                self.isLoading.value = false
+                self?.methods.value = methods
+                self?.retrieveCustomerAddresses()
+            } else if let errors = result.errors as? [CTError], result.isFailure, let alertMessage = self?.alertMessage(for: errors) {
+                self?.alertMessageObserver.send(value: alertMessage)
+                self?.isLoading.value = false
             }
         }
         if cart.shippingAddress != nil {
