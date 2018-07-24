@@ -174,3 +174,10 @@ class StoreSelectionViewModel: BaseViewModel {
         }
     }
 }
+
+extension CTError.FailureReason {
+    init(message: String?, details: String?) {
+        self.message = message
+        self.details = details
+    }
+}
