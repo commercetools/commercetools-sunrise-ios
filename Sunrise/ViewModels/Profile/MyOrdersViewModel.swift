@@ -25,7 +25,9 @@ class MyOrdersViewModel: BaseViewModel {
     
     // MARK: - Lifecycle
     
-    override init() {
+    init(orders: [Order] = []) {
+        self.orders = orders
+
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 

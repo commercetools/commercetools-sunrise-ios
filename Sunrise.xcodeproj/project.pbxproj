@@ -125,6 +125,7 @@
 		218AF314206DAAA300C7F9E7 /* MyOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF313206DAAA300C7F9E7 /* MyOrdersViewModel.swift */; };
 		218AF316206DAAB000C7F9E7 /* MyReservationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218AF315206DAAB000C7F9E7 /* MyReservationsViewModel.swift */; };
 		218F840E1F8EB619005E03A4 /* WishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218F840D1F8EB619005E03A4 /* WishListViewController.swift */; };
+		21929B1921124B3500B55420 /* MyOrdersViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21929B1821124B3500B55420 /* MyOrdersViewModelSpec.swift */; };
 		2195CCDF20EF827D00ACCFC8 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2195CCE120EF827D00ACCFC8 /* Onboarding.storyboard */; };
 		2195CCE420EF841200ACCFC8 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2195CCE620EF841200ACCFC8 /* Cart.storyboard */; };
 		2195CCE920EF842100ACCFC8 /* Wishlist.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2195CCEB20EF842100ACCFC8 /* Wishlist.storyboard */; };
@@ -378,6 +379,7 @@
 		218AF313206DAAA300C7F9E7 /* MyOrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewModel.swift; sourceTree = "<group>"; };
 		218AF315206DAAB000C7F9E7 /* MyReservationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationsViewModel.swift; sourceTree = "<group>"; };
 		218F840D1F8EB619005E03A4 /* WishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewController.swift; sourceTree = "<group>"; };
+		21929B1821124B3500B55420 /* MyOrdersViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewModelSpec.swift; sourceTree = "<group>"; };
 		2195CCE820EF841700ACCFC8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Cart.strings; sourceTree = "<group>"; };
 		2195CCF220EF843000ACCFC8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Categories.strings; sourceTree = "<group>"; };
 		2195CCF720EF8AE200ACCFC8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ProductDetails.strings; sourceTree = "<group>"; };
@@ -807,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				21680E39210F866A0086FD0F /* OrderDetailsViewModelSpec.swift */,
+				21929B1821124B3500B55420 /* MyOrdersViewModelSpec.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1616,6 +1619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21929B1921124B3500B55420 /* MyOrdersViewModelSpec.swift in Sources */,
 				21BBA586210B4362008E1263 /* CheckoutViewModelSpec.swift in Sources */,
 				215C4F6B1CF28CC600A99790 /* TestUtils.swift in Sources */,
 				210BEF25D391E5579E7EC8F2 /* CartViewModelSpec.swift in Sources */,
