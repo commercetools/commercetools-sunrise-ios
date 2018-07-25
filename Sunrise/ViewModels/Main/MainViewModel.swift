@@ -59,7 +59,7 @@ class MainViewModel: BaseViewModel {
 
     // MARK: - Lifecycle
 
-    override init() {
+    init(allCategories: [Category] = []) {
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
@@ -72,6 +72,9 @@ class MainViewModel: BaseViewModel {
         categoriesRetrievalQueue.maxConcurrentOperationCount = 1
 
         super.init()
+
+        self.allCategories = allCategories
+        process(categories: allCategories)
 
         // set the first root category to be an active one
         disposables += activeCategory <~ rootCategories.map { rootCategories in rootCategories.first }
