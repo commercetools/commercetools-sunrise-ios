@@ -28,7 +28,7 @@ class ScannerViewModel: BaseViewModel {
         super.init()
 
         disposables += scannedCode.signal.observeValues { [weak self] sku in
-            if sku.characters.count > 0 {
+            if sku.count > 0 {
                 self?.searchForProduct(sku)
             }
         }
@@ -42,7 +42,7 @@ class ScannerViewModel: BaseViewModel {
         isLoading.value = true
         isCapturing.value = false
 
-        ProductProjection.search(limit: 1, filters: ["variants.sku:\"\(sku)\""], result: { result in
+        ProductProjection.search(limit: 1, filters: ["variants.sku:\"\(sku)\""], markMatchingVariants: true, result: { result in
             if let product = result.model?.results.first, result.isSuccess {
                 self.scannedProduct.value = product
 
@@ -58,5 +58,4 @@ class ScannerViewModel: BaseViewModel {
             self.isLoading.value = false
         })
     }
-
 }

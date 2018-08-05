@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A2r-yC-0rf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Bold.ttf">
+            <string>Poppins-Bold</string>
+        </array>
+        <array key="Rubik-Bold.ttf">
+            <string>Rubik-Bold</string>
+        </array>
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--wishlist-->
+        <scene sceneID="8Y3-yj-hqh">
+            <objects>
+                <viewController id="A2r-yC-0rf" customClass="WishListViewController" customModule="Sunrise" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gYH-Jx-9uq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_background" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-Jr-tBB">
+                                <rect key="frame" x="0.0" y="73" width="375" height="541"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wishlist_separator" translatesAutoresizingMaskIntoConstraints="NO" id="eH1-1h-WUT">
+                                <rect key="frame" x="67.5" y="160" width="240" height="2"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8K3-XS-0Si">
+                                <rect key="frame" x="17.5" y="167" width="339" height="417"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no products in your wishlist." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOX-CC-i75">
+                                        <rect key="frame" x="6" y="17" width="327" height="17"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use the ❤️ icon to add products to your wishlist." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2N7-dn-3RV">
+                                        <rect key="frame" x="5.5" y="46" width="327" height="17"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <color key="textColor" red="0.3411764706" green="0.36862745099999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFi-aJ-HBo">
+                                        <rect key="frame" x="9.5" y="103" width="319" height="95"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="zey-CR-9lZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="-32" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Continue Shopping" backgroundImage="button_background">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueShopping:" destination="A2r-yC-0rf" eventType="touchUpInside" id="JK8-U1-PdV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="2N7-dn-3RV" firstAttribute="top" secondItem="LOX-CC-i75" secondAttribute="bottom" constant="12" id="0gG-ba-Deo"/>
+                                    <constraint firstItem="KFi-aJ-HBo" firstAttribute="centerX" secondItem="8K3-XS-0Si" secondAttribute="centerX" id="2sA-Uc-UX3"/>
+                                    <constraint firstItem="LOX-CC-i75" firstAttribute="leading" secondItem="8K3-XS-0Si" secondAttribute="leading" constant="6" id="X2N-uN-mj7"/>
+                                    <constraint firstItem="2N7-dn-3RV" firstAttribute="leading" secondItem="8K3-XS-0Si" secondAttribute="leading" constant="6" id="a8k-XG-9Se"/>
+                                    <constraint firstAttribute="trailing" secondItem="LOX-CC-i75" secondAttribute="trailing" constant="6" id="n1A-xF-W0T"/>
+                                    <constraint firstItem="LOX-CC-i75" firstAttribute="top" secondItem="8K3-XS-0Si" secondAttribute="top" constant="17" id="qDU-cp-XEf"/>
+                                    <constraint firstItem="KFi-aJ-HBo" firstAttribute="top" secondItem="2N7-dn-3RV" secondAttribute="bottom" constant="40" id="vD5-T0-B2o"/>
+                                    <constraint firstAttribute="trailing" secondItem="2N7-dn-3RV" secondAttribute="trailing" constant="6" id="wdL-LK-8Tn"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-A3-tYB">
+                                <rect key="frame" x="17.5" y="167.5" width="339" height="416.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WishListCell" rowHeight="200" id="BRZ-MM-Gvs" customClass="WishListCell" customModule="Sunrise" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="339" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BRZ-MM-Gvs" id="8l4-fU-pX6">
+                                            <rect key="frame" x="0.0" y="0.0" width="339" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_shoe" translatesAutoresizingMaskIntoConstraints="NO" id="5C1-bI-I49">
+                                                    <rect key="frame" x="11" y="23" width="119" height="153.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas Red Tracksuit Jacket" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLM-gZ-yv0">
+                                                    <rect key="frame" x="145" y="71" width="176" height="33.5"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                    <color key="textColor" red="0.1647058824" green="0.20392156859999999" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oxt-dR-knQ">
+                                                    <rect key="frame" x="145" y="33" width="50" height="14"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="€160.99">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="12" name="Rubik-Bold"/>
+                                                                <integer key="NSStrikethrough" value="1"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="€49.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Moo-uS-dcc">
+                                                    <rect key="frame" x="199" y="30" width="58" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="16"/>
+                                                    <color key="textColor" red="0.93333333330000001" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeB-yE-iPG">
+                                                    <rect key="frame" x="291" y="24.5" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="Lls-m3-A2i"/>
+                                                        <constraint firstAttribute="width" constant="30" id="urQ-tx-IsS"/>
+                                                    </constraints>
+                                                    <state key="normal" image="wishlist_icon"/>
+                                                    <state key="selected" image="wishlist_icon_active"/>
+                                                    <state key="highlighted" image="wishlist_icon_active"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gg-uW-Sl8">
+                                                    <rect key="frame" x="136" y="132.5" width="192" height="76"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="76" id="wxo-fP-LvH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="-29" maxX="27" maxY="0.0"/>
+                                                    <state key="normal" title="Add to bag" backgroundImage="wishlist_button">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" backgroundImage="wishlist_button"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5C1-bI-I49" firstAttribute="top" secondItem="8l4-fU-pX6" secondAttribute="top" constant="23" id="9Xp-5Z-xvp"/>
+                                                <constraint firstItem="0gg-uW-Sl8" firstAttribute="top" secondItem="QLM-gZ-yv0" secondAttribute="bottom" constant="28" id="PGA-qA-QdR"/>
+                                                <constraint firstItem="QLM-gZ-yv0" firstAttribute="trailing" secondItem="ZeB-yE-iPG" secondAttribute="trailing" id="QWc-h3-7kU"/>
+                                                <constraint firstItem="Moo-uS-dcc" firstAttribute="leading" secondItem="oxt-dR-knQ" secondAttribute="trailing" constant="4" id="RWh-iR-U3E"/>
+                                                <constraint firstAttribute="bottom" secondItem="5C1-bI-I49" secondAttribute="bottom" constant="23" id="WGX-Jf-Vnj"/>
+                                                <constraint firstItem="oxt-dR-knQ" firstAttribute="leading" secondItem="5C1-bI-I49" secondAttribute="trailing" constant="15" id="YeP-Ig-2Yr"/>
+                                                <constraint firstItem="ZeB-yE-iPG" firstAttribute="centerY" secondItem="Moo-uS-dcc" secondAttribute="centerY" id="aiV-fR-6nb"/>
+                                                <constraint firstItem="Moo-uS-dcc" firstAttribute="bottom" secondItem="oxt-dR-knQ" secondAttribute="bottom" constant="1.5" id="c2C-vz-SBr"/>
+                                                <constraint firstAttribute="trailing" secondItem="0gg-uW-Sl8" secondAttribute="trailing" constant="11" id="dNF-AO-tXi"/>
+                                                <constraint firstItem="5C1-bI-I49" firstAttribute="leading" secondItem="8l4-fU-pX6" secondAttribute="leading" constant="11" id="eB6-my-1pt"/>
+                                                <constraint firstItem="ZeB-yE-iPG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Moo-uS-dcc" secondAttribute="trailing" constant="2" id="iR1-44-RP7"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZeB-yE-iPG" secondAttribute="trailing" constant="18" id="kPr-Zb-WGC"/>
+                                                <constraint firstItem="QLM-gZ-yv0" firstAttribute="top" secondItem="Moo-uS-dcc" secondAttribute="bottom" constant="22" id="oxX-Ez-2z2"/>
+                                                <constraint firstItem="0gg-uW-Sl8" firstAttribute="leading" secondItem="5C1-bI-I49" secondAttribute="trailing" constant="6" id="p5E-Ky-2ok"/>
+                                                <constraint firstItem="QLM-gZ-yv0" firstAttribute="leading" secondItem="5C1-bI-I49" secondAttribute="trailing" constant="15" id="urU-Wl-jGD"/>
+                                                <constraint firstItem="oxt-dR-knQ" firstAttribute="top" secondItem="5C1-bI-I49" secondAttribute="top" constant="10" id="vc4-hd-un0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="5C1-bI-I49" firstAttribute="width" secondItem="BRZ-MM-Gvs" secondAttribute="width" multiplier="0.351" id="p9s-Ii-A1t"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="addToBagButton" destination="0gg-uW-Sl8" id="FIq-gX-nGx"/>
+                                            <outlet property="oldPriceLabel" destination="oxt-dR-knQ" id="2Un-j7-Shn"/>
+                                            <outlet property="priceLabel" destination="Moo-uS-dcc" id="jXs-cx-BUO"/>
+                                            <outlet property="productImageView" destination="5C1-bI-I49" id="R1c-lJ-N13"/>
+                                            <outlet property="productNameLabel" destination="QLM-gZ-yv0" id="dfI-NL-oDh"/>
+                                            <outlet property="wishListButton" destination="ZeB-yE-iPG" id="v9b-oc-lNV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="A2r-yC-0rf" id="SFk-Gl-anp"/>
+                                    <outlet property="delegate" destination="A2r-yC-0rf" id="OTA-bT-Om6"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wishlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ9-XQ-yU4">
+                                <rect key="frame" x="140" y="108" width="93.5" height="36.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="22"/>
+                                <color key="textColor" red="0.16470588235294117" green="0.20392156862745098" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zz0-hI-4H7">
+                                <rect key="frame" x="17.5" y="167.5" width="339" height="18"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="5XZ-Ux-vev"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zz0-hI-4H7" firstAttribute="width" secondItem="eaB-A3-tYB" secondAttribute="width" id="0hR-dM-eDT"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="2e5-tt-b59"/>
+                            <constraint firstItem="Zz0-hI-4H7" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="8az-5U-aUX"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="DRB-bv-czt"/>
+                            <constraint firstItem="eH1-1h-WUT" firstAttribute="top" secondItem="rZ9-XQ-yU4" secondAttribute="bottom" constant="16" id="HVO-NA-bmX"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="-30" id="JzX-Z3-hjL"/>
+                            <constraint firstItem="xx1-ti-hQ9" firstAttribute="trailing" secondItem="bZb-Jr-tBB" secondAttribute="trailing" id="MXX-Yj-2Dh"/>
+                            <constraint firstItem="rZ9-XQ-yU4" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="Mvc-ks-YNb"/>
+                            <constraint firstItem="bZb-Jr-tBB" firstAttribute="leading" secondItem="xx1-ti-hQ9" secondAttribute="leading" id="PxS-ig-qQT"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="-30" id="T7v-mb-hJ7"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="ZKe-Fr-Ayr"/>
+                            <constraint firstItem="rZ9-XQ-yU4" firstAttribute="top" secondItem="xx1-ti-hQ9" secondAttribute="top" constant="88" id="dsZ-h8-nvf"/>
+                            <constraint firstItem="eaB-A3-tYB" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.904" id="fls-p7-LE1"/>
+                            <constraint firstItem="bZb-Jr-tBB" firstAttribute="top" secondItem="xx1-ti-hQ9" secondAttribute="top" constant="53" id="hSK-S7-d1E"/>
+                            <constraint firstItem="xx1-ti-hQ9" firstAttribute="bottom" secondItem="bZb-Jr-tBB" secondAttribute="bottom" constant="53" id="m4L-v9-cgN"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="nSB-mO-lqN"/>
+                            <constraint firstItem="Zz0-hI-4H7" firstAttribute="top" secondItem="eH1-1h-WUT" secondAttribute="bottom" constant="5" id="oOQ-NV-Y5O"/>
+                            <constraint firstItem="8K3-XS-0Si" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.904" id="wjr-89-pIg"/>
+                            <constraint firstItem="KFi-aJ-HBo" firstAttribute="width" secondItem="gYH-Jx-9uq" secondAttribute="width" multiplier="0.85" id="yBe-6c-ikR"/>
+                            <constraint firstItem="eH1-1h-WUT" firstAttribute="centerX" secondItem="gYH-Jx-9uq" secondAttribute="centerX" id="zam-TK-Wgc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xx1-ti-hQ9"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="wishlist" id="qs6-EQ-Jo8"/>
+                    <connections>
+                        <outlet property="gradientView" destination="Zz0-hI-4H7" id="csg-kC-HE2"/>
+                        <outlet property="tableView" destination="eaB-A3-tYB" id="rZk-Ca-lou"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C7q-fV-UTp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="998" y="1300"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="button_background" width="330" height="99"/>
+        <image name="product_shoe" width="177" height="236"/>
+        <image name="wishlist_background" width="375" height="544"/>
+        <image name="wishlist_button" width="215" height="85"/>
+        <image name="wishlist_icon" width="40" height="40"/>
+        <image name="wishlist_icon_active" width="40" height="40"/>
+        <image name="wishlist_separator" width="240" height="2"/>
+    </resources>
+</document>

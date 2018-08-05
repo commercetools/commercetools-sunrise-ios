@@ -160,7 +160,7 @@ class VoiceSearchViewModel: BaseViewModel {
     private func performSearch() {
         dismissObserver.send(value: ())
         let recognizedText = self.recognizedText.value
-        AppRouting.switchToSearch(query: recognizedText)
+//        AppRouting.switchToSearch(query: recognizedText)
 
         let speechUtterance = String(format: NSLocalizedString("Showing items matching %@", comment: "Showing matching items message"), recognizedText)
         let speechSynthesizer = AVSpeechSynthesizer()

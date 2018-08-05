@@ -78,3 +78,30 @@ extension Attribute {
         }
     }
 }
+
+extension Attribute: Equatable {
+    public static func == (lhs: Attribute, rhs: Attribute) -> Bool {
+        return lhs.name == rhs.name && lhs.value == rhs.value
+    }
+}
+
+extension JsonValue: Equatable {
+    public static func == (lhs: JsonValue, rhs: JsonValue) -> Bool {
+        switch (lhs, rhs) {
+        case (.bool(let lhs), .bool(let rhs)):
+            return lhs == rhs
+        case (.int(let lhs), .int(let rhs)):
+            return lhs == rhs
+        case (.double(let lhs), .double(let rhs)):
+            return lhs == rhs
+        case (.string(let lhs), .string(let rhs)):
+            return lhs == rhs
+        case (.dictionary(let lhs), .dictionary(let rhs)):
+            return lhs == rhs
+        case (.array(let lhs), .array(let rhs)):
+            return lhs == rhs
+        default:
+            return false
+        }
+    }
+}

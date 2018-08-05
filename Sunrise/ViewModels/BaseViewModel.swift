@@ -10,6 +10,9 @@ class BaseViewModel {
 
     // Outputs
     let alertMessageSignal: Signal<String, NoError>
+    var isAuthenticated: Bool {
+        return Commercetools.authState == .customerToken
+    }
 
     let alertMessageObserver: Signal<String, NoError>.Observer
 
@@ -29,31 +32,57 @@ class BaseViewModel {
     let oopsTitle = NSLocalizedString("Oops!", comment: "Oops!")
     let failedTitle = NSLocalizedString("Failed", comment: "Failed")
     let okAction = NSLocalizedString("OK", comment: "OK")
+    let cancelAction = NSLocalizedString("Cancel", comment: "Cancel")
     let settingsAction = NSLocalizedString("Settings", comment: "Settings")
+
+    // Cart and WishList dialogues
+    let addToCartSuccessTitle = NSLocalizedString("Product added to cart", comment: "Product added to cart")
+    let addToCartSuccessMessage = NSLocalizedString("Would you like to continue looking for more, or go to cart overview?", comment: "Product added to cart message")
+    let continueTitle = NSLocalizedString("Continue", comment: "Continue")
+    let cartOverviewTitle = NSLocalizedString("Cart overview", comment: "Cart overview")
+    let couldNotAddToCartTitle = NSLocalizedString("Could not add to cart", comment: "Could not add to cart")
+    let addToCartFailedTitle = NSLocalizedString("Couldn't add product to cart", comment: "Adding product to cart failed")
+
+    // Availability texts
+    let onStock = NSLocalizedString("in stock", comment: "In Stock")
+    let notAvailable = NSLocalizedString("not available", comment: "Not Available")
 
     // Customer title options
     let titleOptions = [NSLocalizedString("MR.", comment: "MR."), NSLocalizedString("MS.", comment: "MS."),
                         NSLocalizedString("DR.", comment: "DR.")]
 
-    // My store
-    var myStore: MutableProperty<Channel?>? {
-        return AppRouting.accountViewController?.viewModel?.currentStore
-    }
-    // Store currently browsing
-    var activeStore: MutableProperty<Channel?>? {
-        return AppRouting.productOverviewViewController?.viewModel?.browsingStore
-    }
+    // Common expansions
+    let discountCodesExpansion = ["discountCodes[*].discountCode.cartDiscounts[*]"]
+    let shippingMethodExpansion = ["shippingInfo.shippingMethod"]
 
     // MARK: - Lifecycle
 
     init() {
-        let (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
-        self.alertMessageSignal = alertMessageSignal
-        self.alertMessageObserver = alertMessageObserver
+        (alertMessageSignal, alertMessageObserver) = Signal<String, NoError>.pipe()
     }
 
     func alertMessage(for errors: [CTError]) -> String {
         return errors.map({ $0.errorDescription ?? "" }).joined(separator: "\n")
+    }
+
+    // MARK: - Cart overview calculations
+
+    func calculateSubtotal(for cart: Cart?) -> String {
+        guard let lineItems = cart?.lineItems else { return "" }
+        return calculateSubtotal(lineItems)
+    }
+
+    func calculateTax(for cart: Cart?) -> String {
+        guard let cart = cart, let totalGrossAmount = cart.taxedPrice?.totalGross.centAmount,
+              let totalNetAmount = cart.taxedPrice?.totalNet.centAmount else { return "-" }
+
+        return Money(currencyCode: cart.lineItems.first?.totalPrice.currencyCode ?? "",
+                centAmount: totalGrossAmount - totalNetAmount).description
+    }
+
+    func calculateOrderDiscount(for cart: Cart?) -> String {
+        guard let lineItems = cart?.lineItems else { return "" }
+        return calculateOrderDiscount(lineItems)
     }
 
     // MARK: - Cart or order overview calculations
@@ -76,10 +105,14 @@ class BaseViewModel {
         return ""
     }
 
+    func shippingPrice(for cart: Cart?) -> String {
+        guard let money = cart?.shippingInfo?.price else { return "-" }
+        return money.centAmount == 0 ? NSLocalizedString("Free", comment: "Free shipping") : money.description
+    }
+
     func calculateOrderDiscount(_ lineItems: [LineItem]) -> String {
         let totalOrderDiscountAmount = lineItems.reduce(0, { $0 + calculateCartDiscountForLineItem($1) })
-        return Money(currencyCode: lineItems.first?.totalPrice.currencyCode ?? "",
-                centAmount: totalOrderDiscountAmount).description
+        return totalOrderDiscountAmount > 0 ? Money(currencyCode: lineItems.first?.totalPrice.currencyCode ?? "", centAmount: totalOrderDiscountAmount).description : ""
     }
 
     func calculateCartDiscountForLineItem(_ lineItem: LineItem) -> Int {
@@ -108,4 +141,15 @@ class BaseViewModel {
         }
     }
 
+    func price(for lineItem: LineItem) -> String {
+        if let discounted = lineItem.price.discounted?.value {
+            return discounted.description
+
+        } else if let discounted = lineItem.discountedPricePerQuantity.first?.discountedPrice.value {
+            return discounted.description
+
+        } else {
+            return lineItem.price.value.description
+        }
+    }
 }

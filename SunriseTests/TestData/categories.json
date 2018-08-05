@@ -1,0 +1,4738 @@
+{
+  "limit": 499,
+  "offset": 0,
+  "count": 130,
+  "total": 130,
+  "results": [
+    {
+      "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c",
+      "version": 1,
+      "name": {
+        "de": "New",
+        "en": "New",
+        "it": "New"
+      },
+      "slug": {
+        "de": "new",
+        "en": "new",
+        "it": "new"
+      },
+      "ancestors": [],
+      "orderHint": "0.00001472471760489333780870",
+      "createdAt": "2016-08-29T11:56:00.490Z",
+      "lastModifiedAt": "2016-08-29T11:56:00.490Z",
+      "externalId": "1",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "f8587a7d-7756-4072-8b1f-6360357218c2",
+      "version": 1,
+      "name": {
+        "de": "Women",
+        "en": "Women",
+        "it": "Donna"
+      },
+      "slug": {
+        "de": "women",
+        "en": "women",
+        "it": "women"
+      },
+      "ancestors": [],
+      "orderHint": "0.000014724717606352087755230",
+      "createdAt": "2016-08-29T11:56:00.635Z",
+      "lastModifiedAt": "2016-08-29T11:56:00.635Z",
+      "externalId": "2",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1",
+      "version": 1,
+      "name": {
+        "de": "Men",
+        "en": "Men",
+        "it": "Uomo"
+      },
+      "slug": {
+        "de": "men",
+        "en": "men",
+        "it": "men"
+      },
+      "ancestors": [],
+      "orderHint": "0.00001472471760771972922790",
+      "createdAt": "2016-08-29T11:56:00.771Z",
+      "lastModifiedAt": "2016-08-29T11:56:00.771Z",
+      "externalId": "3",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "be57522b-35aa-44a6-8e60-d6caba56e775",
+      "version": 1,
+      "name": {
+        "de": "Accessories",
+        "en": "Accessories",
+        "it": "Accessori"
+      },
+      "slug": {
+        "de": "accessories",
+        "en": "accessories",
+        "it": "accessories"
+      },
+      "ancestors": [],
+      "orderHint": "0.000014724717609271549090478",
+      "createdAt": "2016-08-29T11:56:00.928Z",
+      "lastModifiedAt": "2016-08-29T11:56:00.928Z",
+      "externalId": "4",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "cc442414-b763-4d71-980f-d00b170dc710",
+      "version": 1,
+      "name": {
+        "de": "Brands",
+        "en": "Brands",
+        "it": "Brands"
+      },
+      "slug": {
+        "de": "brands",
+        "en": "brands",
+        "it": "brands"
+      },
+      "ancestors": [],
+      "orderHint": "0.000014724717610741802269967",
+      "createdAt": "2016-08-29T11:56:01.074Z",
+      "lastModifiedAt": "2016-08-29T11:56:01.074Z",
+      "externalId": "5",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b",
+      "version": 7,
+      "name": {
+        "de": "Sale",
+        "en": "Sale",
+        "it": "Sales"
+      },
+      "slug": {
+        "de": "sale",
+        "en": "sale",
+        "it": "sale"
+      },
+      "ancestors": [],
+      "orderHint": "0.000014724717612001973085811",
+      "createdAt": "2016-08-29T11:56:01.201Z",
+      "lastModifiedAt": "2017-10-03T01:01:19.339Z",
+      "externalId": "6",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "22e1ecb5-28e4-407b-9542-64682ea6f533",
+      "version": 2,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "women-clothing",
+        "en": "women-clothing",
+        "it": "women-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+      },
+      "orderHint": "0.00001472471762245769532277",
+      "createdAt": "2016-08-29T11:56:02.245Z",
+      "lastModifiedAt": "2018-02-16T17:09:38.721Z",
+      "externalId": "10",
+      "assets": [
+        {
+          "id": "40077b37-3e04-468c-888d-7f49f911b45e",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/women-clothing%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Bekleidung",
+            "en": "Clothing",
+            "it": "Abbigliamento"
+          },
+          "key": "women-clothing-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c",
+      "version": 2,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "men-clothing",
+        "en": "men-clothing",
+        "it": "men-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+      },
+      "orderHint": "0.000014724717636481332648137",
+      "createdAt": "2016-08-29T11:56:03.648Z",
+      "lastModifiedAt": "2018-02-16T17:38:25.021Z",
+      "externalId": "14",
+      "assets": [
+        {
+          "id": "27ba8eb5-0083-419d-86d1-92fe05051c77",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/men-clothing%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Bekleidung",
+            "en": "Clothing",
+            "it": "Abbigliamento"
+          },
+          "key": "men-clothing-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "1bf565bb-9d4b-4a61-a4c8-5d9f94c4004e",
+      "version": 1,
+      "name": {
+        "de": "Jacken",
+        "en": "Jackets",
+        "it": "Giacche"
+      },
+      "slug": {
+        "de": "women-clothing-jackets",
+        "en": "women-clothing-jackets",
+        "it": "women-clothing-jackets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.000014724717643901399096028",
+      "createdAt": "2016-08-29T11:56:04.390Z",
+      "lastModifiedAt": "2016-08-29T11:56:04.390Z",
+      "externalId": "20",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "511972dc-0598-4289-b460-74cbd60e943d",
+      "version": 1,
+      "name": {
+        "de": "Blazer",
+        "en": "Blazer",
+        "it": "Blazer"
+      },
+      "slug": {
+        "de": "women-clothing-blazer",
+        "en": "women-clothing-blazer",
+        "it": "women-clothing-blazer"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471764520686156882",
+      "createdAt": "2016-08-29T11:56:04.521Z",
+      "lastModifiedAt": "2016-08-29T11:56:04.521Z",
+      "externalId": "21",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "905ff486-1e8f-4763-b38d-b809d776c9b9",
+      "version": 1,
+      "name": {
+        "de": "Oberteile",
+        "en": "Tops",
+        "it": "Tops"
+      },
+      "slug": {
+        "de": "women-clothing-tops",
+        "en": "women-clothing-tops",
+        "it": "women-clothing-tops"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471764641767224452",
+      "createdAt": "2016-08-29T11:56:04.641Z",
+      "lastModifiedAt": "2016-08-29T11:56:04.641Z",
+      "externalId": "22",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b1f5ea94-ef2b-45ac-b665-8046a236abf1",
+      "version": 1,
+      "name": {
+        "de": "Blusen",
+        "en": "Shirts",
+        "it": "Camicie"
+      },
+      "slug": {
+        "de": "women-clothing-shirts",
+        "en": "women-clothing-shirts",
+        "it": "women-clothing-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471764798484144412",
+      "createdAt": "2016-08-29T11:56:04.798Z",
+      "lastModifiedAt": "2016-08-29T11:56:04.798Z",
+      "externalId": "23",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d2165ab9-52ff-4c4e-8277-9a172ccb90aa",
+      "version": 1,
+      "name": {
+        "de": "T-shirts",
+        "en": "T-shirts",
+        "it": "T-shirt"
+      },
+      "slug": {
+        "de": "women-clothing-t-shirts",
+        "en": "women-clothing-t-shirts",
+        "it": "women-clothing-t-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471764967198805727",
+      "createdAt": "2016-08-29T11:56:04.967Z",
+      "lastModifiedAt": "2016-08-29T11:56:04.967Z",
+      "externalId": "24",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "771573e5-670a-4c85-b329-93ae35b5a403",
+      "version": 1,
+      "name": {
+        "de": "Jeans",
+        "en": "Jeans",
+        "it": "Jeans"
+      },
+      "slug": {
+        "de": "women-clothing-jeans",
+        "en": "women-clothing-jeans",
+        "it": "women-clothing-jeans"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471765109378752992",
+      "createdAt": "2016-08-29T11:56:05.109Z",
+      "lastModifiedAt": "2016-08-29T11:56:05.109Z",
+      "externalId": "25",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "dfc64ce7-ec17-4c04-b7ea-cbd520c09641",
+      "version": 1,
+      "name": {
+        "de": "Hosen",
+        "en": "Trouser",
+        "it": "Pantaloni"
+      },
+      "slug": {
+        "de": "women-clothing-trouser",
+        "en": "women-clothing-trouser",
+        "it": "women-clothing-trouser"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471765238475922499",
+      "createdAt": "2016-08-29T11:56:05.238Z",
+      "lastModifiedAt": "2016-08-29T11:56:05.238Z",
+      "externalId": "26",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "78d4a2be-7d55-4bf4-80d3-f4842b96864a",
+      "version": 1,
+      "name": {
+        "de": "Röcke",
+        "en": "Skirts",
+        "it": "Gonne"
+      },
+      "slug": {
+        "de": "women-clothing-skirts",
+        "en": "women-clothing-skirts",
+        "it": "women-clothing-skirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471765373800439164",
+      "createdAt": "2016-08-29T11:56:05.374Z",
+      "lastModifiedAt": "2016-08-29T11:56:05.374Z",
+      "externalId": "27",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "92ddaff1-1b81-4308-a43f-18a0f22b4c11",
+      "version": 1,
+      "name": {
+        "de": "Kleider",
+        "en": "Dresses",
+        "it": "Abiti"
+      },
+      "slug": {
+        "de": "women-clothing-dresses",
+        "en": "women-clothing-dresses",
+        "it": "women-clothing-dresses"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.00001472471765539482343973",
+      "createdAt": "2016-08-29T11:56:05.539Z",
+      "lastModifiedAt": "2016-08-29T11:56:05.539Z",
+      "externalId": "28",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "8dfa7247-cd82-4719-9666-bae97e726e1e",
+      "version": 1,
+      "name": {
+        "de": "Bademode",
+        "en": "Swimwear",
+        "it": "Costumi da bagno"
+      },
+      "slug": {
+        "de": "women-clothing-swimwear",
+        "en": "women-clothing-swimwear",
+        "it": "women-clothing-swimwear"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "22e1ecb5-28e4-407b-9542-64682ea6f533"
+      },
+      "orderHint": "0.000014724717656871578872888",
+      "createdAt": "2016-08-29T11:56:05.687Z",
+      "lastModifiedAt": "2016-08-29T11:56:05.687Z",
+      "externalId": "29",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "a707f581-1420-433f-9b70-c05685a72c13",
+      "version": 1,
+      "name": {
+        "de": "Sneakers",
+        "en": "Sneakers",
+        "it": "Sneakers"
+      },
+      "slug": {
+        "de": "women-shoes-sneakers",
+        "en": "women-shoes-sneakers",
+        "it": "women-shoes-sneakers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.00001472471765845329400425",
+      "createdAt": "2016-08-29T11:56:05.845Z",
+      "lastModifiedAt": "2016-08-29T11:56:05.845Z",
+      "externalId": "30",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b96b724d-1181-4f00-a136-5304648045af",
+      "version": 1,
+      "name": {
+        "de": "Stiefel",
+        "en": "Boots",
+        "it": "Boots"
+      },
+      "slug": {
+        "de": "women-shoes-boots",
+        "en": "women-shoes-boots",
+        "it": "women-shoes-boots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.000014724717660481540056618",
+      "createdAt": "2016-08-29T11:56:06.048Z",
+      "lastModifiedAt": "2016-08-29T11:56:06.048Z",
+      "externalId": "31",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "61566a74-4013-4a21-a1f8-b41ad3a44ede",
+      "version": 1,
+      "name": {
+        "de": "Stiefeletten",
+        "en": "Ankle boots",
+        "it": "Stivali"
+      },
+      "slug": {
+        "de": "women-shoes-ankle-boots",
+        "en": "women-shoes-ankle-boots",
+        "it": "women-shoes-ankle-boots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.000014724717662581137239729",
+      "createdAt": "2016-08-29T11:56:06.258Z",
+      "lastModifiedAt": "2016-08-29T11:56:06.258Z",
+      "externalId": "32",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "03a9ddaa-fb1c-49ee-8cf6-d181f41e1988",
+      "version": 1,
+      "name": {
+        "de": "Pumps",
+        "en": "Pumps",
+        "it": "Tacco"
+      },
+      "slug": {
+        "de": "women-shoes-pumps",
+        "en": "women-shoes-pumps",
+        "it": "women-shoes-pumps"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.00001472471766457562425932",
+      "createdAt": "2016-08-29T11:56:06.457Z",
+      "lastModifiedAt": "2016-08-29T11:56:06.457Z",
+      "externalId": "33",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "9fb39fc1-c212-4418-b628-e5969520c656",
+      "version": 1,
+      "name": {
+        "de": "Ballerinas",
+        "en": "Ballerinas",
+        "it": "Ballerinas"
+      },
+      "slug": {
+        "de": "women-shoes-ballerinas",
+        "en": "women-shoes-ballerinas",
+        "it": "women-shoes-ballerinas"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.00001472471766642801112344",
+      "createdAt": "2016-08-29T11:56:06.642Z",
+      "lastModifiedAt": "2016-08-29T11:56:06.642Z",
+      "externalId": "34",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "7de61b09-86e4-4944-98a7-489e80d9d62d",
+      "version": 1,
+      "name": {
+        "de": "Schnürschuhe",
+        "en": "Lace-up shoes",
+        "it": "Lace-up shoes"
+      },
+      "slug": {
+        "de": "women-shoes-lace-up-shoes",
+        "en": "women-shoes-lace-up-shoes",
+        "it": "women-shoes-lace-up-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.0000147247176683267499738",
+      "createdAt": "2016-08-29T11:56:06.832Z",
+      "lastModifiedAt": "2016-08-29T11:56:06.832Z",
+      "externalId": "35",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "7ab89e2c-09c8-40fa-a058-4cd680b5eac4",
+      "version": 1,
+      "name": {
+        "de": "Loafers",
+        "en": "Loafers",
+        "it": "Mocassini"
+      },
+      "slug": {
+        "de": "women-shoes-loafers",
+        "en": "women-shoes-loafers",
+        "it": "women-shoes-loafers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.000014724717669631748246615",
+      "createdAt": "2016-08-29T11:56:06.963Z",
+      "lastModifiedAt": "2016-08-29T11:56:06.963Z",
+      "externalId": "36",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "5705a403-6dae-44ac-aeb7-f62f8b6bd14f",
+      "version": 1,
+      "name": {
+        "de": "Sandalen",
+        "en": "Sandals",
+        "it": "Sandali"
+      },
+      "slug": {
+        "de": "women-shoes-sandals",
+        "en": "women-shoes-sandals",
+        "it": "women-shoes-sandals"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.000014724717671241075005428",
+      "createdAt": "2016-08-29T11:56:07.125Z",
+      "lastModifiedAt": "2016-08-29T11:56:07.125Z",
+      "externalId": "37",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "52f96e6f-e769-4c1c-a803-895054e638d4",
+      "version": 1,
+      "name": {
+        "de": "Boots",
+        "en": "Winterboots",
+        "it": "Boots"
+      },
+      "slug": {
+        "de": "women-shoes-winterboots",
+        "en": "women-shoes-winterboots",
+        "it": "women-shoes-winterboots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b0b08091-8e32-4601-948a-8b504606d3ac"
+      },
+      "orderHint": "0.000014724717672781293628190",
+      "createdAt": "2016-08-29T11:56:07.278Z",
+      "lastModifiedAt": "2016-08-29T11:56:07.278Z",
+      "externalId": "38",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "6aec8d5e-7a26-45e3-88ac-0c48353a1d09",
+      "version": 1,
+      "name": {
+        "de": "Clutches",
+        "en": "Clutches",
+        "it": "Pochette"
+      },
+      "slug": {
+        "de": "women-bags-clutches",
+        "en": "women-bags-clutches",
+        "it": "women-bags-clutches"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+      },
+      "orderHint": "0.00001472471767435976999883",
+      "createdAt": "2016-08-29T11:56:07.435Z",
+      "lastModifiedAt": "2016-08-29T11:56:07.435Z",
+      "externalId": "39",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "f94054ad-7c8e-4937-a818-463c59b785da",
+      "version": 1,
+      "name": {
+        "de": "Umhängetaschen",
+        "en": "Shoulder bags",
+        "it": "Borse a spalla"
+      },
+      "slug": {
+        "de": "women-bags-shoulder-bags",
+        "en": "women-bags-shoulder-bags",
+        "it": "women-bags-shoulder-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+      },
+      "orderHint": "0.000014724717676051576697663",
+      "createdAt": "2016-08-29T11:56:07.605Z",
+      "lastModifiedAt": "2016-08-29T11:56:07.605Z",
+      "externalId": "40",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "24e6e84a-1bb1-447f-bdfe-52dd858aabf8",
+      "version": 1,
+      "name": {
+        "de": "Shopper",
+        "en": "Shopper",
+        "it": "Borse shopping"
+      },
+      "slug": {
+        "de": "women-bags-shopper",
+        "en": "women-bags-shopper",
+        "it": "women-bags-shopper"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+      },
+      "orderHint": "0.000014724717677612042904535",
+      "createdAt": "2016-08-29T11:56:07.761Z",
+      "lastModifiedAt": "2016-08-29T11:56:07.761Z",
+      "externalId": "41",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "110f1528-d40a-4972-a8b6-c915b6e62a87",
+      "version": 1,
+      "name": {
+        "de": "Handtaschen",
+        "en": "Handbag",
+        "it": "Borse a mano"
+      },
+      "slug": {
+        "de": "women-bags-handbag",
+        "en": "women-bags-handbag",
+        "it": "women-bags-handbag"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+      },
+      "orderHint": "0.000014724717679101712007317",
+      "createdAt": "2016-08-29T11:56:07.910Z",
+      "lastModifiedAt": "2016-08-29T11:56:07.910Z",
+      "externalId": "42",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "90b51cb8-ae4c-47e2-a429-93da432d125c",
+      "version": 1,
+      "name": {
+        "de": "Brieftaschen",
+        "en": "Wallets",
+        "it": "Portafogli"
+      },
+      "slug": {
+        "de": "women-bags-wallets",
+        "en": "women-bags-wallets",
+        "it": "women-bags-wallets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+      },
+      "orderHint": "0.000014724717680761055963733",
+      "createdAt": "2016-08-29T11:56:08.076Z",
+      "lastModifiedAt": "2016-08-29T11:56:08.076Z",
+      "externalId": "43",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "85fc4692-ac70-4769-9e6e-ad8f65a8f8b9",
+      "version": 1,
+      "name": {
+        "de": "Beutel & Rucksäcke",
+        "en": "Bucketbag & packbag",
+        "it": "Borse a secchiello e zaini"
+      },
+      "slug": {
+        "de": "women-bags-bucket-and-packbag",
+        "en": "women-bags-bucket-and-packbag",
+        "it": "women-bags-bucket-and-packbag"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        },
+        {
+          "typeId": "category",
+          "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "132823b9-b4c6-449d-b524-c648bd35e3b3"
+      },
+      "orderHint": "0.000014724717682402134359115",
+      "createdAt": "2016-08-29T11:56:08.241Z",
+      "lastModifiedAt": "2016-08-29T11:56:08.241Z",
+      "externalId": "44",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e0ffd9d7-4167-414e-9b23-6d9ad0e811af",
+      "version": 1,
+      "name": {
+        "de": "Jacken",
+        "en": "Jackets",
+        "it": "Giacche"
+      },
+      "slug": {
+        "de": "men-clothing-jackets",
+        "en": "men-clothing-jackets",
+        "it": "men-clothing-jackets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.00001472471768424428888175",
+      "createdAt": "2016-08-29T11:56:08.424Z",
+      "lastModifiedAt": "2016-08-29T11:56:08.424Z",
+      "externalId": "45",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "dfcae891-1fd5-41f3-b982-72c1e4b1b678",
+      "version": 1,
+      "name": {
+        "de": "Oberteile",
+        "en": "Tops",
+        "it": "Tops"
+      },
+      "slug": {
+        "de": "men-clothing-tops",
+        "en": "men-clothing-tops",
+        "it": "men-clothing-tops"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.00001472471768647589635874",
+      "createdAt": "2016-08-29T11:56:08.647Z",
+      "lastModifiedAt": "2016-08-29T11:56:08.647Z",
+      "externalId": "46",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "63b67738-d7fb-4814-9df7-20a3010026f8",
+      "version": 1,
+      "name": {
+        "de": "Hemden",
+        "en": "Shirts",
+        "it": "Camicie"
+      },
+      "slug": {
+        "de": "men-clothing-shirts",
+        "en": "men-clothing-shirts",
+        "it": "men-clothing-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.000014724717688871988792355",
+      "createdAt": "2016-08-29T11:56:08.887Z",
+      "lastModifiedAt": "2016-08-29T11:56:08.887Z",
+      "externalId": "47",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "857489c4-fa6c-4613-9813-058c3c521970",
+      "version": 1,
+      "name": {
+        "de": "Hosen",
+        "en": "Trousers",
+        "it": "Pantaloni"
+      },
+      "slug": {
+        "de": "men-clothing-trousers",
+        "en": "men-clothing-trousers",
+        "it": "men-clothing-trousers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.000014724717691581530139010",
+      "createdAt": "2016-08-29T11:56:09.158Z",
+      "lastModifiedAt": "2016-08-29T11:56:09.158Z",
+      "externalId": "48",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "08a16c19-7557-4895-894e-d23385be734a",
+      "version": 1,
+      "name": {
+        "de": "Jeans",
+        "en": "Jeans",
+        "it": "Jeans"
+      },
+      "slug": {
+        "de": "men-clothing-jeans",
+        "en": "men-clothing-jeans",
+        "it": "men-clothing-jeans"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.000014724717694651379118564",
+      "createdAt": "2016-08-29T11:56:09.465Z",
+      "lastModifiedAt": "2016-08-29T11:56:09.465Z",
+      "externalId": "49",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "631dc3bd-e3d6-407a-a32d-bf5711cca97c",
+      "version": 1,
+      "name": {
+        "de": "Blazer",
+        "en": "Blazer",
+        "it": "Blazer"
+      },
+      "slug": {
+        "de": "men-clothing-blazer",
+        "en": "men-clothing-blazer",
+        "it": "men-clothing-blazer"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.000014724717696301124655203",
+      "createdAt": "2016-08-29T11:56:09.630Z",
+      "lastModifiedAt": "2016-08-29T11:56:09.630Z",
+      "externalId": "50",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "66622bbc-f15b-4215-9450-c2db2cf8c4c2",
+      "version": 1,
+      "name": {
+        "de": "Anzüge",
+        "en": "Suits",
+        "it": "Completi"
+      },
+      "slug": {
+        "de": "men-clothing-suits",
+        "en": "men-clothing-suits",
+        "it": "men-clothing-suits"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "160972a2-1a9a-4bea-a409-7af8eadfb44c"
+      },
+      "orderHint": "0.000014724717697691722033709",
+      "createdAt": "2016-08-29T11:56:09.769Z",
+      "lastModifiedAt": "2016-08-29T11:56:09.769Z",
+      "externalId": "51",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ef77b2b2-b13f-4cdd-97d5-8cebe8ee715a",
+      "version": 1,
+      "name": {
+        "de": "Sneakers",
+        "en": "Sneakers",
+        "it": "Sneakers"
+      },
+      "slug": {
+        "de": "men-shoes-sneakers",
+        "en": "men-shoes-sneakers",
+        "it": "men-shoes-sneakers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+      },
+      "orderHint": "0.00001472471770092400286210",
+      "createdAt": "2016-08-29T11:56:10.092Z",
+      "lastModifiedAt": "2016-08-29T11:56:10.092Z",
+      "externalId": "53",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c1a7b0c0-3679-4233-9c98-6160df489658",
+      "version": 1,
+      "name": {
+        "de": "Stiefel",
+        "en": "Boots",
+        "it": "Boots"
+      },
+      "slug": {
+        "de": "men-shoes-boots",
+        "en": "men-shoes-boots",
+        "it": "men-shoes-boots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+      },
+      "orderHint": "0.00001472471770272189178342",
+      "createdAt": "2016-08-29T11:56:10.272Z",
+      "lastModifiedAt": "2016-08-29T11:56:10.272Z",
+      "externalId": "54",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "a8d65b49-a67c-4436-866c-9bbb2099138d",
+      "version": 1,
+      "name": {
+        "de": "Schnürschuhe",
+        "en": "Lace-up shoes",
+        "it": "Stringate"
+      },
+      "slug": {
+        "de": "men-shoes-lace-up-shoes",
+        "en": "men-shoes-lace-up-shoes",
+        "it": "men-shoes-lace-up-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+      },
+      "orderHint": "0.000014724717704821363784404",
+      "createdAt": "2016-08-29T11:56:10.482Z",
+      "lastModifiedAt": "2016-08-29T11:56:10.482Z",
+      "externalId": "55",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e7f84eb4-edec-4bc9-927b-f7d7df18973a",
+      "version": 1,
+      "name": {
+        "de": "Loafers",
+        "en": "Loafers",
+        "it": "Loafers"
+      },
+      "slug": {
+        "de": "men-shoes-loafers",
+        "en": "men-shoes-loafers",
+        "it": "men-shoes-loafers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+      },
+      "orderHint": "0.00001472471770668729991663",
+      "createdAt": "2016-08-29T11:56:10.669Z",
+      "lastModifiedAt": "2016-08-29T11:56:10.669Z",
+      "externalId": "56",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d499f56f-5c76-46a1-8606-3787939fad92",
+      "version": 1,
+      "name": {
+        "de": "Sandalen",
+        "en": "Sandals",
+        "it": "Sandali"
+      },
+      "slug": {
+        "de": "men-shoes-sandals",
+        "en": "men-shoes-sandals",
+        "it": "men-shoes-sandals"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c077eb33-c5fe-4560-af75-abb8b205ca25"
+      },
+      "orderHint": "0.00001472471770923386909053",
+      "createdAt": "2016-08-29T11:56:10.924Z",
+      "lastModifiedAt": "2016-08-29T11:56:10.924Z",
+      "externalId": "57",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "cbfc552b-8c5d-4e2a-9858-a278ffe08449",
+      "version": 1,
+      "name": {
+        "de": "Clutches",
+        "en": "Clutches",
+        "it": "Pochette"
+      },
+      "slug": {
+        "de": "men-bags-clutches",
+        "en": "men-bags-clutches",
+        "it": "men-bags-clutches"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+      },
+      "orderHint": "0.000014724717712181810496441",
+      "createdAt": "2016-08-29T11:56:11.218Z",
+      "lastModifiedAt": "2016-08-29T11:56:11.218Z",
+      "externalId": "58",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "938c75db-dcb5-4393-9d1a-bd5b85ed79c1",
+      "version": 1,
+      "name": {
+        "de": "Umhängetaschen",
+        "en": "Shoulder bags",
+        "it": "Borse a spalla"
+      },
+      "slug": {
+        "de": "men-bags-shoulder-bags",
+        "en": "men-bags-shoulder-bags",
+        "it": "men-bags-shoulder-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+      },
+      "orderHint": "0.00001472471771364580189722",
+      "createdAt": "2016-08-29T11:56:11.364Z",
+      "lastModifiedAt": "2016-08-29T11:56:11.364Z",
+      "externalId": "59",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b519d968-a76b-4de4-87b0-c3cd6f1b7b2f",
+      "version": 1,
+      "name": {
+        "de": "Shopper",
+        "en": "Shopper",
+        "it": "Borse shopping"
+      },
+      "slug": {
+        "de": "men-bags-shopper",
+        "en": "men-bags-shopper",
+        "it": "men-bags-shopper"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+      },
+      "orderHint": "0.00001472471771527804474866",
+      "createdAt": "2016-08-29T11:56:11.527Z",
+      "lastModifiedAt": "2016-08-29T11:56:11.527Z",
+      "externalId": "60",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "78a610fb-8d05-4e85-a2f6-53d8192f88ad",
+      "version": 1,
+      "name": {
+        "de": "Handtaschen",
+        "en": "Handbag",
+        "it": "Borse a mano"
+      },
+      "slug": {
+        "de": "men-bags-handbag",
+        "en": "men-bags-handbag",
+        "it": "men-bags-handbag"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+      },
+      "orderHint": "0.000014724717716681653469841",
+      "createdAt": "2016-08-29T11:56:11.669Z",
+      "lastModifiedAt": "2016-08-29T11:56:11.669Z",
+      "externalId": "61",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d78a74ca-5c70-47b2-a5d6-2b6a3b25ca8e",
+      "version": 1,
+      "name": {
+        "de": "Brieftaschen",
+        "en": "Wallets",
+        "it": "Portafogli"
+      },
+      "slug": {
+        "de": "men-bags-wallets",
+        "en": "men-bags-wallets",
+        "it": "men-bags-wallets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+      },
+      "orderHint": "0.0000147247177196532622653",
+      "createdAt": "2016-08-29T11:56:11.965Z",
+      "lastModifiedAt": "2016-08-29T11:56:11.965Z",
+      "externalId": "62",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "65860f82-091b-4e25-8c0b-87b36576dcb4",
+      "version": 1,
+      "name": {
+        "de": "Beutel & Rucksäcke",
+        "en": "Bucketbag & packbag",
+        "it": "Borse a secchiello e zaini"
+      },
+      "slug": {
+        "de": "men-bags-bucket-and-packbag",
+        "en": "men-bags-bucket-and-packbag",
+        "it": "men-bags-bucket-and-packbag"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        },
+        {
+          "typeId": "category",
+          "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95"
+      },
+      "orderHint": "0.000014724717721721685373344",
+      "createdAt": "2016-08-29T11:56:12.172Z",
+      "lastModifiedAt": "2016-08-29T11:56:12.172Z",
+      "externalId": "63",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "998e13b1-9dd3-44ef-85cf-03bc40510655",
+      "version": 1,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "new-women-clothing",
+        "en": "new-women-clothing",
+        "it": "new-women-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+      },
+      "orderHint": "0.00001472471772353965382934",
+      "createdAt": "2016-08-29T11:56:12.353Z",
+      "lastModifiedAt": "2016-08-29T11:56:12.353Z",
+      "externalId": "64",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "47798033-006d-4197-99ac-4cd6f6886ec1",
+      "version": 1,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "new-women-shoes",
+        "en": "new-women-shoes",
+        "it": "new-women-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+      },
+      "orderHint": "0.00001472471772534740169089",
+      "createdAt": "2016-08-29T11:56:12.534Z",
+      "lastModifiedAt": "2016-08-29T11:56:12.534Z",
+      "externalId": "65",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b",
+      "version": 1,
+      "name": {
+        "de": "Taschen",
+        "en": "Bags",
+        "it": "Borse"
+      },
+      "slug": {
+        "de": "new-women-bags",
+        "en": "new-women-bags",
+        "it": "new-women-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+      },
+      "orderHint": "0.00001472471772697776790330",
+      "createdAt": "2016-08-29T11:56:12.697Z",
+      "lastModifiedAt": "2016-08-29T11:56:12.697Z",
+      "externalId": "66",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d29d825c-f3ad-49c9-ba4a-ac09aa015bf8",
+      "version": 1,
+      "name": {
+        "de": "Looks",
+        "en": "Looks",
+        "it": "Looks"
+      },
+      "slug": {
+        "de": "new-women-looks",
+        "en": "new-women-looks",
+        "it": "new-women-looks"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+      },
+      "orderHint": "0.000014724717728931121566495",
+      "createdAt": "2016-08-29T11:56:12.894Z",
+      "lastModifiedAt": "2016-08-29T11:56:12.894Z",
+      "externalId": "67",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d",
+      "version": 1,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "new-men-clothing",
+        "en": "new-men-clothing",
+        "it": "new-men-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+      },
+      "orderHint": "0.000014724717731491471021719",
+      "createdAt": "2016-08-29T11:56:13.149Z",
+      "lastModifiedAt": "2016-08-29T11:56:13.149Z",
+      "externalId": "68",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "55c58d39-2b92-44f5-a0f7-a207842a830b",
+      "version": 1,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "new-men-shoes",
+        "en": "new-men-shoes",
+        "it": "new-men-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+      },
+      "orderHint": "0.000014724717733621153678633",
+      "createdAt": "2016-08-29T11:56:13.362Z",
+      "lastModifiedAt": "2016-08-29T11:56:13.362Z",
+      "externalId": "69",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "efea634e-e365-46ec-af90-d71de9ad8bec",
+      "version": 1,
+      "name": {
+        "de": "Taschen",
+        "en": "Bags",
+        "it": "Borse"
+      },
+      "slug": {
+        "de": "new-men-bags",
+        "en": "new-men-bags",
+        "it": "new-men-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+      },
+      "orderHint": "0.000014724717735671648184554",
+      "createdAt": "2016-08-29T11:56:13.568Z",
+      "lastModifiedAt": "2016-08-29T11:56:13.568Z",
+      "externalId": "70",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "3851241b-2595-48d9-a20f-c7065a0cff73",
+      "version": 1,
+      "name": {
+        "de": "Looks",
+        "en": "Looks",
+        "it": "Looks"
+      },
+      "slug": {
+        "de": "new-men-looks",
+        "en": "new-men-looks",
+        "it": "new-men-looks"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+      },
+      "orderHint": "0.00001472471773720886653814",
+      "createdAt": "2016-08-29T11:56:13.720Z",
+      "lastModifiedAt": "2016-08-29T11:56:13.720Z",
+      "externalId": "71",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "f739e716-3df4-4afb-80ee-753382f75d6f",
+      "version": 1,
+      "name": {
+        "de": "Fall in love",
+        "en": "Fall in love",
+        "it": "Fall in love"
+      },
+      "slug": {
+        "de": "new-special-fall-in-love",
+        "en": "new-special-fall-in-love",
+        "it": "new-special-fall-in-love"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "15ee30b8-f71e-477c-84a2-e5aebb8277c0"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "15ee30b8-f71e-477c-84a2-e5aebb8277c0"
+      },
+      "orderHint": "0.00001472471773872907336237",
+      "createdAt": "2016-08-29T11:56:13.872Z",
+      "lastModifiedAt": "2016-08-29T11:56:13.872Z",
+      "externalId": "72",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "a6b7f7f5-3a8d-412a-aefb-43acc7742812",
+      "version": 1,
+      "name": {
+        "de": "Just go",
+        "en": "Just go",
+        "it": "Just go"
+      },
+      "slug": {
+        "de": "new-special-just-go",
+        "en": "new-special-just-go",
+        "it": "new-special-just-go"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "15ee30b8-f71e-477c-84a2-e5aebb8277c0"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "15ee30b8-f71e-477c-84a2-e5aebb8277c0"
+      },
+      "orderHint": "0.000014724717741172033688053",
+      "createdAt": "2016-08-29T11:56:14.117Z",
+      "lastModifiedAt": "2016-08-29T11:56:14.117Z",
+      "externalId": "73",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b2895ee6-bb4e-4c75-b5b6-f2f476b7cfaa",
+      "version": 1,
+      "name": {
+        "de": "Jacken",
+        "en": "Jackets",
+        "it": "Giacche"
+      },
+      "slug": {
+        "de": "new-women-clothing-jackets",
+        "en": "new-women-clothing-jackets",
+        "it": "new-women-clothing-jackets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.00001472471774318595487274",
+      "createdAt": "2016-08-29T11:56:14.318Z",
+      "lastModifiedAt": "2016-08-29T11:56:14.318Z",
+      "externalId": "74",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "1a28cad3-44ff-4a0c-9111-f990a2da8f84",
+      "version": 1,
+      "name": {
+        "de": "Blazer",
+        "en": "Blazer",
+        "it": "Blazer"
+      },
+      "slug": {
+        "de": "new-women-clothing-blazer",
+        "en": "new-women-clothing-blazer",
+        "it": "new-women-clothing-blazer"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.00001472471774493911378765",
+      "createdAt": "2016-08-29T11:56:14.493Z",
+      "lastModifiedAt": "2016-08-29T11:56:14.493Z",
+      "externalId": "75",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "7f518b5c-1b15-4f35-a3d3-8c998e0d7c51",
+      "version": 1,
+      "name": {
+        "de": "Oberteile",
+        "en": "Tops",
+        "it": "Tops"
+      },
+      "slug": {
+        "de": "new-women-clothing-tops",
+        "en": "new-women-clothing-tops",
+        "it": "new-women-clothing-tops"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.000014724717747881229460281",
+      "createdAt": "2016-08-29T11:56:14.788Z",
+      "lastModifiedAt": "2016-08-29T11:56:14.788Z",
+      "externalId": "76",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e337bdd0-4a6e-427f-be52-23d74f05b95d",
+      "version": 1,
+      "name": {
+        "de": "Blusen",
+        "en": "Shirts",
+        "it": "Camicie"
+      },
+      "slug": {
+        "de": "new-women-clothing-shirts",
+        "en": "new-women-clothing-shirts",
+        "it": "new-women-clothing-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.00001472471774969931732966",
+      "createdAt": "2016-08-29T11:56:14.969Z",
+      "lastModifiedAt": "2016-08-29T11:56:14.969Z",
+      "externalId": "77",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "322715f7-904f-4fd3-838d-525dee4d2fc4",
+      "version": 1,
+      "name": {
+        "de": "T-shirts",
+        "en": "T-shirts",
+        "it": "T-shirt"
+      },
+      "slug": {
+        "de": "new-women-clothing-t-shirts",
+        "en": "new-women-clothing-t-shirts",
+        "it": "new-women-clothing-t-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.000014724717751362049685685",
+      "createdAt": "2016-08-29T11:56:15.136Z",
+      "lastModifiedAt": "2016-08-29T11:56:15.136Z",
+      "externalId": "78",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b801790d-fc44-460e-9699-d2fd9aadf969",
+      "version": 1,
+      "name": {
+        "de": "Jeans",
+        "en": "Jeans",
+        "it": "Jeans"
+      },
+      "slug": {
+        "de": "new-women-clothing-jeans",
+        "en": "new-women-clothing-jeans",
+        "it": "new-women-clothing-jeans"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.0000147247177534865142493",
+      "createdAt": "2016-08-29T11:56:15.348Z",
+      "lastModifiedAt": "2016-08-29T11:56:15.348Z",
+      "externalId": "79",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "989197bb-7cbb-4b5a-996a-a76d08d78672",
+      "version": 1,
+      "name": {
+        "de": "Hosen",
+        "en": "Trousers",
+        "it": "Pantaloni"
+      },
+      "slug": {
+        "de": "new-women-clothing-trousers",
+        "en": "new-women-clothing-trousers",
+        "it": "new-women-clothing-trousers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.000014724717755702035045636",
+      "createdAt": "2016-08-29T11:56:15.570Z",
+      "lastModifiedAt": "2016-08-29T11:56:15.570Z",
+      "externalId": "80",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "a4f1f528-83ff-4f30-97cb-f7b4114e23a1",
+      "version": 1,
+      "name": {
+        "de": "Röcke",
+        "en": "Skirts",
+        "it": "Gonne"
+      },
+      "slug": {
+        "de": "new-women-clothing-skirts",
+        "en": "new-women-clothing-skirts",
+        "it": "new-women-clothing-skirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.000014724717757861744741766",
+      "createdAt": "2016-08-29T11:56:15.787Z",
+      "lastModifiedAt": "2016-08-29T11:56:15.787Z",
+      "externalId": "81",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "caa5e99f-8828-4413-8421-c2f31ce8c918",
+      "version": 1,
+      "name": {
+        "de": "Kleider",
+        "en": "Dresses",
+        "it": "Abiti"
+      },
+      "slug": {
+        "de": "new-women-clothing-dresses",
+        "en": "new-women-clothing-dresses",
+        "it": "new-women-clothing-dresses"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.000014724717760061390309128",
+      "createdAt": "2016-08-29T11:56:16.006Z",
+      "lastModifiedAt": "2016-08-29T11:56:16.006Z",
+      "externalId": "82",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ee981bf9-c0d7-4f9f-b8b9-7dc648fc4332",
+      "version": 1,
+      "name": {
+        "de": "Bademode",
+        "en": "Swimwear",
+        "it": "Costumi da bagno"
+      },
+      "slug": {
+        "de": "new-women-clothing-swimwear",
+        "en": "new-women-clothing-swimwear",
+        "it": "new-women-clothing-swimwear"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "998e13b1-9dd3-44ef-85cf-03bc40510655"
+      },
+      "orderHint": "0.000014724717762581780124054",
+      "createdAt": "2016-08-29T11:56:16.258Z",
+      "lastModifiedAt": "2016-08-29T11:56:16.258Z",
+      "externalId": "83",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c5dae3c2-862c-4ae5-a408-dad280cf47bc",
+      "version": 1,
+      "name": {
+        "de": "Sneakers",
+        "en": "Sneakers",
+        "it": "Sneakers"
+      },
+      "slug": {
+        "de": "new-women-shoes-sneakers",
+        "en": "new-women-shoes-sneakers",
+        "it": "new-women-shoes-sneakers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.00001472471776536154465334",
+      "createdAt": "2016-08-29T11:56:16.536Z",
+      "lastModifiedAt": "2016-08-29T11:56:16.536Z",
+      "externalId": "84",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "28f4280d-54fb-4610-a39a-ac72d351f212",
+      "version": 1,
+      "name": {
+        "de": "Stiefel",
+        "en": "Boots",
+        "it": "Stivali"
+      },
+      "slug": {
+        "de": "new-women-shoes-boots",
+        "en": "new-women-shoes-boots",
+        "it": "new-women-shoes-boots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.00001472471776755539387660",
+      "createdAt": "2016-08-29T11:56:16.756Z",
+      "lastModifiedAt": "2016-08-29T11:56:16.756Z",
+      "externalId": "85",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ba9b0478-067e-47af-a8e4-6a0fe0e47686",
+      "version": 1,
+      "name": {
+        "de": "Stiefeletten",
+        "en": "Ankle boots",
+        "it": "Stivaletti"
+      },
+      "slug": {
+        "de": "new-women-shoes-ankle-boots",
+        "en": "new-women-shoes-ankle-boots",
+        "it": "new-women-shoes-ankle-boots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.000014724717769521908036298",
+      "createdAt": "2016-08-29T11:56:16.952Z",
+      "lastModifiedAt": "2016-08-29T11:56:16.952Z",
+      "externalId": "86",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "3e534725-5942-442a-90e9-6773dce109dc",
+      "version": 1,
+      "name": {
+        "de": "Pumps",
+        "en": "Pumps",
+        "it": "Tacco"
+      },
+      "slug": {
+        "de": "new-women-shoes-pumps",
+        "en": "new-women-shoes-pumps",
+        "it": "new-women-shoes-pumps"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.00001472471777149770352095",
+      "createdAt": "2016-08-29T11:56:17.149Z",
+      "lastModifiedAt": "2016-08-29T11:56:17.149Z",
+      "externalId": "87",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ffda578c-081c-46bb-9abf-b51adf3b407d",
+      "version": 1,
+      "name": {
+        "de": "Ballerinas",
+        "en": "Ballerinas",
+        "it": "Ballerinas"
+      },
+      "slug": {
+        "de": "new-women-shoes-ballerinas",
+        "en": "new-women-shoes-ballerinas",
+        "it": "new-women-shoes-ballerinas"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.000014724717773341367277042",
+      "createdAt": "2016-08-29T11:56:17.334Z",
+      "lastModifiedAt": "2016-08-29T11:56:17.334Z",
+      "externalId": "88",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "281b8c68-f29e-4302-b727-19f2ff53601c",
+      "version": 1,
+      "name": {
+        "de": "Schnürschuhe",
+        "en": "Lace-up shoes",
+        "it": "Stringate"
+      },
+      "slug": {
+        "de": "new-women-shoes-lace-up-shoes",
+        "en": "new-women-shoes-lace-up-shoes",
+        "it": "new-women-shoes-lace-up-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.00001472471777492831436977",
+      "createdAt": "2016-08-29T11:56:17.492Z",
+      "lastModifiedAt": "2016-08-29T11:56:17.492Z",
+      "externalId": "89",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "cd2fa506-17f2-422c-95b7-90bada0eabb6",
+      "version": 1,
+      "name": {
+        "de": "Loafers",
+        "en": "Loafers",
+        "it": "Loafers"
+      },
+      "slug": {
+        "de": "new-women-shoes-loafers",
+        "en": "new-women-shoes-loafers",
+        "it": "new-women-shoes-loafers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.000014724717779002028771425",
+      "createdAt": "2016-08-29T11:56:17.900Z",
+      "lastModifiedAt": "2016-08-29T11:56:17.900Z",
+      "externalId": "90",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "219b5f77-1fd0-47e0-8262-bcbdd200ccef",
+      "version": 1,
+      "name": {
+        "de": "Sandalen",
+        "en": "Sandals",
+        "it": "Sandali"
+      },
+      "slug": {
+        "de": "new-women-shoes-sandals",
+        "en": "new-women-shoes-sandals",
+        "it": "new-women-shoes-sandals"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "47798033-006d-4197-99ac-4cd6f6886ec1"
+      },
+      "orderHint": "0.00001472471778116372090076",
+      "createdAt": "2016-08-29T11:56:18.117Z",
+      "lastModifiedAt": "2016-08-29T11:56:18.117Z",
+      "externalId": "91",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e27be759-2393-4747-bb04-4d871496c36d",
+      "version": 1,
+      "name": {
+        "de": "Clutches",
+        "en": "Clutches",
+        "it": "Clutches"
+      },
+      "slug": {
+        "de": "new-women-bags-clutches",
+        "en": "new-women-bags-clutches",
+        "it": "new-women-bags-clutches"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+      },
+      "orderHint": "0.000014724717783681591975105",
+      "createdAt": "2016-08-29T11:56:18.368Z",
+      "lastModifiedAt": "2016-08-29T11:56:18.368Z",
+      "externalId": "93",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d84f97e3-a992-427e-b5aa-53ddc6dfb05f",
+      "version": 1,
+      "name": {
+        "de": "Umhängetaschen",
+        "en": "Shoulder bags",
+        "it": "Pochette"
+      },
+      "slug": {
+        "de": "new-women-bags-shoulder-bags",
+        "en": "new-women-bags-shoulder-bags",
+        "it": "new-women-bags-shoulder-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+      },
+      "orderHint": "0.00001472471778571996903809",
+      "createdAt": "2016-08-29T11:56:18.571Z",
+      "lastModifiedAt": "2016-08-29T11:56:18.571Z",
+      "externalId": "94",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c17bbde6-ea30-44ee-8f5b-bead71f4be0e",
+      "version": 1,
+      "name": {
+        "de": "Shopper",
+        "en": "Shopper",
+        "it": "Borse shopping"
+      },
+      "slug": {
+        "de": "new-women-bags-shopper",
+        "en": "new-women-bags-shopper",
+        "it": "new-women-bags-shopper"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+      },
+      "orderHint": "0.000014724717786881895529828",
+      "createdAt": "2016-08-29T11:56:18.688Z",
+      "lastModifiedAt": "2016-08-29T11:56:18.688Z",
+      "externalId": "95",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d98600e0-2f2f-4e0b-a2c9-8b28416c1b68",
+      "version": 1,
+      "name": {
+        "de": "Handtaschen",
+        "en": "Handbag",
+        "it": "Borse a mano"
+      },
+      "slug": {
+        "de": "new-women-bags-handbag",
+        "en": "new-women-bags-handbag",
+        "it": "new-women-bags-handbag"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+      },
+      "orderHint": "0.000014724717788281497451110",
+      "createdAt": "2016-08-29T11:56:18.828Z",
+      "lastModifiedAt": "2016-08-29T11:56:18.828Z",
+      "externalId": "96",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "f7137d6b-6d79-4726-8f50-3c2c1227c96e",
+      "version": 1,
+      "name": {
+        "de": "Brieftaschen",
+        "en": "Wallets",
+        "it": "Portafogli"
+      },
+      "slug": {
+        "de": "new-women-bags-wallets",
+        "en": "new-women-bags-wallets",
+        "it": "new-women-bags-wallets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+      },
+      "orderHint": "0.000014724717790141979861111",
+      "createdAt": "2016-08-29T11:56:19.014Z",
+      "lastModifiedAt": "2016-08-29T11:56:19.014Z",
+      "externalId": "97",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "07d98810-71fd-4c4e-9189-7f50052849e6",
+      "version": 1,
+      "name": {
+        "de": "Beutel & Rucksäcke",
+        "en": "Bucketbag & packbag",
+        "it": "Borse a secchiello e zaini"
+      },
+      "slug": {
+        "de": "new-women-bags-bucket-and-packbags",
+        "en": "new-women-bags-bucket-and-packbags",
+        "it": "new-women-bags-bucket-and-packbags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057"
+        },
+        {
+          "typeId": "category",
+          "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "143a77c6-ea5c-4972-a393-eb91d605aa9b"
+      },
+      "orderHint": "0.00001472471779185932604142",
+      "createdAt": "2016-08-29T11:56:19.186Z",
+      "lastModifiedAt": "2016-08-29T11:56:19.186Z",
+      "externalId": "98",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "440f50f8-13b0-4dd1-86c8-e84fa3b106ce",
+      "version": 1,
+      "name": {
+        "de": "Jacken",
+        "en": "Jackets",
+        "it": "Giacche"
+      },
+      "slug": {
+        "de": "new-men-clothing-jackets",
+        "en": "new-men-clothing-jackets",
+        "it": "new-men-clothing-jackets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.00001472471779375191282924",
+      "createdAt": "2016-08-29T11:56:19.375Z",
+      "lastModifiedAt": "2016-08-29T11:56:19.375Z",
+      "externalId": "99",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "edbf8703-e606-47a9-b059-bbbe0cceccbf",
+      "version": 1,
+      "name": {
+        "de": "Oberteile",
+        "en": "Tops",
+        "it": "Tops"
+      },
+      "slug": {
+        "de": "new-men-clothing-tops",
+        "en": "new-men-clothing-tops",
+        "it": "new-men-clothing-tops"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.00001472471779542504688773",
+      "createdAt": "2016-08-29T11:56:19.542Z",
+      "lastModifiedAt": "2016-08-29T11:56:19.542Z",
+      "externalId": "100",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "78038bf6-a928-42df-af54-d18bf4c8a285",
+      "version": 1,
+      "name": {
+        "de": "Hemden",
+        "en": "Shirts",
+        "it": "Camicie"
+      },
+      "slug": {
+        "de": "new-men-clothing-shirts",
+        "en": "new-men-clothing-shirts",
+        "it": "new-men-clothing-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.00001472471779690893487024",
+      "createdAt": "2016-08-29T11:56:19.690Z",
+      "lastModifiedAt": "2016-08-29T11:56:19.690Z",
+      "externalId": "101",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "9639435e-96be-4e42-b855-1a09339a1413",
+      "version": 1,
+      "name": {
+        "de": "Hosen",
+        "en": "Trousers",
+        "it": "Pantaloni"
+      },
+      "slug": {
+        "de": "new-men-clothing-trousers",
+        "en": "new-men-clothing-trousers",
+        "it": "new-men-clothing-trousers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.000014724717798411543833693",
+      "createdAt": "2016-08-29T11:56:19.841Z",
+      "lastModifiedAt": "2016-08-29T11:56:19.841Z",
+      "externalId": "102",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "d18b95d9-e188-45db-8a15-8316669dbd34",
+      "version": 1,
+      "name": {
+        "de": "Jeans",
+        "en": "Jeans",
+        "it": "Jeans"
+      },
+      "slug": {
+        "de": "new-men-clothing-jeans",
+        "en": "new-men-clothing-jeans",
+        "it": "new-men-clothing-jeans"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.000014724717800091146208020",
+      "createdAt": "2016-08-29T11:56:20.009Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.009Z",
+      "externalId": "103",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e2a45568-f7f9-4253-92f4-0d4c4d66988d",
+      "version": 1,
+      "name": {
+        "de": "Blazer",
+        "en": "Blazer",
+        "it": "Blazer"
+      },
+      "slug": {
+        "de": "new-men-clothing-blazer",
+        "en": "new-men-clothing-blazer",
+        "it": "new-men-clothing-blazer"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.000014724717801591557786888",
+      "createdAt": "2016-08-29T11:56:20.159Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.159Z",
+      "externalId": "104",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "2e13e156-dbb2-481d-b129-8ff5e3c5449e",
+      "version": 1,
+      "name": {
+        "de": "Anzüge",
+        "en": "Suits",
+        "it": "Completi"
+      },
+      "slug": {
+        "de": "new-men-clothing-suits",
+        "en": "new-men-clothing-suits",
+        "it": "new-men-clothing-suits"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.00001472471780284419863703",
+      "createdAt": "2016-08-29T11:56:20.284Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.284Z",
+      "externalId": "105",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c66a9e53-4c10-4475-ba45-fc8e371e8303",
+      "version": 1,
+      "name": {
+        "de": "T-shirt",
+        "en": "T-shirts",
+        "it": "T-shirt"
+      },
+      "slug": {
+        "de": "new-men-clothing-t-shirts",
+        "en": "new-men-clothing-t-shirts",
+        "it": "new-men-clothing-t-shirts"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f0075446-0b56-4236-8f9e-9cef1b23c85d"
+      },
+      "orderHint": "0.00001472471780429210358378",
+      "createdAt": "2016-08-29T11:56:20.429Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.429Z",
+      "externalId": "106",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "6fd3374e-f861-45a7-9821-ca503eb1d8b4",
+      "version": 1,
+      "name": {
+        "de": "Sneakers",
+        "en": "Sneakers",
+        "it": "Sneakers"
+      },
+      "slug": {
+        "de": "new-men-shoes-sneakers",
+        "en": "new-men-shoes-sneakers",
+        "it": "new-men-shoes-sneakers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+      },
+      "orderHint": "0.00001472471780624729039856",
+      "createdAt": "2016-08-29T11:56:20.624Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.624Z",
+      "externalId": "107",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "61b462be-d14a-4de1-8cef-cca002544cbc",
+      "version": 1,
+      "name": {
+        "de": "Stiefel",
+        "en": "Boots",
+        "it": "Stivali"
+      },
+      "slug": {
+        "de": "new-men-shoes-boots",
+        "en": "new-men-shoes-boots",
+        "it": "new-men-shoes-boots"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+      },
+      "orderHint": "0.00001472471780791346989643",
+      "createdAt": "2016-08-29T11:56:20.791Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.791Z",
+      "externalId": "108",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "9000e5ad-a275-4490-9b57-c89607412d58",
+      "version": 1,
+      "name": {
+        "de": "Schnürschuhe",
+        "en": "Lace-up shoes",
+        "it": "Stivaletti"
+      },
+      "slug": {
+        "de": "new-men-shoes-lace-up-shoes",
+        "en": "new-men-shoes-lace-up-shoes",
+        "it": "new-men-shoes-lace-up-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+      },
+      "orderHint": "0.00001472471780989477261006",
+      "createdAt": "2016-08-29T11:56:20.989Z",
+      "lastModifiedAt": "2016-08-29T11:56:20.989Z",
+      "externalId": "109",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "6ac3ece7-9c78-4ed5-9a5e-e8e82ef0a90b",
+      "version": 1,
+      "name": {
+        "de": "Loafers",
+        "en": "Loafers",
+        "it": "Loafers"
+      },
+      "slug": {
+        "de": "new-men-shoes-loafers",
+        "en": "new-men-shoes-loafers",
+        "it": "new-men-shoes-loafers"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+      },
+      "orderHint": "0.00001472471781203172397992",
+      "createdAt": "2016-08-29T11:56:21.203Z",
+      "lastModifiedAt": "2016-08-29T11:56:21.203Z",
+      "externalId": "110",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ee2803f1-e317-420a-ae5e-7f58c331ac42",
+      "version": 1,
+      "name": {
+        "de": "Sandalen",
+        "en": "Sandals",
+        "it": "Sandali"
+      },
+      "slug": {
+        "de": "new-men-shoes-sandals",
+        "en": "new-men-shoes-sandals",
+        "it": "new-men-shoes-sandals"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "55c58d39-2b92-44f5-a0f7-a207842a830b"
+      },
+      "orderHint": "0.00001472471781726588525310",
+      "createdAt": "2016-08-29T11:56:21.726Z",
+      "lastModifiedAt": "2016-08-29T11:56:21.726Z",
+      "externalId": "111",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "6d0e9370-9fc4-408a-8244-874d62a8b070",
+      "version": 1,
+      "name": {
+        "de": "Clutches",
+        "en": "Clutches",
+        "it": "Pochette"
+      },
+      "slug": {
+        "de": "new-men-bags-clutches",
+        "en": "new-men-bags-clutches",
+        "it": "new-men-bags-clutches"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+      },
+      "orderHint": "0.00001472471781958232611931",
+      "createdAt": "2016-08-29T11:56:21.958Z",
+      "lastModifiedAt": "2016-08-29T11:56:21.958Z",
+      "externalId": "112",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "0a993db8-4509-4877-a4ca-b0b494164085",
+      "version": 1,
+      "name": {
+        "de": "Umhängetaschen",
+        "en": "Shoulder bags",
+        "it": "Borse a spalla"
+      },
+      "slug": {
+        "de": "new-men-bags-shoulder-bags",
+        "en": "new-men-bags-shoulder-bags",
+        "it": "new-men-bags-shoulder-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+      },
+      "orderHint": "0.000014724717821811534069142",
+      "createdAt": "2016-08-29T11:56:22.181Z",
+      "lastModifiedAt": "2016-08-29T11:56:22.181Z",
+      "externalId": "113",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "00ca3fe8-2618-4cfa-aed7-c158851ca05a",
+      "version": 1,
+      "name": {
+        "de": "Shopper",
+        "en": "Shopper",
+        "it": "Borse shopping"
+      },
+      "slug": {
+        "de": "new-men-bags-shopper",
+        "en": "new-men-bags-shopper",
+        "it": "new-men-bags-shopper"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+      },
+      "orderHint": "0.000014724717823572096503689",
+      "createdAt": "2016-08-29T11:56:22.357Z",
+      "lastModifiedAt": "2016-08-29T11:56:22.357Z",
+      "externalId": "114",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "e993885f-beb5-4f8a-ab9a-1279dc755d2f",
+      "version": 1,
+      "name": {
+        "de": "Handtaschen",
+        "en": "Handbag",
+        "it": "Borse a mano"
+      },
+      "slug": {
+        "de": "new-men-bags-handbag",
+        "en": "new-men-bags-handbag",
+        "it": "new-men-bags-handbag"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+      },
+      "orderHint": "0.000014724717825031763109488",
+      "createdAt": "2016-08-29T11:56:22.503Z",
+      "lastModifiedAt": "2016-08-29T11:56:22.503Z",
+      "externalId": "115",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c41ac47f-1e98-4a10-a355-edbb6f880499",
+      "version": 1,
+      "name": {
+        "de": "Brieftaschen",
+        "en": "Wallets",
+        "it": "Portafogli"
+      },
+      "slug": {
+        "de": "new-men-bags-wallets",
+        "en": "new-men-bags-wallets",
+        "it": "new-men-bags-wallets"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+      },
+      "orderHint": "0.000014724717826831263757647",
+      "createdAt": "2016-08-29T11:56:22.684Z",
+      "lastModifiedAt": "2016-08-29T11:56:22.684Z",
+      "externalId": "116",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "99d813a0-30f1-4bcb-bead-0f0b2651d40a",
+      "version": 1,
+      "name": {
+        "de": "Beutel & Rucksäcke",
+        "en": "Bucketbag & packbag",
+        "it": "Borse a secchiello e zaini"
+      },
+      "slug": {
+        "de": "new-men-bags-beutel-rucksaecke",
+        "en": "new-men-bags-beutel-rucksaecke",
+        "it": "new-men-bags-beutel-rucksaecke"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        },
+        {
+          "typeId": "category",
+          "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7"
+        },
+        {
+          "typeId": "category",
+          "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "efea634e-e365-46ec-af90-d71de9ad8bec"
+      },
+      "orderHint": "0.00001472471782858144288331",
+      "createdAt": "2016-08-29T11:56:22.858Z",
+      "lastModifiedAt": "2016-08-29T11:56:22.858Z",
+      "externalId": "117",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462",
+      "version": 2,
+      "name": {
+        "de": "Damen",
+        "en": "Women",
+        "it": "Donna"
+      },
+      "slug": {
+        "de": "accessories-women",
+        "en": "accessories-women",
+        "it": "accessories-women"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+      },
+      "orderHint": "0.000014724717830531916088355",
+      "createdAt": "2016-08-29T11:56:23.053Z",
+      "lastModifiedAt": "2018-02-16T17:45:40.006Z",
+      "externalId": "118",
+      "assets": [
+        {
+          "id": "e9fd7e48-7753-49e5-b4fc-a5d712c8a4ef",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/accessories-women%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Damen",
+            "en": "Women",
+            "it": "Donna"
+          },
+          "key": "accessories-women-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609",
+      "version": 2,
+      "name": {
+        "de": "Herren",
+        "en": "Men",
+        "it": "Uomo"
+      },
+      "slug": {
+        "de": "accessories-men",
+        "en": "accessories-men",
+        "it": "accessories-men"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+      },
+      "orderHint": "0.00001472471783291221255940",
+      "createdAt": "2016-08-29T11:56:23.291Z",
+      "lastModifiedAt": "2018-02-16T17:45:51.545Z",
+      "externalId": "119",
+      "assets": [
+        {
+          "id": "f8d08a92-fbbb-4222-9eda-796ff083652e",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/accessories-men%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Herren",
+            "en": "Men",
+            "it": "Uomo"
+          },
+          "key": "accessories-men-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "62455c5b-3ca5-467d-b505-bfbb7a14f74d",
+      "version": 1,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "accessories-women-clothing",
+        "en": "accessories-women-clothing",
+        "it": "accessories-women-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+      },
+      "orderHint": "0.000014724717834482002149522",
+      "createdAt": "2016-08-29T11:56:23.448Z",
+      "lastModifiedAt": "2016-08-29T11:56:23.448Z",
+      "externalId": "120",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "936131d1-1427-458b-ac35-ff42237f0c75",
+      "version": 1,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "accessories-women-shoes",
+        "en": "accessories-women-shoes",
+        "it": "accessories-women-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+      },
+      "orderHint": "0.00001472471783886946645311",
+      "createdAt": "2016-08-29T11:56:23.886Z",
+      "lastModifiedAt": "2016-08-29T11:56:23.886Z",
+      "externalId": "121",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "673fb211-882e-4172-9023-e0e85367d991",
+      "version": 1,
+      "name": {
+        "de": "Taschen",
+        "en": "Bags",
+        "it": "Borse"
+      },
+      "slug": {
+        "de": "accessories-women-bags",
+        "en": "accessories-women-bags",
+        "it": "accessories-women-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+      },
+      "orderHint": "0.000014724717843021066149461",
+      "createdAt": "2016-08-29T11:56:24.302Z",
+      "lastModifiedAt": "2016-08-29T11:56:24.302Z",
+      "externalId": "122",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "5d413537-4664-4a71-99e1-a2f908f3a4ae",
+      "version": 1,
+      "name": {
+        "de": "Looks",
+        "en": "Looks",
+        "it": "Looks"
+      },
+      "slug": {
+        "de": "accessories-women-looks",
+        "en": "accessories-women-looks",
+        "it": "accessories-women-looks"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+      },
+      "orderHint": "0.000014724717845742100220843",
+      "createdAt": "2016-08-29T11:56:24.574Z",
+      "lastModifiedAt": "2016-08-29T11:56:24.574Z",
+      "externalId": "123",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "f1737b9d-1989-48d0-8a77-2199a36967a4",
+      "key": "myKey",
+      "version": 3,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "accessories-men-clothing",
+        "en": "accessories-men-clothing",
+        "it": "accessories-men-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609"
+      },
+      "orderHint": "0.00001472471784764697640011",
+      "createdAt": "2016-08-29T11:56:24.764Z",
+      "lastModifiedAt": "2017-05-23T09:38:05.998Z",
+      "externalId": "124",
+      "metaTitle": {
+        "it": "Abbigliamento",
+        "en": "Clothing",
+        "de": "Bekleidung"
+      },
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "945ea916-4a33-454c-abad-a4086adf10e9",
+      "version": 1,
+      "name": {
+        "de": "Parfüms",
+        "en": "Parfums",
+        "it": "Profumi"
+      },
+      "slug": {
+        "de": "accessories-women-parfums",
+        "en": "accessories-women-parfums",
+        "it": "accessories-women-parfums"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+      },
+      "orderHint": "0.000014724717849121362405761",
+      "createdAt": "2016-08-29T11:56:24.912Z",
+      "lastModifiedAt": "2016-08-29T11:56:24.912Z",
+      "externalId": "138",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "4f53e084-ba6b-4ca4-97a3-61854686422e",
+      "version": 1,
+      "name": {
+        "de": "Parfüms",
+        "en": "Parfums",
+        "it": "Profumi"
+      },
+      "slug": {
+        "de": "accessories-men-parfums",
+        "en": "accessories-men-parfums",
+        "it": "accessories-men-parfums"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609"
+      },
+      "orderHint": "0.00001472471785064664883386",
+      "createdAt": "2016-08-29T11:56:25.064Z",
+      "lastModifiedAt": "2016-08-29T11:56:25.064Z",
+      "externalId": "139",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ea94636e-b1f8-4f6b-9526-bb9753a64516",
+      "version": 1,
+      "name": {
+        "de": "Sonnenbrillen",
+        "en": "Sunglasses",
+        "it": "Occhiali da sole"
+      },
+      "slug": {
+        "de": "accessories-women-sunglasses",
+        "en": "accessories-women-sunglasses",
+        "it": "accessories-women-sunglasses"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "b8250c0d-a29e-42d5-8c11-97d7a98bb462"
+      },
+      "orderHint": "0.000014724717852171687296673",
+      "createdAt": "2016-08-29T11:56:25.217Z",
+      "lastModifiedAt": "2016-08-29T11:56:25.217Z",
+      "externalId": "140",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "4ad97691-53b5-401b-bd22-0bb91c0e44c7",
+      "version": 1,
+      "name": {
+        "de": "Sonnenbrillen",
+        "en": "Sunglasses",
+        "it": "Occhiali da sole"
+      },
+      "slug": {
+        "de": "accessories-men-sunglasses",
+        "en": "accessories-men-sunglasses",
+        "it": "accessories-men-sunglasses"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "be57522b-35aa-44a6-8e60-d6caba56e775"
+        },
+        {
+          "typeId": "category",
+          "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "84a9eedc-d904-49fb-b62b-47fcee3a3609"
+      },
+      "orderHint": "0.000014724717854162042237697",
+      "createdAt": "2016-08-29T11:56:25.416Z",
+      "lastModifiedAt": "2016-08-29T11:56:25.416Z",
+      "externalId": "141",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b5612fb1-a3da-4eee-9254-28dd3c5750a2",
+      "version": 1,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "sale-women-clothing",
+        "en": "sale-women-clothing",
+        "it": "sale-women-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+        },
+        {
+          "typeId": "category",
+          "id": "1d9f82b4-4fb8-4830-91b0-61b876da7b93"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "1d9f82b4-4fb8-4830-91b0-61b876da7b93"
+      },
+      "orderHint": "0.000014724717857331690251474",
+      "createdAt": "2016-08-29T11:56:25.733Z",
+      "lastModifiedAt": "2016-08-29T11:56:25.733Z",
+      "externalId": "152",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "ef630d0e-eae5-44ef-bc4c-844a4574f6ad",
+      "version": 1,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "sale-women-shoes",
+        "en": "sale-women-shoes",
+        "it": "sale-women-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+        },
+        {
+          "typeId": "category",
+          "id": "1d9f82b4-4fb8-4830-91b0-61b876da7b93"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "1d9f82b4-4fb8-4830-91b0-61b876da7b93"
+      },
+      "orderHint": "0.000014724717859342020595839",
+      "createdAt": "2016-08-29T11:56:25.934Z",
+      "lastModifiedAt": "2016-08-29T11:56:25.934Z",
+      "externalId": "153",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "5228703d-ae5a-430f-b70a-6f05a2561a47",
+      "version": 1,
+      "name": {
+        "de": "Bekleidung",
+        "en": "Clothing",
+        "it": "Abbigliamento"
+      },
+      "slug": {
+        "de": "sale-men-clothing",
+        "en": "sale-men-clothing",
+        "it": "sale-men-clothing"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+        },
+        {
+          "typeId": "category",
+          "id": "c35ef50c-c62a-42bf-851d-2a0692d07f24"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c35ef50c-c62a-42bf-851d-2a0692d07f24"
+      },
+      "orderHint": "0.000014724717862861200870035",
+      "createdAt": "2016-08-29T11:56:26.286Z",
+      "lastModifiedAt": "2016-08-29T11:56:26.286Z",
+      "externalId": "155",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "86619418-4065-4471-9551-80b62b396232",
+      "version": 1,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "sale-men-shoes",
+        "en": "sale-men-shoes",
+        "it": "sale-men-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+        },
+        {
+          "typeId": "category",
+          "id": "c35ef50c-c62a-42bf-851d-2a0692d07f24"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c35ef50c-c62a-42bf-851d-2a0692d07f24"
+      },
+      "orderHint": "0.000014724717864632119168098",
+      "createdAt": "2016-08-29T11:56:26.463Z",
+      "lastModifiedAt": "2016-08-29T11:56:26.463Z",
+      "externalId": "156",
+      "assets": [],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "7c6c054f-e4bc-4ada-81b5-4bf5cf686057",
+      "version": 2,
+      "name": {
+        "de": "Damen",
+        "en": "Women",
+        "it": "Donna"
+      },
+      "slug": {
+        "de": "new-women",
+        "en": "new-women",
+        "it": "new-women"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+      },
+      "orderHint": "0.0000147247176133662108324",
+      "createdAt": "2016-08-29T11:56:01.337Z",
+      "lastModifiedAt": "2018-02-16T16:04:41.648Z",
+      "externalId": "7",
+      "assets": [
+        {
+          "id": "89a6416b-0c36-4b94-8dbd-683ee0c134bd",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/new-women%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Damen",
+            "en": "Women",
+            "it": "Donna"
+          },
+          "key": "new-women-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "4adeaaf5-f823-44fa-956e-e398b88da9c7",
+      "version": 2,
+      "name": {
+        "de": "Herren",
+        "en": "Men",
+        "it": "Uomo"
+      },
+      "slug": {
+        "de": "new-men",
+        "en": "new-men",
+        "it": "new-men"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+      },
+      "orderHint": "0.00001472471761599916818919",
+      "createdAt": "2016-08-29T11:56:01.599Z",
+      "lastModifiedAt": "2018-02-16T17:09:09.843Z",
+      "externalId": "8",
+      "assets": [
+        {
+          "id": "9cd415b7-9dc8-4a85-8a40-e7804ce70bb8",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/new-men%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Herren",
+            "en": "Men",
+            "it": "Uomo"
+          },
+          "key": "new-men-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "15ee30b8-f71e-477c-84a2-e5aebb8277c0",
+      "version": 2,
+      "name": {
+        "de": "Special",
+        "en": "Special",
+        "it": "Special"
+      },
+      "slug": {
+        "de": "new-special",
+        "en": "new-special",
+        "it": "new-special"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "58391aa8-1c63-46e4-80a6-a1f7904b6d7c"
+      },
+      "orderHint": "0.0000147247176193994121825",
+      "createdAt": "2016-08-29T11:56:01.939Z",
+      "lastModifiedAt": "2018-02-16T17:09:24.880Z",
+      "externalId": "9",
+      "assets": [
+        {
+          "id": "59ca36e7-332f-47ee-9bc3-ba4523302516",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/new-special%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Special",
+            "en": "Special",
+            "it": "Special"
+          },
+          "key": "new-special-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "b0b08091-8e32-4601-948a-8b504606d3ac",
+      "version": 2,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "women-shoes",
+        "en": "women-shoes",
+        "it": "women-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+      },
+      "orderHint": "0.000014724717624961370834991",
+      "createdAt": "2016-08-29T11:56:02.496Z",
+      "lastModifiedAt": "2018-02-16T17:31:33.460Z",
+      "externalId": "11",
+      "assets": [
+        {
+          "id": "731d32f2-92a9-44a0-9b28-2ac6ae4234f8",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/women-shoes%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Schuhe",
+            "en": "Shoes",
+            "it": "Scarpe"
+          },
+          "key": "women-shoes-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "132823b9-b4c6-449d-b524-c648bd35e3b3",
+      "version": 2,
+      "name": {
+        "de": "Taschen",
+        "en": "Bags",
+        "it": "Borse"
+      },
+      "slug": {
+        "de": "women-bags",
+        "en": "women-bags",
+        "it": "women-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+      },
+      "orderHint": "0.00001472471762778193714396",
+      "createdAt": "2016-08-29T11:56:02.778Z",
+      "lastModifiedAt": "2018-02-16T17:31:50.131Z",
+      "externalId": "12",
+      "assets": [
+        {
+          "id": "2acab806-b7b6-40db-a96e-ed09b7b54047",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/women-bags%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Taschen",
+            "en": "Bags",
+            "it": "Borse"
+          },
+          "key": "women-bags-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "96ac6204-4631-41d3-9540-22b7629f468d",
+      "version": 2,
+      "name": {
+        "de": "Looks",
+        "en": "Looks",
+        "it": "Looks"
+      },
+      "slug": {
+        "de": "women-looks",
+        "en": "women-looks",
+        "it": "women-looks"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "f8587a7d-7756-4072-8b1f-6360357218c2"
+      },
+      "orderHint": "0.00001472471763066710106734",
+      "createdAt": "2016-08-29T11:56:03.066Z",
+      "lastModifiedAt": "2018-02-16T17:32:04.763Z",
+      "externalId": "13",
+      "assets": [
+        {
+          "id": "655981d4-e7d3-47d2-bf6d-83cea9e188da",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/women-looks%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Looks",
+            "en": "Looks",
+            "it": "Looks"
+          },
+          "key": "women-looks-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c077eb33-c5fe-4560-af75-abb8b205ca25",
+      "version": 2,
+      "name": {
+        "de": "Schuhe",
+        "en": "Shoes",
+        "it": "Scarpe"
+      },
+      "slug": {
+        "de": "men-shoes",
+        "en": "men-shoes",
+        "it": "men-shoes"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+      },
+      "orderHint": "0.000014724717639161534593585",
+      "createdAt": "2016-08-29T11:56:03.916Z",
+      "lastModifiedAt": "2018-02-16T17:38:39.509Z",
+      "externalId": "15",
+      "assets": [
+        {
+          "id": "10abbea1-4454-49fc-9105-1303235b60dc",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/men-shoes%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Schuhe",
+            "en": "Shoes",
+            "it": "Scarpe"
+          },
+          "key": "men-shoes-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "497a225e-ccf5-4c41-b2de-b769b63bfa95",
+      "version": 2,
+      "name": {
+        "de": "Taschen",
+        "en": "Bags",
+        "it": "Borse"
+      },
+      "slug": {
+        "de": "men-bags",
+        "en": "men-bags",
+        "it": "men-bags"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+      },
+      "orderHint": "0.000014724717640741377113673",
+      "createdAt": "2016-08-29T11:56:04.074Z",
+      "lastModifiedAt": "2018-02-16T17:38:53.036Z",
+      "externalId": "16",
+      "assets": [
+        {
+          "id": "288cd909-a065-4a36-bd80-8e6b97f94ddc",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/men-bags%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Taschen",
+            "en": "Bags",
+            "it": "Borse"
+          },
+          "key": "men-bags-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "926f5223-9d26-4942-ae92-288b842336c4",
+      "version": 2,
+      "name": {
+        "de": "Looks",
+        "en": "Looks",
+        "it": "Looks"
+      },
+      "slug": {
+        "de": "men-looks",
+        "en": "men-looks",
+        "it": "men-looks"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "e2191d36-21ab-4ea7-9cee-d9ff576948d1"
+      },
+      "orderHint": "0.00001472471764252888782723",
+      "createdAt": "2016-08-29T11:56:04.252Z",
+      "lastModifiedAt": "2018-02-16T17:39:05.258Z",
+      "externalId": "17",
+      "assets": [
+        {
+          "id": "93eb17fe-2115-40b0-8535-448561c12088",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/men-looks%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Looks",
+            "en": "Looks",
+            "it": "Looks"
+          },
+          "key": "men-looks-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "1d9f82b4-4fb8-4830-91b0-61b876da7b93",
+      "version": 2,
+      "name": {
+        "de": "Damen",
+        "en": "Women",
+        "it": "Donna"
+      },
+      "slug": {
+        "de": "sale-women",
+        "en": "sale-women",
+        "it": "sale-women"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+      },
+      "orderHint": "0.000014724717855961065836725",
+      "createdAt": "2016-08-29T11:56:25.596Z",
+      "lastModifiedAt": "2018-02-16T17:46:04.995Z",
+      "externalId": "151",
+      "assets": [
+        {
+          "id": "9fb904f0-cbaa-46be-a92d-4e9060318472",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/sale-women%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Damen",
+            "en": "Women",
+            "it": "Donna"
+          },
+          "key": "sale-women-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "c35ef50c-c62a-42bf-851d-2a0692d07f24",
+      "version": 2,
+      "name": {
+        "de": "Herren",
+        "en": "Men",
+        "it": "Uomo"
+      },
+      "slug": {
+        "de": "sale-men",
+        "en": "sale-men",
+        "it": "sale-men"
+      },
+      "ancestors": [
+        {
+          "typeId": "category",
+          "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+        }
+      ],
+      "parent": {
+        "typeId": "category",
+        "id": "c470ff8a-ca75-4283-9113-f53e273a4f4b"
+      },
+      "orderHint": "0.000014724717861091624766931",
+      "createdAt": "2016-08-29T11:56:26.109Z",
+      "lastModifiedAt": "2018-02-16T17:46:18.104Z",
+      "externalId": "154",
+      "assets": [
+        {
+          "id": "b8645992-90c5-47b4-bb18-b7dffd84fce2",
+          "sources": [
+            {
+              "uri": "https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/categories/sale-men%403x.png",
+              "key": "3x",
+              "contentType": "image/png"
+            }
+          ],
+          "name": {
+            "de": "Herren",
+            "en": "Men",
+            "it": "Uomo"
+          },
+          "key": "sale-men-ios",
+          "tags": []
+        }
+      ],
+      "lastMessageSequenceNumber": 1
+    }
+  ]
+}

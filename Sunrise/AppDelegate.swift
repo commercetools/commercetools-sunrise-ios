@@ -5,7 +5,6 @@
 import UIKit
 import UserNotifications
 import Commercetools
-import Contentful
 import CoreLocation
 import AVFoundation
 import IQKeyboardManagerSwift
@@ -17,11 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 
-    var contentfulClient: Client = {
-        let spaceId = Bundle.main.object(forInfoDictionaryKey: "ContentfulSpaceId") as? String ?? ""
-        let accessToken = Bundle.main.object(forInfoDictionaryKey: "ContentfulAccessToken") as? String ?? ""
-        return Client(spaceId: spaceId, accessToken: accessToken)
-    }()
+    static var currentCountry: String?
+    static var currentCurrency: String?
+    static var customerGroup: Reference<CustomerGroup>?
 
     var window: UIWindow?
 
@@ -30,17 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var locationManager: CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AppRouting.setupInitiallyActiveTab()
-
         if let configuration = Project.config {
             Commercetools.config = configuration
+
         } else {
             // Inform user about the configuration error
         }
 
         locationManager = CLLocationManager()
         locationManager?.requestWhenInUseAuthorization()
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
 
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.requestAuthorization(options: [.badge, .alert, .sound]) { success, _ in
@@ -51,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCenter.delegate = self
         application.registerForRemoteNotifications()
         addNotificationCategories()
-        AppRouting.setupMyAccountRootViewController()
 
         return true
     }
@@ -61,26 +56,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let pathComponents = url.pathComponents
             // POP (e.g https://demo.commercetools.com/en/search?q=jeans)
             if let indexOfSearch = pathComponents.index(of: "search"), let urlComponents = URLComponents(string: url.absoluteString),
-               let query = urlComponents.queryItems, indexOfSearch > 0 {
-                AppRouting.switchToSearch(query: query["q"] ?? "", locale: Locale(identifier: pathComponents[indexOfSearch - 1]))
+               let queryItems = urlComponents.queryItems, let query = queryItems["q"].first, indexOfSearch > 0 {
+                AppRouting.search(query: query, filters: queryItems)
                 return true
 
             // PDP (e.g https://demo.commercetools.com/en/brunello-cucinelli-coat-mf9284762-cream-M0E20000000DQR5.html)
             } else if let sku = pathComponents.last?.components(separatedBy: "-").last, sku.count > 5, sku.contains(".html") {
-                AppRouting.switchToProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
+                AppRouting.showProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
                 return true
 
-            // Orders (e.g https://demo.commercetools.com/en/user/orders/87896195?)
-            } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last {
-                AppRouting.showOrderDetails(orderNumber: orderNumber)
+            // Orders (e.g https://demo.commercetools.com/en/user/orders)
+            } else if pathComponents.last?.contains("orders") == true {
+                AppRouting.showMyOrders()
                 return true
 
-            // Add to cart (e.g https://demo.commercetools.com/en/cart/add?productId=eedf1d96-8eec-43c9-877c-76ebab6d5c7f&variantId=1&quantity=2&discountCode=SUNRISE)
-            } else if let index = pathComponents.index(of: "cart"), pathComponents.count >= index + 1 && pathComponents[index + 1] == "add",
-                      let urlComponents = URLComponents(string: url.absoluteString), let query = urlComponents.queryItems {
-                guard let product = query["productId"], let variantId = Int(query["variantId"] ?? "") else { return false }
-                AppRouting.switchToCartAndAdd(product: product, variantId: variantId, quantity: UInt(query["quantity"] ?? "") ?? 1, discountCode: query["discountCode"])
-                return true
+            // Order details (e.g https://demo.commercetools.com/en/user/orders/87896195?)
+            } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last, !orderNumber.contains("orders") {
+                AppRouting.showOrderDetails(for: orderNumber)
+
+            // Category overview (e.g https://demo.commercetools.com/en/women-clothing-blazer)
+            } else if pathComponents.count == 3, pathComponents[1].count == 2 {
+                AppRouting.showCategory(locale: pathComponents[1], slug: pathComponents[2])
             }
         }
         return false
@@ -88,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     fileprivate func handleNotification(notificationInfo: [AnyHashable: Any]) {
         if let reservationId = notificationInfo["reservation-id"] as? String {
-            AppRouting.showReservationDetails(id: reservationId)
+            AppRouting.showReservationDetails(for: reservationId)
         }
     }
 
@@ -151,7 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 )
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-                    AppRouting.accountViewController?.viewModel?.logoutCustomer()
                     Commercetools.logoutCustomer()
                     Project.update(config: projectConfig as NSDictionary)
                     exit(0)

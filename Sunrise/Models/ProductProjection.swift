@@ -6,48 +6,40 @@ import Commercetools
 
 extension ProductProjection {
 
+    func displayVariant(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> ProductVariant? {
+        return displayVariants(country: country, currency: currency, customerGroup: customerGroup).first
+    }
+
+    func displayVariants(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> [ProductVariant] {
+        var displayVariants = [ProductVariant]()
+        let now = Date()
+        if let matchingVariant = allVariants.first(where: { $0.isMatchingVariant == true }) {
+            displayVariants.append(matchingVariant)
+        }
+        displayVariants += allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        if displayVariants.isEmpty, customerGroup != nil {
+            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
+                    && $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        }
+        if displayVariants.isEmpty {
+            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        }
+        if displayVariants.isEmpty, customerGroup != nil {
+            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        }
+        if let mainVariantWithPrice = mainVariantWithPrice, displayVariants.isEmpty {
+            displayVariants.append(mainVariantWithPrice)
+        }
+        return displayVariants
+    }
+
     /// The `masterVariant` if it has price, or  the first from `variants` with price.
     var mainVariantWithPrice: ProductVariant? {
         if let prices = masterVariant.prices, prices.count > 0 {
             return masterVariant
         } else {
             return variants.filter({ ($0.prices?.count ?? 0) > 0 }).first
-        }
-    }
-
-    /**
-        Returns `masterVariant` if it contains price for the specified channel, or the first from `variants` with price
-        that fulfils the same condition.
-
-        - parameter channel:            An optional `Channel` instance, used to filter `prices` by.
-        - returns:                      An optional `ProductVariant` instance.
-    */
-    func mainVariantWithPrice(for channel: Channel? = nil) -> ProductVariant? {
-        if let channelId = channel?.id {
-            if let prices = masterVariant.prices?.filter({ $0.channel?.id == channelId }), prices.count > 0 {
-                return masterVariant
-            } else {
-                return variants.filter({ ($0.prices?.filter({ $0.channel?.id == channelId }).count ?? 0) > 0 }).first
-            }
-        } else {
-            return mainVariantWithPrice
-        }
-    }
-
-    /**
-        Creates and returns an array of `ProductVariant`s containing the union of `masterVariant` and other `variants`.
-
-        - parameter channel:            If specified, returned `ProductVariant` array will contain only those variants
-                                        which are on stock for the channel provided.
-        - returns:                      An array of `ProductVariant`s.
-    */
-    func allVariants(for channel: Channel? = nil) -> [ProductVariant] {
-        if let channelId = channel?.id {
-            return allVariants.filter { variant in
-                variant.availability?.channels?[channelId]?.isOnStock == true
-            }
-        } else {
-            return allVariants
         }
     }
 }

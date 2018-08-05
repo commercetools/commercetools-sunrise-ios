@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import IQDropDownTextField
 
 class CartLineItemCell: UITableViewCell {
 
@@ -11,14 +10,17 @@ class CartLineItemCell: UITableViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var oldPriceLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var quantityLabel: UILabel?
-    @IBOutlet weak var quantityField: IQDropDownTextField?
-    @IBOutlet weak var totalPriceLabel: UILabel!
-    @IBOutlet weak var skuLabel: UILabel!
+    @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var colorView: UIView!
 
-    @IBAction func editQuantity(_ sender: AnyObject) {
-        quantityField?.becomeFirstResponder()
-    }    
+    @IBOutlet weak var wishListButton: UIButton!
+    @IBOutlet weak var removeLineItemButton: UIButton!
 
+    @IBOutlet weak var oldAndActivePriceSpacingConstraint: NSLayoutConstraint!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        wishListButton.setImage(#imageLiteral(resourceName: "wishlist_icon_active"), for: [.selected, .highlighted])
+    }
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import Commercetools
@@ -15,7 +15,7 @@ class CartViewModelSpec: QuickSpec {
             var cartViewModel: CartViewModel!
 
             beforeEach {
-                let path = Bundle.currentTestBundle!.path(forResource: "cartAndOrder", ofType: "json")!
+                let path = Bundle.currentTestBundle!.path(forResource: "cart", ofType: "json")!
                 let cartJSON = try! String(contentsOfFile: path, encoding: .utf8)
                 let cart = try! jsonDecoder.decode(Cart.self, from: cartJSON.data(using: .utf8)!)
 
@@ -23,75 +23,67 @@ class CartViewModelSpec: QuickSpec {
                 cartViewModel.cart.value = cart
             }
 
-            it("has the correct number of cells line items + summary") {
-                expect(cartViewModel.numberOfRowsInSection(0)).to(equal(4))
+            it("has the correct number of unique items") {
+                expect(cartViewModel.numberOfItems.value).to(equal("3"))
             }
 
-            it("has the correct number of items") {
-                expect(cartViewModel.numberOfItems.value).to(equal("3"))
+            it("has the correct number of line item cells") {
+                expect(cartViewModel.numberOfLineItems).to(equal(3))
+            }
+
+            it("has the correct total") {
+                expect(cartViewModel.orderTotal.value).to(equal("€ 1265.84"))
             }
 
             context("retrieving data for the first line item") {
                 let indexPath = IndexPath(row: 0, section: 0)
 
-                it("product name is properly extracted") {
-                    expect(cartViewModel.lineItemNameAtIndexPath(indexPath)).to(equal("Dress “Olivia“ Polo Ralph Lauren blue"))
+                it("has the correct line item name") {
+                    expect(cartViewModel.lineItemName(at: indexPath)).to(equal("Jacket Michael Kors dark blue"))
                 }
 
-                it("imageUrl selected from variant") {
-                    expect(cartViewModel.lineItemImageUrlAtIndexPath(indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/078990_1_medium.jpg"))
+                it("has the correct line item sku") {
+                    expect(cartViewModel.lineItemSku(at: indexPath)).to(equal("M0E20000000DLUW"))
                 }
 
-                it("sku is properly extracted") {
-                    expect(cartViewModel.lineItemSkuAtIndexPath(indexPath)).to(equal("M0E20000000DVL9"))
+                it("has the correct line item size") {
+                    expect(cartViewModel.lineItemSize(at: indexPath)).to(equal("XXS"))
                 }
 
-                it("has correct price before discount") {
-                    expect(cartViewModel.lineItemPriceAtIndexPath(indexPath)).to(equal("€87.50"))
+                it("has the correct line item image url") {
+                    expect(cartViewModel.lineItemImageUrl(at: indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/072769_1_large.jpg"))
                 }
 
-                it("has correct discounted price") {
-                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal("€175.00"))
+                it("has the correct old price for the line item") {
+                    expect(cartViewModel.lineItemOldPrice(at: indexPath)).to(equal("€ 195.00"))
                 }
 
-                it("has correct quantity") {
-                    expect(cartViewModel.lineItemQuantityAtIndexPath(indexPath)).to(equal("2"))
+                it("has the correct current price for the line item") {
+                    expect(cartViewModel.lineItemPrice(at: indexPath)).to(equal("€ 156.00"))
                 }
 
-                it("has correct total item price") {
-                    expect(cartViewModel.lineItemTotalPriceAtIndexPath(indexPath)).to(equal("€175.00"))
+                it("has the correct quantity for the line item") {
+                    expect(cartViewModel.lineItemQuantity(at: indexPath)).to(equal("x1"))
+                }
+
+                it("has the correct color for the line item") {
+                    expect(cartViewModel.lineItemColor(at: indexPath)).to(equal(.blue))
                 }
             }
 
-            context("retrieving data for the second line item") {
-                let indexPath = IndexPath(row: 1, section: 0)
+            context("retrieving data for the third line item") {
+                let indexPath = IndexPath(row: 2, section: 0)
 
-                it("product name is properly extracted") {
-                    expect(cartViewModel.lineItemNameAtIndexPath(indexPath)).to(equal("Pumps ”Flex” Michael Kors red"))
+                it("has the correct old price for the line item") {
+                    expect(cartViewModel.lineItemOldPrice(at: indexPath)).to(equal("€ 910.00"))
                 }
 
-                it("imageUrl selected from variant") {
-                    expect(cartViewModel.lineItemImageUrlAtIndexPath(indexPath)).to(equal("https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/073017_1_medium.jpg"))
+                it("has the correct current price for the line item") {
+                    expect(cartViewModel.lineItemPrice(at: indexPath)).to(equal("€ 637.00"))
                 }
 
-                it("sku is properly extracted") {
-                    expect(cartViewModel.lineItemSkuAtIndexPath(indexPath)).to(equal("M0E20000000DMV1"))
-                }
-
-                it("has correct item price") {
-                    expect(cartViewModel.lineItemPriceAtIndexPath(indexPath)).to(equal("€127.50"))
-                }
-
-                it("has correct quantity") {
-                    expect(cartViewModel.lineItemQuantityAtIndexPath(indexPath)).to(equal("1"))
-                }
-                
-                it("has correct discounted price extracted from first discountedPricePerQuantity element") {
-                    expect(cartViewModel.lineItemOldPriceAtIndexPath(indexPath)).to(equal("€137.50"))
-                }
-
-                it("has correct total item price") {
-                    expect(cartViewModel.lineItemTotalPriceAtIndexPath(indexPath)).to(equal("€127.50"))
+                it("has the correct quantity for the line item") {
+                    expect(cartViewModel.lineItemQuantity(at: indexPath)).to(equal("x2"))
                 }
             }
         }

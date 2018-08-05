@@ -1,29 +1,32 @@
 //
-// Copyright (c) 2016 Commercetools. All rights reserved.
+// Copyright (c) 2017 Commercetools. All rights reserved.
 //
 
 import UIKit
-import ReactiveCocoa
+import PassKit
 import ReactiveSwift
-import Result
-import SDWebImage
-import IQDropDownTextField
-import DZNEmptyDataSet
+import ReactiveCocoa
+import SVProgressHUD
 
 class CartViewController: UIViewController {
 
-    @IBInspectable var borderColor: UIColor = UIColor.lightGray
-    
-    @IBOutlet var emptyCartView: UIView!
-    @IBOutlet weak var numberOfItemsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-
-    var viewModel: CartViewModel? {
-        didSet {
-            bindViewModel()
-        }
-    }
-
+    @IBOutlet weak var loginPromptView: UIView!
+    @IBOutlet weak var snapshotBackgroundColorView: UIView!
+    @IBOutlet weak var whiteBackgroundColorView: UIView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet var headerView: UIView!
+    
+    @IBOutlet weak var numerOfItemsLabel: UILabel!
+    @IBOutlet weak var orderTotalLabel: UILabel!
+    
+    @IBOutlet weak var checkoutButton: UIButton!
+    @IBOutlet weak var applePayButton: UIButton!
+    
+    @IBOutlet var emptyStateVerticalSpaceConstraints: [NSLayoutConstraint]!
+    
+    private var backgroundSnapshot: UIImage?
+    private var blurredSnapshot: UIImage?
     private let refreshControl = UIRefreshControl()
     private let disposables = CompositeDisposable()
 
@@ -31,48 +34,81 @@ class CartViewController: UIViewController {
         disposables.dispose()
     }
 
+    var viewModel: CartViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.emptyDataSetSource = self
-        tableView.emptyDataSetDelegate = self
-
-        viewModel = CartViewModel()
-        tableView.layer.borderColor = borderColor.cgColor
-        tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableHeaderView = headerView
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
+
+        applePayButton.isEnabled = PKPaymentAuthorizationViewController.canMakePayments()
+
+        emptyStateVerticalSpaceConstraints.forEach { $0.constant = 0.25 * view.bounds.height - 129 }
+
+        viewModel = CartViewModel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         viewModel?.refreshObserver.send(value: ())
     }
 
-    func bindViewModel() {
-        guard let viewModel = viewModel else { return }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.15) {
+            SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+        }
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        backgroundImageView.alpha = 0
+        snapshotBackgroundColorView.alpha = 0
+        whiteBackgroundColorView.alpha = 0
+        loginPromptView.alpha = 0
+        super.viewDidDisappear(animated)
+    }
 
-        viewModel.numberOfItems.producer
-        .observe(on: UIScheduler())
-        .startWithValues({ [weak self] numberOfItems in
-            self?.numberOfItemsLabel.text = numberOfItems
-        })
+    private func bindViewModel() {
+        guard let viewModel = viewModel, isViewLoaded else { return }
 
-        viewModel.isLoading.producer
+        disposables += viewModel.isLoading.producer
+        .filter { !$0 }
         .observe(on: UIScheduler())
-        .startWithValues({ [weak self] isLoading in
-            if !isLoading {
-                self?.refreshControl.endRefreshing()
-            } else {
-                self?.refreshControl.beginRefreshing()
-            }
-        })
+        .startWithValues { [unowned self] _ in
+            UIView.animate(withDuration: 0.1, animations: {
+                self.refreshControl.endRefreshing()
+                self.tableView.alpha = self.viewModel?.numberOfLineItems == 0 ? 0 : 1
+            }, completion: { finished in
+                if !self.tableView.isDecelerating, !self.tableView.isTracking {
+                    DispatchQueue.main.async {
+                        self.updateBackgroundSnapshot()
+                    }
+                }
+            })
+            SVProgressHUD.dismiss()
+        }
+
+        disposables += viewModel.isLoading.producer
+        .filter { $0 }
+        .observe(on: UIScheduler())
+        .startWithValues { _ in SVProgressHUD.show() }
+
+        disposables += numerOfItemsLabel.reactive.text <~ viewModel.numberOfItems
+        disposables += orderTotalLabel.reactive.text <~ viewModel.orderTotal
+        disposables += checkoutButton.reactive.isEnabled <~ viewModel.isCheckoutEnabled
+        disposables += applePayButton.reactive.isEnabled <~ viewModel.isCheckoutEnabled
+
+        applePayButton.reactive.pressed = CocoaAction(viewModel.applePayAction)
 
         disposables += viewModel.contentChangesSignal
         .observe(on: UIScheduler())
-        .observeValues({ [weak self] changeset in
+        .observeValues { [weak self] changeset in
             guard let tableView = self?.tableView else { return }
 
             tableView.beginUpdates()
@@ -80,53 +116,37 @@ class CartViewController: UIViewController {
             tableView.reloadRows(at: changeset.modifications, with: .none)
             tableView.insertRows(at: changeset.insertions, with: .automatic)
             tableView.endUpdates()
-        })
 
-        disposables += viewModel.discountsDetailsSignal
-        .observe(on: UIScheduler())
-        .observeValues({ [weak self] alertMessage in
-            let alertController = UIAlertController(
-                    title: self?.viewModel?.discountsTitle,
-                    message: alertMessage,
-                    preferredStyle: .alert
-            )
-            alertController.addAction(UIAlertAction(title: self?.viewModel?.okAction, style: .default, handler: nil))
-            self?.present(alertController, animated: true, completion: nil)
-        })
-
-        disposables += viewModel.showDiscountDialogueSignal
-        .observe(on: UIScheduler())
-        .observeValues({ [weak self] _ in
-            let alertController = UIAlertController(
-                    title: self?.viewModel?.discountsTitle,
-                    message: self?.viewModel?.addDiscountMessage,
-                    preferredStyle: .alert
-            )
-            alertController.addTextField { $0.placeholder = self?.viewModel?.discountCodePlaceholder }
-            alertController.addAction(UIAlertAction(title: self?.viewModel?.okAction, style: .default, handler: { _ in
-                if let text = alertController.textFields?[0].text {
-                    self?.viewModel?.addDiscountCodeObserver.send(value: text)
+            if !tableView.isDecelerating, !tableView.isTracking {
+                DispatchQueue.main.async {
+                    self?.updateBackgroundSnapshot()
                 }
-            }))
-            self?.present(alertController, animated: true, completion: nil)
-        })
+            }
+        }
 
-        disposables += viewModel.performSegueSignal
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
         .observe(on: UIScheduler())
-        .observeValues({ [weak self] identifier in
-            self?.performSegue(withIdentifier: identifier, sender: nil)
-        })
+        .observeValues { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+
+        disposables += viewModel.presentAuthorizationSignal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            guard let authorizationViewController = PKPaymentAuthorizationViewController(paymentRequest: $0) else { return }
+            authorizationViewController.delegate = self
+            self?.present(authorizationViewController, animated: true)
+        }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
+        viewModel.refreshObserver.send(value: ())
     }
 
-    // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectedCell = sender as? CartLineItemCell, let indexPath = tableView.indexPath(for: selectedCell),
-                let productViewController = segue.destination as? ProductViewController,
-                let productViewModel = viewModel?.productDetailsViewModelForLineItemAtIndexPath(indexPath) {
-            productViewController.viewModel = productViewModel
+        if let recommendationsViewController = segue.destination as? InlineProductOverviewViewController {
+            _ = recommendationsViewController.view
+            recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
         }
     }
 
@@ -134,75 +154,82 @@ class CartViewController: UIViewController {
         viewModel?.refreshObserver.send(value: ())
     }
 
-    // MARK: - Binding utilities
+    @IBAction func checkout(_ sender: UIButton) {
+        viewModel?.isAuthenticated == false ? presentLoginPrompt() : performSegue(withIdentifier: "showCheckout", sender: self)
+    }
 
-    fileprivate func bindCartSummaryCell(_ summaryCell: CartSummaryCell) {
-        guard let viewModel = viewModel else { return }
+    private func presentLoginPrompt() {
+        guard let snapshot = backgroundSnapshot else { return }
+        backgroundImageView.image = snapshot
+        backgroundImageView.alpha = 1
+        UIView.transition(with: backgroundImageView, duration: 0.15, options: .transitionCrossDissolve, animations: {
+            SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+            SunriseTabBarController.currentlyActive?.navigationView.alpha = 0
+            self.backgroundImageView.image = self.blurredSnapshot
+        }, completion: { _ in
+            self.whiteBackgroundColorView.alpha = 1
+            UIView.animate(withDuration: 0.15) {
+                self.backgroundImageView.alpha = 0.5
+                self.snapshotBackgroundColorView.alpha = 0.5
+                self.loginPromptView.alpha = 1
+            }
+        })
+    }
 
-        summaryCell.subtotalLabel.text = viewModel.subtotal.value
-        summaryCell.orderDiscountLabel.text = viewModel.orderDiscount.value
-        summaryCell.taxLabel.text = viewModel.tax.value
-        summaryCell.taxLabel.isHidden = viewModel.taxRowHidden.value
-        summaryCell.taxDescriptionLabel.isHidden = viewModel.taxRowHidden.value
-        summaryCell.orderTotalLabel.text = viewModel.orderTotal.value
-        summaryCell.checkoutButton.reactive.pressed = CocoaAction(viewModel.checkoutAction)
-        summaryCell.discountInfoButton.reactive.pressed = CocoaAction(viewModel.discountDetailsAction)
-        summaryCell.addDiscountButton?.reactive.pressed = CocoaAction(viewModel.showDiscountDialogueAction)
-        viewModel.orderDiscountButton.producer
-        .observe(on: UIScheduler())
-        .take(until: summaryCell.reactive.prepareForReuse)
-        .startWithValues { buttonProperties in
-            summaryCell.discountInfoButton?.setTitle(buttonProperties.text, for: .normal)
-            summaryCell.discountInfoButton?.isUserInteractionEnabled = buttonProperties.isEnabled
+    private func updateBackgroundSnapshot() {
+        guard let backgroundSnapshot = takeSnapshot() else { return }
+        self.backgroundSnapshot = backgroundSnapshot
+        blurredSnapshot = blur(image: backgroundSnapshot)
+        if backgroundImageView.alpha > 0 {
+            backgroundImageView.image = blurredSnapshot
         }
     }
 
-    fileprivate func bindLineItemCell(_ lineItemCell: CartLineItemCell, indexPath: IndexPath) {
-        guard let viewModel = viewModel else { return }
-
-        lineItemCell.productNameLabel.text = viewModel.lineItemNameAtIndexPath(indexPath)
-        lineItemCell.skuLabel.text = viewModel.lineItemSkuAtIndexPath(indexPath)
-        lineItemCell.sizeLabel.text = viewModel.lineItemSizeAtIndexPath(indexPath)
-        lineItemCell.priceLabel.text = viewModel.lineItemPriceAtIndexPath(indexPath)
-        lineItemCell.quantityField?.delegate = self
-        lineItemCell.quantityField?.isOptionalDropDown = false
-        lineItemCell.quantityField?.itemList = viewModel.availableQuantities
-        lineItemCell.quantityField?.selectedItem = viewModel.lineItemQuantityAtIndexPath(indexPath)
-        lineItemCell.totalPriceLabel.text = viewModel.lineItemTotalPriceAtIndexPath(indexPath)
-        lineItemCell.productImageView.sd_setImage(with: URL(string: viewModel.lineItemImageUrlAtIndexPath(indexPath)), placeholderImage: UIImage(named: "transparent"))
-
-        let priceBeforeDiscount =  NSMutableAttributedString(string: viewModel.lineItemOldPriceAtIndexPath(indexPath))
-        priceBeforeDiscount.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, priceBeforeDiscount.length))
-        lineItemCell.oldPriceLabel.attributedText = priceBeforeDiscount
+    private func takeSnapshot() -> UIImage? {
+        guard let view = UIApplication.shared.keyWindow?.rootViewController?.view else { return nil }
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        view.layer.render(in: context)
+        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapshot
     }
-
 }
 
 extension CartViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return 0 }
-        return viewModel.numberOfRowsInSection(section)
+        return viewModel?.numberOfLineItems ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let lineItemCell = tableView.dequeueReusableCell(withIdentifier: "CartItemCell") as! CartLineItemCell
-
         guard let viewModel = viewModel else { return lineItemCell }
 
-        if indexPath.row == viewModel.numberOfRowsInSection(0) - 1 {
-            let summaryCell = tableView.dequeueReusableCell(withIdentifier: "CartSummaryCell") as! CartSummaryCell
-            bindCartSummaryCell(summaryCell)
-            return summaryCell
-
-        } else {
-            bindLineItemCell(lineItemCell, indexPath: indexPath)
-            return lineItemCell
+        lineItemCell.productNameLabel.text = viewModel.lineItemName(at: indexPath)
+        lineItemCell.sizeLabel.text = viewModel.lineItemSize(at: indexPath)
+        lineItemCell.colorView.backgroundColor = viewModel.lineItemColor(at: indexPath)
+        lineItemCell.quantityLabel.text = viewModel.lineItemQuantity(at: indexPath)
+        lineItemCell.priceLabel.text = viewModel.lineItemPrice(at: indexPath)
+        lineItemCell.priceLabel.textColor = viewModel.lineItemOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
+        lineItemCell.productImageView.sd_setImage(with: URL(string: viewModel.lineItemImageUrl(at: indexPath)), placeholderImage: UIImage(named: "transparent"))
+        lineItemCell.oldAndActivePriceSpacingConstraint.constant = viewModel.lineItemOldPrice(at: indexPath).isEmpty ? 0 : 4
+        let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 14)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+        lineItemCell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.lineItemOldPrice(at: indexPath), attributes: oldPriceAttributes)
+        lineItemCell.wishListButton.isSelected = viewModel.isLineItemInWishList(at: indexPath)
+        disposables += lineItemCell.removeLineItemButton.reactive.controlEvents(.touchUpInside)
+        .take(until: lineItemCell.reactive.prepareForReuse)
+        .observeValues { [weak self] _ in
+            SVProgressHUD.show()
+            self?.viewModel?.deleteLineItemObserver.send(value: indexPath)
         }
-    }
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return viewModel?.canDeleteRowAtIndexPath(indexPath) ?? false
+        disposables += lineItemCell.wishListButton.reactive.controlEvents(.touchUpInside)
+        .take(until: lineItemCell.reactive.prepareForReuse)
+        .observeValues { [weak self] _ in
+            lineItemCell.wishListButton.isSelected = !lineItemCell.wishListButton.isSelected
+            self?.viewModel?.toggleWishListObserver.send(value: indexPath)
+        }
+        return lineItemCell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -210,32 +237,49 @@ extension CartViewController: UITableViewDataSource {
             viewModel?.deleteLineItemObserver.send(value: indexPath)
         }
     }
-
 }
 
-extension CartViewController: IQDropDownTextFieldDelegate {
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let indexPath = self.tableView.indexPathForRow(at: textField.convert(.zero, to: tableView)),
-                let quantity = textField.text {
-            viewModel?.updateLineItemQuantityAtIndexPath(indexPath, quantity: quantity)
-        }
+extension CartViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 198
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let sku = viewModel?.lineItemSku(at: indexPath) else { return }
+        AppRouting.showProductDetails(for: sku)
+    }
 }
 
-extension CartViewController: DZNEmptyDataSetSource {
-
-    func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView {
-        return emptyCartView
+extension CartViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard !decelerate else { return }
+        updateBackgroundSnapshot()
     }
-
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateBackgroundSnapshot()
+    }
 }
 
-extension CartViewController: DZNEmptyDataSetDelegate {
+extension CartViewController: PKPaymentAuthorizationViewControllerDelegate {
 
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
-        return true
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: {
+            if self.viewModel?.shouldPresentOrderConfirmation.value == true {
+                self.viewModel?.shouldPresentOrderConfirmation.value = false
+                self.performSegue(withIdentifier: "presentOrderConfirmation", sender: self)
+            }
+        })
     }
 
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler: @escaping (PKPaymentAuthorizationResult) -> Swift.Void) {
+        viewModel?.createOrder(with: payment, completion: handler)
+    }
+
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelect shippingMethod: PKShippingMethod, handler: @escaping (PKPaymentRequestShippingMethodUpdate) -> Swift.Void) {
+        viewModel?.select(shippingMethod: shippingMethod, completion: handler)
+    }
+
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelectShippingContact contact: PKContact, handler: @escaping (PKPaymentRequestShippingContactUpdate) -> Swift.Void) {
+        viewModel?.update(shippingAddress: contact, completion: handler)
+    }
 }
