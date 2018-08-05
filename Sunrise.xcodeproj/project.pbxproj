@@ -89,7 +89,7 @@
 		212EB3001F5F21EF0006611E /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DB1F5F21E90006611E /* Rubik-Medium.ttf */; };
 		212EB3011F5F21EF0006611E /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E21F5F21EA0006611E /* Rubik-MediumItalic.ttf */; };
 		212EB3021F5F21EF0006611E /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DE1F5F21E90006611E /* Rubik-Regular.ttf */; };
-		2131ADE82056DB8900AEB694 /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131ADE72056DB8900AEB694 /* WishlistViewModel.swift */; };
+		2131ADE82056DB8900AEB694 /* WishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131ADE72056DB8900AEB694 /* WishListViewModel.swift */; };
 		213553331EBB681F007E9A60 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 213553351EBB681F007E9A60 /* Localizable.strings */; };
 		213A90FD20710E4B006C3F06 /* OrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A90FC20710E4B006C3F06 /* OrderDetailsViewModel.swift */; };
 		213A90FF20710EB0006C3F06 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A90FE20710EB0006C3F06 /* OrderDetailsViewController.swift */; };
@@ -343,7 +343,7 @@
 		212EB2E21F5F21EA0006611E /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		212EB2E31F5F21EA0006611E /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		212EB2E41F5F21EA0006611E /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
-		2131ADE72056DB8900AEB694 /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
+		2131ADE72056DB8900AEB694 /* WishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewModel.swift; sourceTree = "<group>"; };
 		2132AFA020F8E64A00D7BE70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Profile.strings; sourceTree = "<group>"; };
 		2135533A1EBB799B007E9A60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2137FA901DCA776800A38A25 /* Sunrise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sunrise.entitlements; sourceTree = "<group>"; };
@@ -583,7 +583,7 @@
 			children = (
 				21B76758207F9D2F009C402D /* Home */,
 				21B55955205A964F00775E76 /* Profile */,
-				218F840C1F8EB4EA005E03A4 /* Wishlist */,
+				218F840C1F8EB4EA005E03A4 /* WishList */,
 				21D2AE9B1F6171B80087CB46 /* Onboarding */,
 				210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */,
 				21A30D101D3005300029DB7E /* SunriseTabBarController.swift */,
@@ -614,7 +614,7 @@
 			children = (
 				21B76759207F9D49009C402D /* Home */,
 				21B55954205A964300775E76 /* Profile */,
-				2131ADE62056DB3F00AEB694 /* Wishlist */,
+				2131ADE62056DB3F00AEB694 /* WishList */,
 				210BE81F2AC37E98EA8580EA /* BaseViewModel.swift */,
 				210BE521E8D047E086A7CB39 /* Products */,
 				210BEB1E1AD03C11B838E965 /* Cart */,
@@ -786,12 +786,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		2131ADE62056DB3F00AEB694 /* Wishlist */ = {
+		2131ADE62056DB3F00AEB694 /* WishList */ = {
 			isa = PBXGroup;
 			children = (
-				2131ADE72056DB8900AEB694 /* WishlistViewModel.swift */,
+				2131ADE72056DB8900AEB694 /* WishListViewModel.swift */,
 			);
-			path = Wishlist;
+			path = WishList;
 			sourceTree = "<group>";
 		};
 		2163EBB21DE8C26C00803640 /* Sunrise Watch */ = {
@@ -846,12 +846,12 @@
 			path = TestData;
 			sourceTree = "<group>";
 		};
-		218F840C1F8EB4EA005E03A4 /* Wishlist */ = {
+		218F840C1F8EB4EA005E03A4 /* WishList */ = {
 			isa = PBXGroup;
 			children = (
 				218F840D1F8EB619005E03A4 /* WishListViewController.swift */,
 			);
-			path = Wishlist;
+			path = WishList;
 			sourceTree = "<group>";
 		};
 		2199923C1DC9FAAB000E48FD /* ReservationNotification */ = {
@@ -1621,7 +1621,7 @@
 				210BED193C70A2F36D0D6477 /* VoiceSearchViewModel.swift in Sources */,
 				212B14EF1F6FE9320017D594 /* OnboardingViewController.swift in Sources */,
 				210BE91F37F1132ACF12CB18 /* VoiceLevelView.swift in Sources */,
-				2131ADE82056DB8900AEB694 /* WishlistViewModel.swift in Sources */,
+				2131ADE82056DB8900AEB694 /* WishListViewModel.swift in Sources */,
 				210BED67E6A0FE06D4850643 /* DiscountCode.swift in Sources */,
 				210BE5E6DEEE3309C8BC8C86 /* HomeTitleCell.swift in Sources */,
 				210BEACCE962ACCA4EB2AB94 /* CreditCard.swift in Sources */,
