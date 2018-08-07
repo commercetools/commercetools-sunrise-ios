@@ -26,6 +26,7 @@ class MainViewModel: BaseViewModel {
     let presentProductOverviewSignal: Signal<Void, NoError>
 
     let productsViewModel = ProductOverviewViewModel()
+    weak var voiceSearchViewModel: VoiceSearchViewModel?
 
     private let rootCategories = MutableProperty([Category]())
     private let activeCategory: MutableProperty<Category?> = MutableProperty(nil)

@@ -11,6 +11,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var filtersView: UIView!
+    @IBOutlet weak var voiceSearchView: UIView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var categoriesDropdownGradientView: UIView!
     @IBOutlet weak var searchView: UIView!
@@ -20,7 +21,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var productsCollectionView: UICollectionView!
     @IBOutlet weak var searchSuggestionsTableView: UITableView!
     @IBOutlet weak var subcategoriesTableView: UITableView!
-    @IBOutlet weak var magnifyingGlassImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var snapshotBackgroundColorView: UIView!
     @IBOutlet weak var whiteBackgroundColorView: UIView!
@@ -31,11 +31,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var filterMyStyleAppliedImageView: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var filterBackgroundTopImageView: UIImageView!
+    @IBOutlet weak var voiceSearchButton: UIButton!
 
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var searchFieldMagnifyingGlassLeadingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var categorySelectionButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchFieldLineCenterXConstraint: NSLayoutConstraint!
     @IBOutlet weak var categoriesDropdownCenterXConstraint: NSLayoutConstraint!
@@ -45,6 +45,8 @@ class MainViewController: UIViewController {
     @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
 
     private weak var filtersViewController: FiltersViewController?
+    private weak var voiceSearchViewController: VoiceSearchViewController?
+    private let clearSearchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
     private let gradientLayer = CAGradientLayer()
     private let categoriesDropdownGradientLayer = CAGradientLayer()
     private var screenSnapshot: UIImage?
@@ -76,12 +78,20 @@ class MainViewController: UIViewController {
         categoriesDropdownGradientView.layer.insertSublayer(categoriesDropdownGradientLayer, at: 0)
         subcategoriesTableView.contentInset = UIEdgeInsetsMake(17, 0, 0, 0)
 
+        let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
+        magnifyingGlassAttachment.image = #imageLiteral(resourceName: "search_field_icon")
         let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
-        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes)
+        let searchPlaceholder = NSMutableAttributedString(attributedString: NSAttributedString(attachment: magnifyingGlassAttachment))
+        searchPlaceholder.append(NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes))
+        searchField.attributedPlaceholder = searchPlaceholder
 
         [searchSuggestionsTableView, subcategoriesTableView].forEach { $0.tableFooterView = UIView() }
         subcategoriesTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: subcategoriesTableView.bounds.width, height: 0.5))
         subcategoriesTableView.tableHeaderView?.backgroundColor = subcategoriesTableView.separatorColor
+
+        clearSearchButton.setImage(#imageLiteral(resourceName: "clear-button"), for: .normal)
+        searchField.rightViewMode = .whileEditing
+        searchField.rightView = clearSearchButton
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -156,17 +166,31 @@ class MainViewController: UIViewController {
 
         disposables += searchField.reactive.textValues
         .filter { $0 != "" }
-        .observe(on: UIScheduler())
         .observeValues { [weak self] _ in
             self?.presentSearchResults()
         }
-        
+
+        disposables += searchField.reactive.continuousTextValues
+        .observeValues { [weak self] in
+            self?.searchField.rightView?.alpha = $0 == "" ? 0 : 1
+        }
+
+        disposables += clearSearchButton.reactive.controlEvents(.touchUpInside)
+        .observeValues { [weak self] _ in
+            self?.searchField.text = ""
+        }
+
         disposables += viewModel.isLoading.producer
         .observe(on: UIScheduler())
         .startWithValues { $0 ? SVProgressHUD.show() : SVProgressHUD.dismiss() }
 
         disposables += observeAlertMessageSignal(viewModel: viewModel)
+
+        viewModel.voiceSearchViewModel = voiceSearchViewController?.viewModel
+
         bindProductsViewModel()
+        bindFiltersViewModel()
+        bindVoiceSearchViewModel()
     }
 
     func bindProductsViewModel() {
@@ -215,13 +239,11 @@ class MainViewController: UIViewController {
 
         viewModel.filtersViewModel = filtersViewController?.viewModel
 
-        bindFiltersViewModel()
-
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
 
     func bindFiltersViewModel() {
-        guard let viewModel = viewModel?.productsViewModel.filtersViewModel, isViewLoaded else { return }
+        guard let viewModel = viewModel?.productsViewModel.filtersViewModel, filtersViewController?.isViewLoaded == true else { return }
 
         disposables += viewModel.isMyStyleApplied.producer
         .observe(on: UIScheduler())
@@ -263,26 +285,73 @@ class MainViewController: UIViewController {
         .observe(on: UIScheduler())
         .startWithValues { _ in SVProgressHUD.dismiss() }
     }
+    
+    func bindVoiceSearchViewModel() {
+        guard let viewModel = viewModel?.voiceSearchViewModel, voiceSearchViewController?.isViewLoaded == true, isViewLoaded else { return }
+        
+        disposables += voiceSearchButton.reactive.isSelected <~ viewModel.isRecognitionInProgress
+        disposables += viewModel.performSearchSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] searchParams in
+            self.categorySelectionButton.alpha = 0
+            self.categorySelectionButtonHeightConstraint.constant = 0
+            [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
+            self.searchField.text = searchParams.0
+            self.viewModel?.productsViewModel.textSearch.value = searchParams
+            self.searchEditingDidEnd(self.searchField)
+            self.presentSearchResults()
+        }
+        
+        disposables += viewModel.dismissSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.voiceSearchView.alpha = 0
+            SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+        }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        updateBackgroundSnapshot()
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: .UIApplicationDidBecomeActive)
+        .combineLatest(with: viewModel.isRecognitionInProgress.signal)
+        .filter { $1 }
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] _ in
+            self.presentVoiceSearchView()
+        }
+
+        disposables += viewModel.startSpeechRecognitionSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.presentVoiceSearchView()
+        }
+    }
+
+    private func presentVoiceSearchView() {
+        UIView.animate(withDuration: 0.3) {
+            SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+            self.voiceSearchView.alpha = 1
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let filtersViewController = segue.destination as? FiltersViewController {
-            self.filtersViewController = filtersViewController
-            _ = filtersViewController.view
-        } else if let recommendationsViewController = segue.destination as? InlineProductOverviewViewController {
-            _ = recommendationsViewController.view
-            recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
-        } else if let detailsViewController = segue.destination as? ProductDetailsViewController {
-            _ = detailsViewController.view
-            if let cell = sender as? UICollectionViewCell, let indexPath = productsCollectionView.indexPath(for: cell) {
-                detailsViewController.viewModel = viewModel?.productsViewModel.productDetailsViewModelForProduct(at: indexPath)
-            } else if let viewModel = sender as? ProductDetailsViewModel {
-                detailsViewController.viewModel = viewModel
-            }
+        switch segue.destination {
+            case let filtersViewController as FiltersViewController:
+                self.filtersViewController = filtersViewController
+                _ = filtersViewController.view
+            case let recommendationsViewController as InlineProductOverviewViewController:
+                _ = recommendationsViewController.view
+                recommendationsViewController.viewModel = CartViewModel.recommendationsViewModel
+            case let detailsViewController as ProductDetailsViewController:
+                _ = detailsViewController.view
+                if let cell = sender as? UICollectionViewCell, let indexPath = productsCollectionView.indexPath(for: cell) {
+                    detailsViewController.viewModel = viewModel?.productsViewModel.productDetailsViewModelForProduct(at: indexPath)
+                } else if let viewModel = sender as? ProductDetailsViewModel {
+                    detailsViewController.viewModel = viewModel
+                }
+            case let voiceSearchViewController as VoiceSearchViewController:
+                self.voiceSearchViewController = voiceSearchViewController
+                _ = voiceSearchViewController.view
+            default:
+                return
         }
     }
 
@@ -336,13 +405,21 @@ class MainViewController: UIViewController {
             sender.isSelected = true
         }
     }
+    
+    @IBAction func voiceSearch(_ sender: UIButton) {
+        searchField.resignFirstResponder()
+        if sender.isSelected {
+            viewModel?.voiceSearchViewModel?.dismissObserver.send(value: ())
+        } else {
+            viewModel?.voiceSearchViewModel?.startSpeechRecognitionObserver.send(value: ())
+        }
+    }
 
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
         viewModel?.productsViewModel.clearProductsObserver.send(value: ())
+        viewModel?.voiceSearchViewModel?.dismissObserver.send(value: ())
         UIView.animate(withDuration: 0.3, animations: {
             self.checkAndPresentEmptyState()
-            self.magnifyingGlassImageView.image = #imageLiteral(resourceName: "search_field_icon_active")
-            self.searchFieldMagnifyingGlassLeadingSpaceConstraint.constant = 0
             self.categorySelectionButton.alpha = 0
             self.searchFilterButton.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
@@ -364,10 +441,8 @@ class MainViewController: UIViewController {
     @IBAction func searchEditingDidEnd(_ sender: UITextField) {
         UIView.animate(withDuration: 0.3, animations: {
             if (sender.text ?? "").isEmpty {
-                self.magnifyingGlassImageView.image = #imageLiteral(resourceName: "search_field_icon")
                 self.searchFieldLineWidthActiveConstraint.isActive = false
                 self.searchFieldLineWidthInactiveConstraint.isActive = true
-                self.searchFieldMagnifyingGlassLeadingSpaceConstraint.constant = 20
                 self.searchFieldLineCenterXConstraint.constant = 0
                 self.searchSuggestionsTableView.alpha = 0
                 self.searchFilterButton.alpha = 0
@@ -470,6 +545,8 @@ class MainViewController: UIViewController {
     private func presentSearchResults() {
         UIView.animate(withDuration: 0.3, animations: {
             self.searchSuggestionsTableView.alpha = 0
+            self.voiceSearchView.alpha = 0
+            SunriseTabBarController.currentlyActive?.tabView.alpha = 1
         }, completion: { _ in
             UIView.animate(withDuration: 0.3) {
                 self.productsCollectionView.alpha = 1
