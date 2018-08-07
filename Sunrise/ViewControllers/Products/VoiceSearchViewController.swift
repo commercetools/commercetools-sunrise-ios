@@ -22,7 +22,6 @@ class VoiceSearchViewController: UIViewController {
     var viewModel: VoiceSearchViewModel? {
         didSet {
             self.bindViewModel()
-            viewModel?.requestAuthorizations()
         }
     }
 
@@ -30,15 +29,6 @@ class VoiceSearchViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = VoiceSearchViewModel()
-
-        let gradient = CAGradientLayer()
-
-        gradient.frame = view.bounds
-        gradient.opacity = 0.8
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-
-        view.layer.insertSublayer(gradient, at: 0)
-        view.backgroundColor = UIColor.clear
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +39,7 @@ class VoiceSearchViewController: UIViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
+        viewModel?.dismissObserver.send(value: ())
         displayLink?.invalidate()
 
         super.viewDidDisappear(animated)

@@ -11,11 +11,15 @@ class VoiceSearchViewModel: BaseViewModel {
 
     // Inputs
     let dismissObserver: Signal<Void, NoError>.Observer
+    let startSpeechRecognitionObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     let notAuthorizedSignal: Signal<Void, NoError>
+    let startSpeechRecognitionSignal: Signal<Void, NoError>
     let dismissSignal: Signal<Void, NoError>
-    let recognizedText = MutableProperty(NSLocalizedString("Try: \"black sneakers\"", comment: "Speech black sneakers suggestion"))
+    let performSearchSignal: Signal<(String, Locale), NoError>
+    let isRecognitionInProgress = MutableProperty(false)
+    let recognizedText: MutableProperty<String>
     let notAuthorizedMessage = NSLocalizedString("Microphone and speech recognition have to be activated for this feature.", comment: "Speech permissions error")
 
     private var idleTimer: Timer?
@@ -23,20 +27,24 @@ class VoiceSearchViewModel: BaseViewModel {
     private var inputNode: AVAudioInputNode?
     private var audioRecorder: AVAudioRecorder?
     private var recognitionTask: SFSpeechRecognitionTask?
-    private let recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+    private var recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 
     // Property set from within the speech recognition task, indicating whether a search will be performed, so we can
     // deactivate AVAudioSession or wait for the AVSpeechSynthesizer to complete the utterance.
     private var willPerformSearch = false
     private let notAuthorizedObserver: Signal<Void, NoError>.Observer
+    private let performSearchObserver: Signal<(String, Locale), NoError>.Observer
+    private let searchSuggestion = NSLocalizedString("Try: \"black sneakers\"", comment: "Speech black sneakers suggestion")
     private let disposables = CompositeDisposable()
 
     // MARK: Lifecycle
 
     override init() {
         (notAuthorizedSignal, notAuthorizedObserver) = Signal<Void, NoError>.pipe()
-
         (dismissSignal, dismissObserver) = Signal<Void, NoError>.pipe()
+        (performSearchSignal, performSearchObserver) = Signal<(String, Locale), NoError>.pipe()
+        (startSpeechRecognitionSignal, startSpeechRecognitionObserver) = Signal<Void, NoError>.pipe()
+        recognizedText = MutableProperty(searchSuggestion)
 
         super.init()
 
@@ -46,8 +54,14 @@ class VoiceSearchViewModel: BaseViewModel {
             self?.dismissObserver.send(value: ())
         }
 
-        disposables += dismissSignal.observeValues { [weak self] in
+        disposables += dismissSignal
+        .filter { [unowned self] in !self.willPerformSearch }
+        .observeValues { [weak self] in
             self?.stopSpeechRecognition()
+        }
+        
+        disposables += startSpeechRecognitionSignal.observeValues { [weak self] in
+            self?.requestAuthorizations()
         }
 
         let recorderSettings: [String: AnyObject] = [AVSampleRateKey: 44100.0 as AnyObject,
@@ -87,6 +101,13 @@ class VoiceSearchViewModel: BaseViewModel {
     }
 
     private func recognizeSpeech() {
+        recognizedText.value = searchSuggestion
+        willPerformSearch = false
+
+        if isRecognitionInProgress.value {
+            stopSpeechRecognition()
+        }
+        isRecognitionInProgress.value = true
         guard let recognizer = SFSpeechRecognizer() else {
             alertMessageObserver.send(value: "Cannot perform speech recognition with your locale")
             return
@@ -110,6 +131,7 @@ class VoiceSearchViewModel: BaseViewModel {
             return
         }
 
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         recognitionRequest.shouldReportPartialResults = true
 
         recognitionTask = recognizer.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] result, error in
@@ -120,10 +142,11 @@ class VoiceSearchViewModel: BaseViewModel {
                     self?.recognitionRequest.endAudio()
                     self?.willPerformSearch = true
                     self?.performSearch()
+                    self?.idleTimer?.invalidate()
                 }
             }
 
-            if result?.isFinal == true || error != nil {
+            if self?.recognitionTask?.isCancelled == false && (result?.isFinal == true || error != nil) {
                 self?.stopSpeechRecognition()
                 if let error = error {
                     self?.alertMessageObserver.send(value: "\(error)")
@@ -147,9 +170,11 @@ class VoiceSearchViewModel: BaseViewModel {
     }
     
     private func stopSpeechRecognition() {
-        recognitionTask?.cancel()
-        inputNode?.removeTap(onBus: 0)
+        isRecognitionInProgress.value = false
+        guard recognitionTask?.isCancelled == false else { return }
         recognitionRequest.endAudio()
+        inputNode?.removeTap(onBus: 0)
+        recognitionTask?.cancel()
         audioEngine.stop()
         audioRecorder?.stop()
         if !willPerformSearch {
@@ -158,9 +183,9 @@ class VoiceSearchViewModel: BaseViewModel {
     }
 
     private func performSearch() {
-        dismissObserver.send(value: ())
+        guard recognitionTask?.isCancelled == false else { return }
         let recognizedText = self.recognizedText.value
-//        AppRouting.switchToSearch(query: recognizedText)
+        performSearchObserver.send(value: (recognizedText, Locale.current))
 
         let speechUtterance = String(format: NSLocalizedString("Showing items matching %@", comment: "Showing matching items message"), recognizedText)
         let speechSynthesizer = AVSpeechSynthesizer()
