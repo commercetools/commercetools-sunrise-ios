@@ -131,11 +131,7 @@ class SunriseTabBarController: UITabBarController {
     }
 
     @IBAction func backButtonTouchUpInside(_ sender: UIButton) {
-        if AppRouting.isProductOverviewOnMainTabPresented {
-            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
-        } else {
-            NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, userInfo: nil)
-        }
+        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, userInfo: nil)
     }
 
     @IBAction func cartButtonTouchUpInside(_ sender: UIButton) {

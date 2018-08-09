@@ -113,7 +113,7 @@ class FiltersViewController: UIViewController {
         disposables += observeAlertMessageSignal(viewModel: viewModel)
     }
     
-    @IBAction func closeFilters(_ sender: UIButton) {
+    @IBAction func closeFilters(_ sender: UIButton? = nil) {
         guard let mainViewController = parent as? MainViewController else { return }
         if mainViewController.searchFilterBackgroundTopConstraint.isActive {
             mainViewController.searchFilter(mainViewController.searchFilterButton)

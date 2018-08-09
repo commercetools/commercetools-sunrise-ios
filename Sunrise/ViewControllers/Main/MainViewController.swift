@@ -150,18 +150,24 @@ class MainViewController: UIViewController {
         disposables += NotificationCenter.default.reactive
         .notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
         .observe(on: UIScheduler())
-        .observeValues { [weak self] _ in
-            self?.backToCategoryOverview()
+        .observeValues { [unowned self] _ in
+            self.backToCategoryOverview()
         }
 
         disposables += NotificationCenter.default.reactive
         .notifications(forName: Foundation.Notification.Name.Navigation.backButtonTapped)
         .observe(on: UIScheduler())
-        .observeValues { [weak self] _ in
-            guard self?.view.window != nil else { return }
-            self?.searchField.text = ""
-            self?.searchField.resignFirstResponder()
-            self?.updateBackgroundSnapshot()
+        .observeValues { [unowned self] _ in
+            guard self.view.window != nil else { return }
+            if self.categoriesDropdownView.alpha == 1 {
+                self.switchCategory(self.categorySelectionButton)
+
+            } else if self.filtersView.alpha == 1 {
+                self.filtersViewController?.closeFilters()
+
+            } else {
+                NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
+            }
         }
 
         disposables += searchField.reactive.textValues
