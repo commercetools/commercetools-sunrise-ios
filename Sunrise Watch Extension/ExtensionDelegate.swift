@@ -79,9 +79,9 @@ extension ExtensionDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if let reservationId = response.notification.request.content.userInfo["reservation-id"] as? String {
             if response.actionIdentifier == Notification.Action.getDirections {
-                ReservationsInterfaceModel.sharedInstance.presentDirections(for: reservationId)
+//                MainMenuInterfaceModel.sharedInstance.presentDirections(for: reservationId)
             } else {
-                ReservationsInterfaceModel.sharedInstance.presentDetails(for: reservationId)
+//                MainMenuInterfaceModel.sharedInstance.presentDetails(for: reservationId)
             }
         }
         completionHandler()
