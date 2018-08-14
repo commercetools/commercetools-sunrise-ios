@@ -27,26 +27,26 @@ class ReservationNotificationController: WKUserNotificationInterfaceController {
     }
 
     override func didReceive(_ notification: UNNotification, withCompletion completionHandler: @escaping (WKUserNotificationInterfaceType) -> Swift.Void) {
-        if let reservationId = notification.request.content.userInfo["reservation-id"] as? String {
-            Order.byId(reservationId, expansion: ["lineItems[0].distributionChannel"]) { [weak self] result in
-                if let reservation = result.model, result.isSuccess {
-                    let interfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
-                    DispatchQueue.main.async {
-                        self?.titleLabel.setText(interfaceModel.productName + " is ready for pickup!")
-                        self?.distanceLabel.setText(interfaceModel.storeDistance)
-                        self?.storeNameLabel.setText(interfaceModel.storeName)
-                        if let center = interfaceModel.storeLocation?.coordinate {
-                            self?.storeMap.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)))
-                            self?.storeMap.addAnnotation(center, with: .red)
-                        }
-                        completionHandler(.custom)
-                        ReservationsInterfaceModel.sharedInstance.add(reservation: reservation)
-                    }
-                    
-                } else if let errors = result.errors as? [CTError], result.isFailure {
-                    print(errors)
-                }
-            }
-        }
+//        if let reservationId = notification.request.content.userInfo["reservation-id"] as? String {
+//            Order.byId(reservationId, expansion: ["lineItems[0].distributionChannel"]) { [weak self] result in
+//                if let reservation = result.model, result.isSuccess {
+//                    let interfaceModel = ProductDetailsInterfaceModel(reservation: reservation)
+//                    DispatchQueue.main.async {
+//                        self?.titleLabel.setText(interfaceModel.productName + " is ready for pickup!")
+//                        self?.distanceLabel.setText(interfaceModel.storeDistance)
+//                        self?.storeNameLabel.setText(interfaceModel.storeName)
+//                        if let center = interfaceModel.storeLocation?.coordinate {
+//                            self?.storeMap.setRegion(MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)))
+//                            self?.storeMap.addAnnotation(center, with: .red)
+//                        }
+//                        completionHandler(.custom)
+////                        MainMenuInterfaceModel.sharedInstance.add(reservation: reservation)
+//                    }
+//                    
+//                } else if let errors = result.errors as? [CTError], result.isFailure {
+//                    print(errors)
+//                }
+//            }
+//        }
     }
 }
