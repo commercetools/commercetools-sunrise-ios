@@ -1,15 +1,14 @@
 //
-// Copyright (c) 2016 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import WatchKit
 
-class ReservationRowController: NSObject {
+class ProductRowController: NSObject {
 
-    static let identifier = "ReservationRowType"
+    static let identifier = "ProductRowType"
 
     @IBOutlet var productImage: WKInterfaceImage!
     @IBOutlet var productPrice: WKInterfaceLabel!
     @IBOutlet var productName: WKInterfaceLabel!
-
 }

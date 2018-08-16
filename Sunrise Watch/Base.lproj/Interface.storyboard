@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14113" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14033"/>
     </dependencies>
     <scenes>
-        <!--ReservationsInterfaceController-->
+        <!--MainMenuInterfaceController-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="ReservationsInterfaceController" id="AgC-eL-Hgc" customClass="ReservationsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ReservationsInterfaceController" id="AgC-eL-Hgc" userLabel="MainMenuInterfaceController" customClass="MainMenuInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="adS-QO-6gk">
                             <items>
@@ -26,77 +26,101 @@
                         </group>
                         <group width="1" alignment="left" layout="vertical" id="KEF-Ne-ykA">
                             <items>
-                                <label alignment="left" text="My reservations:" numberOfLines="2" id="zRW-l2-KDU"/>
-                                <table alignment="left" spacing="6" id="pyI-Ne-IAs">
+                                <button width="1" alignment="left" title="New Products" id="nnj-t5-o7D">
+                                    <connections>
+                                        <segue destination="tYN-X1-LQT" kind="push" id="Xlu-dL-xpW"/>
+                                    </connections>
+                                </button>
+                                <button width="1" alignment="left" title="My WishList" id="oHd-4T-D7e"/>
+                                <button width="1" alignment="left" title="On Sale" id="UZs-Vr-wy1"/>
+                                <button width="1" alignment="left" title="Recent Orders" id="7Up-SI-5eR"/>
+                            </items>
+                            <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="mainMenuGroup" destination="KEF-Ne-ykA" id="NCi-sx-oRQ"/>
+                        <outlet property="signInGroup" destination="adS-QO-6gk" id="sMS-lP-ue3"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-112" y="101"/>
+        </scene>
+        <!--New Products Interface Controller-->
+        <scene sceneID="4k2-rI-Atk">
+            <objects>
+                <controller id="tYN-X1-LQT" customClass="NewProductsInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="dYq-Ph-syv">
+                            <items>
+                                <table alignment="center" spacing="6" id="RwM-dl-ShK">
                                     <items>
-                                        <tableRow identifier="ReservationRowType" id="NSb-HN-VfY" customClass="ReservationRowController" customModule="Sunrise_Watch_Extension">
-                                            <group key="rootItem" width="1" height="124" alignment="left" layout="vertical" id="C7y-gJ-lNj">
+                                        <tableRow identifier="ProductRowType" id="C6D-8Z-Sty" customClass="ProductRowController" customModule="Sunrise_Watch_Extension">
+                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="JCE-4w-GIe">
                                                 <items>
-                                                    <group width="156" alignment="left" radius="6" id="63h-AD-Ui1">
+                                                    <group width="156" alignment="left" radius="6" id="aAe-dG-TSm">
                                                         <items>
-                                                            <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="yGs-2u-ATN"/>
+                                                            <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="3tA-CA-BGY"/>
                                                         </items>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </group>
-                                                    <group width="1" alignment="left" layout="vertical" id="HWb-vk-1ep">
+                                                    <group width="1" alignment="left" layout="vertical" id="g3r-pa-7Rv">
                                                         <items>
-                                                            <label alignment="left" text="$19.99" id="7xe-OI-1Qb">
+                                                            <label alignment="left" text="$19.99" id="Z9X-hw-kbp">
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                                             </label>
-                                                            <label alignment="left" text="Product Name" id="OtZ-3N-S8T">
+                                                            <label alignment="left" text="Product Name" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="PKF-bU-z5a">
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </label>
                                                         </items>
                                                         <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
                                                     </group>
                                                 </items>
-                                                <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
                                             <connections>
-                                                <outlet property="productImage" destination="yGs-2u-ATN" id="tM9-Kb-siQ"/>
-                                                <outlet property="productName" destination="OtZ-3N-S8T" id="W3t-TL-OvT"/>
-                                                <outlet property="productPrice" destination="7xe-OI-1Qb" id="fvf-vk-Nzu"/>
-                                                <segue destination="r4v-gy-uaD" kind="push" id="HWv-yg-fvO"/>
+                                                <outlet property="productImage" destination="3tA-CA-BGY" id="hHj-kO-8HI"/>
+                                                <outlet property="productName" destination="PKF-bU-z5a" id="0br-5Y-60m"/>
+                                                <outlet property="productPrice" destination="Z9X-hw-kbp" id="gio-PL-TlF"/>
+                                                <segue destination="r4v-gy-uaD" kind="push" id="iKA-ac-w9X"/>
                                             </connections>
                                         </tableRow>
                                     </items>
                                 </table>
                             </items>
-                            <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
-                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="cdj-XL-K6t">
+                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="EbC-Fa-WVa">
                             <items>
-                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="riW-Pa-HPR">
+                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="NUw-QH-0Jh">
                                     <items>
-                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="6e4-Kp-WrE"/>
+                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="ZPM-FP-k1y"/>
                                     </items>
                                 </group>
-                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="gUH-t9-Hel">
+                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="2lA-UX-SS0">
                                     <items>
-                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Oz4-J0-SUu"/>
+                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="HWM-kS-lkg"/>
                                     </items>
                                 </group>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="leftLoadingDot" destination="Oz4-J0-SUu" id="RbC-eP-Jal"/>
-                        <outlet property="loadingGroup" destination="cdj-XL-K6t" id="03m-be-5TB"/>
-                        <outlet property="reservationsGroup" destination="KEF-Ne-ykA" id="NCi-sx-oRQ"/>
-                        <outlet property="reservationsTable" destination="pyI-Ne-IAs" id="Owb-hn-2xk"/>
-                        <outlet property="rightLoadingDot" destination="6e4-Kp-WrE" id="PDv-uT-irz"/>
-                        <outlet property="signInGroup" destination="adS-QO-6gk" id="sMS-lP-ue3"/>
+                        <outlet property="leftLoadingDot" destination="HWM-kS-lkg" id="xZY-ft-lCI"/>
+                        <outlet property="loadingGroup" destination="EbC-Fa-WVa" id="pr7-k7-53n"/>
+                        <outlet property="productsGroup" destination="dYq-Ph-syv" id="Mwi-ZU-9CW"/>
+                        <outlet property="productsTable" destination="RwM-dl-ShK" id="POB-3w-tCv"/>
+                        <outlet property="rightLoadingDot" destination="ZPM-FP-k1y" id="wNB-nG-1TQ"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="83.692307692307693" y="101.12820512820514"/>
+            <point key="canvasLocation" x="144" y="101"/>
         </scene>
         <!--ReservationDetailsInterfaceController-->
         <scene sceneID="lSW-xS-HHG">
             <objects>
-                <controller identifier="ReservationDetailsInterfaceController" id="r4v-gy-uaD" customClass="ReservationDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ReservationDetailsInterfaceController" id="r4v-gy-uaD" customClass="ProductDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="UPM-mm-GiP">
                             <items>
@@ -109,43 +133,29 @@
                                 <label alignment="left" text="$19.99" id="elR-U1-7wD"/>
                                 <label alignment="left" text="Fancy Jacket" numberOfLines="0" id="Bbj-oP-hUa"/>
                                 <separator alignment="left" id="eTy-cs-hQT"/>
-                                <label alignment="left" text="SUNRISE Store Berlin" numberOfLines="0" id="JUS-Aq-nUI"/>
-                                <map height="72" alignment="left" id="yRT-gC-xad"/>
-                                <label alignment="left" text="13 km away" id="W94-hR-IrC"/>
-                                <label alignment="left" text="Address:" id="ZWh-Zh-aU2">
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                </label>
-                                <label alignment="left" text="streetAndNumber" numberOfLines="0" id="Psf-bt-his">
-                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                </label>
-                                <label alignment="left" text="zipAndCity" numberOfLines="0" id="y5b-9w-fqz"/>
-                                <label alignment="left" text="Opening hours:" id="oVs-AQ-2Ee">
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                </label>
-                                <label alignment="left" text="openInfo" numberOfLines="0" id="p5T-nH-cer"/>
-                                <button width="1" alignment="left" title="Directions" id="5qi-Qf-osh">
+                                <button width="1" alignment="left" title="Move to cart" id="5qi-Qf-osh">
                                     <connections>
-                                        <action selector="getDirections" destination="r4v-gy-uaD" id="eEp-Fk-MBV"/>
+                                        <action selector="moveToCart" destination="r4v-gy-uaD" id="bCl-f7-0KL"/>
                                     </connections>
                                 </button>
+                                <button width="1" alignment="left" title="Add to wishlist" id="IHe-4Z-ydl">
+                                    <connections>
+                                        <action selector="addToWishList" destination="r4v-gy-uaD" id="ZPS-gC-L4b"/>
+                                    </connections>
+                                </button>
+                                <group width="1" height="10" alignment="left" id="WCS-QA-czL"/>
                             </items>
                             <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="distanceLabel" destination="W94-hR-IrC" id="Vel-8w-lEo"/>
-                        <outlet property="openInfoLabel" destination="p5T-nH-cer" id="ZqP-k7-tOS"/>
                         <outlet property="productImage" destination="32v-KZ-Jba" id="H4I-9y-Quj"/>
                         <outlet property="productNameLabel" destination="Bbj-oP-hUa" id="TRJ-Wo-qnY"/>
                         <outlet property="productPriceLabel" destination="elR-U1-7wD" id="SzT-er-Jx4"/>
-                        <outlet property="storeMap" destination="yRT-gC-xad" id="isN-U2-gag"/>
-                        <outlet property="storeNameLabel" destination="JUS-Aq-nUI" id="d71-jy-9nF"/>
-                        <outlet property="streetAndNumberLabel" destination="Psf-bt-his" id="f7X-fl-3cb"/>
-                        <outlet property="zipAndCityLabel" destination="y5b-9w-fqz" id="Vui-dw-fLV"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="369" y="102"/>
+            <point key="canvasLocation" x="401" y="102"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="vty-sl-sqF">
