@@ -372,14 +372,14 @@ class ProductDetailsViewModel: BaseViewModel {
         let popCategoryFilterQuery = productsViewModel?.category.value != nil ? ["categories.id:subtree(\"\(productsViewModel!.category.value!.id)\")"] : nil
 
         ProductProjection.search(limit: 10, filterQuery: popCategoryFilterQuery ?? categoriesFilterQuery, markMatchingVariants: true,
-                                 priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
-                                 priceCustomerGroup: AppDelegate.customerGroup?.id) { result in
+                                 priceCurrency: Customer.currentCurrency, priceCountry: Customer.currentCountry,
+                                 priceCustomerGroup: Customer.customerGroup?.id) { result in
             // In case we used category from POP to filter recommendations, and less than 5 results were returned,
             // try again by taking into account all categories this product belongs to
             if let count = result.model?.count, count < 5, popCategoryFilterQuery != nil {
                 ProductProjection.search(limit: 10, filterQuery: categoriesFilterQuery, markMatchingVariants: true,
-                                         priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
-                                         priceCustomerGroup: AppDelegate.customerGroup?.id) { result in
+                                         priceCurrency: Customer.currentCurrency, priceCountry: Customer.currentCountry,
+                                         priceCustomerGroup: Customer.customerGroup?.id) { result in
                     if let products = result.model?.results {
                         self.recommendations.value = products.filter { $0.id != self.product?.id }
                     } else if let errors = result.errors as? [CTError], result.isFailure {
