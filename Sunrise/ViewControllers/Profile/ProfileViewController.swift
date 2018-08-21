@@ -9,6 +9,7 @@ import ReactiveSwift
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileAvatarImageView: UIImageView!
     @IBOutlet var headerView: UIView!
     @IBOutlet weak var signInContainerView: UIView!
     private weak var signInViewController: SignInViewController?
@@ -53,6 +54,12 @@ class ProfileViewController: UIViewController {
                 self.signInContainerView.alpha = isLoginHidden ? 0 : 1
             }
         }
+        
+        disposables += viewModel.profilePhoto.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [unowned self] in
+            self.profileAvatarImageView.image = $0 ?? #imageLiteral(resourceName: "default-profile-photo")
+        }
 
         viewModel.signInViewModel = signInViewController?.viewModel
     }
@@ -67,6 +74,25 @@ class ProfileViewController: UIViewController {
             _ = myOrdersViewController.view
             myOrdersViewController.viewModel?.pendingOrderNumber.value = (sender as? AppRouting.ShowOrderDetailsRequest)?.orderNumber
         }
+    }
+    
+    @IBAction func presentProfilePhotoActions(_ sender: UIButton) {
+        let alertController = UIAlertController(title: nil, message: "Change profile photo", preferredStyle: .actionSheet)
+        if profileAvatarImageView.image != #imageLiteral(resourceName: "default-profile-photo") {
+            alertController.addAction(UIAlertAction(title: "Remove current photo", style: .destructive, handler: { _ in
+                let confirmController = UIAlertController(title: "Delete profile photo", message: "Are you sure you want to delete your current profile photo?", preferredStyle: .alert)
+                confirmController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                    self.viewModel?.deleteProfilePhotoObserver.send(value: ())
+                }))
+                confirmController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                self.present(confirmController, animated: true)
+            }))
+        }
+        alertController.addAction(UIAlertAction(title: "Choose from library", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "showProfilePhoto", sender: self)
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true)
     }
 }
 
