@@ -136,8 +136,8 @@ class ProductOverviewViewModel: BaseViewModel {
             self?.queryForProductProjections(offset: 0)
         }
 
-        AppDelegate.currentCurrency = Locale.current.currencyCode
-        AppDelegate.currentCountry = (Locale.current as NSLocale).countryCode
+        Customer.currentCurrency = Locale.current.currencyCode
+        Customer.currentCountry = (Locale.current as NSLocale).countryCode
         disposables += userLocation.producer
         .observe(on: QueueScheduler(qos: .userInteractive))
         .startWithValues { [weak self] location in
@@ -145,8 +145,8 @@ class ProductOverviewViewModel: BaseViewModel {
             self?.geocoder.reverseGeocodeLocation(location) { placemarks, _ in
                 DispatchQueue.global(qos: .userInitiated).async {
                     guard let isoCountryCode = placemarks?.first?.isoCountryCode else { return }
-                    AppDelegate.currentCountry = isoCountryCode
-                    AppDelegate.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
+                    Customer.currentCountry = isoCountryCode
+                    Customer.currentCurrency = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: isoCountryCode])).currencyCode
                     // Update price slider price formatting
                     self?.filtersViewModel?.priceRange.value = self?.filtersViewModel?.priceRange.value ?? (FiltersViewModel.kPriceMin, FiltersViewModel.kPriceMax)
                     // Refresh products if needed
@@ -277,7 +277,7 @@ class ProductOverviewViewModel: BaseViewModel {
             if let mainProductTypeId = self.filtersViewModel?.mainProductType?.id {
                 filterQuery.append("productType.id:\"\(mainProductTypeId)\"")
             }
-            if let lower = self.filtersViewModel?.priceRange.value.0, let upper = self.filtersViewModel?.priceRange.value.1, AppDelegate.currentCurrency != nil {
+            if let lower = self.filtersViewModel?.priceRange.value.0, let upper = self.filtersViewModel?.priceRange.value.1, Customer.currentCurrency != nil {
                 filterQuery.append("variants.price.centAmount:range (\(lower * 100) to \(upper == FiltersViewModel.kPriceMax ? "*" : (upper * 100).description))")
             }
 
@@ -296,8 +296,8 @@ class ProductOverviewViewModel: BaseViewModel {
             let semaphore = DispatchSemaphore(value: 0)
             ProductProjection.search(limit: self.pageSize, offset: offset, lang: locale, text: text,
                     filters: filters, filterQuery: filterQuery, facets: facets, markMatchingVariants: true,
-                    priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
-                    priceCustomerGroup: AppDelegate.customerGroup?.id) { [unowned self] result in
+                    priceCurrency: Customer.currentCurrency, priceCountry: Customer.currentCountry,
+                    priceCustomerGroup: Customer.customerGroup?.id) { [unowned self] result in
 
                 if let products = result.model?.results, text == self.textSearch.value.0, locale == self.textSearch.value.1, result.isSuccess {
                     // If there were no results with my style filters applied, try again without them
