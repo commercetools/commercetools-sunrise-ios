@@ -128,8 +128,8 @@ class InlineProductOverviewViewModel: BaseViewModel {
         isLoading.value = true
 
         ProductProjection.search(sort: sort, limit: 10, filterQuery: applyFailbackFilterQuery ? failbackFilterQuery : filterQuery, markMatchingVariants: true,
-                                 priceCurrency: AppDelegate.currentCurrency, priceCountry: AppDelegate.currentCountry,
-                                 priceCustomerGroup: AppDelegate.customerGroup?.id, result: { result in
+                                 priceCurrency: Customer.currentCurrency, priceCountry: Customer.currentCountry,
+                                 priceCustomerGroup: Customer.customerGroup?.id, result: { result in
             if let products = result.model?.results, result.isSuccess {
                 if products.isEmpty && !applyFailbackFilterQuery {
                     self.queryForProductProjections(filterQuery: filterQuery, failbackFilterQuery: failbackFilterQuery, sort: sort, applyFailbackFilterQuery: true)
