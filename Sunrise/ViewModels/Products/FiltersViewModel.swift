@@ -81,8 +81,8 @@ class FiltersViewModel: BaseViewModel {
         disposables += isLoading <~ activeSizes.map { _ in false }
         disposables += isLoading <~ activeColors.map { _ in false }
 
-        disposables += lowerPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.0 * 100).description }
-        disposables += higherPrice <~ priceRange.map { Money(currencyCode: AppDelegate.currentCurrency ?? "", centAmount: $0.1 * 100).description + ($0.1 == FiltersViewModel.kPriceMax ? "+" : "") }
+        disposables += lowerPrice <~ priceRange.map { Money(currencyCode: Customer.currentCurrency ?? "", centAmount: $0.0 * 100).description }
+        disposables += higherPrice <~ priceRange.map { Money(currencyCode: Customer.currentCurrency ?? "", centAmount: $0.1 * 100).description + ($0.1 == FiltersViewModel.kPriceMax ? "+" : "") }
 
         disposables += isLoading.signal.observeValues { [unowned self] _ in
             self.isMyStyleApplied.value = self.isAuthenticated && self.hasFiltersApplied && MyStyleViewModel.brandsSettings == self.activeBrands.value && MyStyleViewModel.sizesSettings == self.activeSizes.value && MyStyleViewModel.colorsSettings == self.activeColors.value
