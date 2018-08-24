@@ -306,7 +306,7 @@ class CheckoutViewModel: BaseViewModel {
         }
         if cart.shippingAddress != nil {
             ShippingMethod.for(cart: cart, result: shippingMethodResultHandler)
-        } else if let country = AppDelegate.currentCountry {
+        } else if let country = Customer.currentCountry {
             ShippingMethod.for(country: country, result: shippingMethodResultHandler)
         }
     }
