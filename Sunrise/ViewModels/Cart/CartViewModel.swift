@@ -237,7 +237,7 @@ class CartViewModel: BaseViewModel {
                 })
             } else {
                 // If there is no active cart, create one, with the selected product
-                let cartDraft = CartDraft(currency: AppDelegate.currentCurrency ?? BaseViewModel.currencyCodeForCurrentLocale)
+                let cartDraft = CartDraft(currency: Customer.currentCurrency ?? BaseViewModel.currencyCodeForCurrentLocale)
                 Cart.create(cartDraft, expansion: self.shippingMethodExpansion, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
@@ -438,7 +438,7 @@ class CartViewModel: BaseViewModel {
     }
 
     private var paymentRequest: PKPaymentRequest? {
-        guard var cart = cart.value, let countryCode = AppDelegate.currentCountry else { return nil }
+        guard var cart = cart.value, let countryCode = Customer.currentCountry else { return nil }
         let request = PKPaymentRequest()
         request.countryCode = countryCode
         request.currencyCode = cart.totalPrice.currencyCode
