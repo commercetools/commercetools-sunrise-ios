@@ -7,6 +7,11 @@ import Foundation
 
 class SunriseTabBarController: UITabBarController {
     
+    enum RightNavItemMode {
+        case cart
+        case doneButton
+    }
+
     static var currentlyActive: SunriseTabBarController?
     
     @IBOutlet var tabView: UIView!
@@ -20,6 +25,7 @@ class SunriseTabBarController: UITabBarController {
     @IBOutlet weak var wishListButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var wishListBadgeImageView: UIImageView!
     @IBOutlet weak var wishListBadgeLabel: UILabel!
     @IBOutlet weak var cartBadgeImageView: UIImageView!
@@ -53,6 +59,23 @@ class SunriseTabBarController: UITabBarController {
         }
         get {
             return navigationBarLogoImageView.isHidden
+        }
+    }
+
+    var rightNavItemModel: RightNavItemMode {
+        set {
+            cartButton.isHidden = newValue == .doneButton
+            doneButton.isHidden = newValue == .cart
+            if newValue == .doneButton {
+                cartBadgeLabel.isHidden = true
+                cartBadgeImageView.isHidden = true
+            } else {
+                let currentCartBadge = cartBadge
+                cartBadge = currentCartBadge
+            }
+        }
+        get {
+            return cartButton.isHidden ? .doneButton : .cart
         }
     }
 
@@ -134,6 +157,10 @@ class SunriseTabBarController: UITabBarController {
         NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.backButtonTapped, object: nil, userInfo: nil)
     }
 
+    @IBAction func doneButtonTouchUpInside(_ sender: UIButton) {
+        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.doneButtonTapped, object: nil, userInfo: nil)
+    }
+
     @IBAction func cartButtonTouchUpInside(_ sender: UIButton) {
         guard !sender.isSelected else { return }
         selectedIndex = tabButtons.count
@@ -160,6 +187,7 @@ public extension Foundation.Notification.Name {
     /// Used as a namespace for all notifications related to watch token synchronization.
     public struct Navigation {
         public static let backButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.backButtonTapped")
+        public static let doneButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.doneButtonTapped")
         public static let resetSearch = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.resetSearch")
     }
 }
