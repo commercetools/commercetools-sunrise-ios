@@ -17,7 +17,7 @@ extension ProductVariant {
         }).first
     }
 
-    func price(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> Price? {
+    func price(country: String? = Customer.currentCountry, currency: String? = Customer.currentCurrency, customerGroup: Reference<CustomerGroup>? = Customer.customerGroup) -> Price? {
         // If API has selected a price, return that one
         guard self.price == nil else { return self.price }
         // If not, try to find the most suitable one
