@@ -6,11 +6,11 @@ import Commercetools
 
 extension ProductProjection {
 
-    func displayVariant(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> ProductVariant? {
+    func displayVariant(country: String? = Customer.currentCountry, currency: String? = Customer.currentCurrency, customerGroup: Reference<CustomerGroup>? = Customer.customerGroup) -> ProductVariant? {
         return displayVariants(country: country, currency: currency, customerGroup: customerGroup).first
     }
 
-    func displayVariants(country: String? = AppDelegate.currentCountry, currency: String? = AppDelegate.currentCurrency, customerGroup: Reference<CustomerGroup>? = AppDelegate.customerGroup) -> [ProductVariant] {
+    func displayVariants(country: String? = Customer.currentCountry, currency: String? = Customer.currentCurrency, customerGroup: Reference<CustomerGroup>? = Customer.customerGroup) -> [ProductVariant] {
         var displayVariants = [ProductVariant]()
         let now = Date()
         if let matchingVariant = allVariants.first(where: { $0.isMatchingVariant == true }) {
