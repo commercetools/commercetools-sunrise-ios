@@ -103,6 +103,12 @@ struct Project {
     }
 }
 
+extension Customer {
+    static var currentCountry: String?
+    static var currentCurrency: String?
+    static var customerGroup: Reference<CustomerGroup>?
+}
+
 extension Collection where Iterator.Element == URLQueryItem {
     subscript(key: String) -> [String] {
         return self.filter({ $0.name == key }).compactMap { $0.value }
