@@ -8,6 +8,7 @@ import Commercetools
 import CoreLocation
 import AVFoundation
 import IQKeyboardManagerSwift
+import AWSS3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,10 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-
-    static var currentCountry: String?
-    static var currentCurrency: String?
-    static var customerGroup: Reference<CustomerGroup>?
 
     var window: UIWindow?
 
@@ -33,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             // Inform user about the configuration error
         }
+
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.EUWest1, identityPoolId: "")
+        let configuration = AWSServiceConfiguration(region: AWSRegionType.EUWest1, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
 
         locationManager = CLLocationManager()
         locationManager?.requestWhenInUseAuthorization()
@@ -124,46 +125,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let reservationConfirmationCategory = UNNotificationCategory(identifier: Notification.Category.reservationConfirmation, actions: [viewAction, getDirectionsAction], intentIdentifiers: [], options: [])
 
         UNUserNotificationCenter.current().setNotificationCategories([reservationConfirmationCategory])
-    }
-    
-    // MARK: - Project configuration
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        if let queryItems = URLComponents(string: url.absoluteString)?.queryItems, url.scheme == "ctpclient", url.host == "changeProject" {
-            var projectConfig = [String: Any]()
-            queryItems.forEach {
-                if $0.value != "true" && $0.value != "false" {
-                    projectConfig[$0.name] = $0.value
-                } else {
-                    // Handle boolean values explicitly
-                    projectConfig[$0.name] = $0.value == "true"
-                }
-            }
-            if Config(config: projectConfig as NSDictionary) != nil {
-                let alertController = UIAlertController(
-                    title: "Valid Configuration",
-                    message: "Confirm to store the new configuration and quit the app, or tap cancel to abort",
-                    preferredStyle: .alert
-                )
-                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                alertController.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-                    Commercetools.logoutCustomer()
-                    Project.update(config: projectConfig as NSDictionary)
-                    exit(0)
-                })
-                window?.rootViewController?.present(alertController, animated: true)
-            } else {
-                let alertController = UIAlertController(
-                    title: "Invalid Configuration",
-                    message: "Project has not been changed",
-                    preferredStyle: .alert
-                )
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                window?.rootViewController?.present(alertController, animated: true)
-            }
-            return true
-        }
-        return false
     }
 }
 
