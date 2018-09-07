@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14113" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14033"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.10"/>
     </dependencies>
     <scenes>
         <!--MainMenuInterfaceController-->
@@ -28,11 +29,19 @@
                             <items>
                                 <button width="1" alignment="left" title="New Products" id="nnj-t5-o7D">
                                     <connections>
-                                        <segue destination="tYN-X1-LQT" kind="push" id="Xlu-dL-xpW"/>
+                                        <segue destination="tYN-X1-LQT" kind="push" identifier="NewProducts" id="Xlu-dL-xpW"/>
                                     </connections>
                                 </button>
-                                <button width="1" alignment="left" title="My WishList" id="oHd-4T-D7e"/>
-                                <button width="1" alignment="left" title="On Sale" id="UZs-Vr-wy1"/>
+                                <button width="1" alignment="left" title="My WishList" id="oHd-4T-D7e">
+                                    <connections>
+                                        <segue destination="qDP-vX-N3z" kind="push" id="4er-R0-Qkt"/>
+                                    </connections>
+                                </button>
+                                <button width="1" alignment="left" title="On Sale" id="UZs-Vr-wy1">
+                                    <connections>
+                                        <segue destination="tYN-X1-LQT" kind="push" identifier="OnSale" id="aG4-yv-S4p"/>
+                                    </connections>
+                                </button>
                                 <button width="1" alignment="left" title="Recent Orders" id="7Up-SI-5eR"/>
                             </items>
                             <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
@@ -44,12 +53,12 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-112" y="101"/>
+            <point key="canvasLocation" x="-291" y="128"/>
         </scene>
-        <!--New Products Interface Controller-->
+        <!--Product Overview Interface Controller-->
         <scene sceneID="4k2-rI-Atk">
             <objects>
-                <controller id="tYN-X1-LQT" customClass="NewProductsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller id="tYN-X1-LQT" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
                         <group width="1" alignment="left" id="dYq-Ph-syv">
                             <items>
@@ -58,18 +67,27 @@
                                         <tableRow identifier="ProductRowType" id="C6D-8Z-Sty" customClass="ProductRowController" customModule="Sunrise_Watch_Extension">
                                             <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="JCE-4w-GIe">
                                                 <items>
-                                                    <group width="156" alignment="left" radius="6" id="aAe-dG-TSm">
+                                                    <group width="1" alignment="left" layout="overlap" radius="6" id="aAe-dG-TSm">
                                                         <items>
+                                                            <imageView width="30" height="30" alignment="left" image="wishlist_icon" contentMode="scaleAspectFit" id="OuN-6f-YH9"/>
                                                             <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="3tA-CA-BGY"/>
                                                         </items>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </group>
                                                     <group width="1" alignment="left" layout="vertical" id="g3r-pa-7Rv">
                                                         <items>
-                                                            <label alignment="left" text="$19.99" id="Z9X-hw-kbp">
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                                            </label>
+                                                            <group width="1" alignment="left" id="WMi-dX-XEo">
+                                                                <items>
+                                                                    <label alignment="left" text="$19.99" id="Z9X-hw-kbp">
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                                                    </label>
+                                                                    <label alignment="left" text="$19.99" id="66F-AW-NXZ">
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                                                    </label>
+                                                                </items>
+                                                            </group>
                                                             <label alignment="left" text="Product Name" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="PKF-bU-z5a">
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </label>
@@ -83,7 +101,9 @@
                                             <connections>
                                                 <outlet property="productImage" destination="3tA-CA-BGY" id="hHj-kO-8HI"/>
                                                 <outlet property="productName" destination="PKF-bU-z5a" id="0br-5Y-60m"/>
+                                                <outlet property="productOldPrice" destination="66F-AW-NXZ" id="bY9-77-UhV"/>
                                                 <outlet property="productPrice" destination="Z9X-hw-kbp" id="gio-PL-TlF"/>
+                                                <outlet property="wishListImage" destination="OuN-6f-YH9" id="V7T-ZJ-hnX"/>
                                                 <segue destination="r4v-gy-uaD" kind="push" id="iKA-ac-w9X"/>
                                             </connections>
                                         </tableRow>
@@ -115,12 +135,12 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="144" y="101"/>
+            <point key="canvasLocation" x="89" y="-129"/>
         </scene>
-        <!--ReservationDetailsInterfaceController-->
+        <!--Product Details Interface Controller-->
         <scene sceneID="lSW-xS-HHG">
             <objects>
-                <controller identifier="ReservationDetailsInterfaceController" id="r4v-gy-uaD" customClass="ProductDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ReservationDetailsInterfaceController" id="r4v-gy-uaD" userLabel="Product Details Interface Controller" customClass="ProductDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
                         <group width="1" alignment="left" layout="vertical" id="UPM-mm-GiP">
                             <items>
@@ -149,13 +169,15 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="moveToCartButton" destination="5qi-Qf-osh" id="uMK-Vt-pfj"/>
                         <outlet property="productImage" destination="32v-KZ-Jba" id="H4I-9y-Quj"/>
                         <outlet property="productNameLabel" destination="Bbj-oP-hUa" id="TRJ-Wo-qnY"/>
                         <outlet property="productPriceLabel" destination="elR-U1-7wD" id="SzT-er-Jx4"/>
+                        <outlet property="wishListButton" destination="IHe-4Z-ydl" id="2j2-xr-YXe"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="401" y="102"/>
+            <point key="canvasLocation" x="350" y="-3"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="vty-sl-sqF">
@@ -199,5 +221,87 @@
             </objects>
             <point key="canvasLocation" x="331" y="697"/>
         </scene>
+        <!--Wish List Interface Controller-->
+        <scene sceneID="n58-Na-FLU">
+            <objects>
+                <controller id="qDP-vX-N3z" customClass="WishListInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="D4I-qC-HjY">
+                            <items>
+                                <table alignment="center" spacing="6" id="v7Q-kg-Lp2">
+                                    <items>
+                                        <tableRow identifier="WishListItemRowType" selectable="NO" id="beK-0w-y39" customClass="WishListItemRowController" customModule="Sunrise_Watch_Extension">
+                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="EB3-SJ-9Ry">
+                                                <items>
+                                                    <group width="1" alignment="left" radius="6" id="lYP-Xb-1tM">
+                                                        <items>
+                                                            <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="HPC-eI-zWx"/>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </group>
+                                                    <group width="1" alignment="left" layout="vertical" id="PSC-HP-w1h">
+                                                        <items>
+                                                            <label alignment="left" text="$19.99" id="qvf-fy-fs2">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                                            </label>
+                                                            <label alignment="left" text="Product Name" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Ca5-XD-yJF">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </label>
+                                                        </items>
+                                                        <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
+                                                    </group>
+                                                    <button width="1" alignment="left" title="Move to cart" id="YHa-6P-5Bv">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" red="1" green="0.45098039215686275" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <connections>
+                                                            <action selector="moveToCart" destination="beK-0w-y39" id="lh2-H7-ZZD"/>
+                                                        </connections>
+                                                    </button>
+                                                    <group width="1" height="4" alignment="left" id="wZM-1e-Nys"/>
+                                                </items>
+                                                <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <connections>
+                                                <outlet property="addToCartButton" destination="YHa-6P-5Bv" id="BO7-29-3b8"/>
+                                                <outlet property="productImage" destination="HPC-eI-zWx" id="E0N-T0-9VE"/>
+                                                <outlet property="productName" destination="Ca5-XD-yJF" id="JuP-Vx-Kza"/>
+                                                <outlet property="productPrice" destination="qvf-fy-fs2" id="Cyb-e4-R5h"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="Qvg-US-xqu">
+                            <items>
+                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="LV2-RN-6gc">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="sx0-Ob-Ecl"/>
+                                    </items>
+                                </group>
+                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="sBx-je-shf">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Uzt-WS-NJC"/>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="leftLoadingDot" destination="Uzt-WS-NJC" id="qYk-DE-vGD"/>
+                        <outlet property="listGroup" destination="D4I-qC-HjY" id="fOK-X7-3ZJ"/>
+                        <outlet property="listTable" destination="v7Q-kg-Lp2" id="eqs-Tg-wiM"/>
+                        <outlet property="loadingGroup" destination="Qvg-US-xqu" id="hLN-IC-kTl"/>
+                        <outlet property="rightLoadingDot" destination="sx0-Ob-Ecl" id="aJm-WD-7c3"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="89" y="179"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xlu-dL-xpW"/>
+    </inferredMetricsTieBreakers>
 </document>
