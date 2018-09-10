@@ -22,7 +22,6 @@ class WishListViewModel: BaseViewModel {
     let lineItems = MutableProperty([ShoppingList.LineItem]())
     private let contentChangesObserver: Signal<Changeset, NoError>.Observer
     private let kShoppingListVariantExpansion = ["lineItems[*].variant"]
-    private let kWishlistShoppingListName = "WishList"
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
@@ -111,7 +110,7 @@ class WishListViewModel: BaseViewModel {
     }
 
     private func wishListShoppingList(_ completion: @escaping (ShoppingList?) -> Void) {
-        ShoppingList.query(predicates: ["name(en=\"\(kWishlistShoppingListName)\")"], sort: ["lastModifiedAt desc"], expansion: kShoppingListVariantExpansion, limit: 1) { result in
+        ShoppingList.query(predicates: ["name(en=\"\(ShoppingList.kWishlistShoppingListName)\")"], sort: ["lastModifiedAt desc"], expansion: kShoppingListVariantExpansion, limit: 1) { result in
             if result.isSuccess, result.model?.count == 0 {
                 self.createWishListShoppingList(completion)
                 return
@@ -124,7 +123,7 @@ class WishListViewModel: BaseViewModel {
     }
 
     private func createWishListShoppingList(_ completion: @escaping (ShoppingList?) -> Void) {
-        let draft = ShoppingListDraft(name: ["en": kWishlistShoppingListName])
+        let draft = ShoppingListDraft(name: ["en": ShoppingList.kWishlistShoppingListName])
         ShoppingList.create(draft, expansion: kShoppingListVariantExpansion) { result in
             if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
@@ -133,7 +132,7 @@ class WishListViewModel: BaseViewModel {
         }
     }
 
-    // MARK: - Removing WishList items
+    // MARK: - Toggling WishList items
 
     func toggleWishList(productId: String, variantId: Int?) -> SignalProducer<Void, CTError> {
         return SignalProducer { [unowned self] observer, disposable in
@@ -163,8 +162,6 @@ class WishListViewModel: BaseViewModel {
             }
         }
     }
-
-    // MARK: - Removing WishList items
 
     private func remove(lineItem: ShoppingList.LineItem) {
         isLoading.value = true
