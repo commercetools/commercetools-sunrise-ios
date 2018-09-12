@@ -11,7 +11,7 @@ class MainMenuInterfaceController: WKInterfaceController {
     @IBOutlet var signInGroup: WKInterfaceGroup!
     @IBOutlet var mainMenuGroup: WKInterfaceGroup!
 
-    private var interfaceModel: MainMenuInterfaceModel? {
+    var interfaceModel: MainMenuInterfaceModel? {
         didSet {
             bindInterfaceModel()
         }
@@ -24,6 +24,17 @@ class MainMenuInterfaceController: WKInterfaceController {
         signInGroup.setHidden(true)
         
         interfaceModel = MainMenuInterfaceModel()
+    }
+
+    override func contextForSegue(withIdentifier segueIdentifier: String) -> Any? {
+        switch segueIdentifier {
+            case "NewProducts":
+                return ProductOverviewInterfaceModel(mainMenuInterfaceModel: interfaceModel, sort: ["createdAt desc"])
+            case "OnSale":
+                return ProductOverviewInterfaceModel(mainMenuInterfaceModel: interfaceModel, filterQuery: ["variants.prices.discounted:exists"])
+            default:
+                return nil
+        }
     }
 
     private func bindInterfaceModel() {
