@@ -20,7 +20,7 @@ class ProductOverviewInterfaceController: WKInterfaceController {
     private let disposables = CompositeDisposable()
     private var activityAnimation: NKWActivityIndicatorAnimation?
 
-    private var interfaceModel: NewProductsInterfaceModel? {
+    private var interfaceModel: ProductOverviewInterfaceModel? {
         didSet {
             bindInterfaceModel()
         }
@@ -38,7 +38,7 @@ class ProductOverviewInterfaceController: WKInterfaceController {
         productsGroup.setAlpha(0)
         productsGroup.setHidden(true)
 
-        interfaceModel = NewProductsInterfaceModel(mainMenuInterfaceModel: (WKExtension.shared().rootInterfaceController as? MainMenuInterfaceController)?.interfaceModel)
+        interfaceModel = context as? ProductOverviewInterfaceModel
     }
 
     override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
@@ -79,6 +79,8 @@ class ProductOverviewInterfaceController: WKInterfaceController {
                 if let rowController = self?.productsTable.rowController(at: row) as? ProductRowController {
                     rowController.productName.setText(interfaceModel.productName(at: row))
                     rowController.productPrice.setText(interfaceModel.productPrice(at: row))
+                    let oldPriceAttributes: [NSAttributedStringKey : Any] = [.strikethroughStyle: 1]
+                    rowController.productOldPrice.setAttributedText(NSAttributedString(string: interfaceModel.productOldPrice(at: row), attributes: oldPriceAttributes))
                     rowController.wishListImage.setImageNamed(interfaceModel.isInWishList(at: row) ? "wishlist_icon_active" : "wishlist_icon")
                     if let url = URL(string: interfaceModel.productImageUrl(at: row)) {
                         SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { image, _, _, _, _, _ in
