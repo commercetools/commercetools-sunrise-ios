@@ -28,7 +28,7 @@ extension Order {
 
                     let billingAddress = profile.addresses.filter({ $0.id == profile.defaultBillingAddressId }).first ?? Address(firstName: profile.firstName, lastName: profile.lastName, country: store.address?.country ?? "")
 
-                    let cartDraft = CartDraft(currency: Customer.currentCurrency ?? BaseViewModel.currencyCodeForCurrentLocale, customerEmail: profile.email, lineItems: [lineItemDraft], shippingAddress: shippingAddress, billingAddress: billingAddress, custom: customType)
+                    let cartDraft = CartDraft(currency: Customer.currentCurrency ?? Locale.currencyCodeForCurrentLocale, customerEmail: profile.email, lineItems: [lineItemDraft], shippingAddress: shippingAddress, billingAddress: billingAddress, custom: customType)
                     Commercetools.Cart.create(cartDraft, result: { result in
 
                         if let cart = result.model, result.isSuccess {

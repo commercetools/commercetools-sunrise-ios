@@ -109,8 +109,23 @@ extension Customer {
     static var customerGroup: Reference<CustomerGroup>?
 }
 
+extension ShoppingList {
+    static let kWishlistShoppingListName = "WishList"
+}
+
 extension Collection where Iterator.Element == URLQueryItem {
     subscript(key: String) -> [String] {
         return self.filter({ $0.name == key }).compactMap { $0.value }
+    }
+}
+
+extension Locale {
+    // Convenience property for obtaining currency code for user's locale
+    static var currencyCodeForCurrentLocale: String {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.locale = Locale.current
+
+        return currencyFormatter.currencyCode
     }
 }

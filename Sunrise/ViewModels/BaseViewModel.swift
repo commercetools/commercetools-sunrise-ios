@@ -16,15 +16,6 @@ class BaseViewModel {
 
     let alertMessageObserver: Signal<String, NoError>.Observer
 
-    // Convenience property for obtaining currency code for user's locale
-    static var currencyCodeForCurrentLocale: String {
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .currency
-        currencyFormatter.locale = Locale.current
-
-        return currencyFormatter.currencyCode
-    }
-
     // Dialogue texts
     let reservationSuccessTitle = NSLocalizedString("Product has been reserved", comment: "Successful reservation")
     let reservationSuccessMessage = NSLocalizedString("You will get the notification once your product is ready for pickup", comment: "Successful reservation message")
