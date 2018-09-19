@@ -10,6 +10,8 @@ class MainMenuInterfaceController: WKInterfaceController {
     
     @IBOutlet var signInGroup: WKInterfaceGroup!
     @IBOutlet var mainMenuGroup: WKInterfaceGroup!
+    
+    private let disposables = CompositeDisposable()
 
     var interfaceModel: MainMenuInterfaceModel? {
         didSet {
@@ -24,6 +26,11 @@ class MainMenuInterfaceController: WKInterfaceController {
         signInGroup.setHidden(true)
         
         interfaceModel = MainMenuInterfaceModel()
+        invalidateUserActivity()
+    }
+    
+    deinit {
+        disposables.dispose()
     }
 
     override func contextForSegue(withIdentifier segueIdentifier: String) -> Any? {
@@ -40,7 +47,7 @@ class MainMenuInterfaceController: WKInterfaceController {
     private func bindInterfaceModel() {
         guard let interfaceModel = interfaceModel else { return }
 
-        interfaceModel.presentSignInMessage.producer
+        disposables += interfaceModel.isSignInMessagePresent.producer
         .observe(on: UIScheduler())
         .startWithValues({ [weak self] presentSignIn in
             self?.animate(withDuration: 0.3) {
@@ -56,5 +63,18 @@ class MainMenuInterfaceController: WKInterfaceController {
                 }
             }
         })
+        
+        disposables += interfaceModel.presentSearchResultsSignal
+        .observeValues { [weak self] in
+            self?.pushController(withName: "ProductOverviewInterfaceController", context: $0)
+        }
     }
+    
+    @IBAction func search() {
+        presentTextInputController(withSuggestions: interfaceModel?.recentSearches.value, allowedInputMode: .plain) {
+            guard let searchTerm = $0?.first as? String else { return }
+            self.interfaceModel?.performSearchObserver.send(value: searchTerm)
+        }
+    }
+    
 }
