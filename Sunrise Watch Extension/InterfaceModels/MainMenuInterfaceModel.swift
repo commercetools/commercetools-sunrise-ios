@@ -4,24 +4,58 @@
 
 import Foundation
 import ReactiveSwift
+import Result
 import Commercetools
 
 class MainMenuInterfaceModel {
 
     // Inputs
+    let performSearchObserver: Signal<String, NoError>.Observer
 
     // Outputs
-    let presentSignInMessage: MutableProperty<Bool>
+    let isSignInMessagePresent: MutableProperty<Bool>
+    let recentSearches: MutableProperty<[String]>
+    let presentSearchResultsSignal: Signal<ProductOverviewInterfaceModel, NoError>
 
     // Input & Output
     let activeWishList = MutableProperty<ShoppingList?>(nil)
 
+    private let disposables = CompositeDisposable()
     private let kShoppingListVariantExpansion = ["lineItems[*].variant"]
+    private let kRecentSearchesKey = "RecentSearchesKey"
 
     // MARK: - Lifecycle
 
     init() {
-        presentSignInMessage = MutableProperty(Commercetools.authState != .customerToken)
+        isSignInMessagePresent = MutableProperty(Commercetools.authState != .customerToken)
+        recentSearches = MutableProperty(UserDefaults.standard.array(forKey: kRecentSearchesKey) as? [String] ?? [])
+        
+        let (performSearchSignal, performSearchObserver) = Signal<String, NoError>.pipe()
+        self.performSearchObserver = performSearchObserver
+        
+        let (presentSearchResultsSignal, presentSearchResultsObserver) = Signal<ProductOverviewInterfaceModel, NoError>.pipe()
+        self.presentSearchResultsSignal = presentSearchResultsSignal
+        
+        disposables += recentSearches.signal
+        .observe(on: QueueScheduler())
+        .observeValues { [unowned self] in
+            UserDefaults.standard.set($0, forKey: self.kRecentSearchesKey)
+        }
+        
+        disposables += performSearchSignal
+        .filter { !$0.isEmpty }
+        .observeValues { [unowned self] in
+            presentSearchResultsObserver.send(value: ProductOverviewInterfaceModel(mainMenuInterfaceModel: self, text: $0))
+            var recentSearches = self.recentSearches.value
+            if let index = recentSearches.index(of: $0) {
+                recentSearches.remove(at: index)
+            }
+            recentSearches.append($0)
+            if recentSearches.count > 3 {
+                recentSearches.remove(at: 0)
+            }
+            self.recentSearches.value = recentSearches
+        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(checkAuthState), name: Commercetools.Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
 
@@ -30,10 +64,11 @@ class MainMenuInterfaceModel {
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: Commercetools.Notification.Name.WatchSynchronization.DidReceiveTokens, object: nil)
+        disposables.dispose()
     }
 
     @objc private func checkAuthState() {
-        presentSignInMessage.value = Commercetools.authState != .customerToken
+        isSignInMessagePresent.value = Commercetools.authState != .customerToken
     }
 
     // MARK: - Active WishList
