@@ -50,8 +50,28 @@ class ProfileViewModel: BaseViewModel {
         
         disposables += refreshSignal.observeValues { [unowned self] in self.retrieveProfile() }
         
-        disposables += logoutSignal.observeValues { [unowned self] in
+        disposables += logoutSignal
+        .observe(on: QueueScheduler(qos: .userInitiated))
+        .observeValues { [unowned self] in
+            let semaphore = DispatchSemaphore(value: 0)
+            Customer.addCustomTypeIfNotExists { version, errors in
+                if let version = version, errors == nil {
+                    let updateActions = UpdateActions(version: version, actions: [CustomerUpdateAction.setCustomField(name: "apnsToken", value: nil)])
+                    
+                    Customer.update(actions: updateActions) { result in
+                        if result.isFailure {
+                            result.errors?.forEach { debugPrint($0) }
+                        }
+                        semaphore.signal()
+                    }
+                } else {
+                    errors?.forEach { debugPrint($0) }
+                    semaphore.signal()
+                }
+            }
+            _ = semaphore.wait(timeout: .now() + 3)
             Commercetools.logoutCustomer()
+            AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
             AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
             AppRouting.wishListViewController?.viewModel?.refreshObserver.send(value: ())
             self.isLoginHidden.value = Commercetools.authState == .customerToken
