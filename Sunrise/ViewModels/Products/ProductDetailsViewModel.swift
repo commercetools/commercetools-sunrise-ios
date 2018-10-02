@@ -105,7 +105,7 @@ class ProductDetailsViewModel: BaseViewModel {
         disposables += refreshSignal
         .observeValues { [weak self] in
             if let productId = self?.product?.id {
-                self?.retrieveProduct(productId, size: nil)
+                self?.retrieveProduct(productId, variantId: self?.variantForActiveAttributes?.id)
             }
         }
         
@@ -164,26 +164,14 @@ class ProductDetailsViewModel: BaseViewModel {
 
         bindViewModelProperties()
 
-        guard let variant = product.allVariants.first(where: { $0.id == variantId }) ?? product.mainVariantWithPrice else { return }
-        let colors = variant.attributes?.filter { $0.name == FiltersViewModel.kColorsAttributeName } ?? []
-        if let color = colors.first(where: { MyStyleViewModel.colorsSettings.contains($0.valueKey ?? "") }), isAuthenticated {
-            activeAttributes.value.append(color)
-        } else if let color = colors.first {
-            activeAttributes.value.append(color)
-        }
-        let sizes = variant.attributes?.filter { $0.name == FiltersViewModel.kSizeAttributeName } ?? []
-        if let size = sizes.first(where: { MyStyleViewModel.sizesSettings.contains($0.valueLabel ?? "") }), isAuthenticated {
-            activeAttributes.value.append(size)
-        } else if let size = sizes.first {
-            activeAttributes.value.append(size)
-        }
+        updateActiveAttributes(for: variantId)
 
         retrieveRecommendations()
     }
 
-    convenience init(productId: String, size: String? = nil) {
+    convenience init(productId: String, variantId: Int? = nil) {
         self.init()
-        retrieveProduct(productId, size: size)
+        retrieveProduct(productId, variantId: variantId)
     }
     
     deinit {
@@ -346,19 +334,34 @@ class ProductDetailsViewModel: BaseViewModel {
         return variantForActiveAttributes?.id
     }
 
+    private func updateActiveAttributes(for variantId: Int? = nil) {
+        guard let variant = product?.allVariants.first(where: { $0.id == variantId }) ?? product?.displayVariant() else { return }
+        let colors = variant.attributes?.filter { $0.name == FiltersViewModel.kColorsAttributeName } ?? []
+        var updatedActiveAttributes = [Attribute]()
+        if let color = colors.first(where: { MyStyleViewModel.colorsSettings.contains($0.valueKey ?? "") }), isAuthenticated {
+            updatedActiveAttributes.append(color)
+        } else if let color = colors.first {
+            updatedActiveAttributes.append(color)
+        }
+        let sizes = variant.attributes?.filter { $0.name == FiltersViewModel.kSizeAttributeName } ?? []
+        if let size = sizes.first(where: { MyStyleViewModel.sizesSettings.contains($0.valueLabel ?? "") }), isAuthenticated {
+            updatedActiveAttributes.append(size)
+        } else if let size = sizes.first {
+            updatedActiveAttributes.append(size)
+        }
+        activeAttributes.value = updatedActiveAttributes
+    }
+
     // MARK: - Product retrieval
 
-    private func retrieveProduct(_ productId: String, size: String?) {
+    private func retrieveProduct(_ productId: String, variantId: Int? = nil) {
         self.isLoading.value = true
         ProductProjection.byId(productId, expansion: ["productType"], result: { result in
             if let product = result.model, result.isSuccess {
                 self.product = product
                 self.productType = product.productType.obj
                 self.bindViewModelProperties()
-                // TODO Set size
-//                if let size = size {
-//                    self.activeAttributes.value["size"] = size
-//                }
+                self.updateActiveAttributes(for: variantId)
 
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))

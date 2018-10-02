@@ -329,7 +329,7 @@ class ProductOverviewViewModel: BaseViewModel {
 
     func presentProductDetails(for sku: String) {
         isLoading.value = true
-        ProductProjection.search(filters: ["variants.sku:\"\(sku)\""]) { result in
+        ProductProjection.search(filters: ["variants.sku:\"\(sku)\""], markMatchingVariants: true) { result in
             if let product = result.model?.results.first, result.isSuccess {
                 self.presentProductDetailsObserver.send(value: ProductDetailsViewModel(product: product))
 

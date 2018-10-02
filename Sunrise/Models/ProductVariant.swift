@@ -40,3 +40,9 @@ extension ProductVariant {
         return price
     }
 }
+
+extension ProductVariant: Equatable {
+    public static func ==(lhs: ProductVariant, rhs: ProductVariant) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

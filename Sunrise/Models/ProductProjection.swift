@@ -16,18 +16,14 @@ extension ProductProjection {
         if let matchingVariant = allVariants.first(where: { $0.isMatchingVariant == true }) {
             displayVariants.append(matchingVariant)
         }
-        displayVariants += allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
-                && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
-        if displayVariants.isEmpty, customerGroup != nil {
-            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil && $0.validUntil! > now
-                    && $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        displayVariants += allVariants.filter({ !displayVariants.contains($0) && $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil
+            && $0.validUntil! > now && $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+        if customerGroup != nil {
+            displayVariants += allVariants.filter({ !displayVariants.contains($0) && $0.prices?.filter({ $0.validFrom != nil && $0.validFrom! < now && $0.validUntil != nil
+                && $0.validUntil! > now && $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
+            displayVariants += allVariants.filter({ !displayVariants.contains($0) && $0.prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
         }
-        if displayVariants.isEmpty {
-            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
-        }
-        if displayVariants.isEmpty, customerGroup != nil {
-            displayVariants += allVariants.filter({ $0.prices?.filter({ $0.country == country && $0.value.currencyCode == currency }).count ?? 0 > 0 })
-        }
+        displayVariants += allVariants.filter({ !displayVariants.contains($0) && $0.prices?.filter({ $0.country == country && $0.customerGroup?.id == customerGroup?.id && $0.value.currencyCode == currency }).count ?? 0 > 0 })
         if let mainVariantWithPrice = mainVariantWithPrice, displayVariants.isEmpty {
             displayVariants.append(mainVariantWithPrice)
         }
