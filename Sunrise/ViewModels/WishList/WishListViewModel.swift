@@ -65,6 +65,12 @@ class WishListViewModel: BaseViewModel {
             self.isLoading.value = true
             return self.toggleWishList(productId: productId, variantId: variantId)
         }
+
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: .UIApplicationDidBecomeActive)
+        .observeValues { [unowned self] _ in
+            self.refreshObserver.send(value: ())
+        }
     }
 
     deinit {
