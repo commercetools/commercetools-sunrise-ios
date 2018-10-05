@@ -19,7 +19,6 @@ class HomeViewModel: BaseViewModel {
     
     // Outputs
     
-
     private let disposables = CompositeDisposable()
     
     // MARK: - Lifecycle
@@ -32,14 +31,14 @@ class HomeViewModel: BaseViewModel {
 
         disposables += selectedElementSignal
         .observe(on: UIScheduler())
-        .observeValues {
+        .observeValues { [unowned self] in
             switch $0.row {
                 case 0:
                     AppRouting.showCategory(id: "b8250c0d-a29e-42d5-8c11-97d7a98bb462")
                 case 1:
                     AppRouting.showCategory(id: "96ac6204-4631-41d3-9540-22b7629f468d")
                 case 3:
-                    AppRouting.showCategory(id: MyStyleViewModel.isWomenSetting ? "1d9f82b4-4fb8-4830-91b0-61b876da7b93" : "c35ef50c-c62a-42bf-851d-2a0692d07f24")
+                    AppRouting.showCategory(id: self.isAuthenticated ? (MyStyleViewModel.isWomenSetting ? "1d9f82b4-4fb8-4830-91b0-61b876da7b93" : "c35ef50c-c62a-42bf-851d-2a0692d07f24") : "c470ff8a-ca75-4283-9113-f53e273a4f4b")
                 case 5:
                     AppRouting.showCategory(id: "f8587a7d-7756-4072-8b1f-6360357218c2")
                 case 6:
