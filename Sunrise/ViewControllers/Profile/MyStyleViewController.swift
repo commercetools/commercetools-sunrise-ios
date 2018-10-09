@@ -146,6 +146,7 @@ extension MyStyleViewController: UICollectionViewDataSource {
         case colorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCell", for: indexPath) as! ColorCell
             cell.colorView.backgroundColor = viewModel?.color(at: indexPath)
+            cell.selectedColorImageView.image = viewModel?.color(at: indexPath) != .white ? #imageLiteral(resourceName: "selected_color") : #imageLiteral(resourceName: "selected_color_inverted")
             cell.selectedColorImageView.isHidden = viewModel?.isColorActive(at: indexPath) == false
             return cell
         default:
