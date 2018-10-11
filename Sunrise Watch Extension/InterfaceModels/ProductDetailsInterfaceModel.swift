@@ -2,8 +2,6 @@
 // Copyright (c) 2016 Commercetools. All rights reserved.
 //
 
-import MapKit
-import CoreLocation
 import ReactiveSwift
 import Result
 import Commercetools
@@ -32,6 +30,16 @@ class ProductDetailsInterfaceModel {
             return price.value.description
         }
     }
+    var productOldPrice: String {
+        guard let variant = product.displayVariant(),
+              let price = variant.price(), price.discounted?.value != nil else { return "" }
+
+        return price.value.description
+    }
+    var userActivityInfo: [AnyHashable: Any]? {
+        guard let sku = product.displayVariant()?.sku else { return nil }
+        return ["sku": sku]
+    }
 
     private weak var mainMenuInterfaceModel: MainMenuInterfaceModel?
     private let product: ProductProjection
@@ -39,7 +47,7 @@ class ProductDetailsInterfaceModel {
 
     // MARK: - Lifecycle
 
-    init(product: ProductProjection, mainMenuInterfaceModel: MainMenuInterfaceModel?) {
+    init(product: ProductProjection, mainMenuInterfaceModel: MainMenuInterfaceModel? = nil) {
         self.product = product
         self.mainMenuInterfaceModel = mainMenuInterfaceModel
 

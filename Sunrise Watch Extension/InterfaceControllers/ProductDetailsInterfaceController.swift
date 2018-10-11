@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import WatchKit
@@ -11,6 +11,7 @@ class ProductDetailsInterfaceController: WKInterfaceController {
     
     @IBOutlet var productImage: WKInterfaceImage!
     @IBOutlet var productPriceLabel: WKInterfaceLabel!
+    @IBOutlet var productOldPriceLabel: WKInterfaceLabel!
     @IBOutlet var productNameLabel: WKInterfaceLabel!
     @IBOutlet var moveToCartButton: WKInterfaceButton!
     @IBOutlet var wishListButton: WKInterfaceButton!
@@ -31,12 +32,19 @@ class ProductDetailsInterfaceController: WKInterfaceController {
         super.awake(withContext: context)
         interfaceModel = context as? ProductDetailsInterfaceModel
     }
+    
+    override func willDisappear() {
+        invalidateUserActivity()
+        super.willDisappear()
+    }
 
     private func bindInterfaceModel() {
         guard let interfaceModel = interfaceModel else { return }
 
         productNameLabel.setText(interfaceModel.productName)
         productPriceLabel.setText(interfaceModel.productPrice)
+        let oldPriceAttributes: [NSAttributedStringKey : Any] = [.strikethroughStyle: 1]
+        productOldPriceLabel.setAttributedText(NSAttributedString(string: interfaceModel.productOldPrice, attributes: oldPriceAttributes))
         if let url = URL(string: interfaceModel.productImageUrl) {
             SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
                 if let image = image {
@@ -80,6 +88,8 @@ class ProductDetailsInterfaceController: WKInterfaceController {
         .startWithValues { [weak self] in
             self?.wishListButton.setEnabled($0)
         }
+
+        updateUserActivity("com.commercetools.Sunrise.viewProductDetails", userInfo: interfaceModel.userActivityInfo, webpageURL: nil)
     }
 
     @IBAction func moveToCart() {
