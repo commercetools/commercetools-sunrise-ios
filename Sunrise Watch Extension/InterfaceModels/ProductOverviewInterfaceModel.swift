@@ -19,14 +19,16 @@ class ProductOverviewInterfaceModel {
     private weak var mainMenuInterfaceModel: MainMenuInterfaceModel?
     private let presentProductObserver: Signal<ProductDetailsInterfaceModel, NoError>.Observer
     private var products = [ProductProjection]()
+    private let text: String?
     private let filterQuery: [String]?
     private let sort: [String]?
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
-    init(mainMenuInterfaceModel: MainMenuInterfaceModel?, filterQuery: [String]? = nil, sort: [String]? = nil) {
+    init(mainMenuInterfaceModel: MainMenuInterfaceModel?, text: String? = nil, filterQuery: [String]? = nil, sort: [String]? = nil) {
         self.mainMenuInterfaceModel = mainMenuInterfaceModel
+        self.text = text
         self.filterQuery = filterQuery
         self.sort = sort
 
@@ -92,7 +94,7 @@ class ProductOverviewInterfaceModel {
         isLoading.value = true
         let activity = ProcessInfo.processInfo.beginActivity(options: [.background, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve products")
         mainMenuInterfaceModel?.wishListShoppingList(observer: nil, activity: activity) { _ in
-            ProductProjection.search(sort: self.sort, limit: 4, filterQuery: self.filterQuery) { result in
+            ProductProjection.search(sort: self.sort, limit: 4, text: self.text, filterQuery: self.filterQuery) { result in
                 if let products = result.model?.results, result.isSuccess {
                     DispatchQueue.main.async {
                         self.products = products

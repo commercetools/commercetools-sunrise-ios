@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.10"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
     <scenes>
         <!--MainMenuInterfaceController-->
@@ -27,6 +27,11 @@
                         </group>
                         <group width="1" alignment="left" layout="vertical" id="KEF-Ne-ykA">
                             <items>
+                                <button width="1" alignment="left" title="Search" id="q37-4M-Jlz">
+                                    <connections>
+                                        <action selector="search" destination="AgC-eL-Hgc" id="pwe-Hc-yLK"/>
+                                    </connections>
+                                </button>
                                 <button width="1" alignment="left" title="New Products" id="nnj-t5-o7D">
                                     <connections>
                                         <segue destination="tYN-X1-LQT" kind="push" identifier="NewProducts" id="Xlu-dL-xpW"/>
@@ -42,7 +47,11 @@
                                         <segue destination="tYN-X1-LQT" kind="push" identifier="OnSale" id="aG4-yv-S4p"/>
                                     </connections>
                                 </button>
-                                <button width="1" alignment="left" title="Recent Orders" id="7Up-SI-5eR"/>
+                                <button width="1" alignment="left" title="Recent Orders" id="7Up-SI-5eR">
+                                    <connections>
+                                        <segue destination="OSK-8W-GmA" kind="push" id="9PD-y4-8Of"/>
+                                    </connections>
+                                </button>
                             </items>
                             <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
@@ -55,10 +64,10 @@
             </objects>
             <point key="canvasLocation" x="-291" y="128"/>
         </scene>
-        <!--Product Overview Interface Controller-->
+        <!--ProductOverviewInterfaceController-->
         <scene sceneID="4k2-rI-Atk">
             <objects>
-                <controller id="tYN-X1-LQT" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ProductOverviewInterfaceController" id="tYN-X1-LQT" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
                         <group width="1" alignment="left" id="dYq-Ph-syv">
                             <items>
@@ -150,7 +159,16 @@
                                     </items>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </group>
-                                <label alignment="left" text="$19.99" id="elR-U1-7wD"/>
+                                <group width="1" alignment="left" id="ZkK-p3-FBs">
+                                    <items>
+                                        <label alignment="left" text="$19.99" id="i1m-BE-84h">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                        <label alignment="left" text="$19.99" id="4ca-0c-9Tr">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                    </items>
+                                </group>
                                 <label alignment="left" text="Fancy Jacket" numberOfLines="0" id="Bbj-oP-hUa"/>
                                 <separator alignment="left" id="eTy-cs-hQT"/>
                                 <button width="1" alignment="left" title="Move to cart" id="5qi-Qf-osh">
@@ -163,6 +181,10 @@
                                         <action selector="addToWishList" destination="r4v-gy-uaD" id="ZPS-gC-L4b"/>
                                     </connections>
                                 </button>
+                                <separator alignment="left" id="fWE-Zf-cBt"/>
+                                <label alignment="left" text="Get more details on your iPhone using handoff" textAlignment="left" numberOfLines="0" id="Au3-lt-eW4">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
                                 <group width="1" height="10" alignment="left" id="WCS-QA-czL"/>
                             </items>
                             <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
@@ -172,12 +194,13 @@
                         <outlet property="moveToCartButton" destination="5qi-Qf-osh" id="uMK-Vt-pfj"/>
                         <outlet property="productImage" destination="32v-KZ-Jba" id="H4I-9y-Quj"/>
                         <outlet property="productNameLabel" destination="Bbj-oP-hUa" id="TRJ-Wo-qnY"/>
-                        <outlet property="productPriceLabel" destination="elR-U1-7wD" id="SzT-er-Jx4"/>
+                        <outlet property="productOldPriceLabel" destination="4ca-0c-9Tr" id="xH4-Gh-vey"/>
+                        <outlet property="productPriceLabel" destination="i1m-BE-84h" id="RxJ-Pe-0X4"/>
                         <outlet property="wishListButton" destination="IHe-4Z-ydl" id="2j2-xr-YXe"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="350" y="-3"/>
+            <point key="canvasLocation" x="394" y="-129"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="vty-sl-sqF">
@@ -193,7 +216,7 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="83" y="697"/>
+            <point key="canvasLocation" x="101" y="1176"/>
         </scene>
         <!--Reservation Notification Controller-->
         <scene sceneID="940-RE-W2z">
@@ -219,7 +242,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="331" y="697"/>
+            <point key="canvasLocation" x="402" y="1176"/>
         </scene>
         <!--Wish List Interface Controller-->
         <scene sceneID="n58-Na-FLU">
@@ -299,6 +322,274 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="89" y="179"/>
+        </scene>
+        <!--Recent Orders Interface Controller-->
+        <scene sceneID="O6d-j6-A3g">
+            <objects>
+                <controller id="OSK-8W-GmA" customClass="RecentOrdersInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="LIe-xs-FKQ">
+                            <items>
+                                <table alignment="center" spacing="6" id="cdW-KK-TDK">
+                                    <items>
+                                        <tableRow identifier="OrderItemRowType" id="P9h-9A-VK2" customClass="OrderItemRowController" customModule="Sunrise_Watch_Extension">
+                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="v7g-UG-gcE">
+                                                <items>
+                                                    <group width="1" alignment="left" layout="vertical" id="Izd-6E-vnM">
+                                                        <items>
+                                                            <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="yty-AR-J0v">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </label>
+                                                            <label alignment="left" text="Shoes and 1 more" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="fRi-g9-5gc">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                            </label>
+                                                        </items>
+                                                        <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
+                                                    </group>
+                                                    <group width="1" height="2" alignment="left" id="kVd-Sk-gUI"/>
+                                                </items>
+                                                <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <connections>
+                                                <outlet property="orderDescriptionLabel" destination="fRi-g9-5gc" id="XHP-sI-XRM"/>
+                                                <outlet property="orderNumberLabel" destination="yty-AR-J0v" id="81i-Fw-27f"/>
+                                                <segue destination="o0p-mg-52x" kind="push" id="R6v-NS-ekn"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="AzI-4A-VbL">
+                            <items>
+                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="cD5-ie-Fng">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="mB9-TZ-N1G"/>
+                                    </items>
+                                </group>
+                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="Hkk-0I-u88">
+                                    <items>
+                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Y6X-Aw-vyk"/>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="leftLoadingDot" destination="Y6X-Aw-vyk" id="g8B-Ea-g2G"/>
+                        <outlet property="listGroup" destination="LIe-xs-FKQ" id="cvU-1h-mSS"/>
+                        <outlet property="listTable" destination="cdW-KK-TDK" id="HNo-UE-ugt"/>
+                        <outlet property="loadingGroup" destination="AzI-4A-VbL" id="odJ-l0-izx"/>
+                        <outlet property="rightLoadingDot" destination="mB9-TZ-N1G" id="o5T-xt-VfY"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="89" y="634"/>
+        </scene>
+        <!--OrderDetailsInterfaceController-->
+        <scene sceneID="gKm-EI-auR">
+            <objects>
+                <controller id="o0p-mg-52x" userLabel="OrderDetailsInterfaceController" customClass="OrderDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="krJ-nk-meg">
+                            <items>
+                                <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="lHc-5z-cDM"/>
+                                <group width="1" height="2" alignment="left" id="obm-ss-ZVs"/>
+                                <label alignment="left" text="Shipping Address:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="tBC-TV-QTE">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <label alignment="left" text="Sonnenallee 223" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="9V2-xj-16i">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <group width="1" height="2" alignment="left" id="VMk-e8-Vtq"/>
+                                <label alignment="left" text="Order total:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="jev-hM-VpV">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <label alignment="left" text="$19.99" id="gmc-C0-m2r">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <group width="1" height="2" alignment="left" id="f9l-Hz-JG0"/>
+                            </items>
+                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="orderNumberLabel" destination="lHc-5z-cDM" id="Bdt-ag-CIX"/>
+                        <outlet property="orderTotalLabel" destination="gmc-C0-m2r" id="vsZ-AH-BUW"/>
+                        <outlet property="shippingAddressLabel" destination="9V2-xj-16i" id="GCn-FG-EFy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="394" y="635"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="ohZ-mp-zwZ">
+            <objects>
+                <notificationController id="G9c-64-hQA">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="O5b-uv-dhc"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="order-confirmed" id="5Vg-g1-Vma"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="O5b-uv-dhc" id="DZO-pU-C3Y"/>
+                        <segue destination="JKB-HV-a1N" kind="relationship" relationship="dynamicNotificationInterface" id="VUs-5k-Q5R"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="101" y="1654"/>
+        </scene>
+        <!--Order Notification Controller-->
+        <scene sceneID="EOT-eO-zQI">
+            <objects>
+                <controller id="JKB-HV-a1N" customClass="OrderNotificationController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="95C-ku-Ydm">
+                            <items>
+                                <label alignment="left" text="Your order has been confirmed!" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="pV5-CV-Bka"/>
+                                <group width="1" height="2" alignment="left" id="eDH-3I-Tfg"/>
+                                <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Cvk-Vb-wX8"/>
+                                <group width="1" height="2" alignment="left" id="FXw-dn-Kuk"/>
+                                <label alignment="left" text="Shipping Address:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="aNC-zJ-Kt4">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <label alignment="left" text="Sonnenallee 223" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Mxt-AM-yzj">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <group width="1" height="2" alignment="left" id="EiB-1W-GJg"/>
+                                <label alignment="left" text="Order total:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="EiR-kB-2k7">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <label alignment="left" text="$19.99" id="olM-6T-gqx">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <group width="1" height="2" alignment="left" id="a2U-3k-Ipb"/>
+                            </items>
+                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="orderNumberLabel" destination="Cvk-Vb-wX8" id="MPx-Hg-85q"/>
+                        <outlet property="orderTotalLabel" destination="olM-6T-gqx" id="YaU-rx-Qez"/>
+                        <outlet property="shippingAddressLabel" destination="Mxt-AM-yzj" id="hR4-B5-O8J"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="402" y="1654"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="VUc-RA-451">
+            <objects>
+                <notificationController id="CXv-jU-rKs">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="eEP-ce-yRg"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="order-shipped" id="L2U-AZ-oPh"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="eEP-ce-yRg" id="tpV-3j-5qz"/>
+                        <segue destination="zWM-bn-aSV" kind="relationship" relationship="dynamicNotificationInterface" id="M5Z-g2-FHP"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="101" y="2168"/>
+        </scene>
+        <!--Order Notification Controller-->
+        <scene sceneID="WL3-38-h3m">
+            <objects>
+                <controller id="zWM-bn-aSV" customClass="OrderNotificationController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="mcd-y6-Kph">
+                            <items>
+                                <label alignment="left" text="Shipped" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="40z-PH-n6p">
+                                    <color key="textColor" red="1" green="0.50980392159999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </label>
+                                <label alignment="left" text="Your order has left the warehouse and is now in transit." numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="NyM-mV-Cc7"/>
+                                <group width="1" height="2" alignment="left" id="V7S-ay-V1i"/>
+                                <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="mJw-P6-Ev7"/>
+                                <group width="1" height="2" alignment="left" id="ydI-SJ-X5Q"/>
+                                <label alignment="left" text="Shipping Address:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="o12-Ig-vHL">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <label alignment="left" text="Sonnenallee 223" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="apO-L2-Pkc">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <group width="1" height="2" alignment="left" id="4e7-6Q-gxt"/>
+                                <label alignment="left" text="Order total:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="BHf-cr-DBV">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <label alignment="left" text="$19.99" id="xTG-eo-Jbv">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <group width="1" height="2" alignment="left" id="yNm-pA-Q2a"/>
+                            </items>
+                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="orderNumberLabel" destination="mJw-P6-Ev7" id="BSq-E6-BaZ"/>
+                        <outlet property="orderTotalLabel" destination="xTG-eo-Jbv" id="iCd-A1-0at"/>
+                        <outlet property="shippingAddressLabel" destination="apO-L2-Pkc" id="Q3Q-q5-w6A"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="402" y="2168"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="GgF-6d-CrU">
+            <objects>
+                <notificationController id="V9p-fR-7yu">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="DSp-ft-nqL"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="product-discount-set" id="jDm-uK-vMC"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="DSp-ft-nqL" id="lEn-ed-elW"/>
+                        <segue destination="ZbV-ea-4fL" kind="relationship" relationship="dynamicNotificationInterface" id="9hh-x0-yfc"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="101" y="2731"/>
+        </scene>
+        <!--Product Discount Notification Controller-->
+        <scene sceneID="rdg-bE-4dv">
+            <objects>
+                <controller id="ZbV-ea-4fL" customClass="ProductDiscountNotificationController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="FlJ-g8-5u4">
+                            <items>
+                                <label alignment="left" text="Price for a product from your wishlist just dropped!" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="ifc-v0-nCN"/>
+                                <separator alignment="left" id="8J9-Xf-ekz"/>
+                                <group width="1" alignment="left" id="1T0-IX-RH0">
+                                    <items>
+                                        <label alignment="left" text="$19.99" id="tZl-3e-L5M">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                        <label alignment="left" text="$19.99" id="VeR-9u-GmX">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" layout="vertical" radius="6" id="Ml5-b1-dGb">
+                                    <items>
+                                        <imageView height="72" alignment="left" contentMode="scaleAspectFit" id="FsD-PF-x6F"/>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                                <group width="1" height="2" alignment="left" id="8qq-9a-Yuv"/>
+                            </items>
+                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="discountInfoLabel" destination="ifc-v0-nCN" id="4DZ-Xj-Bne"/>
+                        <outlet property="productImage" destination="FsD-PF-x6F" id="R1M-99-M9d"/>
+                        <outlet property="productOldPriceLabel" destination="VeR-9u-GmX" id="Fyk-jd-qhc"/>
+                        <outlet property="productPriceLabel" destination="tZl-3e-L5M" id="eHa-Ys-I0h"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="402" y="2731"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
