@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 
 def common_pods
@@ -14,15 +14,17 @@ target 'Sunrise' do
   pod 'IQDropDownTextField'
   pod 'SVProgressHUD'
   pod 'DateToolsSwift'
+  pod 'AWSS3'
 end
 
 target 'ReservationNotification' do
-  common_pods
+pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'master'
+pod 'ReactiveCocoa', '~> 7.2'
   pod 'SDWebImage'
 end
 
 target 'Sunrise Watch Extension' do
-  platform :watchos, '3.0'
+  platform :watchos, '4.0'
   pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'master'
   pod 'ReactiveSwift'
   pod 'SDWebImage'
