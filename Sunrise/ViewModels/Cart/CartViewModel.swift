@@ -103,6 +103,12 @@ class CartViewModel: BaseViewModel {
             self.isLoading.value = false
             presentAuthorizationObserver.send(value: request)
         }
+
+        disposables += NotificationCenter.default.reactive
+        .notifications(forName: .UIApplicationDidBecomeActive)
+        .observeValues { [unowned self] _ in
+            self.refreshObserver.send(value: ())
+        }
     }
 
     deinit {
@@ -193,8 +199,8 @@ class CartViewModel: BaseViewModel {
     }
 
     func productDetailsViewModelForLineItem(at indexPath: IndexPath) -> ProductDetailsViewModel? {
-        if let productId = cart.value?.lineItems[indexPath.row].productId {
-            return ProductDetailsViewModel(productId: productId, size: lineItemSize(at: indexPath))
+        if let lineItem = cart.value?.lineItems[indexPath.row] {
+            return ProductDetailsViewModel(productId: lineItem.productId, variantId: lineItem.variant.id)
         }
         return nil
     }
@@ -237,7 +243,7 @@ class CartViewModel: BaseViewModel {
                 })
             } else {
                 // If there is no active cart, create one, with the selected product
-                let cartDraft = CartDraft(currency: Customer.currentCurrency ?? BaseViewModel.currencyCodeForCurrentLocale)
+                let cartDraft = CartDraft(currency: Customer.currentCurrency ?? Locale.currencyCodeForCurrentLocale)
                 Cart.create(cartDraft, expansion: self.shippingMethodExpansion, result: { result in
                     if let cart = result.model, result.isSuccess {
                         self.update(cart: cart)
