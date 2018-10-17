@@ -6,6 +6,7 @@ import WatchKit
 import Commercetools
 import UserNotifications
 import CoreLocation
+import MapKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
@@ -77,14 +78,17 @@ extension ExtensionDelegate: CLLocationManagerDelegate {
 extension ExtensionDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let reservationId = response.notification.request.content.userInfo["reservation-id"] as? String {
-            if response.actionIdentifier == Notification.Action.getDirections {
-//                MainMenuInterfaceModel.sharedInstance.presentDirections(for: reservationId)
-            } else {
-//                MainMenuInterfaceModel.sharedInstance.presentDetails(for: reservationId)
+        if let reservationId = response.notification.request.content.userInfo["reservation-id"] as? String, response.actionIdentifier == Notification.Action.getDirections {
+            Order.byId(reservationId, expansion: ["lineItems[0].distributionChannel"]) { result in
+                guard let reservation = result.model else { return }
+                let reservationInterfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
+                guard let storeLocation = reservationInterfaceModel.storeLocation else { return }
+                let destination = MKMapItem(placemark: MKPlacemark(coordinate: storeLocation.coordinate))
+                destination.name = reservationInterfaceModel.storeName
+                MKMapItem.openMaps(with: [destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+                completionHandler()
             }
         }
-        completionHandler()
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
