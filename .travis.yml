@@ -7,9 +7,9 @@ install:
    - pod repo update
    - pod install
 
-osx_image: xcode9.3
+osx_image: xcode10.1
 
-xcode_sdk: iphonesimulator11.3
+xcode_sdk: iphonesimulator12.1
 
 script:
   - set -o pipefail
