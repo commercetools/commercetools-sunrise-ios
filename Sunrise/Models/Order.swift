@@ -4,6 +4,7 @@
 
 import Commercetools
 import ReactiveSwift
+import Intents
 
 extension Order {
     var isReservation: Bool {
@@ -53,4 +54,31 @@ extension Order {
         }
     }
     #endif
+}
+
+@available(iOS 12.0, *)
+@available(watchOSApplicationExtension 5.0, *)
+extension Order {
+    var reorderIntent: OrderProductIntent {
+        let intent = OrderProductIntent()
+        intent.previousOrderId = id
+        intent.firstLineItemName = lineItems.first?.name.localizedString
+        intent.otherLineItemsCount = lineItems.count > 1 ? (lineItems.count - 1) as NSNumber : nil
+        var suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "Order %@", intent.firstLineItemName ?? "") as String
+        if let otherLineItemsCount = intent.otherLineItemsCount {
+            suggestedInvocationPhrase.append(NSString.deferredLocalizedIntentsString(with: " and %@ more", otherLineItemsCount) as String)
+        }
+        intent.suggestedInvocationPhrase = suggestedInvocationPhrase
+        return intent
+    }
+}
+
+extension Order {
+    func createReorderCart(completion: @escaping (Cart?) -> Void) {
+        let lineItemsDraft = lineItems.map({ LineItemDraft(productVariantSelection: .productVariant(productId: $0.productId, variantId: $0.variant.id), quantity: UInt($0.quantity)) })
+        let cartDraft = CartDraft(currency: totalPrice.currencyCode, customerEmail: customerEmail, lineItems: lineItemsDraft, shippingAddress: shippingAddress, billingAddress: billingAddress, shippingMethod: shippingInfo?.shippingMethod)
+        Cart.create(cartDraft) { result in
+            completion(result.model)
+        }
+    }
 }
