@@ -476,7 +476,7 @@ class CheckoutViewModel: BaseViewModel {
         Commercetools.signUpCustomer(draft) { result in
             if result.isSuccess {
                 Commercetools.loginCustomer(username: email, password: password, activeCartSignInMode: .useAsNewActiveCustomerCart) { result in
-                    AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
+                    AppDelegate.saveDeviceTokenForCurrentCustomer()
                     error = result.errors?.first as? CTError
                     semaphore.signal()
                 }

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var deviceToken: String?
+    private static var deviceToken: String?
 
     private var locationManager: CLLocationManager?
 
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Inform user about the configuration error
         }
 
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.EUWest1, identityPoolId: "")
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.EUWest1, identityPoolId: "eu-west-1:f0aa3646-d97e-4ee1-a102-6ff671bf089d")
         let configuration = AWSServiceConfiguration(region: AWSRegionType.EUWest1, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
 
@@ -79,6 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if pathComponents.count == 3, pathComponents[1].count == 2 {
                 AppRouting.showCategory(locale: pathComponents[1], slug: pathComponents[2])
             }
+        } else if userActivity.activityType == "com.commercetools.Sunrise.viewProductDetails", let sku = userActivity.userInfo?["sku"] as? String {
+            AppRouting.showProductDetails(for: sku)
         }
         return false
     }
@@ -90,17 +92,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        deviceToken = nil
-        saveDeviceTokenForCurrentCustomer()
+        AppDelegate.deviceToken = nil
+        AppDelegate.saveDeviceTokenForCurrentCustomer()
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        self.deviceToken = deviceToken
-        saveDeviceTokenForCurrentCustomer()
+        AppDelegate.deviceToken = deviceToken
+        AppDelegate.saveDeviceTokenForCurrentCustomer()
     }
     
-    func saveDeviceTokenForCurrentCustomer() {
+    static func saveDeviceTokenForCurrentCustomer() {
         if Commercetools.authState == .customerToken {
             Customer.addCustomTypeIfNotExists { version, errors in
                 if let version = version, let deviceToken = self.deviceToken, errors == nil {

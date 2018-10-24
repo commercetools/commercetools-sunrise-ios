@@ -61,7 +61,7 @@ class SignInViewModel: BaseViewModel {
                     AppRouting.wishListViewController?.viewModel?.refreshObserver.send(value: ())
                     AppRouting.profileViewController?.viewModel?.refreshObserver.send(value: ())
                 }
-                AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
+                AppDelegate.saveDeviceTokenForCurrentCustomer()
                 self?.isLoading.value = false
             }
         }

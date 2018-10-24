@@ -71,7 +71,7 @@ class ProfileViewModel: BaseViewModel {
             }
             _ = semaphore.wait(timeout: .now() + 3)
             Commercetools.logoutCustomer()
-            AppDelegate.shared.saveDeviceTokenForCurrentCustomer()
+            AppDelegate.saveDeviceTokenForCurrentCustomer()
             AppRouting.cartViewController?.viewModel?.refreshObserver.send(value: ())
             AppRouting.wishListViewController?.viewModel?.refreshObserver.send(value: ())
             self.isLoginHidden.value = Commercetools.authState == .customerToken
