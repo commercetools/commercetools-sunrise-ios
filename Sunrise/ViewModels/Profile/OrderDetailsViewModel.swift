@@ -7,6 +7,7 @@ import ReactiveSwift
 import Result
 import Commercetools
 import DateToolsSwift
+import Intents
 
 class OrderDetailsViewModel: BaseViewModel {
 
@@ -17,6 +18,11 @@ class OrderDetailsViewModel: BaseViewModel {
     let orderNumber: MutableProperty<String?>
     let deliveryAddress: MutableProperty<String?>
     let orderTotal: MutableProperty<String?>
+
+    @available(iOS 12.0, *)
+    var orderIntent: OrderProductIntent {
+        return order.reorderIntent
+    }
 
     private let order: Order
 
