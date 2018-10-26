@@ -195,7 +195,22 @@
 		21F96DF12061A6F5004CD31A /* InlineProductOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F96DF02061A6F5004CD31A /* InlineProductOverviewViewController.swift */; };
 		21F96DF32061A760004CD31A /* InlineProductOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F96DF22061A760004CD31A /* InlineProductOverviewViewModel.swift */; };
 		21FAD0C62080A6C50069695A /* BannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FAD0C52080A6C50069695A /* BannerCell.swift */; };
+		21FB4B1421A587FC00F6BD80 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B1321A587FC00F6BD80 /* IntentHandler.swift */; };
+		21FB4B1C21A587FC00F6BD80 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FB4B1B21A587FC00F6BD80 /* IntentsUI.framework */; };
+		21FB4B1F21A587FC00F6BD80 /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B1E21A587FC00F6BD80 /* IntentViewController.swift */; };
+		21FB4B2221A587FC00F6BD80 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FB4B2021A587FC00F6BD80 /* MainInterface.storyboard */; };
+		21FB4B2621A587FC00F6BD80 /* SunriseIntentsUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		21FB4B2921A587FC00F6BD80 /* SunriseIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		21FB4B3721A5E18000F6BD80 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */; };
+		21FB4B3821A5E18000F6BD80 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */; };
+		21FB4B3F21A6CE6100F6BD80 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (codegen, ); }; };
+		21FB4B4021A727E400F6BD80 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
+		21FB4B4221A82BBF00F6BD80 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEDBDA0B3DD0E3AA22401 /* Order.swift */; };
+		21FB4B4321A8388D00F6BD80 /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
+		21FB4B4421A8389200F6BD80 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
+		21FB4B4521A8389300F6BD80 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
+		6E7C5D46C6BA3A07C072AE5B /* Pods_SunriseIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9452F185DD88CD4C255337 /* Pods_SunriseIntents.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
 		C3E67B54573794A35CE64ACE /* Pods_Sunrise_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */; };
 		D78C254EAC84E3853FB82002 /* Pods_ReservationNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */; };
@@ -230,6 +245,20 @@
 			remoteGlobalIDString = 21CDC4931CE91D9B009D2638;
 			remoteInfo = Sunrise;
 		};
+		21FB4B2421A587FC00F6BD80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21FB4B1921A587FC00F6BD80;
+			remoteInfo = SunriseIntentsUI;
+		};
+		21FB4B2721A587FC00F6BD80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21FB4B1021A587FC00F6BD80;
+			remoteInfo = SunriseIntents;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -261,6 +290,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				21FB4B2921A587FC00F6BD80 /* SunriseIntents.appex in Embed App Extensions */,
+				21FB4B2621A587FC00F6BD80 /* SunriseIntentsUI.appex in Embed App Extensions */,
 				219992451DC9FAAB000E48FD /* ReservationNotification.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -270,6 +301,7 @@
 
 /* Begin PBXFileReference section */
 		00939BB1A611F998D130DD79 /* Pods-Sunrise Watch Extension.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.debug staging.xcconfig"; sourceTree = "<group>"; };
+		0BC7295C44E16267A5D0A524 /* Pods-SunriseIntents.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntents.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntents/Pods-SunriseIntents.release staging.xcconfig"; sourceTree = "<group>"; };
 		0F936319ED56CE489C8CACC6 /* Pods-ReservationNotification.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release prod.xcconfig"; sourceTree = "<group>"; };
 		17D1760D1D552D42D0C367DB /* Pods-Sunrise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug staging.xcconfig"; sourceTree = "<group>"; };
@@ -333,6 +365,7 @@
 		2110BECD1F85A9E200E03A33 /* SearchSuggestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionCell.swift; sourceTree = "<group>"; };
 		21123EC1207F8D6200B54275 /* AddressBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookViewController.swift; sourceTree = "<group>"; };
 		21123EC3207F8D6E00B54275 /* AddressBookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookViewModel.swift; sourceTree = "<group>"; };
+		21127725A3FD84EDACCE2787 /* Pods-SunriseIntents.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntents.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntents/Pods-SunriseIntents.release prod.xcconfig"; sourceTree = "<group>"; };
 		211617DC216C096F0049E3DF /* WishListInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListInterfaceModel.swift; sourceTree = "<group>"; };
 		211617DE216C09B70049E3DF /* WishListItemRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListItemRowController.swift; sourceTree = "<group>"; };
 		21162106203DB7D600EBE25D /* ReservationConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -467,10 +500,22 @@
 		21F96DF02061A6F5004CD31A /* InlineProductOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineProductOverviewViewController.swift; sourceTree = "<group>"; };
 		21F96DF22061A760004CD31A /* InlineProductOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineProductOverviewViewModel.swift; sourceTree = "<group>"; };
 		21FAD0C52080A6C50069695A /* BannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCell.swift; sourceTree = "<group>"; };
+		21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunriseIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		21FB4B1321A587FC00F6BD80 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		21FB4B1521A587FC00F6BD80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunriseIntentsUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		21FB4B1B21A587FC00F6BD80 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		21FB4B1E21A587FC00F6BD80 /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
+		21FB4B2121A587FC00F6BD80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		21FB4B2321A587FC00F6BD80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21FB4B3921A5E18000F6BD80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		21FB4B3C21A5E19900F6BD80 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Intents.strings; sourceTree = "<group>"; };
+		21FB4B4121A7291C00F6BD80 /* SunriseIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunriseIntents.entitlements; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B6500D5EEF8B2DB01ACAC34 /* Pods-Sunrise.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug staging.xcconfig"; sourceTree = "<group>"; };
+		445F5290177768FBF9E7752F /* Pods-SunriseIntents.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntents.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntents/Pods-SunriseIntents.debug prod.xcconfig"; sourceTree = "<group>"; };
 		461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReservationNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE03700D7B2698868A8CE86 /* Pods-SunriseTests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release prod.xcconfig"; sourceTree = "<group>"; };
 		535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug prod.xcconfig"; sourceTree = "<group>"; };
@@ -478,10 +523,12 @@
 		5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release prod.xcconfig"; sourceTree = "<group>"; };
 		60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.release prod.xcconfig"; sourceTree = "<group>"; };
 		6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release staging.xcconfig"; sourceTree = "<group>"; };
+		67F6F8A88507829B5FF61CD0 /* Pods-SunriseIntents.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntents.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntents/Pods-SunriseIntents.debug staging.xcconfig"; sourceTree = "<group>"; };
 		6B8E12D52C3FC7E6B9174358 /* Pods-Sunrise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release.xcconfig"; sourceTree = "<group>"; };
 		75C04D6F02B1AC2F2C0AC1EB /* Pods-SunriseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8080A3FE3BC2FE4CAC9A3A23 /* Pods-SunriseUITests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug prod.xcconfig"; sourceTree = "<group>"; };
+		8C9452F185DD88CD4C255337 /* Pods_SunriseIntents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseIntents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5E8D230203D5E6313ED72F /* Pods-SunriseTests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release staging.xcconfig"; sourceTree = "<group>"; };
 		8F8E56E096FD3BFA07010301 /* Pods-SunriseTests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -527,6 +574,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21FB4B0E21A587FC00F6BD80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E7C5D46C6BA3A07C072AE5B /* Pods_SunriseIntents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21FB4B1721A587FC00F6BD80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21FB4B1C21A587FC00F6BD80 /* IntentsUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -725,6 +788,7 @@
 		210BE8897C04FAD5205BE6F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */,
 				210BE9B158BE86C70C9F1F47 /* Common.swift */,
 				210BEB43EB567F74C591D677 /* AppRouting.swift */,
 				210BE70101007B36C753F74B /* Changeset.swift */,
@@ -986,6 +1050,8 @@
 				2199923C1DC9FAAB000E48FD /* ReservationNotification */,
 				2163EBB21DE8C26C00803640 /* Sunrise Watch */,
 				2163EBC11DE8C26C00803640 /* Sunrise Watch Extension */,
+				21FB4B1221A587FC00F6BD80 /* SunriseIntents */,
+				21FB4B1D21A587FC00F6BD80 /* SunriseIntentsUI */,
 				21CDC4951CE91D9B009D2638 /* Products */,
 				35E540A469E198E7F3ACD078 /* Pods */,
 				A5930317FAADB466B9D2E3C1 /* Frameworks */,
@@ -1000,6 +1066,8 @@
 				219992371DC9FAAB000E48FD /* ReservationNotification.appex */,
 				2163EBB11DE8C26C00803640 /* Sunrise Watch.app */,
 				2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */,
+				21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */,
+				21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1043,6 +1111,26 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		21FB4B1221A587FC00F6BD80 /* SunriseIntents */ = {
+			isa = PBXGroup;
+			children = (
+				21FB4B4121A7291C00F6BD80 /* SunriseIntents.entitlements */,
+				21FB4B1321A587FC00F6BD80 /* IntentHandler.swift */,
+				21FB4B1521A587FC00F6BD80 /* Info.plist */,
+			);
+			path = SunriseIntents;
+			sourceTree = "<group>";
+		};
+		21FB4B1D21A587FC00F6BD80 /* SunriseIntentsUI */ = {
+			isa = PBXGroup;
+			children = (
+				21FB4B1E21A587FC00F6BD80 /* IntentViewController.swift */,
+				21FB4B2021A587FC00F6BD80 /* MainInterface.storyboard */,
+				21FB4B2321A587FC00F6BD80 /* Info.plist */,
+			);
+			path = SunriseIntentsUI;
+			sourceTree = "<group>";
+		};
 		35E540A469E198E7F3ACD078 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,6 +1160,10 @@
 				00939BB1A611F998D130DD79 /* Pods-Sunrise Watch Extension.debug staging.xcconfig */,
 				60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */,
 				F6AE90BED5587F739F4B8F59 /* Pods-Sunrise Watch Extension.release staging.xcconfig */,
+				445F5290177768FBF9E7752F /* Pods-SunriseIntents.debug prod.xcconfig */,
+				67F6F8A88507829B5FF61CD0 /* Pods-SunriseIntents.debug staging.xcconfig */,
+				21127725A3FD84EDACCE2787 /* Pods-SunriseIntents.release prod.xcconfig */,
+				0BC7295C44E16267A5D0A524 /* Pods-SunriseIntents.release staging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1086,6 +1178,8 @@
 				2199923A1DC9FAAB000E48FD /* UserNotificationsUI.framework */,
 				461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */,
 				391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */,
+				21FB4B1B21A587FC00F6BD80 /* IntentsUI.framework */,
+				8C9452F185DD88CD4C255337 /* Pods_SunriseIntents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1165,6 +1259,8 @@
 			dependencies = (
 				219992441DC9FAAB000E48FD /* PBXTargetDependency */,
 				2163EBCA1DE8C26C00803640 /* PBXTargetDependency */,
+				21FB4B2521A587FC00F6BD80 /* PBXTargetDependency */,
+				21FB4B2821A587FC00F6BD80 /* PBXTargetDependency */,
 			);
 			name = Sunrise;
 			productName = Sunrise;
@@ -1191,13 +1287,48 @@
 			productReference = 21CDC4AA1CE91D9B009D2638 /* SunriseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		21FB4B1021A587FC00F6BD80 /* SunriseIntents */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21FB4B3321A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseIntents" */;
+			buildPhases = (
+				2984D02D47FB13F2B7D5747D /* [CP] Check Pods Manifest.lock */,
+				21FB4B0D21A587FC00F6BD80 /* Sources */,
+				21FB4B0E21A587FC00F6BD80 /* Frameworks */,
+				21FB4B0F21A587FC00F6BD80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunriseIntents;
+			productName = SunriseIntents;
+			productReference = 21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		21FB4B1921A587FC00F6BD80 /* SunriseIntentsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21FB4B3221A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseIntentsUI" */;
+			buildPhases = (
+				21FB4B1621A587FC00F6BD80 /* Sources */,
+				21FB4B1721A587FC00F6BD80 /* Frameworks */,
+				21FB4B1821A587FC00F6BD80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunriseIntentsUI;
+			productName = SunriseIntentsUI;
+			productReference = 21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		21CDC48C1CE91D9B009D2638 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Commercetools;
 				TargetAttributes = {
@@ -1273,6 +1404,24 @@
 						LastSwiftMigration = 1000;
 						TestTargetID = 21CDC4931CE91D9B009D2638;
 					};
+					21FB4B1021A587FC00F6BD80 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = H2968B9CHK;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					21FB4B1921A587FC00F6BD80 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = H2968B9CHK;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 21CDC48F1CE91D9B009D2638 /* Build configuration list for PBXProject "Sunrise" */;
@@ -1294,6 +1443,8 @@
 				219992361DC9FAAB000E48FD /* ReservationNotification */,
 				2163EBB01DE8C26C00803640 /* Sunrise Watch */,
 				2163EBBC1DE8C26C00803640 /* Sunrise Watch Extension */,
+				21FB4B1021A587FC00F6BD80 /* SunriseIntents */,
+				21FB4B1921A587FC00F6BD80 /* SunriseIntentsUI */,
 			);
 		};
 /* End PBXProject section */
@@ -1312,6 +1463,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21FB4B4421A8389200F6BD80 /* CommercetoolsStagingConfig.plist in Resources */,
 				2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */,
 				2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */,
 			);
@@ -1372,9 +1524,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21FB4B0F21A587FC00F6BD80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21FB4B4521A8389300F6BD80 /* CommercetoolsStagingConfig.plist in Resources */,
+				21FB4B4321A8388D00F6BD80 /* CommercetoolsProdConfig.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21FB4B1821A587FC00F6BD80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21FB4B2221A587FC00F6BD80 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2984D02D47FB13F2B7D5747D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SunriseIntents-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2CF7DD2A9C3C70DD19476E06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1519,7 +1706,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Commercetools-iOS/Commercetools.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift-iOS/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result-iOS/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
@@ -1528,7 +1714,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Commercetools.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
@@ -1560,6 +1745,7 @@
 				21E0809D21750E1A005FFFBC /* RecentOrdersInterfaceController.swift in Sources */,
 				21E0809F21751126005FFFBC /* OrderItemRowController.swift in Sources */,
 				21E201DF2176160E0057E651 /* OrderDetailsInterfaceController.swift in Sources */,
+				21FB4B3821A5E18000F6BD80 /* Intents.intentdefinition in Sources */,
 				211D9DEC1DECE3DC00167C23 /* Order.swift in Sources */,
 				21E0809B21750E05005FFFBC /* RecentOrdersInterfaceModel.swift in Sources */,
 				21E201E1217616220057E651 /* OrderDetailsInterfaceModel.swift in Sources */,
@@ -1622,6 +1808,7 @@
 				21162107203DB7D600EBE25D /* ReservationConfirmationViewController.swift in Sources */,
 				210C66F3207BC9D400902979 /* StoreFinderViewController.swift in Sources */,
 				219B84ED20391C720014BC4D /* ProductDescriptionCell.swift in Sources */,
+				21FB4B3721A5E18000F6BD80 /* Intents.intentdefinition in Sources */,
 				210BE1FC59FA761E46E72C64 /* CommonViewBinding.swift in Sources */,
 				21C9D8532156FB3F0029C459 /* ProfilePhotoViewController.swift in Sources */,
 				21F96DF12061A6F5004CD31A /* InlineProductOverviewViewController.swift in Sources */,
@@ -1715,6 +1902,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21FB4B0D21A587FC00F6BD80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21FB4B3F21A6CE6100F6BD80 /* Intents.intentdefinition in Sources */,
+				21FB4B4021A727E400F6BD80 /* Common.swift in Sources */,
+				21FB4B4221A82BBF00F6BD80 /* Order.swift in Sources */,
+				21FB4B1421A587FC00F6BD80 /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21FB4B1621A587FC00F6BD80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21FB4B1F21A587FC00F6BD80 /* IntentViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1737,6 +1943,16 @@
 			isa = PBXTargetDependency;
 			target = 21CDC4931CE91D9B009D2638 /* Sunrise */;
 			targetProxy = 21CDC4AB1CE91D9B009D2638 /* PBXContainerItemProxy */;
+		};
+		21FB4B2521A587FC00F6BD80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21FB4B1921A587FC00F6BD80 /* SunriseIntentsUI */;
+			targetProxy = 21FB4B2421A587FC00F6BD80 /* PBXContainerItemProxy */;
+		};
+		21FB4B2821A587FC00F6BD80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21FB4B1021A587FC00F6BD80 /* SunriseIntents */;
+			targetProxy = 21FB4B2721A587FC00F6BD80 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1819,6 +2035,23 @@
 				2132AFA020F8E64A00D7BE70 /* de */,
 			);
 			name = Profile.storyboard;
+			sourceTree = "<group>";
+		};
+		21FB4B2021A587FC00F6BD80 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21FB4B2121A587FC00F6BD80 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				21FB4B3921A5E18000F6BD80 /* Base */,
+				21FB4B3C21A5E19900F6BD80 /* de */,
+			);
+			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2890,6 +3123,554 @@
 			};
 			name = "Release Prod";
 		};
+		21FB4B2A21A587FC00F6BD80 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 445F5290177768FBF9E7752F /* Pods-SunriseIntents.debug prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = SunriseIntents/SunriseIntents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntents/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Prod";
+		};
+		21FB4B2B21A587FC00F6BD80 /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67F6F8A88507829B5FF61CD0 /* Pods-SunriseIntents.debug staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = SunriseIntents/SunriseIntents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntents/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Staging";
+		};
+		21FB4B2C21A587FC00F6BD80 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21127725A3FD84EDACCE2787 /* Pods-SunriseIntents.release prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = SunriseIntents/SunriseIntents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntents/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Prod";
+		};
+		21FB4B2D21A587FC00F6BD80 /* Release Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BC7295C44E16267A5D0A524 /* Pods-SunriseIntents.release staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = SunriseIntents/SunriseIntents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntents/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntents;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Staging";
+		};
+		21FB4B2E21A587FC00F6BD80 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Prod";
+		};
+		21FB4B2F21A587FC00F6BD80 /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Staging";
+		};
+		21FB4B3021A587FC00F6BD80 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Prod";
+		};
+		21FB4B3121A587FC00F6BD80 /* Release Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = H2968B9CHK;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Staging";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2955,6 +3736,28 @@
 				21A8EEA31CEC614C009A8CEB /* Debug Staging */,
 				21CDC4C31CE91D9B009D2638 /* Release Prod */,
 				21A8EEA71CEC615A009A8CEB /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Prod";
+		};
+		21FB4B3221A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseIntentsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21FB4B2E21A587FC00F6BD80 /* Debug Prod */,
+				21FB4B2F21A587FC00F6BD80 /* Debug Staging */,
+				21FB4B3021A587FC00F6BD80 /* Release Prod */,
+				21FB4B3121A587FC00F6BD80 /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Prod";
+		};
+		21FB4B3321A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseIntents" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21FB4B2A21A587FC00F6BD80 /* Debug Prod */,
+				21FB4B2B21A587FC00F6BD80 /* Debug Staging */,
+				21FB4B2C21A587FC00F6BD80 /* Release Prod */,
+				21FB4B2D21A587FC00F6BD80 /* Release Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = "Release Prod";

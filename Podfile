@@ -3,11 +3,12 @@ use_frameworks!
 
 def common_pods
   pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'master'
-  pod 'ReactiveCocoa', '~> 7.2'
+  pod 'ReactiveSwift'
 end
 
 target 'Sunrise' do
   common_pods
+  pod 'ReactiveCocoa', '~> 7.2'
   pod 'CardIO'
   pod 'IQKeyboardManagerSwift'
   pod 'SDWebImage'
@@ -18,15 +19,17 @@ target 'Sunrise' do
 end
 
 target 'ReservationNotification' do
-pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'master'
-pod 'ReactiveCocoa', '~> 7.2'
+  common_pods
   pod 'SDWebImage'
+end
+
+target 'SunriseIntents' do
+  common_pods
 end
 
 target 'Sunrise Watch Extension' do
   platform :watchos, '4.0'
-  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'master'
-  pod 'ReactiveSwift'
+  common_pods
   pod 'SDWebImage'
   pod 'NKWatchActivityIndicator'
 end
