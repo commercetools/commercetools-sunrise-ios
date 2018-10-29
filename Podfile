@@ -27,6 +27,12 @@ target 'SunriseIntents' do
   common_pods
 end
 
+target 'SunriseIntentsUI' do
+  common_pods
+  pod 'ReactiveCocoa'
+  pod 'SDWebImage'
+end
+
 target 'Sunrise Watch Extension' do
   platform :watchos, '4.0'
   common_pods
