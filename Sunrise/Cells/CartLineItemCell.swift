@@ -14,13 +14,13 @@ class CartLineItemCell: UITableViewCell {
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var colorView: UIView!
 
-    @IBOutlet weak var wishListButton: UIButton!
-    @IBOutlet weak var removeLineItemButton: UIButton!
+    @IBOutlet weak var wishListButton: UIButton?
+    @IBOutlet weak var removeLineItemButton: UIButton?
 
     @IBOutlet weak var oldAndActivePriceSpacingConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        wishListButton.setImage(#imageLiteral(resourceName: "wishlist_icon_active"), for: [.selected, .highlighted])
+        wishListButton?.setImage(#imageLiteral(resourceName: "wishlist_icon_active"), for: [.selected, .highlighted])
     }
 }

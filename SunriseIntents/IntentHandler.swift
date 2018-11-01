@@ -1,9 +1,5 @@
 //
-//  IntentHandler.swift
-//  SunriseIntents
-//
-//  Created by Nikola Mladenovic on 11/21/18.
-//  Copyright © 2018 Commercetools. All rights reserved.
+// Copyright (c) 2018 Commercetools. All rights reserved.
 //
 
 import Intents

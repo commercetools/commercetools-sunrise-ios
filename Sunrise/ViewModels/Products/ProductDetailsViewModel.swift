@@ -398,12 +398,3 @@ class ProductDetailsViewModel: BaseViewModel {
         }
     }
 }
-
-extension Attribute {
-    var valueLabel: String? {
-        return value.dictionary?["label"]?.string
-    }
-    var valueKey: String? {
-        return value.dictionary?["key"]?.string
-    }
-}

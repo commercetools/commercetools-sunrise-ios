@@ -213,7 +213,7 @@ class FiltersViewModel: BaseViewModel {
     }
 
     func color(at indexPath: IndexPath) -> UIColor? {
-        return FiltersViewModel.colorValues[colors[indexPath.item].key]
+        return UIColor.displayValues[colors[indexPath.item].key]
     }
 
     func isColorActive(at indexPath: IndexPath) -> Bool {

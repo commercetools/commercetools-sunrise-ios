@@ -216,17 +216,17 @@ extension CartViewController: UITableViewDataSource {
         lineItemCell.oldAndActivePriceSpacingConstraint.constant = viewModel.lineItemOldPrice(at: indexPath).isEmpty ? 0 : 4
         let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 14)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
         lineItemCell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.lineItemOldPrice(at: indexPath), attributes: oldPriceAttributes)
-        lineItemCell.wishListButton.isSelected = viewModel.isLineItemInWishList(at: indexPath)
-        disposables += lineItemCell.removeLineItemButton.reactive.controlEvents(.touchUpInside)
+        lineItemCell.wishListButton!.isSelected = viewModel.isLineItemInWishList(at: indexPath)
+        disposables += lineItemCell.removeLineItemButton!.reactive.controlEvents(.touchUpInside)
         .take(until: lineItemCell.reactive.prepareForReuse)
         .observeValues { [weak self] _ in
             SVProgressHUD.show()
             self?.viewModel?.deleteLineItemObserver.send(value: indexPath)
         }
-        disposables += lineItemCell.wishListButton.reactive.controlEvents(.touchUpInside)
+        disposables += lineItemCell.wishListButton!.reactive.controlEvents(.touchUpInside)
         .take(until: lineItemCell.reactive.prepareForReuse)
         .observeValues { [weak self] _ in
-            lineItemCell.wishListButton.isSelected = !lineItemCell.wishListButton.isSelected
+            lineItemCell.wishListButton!.isSelected = !lineItemCell.wishListButton!.isSelected
             self?.viewModel?.toggleWishListObserver.send(value: indexPath)
         }
         return lineItemCell
