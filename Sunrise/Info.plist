@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>162</string>
+	<string>180</string>
 	<key>Category cache expiration</key>
 	<integer>3600</integer>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -35,9 +35,14 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Search for products without having to type!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We use your photo library in order to look for product barcodes.</string>
+	<string>Photo library access is needed in order to upload your profile photo.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Search for products without having to type!</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>OrderProductIntent</string>
+		<string>com.commercetools.Sunrise.viewProductDetails</string>
+	</array>
 	<key>Product description attributes</key>
 	<array>
 		<string>designer</string>
