@@ -22,5 +22,6 @@ class CartLineItemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         wishListButton?.setImage(#imageLiteral(resourceName: "wishlist_icon_active"), for: [.selected, .highlighted])
+        colorView.layer.borderColor = UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0).cgColor
     }
 }
