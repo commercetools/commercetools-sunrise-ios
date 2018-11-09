@@ -72,7 +72,7 @@ class ProfileViewController: UIViewController {
             myReservationsViewController.viewModel?.pendingReservationDetailsId.value = (sender as? AppRouting.ShowReservationDetailsRequest)?.reservationId
         } else if let myOrdersViewController = segue.destination as? MyOrdersViewController {
             _ = myOrdersViewController.view
-            myOrdersViewController.viewModel?.pendingOrderNumber.value = (sender as? AppRouting.ShowOrderDetailsRequest)?.orderNumber
+            myOrdersViewController.viewModel?.pendingOrderDetailsRequest.value = (sender as? AppRouting.ShowOrderDetailsRequest)
         }
     }
     

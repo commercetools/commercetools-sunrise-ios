@@ -24,8 +24,9 @@ class AppRouting {
         let reservationId: String
     }
 
-    struct ShowOrderDetailsRequest {
-        let orderNumber: String
+    enum ShowOrderDetailsRequest {
+        case orderNumber(String)
+        case id(String)
     }
 
     static let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -72,9 +73,14 @@ class AppRouting {
         SunriseTabBarController.currentlyActive?.selectedIndex = TabIndex.profileTab.index
     }
 
-    static func showProductDetails(for sku: String) {
+    static func showProductDetails(sku: String) {
         showMainTab()
-        mainViewController?.viewModel?.productsViewModel.presentProductDetails(for: sku)
+        mainViewController?.viewModel?.productsViewModel.presentProductDetails(sku: sku)
+    }
+    
+    static func showProductDetails(productId: String) {
+        showMainTab()
+        mainViewController?.viewModel?.productsViewModel.presentProductDetails(productId: productId)
     }
 
     static func showCategory(id: String) {
@@ -110,9 +116,9 @@ class AppRouting {
         profileViewController?.performSegue(withIdentifier: "showMyReservations", sender: ShowReservationDetailsRequest(reservationId: reservationId))
     }
 
-    static func showOrderDetails(for orderNumber: String) {
+    static func showOrderDetails(with request: ShowOrderDetailsRequest) {
         showProfileTab()
-        profileViewController?.performSegue(withIdentifier: "showMyOrders", sender: ShowOrderDetailsRequest(orderNumber: orderNumber))
+        profileViewController?.performSegue(withIdentifier: "showMyOrders", sender: request)
     }
 
     static func search(query: String, filters: [URLQueryItem]) {
