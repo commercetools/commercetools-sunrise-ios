@@ -125,7 +125,7 @@ class ScannerViewController: UIViewController {
         .observe(on: UIScheduler())
         .startWithValues { scannedProduct in
             if let sku = scannedProduct?.allVariants.first(where: { $0.isMatchingVariant == true })?.sku {
-                AppRouting.showProductDetails(for: sku)
+                AppRouting.showProductDetails(sku: sku)
             }
         }
 

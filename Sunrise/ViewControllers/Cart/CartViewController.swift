@@ -209,6 +209,7 @@ extension CartViewController: UITableViewDataSource {
         lineItemCell.productNameLabel.text = viewModel.lineItemName(at: indexPath)
         lineItemCell.sizeLabel.text = viewModel.lineItemSize(at: indexPath)
         lineItemCell.colorView.backgroundColor = viewModel.lineItemColor(at: indexPath)
+        lineItemCell.colorView.layer.borderWidth = viewModel.lineItemColor(at: indexPath) == .white ? 1 : 0
         lineItemCell.quantityLabel.text = viewModel.lineItemQuantity(at: indexPath)
         lineItemCell.priceLabel.text = viewModel.lineItemPrice(at: indexPath)
         lineItemCell.priceLabel.textColor = viewModel.lineItemOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
@@ -246,7 +247,7 @@ extension CartViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let sku = viewModel?.lineItemSku(at: indexPath) else { return }
-        AppRouting.showProductDetails(for: sku)
+        AppRouting.showProductDetails(sku: sku)
     }
 }
 

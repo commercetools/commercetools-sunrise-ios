@@ -83,6 +83,6 @@ extension InlineProductOverviewViewController: UICollectionViewDataSource {
 extension InlineProductOverviewViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let sku = viewModel?.sku(at: indexPath) else { return }
-        AppRouting.showProductDetails(for: sku)
+        AppRouting.showProductDetails(sku: sku)
     }
 }
