@@ -144,6 +144,6 @@ extension WishListViewController: UITableViewDataSource {
 extension WishListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let sku = viewModel?.lineItemSku(at: indexPath) else { return }
-        AppRouting.showProductDetails(for: sku)
+        AppRouting.showProductDetails(sku: sku)
     }
 }

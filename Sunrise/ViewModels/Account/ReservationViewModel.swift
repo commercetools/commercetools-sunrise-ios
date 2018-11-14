@@ -99,10 +99,14 @@ struct Notification {
     
     struct Category {
         static let reservationConfirmation = "reservation_confirmation"
+        static let productDiscountSet = "product-discount-set"
+        static let orderConfirmed = "order-confirmed"
+        static let orderShipped = "order-shipped"
     }
     
     struct Action {
         static let view = "viewAction"
         static let getDirections = "getDirectionsAction"
+        static let addToCart = "addToCart"
     }
 }
