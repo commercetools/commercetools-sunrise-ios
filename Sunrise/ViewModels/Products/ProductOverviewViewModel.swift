@@ -325,9 +325,9 @@ class ProductOverviewViewModel: BaseViewModel {
         }
     }
 
-    // MARK: - Presenting product details from the universal links
+    // MARK: - Presenting product details from the universal links and notification actions
 
-    func presentProductDetails(for sku: String) {
+    func presentProductDetails(sku: String) {
         isLoading.value = true
         ProductProjection.search(filters: ["variants.sku:\"\(sku)\""], markMatchingVariants: true) { result in
             if let product = result.model?.results.first, result.isSuccess {
@@ -336,6 +336,19 @@ class ProductOverviewViewModel: BaseViewModel {
             } else if result.model?.count == 0 {
                 super.alertMessageObserver.send(value: NSLocalizedString("The product could not be found", comment: "Product not found"))
 
+            } else if let errors = result.errors as? [CTError], result.isFailure {
+                super.alertMessageObserver.send(value: self.alertMessage(for: errors))
+            }
+            self.isLoading.value = false
+        }
+    }
+    
+    func presentProductDetails(productId: String) {
+        isLoading.value = true
+        ProductProjection.byId(productId) { result in
+            if let product = result.model, result.isSuccess {
+                self.presentProductDetailsObserver.send(value: ProductDetailsViewModel(product: product))
+                
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }

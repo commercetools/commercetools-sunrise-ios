@@ -12,7 +12,7 @@ class MyOrdersViewModel: BaseViewModel {
     
     // Inputs
     let refreshObserver: Signal<Void, NoError>.Observer
-    let pendingOrderNumber = MutableProperty<String?>(nil)
+    let pendingOrderDetailsRequest = MutableProperty<AppRouting.ShowOrderDetailsRequest?>(nil)
     
     // Outputs
     let pendingOrderDetails: Signal<OrderDetailsViewModel, NoError>
@@ -35,7 +35,7 @@ class MyOrdersViewModel: BaseViewModel {
 
         super.init()
 
-        disposables += pendingOrderNumber.producer
+        disposables += pendingOrderDetailsRequest.producer
         .filter { $0 != nil }
         .startWithValues { [unowned self] in
             self.presentDetailsForOrder(with: $0!)
@@ -72,22 +72,32 @@ class MyOrdersViewModel: BaseViewModel {
 
     // MARK: - Orders retrieval
 
-    private func presentDetailsForOrder(with number: String) {
+    private func presentDetailsForOrder(with request: AppRouting.ShowOrderDetailsRequest) {
         isLoading.value = true
-        Order.query(predicates: ["orderNumber = \"\(number)\""], limit: 1) { result in
-            if let order = result.model?.results.first, result.isSuccess {
-                self.presentOrderDetailsObserver.send(value: OrderDetailsViewModel(order: order))
-            }
-            self.isLoading.value = false
+        switch request {
+            case .orderNumber(let number):
+                Order.query(predicates: ["orderNumber = \"\(number)\""], limit: 1) { result in
+                    if let order = result.model?.results.first, result.isSuccess {
+                        self.presentOrderDetailsObserver.send(value: OrderDetailsViewModel(order: order))
+                    }
+                    self.isLoading.value = false
+                }
+            case .id(let id):
+                Order.byId(id) { result in
+                    if let order = result.model, result.isSuccess {
+                        self.presentOrderDetailsObserver.send(value: OrderDetailsViewModel(order: order))
+                    }
+                    self.isLoading.value = false
+                }
         }
     }
 
     private func retrieveOrders() {
         isLoading.value = true
         // TODO Add paging
-        Order.query(sort: ["createdAt desc"], limit: 50) { result in
+        Order.query(predicates: ["custom(fields(isReservation != true))"], sort: ["createdAt desc"], limit: 50) { result in
             if let orders = result.model?.results, result.isSuccess {
-                self.orders = orders.filter { $0.isReservation != true }
+                self.orders = orders
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 super.alertMessageObserver.send(value: self.alertMessage(for: errors))
             }
