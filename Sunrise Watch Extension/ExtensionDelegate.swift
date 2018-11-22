@@ -7,9 +7,14 @@ import Commercetools
 import UserNotifications
 import CoreLocation
 import MapKit
+import ReactiveSwift
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
+    var mainMenuInterfaceController: MainMenuInterfaceController? {
+        return WKExtension.shared().rootInterfaceController as? MainMenuInterfaceController
+    }
+
     private var locationManager: CLLocationManager?
 
     func applicationDidFinishLaunching() {
@@ -60,6 +65,21 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
 
+    private func presentProductDetails(productId: String) {
+        guard let mainMenuInterfaceController = mainMenuInterfaceController else { return }
+        mainMenuInterfaceController.popToRootController()
+        DispatchQueue.main.async {
+            mainMenuInterfaceController.interfaceModel?.showProductDetails(productId: productId)
+        }
+    }
+
+    private func presentOrderDetails(orderId: String) {
+        guard let mainMenuInterfaceController = mainMenuInterfaceController else { return }
+        mainMenuInterfaceController.popToRootController()
+        DispatchQueue.main.async {
+            mainMenuInterfaceController.interfaceModel?.showOrderDetails(orderId: orderId)
+        }
+    }
 }
 
 let userLatitudeKey = "userLatitudeKey"
@@ -78,7 +98,9 @@ extension ExtensionDelegate: CLLocationManagerDelegate {
 extension ExtensionDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let reservationId = response.notification.request.content.userInfo["reservation-id"] as? String, response.actionIdentifier == Notification.Action.getDirections {
+        let userInfo = response.notification.request.content.userInfo
+
+        if let reservationId = userInfo["reservation-id"] as? String, response.actionIdentifier == Notification.Action.getDirections {
             Order.byId(reservationId, expansion: ["lineItems[0].distributionChannel"]) { result in
                 guard let reservation = result.model else { return }
                 let reservationInterfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
@@ -87,6 +109,22 @@ extension ExtensionDelegate: UNUserNotificationCenterDelegate {
                 destination.name = reservationInterfaceModel.storeName
                 MKMapItem.openMaps(with: [destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
                 completionHandler()
+            }
+        } else if let productId = userInfo["productId"] as? String, response.actionIdentifier == Notification.Action.view {
+            DispatchQueue.main.async {
+                self.presentProductDetails(productId: productId)
+                completionHandler()
+            }
+        } else if let orderId = userInfo["orderId"] as? String, response.actionIdentifier == Notification.Action.view {
+            DispatchQueue.main.async {
+                self.presentOrderDetails(orderId: orderId)
+                completionHandler()
+            }
+        } else if let productId = userInfo["productId"] as? String, let variantIdString = userInfo["variantId"] as? String, let variantId = Int(variantIdString), response.actionIdentifier == Notification.Action.addToCart {
+            var disposable: Disposable?
+            disposable = ProductProjectionDetailsInterfaceModel.addToCart(productId: productId, variantId: variantId).startWithCompleted {
+                completionHandler()
+                disposable?.dispose()
             }
         }
     }

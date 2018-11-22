@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // PDP (e.g https://demo.commercetools.com/en/brunello-cucinelli-coat-mf9284762-cream-M0E20000000DQR5.html)
             } else if let sku = pathComponents.last?.components(separatedBy: "-").last, sku.count > 5, sku.contains(".html") {
-                AppRouting.showProductDetails(for: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
+                AppRouting.showProductDetails(sku: String(sku[...String.Index(encodedOffset: sku.count - 6)]))
                 return true
 
             // Orders (e.g https://demo.commercetools.com/en/user/orders)
@@ -73,21 +73,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // Order details (e.g https://demo.commercetools.com/en/user/orders/87896195?)
             } else if pathComponents.contains("orders"), let orderNumber = pathComponents.last, !orderNumber.contains("orders") {
-                AppRouting.showOrderDetails(for: orderNumber)
+                AppRouting.showOrderDetails(with: AppRouting.ShowOrderDetailsRequest.orderNumber(orderNumber))
 
             // Category overview (e.g https://demo.commercetools.com/en/women-clothing-blazer)
             } else if pathComponents.count == 3, pathComponents[1].count == 2 {
                 AppRouting.showCategory(locale: pathComponents[1], slug: pathComponents[2])
             }
         } else if userActivity.activityType == "com.commercetools.Sunrise.viewProductDetails", let sku = userActivity.userInfo?["sku"] as? String {
-            AppRouting.showProductDetails(for: sku)
+            AppRouting.showProductDetails(sku: sku)
+
+        } else if userActivity.activityType == "com.commercetools.Sunrise.viewOrderDetails", let id = userActivity.userInfo?["id"] as? String {
+            AppRouting.showOrderDetails(with: AppRouting.ShowOrderDetailsRequest.id(id))
         }
         return false
     }
 
-    fileprivate func handleNotification(notificationInfo: [AnyHashable: Any]) {
-        if let reservationId = notificationInfo["reservation-id"] as? String {
+    fileprivate func handleNotification(response: UNNotificationResponse, completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let reservationId = userInfo["reservation-id"] as? String {
             AppRouting.showReservationDetails(for: reservationId)
+            completionHandler()
+        } else if let productId = userInfo["productId"] as? String, response.actionIdentifier == Notification.Action.view {
+            AppRouting.showProductDetails(productId: productId)
+            completionHandler()
+
+        } else if let productId = userInfo["productId"] as? String, let variantIdString = userInfo["variantId"] as? String, let variantId = Int(variantIdString), let cartViewModel = AppRouting.cartViewController?.viewModel, response.actionIdentifier == Notification.Action.addToCart {
+            let disposable = cartViewModel.addToCartAction.apply((productId, variantId)).startWithCompleted {
+                completionHandler()
+            }
+            cartViewModel.disposables.add(disposable)
+
+        } else if let orderId = userInfo["orderId"] as? String {
+            AppRouting.showOrderDetails(with: .id(orderId))
+            completionHandler()
         }
     }
 
@@ -123,10 +141,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func addNotificationCategories() {
         let viewAction = UNNotificationAction(identifier: Notification.Action.view, title: NSLocalizedString("View", comment: "View"), options: [.authenticationRequired, .foreground])
         let getDirectionsAction = UNNotificationAction(identifier: Notification.Action.getDirections, title: NSLocalizedString("Get Directions", comment: "Get Directions"), options: [.foreground])
+        let addToCartAction = UNNotificationAction(identifier: Notification.Action.addToCart, title: NSLocalizedString("Add to cart", comment: "Add to cart"))
 
         let reservationConfirmationCategory = UNNotificationCategory(identifier: Notification.Category.reservationConfirmation, actions: [viewAction, getDirectionsAction], intentIdentifiers: [], options: [])
+        let productDiscountSetCategory = UNNotificationCategory(identifier: Notification.Category.productDiscountSet, actions: [viewAction, addToCartAction], intentIdentifiers: [], options: [])
+        let orderConfirmedCategory = UNNotificationCategory(identifier: Notification.Category.orderConfirmed, actions: [viewAction], intentIdentifiers: [], options: [])
+        let orderShippedCategory = UNNotificationCategory(identifier: Notification.Category.orderShipped, actions: [viewAction], intentIdentifiers: [], options: [])
 
-        UNUserNotificationCenter.current().setNotificationCategories([reservationConfirmationCategory])
+        UNUserNotificationCenter.current().setNotificationCategories([reservationConfirmationCategory, productDiscountSetCategory, orderConfirmedCategory, orderShippedCategory])
     }
 }
 
@@ -134,8 +156,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.handleNotification(notificationInfo: response.notification.request.content.userInfo)
-            completionHandler()
+            self.handleNotification(response: response, completionHandler: completionHandler)
         }
     }
     
