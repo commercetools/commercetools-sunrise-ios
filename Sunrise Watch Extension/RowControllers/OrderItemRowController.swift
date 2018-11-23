@@ -6,7 +6,9 @@ import WatchKit
 
 class OrderItemRowController: NSObject {
     
-    @IBOutlet var orderNumberLabel: WKInterfaceLabel!
+    @IBOutlet var itemsLabel: WKInterfaceLabel!
+    @IBOutlet var orderStatusLabel: WKInterfaceLabel!
     @IBOutlet var orderDescriptionLabel: WKInterfaceLabel!
+    @IBOutlet var orderTotalLabel: WKInterfaceLabel!
     static let identifier = "OrderItemRowType"
 }
