@@ -6,7 +6,6 @@ import WatchKit
 import Foundation
 import ReactiveSwift
 import SDWebImage
-import NKWatchActivityIndicator
 
 class RecentOrdersInterfaceController: WKInterfaceController {
     
@@ -14,11 +13,11 @@ class RecentOrdersInterfaceController: WKInterfaceController {
     @IBOutlet var listTable: WKInterfaceTable!
     
     @IBOutlet var loadingGroup: WKInterfaceGroup!
-    @IBOutlet var leftLoadingDot: WKInterfaceImage!
-    @IBOutlet var rightLoadingDot: WKInterfaceImage!
+    @IBOutlet var loadingImage: WKInterfaceImage!
+    @IBOutlet var emptyStateLabel: WKInterfaceLabel!
+    @IBOutlet var loadMoreButton: WKInterfaceButton!
     
     private let disposables = CompositeDisposable()
-    private var activityAnimation: NKWActivityIndicatorAnimation?
     
     private var interfaceModel: RecentOrdersInterfaceModel? {
         didSet {
@@ -33,12 +32,13 @@ class RecentOrdersInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        activityAnimation = NKWActivityIndicatorAnimation(type: .twoDotsAnimation, controller: self, images: [leftLoadingDot, rightLoadingDot])
-        
-        listGroup.setAlpha(0)
-        listGroup.setHidden(true)
-        
+        listGroup.setRelativeHeight(1, withAdjustment: 0)
         interfaceModel = RecentOrdersInterfaceModel()
+    }
+
+    override func didAppear() {
+        super.didAppear()
+        invalidateUserActivity()
     }
     
     override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
@@ -51,36 +51,60 @@ class RecentOrdersInterfaceController: WKInterfaceController {
         disposables += interfaceModel.isLoading.producer
         .skipRepeats()
         .observe(on: UIScheduler())
-        .startWithValues({ [weak self] isLoading in
+        .startWithValues { [weak self] isLoading in
             self?.animate(withDuration: 0.3) {
-                [self?.listGroup, self?.loadingGroup].forEach { $0?.setAlpha(0) }
+                self?.loadingGroup.setAlpha(0)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self?.listGroup.setHidden(isLoading)
                 self?.loadingGroup.setHidden(!isLoading)
                 self?.animate(withDuration: 0.3) {
-                    self?.listGroup.setAlpha(isLoading ? 0 : 1)
                     self?.loadingGroup.setAlpha(isLoading ? 1 : 0)
                 }
                 if isLoading {
-                    self?.activityAnimation?.startAnimating()
+                    self?.loadingImage.startAnimating()
                 } else {
-                    self?.activityAnimation?.stopAnimating()
+                    self?.loadingImage.stopAnimating()
+                    self?.listGroup.sizeToFitHeight()
+                    self?.loadingGroup.setVerticalAlignment(.top)
                 }
             }
-        })
+        }
+        
+        disposables += interfaceModel.isLoadMoreHidden.producer
+        .observe(on: UIScheduler())
+        .startWithValues { [weak self] in
+            self?.loadMoreButton.setHidden($0)
+        }
         
         disposables += interfaceModel.numberOfRows.producer
+        .skip(first: 1)
         .observe(on: UIScheduler())
-        .startWithValues({ [weak self] numberOfRows in
+        .startWithValues { [weak self] numberOfRows in
+            self?.loadMoreButton.setHidden(self?.interfaceModel?.isLoadMoreHidden.value ?? true)
             self?.listTable.setNumberOfRows(numberOfRows, withRowType: OrderItemRowController.identifier)
+            self?.animate(withDuration: 0.3) {
+                self?.emptyStateLabel.setAlpha(numberOfRows == 0 ? 1 : 0)
+            }
             guard let interfaceModel = self?.interfaceModel, numberOfRows > 0 else { return }
             (0...numberOfRows - 1).forEach { row in
                 if let rowController = self?.listTable.rowController(at: row) as? OrderItemRowController {
-                    rowController.orderNumberLabel.setText(interfaceModel.orderNumber(at: row))
-                    rowController.orderDescriptionLabel.setText(interfaceModel.orderDescription(at: row))
+                    rowController.orderStatusLabel.setAttributedText(interfaceModel.orderStatus(at: row))
+                    rowController.itemsLabel.setText(interfaceModel.items(at: row))
+                    rowController.orderDescriptionLabel.setAttributedText(interfaceModel.orderDescription(at: row))
+                    rowController.orderTotalLabel.setText(interfaceModel.orderTotal(at: row))
                 }
             }
-        })
+        }
+    }
+    
+    @IBAction func loadMore() {
+        interfaceModel?.loadMoreObserver.send(value: ())
+        animate(withDuration: 0.3) {
+            self.loadMoreButton.setAlpha(0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.loadMoreButton.setHidden(true)
+                self.loadMoreButton.setAlpha(1)
+            }
+        }
     }
 }

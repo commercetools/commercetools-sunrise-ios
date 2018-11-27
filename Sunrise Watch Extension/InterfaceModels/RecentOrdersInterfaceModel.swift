@@ -10,25 +10,32 @@ import Commercetools
 class RecentOrdersInterfaceModel {
     
     // Inputs
+    let loadMoreObserver: Signal<Void, NoError>.Observer
     
     // Outputs
     let isLoading: MutableProperty<Bool>
     let numberOfRows: MutableProperty<Int>
-//    let presentOrderSignal: Signal<ProductDetailsInterfaceModel, NoError>
+    let isLoadMoreHidden = MutableProperty(true)
     
-//    private let presentOrderObserver: Signal<ProductDetailsInterfaceModel, NoError>.Observer
     private var orders = [Order]()
+    private var totalOrders: UInt = 0
     private let disposables = CompositeDisposable()
     
     // MARK: - Lifecycle
     
     init() {
+        let (loadMoreSignal, loadMoreObserver) = Signal<Void, NoError>.pipe()
+        self.loadMoreObserver = loadMoreObserver
+        
         isLoading = MutableProperty(true)
         numberOfRows = MutableProperty(0)
         
-//        (presentOrderSignal, presentOrderObserver) = Signal<ProductDetailsInterfaceModel, NoError>.pipe()
+        disposables += loadMoreSignal
+        .observeValues { [weak self] in
+            self?.retrieveOrders()
+        }
         
-        retrieveRecentOrders()
+        retrieveOrders()
     }
     
     deinit {
@@ -37,14 +44,34 @@ class RecentOrdersInterfaceModel {
     
     // MARK: - Data Source
     
-    func orderNumber(at row: Int) -> String {
-        return String(format: NSLocalizedString("Order # %@", comment: "Order Number"), orders[row].orderNumber ?? "—")
+    func orderStatus(at row: Int) -> NSAttributedString? {
+        let orderState = orders[row].orderState
+        let shipmentState = orders[row].shipmentState
+        let color = OrderDetailsInterfaceModel.color(for: (orderState, shipmentState))
+        let status = shipmentState == .shipped ? shipmentState!.rawValue : orderState.rawValue
+        let attributes: [NSAttributedString.Key : Any] = [.font: UIFont.preferredFont(forTextStyle: .caption2), .foregroundColor: color]
+        return NSAttributedString(string: status, attributes: attributes)
     }
     
-    func orderDescription(at row: Int) -> String {
+    func items(at row: Int) -> String {
+        let lineItemsCount = orders[row].lineItems.count
+        var items = lineItemsCount > 1 ? NSLocalizedString("Items", comment: "Items") : NSLocalizedString("Item", comment: "Item")
+        items.append(" (\(lineItemsCount))")
+        return items
+    }
+    
+    func orderDescription(at row: Int) -> NSAttributedString? {
         let order = orders[row]
         let firstItemName = order.lineItems.first?.name.localizedString ?? ""
-        return order.lineItems.count > 1 ? String(format: NSLocalizedString("%@ and %@ more", comment: "Order Summary"), firstItemName, "\(order.lineItems.count - 1)") : firstItemName
+        let description = NSMutableAttributedString(string: firstItemName, attributes: [.font: UIFont.preferredFont(forTextStyle: .caption2), .foregroundColor: UIColor.white])
+        if order.lineItems.count > 1 {
+            description.append(NSAttributedString(string: String(format: NSLocalizedString(" + %@ more", comment: "Order Summary"), "\(order.lineItems.count - 1)"), attributes: [.font: UIFont.preferredFont(forTextStyle: .footnote), .foregroundColor: UIColor(red: 0.68, green: 0.71, blue: 0.75, alpha: 1.0)]))
+        }
+        return description
+    }
+    
+    func orderTotal(at row: Int) -> String {
+        return orders[row].totalPrice.description
     }
     
     func orderDetailsInterfaceModel(for row: Int) -> OrderDetailsInterfaceModel {
@@ -53,14 +80,20 @@ class RecentOrdersInterfaceModel {
     
     // MARK: - Wish list retrieval
     
-    private func retrieveRecentOrders() {
+    private func retrieveOrders() {
         isLoading.value = true
+        let limit: UInt = 5
+        let offset = UInt(orders.count)
+        guard offset == 0 || offset < totalOrders else { return }
         let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve recent orders")
-        Order.query(sort: ["createdAt desc"], limit: 4) { result in
-            if let orders = result.model?.results, result.isSuccess {
+        Order.query(predicates: ["custom(fields(isReservation != true))"], sort: ["createdAt desc"], limit: limit, offset: offset) { result in
+            if let orders = result.model?.results, let total = result.model?.total, let offset = result.model?.offset, result.isSuccess {
                 DispatchQueue.main.async {
-                    self.orders = orders
-                    self.numberOfRows.value = orders.count
+                    guard offset == self.orders.count else { return }
+                    self.orders += orders
+                    self.totalOrders = total
+                    self.numberOfRows.value = self.orders.count
+                    self.isLoadMoreHidden.value = self.orders.count >= total
                 }
                 
             } else if let errors = result.errors as? [CTError], result.isFailure {
