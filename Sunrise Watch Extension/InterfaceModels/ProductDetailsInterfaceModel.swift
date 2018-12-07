@@ -6,23 +6,27 @@ import ReactiveSwift
 import Result
 import Commercetools
 
-protocol ProductDetailsInterfaceModel {
+protocol ProductDetailsInterfaceModel: class {
+    
     // Inputs
     var moveToCartAction: Action<Void, Void, CTError>! { get }
+    var toggleWishListObserver: Signal<Void, NoError>.Observer { get }
     
     // Outputs
     var productName: String { get }
     var productImageUrl: String { get }
-    var productPrice: String? { get }
+    var productPrice: String { get }
     var productOldPrice: String { get }
     var userActivityInfo: [AnyHashable: Any]? { get }
-    var isInWishList: Bool { get }
+    var isInWishList: MutableProperty<Bool> { get }
+    var isWishListButtonEnabled: MutableProperty<Bool> { get }
 }
 
 class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
 
     // Inputs
     var moveToCartAction: Action<Void, Void, CTError>!
+    let toggleWishListObserver: Signal<Void, NoError>.Observer
 
     // Outputs
     var productName: String {
@@ -31,7 +35,7 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
     var productImageUrl: String {
         return product.displayVariant()?.images?.first?.url ?? ""
     }
-    var productPrice: String? {
+    var productPrice: String {
         guard let variant = product.displayVariant(),
               let price = variant.price() else { return "" }
 
@@ -51,9 +55,8 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
         guard let sku = product.displayVariant()?.sku else { return nil }
         return ["sku": sku]
     }
-    var isInWishList: Bool {
-        return mainMenuInterfaceModel?.activeWishList.value?.lineItems.contains(where: { $0.productId == product.id && $0.variantId == product.displayVariant()?.id ?? product.masterVariant.id }) == true
-    }
+    let isInWishList = MutableProperty(false)
+    let isWishListButtonEnabled = MutableProperty(true)
 
     private weak var mainMenuInterfaceModel: MainMenuInterfaceModel?
     private let product: ProductProjection
@@ -64,27 +67,116 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
     init(product: ProductProjection, mainMenuInterfaceModel: MainMenuInterfaceModel? = nil) {
         self.product = product
         self.mainMenuInterfaceModel = mainMenuInterfaceModel
+        
+        let (toggleWishListSignal, toggleWishListObserver) = Signal<Void, NoError>.pipe()
+        self.toggleWishListObserver = toggleWishListObserver
 
         moveToCartAction = Action(enabledIf: Property(value: true)) { [unowned self] _ in
-            return self.addToCart()
+            return ProductProjectionDetailsInterfaceModel.addToCart(productId: self.product.id, variantId: self.product.displayVariant()?.id ?? self.product.masterVariant.id)
+        }
+        
+        guard let mainMenuInterfaceModel = mainMenuInterfaceModel else { return }
+        
+        disposables += isInWishList <~ mainMenuInterfaceModel.wishListLineItems.map { $0.contains(where: { $0.productId == product.id && $0.variantId == product.displayVariant()?.id ?? product.masterVariant.id }) == true }
+        
+        disposables += isWishListButtonEnabled <~ mainMenuInterfaceModel.isUpdatingWishList.map { !$0 }
+        
+        disposables += toggleWishListSignal
+        .observeValues { [unowned self] in
+            self.isWishListButtonEnabled.value = false
+            DispatchQueue.global(qos: .userInitiated).async {
+                mainMenuInterfaceModel.toggleWishListObserver.send(value: (self.product.id, self.product.displayVariant()?.id ?? self.product.masterVariant.id))
+            }
         }
     }
     
     deinit {
         disposables.dispose()
     }
+}
+
+class LineItemDetailsInterfaceModel: ProductDetailsInterfaceModel {
     
-    // MARK: - Add to cart
+    // Inputs
+    var moveToCartAction: Action<Void, Void, CTError>!
+    let toggleWishListObserver: Signal<Void, NoError>.Observer
     
-    private func addToCart() -> SignalProducer<Void, CTError> {
-        return SignalProducer { [weak self] observer, disposable in
-            guard let productId = self?.product.id, let variantId = self?.product.displayVariant()?.id ?? self?.product.masterVariant.id else {
-                observer.sendCompleted()
-                return
+    // Outputs
+    var productName: String {
+        return lineItem.name.localizedString ?? ""
+    }
+    var productImageUrl: String {
+        return lineItem.variant?.images?.first?.url ?? ""
+    }
+    var productPrice: String {
+        guard let variant = lineItem.variant,
+            let price = variant.price() else { return "" }
+        
+        if let discounted = price.discounted?.value {
+            return discounted.description
+        } else {
+            return price.value.description
+        }
+    }
+    var productOldPrice: String {
+        guard let variant = lineItem.variant,
+            let price = variant.price(), price.discounted?.value != nil else { return "" }
+        
+        return price.value.description
+    }
+    var userActivityInfo: [AnyHashable: Any]? {
+        guard let sku = lineItem.variant?.sku else { return nil }
+        return ["sku": sku]
+    }
+    let isInWishList = MutableProperty(false)
+    let isWishListButtonEnabled = MutableProperty(true)
+    
+    private weak var mainMenuInterfaceModel: MainMenuInterfaceModel?
+    private let lineItem: WishListLineItem
+    private let disposables = CompositeDisposable()
+    
+    // MARK: - Lifecycle
+    
+    init(lineItem: WishListLineItem, mainMenuInterfaceModel: MainMenuInterfaceModel? = nil) {
+        self.lineItem = lineItem
+        self.mainMenuInterfaceModel = mainMenuInterfaceModel
+        
+        let (toggleWishListSignal, toggleWishListObserver) = Signal<Void, NoError>.pipe()
+        self.toggleWishListObserver = toggleWishListObserver
+        
+        moveToCartAction = Action(enabledIf: Property(value: true)) { [unowned self] _ in
+            guard let variantId = self.lineItem.variantId else {
+                return SignalProducer.empty
             }
+            return LineItemDetailsInterfaceModel.addToCart(productId: self.lineItem.productId, variantId: variantId)
+        }
+        
+        guard let mainMenuInterfaceModel = mainMenuInterfaceModel else { return }
+        
+        disposables += isInWishList <~ mainMenuInterfaceModel.wishListLineItems.map { $0.contains(where: { $0.productId == lineItem.productId && $0.variantId == lineItem.variantId }) == true }
+        
+        disposables += isWishListButtonEnabled <~ mainMenuInterfaceModel.isUpdatingWishList.map { !$0 }
+        
+        disposables += toggleWishListSignal
+        .observeValues { [unowned self] in
+            self.isWishListButtonEnabled.value = false
+            DispatchQueue.global(qos: .userInitiated).async {
+                mainMenuInterfaceModel.toggleWishListObserver.send(value: (lineItem.productId, lineItem.variantId))
+            }
+        }
+    }
+    
+    deinit {
+        disposables.dispose()
+    }
+}
+
+extension ProductDetailsInterfaceModel {
+    static func addToCart(productId: String, variantId: Int) -> SignalProducer<Void, CTError> {
+        return SignalProducer { observer, disposable in
             DispatchQueue.global().async {
                 let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Add to cart request")
-                ProductProjectionDetailsInterfaceModel.queryForActiveCart(observer: observer, activity: activity) { cart in
+                queryForActiveCart(observer: observer, activity: activity) { cart in
                     let actions = [CartUpdateAction.addLineItem(lineItemDraft: LineItemDraft(productVariantSelection: .productVariant(productId: productId, variantId: variantId), quantity: 1))]
                     Cart.update(cart.id, actions: UpdateActions<CartUpdateAction>(version: cart.version, actions: actions), result: { result in
                         if result.isSuccess {
@@ -101,7 +193,7 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
         }
     }
     
-    static func queryForActiveCart(observer: Signal<Void, CTError>.Observer, activity: NSObjectProtocol, completion: ((Cart)->())? = nil) {
+    private static func queryForActiveCart(observer: Signal<Void, CTError>.Observer, activity: NSObjectProtocol, completion: ((Cart)->())? = nil) {
         Cart.active(result: { result in
             if let cart = result.model, result.isSuccess {
                 // Run recalculation before we present the refreshed cart

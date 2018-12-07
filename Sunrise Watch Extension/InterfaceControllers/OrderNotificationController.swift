@@ -9,9 +9,14 @@ import ReactiveSwift
 
 class OrderNotificationController: WKUserNotificationInterfaceController {
     
-    @IBOutlet var orderNumberLabel: WKInterfaceLabel!
-    @IBOutlet var shippingAddressLabel: WKInterfaceLabel!
+
+    @IBOutlet var lineItemsLabel: WKInterfaceLabel!
+    @IBOutlet var firstLineItemQuantityLabel: WKInterfaceLabel!
+    @IBOutlet var firstLineItemNameLabel: WKInterfaceLabel!
+    @IBOutlet var moreLineItemsLabel: WKInterfaceLabel!
     @IBOutlet var orderTotalLabel: WKInterfaceLabel!
+    @IBOutlet var expectedDeliveryLabel: WKInterfaceLabel?
+    @IBOutlet var orderDateLabel: WKInterfaceLabel?
     
     override init() {
         if let configuration = Project.config {
@@ -27,9 +32,14 @@ class OrderNotificationController: WKUserNotificationInterfaceController {
                 if let order = result.model, result.isSuccess {
                     let interfaceModel = OrderDetailsInterfaceModel(order: order)
                     DispatchQueue.main.async {
-                        self.orderNumberLabel.setText(interfaceModel.orderNumber)
-                        self.shippingAddressLabel.setText(interfaceModel.shippingAddress)
+                        self.lineItemsLabel.setText(interfaceModel.items)
+                        self.moreLineItemsLabel.setText(interfaceModel.moreLineItems)
                         self.orderTotalLabel.setText(interfaceModel.orderTotal)
+                        guard interfaceModel.numberOfLineItems > 0 else { return }
+                        self.firstLineItemQuantityLabel.setText(interfaceModel.quantity(at: 0))
+                        self.firstLineItemNameLabel.setText(interfaceModel.productName(at: 0))
+                        self.expectedDeliveryLabel?.setText(interfaceModel.expectedDelivery)
+                        self.orderDateLabel?.setText(interfaceModel.orderDate)
                         completionHandler(.custom)
                     }
 
