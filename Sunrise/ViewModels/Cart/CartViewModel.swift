@@ -33,7 +33,7 @@ class CartViewModel: BaseViewModel {
     private let performSegueObserver: Signal<String, NoError>.Observer
     private var shippingAddress: Address? // Used for Apple Pay checkout, for authenticated customers
     private var billingAddress: Address? // Used for Apple Pay checkout, for authenticated customers
-    private let disposables = CompositeDisposable()
+    let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
