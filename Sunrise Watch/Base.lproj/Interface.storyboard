@@ -12,8 +12,36 @@
         <!--MainMenuInterfaceController-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="ReservationsInterfaceController" id="AgC-eL-Hgc" userLabel="MainMenuInterfaceController" customClass="MainMenuInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ReservationsInterfaceController" title="Sunrise" id="AgC-eL-Hgc" userLabel="MainMenuInterfaceController" customClass="MainMenuInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
+                        <table alignment="left" hidden="YES" pagingScroll="YES" id="Pa5-eF-ZNO">
+                            <items>
+                                <tableRow identifier="NewProductsRowType" id="MhQ-sO-rZO">
+                                    <group key="rootItem" width="1" alignment="left" id="zSv-iU-heE"/>
+                                    <connections>
+                                        <segue destination="IcN-lP-hYV" kind="push" identifier="NewProductsRowType" id="JQc-VK-pvt"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="OnSaleRowType" id="wtl-XT-wqp">
+                                    <group key="rootItem" width="1" alignment="left" id="JT8-7C-ed4"/>
+                                    <connections>
+                                        <segue destination="hPl-t2-8Rn" kind="push" identifier="OnSaleRowType" id="z2g-1d-KE6"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="WishListRowType" id="l6O-NW-Tnq">
+                                    <group key="rootItem" width="1" alignment="left" id="gRG-zH-zIK"/>
+                                    <connections>
+                                        <segue destination="9JU-A1-t7h" kind="push" identifier="WishListRowType" id="oaF-7L-Z5R"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="SearchRowType" id="BLf-gj-cHC">
+                                    <group key="rootItem" width="1" alignment="left" id="OWB-iI-bnY"/>
+                                    <connections>
+                                        <segue destination="b0w-KL-cDV" kind="push" identifier="SearchRowType" id="wgF-W1-53O"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
                         <group width="1" alignment="left" layout="vertical" id="adS-QO-6gk">
                             <items>
                                 <label width="136" alignment="center" text="Looks like you're not singed in!" textAlignment="center" numberOfLines="0" id="tnn-qb-LhV">
@@ -27,142 +55,157 @@
                         </group>
                         <group width="1" alignment="left" layout="vertical" id="KEF-Ne-ykA">
                             <items>
-                                <button width="1" alignment="left" title="Search" id="q37-4M-Jlz">
+                                <button alignment="left" id="5ga-ch-O3W">
+                                    <group key="contentGroup" width="1" height="64" alignment="left" layout="vertical" spacing="0.0" id="RcX-0t-EQ2">
+                                        <items>
+                                            <group width="1" height="8" alignment="left" id="LVH-sA-Db4"/>
+                                            <imageView width="1" alignment="center" image="my_orders" contentMode="center" id="DJc-gY-QTb"/>
+                                            <group width="1" height="6" alignment="left" id="6DY-vv-7xO"/>
+                                            <label alignment="center" text="My orders" textAlignment="center" id="Fkv-st-IQ4"/>
+                                        </items>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <segue destination="OSK-8W-GmA" kind="push" id="lxM-fl-Ndh"/>
+                                    </connections>
+                                </button>
+                                <button alignment="left" id="Apm-2W-t9R">
+                                    <group key="contentGroup" width="1" height="64" alignment="left" layout="vertical" spacing="0.0" id="kdg-sT-uA9">
+                                        <items>
+                                            <group width="1" height="8" alignment="left" id="x27-AH-gcR"/>
+                                            <imageView width="1" alignment="center" image="my_wishlist" contentMode="center" id="CtM-jw-Jj4"/>
+                                            <group width="1" height="6" alignment="left" id="7W1-Gm-ld7"/>
+                                            <label alignment="center" text="My wishlist" textAlignment="center" id="bmb-Ur-lkU"/>
+                                        </items>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="showWishList" destination="AgC-eL-Hgc" id="grS-87-cZ9"/>
+                                    </connections>
+                                </button>
+                                <button alignment="left" id="YVu-QM-IYA">
+                                    <group key="contentGroup" width="1" height="64" alignment="left" layout="vertical" spacing="0.0" id="rf8-Pf-TAR">
+                                        <items>
+                                            <group width="1" height="8" alignment="left" id="3tx-AS-H9d"/>
+                                            <imageView width="1" alignment="center" image="new_products" contentMode="center" id="abr-LS-0L5"/>
+                                            <group width="1" height="6" alignment="left" id="ht3-pT-dFe"/>
+                                            <label alignment="center" text="New products" textAlignment="center" id="kgg-8U-yK0"/>
+                                        </items>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="showNewProducts" destination="AgC-eL-Hgc" id="Clx-jJ-ZVM"/>
+                                    </connections>
+                                </button>
+                                <button alignment="left" id="HLL-uE-1G0">
+                                    <group key="contentGroup" width="1" height="64" alignment="left" layout="vertical" spacing="0.0" id="OZq-Mx-zMD">
+                                        <items>
+                                            <group width="1" height="8" alignment="left" id="Kci-Zw-aXT"/>
+                                            <imageView width="1" alignment="center" image="on_sale" contentMode="center" id="fnn-qq-vWN"/>
+                                            <group width="1" height="6" alignment="left" id="Lsj-Kl-ELT"/>
+                                            <label alignment="center" text="On sale" textAlignment="center" id="tJi-Ea-vuW"/>
+                                        </items>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <action selector="showOnSaleProducts" destination="AgC-eL-Hgc" id="hWg-Yh-BUT"/>
+                                    </connections>
+                                </button>
+                                <button alignment="left" id="q37-4M-Jlz">
+                                    <group key="contentGroup" width="1" height="64" alignment="left" layout="vertical" spacing="0.0" id="T3Y-qb-MrT">
+                                        <items>
+                                            <group width="1" height="8" alignment="left" id="RbV-Oj-xPL"/>
+                                            <imageView width="1" alignment="center" image="search_products" contentMode="center" id="M0z-T6-8xO"/>
+                                            <group width="1" height="6" alignment="left" id="ySn-Wg-I7I"/>
+                                            <label alignment="center" text="Search products" textAlignment="center" id="YzL-kV-7Zh"/>
+                                        </items>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                    </group>
                                     <connections>
                                         <action selector="search" destination="AgC-eL-Hgc" id="pwe-Hc-yLK"/>
-                                    </connections>
-                                </button>
-                                <button width="1" alignment="left" title="New Products" id="nnj-t5-o7D">
-                                    <connections>
-                                        <segue destination="tYN-X1-LQT" kind="push" identifier="NewProducts" id="Xlu-dL-xpW"/>
-                                    </connections>
-                                </button>
-                                <button width="1" alignment="left" title="My WishList" id="oHd-4T-D7e">
-                                    <connections>
-                                        <segue destination="qDP-vX-N3z" kind="push" id="4er-R0-Qkt"/>
-                                    </connections>
-                                </button>
-                                <button width="1" alignment="left" title="On Sale" id="UZs-Vr-wy1">
-                                    <connections>
-                                        <segue destination="tYN-X1-LQT" kind="push" identifier="OnSale" id="aG4-yv-S4p"/>
-                                    </connections>
-                                </button>
-                                <button width="1" alignment="left" title="Recent Orders" id="7Up-SI-5eR">
-                                    <connections>
-                                        <segue destination="OSK-8W-GmA" kind="push" id="9PD-y4-8Of"/>
                                     </connections>
                                 </button>
                             </items>
                             <edgeInsets key="margins" left="3" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
+                        <group width="1" alignment="center" verticalAlignment="center" hidden="YES" alpha="0.0" id="VqW-4P-Srz">
+                            <items>
+                                <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" initiallyAnimated="NO" animationDuration="0.80000000000000004" id="cLU-jJ-19G"/>
+                            </items>
+                        </group>
                     </items>
                     <connections>
+                        <outlet property="loadingGroup" destination="VqW-4P-Srz" id="srf-yU-IhL"/>
+                        <outlet property="loadingImage" destination="cLU-jJ-19G" id="eL2-PR-Uab"/>
                         <outlet property="mainMenuGroup" destination="KEF-Ne-ykA" id="NCi-sx-oRQ"/>
+                        <outlet property="productsTable" destination="Pa5-eF-ZNO" id="FI5-nZ-tfb"/>
                         <outlet property="signInGroup" destination="adS-QO-6gk" id="sMS-lP-ue3"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-291" y="128"/>
         </scene>
-        <!--ProductOverviewInterfaceController-->
-        <scene sceneID="4k2-rI-Atk">
+        <!--New products-->
+        <scene sceneID="ngI-uK-Gq8">
             <objects>
-                <controller identifier="ProductOverviewInterfaceController" id="tYN-X1-LQT" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller title="New products" id="IcN-lP-hYV" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" id="dYq-Ph-syv">
+                        <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="zWf-X6-zmS">
                             <items>
-                                <table alignment="center" spacing="6" id="RwM-dl-ShK">
-                                    <items>
-                                        <tableRow identifier="ProductRowType" id="C6D-8Z-Sty" customClass="ProductRowController" customModule="Sunrise_Watch_Extension">
-                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="JCE-4w-GIe">
-                                                <items>
-                                                    <group width="1" alignment="left" layout="overlap" radius="6" id="aAe-dG-TSm">
-                                                        <items>
-                                                            <imageView width="30" height="30" alignment="left" image="wishlist_icon" contentMode="scaleAspectFit" id="OuN-6f-YH9"/>
-                                                            <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="3tA-CA-BGY"/>
-                                                        </items>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </group>
-                                                    <group width="1" alignment="left" layout="vertical" id="g3r-pa-7Rv">
-                                                        <items>
-                                                            <group width="1" alignment="left" id="WMi-dX-XEo">
-                                                                <items>
-                                                                    <label alignment="left" text="$19.99" id="Z9X-hw-kbp">
-                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                                                    </label>
-                                                                    <label alignment="left" text="$19.99" id="66F-AW-NXZ">
-                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                                                    </label>
-                                                                </items>
-                                                            </group>
-                                                            <label alignment="left" text="Product Name" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="PKF-bU-z5a">
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </label>
-                                                        </items>
-                                                        <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
-                                                    </group>
-                                                </items>
-                                                <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                            </group>
-                                            <connections>
-                                                <outlet property="productImage" destination="3tA-CA-BGY" id="hHj-kO-8HI"/>
-                                                <outlet property="productName" destination="PKF-bU-z5a" id="0br-5Y-60m"/>
-                                                <outlet property="productOldPrice" destination="66F-AW-NXZ" id="bY9-77-UhV"/>
-                                                <outlet property="productPrice" destination="Z9X-hw-kbp" id="gio-PL-TlF"/>
-                                                <outlet property="wishListImage" destination="OuN-6f-YH9" id="V7T-ZJ-hnX"/>
-                                                <segue destination="r4v-gy-uaD" kind="push" id="iKA-ac-w9X"/>
-                                            </connections>
-                                        </tableRow>
-                                    </items>
-                                </table>
-                            </items>
-                        </group>
-                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="EbC-Fa-WVa">
-                            <items>
-                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="NUw-QH-0Jh">
-                                    <items>
-                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="ZPM-FP-k1y"/>
-                                    </items>
-                                </group>
-                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="2lA-UX-SS0">
-                                    <items>
-                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="HWM-kS-lkg"/>
-                                    </items>
-                                </group>
+                                <button alignment="left" id="TqG-DY-NYu">
+                                    <group key="contentGroup" width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="JRH-Za-SWQ">
+                                        <items>
+                                            <imageView width="1" height="1" alignment="left" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="3nu-oL-lkp"/>
+                                            <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="Ksh-mO-UYN"/>
+                                        </items>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <segue destination="r4v-gy-uaD" kind="push" id="6V5-H7-0YG"/>
+                                    </connections>
+                                </button>
+                                <button width="41" height="41" alignment="right" verticalAlignment="bottom" backgroundImage="wishlist_icon" id="FH3-tU-dLa">
+                                    <connections>
+                                        <action selector="toggleWishList" destination="IcN-lP-hYV" id="pT3-cc-yng"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="leftLoadingDot" destination="HWM-kS-lkg" id="xZY-ft-lCI"/>
-                        <outlet property="loadingGroup" destination="EbC-Fa-WVa" id="pr7-k7-53n"/>
-                        <outlet property="productsGroup" destination="dYq-Ph-syv" id="Mwi-ZU-9CW"/>
-                        <outlet property="productsTable" destination="RwM-dl-ShK" id="POB-3w-tCv"/>
-                        <outlet property="rightLoadingDot" destination="ZPM-FP-k1y" id="wNB-nG-1TQ"/>
+                        <outlet property="loadingImage" destination="Ksh-mO-UYN" id="7b8-dB-QN5"/>
+                        <outlet property="productButton" destination="TqG-DY-NYu" id="PBh-Mb-o8X"/>
+                        <outlet property="productImage" destination="3nu-oL-lkp" id="1A0-if-mmg"/>
+                        <outlet property="wishListButton" destination="FH3-tU-dLa" id="peO-B7-nCz"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="89" y="-129"/>
+            <point key="canvasLocation" x="467" y="98"/>
         </scene>
         <!--Product Details Interface Controller-->
         <scene sceneID="lSW-xS-HHG">
             <objects>
-                <controller identifier="ReservationDetailsInterfaceController" id="r4v-gy-uaD" userLabel="Product Details Interface Controller" customClass="ProductDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="ProductDetailsInterfaceController" title="Product" id="r4v-gy-uaD" userLabel="Product Details Interface Controller" customClass="ProductDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="UPM-mm-GiP">
+                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="UPM-mm-GiP">
                             <items>
-                                <group width="1" alignment="left" layout="vertical" radius="6" id="OPc-Mz-fg6">
+                                <group width="1" height="136" alignment="left" layout="overlap" radius="6" spacing="0.0" id="OPc-Mz-fg6">
                                     <items>
-                                        <imageView height="72" alignment="left" contentMode="scaleAspectFit" id="32v-KZ-Jba"/>
+                                        <imageView height="1" alignment="center" verticalAlignment="center" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="32v-KZ-Jba"/>
+                                        <button width="41" height="41" alignment="right" verticalAlignment="bottom" backgroundImage="wishlist_icon" id="cKX-nm-6eB">
+                                            <connections>
+                                                <action selector="toggleWishList" destination="r4v-gy-uaD" id="pOU-6Y-dbj"/>
+                                            </connections>
+                                        </button>
+                                        <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="DT5-iC-a8L"/>
                                     </items>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </group>
+                                <group width="1" height="4" alignment="left" id="ykn-Mm-b1k"/>
                                 <group width="1" alignment="left" id="ZkK-p3-FBs">
                                     <items>
                                         <label alignment="left" text="$19.99" id="i1m-BE-84h">
-                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
                                         <label alignment="left" text="$19.99" id="4ca-0c-9Tr">
                                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
@@ -170,37 +213,34 @@
                                     </items>
                                 </group>
                                 <label alignment="left" text="Fancy Jacket" numberOfLines="0" id="Bbj-oP-hUa"/>
-                                <separator alignment="left" id="eTy-cs-hQT"/>
-                                <button width="1" alignment="left" title="Move to cart" id="5qi-Qf-osh">
+                                <group width="1" height="16" alignment="left" id="Bbq-Wp-KzC"/>
+                                <button width="1" height="39" alignment="left" title="     Add to bag" backgroundImage="add-to-bag" id="5qi-Qf-osh">
                                     <connections>
                                         <action selector="moveToCart" destination="r4v-gy-uaD" id="bCl-f7-0KL"/>
                                     </connections>
                                 </button>
-                                <button width="1" alignment="left" title="Add to wishlist" id="IHe-4Z-ydl">
-                                    <connections>
-                                        <action selector="addToWishList" destination="r4v-gy-uaD" id="ZPS-gC-L4b"/>
-                                    </connections>
-                                </button>
-                                <separator alignment="left" id="fWE-Zf-cBt"/>
+                                <group width="1" height="16" alignment="left" id="w9K-kC-rF6"/>
                                 <label alignment="left" text="Get more details on your iPhone using handoff" textAlignment="left" numberOfLines="0" id="Au3-lt-eW4">
+                                    <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                 </label>
-                                <group width="1" height="10" alignment="left" id="WCS-QA-czL"/>
                             </items>
                             <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
+                        <outlet property="loadingImage" destination="DT5-iC-a8L" id="faA-zg-6gB"/>
                         <outlet property="moveToCartButton" destination="5qi-Qf-osh" id="uMK-Vt-pfj"/>
-                        <outlet property="productImage" destination="32v-KZ-Jba" id="H4I-9y-Quj"/>
+                        <outlet property="productImage" destination="32v-KZ-Jba" id="MZv-q2-Pz0"/>
+                        <outlet property="productImageGroup" destination="OPc-Mz-fg6" id="Tl4-ig-fLX"/>
                         <outlet property="productNameLabel" destination="Bbj-oP-hUa" id="TRJ-Wo-qnY"/>
                         <outlet property="productOldPriceLabel" destination="4ca-0c-9Tr" id="xH4-Gh-vey"/>
                         <outlet property="productPriceLabel" destination="i1m-BE-84h" id="RxJ-Pe-0X4"/>
-                        <outlet property="wishListButton" destination="IHe-4Z-ydl" id="2j2-xr-YXe"/>
+                        <outlet property="wishListButton" destination="cKX-nm-6eB" id="i4a-fO-2G0"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="394" y="-129"/>
+            <point key="canvasLocation" x="1101" y="557"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="vty-sl-sqF">
@@ -216,7 +256,7 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="101" y="1176"/>
+            <point key="canvasLocation" x="467" y="1694"/>
         </scene>
         <!--Reservation Notification Controller-->
         <scene sceneID="940-RE-W2z">
@@ -242,187 +282,247 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="402" y="1176"/>
+            <point key="canvasLocation" x="768" y="1694"/>
         </scene>
-        <!--Wish List Interface Controller-->
-        <scene sceneID="n58-Na-FLU">
-            <objects>
-                <controller id="qDP-vX-N3z" customClass="WishListInterfaceController" customModule="Sunrise_Watch_Extension">
-                    <items>
-                        <group width="1" alignment="left" id="D4I-qC-HjY">
-                            <items>
-                                <table alignment="center" spacing="6" id="v7Q-kg-Lp2">
-                                    <items>
-                                        <tableRow identifier="WishListItemRowType" selectable="NO" id="beK-0w-y39" customClass="WishListItemRowController" customModule="Sunrise_Watch_Extension">
-                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="EB3-SJ-9Ry">
-                                                <items>
-                                                    <group width="1" alignment="left" radius="6" id="lYP-Xb-1tM">
-                                                        <items>
-                                                            <imageView height="72" alignment="center" contentMode="scaleAspectFit" id="HPC-eI-zWx"/>
-                                                        </items>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </group>
-                                                    <group width="1" alignment="left" layout="vertical" id="PSC-HP-w1h">
-                                                        <items>
-                                                            <label alignment="left" text="$19.99" id="qvf-fy-fs2">
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                                            </label>
-                                                            <label alignment="left" text="Product Name" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Ca5-XD-yJF">
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </label>
-                                                        </items>
-                                                        <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
-                                                    </group>
-                                                    <button width="1" alignment="left" title="Move to cart" id="YHa-6P-5Bv">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <color key="backgroundColor" red="1" green="0.45098039215686275" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="moveToCart" destination="beK-0w-y39" id="lh2-H7-ZZD"/>
-                                                        </connections>
-                                                    </button>
-                                                    <group width="1" height="4" alignment="left" id="wZM-1e-Nys"/>
-                                                </items>
-                                                <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                            </group>
-                                            <connections>
-                                                <outlet property="addToCartButton" destination="YHa-6P-5Bv" id="BO7-29-3b8"/>
-                                                <outlet property="productImage" destination="HPC-eI-zWx" id="E0N-T0-9VE"/>
-                                                <outlet property="productName" destination="Ca5-XD-yJF" id="JuP-Vx-Kza"/>
-                                                <outlet property="productPrice" destination="qvf-fy-fs2" id="Cyb-e4-R5h"/>
-                                            </connections>
-                                        </tableRow>
-                                    </items>
-                                </table>
-                            </items>
-                        </group>
-                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="Qvg-US-xqu">
-                            <items>
-                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="LV2-RN-6gc">
-                                    <items>
-                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="sx0-Ob-Ecl"/>
-                                    </items>
-                                </group>
-                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="sBx-je-shf">
-                                    <items>
-                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Uzt-WS-NJC"/>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="leftLoadingDot" destination="Uzt-WS-NJC" id="qYk-DE-vGD"/>
-                        <outlet property="listGroup" destination="D4I-qC-HjY" id="fOK-X7-3ZJ"/>
-                        <outlet property="listTable" destination="v7Q-kg-Lp2" id="eqs-Tg-wiM"/>
-                        <outlet property="loadingGroup" destination="Qvg-US-xqu" id="hLN-IC-kTl"/>
-                        <outlet property="rightLoadingDot" destination="sx0-Ob-Ecl" id="aJm-WD-7c3"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="89" y="179"/>
-        </scene>
-        <!--Recent Orders Interface Controller-->
+        <!--My orders-->
         <scene sceneID="O6d-j6-A3g">
             <objects>
-                <controller id="OSK-8W-GmA" customClass="RecentOrdersInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller title="My orders" id="OSK-8W-GmA" customClass="RecentOrdersInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" id="LIe-xs-FKQ">
+                        <group width="1" alignment="left" layout="vertical" id="LIe-xs-FKQ">
                             <items>
+                                <label alignment="center" verticalAlignment="center" alpha="0.0" text="No recent orders" id="knR-w7-OJ1">
+                                    <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </label>
                                 <table alignment="center" spacing="6" id="cdW-KK-TDK">
                                     <items>
                                         <tableRow identifier="OrderItemRowType" id="P9h-9A-VK2" customClass="OrderItemRowController" customModule="Sunrise_Watch_Extension">
-                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="v7g-UG-gcE">
+                                            <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="v7g-UG-gcE">
                                                 <items>
-                                                    <group width="1" alignment="left" layout="vertical" id="Izd-6E-vnM">
+                                                    <group width="1" height="4" alignment="right" id="dLX-Os-pmf">
+                                                        <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                    <group width="1" alignment="left" radius="0.0" id="1VS-CQ-uw3">
                                                         <items>
-                                                            <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="yty-AR-J0v">
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <label alignment="right" text="Pending" textAlignment="right" id="Y21-DM-dSa">
+                                                                <color key="textColor" red="0.0" green="0.61568627450980395" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                                             </label>
-                                                            <label alignment="left" text="Shoes and 1 more" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="fRi-g9-5gc">
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <group width="4" height="2" alignment="right" id="gsN-LH-1hR"/>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                    <group width="1" height="4" alignment="right" id="ZqG-Gk-77k">
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </group>
+                                                    <group width="1" height="3" alignment="left" id="d9k-vs-nVo"/>
+                                                    <group width="1" alignment="left" spacing="0.0" id="SGF-j5-cjg">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="XiF-gM-acP"/>
+                                                            <label alignment="left" text="Items (4)" id="dvt-RI-zbf">
+                                                                <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                                             </label>
                                                         </items>
-                                                        <edgeInsets key="margins" left="4" right="0.0" top="0.0" bottom="0.0"/>
                                                     </group>
-                                                    <group width="1" height="2" alignment="left" id="kVd-Sk-gUI"/>
+                                                    <group width="1" alignment="left" spacing="0.0" id="kRC-fj-MxR">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="9k7-K5-jNZ"/>
+                                                            <label alignment="left" numberOfLines="2" id="76e-9R-qdu">
+                                                                <string key="text">Down jacket 
+KATHMANDU peuter peuter peuter</string>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                            </label>
+                                                            <group width="4" height="2" alignment="right" layout="vertical" id="nt2-PO-6UP"/>
+                                                        </items>
+                                                    </group>
+                                                    <group width="1" height="4" alignment="left" id="tlH-kU-6CG"/>
+                                                    <group width="1" alignment="left" spacing="0.0" id="ZQl-xF-0Is">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="P7f-f0-Ymk"/>
+                                                            <label alignment="left" text="Total" id="90z-zu-19I">
+                                                                <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                    <group width="1" alignment="left" spacing="0.0" id="lEx-fd-tHB">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="2wG-ga-13l"/>
+                                                            <label alignment="left" text="€ 159.90" id="vhc-OP-JvS">
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                    <group width="1" height="2" alignment="left" id="fPp-a8-t3P"/>
                                                 </items>
-                                                <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.12549019607843137" green="0.12549019607843137" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                             </group>
                                             <connections>
-                                                <outlet property="orderDescriptionLabel" destination="fRi-g9-5gc" id="XHP-sI-XRM"/>
-                                                <outlet property="orderNumberLabel" destination="yty-AR-J0v" id="81i-Fw-27f"/>
+                                                <outlet property="itemsLabel" destination="dvt-RI-zbf" id="rGI-xD-YfT"/>
+                                                <outlet property="orderDescriptionLabel" destination="76e-9R-qdu" id="8Nn-dr-AES"/>
+                                                <outlet property="orderStatusLabel" destination="Y21-DM-dSa" id="Fsy-6u-4eY"/>
+                                                <outlet property="orderTotalLabel" destination="vhc-OP-JvS" id="8DX-IE-H3x"/>
                                                 <segue destination="o0p-mg-52x" kind="push" id="R6v-NS-ekn"/>
                                             </connections>
                                         </tableRow>
                                     </items>
                                 </table>
-                            </items>
-                        </group>
-                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="AzI-4A-VbL">
-                            <items>
-                                <group width="0.5" height="1" alignment="right" verticalAlignment="center" id="cD5-ie-Fng">
+                                <button width="1" alignment="left" title="Load more" id="Scs-By-Wch">
+                                    <connections>
+                                        <action selector="loadMore" destination="OSK-8W-GmA" id="Ix6-Zy-de3"/>
+                                    </connections>
+                                </button>
+                                <group width="50" height="50" alignment="center" verticalAlignment="center" id="bF2-Xs-ojB">
                                     <items>
-                                        <imageView width="1" height="1" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="mB9-TZ-N1G"/>
-                                    </items>
-                                </group>
-                                <group width="0.5" height="1" alignment="left" verticalAlignment="center" id="Hkk-0I-u88">
-                                    <items>
-                                        <imageView width="1" height="1" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Y6X-Aw-vyk"/>
+                                        <imageView width="50" height="50" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" initiallyAnimated="NO" animationDuration="0.80000000000000004" id="dv1-KS-f4m"/>
                                     </items>
                                 </group>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="leftLoadingDot" destination="Y6X-Aw-vyk" id="g8B-Ea-g2G"/>
+                        <outlet property="emptyStateLabel" destination="knR-w7-OJ1" id="nyN-yu-G33"/>
                         <outlet property="listGroup" destination="LIe-xs-FKQ" id="cvU-1h-mSS"/>
                         <outlet property="listTable" destination="cdW-KK-TDK" id="HNo-UE-ugt"/>
-                        <outlet property="loadingGroup" destination="AzI-4A-VbL" id="odJ-l0-izx"/>
-                        <outlet property="rightLoadingDot" destination="mB9-TZ-N1G" id="o5T-xt-VfY"/>
+                        <outlet property="loadMoreButton" destination="Scs-By-Wch" id="puQ-mF-MkU"/>
+                        <outlet property="loadingGroup" destination="bF2-Xs-ojB" id="ieE-Kt-FM9"/>
+                        <outlet property="loadingImage" destination="dv1-KS-f4m" id="7Q2-ek-yoj"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="89" y="634"/>
+            <point key="canvasLocation" x="475" y="-339"/>
         </scene>
         <!--OrderDetailsInterfaceController-->
         <scene sceneID="gKm-EI-auR">
             <objects>
-                <controller id="o0p-mg-52x" userLabel="OrderDetailsInterfaceController" customClass="OrderDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
+                <controller identifier="OrderDetailsInterfaceController" title="Order" id="o0p-mg-52x" userLabel="OrderDetailsInterfaceController" customClass="OrderDetailsInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="krJ-nk-meg">
+                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="krJ-nk-meg">
                             <items>
-                                <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="lHc-5z-cDM"/>
-                                <group width="1" height="2" alignment="left" id="obm-ss-ZVs"/>
-                                <label alignment="left" text="Shipping Address:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="tBC-TV-QTE">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label alignment="left" text="Order status" numberOfLines="0" id="eVt-Pa-AvY">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label alignment="left" text="Shipped" id="Gcv-Ck-LWW">
+                                    <color key="textColor" red="0.47843137254901957" green="0.76078431372549016" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <group width="1" height="4" alignment="left" id="obm-ss-ZVs"/>
+                                <label alignment="left" text="Order nr." numberOfLines="0" id="tBC-TV-QTE">
+                                    <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label alignment="left" text="12312315123123" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="tGf-Yp-5OY">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <group width="1" height="4" alignment="left" id="eK9-yn-UZn"/>
+                                <label alignment="left" text="Expected delivery" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="EgU-GF-Ut8">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label alignment="left" text="Tue, 12 Oct" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="joa-uS-LBa">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <group width="1" height="8" alignment="left" id="dlT-in-BKR"/>
+                                <group width="0.96730000000000005" height="2" alignment="center" alpha="0.20000000000000001" id="8uQ-6z-Zbv">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <group width="1" height="8" alignment="left" id="WNh-Ug-v54"/>
+                                <label alignment="left" text="Items (3)" numberOfLines="0" id="bcj-F0-gJB">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <table alignment="left" id="rO0-cm-7yo">
+                                    <items>
+                                        <tableRow identifier="LineItemRowType" id="JUM-8r-KeO" customClass="LineItemRowController" customModule="Sunrise_Watch_Extension">
+                                            <group key="rootItem" width="1" height="0.0" alignment="left" spacing="7" id="DEu-QG-cBi">
+                                                <items>
+                                                    <label alignment="left" text="x1" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="yDh-Re-Bd0">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                    <label alignment="left" text="Shirt Polo Ralph Lauren white" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="kA2-wI-302">
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                            <connections>
+                                                <outlet property="productNameLabel" destination="kA2-wI-302" id="qB0-rT-bDu"/>
+                                                <outlet property="quantityLabel" destination="yDh-Re-Bd0" id="YxK-AJ-Oab"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                                <group width="1" height="8" alignment="left" id="SAw-Xm-eGd"/>
+                                <group width="0.96730000000000005" height="2" alignment="center" alpha="0.20000000000000001" id="mOo-Y5-ciY">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <group width="1" height="8" alignment="left" id="6Kj-3I-QMH"/>
+                                <label alignment="left" text="Total" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="yNU-Yd-gyr">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label alignment="left" text="$88.00" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="7OQ-UK-R6t">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <group width="1" height="8" alignment="left" id="gWX-dr-agz"/>
+                                <group width="0.96730000000000005" height="2" alignment="center" alpha="0.20000000000000001" id="Z92-4N-pD6">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <group width="1" height="8" alignment="left" id="4PJ-Kv-vMU"/>
+                                <label alignment="left" text="Shipping address" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="LPU-Er-TBY">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                 </label>
                                 <label alignment="left" text="Sonnenallee 223" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="9V2-xj-16i">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <group width="1" height="2" alignment="left" id="VMk-e8-Vtq"/>
-                                <label alignment="left" text="Order total:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="jev-hM-VpV">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <group width="1" height="4" alignment="left" id="ulp-ox-Fb1"/>
+                                <label alignment="left" text="Payment method" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="g60-lc-diA">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                 </label>
-                                <label alignment="left" text="$19.99" id="gmc-C0-m2r">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label alignment="left" text="Card" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="03K-EA-UaC">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <group width="1" height="2" alignment="left" id="f9l-Hz-JG0"/>
+                                <group width="1" height="8" alignment="left" id="UJt-PK-FK0"/>
+                                <group width="0.96730000000000005" height="2" alignment="center" alpha="0.20000000000000001" id="BlQ-GK-6h3">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <group width="1" height="8" alignment="left" id="4nW-Nd-75I"/>
+                                <label alignment="left" text="Get more details on your iPhone using handoff" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="r6t-62-td1">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <group width="1" height="4" alignment="left" id="VMk-e8-Vtq"/>
                             </items>
                             <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="orderNumberLabel" destination="lHc-5z-cDM" id="Bdt-ag-CIX"/>
-                        <outlet property="orderTotalLabel" destination="gmc-C0-m2r" id="vsZ-AH-BUW"/>
+                        <outlet property="expectedDeliveryLabel" destination="joa-uS-LBa" id="AOl-TP-z3x"/>
+                        <outlet property="itemsLabel" destination="bcj-F0-gJB" id="6F1-rv-j1C"/>
+                        <outlet property="lineItemsTable" destination="rO0-cm-7yo" id="aCI-Xv-EEQ"/>
+                        <outlet property="orderNumberLabel" destination="tGf-Yp-5OY" id="4wP-Vl-WMZ"/>
+                        <outlet property="orderStatusLabel" destination="Gcv-Ck-LWW" id="MA5-Em-cSr"/>
+                        <outlet property="orderTotalLabel" destination="7OQ-UK-R6t" id="ElB-m3-v2z"/>
                         <outlet property="shippingAddressLabel" destination="9V2-xj-16i" id="GCn-FG-EFy"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="394" y="635"/>
+            <point key="canvasLocation" x="773" y="-339"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="ohZ-mp-zwZ">
@@ -438,45 +538,83 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="101" y="1654"/>
+            <point key="canvasLocation" x="467" y="2172"/>
         </scene>
         <!--Order Notification Controller-->
         <scene sceneID="EOT-eO-zQI">
             <objects>
                 <controller id="JKB-HV-a1N" customClass="OrderNotificationController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="95C-ku-Ydm">
+                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="95C-ku-Ydm">
                             <items>
-                                <label alignment="left" text="Your order has been confirmed!" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="pV5-CV-Bka"/>
-                                <group width="1" height="2" alignment="left" id="eDH-3I-Tfg"/>
-                                <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Cvk-Vb-wX8"/>
-                                <group width="1" height="2" alignment="left" id="FXw-dn-Kuk"/>
-                                <label alignment="left" text="Shipping Address:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="aNC-zJ-Kt4">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label alignment="left" text="Your order has been" minimumScaleFactor="0.29999999999999999" id="pV5-CV-Bka">
+                                    <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <label alignment="left" text="Sonnenallee 223" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Mxt-AM-yzj">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label height="27" alignment="left" text="confirmed" minimumScaleFactor="0.29999999999999999" id="imw-2G-ORW">
+                                    <color key="textColor" red="0.0" green="0.61568627450980395" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
                                 </label>
-                                <group width="1" height="2" alignment="left" id="EiB-1W-GJg"/>
-                                <label alignment="left" text="Order total:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="EiR-kB-2k7">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <group width="1" height="17" alignment="left" id="eDH-3I-Tfg"/>
+                                <label alignment="left" text="Order date" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Cvk-Vb-wX8">
+                                    <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <label alignment="left" text="$19.99" id="olM-6T-gqx">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label alignment="left" text="Mon, 12. Nov" minimumScaleFactor="0.29999999999999999" id="b7A-ti-0sS">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                 </label>
-                                <group width="1" height="2" alignment="left" id="a2U-3k-Ipb"/>
+                                <group width="1" height="10" alignment="left" id="B1L-V0-e5K"/>
+                                <separator alignment="left" id="XFs-Ex-Dy7">
+                                    <color key="color" red="0.99999600649999998" green="1" blue="1" alpha="0.1992722602739726" colorSpace="custom" customColorSpace="sRGB"/>
+                                </separator>
+                                <group width="1" height="10" alignment="left" id="jfd-bP-I9F"/>
+                                <label alignment="left" text="Items (3)" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="c8O-i2-g7i">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <group width="1" alignment="left" spacing="0.0" id="O3D-KU-20B">
+                                    <items>
+                                        <label width="32" alignment="left" text="x1" id="90Q-bU-xij">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                        </label>
+                                        <label alignment="left" text="Shirt Polo Ralph Lauren white" numberOfLines="2" id="5VC-FL-u0H">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" spacing="0.0" id="bFB-pw-gSY">
+                                    <items>
+                                        <group width="32" height="2" alignment="left" layout="vertical" id="rFe-ZO-ZE3"/>
+                                        <label alignment="left" text="and 2 more" numberOfLines="2" id="Rec-AL-CGI">
+                                            <color key="textColor" red="0.68235294117647061" green="0.70588235294117641" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" height="8" alignment="left" id="MZu-sa-Pbk"/>
+                                <label alignment="left" text="Total" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="Cnh-J8-qF0">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <label alignment="left" text="€ 159.90" minimumScaleFactor="0.29999999999999999" id="rfO-Ml-ebz">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
+                                </label>
                             </items>
-                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="orderNumberLabel" destination="Cvk-Vb-wX8" id="MPx-Hg-85q"/>
-                        <outlet property="orderTotalLabel" destination="olM-6T-gqx" id="YaU-rx-Qez"/>
-                        <outlet property="shippingAddressLabel" destination="Mxt-AM-yzj" id="hR4-B5-O8J"/>
+                        <outlet property="firstLineItemNameLabel" destination="5VC-FL-u0H" id="M47-or-1Zm"/>
+                        <outlet property="firstLineItemQuantityLabel" destination="90Q-bU-xij" id="AVz-NR-pHV"/>
+                        <outlet property="lineItemsLabel" destination="c8O-i2-g7i" id="Vqc-iv-9cg"/>
+                        <outlet property="moreLineItemsLabel" destination="Rec-AL-CGI" id="eRg-yl-MtM"/>
+                        <outlet property="orderDateLabel" destination="b7A-ti-0sS" id="dy7-s1-kdR"/>
+                        <outlet property="orderTotalLabel" destination="rfO-Ml-ebz" id="tCD-sQ-JTX"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="402" y="1654"/>
+            <point key="canvasLocation" x="768" y="2172"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="VUc-RA-451">
@@ -492,48 +630,83 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="101" y="2168"/>
+            <point key="canvasLocation" x="467" y="2686"/>
         </scene>
         <!--Order Notification Controller-->
         <scene sceneID="WL3-38-h3m">
             <objects>
                 <controller id="zWM-bn-aSV" customClass="OrderNotificationController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="mcd-y6-Kph">
+                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="qvN-Gc-o2m">
                             <items>
-                                <label alignment="left" text="Shipped" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="40z-PH-n6p">
-                                    <color key="textColor" red="1" green="0.50980392159999999" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <label alignment="left" text="Your order has been" minimumScaleFactor="0.29999999999999999" id="1c5-cj-uMD">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <label alignment="left" text="Your order has left the warehouse and is now in transit." numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="NyM-mV-Cc7"/>
-                                <group width="1" height="2" alignment="left" id="V7S-ay-V1i"/>
-                                <label alignment="left" text="Order #" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="mJw-P6-Ev7"/>
-                                <group width="1" height="2" alignment="left" id="ydI-SJ-X5Q"/>
-                                <label alignment="left" text="Shipping Address:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="o12-Ig-vHL">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label height="27" alignment="left" text="shipped" minimumScaleFactor="0.29999999999999999" id="vUU-dW-wiY">
+                                    <color key="textColor" red="0.47843137254901957" green="0.76078431372549016" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle2"/>
                                 </label>
-                                <label alignment="left" text="Sonnenallee 223" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="apO-L2-Pkc">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <group width="1" height="17" alignment="left" id="MV6-ey-rmy"/>
+                                <label alignment="left" text="Expected delivery" minimumScaleFactor="0.29999999999999999" id="vWa-rp-wGL">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <group width="1" height="2" alignment="left" id="4e7-6Q-gxt"/>
-                                <label alignment="left" text="Order total:" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="BHf-cr-DBV">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <label alignment="left" text="Mon, 12. Nov" minimumScaleFactor="0.29999999999999999" id="5Cf-Ly-lmx">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
                                 </label>
-                                <label alignment="left" text="$19.99" id="xTG-eo-Jbv">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                <group width="1" height="10" alignment="left" id="1lp-IZ-JvF"/>
+                                <separator alignment="left" id="Zsw-XC-Zy9">
+                                    <color key="color" red="0.99999600649999998" green="1" blue="1" alpha="0.1992722603" colorSpace="custom" customColorSpace="sRGB"/>
+                                </separator>
+                                <group width="1" height="10" alignment="left" id="xdN-I2-Puu"/>
+                                <label alignment="left" text="Items (3)" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="tmb-Xg-HKK">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
-                                <group width="1" height="2" alignment="left" id="yNm-pA-Q2a"/>
+                                <group width="1" alignment="left" spacing="0.0" id="Axx-4U-JrQ">
+                                    <items>
+                                        <label width="32" alignment="left" text="x1" id="kf6-yh-Hme">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                        </label>
+                                        <label alignment="left" text="Shirt Polo Ralph Lauren white" numberOfLines="2" id="h4Q-8B-T6H">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" spacing="0.0" id="KVL-Xn-5MN">
+                                    <items>
+                                        <group width="32" height="2" alignment="left" layout="vertical" id="hCa-Vh-Eme"/>
+                                        <label alignment="left" text="and 2 more" numberOfLines="2" id="9Tk-kV-Vh7">
+                                            <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" height="8" alignment="left" id="yFY-9J-Ziz"/>
+                                <label alignment="left" text="Total" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="u4t-aq-ktN">
+                                    <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <label alignment="left" text="€ 159.90" minimumScaleFactor="0.29999999999999999" id="aXM-9t-6rx">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle3"/>
+                                </label>
                             </items>
-                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="orderNumberLabel" destination="mJw-P6-Ev7" id="BSq-E6-BaZ"/>
-                        <outlet property="orderTotalLabel" destination="xTG-eo-Jbv" id="iCd-A1-0at"/>
-                        <outlet property="shippingAddressLabel" destination="apO-L2-Pkc" id="Q3Q-q5-w6A"/>
+                        <outlet property="expectedDeliveryLabel" destination="5Cf-Ly-lmx" id="2ne-7b-ppg"/>
+                        <outlet property="firstLineItemNameLabel" destination="h4Q-8B-T6H" id="5q0-qD-2Sl"/>
+                        <outlet property="firstLineItemQuantityLabel" destination="kf6-yh-Hme" id="ode-RE-cfL"/>
+                        <outlet property="lineItemsLabel" destination="tmb-Xg-HKK" id="McU-8U-Zik"/>
+                        <outlet property="moreLineItemsLabel" destination="9Tk-kV-Vh7" id="cON-iM-UCh"/>
+                        <outlet property="orderTotalLabel" destination="aXM-9t-6rx" id="nB3-It-fme"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="402" y="2168"/>
+            <point key="canvasLocation" x="768" y="2686"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="GgF-6d-CrU">
@@ -549,50 +722,315 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="101" y="2731"/>
+            <point key="canvasLocation" x="467" y="3248"/>
         </scene>
         <!--Product Discount Notification Controller-->
         <scene sceneID="rdg-bE-4dv">
             <objects>
                 <controller id="ZbV-ea-4fL" customClass="ProductDiscountNotificationController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="FlJ-g8-5u4">
+                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="FlJ-g8-5u4">
                             <items>
-                                <label alignment="left" text="Price for a product from your wishlist just dropped!" numberOfLines="0" minimumScaleFactor="0.29999999999999999" id="ifc-v0-nCN"/>
-                                <separator alignment="left" id="8J9-Xf-ekz"/>
-                                <group width="1" alignment="left" id="1T0-IX-RH0">
+                                <label alignment="center" text="New discount" id="7du-Ak-WTq"/>
+                                <group width="1" height="4" alignment="left" id="oOH-q8-fss"/>
+                                <group width="1" height="90" alignment="center" layout="overlap" radius="6" spacing="0.0" id="Ml5-b1-dGb">
                                     <items>
-                                        <label alignment="left" text="$19.99" id="tZl-3e-L5M">
-                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        <imageView height="90" alignment="center" verticalAlignment="center" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="FsD-PF-x6F"/>
+                                        <imageView width="50" height="50" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="QJu-oj-9lN"/>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <group width="1" height="4" alignment="left" id="8qq-9a-Yuv"/>
+                                <group width="1" height="19" alignment="left" spacing="0.0" id="sXD-9V-jho">
+                                    <items>
+                                        <group width="4" height="2" alignment="left" layout="vertical" id="5SD-Rj-M2l"/>
+                                        <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="9Bz-ai-dea">
+                                            <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="left" text="$19.99" id="VeR-9u-GmX">
-                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        <group width="12" height="2" alignment="left" layout="vertical" id="cxa-rI-ynq"/>
+                                        <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="Ayb-18-FIb">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </group>
-                                <group width="1" alignment="left" layout="vertical" radius="6" id="Ml5-b1-dGb">
-                                    <items>
-                                        <imageView height="72" alignment="left" contentMode="scaleAspectFit" id="FsD-PF-x6F"/>
-                                    </items>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </group>
-                                <group width="1" height="2" alignment="left" id="8qq-9a-Yuv"/>
+                                <label alignment="left" text="Down jacket “KATHMANDU” peutery" numberOfLines="0" id="zOH-gY-lEF"/>
                             </items>
-                            <edgeInsets key="margins" left="3" right="3" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
+                    <edgeInsets key="margins" left="8" right="8" top="4" bottom="8"/>
                     <connections>
-                        <outlet property="discountInfoLabel" destination="ifc-v0-nCN" id="4DZ-Xj-Bne"/>
+                        <outlet property="loadingImage" destination="QJu-oj-9lN" id="pbX-Mv-evH"/>
                         <outlet property="productImage" destination="FsD-PF-x6F" id="R1M-99-M9d"/>
-                        <outlet property="productOldPriceLabel" destination="VeR-9u-GmX" id="Fyk-jd-qhc"/>
-                        <outlet property="productPriceLabel" destination="tZl-3e-L5M" id="eHa-Ys-I0h"/>
+                        <outlet property="productNameLabel" destination="zOH-gY-lEF" id="tCz-zR-8GB"/>
+                        <outlet property="productOldPriceLabel" destination="Ayb-18-FIb" id="BYM-D0-7Ty"/>
+                        <outlet property="productPriceLabel" destination="9Bz-ai-dea" id="IUA-bb-7pP"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="402" y="2731"/>
+            <point key="canvasLocation" x="768" y="3249"/>
+        </scene>
+        <!--On sale-->
+        <scene sceneID="rtP-t7-Ycx">
+            <objects>
+                <controller title="On sale" id="hPl-t2-8Rn" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="qWf-Df-Tre">
+                            <items>
+                                <button alignment="left" id="OrC-nm-zeJ">
+                                    <group key="contentGroup" width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="0wt-jC-1ec">
+                                        <items>
+                                            <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="GpY-8S-POu">
+                                                <items>
+                                                    <imageView width="1" height="1" alignment="left" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="2AA-9Y-4ea"/>
+                                                    <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="k0g-Yf-o3c"/>
+                                                </items>
+                                            </group>
+                                            <group width="1" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="RKJ-hy-igd">
+                                                <items>
+                                                    <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="cfL-Lk-uXm">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="U93-gl-K5G"/>
+                                                            <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="asf-l3-KPV">
+                                                                <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                            </label>
+                                                            <group width="12" height="2" alignment="left" layout="vertical" id="dIf-AH-IvC"/>
+                                                            <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="77z-Yb-Po8">
+                                                                <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="0.79695526541095896" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <segue destination="r4v-gy-uaD" kind="push" id="FD0-V9-cM9"/>
+                                    </connections>
+                                </button>
+                                <group width="1" height="68" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="w9C-f3-2c9">
+                                    <items>
+                                        <button width="41" height="41" alignment="right" backgroundImage="wishlist_icon" id="us0-fu-LcC">
+                                            <connections>
+                                                <action selector="toggleWishList" destination="IcN-lP-hYV" id="ags-Wk-ztw"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="loadingImage" destination="k0g-Yf-o3c" id="NPg-Mc-GwD"/>
+                        <outlet property="productButton" destination="OrC-nm-zeJ" id="iDl-Qp-Xna"/>
+                        <outlet property="productImage" destination="2AA-9Y-4ea" id="rxO-xk-1LC"/>
+                        <outlet property="productOldPriceLabel" destination="77z-Yb-Po8" id="04T-WF-1Bz"/>
+                        <outlet property="productPriceLabel" destination="asf-l3-KPV" id="EwD-SN-LlI"/>
+                        <outlet property="wishListButton" destination="us0-fu-LcC" id="Dyd-HE-28M"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="467" y="484"/>
+        </scene>
+        <!--My wishlist-->
+        <scene sceneID="1CW-87-h9Q">
+            <objects>
+                <controller title="My wishlist" id="9JU-A1-t7h" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="qY6-rx-KNJ">
+                            <items>
+                                <button alignment="left" id="a7t-S7-FX5">
+                                    <group key="contentGroup" width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="xfX-4H-8Th">
+                                        <items>
+                                            <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="CSS-W0-May">
+                                                <items>
+                                                    <imageView width="1" height="1" alignment="left" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="OzF-ky-vvM"/>
+                                                    <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="yob-RY-Ffb"/>
+                                                </items>
+                                            </group>
+                                            <group width="1" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="DXy-lu-PnM">
+                                                <items>
+                                                    <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="hY2-Px-uUG">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="GMb-jk-vnH"/>
+                                                            <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="bGe-rg-zCf">
+                                                                <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                            </label>
+                                                            <group width="12" height="2" alignment="left" layout="vertical" id="ljW-EV-BET"/>
+                                                            <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="pEM-Ax-OV6">
+                                                                <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="0.79695526539999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <segue destination="r4v-gy-uaD" kind="push" id="FEn-mX-EEb"/>
+                                    </connections>
+                                </button>
+                                <group width="1" height="68" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="HPh-Id-WMN">
+                                    <items>
+                                        <button width="41" height="41" alignment="right" backgroundImage="wishlist_icon" id="hQl-Us-9fV">
+                                            <connections>
+                                                <action selector="toggleWishList" destination="IcN-lP-hYV" id="SQ5-ft-1Un"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="loadingImage" destination="yob-RY-Ffb" id="FE4-Tc-San"/>
+                        <outlet property="productButton" destination="a7t-S7-FX5" id="KIa-ww-BEW"/>
+                        <outlet property="productImage" destination="OzF-ky-vvM" id="UjD-IA-Ew1"/>
+                        <outlet property="productOldPriceLabel" destination="pEM-Ax-OV6" id="R1U-T7-oVs"/>
+                        <outlet property="productPriceLabel" destination="bGe-rg-zCf" id="EMp-61-hfu"/>
+                        <outlet property="wishListButton" destination="hQl-Us-9fV" id="vAz-aL-eOa"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="467" y="849"/>
+        </scene>
+        <!--My wishlist-->
+        <scene sceneID="1Mo-EJ-jnf">
+            <objects>
+                <controller identifier="EmptyWishListInterfaceController" title="My wishlist" id="mI3-9Q-Z9t">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="You have no products in your wishlist" textAlignment="center" numberOfLines="0" id="g3M-0E-4Zl">
+                            <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="773" y="849"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="i6T-pO-s26">
+            <objects>
+                <controller title="Search" id="b0w-KL-cDV" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="7Uf-vp-YIt">
+                            <items>
+                                <button alignment="left" id="wJb-rl-BZf">
+                                    <group key="contentGroup" width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="ehL-cC-hA2">
+                                        <items>
+                                            <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="H09-xE-k2F">
+                                                <items>
+                                                    <imageView width="1" height="1" alignment="left" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="BZi-2W-hB6"/>
+                                                    <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="q6n-fo-iFc"/>
+                                                </items>
+                                            </group>
+                                            <group width="1" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="wsB-dm-Cnx">
+                                                <items>
+                                                    <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="CCF-1U-8Ov">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" layout="vertical" id="hlP-I5-Nlu"/>
+                                                            <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="QCi-T5-TMX">
+                                                                <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                            </label>
+                                                            <group width="12" height="2" alignment="left" layout="vertical" id="fyr-o9-Zl2"/>
+                                                            <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="BRu-tB-bcZ">
+                                                                <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="0.79695526539999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </group>
+                                    <connections>
+                                        <segue destination="r4v-gy-uaD" kind="push" id="cQ6-QM-7sO"/>
+                                    </connections>
+                                </button>
+                                <group width="1" height="68" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="mDi-AX-eaL">
+                                    <items>
+                                        <button width="41" height="41" alignment="right" backgroundImage="wishlist_icon" id="TY4-FF-LJY">
+                                            <connections>
+                                                <action selector="toggleWishList" destination="IcN-lP-hYV" id="N0K-t9-kLc"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="loadingImage" destination="q6n-fo-iFc" id="yEU-0x-6Kz"/>
+                        <outlet property="productButton" destination="wJb-rl-BZf" id="jsM-M5-rza"/>
+                        <outlet property="productImage" destination="BZi-2W-hB6" id="9o3-11-Rbd"/>
+                        <outlet property="productOldPriceLabel" destination="BRu-tB-bcZ" id="oJu-ms-arZ"/>
+                        <outlet property="productPriceLabel" destination="QCi-T5-TMX" id="zvu-sS-6KE"/>
+                        <outlet property="wishListButton" destination="TY4-FF-LJY" id="ezf-58-0jF"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="467" y="1209"/>
+        </scene>
+        <!--On sale-->
+        <scene sceneID="N6T-G5-9rj">
+            <objects>
+                <controller identifier="EmptyOnSaleInterfaceController" title="On sale" id="6LA-jf-rol">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="No products on sale" textAlignment="center" numberOfLines="0" id="i3e-Qt-scz">
+                            <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="773" y="484"/>
+        </scene>
+        <!--New products-->
+        <scene sceneID="oR0-er-5pt">
+            <objects>
+                <controller identifier="EmptyNewProductsInterfaceController" title="New products" id="nHE-Gv-hZw">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="No new products" textAlignment="center" numberOfLines="0" id="xL5-au-kAa">
+                            <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="773" y="98"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="zJ9-Ag-etF">
+            <objects>
+                <controller identifier="EmptySearchInterfaceController" title="Search" id="yD2-t9-yM2">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="No products" textAlignment="center" numberOfLines="0" id="FYT-NN-O1r">
+                            <color key="textColor" red="0.68235294120000001" green="0.70588235290000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="773" y="1209"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Xlu-dL-xpW"/>
+        <segue reference="FEn-mX-EEb"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.94117647058823528" green="0.38823529411764707" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
