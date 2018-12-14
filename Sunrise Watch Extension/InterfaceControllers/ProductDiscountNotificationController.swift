@@ -10,10 +10,11 @@ import SDWebImage
 
 class ProductDiscountNotificationController: WKUserNotificationInterfaceController {
     
-    @IBOutlet var discountInfoLabel: WKInterfaceLabel!
+    @IBOutlet var loadingImage: WKInterfaceImage!
+    @IBOutlet var productImage: WKInterfaceImage!
+    @IBOutlet var productNameLabel: WKInterfaceLabel!
     @IBOutlet var productPriceLabel: WKInterfaceLabel!
     @IBOutlet var productOldPriceLabel: WKInterfaceLabel!
-    @IBOutlet var productImage: WKInterfaceImage!
     
     override init() {
         if let configuration = Project.config {
@@ -27,20 +28,31 @@ class ProductDiscountNotificationController: WKUserNotificationInterfaceControll
         if let productId = notification.request.content.userInfo["productId"] as? String {
             ProductProjection.byId(productId) { result in
                 if let product = result.model, result.isSuccess {
-                    let interfaceModel = ProductDetailsInterfaceModel(product: product)
+                    let interfaceModel = ProductProjectionDetailsInterfaceModel(product: product)
                     DispatchQueue.main.async {
-                        self.productPriceLabel.setText(interfaceModel.productPrice)
-                        let oldPriceAttributes: [NSAttributedStringKey : Any] = [.strikethroughStyle: 1]
+                        self.productNameLabel.setText(interfaceModel.productName)
+                        let priceAttributes: [NSAttributedString.Key : Any] = [.foregroundColor: interfaceModel.productOldPrice.isEmpty ? .white : UIColor(red: 0.94, green: 0.39, blue: 0.25, alpha: 1.0)]
+                        self.productPriceLabel.setAttributedText(NSAttributedString(string: interfaceModel.productPrice, attributes: priceAttributes))
+                        let oldPriceAttributes: [NSAttributedString.Key : Any] = [.strikethroughStyle: 1]
                         self.productOldPriceLabel.setAttributedText(NSAttributedString(string: interfaceModel.productOldPrice, attributes: oldPriceAttributes))
-                        self.discountInfoLabel.setText("Price for \(interfaceModel.productName) from your wishlist just dropped from \(interfaceModel.productOldPrice) to \(interfaceModel.productPrice ?? "")!")
                         if let url = URL(string: interfaceModel.productImageUrl) {
                             SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
                                 if let image = image {
                                     self?.productImage.setImage(image)
                                 }
+                                self?.animate(withDuration: 0.3) {
+                                    self?.loadingImage.setAlpha(0)
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    self?.loadingImage.stopAnimating()
+                                    self?.loadingImage.setHidden(true)
+                                    self?.productImage.setHidden(false)
+                                    self?.animate(withDuration: 0.3) {
+                                        self?.productImage.setAlpha(1)
+                                    }
+                                }
                             })
                         }
-                        // TODO add discount info label text
                         completionHandler(.custom)
                     }
                     
