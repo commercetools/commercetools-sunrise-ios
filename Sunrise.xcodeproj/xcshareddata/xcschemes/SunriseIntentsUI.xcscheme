@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1010"
-   version = "1.3">
+   wasCreatedForAppExtension = "YES"
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-               BuildableName = "Sunrise Watch.app"
-               BlueprintName = "Sunrise Watch"
+               BlueprintIdentifier = "21FB4B1921A587FC00F6BD80"
+               BuildableName = "SunriseIntentsUI.appex"
+               BlueprintName = "SunriseIntentsUI"
                ReferencedContainer = "container:Sunrise.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-            BuildableName = "Sunrise Watch.app"
-            BlueprintName = "Sunrise Watch"
+            BlueprintIdentifier = "21FB4B1921A587FC00F6BD80"
+            BuildableName = "SunriseIntentsUI.appex"
+            BlueprintName = "SunriseIntentsUI"
             ReferencedContainer = "container:Sunrise.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,41 +58,33 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug Prod"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      intentQueryString = "Test order"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-            BuildableName = "Sunrise Watch.app"
-            BlueprintName = "Sunrise Watch"
-            ReferencedContainer = "container:Sunrise.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "2">
       <RemoteRunnable
          runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.carousel"
-         RemotePath = "/Sunrise">
+         BundleIdentifier = "com.apple.notificationcenterui">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-            BuildableName = "Sunrise Watch.app"
-            BlueprintName = "Sunrise Watch"
+            BlueprintIdentifier = "21FB4B1921A587FC00F6BD80"
+            BuildableName = "SunriseIntentsUI.appex"
+            BlueprintName = "SunriseIntentsUI"
             ReferencedContainer = "container:Sunrise.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-            BuildableName = "Sunrise Watch.app"
-            BlueprintName = "Sunrise Watch"
+            BlueprintIdentifier = "21FB4B1921A587FC00F6BD80"
+            BuildableName = "SunriseIntentsUI.appex"
+            BlueprintName = "SunriseIntentsUI"
             ReferencedContainer = "container:Sunrise.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -100,31 +93,22 @@
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release Prod"
+      intentQueryString = "Test order"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.carousel"
-         RemotePath = "/Sunrise">
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "2">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-            BuildableName = "Sunrise Watch.app"
-            BlueprintName = "Sunrise Watch"
+            BlueprintIdentifier = "21CDC4931CE91D9B009D2638"
+            BuildableName = "Sunrise.app"
+            BlueprintName = "Sunrise"
             ReferencedContainer = "container:Sunrise.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2163EBB01DE8C26C00803640"
-            BuildableName = "Sunrise Watch.app"
-            BlueprintName = "Sunrise Watch"
-            ReferencedContainer = "container:Sunrise.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug Prod">
