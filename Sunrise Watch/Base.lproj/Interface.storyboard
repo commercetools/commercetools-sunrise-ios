@@ -150,33 +150,65 @@
             <objects>
                 <controller title="New products" id="IcN-lP-hYV" customClass="ProductOverviewInterfaceController" customModule="Sunrise_Watch_Extension">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="zWf-X6-zmS">
+                        <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="tga-4S-NWH">
                             <items>
-                                <button alignment="left" id="TqG-DY-NYu">
-                                    <group key="contentGroup" width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="JRH-Za-SWQ">
+                                <button alignment="left" id="HxS-Xa-zCY">
+                                    <group key="contentGroup" width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="6iz-oP-lZW">
                                         <items>
-                                            <imageView width="1" height="1" alignment="left" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="3nu-oL-lkp"/>
-                                            <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="Ksh-mO-UYN"/>
+                                            <group width="1" height="1" alignment="left" layout="overlap" spacing="0.0" id="I8l-9g-oou">
+                                                <items>
+                                                    <imageView width="1" height="1" alignment="left" hidden="YES" alpha="0.0" contentMode="scaleAspectFit" id="y83-TH-wyE"/>
+                                                    <imageView width="100" height="100" alignment="center" verticalAlignment="center" image="loading-indicator" contentMode="center" animationDuration="0.80000000000000004" id="Mtt-Fb-Uk4"/>
+                                                </items>
+                                            </group>
+                                            <group width="1" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="nHL-1F-rfq">
+                                                <items>
+                                                    <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="8fZ-FT-ekT">
+                                                        <items>
+                                                            <group width="4" height="2" alignment="left" verticalAlignment="center" layout="vertical" id="1YQ-IY-HiD">
+                                                                <variation key="device=watch40mm" width="8"/>
+                                                                <variation key="device=watch44mm" width="8"/>
+                                                            </group>
+                                                            <label alignment="left" verticalAlignment="center" text="Jeans" id="Mto-g9-5fv">
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                            </label>
+                                                            <group width="4" height="2" alignment="left" verticalAlignment="center" layout="vertical" id="qRD-2o-LeQ">
+                                                                <variation key="device=watch40mm" width="8"/>
+                                                                <variation key="device=watch44mm" width="8"/>
+                                                            </group>
+                                                        </items>
+                                                        <color key="backgroundColor" white="1" alpha="0.79695526539999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </group>
                                         </items>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </group>
                                     <connections>
-                                        <segue destination="r4v-gy-uaD" kind="push" id="6V5-H7-0YG"/>
+                                        <segue destination="r4v-gy-uaD" kind="push" id="BkA-KV-dlG"/>
                                     </connections>
                                 </button>
-                                <button width="41" height="41" alignment="right" verticalAlignment="bottom" backgroundImage="wishlist_icon" id="FH3-tU-dLa">
-                                    <connections>
-                                        <action selector="toggleWishList" destination="IcN-lP-hYV" id="pT3-cc-yng"/>
-                                    </connections>
-                                </button>
+                                <group width="1" height="68" alignment="left" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="6UQ-tu-tX9">
+                                    <items>
+                                        <button width="41" height="41" alignment="right" backgroundImage="wishlist_icon" id="FdP-Vq-B4C">
+                                            <connections>
+                                                <action selector="toggleWishList" destination="IcN-lP-hYV" id="6SZ-hD-cyF"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="loadingImage" destination="Ksh-mO-UYN" id="7b8-dB-QN5"/>
-                        <outlet property="productButton" destination="TqG-DY-NYu" id="PBh-Mb-o8X"/>
-                        <outlet property="productImage" destination="3nu-oL-lkp" id="1A0-if-mmg"/>
-                        <outlet property="wishListButton" destination="FH3-tU-dLa" id="peO-B7-nCz"/>
+                        <outlet property="loadingImage" destination="Mtt-Fb-Uk4" id="ZYN-Qk-SdM"/>
+                        <outlet property="productButton" destination="HxS-Xa-zCY" id="OOc-jD-hFA"/>
+                        <outlet property="productImage" destination="y83-TH-wyE" id="gNK-kO-k4a"/>
+                        <outlet property="productNameLabel" destination="Mto-g9-5fv" id="qGA-0b-5ru"/>
+                        <outlet property="wishListButton" destination="FdP-Vq-B4C" id="xWC-LV-dTg"/>
                     </connections>
                 </controller>
             </objects>
@@ -792,7 +824,10 @@ KATHMANDU peuter peuter peuter</string>
                                                 <items>
                                                     <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="cfL-Lk-uXm">
                                                         <items>
-                                                            <group width="4" height="2" alignment="left" layout="vertical" id="U93-gl-K5G"/>
+                                                            <group width="4" height="2" alignment="left" verticalAlignment="center" layout="vertical" id="7WS-bs-Mo2">
+                                                                <variation key="device=watch40mm" width="8"/>
+                                                                <variation key="device=watch44mm" width="8"/>
+                                                            </group>
                                                             <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="asf-l3-KPV">
                                                                 <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
@@ -860,7 +895,10 @@ KATHMANDU peuter peuter peuter</string>
                                                 <items>
                                                     <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="hY2-Px-uUG">
                                                         <items>
-                                                            <group width="4" height="2" alignment="left" layout="vertical" id="GMb-jk-vnH"/>
+                                                            <group width="4" height="2" alignment="left" verticalAlignment="center" layout="vertical" id="xIm-MS-7ww">
+                                                                <variation key="device=watch40mm" width="8"/>
+                                                                <variation key="device=watch44mm" width="8"/>
+                                                            </group>
                                                             <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="bGe-rg-zCf">
                                                                 <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
@@ -941,7 +979,10 @@ KATHMANDU peuter peuter peuter</string>
                                                 <items>
                                                     <group width="1" height="27" alignment="left" verticalAlignment="bottom" spacing="0.0" id="CCF-1U-8Ov">
                                                         <items>
-                                                            <group width="4" height="2" alignment="left" layout="vertical" id="hlP-I5-Nlu"/>
+                                                            <group width="4" height="2" alignment="left" verticalAlignment="center" layout="vertical" id="a1H-VB-AHG">
+                                                                <variation key="device=watch40mm" width="8"/>
+                                                                <variation key="device=watch44mm" width="8"/>
+                                                            </group>
                                                             <label alignment="left" verticalAlignment="center" text="$19.99" minimumScaleFactor="0.29999999999999999" id="QCi-T5-TMX">
                                                                 <color key="textColor" red="0.94117647059999998" green="0.38823529410000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
@@ -1030,7 +1071,7 @@ KATHMANDU peuter peuter peuter</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FEn-mX-EEb"/>
+        <segue reference="BkA-KV-dlG"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647058823528" green="0.38823529411764707" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
