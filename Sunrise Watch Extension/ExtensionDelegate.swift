@@ -30,6 +30,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         locationManager?.startUpdatingLocation()
         
         UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().addNotificationCategories()
     }
 
     func applicationDidBecomeActive() {

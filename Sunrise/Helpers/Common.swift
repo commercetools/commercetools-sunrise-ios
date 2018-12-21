@@ -5,6 +5,7 @@
 import UIKit
 import PassKit
 import Commercetools
+import UserNotifications
 
 extension Dictionary where Key: ExpressibleByStringLiteral, Value: ExpressibleByStringLiteral {
     var localizedString: Value? {
@@ -140,5 +141,36 @@ extension Locale {
         currencyFormatter.locale = Locale.current
 
         return currencyFormatter.currencyCode
+    }
+}
+
+struct Notification {
+
+    struct Category {
+        static let reservationConfirmation = "reservation_confirmation"
+        static let productDiscountSet = "product-discount-set"
+        static let orderConfirmed = "order-confirmed"
+        static let orderShipped = "order-shipped"
+    }
+
+    struct Action {
+        static let view = "viewAction"
+        static let getDirections = "getDirectionsAction"
+        static let addToCart = "addToCart"
+    }
+}
+
+extension UNUserNotificationCenter {
+    func addNotificationCategories() {
+        let viewAction = UNNotificationAction(identifier: Notification.Action.view, title: NSLocalizedString("View", comment: "View"), options: [.authenticationRequired, .foreground])
+        let getDirectionsAction = UNNotificationAction(identifier: Notification.Action.getDirections, title: NSLocalizedString("Get Directions", comment: "Get Directions"), options: [.foreground])
+        let addToCartAction = UNNotificationAction(identifier: Notification.Action.addToCart, title: NSLocalizedString("Add to cart", comment: "Add to cart"))
+
+        let reservationConfirmationCategory = UNNotificationCategory(identifier: Notification.Category.reservationConfirmation, actions: [viewAction, getDirectionsAction], intentIdentifiers: [], options: [])
+        let productDiscountSetCategory = UNNotificationCategory(identifier: Notification.Category.productDiscountSet, actions: [viewAction, addToCartAction], intentIdentifiers: [], options: [])
+        let orderConfirmedCategory = UNNotificationCategory(identifier: Notification.Category.orderConfirmed, actions: [viewAction], intentIdentifiers: [], options: [])
+        let orderShippedCategory = UNNotificationCategory(identifier: Notification.Category.orderShipped, actions: [viewAction], intentIdentifiers: [], options: [])
+
+        setNotificationCategories([reservationConfirmationCategory, productDiscountSetCategory, orderConfirmedCategory, orderShippedCategory])
     }
 }

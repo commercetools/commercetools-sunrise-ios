@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         notificationCenter.delegate = self
         application.registerForRemoteNotifications()
-        addNotificationCategories()
+        UNUserNotificationCenter.current().addNotificationCategories()
 
         return true
     }
@@ -136,19 +136,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-    }
-
-    func addNotificationCategories() {
-        let viewAction = UNNotificationAction(identifier: Notification.Action.view, title: NSLocalizedString("View", comment: "View"), options: [.authenticationRequired, .foreground])
-        let getDirectionsAction = UNNotificationAction(identifier: Notification.Action.getDirections, title: NSLocalizedString("Get Directions", comment: "Get Directions"), options: [.foreground])
-        let addToCartAction = UNNotificationAction(identifier: Notification.Action.addToCart, title: NSLocalizedString("Add to cart", comment: "Add to cart"))
-
-        let reservationConfirmationCategory = UNNotificationCategory(identifier: Notification.Category.reservationConfirmation, actions: [viewAction, getDirectionsAction], intentIdentifiers: [], options: [])
-        let productDiscountSetCategory = UNNotificationCategory(identifier: Notification.Category.productDiscountSet, actions: [viewAction, addToCartAction], intentIdentifiers: [], options: [])
-        let orderConfirmedCategory = UNNotificationCategory(identifier: Notification.Category.orderConfirmed, actions: [viewAction], intentIdentifiers: [], options: [])
-        let orderShippedCategory = UNNotificationCategory(identifier: Notification.Category.orderShipped, actions: [viewAction], intentIdentifiers: [], options: [])
-
-        UNUserNotificationCenter.current().setNotificationCategories([reservationConfirmationCategory, productDiscountSetCategory, orderConfirmedCategory, orderShippedCategory])
     }
 }
 
