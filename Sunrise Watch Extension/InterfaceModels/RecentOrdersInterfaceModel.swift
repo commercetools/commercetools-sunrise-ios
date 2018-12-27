@@ -48,7 +48,7 @@ class RecentOrdersInterfaceModel {
         let orderState = orders[row].orderState
         let shipmentState = orders[row].shipmentState
         let color = OrderDetailsInterfaceModel.color(for: (orderState, shipmentState))
-        let status = shipmentState == .shipped ? shipmentState!.rawValue : orderState.rawValue
+        let status = shipmentState == .shipped ? NSLocalizedString(shipmentState!.rawValue, comment: "Shipment state") : NSLocalizedString(orderState.rawValue, comment: "Order state")
         let attributes: [NSAttributedString.Key : Any] = [.font: UIFont.preferredFont(forTextStyle: .caption2), .foregroundColor: color]
         return NSAttributedString(string: status, attributes: attributes)
     }

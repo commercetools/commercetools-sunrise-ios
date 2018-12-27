@@ -75,9 +75,9 @@ class ProductDetailsInterfaceController: WKInterfaceController {
         .observeValues { [weak self] event in
             switch event {
                 case .value(_):
-                    self?.presentAlert(withTitle: "Moved to cart", message: "Product has been moved to cart", preferredStyle: .alert, actions: [WKAlertAction.okAction])
+                    self?.presentAlert(withTitle: NSLocalizedString("Added to cart", comment: "Added to cart"), message: NSLocalizedString("Product has been added to cart", comment: "Added to cart message"), preferredStyle: .alert, actions: [WKAlertAction.okAction])
                 case let .failed(error):
-                    self?.presentAlert(withTitle: "Could not move to cart", message: error.errorDescription, preferredStyle: .alert, actions: [WKAlertAction.okAction])
+                    self?.presentAlert(withTitle: NSLocalizedString("Could not add to cart", comment: "Could not add to cart"), message: error.errorDescription, preferredStyle: .alert, actions: [WKAlertAction.okAction])
                 case .completed:
                     self?.moveToCartButton.setEnabled(true)
                 default:

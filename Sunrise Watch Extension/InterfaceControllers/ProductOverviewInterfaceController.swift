@@ -15,6 +15,7 @@ class ProductOverviewInterfaceController: WKInterfaceController {
     @IBOutlet var loadingImage: WKInterfaceImage!
     @IBOutlet var productPriceLabel: WKInterfaceLabel?
     @IBOutlet var productOldPriceLabel: WKInterfaceLabel?
+    @IBOutlet var productNameLabel: WKInterfaceLabel?
     
     private let disposables = CompositeDisposable()
 
@@ -44,6 +45,7 @@ class ProductOverviewInterfaceController: WKInterfaceController {
         productPriceLabel?.setAttributedText(NSAttributedString(string: interfaceModel.productPrice, attributes: priceAttributes))
         let oldPriceAttributes: [NSAttributedString.Key : Any] = [.strikethroughStyle: 1]
         productOldPriceLabel?.setAttributedText(NSAttributedString(string: interfaceModel.productOldPrice, attributes: oldPriceAttributes))
+        productNameLabel?.setText(interfaceModel.productName)
         if let url = URL(string: interfaceModel.productImageUrl) {
             SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
                 if let image = image {

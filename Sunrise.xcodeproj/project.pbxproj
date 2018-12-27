@@ -17,7 +17,6 @@
 		210ABDE62039174200BF2457 /* StoreSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210ABDE52039174200BF2457 /* StoreSelectionViewController.swift */; };
 		210BE02EA82049EFD1E1188C /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
 		210BE0D3C4E3336428ECAB34 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
-		210BE103BF26B8D00ACA6F82 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE75F90AE686FB2D5D8AD /* ReservationViewModel.swift */; };
 		210BE15EB86DF0306282C27C /* MainMenuInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE60A69039721F912B8E8 /* MainMenuInterfaceModel.swift */; };
 		210BE1FC59FA761E46E72C64 /* CommonViewBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE3F7DD234F1F971FFCFF /* CommonViewBinding.swift */; };
 		210BE2FB5EE7C6EB9869D375 /* ProductVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE439FAD7F1908A054A18 /* ProductVariant.swift */; };
@@ -202,6 +201,7 @@
 		21CDC4A11CE91D9B009D2638 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		21CE603221C6B19C00241312 /* ProductOverviewInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE603121C6B19C00241312 /* ProductOverviewInterfaceController.swift */; };
 		21D2AE9D1F6171E10087CB46 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D2AE9C1F6171E10087CB46 /* SignUpViewController.swift */; };
+		21DCAF602225711B008B4264 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 213553351EBB681F007E9A60 /* Localizable.strings */; };
 		21DEDD9B20737F8700DF6ADF /* MyReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9A20737F8700DF6ADF /* MyReservationCell.swift */; };
 		21DEDD9D20739B4600DF6ADF /* ReservationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9C20739B4600DF6ADF /* ReservationDetailsViewModel.swift */; };
 		21DEDD9F20739B5700DF6ADF /* ReservationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEDD9E20739B5700DF6ADF /* ReservationDetailsViewController.swift */; };
@@ -481,6 +481,7 @@
 		219A4D5E213C4C7F007DC0F2 /* ProductOverviewInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOverviewInterfaceModel.swift; sourceTree = "<group>"; };
 		219B2EBB1D1B7348004579DD /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		219B84EC20391C720014BC4D /* ProductDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionCell.swift; sourceTree = "<group>"; };
+		219CD14F221A197F00C58C2C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Interface.strings; sourceTree = "<group>"; };
 		21A30D101D3005300029DB7E /* SunriseTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseTabBarController.swift; sourceTree = "<group>"; };
 		21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsStagingConfig.plist; sourceTree = "<group>"; };
 		21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CommercetoolsProdConfig.plist; sourceTree = "<group>"; };
@@ -1512,6 +1513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21FB4B4421A8389200F6BD80 /* CommercetoolsStagingConfig.plist in Resources */,
+				21DCAF602225711B008B4264 /* Localizable.strings in Resources */,
 				2158A26C1DEA77CC0039E21F /* CommercetoolsProdConfig.plist in Resources */,
 				2163EBC71DE8C26C00803640 /* Assets.xcassets in Resources */,
 			);
@@ -1841,7 +1843,6 @@
 				217F535621B93C3E0022FE8C /* LineItemRowController.swift in Sources */,
 				21BF5362219A17FF00561542 /* ProductDiscountNotificationController.swift in Sources */,
 				21AFE8121DF24B6C00D0F6EE /* ProductDetailsInterfaceModel.swift in Sources */,
-				210BE103BF26B8D00ACA6F82 /* ReservationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2060,6 +2061,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2163EBB41DE8C26C00803640 /* Base */,
+				219CD14F221A197F00C58C2C /* de */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -3556,6 +3558,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -3629,6 +3632,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -3695,6 +3699,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -3761,6 +3766,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

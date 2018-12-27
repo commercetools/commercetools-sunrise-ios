@@ -49,7 +49,7 @@ class OrderDetailsInterfaceModel {
         expectedDelivery = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 2, to: Date())!)
         orderDate = dateFormatter.string(from: Date())
         
-        let status = order.shipmentState == .shipped ? order.shipmentState!.rawValue : order.orderState.rawValue
+        let status = order.shipmentState == .shipped ? NSLocalizedString(order.shipmentState!.rawValue, comment: "Shipment state") : NSLocalizedString(order.orderState.rawValue, comment: "Order state")
         let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: OrderDetailsInterfaceModel.color(for: (order.orderState, order.shipmentState))]
         orderStatus = NSAttributedString(string: status, attributes: attributes)
         moreLineItems = order.lineItems.count > 1 ? String(format: NSLocalizedString("and %@ more", comment: "Order Summary"), "\(order.lineItems.count - 1)") : ""
