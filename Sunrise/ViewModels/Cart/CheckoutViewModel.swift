@@ -315,7 +315,7 @@ class CheckoutViewModel: BaseViewModel {
         isLoading.value = true
         let shippingMethod = methods.value[indexPath.row]
 
-        let shippingMethodReference = Reference<ShippingMethod>(id: shippingMethod.id, typeId: "shipping-method")
+        let shippingMethodReference = ResourceIdentifier(id: shippingMethod.id, typeId: .shippingMethod)
         updateActiveCart(actions: [.setShippingMethod(shippingMethod: shippingMethodReference), .recalculate(updateProductData: nil)])
     }
 

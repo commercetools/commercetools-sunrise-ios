@@ -16,7 +16,7 @@ extension Customer {
         Customer.profile { result in
             if let customerVersion = result.model?.version, result.isSuccess && result.model?.customType == nil {
                 // Custom type not present, add it
-                let type = ResourceIdentifier(typeId: "type", key: "iOSUser")
+                let type = ResourceIdentifier(key: "iOSUser", typeId: .type)
                 let updateActions = UpdateActions(version: customerVersion, actions: [CustomerUpdateAction.setCustomType(type: type, fields: nil)])
                 Customer.update(actions: updateActions) { result in
                     completionHandler(result.model?.version, result.errors)
@@ -36,7 +36,7 @@ extension Customer {
     }
     var myStore: Reference<Channel>? {
         if let myStoreJSON = fields?["myStore"]?.dictionary, let id = myStoreJSON["id"]?.string,
-           let typeId = myStoreJSON["typeId"]?.string {
+           let rawTypeId = myStoreJSON["typeId"]?.string, let typeId = TypeId(rawValue: rawTypeId) {
             return Reference<Channel>(id: id, typeId: typeId)
         }
         return nil

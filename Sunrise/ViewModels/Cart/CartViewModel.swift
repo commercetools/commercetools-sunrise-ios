@@ -380,12 +380,11 @@ class CartViewModel: BaseViewModel {
             if let ctPayment = result.model, result.isSuccess {
                 var actions = [CartUpdateAction]()
                 if let activeShippingMethodId = payment.shippingMethod?.identifier {
-                    let shippingMethodReference = Reference<ShippingMethod>(id: activeShippingMethodId, typeId: "shipping-method")
-                    actions.append(.setShippingMethod(shippingMethod: shippingMethodReference))
+                    actions.append(.setShippingMethod(shippingMethod: ResourceIdentifier(id: activeShippingMethodId, typeId: .shippingMethod)))
                 }
                 actions.append(.setShippingAddress(address: payment.shippingContact?.ctAddress))
                 actions.append(.setBillingAddress(address: payment.billingContact?.ctAddress))
-                let paymentReference = Reference<Payment>(id: ctPayment.id, typeId: "payment")
+                let paymentReference = Reference<Payment>(id: ctPayment.id, typeId: .payment)
                 actions.append(.addPayment(payment: paymentReference))
 
                 Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: actions), expansion: self.shippingMethodExpansion) { result in
@@ -429,8 +428,7 @@ class CartViewModel: BaseViewModel {
             return
         }
         if let activeShippingMethodId = shippingMethod.identifier {
-            let shippingMethodReference = Reference<ShippingMethod>(id: activeShippingMethodId, typeId: "shipping-method")
-            Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: [.setShippingMethod(shippingMethod: shippingMethodReference)]), expansion: shippingMethodExpansion) { result in
+            Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: [.setShippingMethod(shippingMethod: ResourceIdentifier(id: activeShippingMethodId, typeId: .shippingMethod))]), expansion: shippingMethodExpansion) { result in
                 if let cart = result.model {
                     self.cart.value = cart
                     completion(PKPaymentRequestShippingMethodUpdate(paymentSummaryItems: self.paymentSummaryItems))
@@ -507,8 +505,7 @@ class CartViewModel: BaseViewModel {
                 shippingMethods.insert(activeMethod, at: 0)
                 completion(shippingMethods, [])
             } else if let activeShippingMethodId = shippingMethods.first?.identifier {
-                let shippingMethodReference = Reference<ShippingMethod>(id: activeShippingMethodId, typeId: "shipping-method")
-                Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: [.setShippingMethod(shippingMethod: shippingMethodReference)]), expansion: self.shippingMethodExpansion) { result in
+                Cart.update(cart.id, actions: UpdateActions(version: cart.version, actions: [.setShippingMethod(shippingMethod: ResourceIdentifier(id: activeShippingMethodId, typeId: .shippingMethod))]), expansion: self.shippingMethodExpansion) { result in
                     if let cart = result.model, result.isSuccess {
                         self.cart.value = cart
                         completion(shippingMethods, [])

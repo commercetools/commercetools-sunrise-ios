@@ -19,8 +19,8 @@ extension Order {
                 return
             }
 
-            let selectedChannelReference = Reference<Channel>(id: store.id, typeId: "channel")
-            let lineItemDraft = LineItemDraft(productVariantSelection: .sku(sku: sku), supplyChannel: selectedChannelReference, distributionChannel: selectedChannelReference)
+            let selectedChannel = ResourceIdentifier(id: store.id, typeId: .channel)
+            let lineItemDraft = LineItemDraft(productVariantSelection: .sku(sku: sku), supplyChannel: selectedChannel, distributionChannel: selectedChannel)
             let customType = JsonValue.dictionary(value: ["type": .dictionary(value: ["key": .string(value: "reservationOrder")]),
                                                            "fields": .dictionary(value: ["isReservation": .bool(value: true)])])
 
@@ -76,7 +76,7 @@ extension Order {
 extension Order {
     func createReorderCart(completion: @escaping (Cart?) -> Void) {
         let lineItemsDraft = lineItems.map({ LineItemDraft(productVariantSelection: .productVariant(productId: $0.productId, variantId: $0.variant.id), quantity: UInt($0.quantity)) })
-        let cartDraft = CartDraft(currency: totalPrice.currencyCode, customerEmail: customerEmail, lineItems: lineItemsDraft, shippingAddress: shippingAddress, billingAddress: billingAddress, shippingMethod: shippingInfo?.shippingMethod)
+        let cartDraft = CartDraft(currency: totalPrice.currencyCode, customerEmail: customerEmail, lineItems: lineItemsDraft, shippingAddress: shippingAddress, billingAddress: billingAddress, shippingMethod: ResourceIdentifier(id: shippingInfo?.shippingMethod?.id, typeId: .shippingMethod))
         Cart.create(cartDraft) { result in
             completion(result.model)
         }
