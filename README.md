@@ -1,18 +1,22 @@
-# Commercetools Sunrise iOS :sunrise:
+# Commercetools Sunrise iOS watchOS :sunrise:
 
 [![][travis img]][travis]
 [![][license img]][license]
-[![Stories in Ready](https://badge.waffle.io/commercetools/commercetools-sunrise-ios.svg?label=ready&title=Ready)](http://waffle.io/commercetools/commercetools-sunrise-ios)
+[![][demo img]][demo]
 
 The mobile shop template using the latest version of [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk), and providing you with the best and quickest way to get up and running with the commercetools platform.
 
 ## Getting started
 
+### Demo
+
+If you want to try out Sunrise without building the project, you can use the following link to get the latest TestFlight build on your iPhone / Apple Watch: https://testflight.apple.com/join/pzpGWTe2
+
 ### Requirements
 
-- iOS 10.0+ / watchOS 3.0+
-- Xcode 8.1+
-- Swift 3.0+
+- iOS 11.0+ / watchOS 4.0+
+- Xcode 10.1+
+- Swift 4.0
 
 ### Installing CocoaPods Dependencies
 
@@ -22,7 +26,7 @@ The mobile shop template using the latest version of [Commercetools SDK](https:/
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.1.0+ is required to build the latest Sunrise project.
+> CocoaPods 1.5.3+ is required to build the latest Sunrise project.
 
 Then, run the following command:
 
@@ -41,14 +45,19 @@ You can optionally decide to have multiple environments (staging, qa, production
 The main goal of this project is to provide you with the best practices on how to utilize the [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk) along with current iOS trends, and quickly start with your own mobile shop. We are constantly working on adding new features, and you can always check the status by looking at the project's [Waffle board](https://waffle.io/commercetools/commercetools-sunrise-ios).
 
 This is the list of features you can find in the current version of the Sunrise app:
-- Products overview: a customer can browse for products on the overview screen, and navigate to product details. Optionally for an authenticated customer, Sunrise provides the ability to customize products overview experience, by choosing whether to browse the entire online inventory, or just the products which are in stock in your favorite store.
-- Product details: all product related details, customized depending on selected preference on the overview screen.
-- Click 'n' collect: from the product details, a customer can reserve an item to be picked up from one of the stores selected on the score selection screen.
+- Category / Products overview: a customer can browse for categories and products on the overview screen, and navigate to product details.
+- Product details: all product related details.
+- Click 'n' collect / reserve in store: from the product details, a customer can reserve an item to be picked up from one of the stores selected on the score selection screen.
 - Carts: products can be added to the cart from the details page, and managed on the cart tab (delete items, change quantity, etc).
-- Search: textual search, with results presented on the product overview screen.
+- Wishlist: products can be saved from overview and details pages, and managed from the wishlist tab (remove items, get details, etc).
+- Search: textual search, voice search, with results presented on the product overview screen.
 - My account:
   - Login and registration screen in case the customer has not previously logged in.
-  - Orders and reservations overview, when the customer is logged in. Customer's preferred store can also be seen under my preferences section, and changed from the subsequent screens containing map and list view of the available stores.
+  - Orders and reservations overview, when the customer is logged in.
+  - My style can be defined for authenticated customer, and it is automatically applied while browsing products.
+  - Address book is used to store customer's shipping and billing addresses, which can be used during checkout.
+  - Map view with stores and associated information, search, and option to choose a default store.
+  - Change password, notification and location permissions settings.
 
 ## Push Notifications
 
@@ -79,12 +88,13 @@ Triggered on `OrderCreated` message. Function for delivering the notification re
 
 ![phone notification](https://cloud.githubusercontent.com/assets/14024032/22203139/dbb949c8-e16b-11e6-8088-09258ace2fbe.png)
 
-![watch notificaiton](https://cloud.githubusercontent.com/assets/14024032/22203151/f321d4ea-e16b-11e6-8454-29189681ea94.png)
-
-[](definitions for the top badges)
+![watch notification](https://cloud.githubusercontent.com/assets/14024032/22203151/f321d4ea-e16b-11e6-8454-29189681ea94.png)
 
 [travis]:https://travis-ci.org/commercetools/commercetools-ios-sdk
 [travis img]:https://travis-ci.org/commercetools/commercetools-ios-sdk.svg?branch=master
 
 [license]:LICENSE
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
+
+[demo]:https://testflight.apple.com/join/pzpGWTe2
+[demo img]:https://img.shields.io/badge/Demo-TestFlight-blue.svg
