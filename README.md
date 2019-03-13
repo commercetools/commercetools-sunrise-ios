@@ -59,6 +59,12 @@ This is the list of features you can find in the current version of the Sunrise 
   - Map view with stores and associated information, search, and option to choose a default store.
   - Change password, notification and location permissions settings.
 
+## Siri Shortcuts
+
+Sunrise has Siri Shortcuts integration for reordering items. In order to create your shortcut, navigate to _My Account_ tab, and select a specific order from _My Orders_ screen. Order details contains _Add to Siri_ button you can use to create a shortcut.
+
+![siri-shortcuts](https://user-images.githubusercontent.com/14024032/54278572-fa655f00-4592-11e9-92ca-86a1b74d340b.png)
+
 ## Push Notifications
 
 Another important aspect of a mobile shop template is the ability to receive notifications important to the customer. Sunrise iOS project provides an example on how to implement a notification that is triggered when a customer reserves an item to be picked up in a store.
