@@ -63,7 +63,13 @@ This is the list of features you can find in the current version of the Sunrise 
 
 Sunrise has Siri Shortcuts integration for reordering items. In order to create your shortcut, navigate to _My Account_ tab, and select a specific order from _My Orders_ screen. Order details contains _Add to Siri_ button you can use to create a shortcut.
 
-![siri-shortcuts](https://user-images.githubusercontent.com/14024032/54278572-fa655f00-4592-11e9-92ca-86a1b74d340b.png)
+![siri-shortcuts](https://user-images.githubusercontent.com/14024032/54280662-45ce3c00-4598-11e9-9ae6-4825829a2785.png)
+
+## Apple Pay
+
+One of the checkout options Sunrise app offers is Apple Pay. The project provides an example on how to implement it, and how models from [Commercetools SDK](https://github.com/commercetools/commercetools-ios-sdk) map to `PassKit` objects.
+
+![apple-pay](https://user-images.githubusercontent.com/14024032/54283647-bd9f6500-459e-11e9-8013-7738e7e85216.png)
 
 ## Push Notifications
 
