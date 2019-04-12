@@ -107,14 +107,14 @@ class MainViewModel: BaseViewModel {
         disposables += productsViewModel.textSearch.producer
         .filter { $0.0 != "" }
         .startWithValues { [unowned self] in
-            if let index = self.recentSearches.index(of: $0.0) {
+            if let index = self.recentSearches.firstIndex(of: $0.0) {
                 self.recentSearches.remove(at: index)
             }
             self.recentSearches.insert($0.0, at: 0)
         }
 
         disposables += NotificationCenter.default.reactive
-        .notifications(forName: .UIApplicationDidBecomeActive)
+        .notifications(forName: UIApplication.didBecomeActiveNotification)
         .observeValues { [weak self] _ in
             self?.retrieveCategories()
         }
@@ -223,7 +223,7 @@ class MainViewModel: BaseViewModel {
                 assetUrls.append(url)
             }
         }
-        SDWebImagePrefetcher.shared().prefetchURLs(assetUrls)
+        SDWebImagePrefetcher.shared.prefetchURLs(assetUrls)
         if let navigationId = navigationId {
             rootCategories = childCategories[navigationId] ?? []
         }

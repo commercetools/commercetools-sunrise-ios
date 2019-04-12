@@ -146,7 +146,7 @@ class SunriseTabBarController: UITabBarController {
     }
 
     @IBAction func touchUpInside(_ sender: UIButton) {
-        guard let index = tabButtons.index(of: sender) else { return }
+        guard let index = tabButtons.firstIndex(of: sender) else { return }
         if index == AppRouting.TabIndex.mainTab.index && AppRouting.isProductOverviewOnMainTabPresented {
             NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
         }
@@ -172,7 +172,7 @@ class SunriseTabBarController: UITabBarController {
             button.isSelected = selectedIndex == index
         }
         cartButton.isSelected = false
-        wishListBadgeImageView.image = selectedIndex == tabButtons.index(of: wishListButton) ? #imageLiteral(resourceName: "tab_wishlist_badge") : #imageLiteral(resourceName: "tab_wishlist_off_badge")
+        wishListBadgeImageView.image = selectedIndex == tabButtons.firstIndex(of: wishListButton) ? #imageLiteral(resourceName: "tab_wishlist_badge") : #imageLiteral(resourceName: "tab_wishlist_off_badge")
     }
 }
 
@@ -185,7 +185,7 @@ extension SunriseTabBarController: UITabBarControllerDelegate {
 
 public extension Foundation.Notification.Name {
     /// Used as a namespace for all notifications related to watch token synchronization.
-    public struct Navigation {
+    struct Navigation {
         public static let backButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.backButtonTapped")
         public static let doneButtonTapped = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.doneButtonTapped")
         public static let resetSearch = Foundation.Notification.Name(rawValue: "com.commercetools.notification.navigation.resetSearch")

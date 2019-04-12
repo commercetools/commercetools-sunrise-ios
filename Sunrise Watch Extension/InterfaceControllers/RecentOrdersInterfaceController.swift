@@ -64,8 +64,6 @@ class RecentOrdersInterfaceController: WKInterfaceController {
                     self?.loadingImage.startAnimating()
                 } else {
                     self?.loadingImage.stopAnimating()
-                    self?.listGroup.sizeToFitHeight()
-                    self?.loadingGroup.setVerticalAlignment(.top)
                 }
             }
         }
@@ -82,8 +80,14 @@ class RecentOrdersInterfaceController: WKInterfaceController {
         .startWithValues { [weak self] numberOfRows in
             self?.loadMoreButton.setHidden(self?.interfaceModel?.isLoadMoreHidden.value ?? true)
             self?.listTable.setNumberOfRows(numberOfRows, withRowType: OrderItemRowController.identifier)
-            self?.animate(withDuration: 0.3) {
-                self?.emptyStateLabel.setAlpha(numberOfRows == 0 ? 1 : 0)
+            if numberOfRows > 0 {
+                self?.listGroup.sizeToFitHeight()
+                self?.loadingGroup.setVerticalAlignment(.top)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self?.animate(withDuration: 0.3) {
+                    self?.emptyStateLabel.setAlpha(numberOfRows == 0 ? 1 : 0)
+                }
             }
             guard let interfaceModel = self?.interfaceModel, numberOfRows > 0 else { return }
             (0...numberOfRows - 1).forEach { row in

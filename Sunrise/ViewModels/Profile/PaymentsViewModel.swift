@@ -46,7 +46,7 @@ class PaymentsViewModel: BaseViewModel {
         }
 
         disposables += setDefaultPaymentSignal.observeValues { [unowned self] in
-            while let previousDefaultIndex = self.creditCards.index(where: { $0.isDefault }) {
+            while let previousDefaultIndex = self.creditCards.firstIndex(where: { $0.isDefault }) {
                 var previous = self.creditCards[previousDefaultIndex]
                 previous.isDefault = false
                 self.creditCards[previousDefaultIndex] = previous

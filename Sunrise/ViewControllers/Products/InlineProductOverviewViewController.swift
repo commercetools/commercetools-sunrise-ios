@@ -65,7 +65,7 @@ extension InlineProductOverviewViewController: UICollectionViewDataSource {
         guard let viewModel = viewModel else { return cell }
         cell.productNameLabel.text = viewModel.productName(at: indexPath)
         cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)))
-        let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+        let oldPriceAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
         cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.productOldPrice(at: indexPath), attributes: oldPriceAttributes)
         cell.priceLabel.text = viewModel.productPrice(at: indexPath)
         cell.priceLabel.textColor = viewModel.productOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)

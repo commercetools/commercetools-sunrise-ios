@@ -56,8 +56,8 @@ class CheckoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        lineItemsTableView.rowHeight = UITableViewAutomaticDimension
-        shippingMethodsTableView.rowHeight = UITableViewAutomaticDimension
+        lineItemsTableView.rowHeight = UITableView.automaticDimension
+        shippingMethodsTableView.rowHeight = UITableView.automaticDimension
 
         billingAsShippingSwitch.onTintColor = UIColor(patternImage: #imageLiteral(resourceName: "switch_background"))
         hiddenWhenAuthenticatedViews.forEach { $0.isHidden = true }

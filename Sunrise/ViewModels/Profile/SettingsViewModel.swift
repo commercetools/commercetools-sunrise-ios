@@ -55,7 +55,7 @@ class SettingsViewModel: BaseViewModel {
 
         super.init()
 
-        disposables += NotificationCenter.default.reactive.notifications(forName: .UIApplicationDidBecomeActive)
+        disposables += NotificationCenter.default.reactive.notifications(forName: UIApplication.didBecomeActiveNotification)
         .observeValues { [unowned self] _ in self.refreshNotificationPermissionStatus() }
 
         disposables += isLocationEnabled <~ locationAuthorizationStatus.map { $0 == .authorizedAlways || $0 == .authorizedWhenInUse }

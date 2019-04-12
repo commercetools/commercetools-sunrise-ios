@@ -68,7 +68,7 @@ class MyStyleViewModel: BaseViewModel {
 
         queryForMainProductType()
 
-        disposables += NotificationCenter.default.reactive.notifications(forName: .UIApplicationDidBecomeActive)
+        disposables += NotificationCenter.default.reactive.notifications(forName: UIApplication.didBecomeActiveNotification)
         .observeValues { [weak self] _ in
             self?.queryForMainProductType()
         }
@@ -131,7 +131,7 @@ class MyStyleViewModel: BaseViewModel {
                 default:
                     return true
                 }
-            }).first, let index = self.brands.index(of: firstMatchingBrand) {
+            }).first, let index = self.brands.firstIndex(of: firstMatchingBrand) {
                 return SignalProducer(value: IndexPath(item: index, section: 0))
             }
             return SignalProducer(value: nil)

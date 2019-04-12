@@ -131,7 +131,7 @@ class ProfilePhotoViewController: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Cannot access photos", comment: "Cannot access photos"), message: NSLocalizedString("Please enable access to photos for Sunrise app", comment: "Photos permission prompt"), preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)
-            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         })
         alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)

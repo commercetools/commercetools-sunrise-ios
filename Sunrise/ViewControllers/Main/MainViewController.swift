@@ -76,11 +76,11 @@ class MainViewController: UIViewController {
         categoriesDropdownCenterXConstraint.constant = 0.016 * view.bounds.width
         categoriesDropdownGradientLayer.frame = categoriesDropdownGradientView.bounds
         categoriesDropdownGradientView.layer.insertSublayer(categoriesDropdownGradientLayer, at: 0)
-        subcategoriesTableView.contentInset = UIEdgeInsetsMake(17, 0, 0, 0)
+        subcategoriesTableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
 
         let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
         magnifyingGlassAttachment.image = #imageLiteral(resourceName: "search_field_icon")
-        let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
+        let placeholderAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
         let searchPlaceholder = NSMutableAttributedString(attributedString: NSAttributedString(attachment: magnifyingGlassAttachment))
         searchPlaceholder.append(NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes))
         searchField.attributedPlaceholder = searchPlaceholder
@@ -227,7 +227,7 @@ class MainViewController: UIViewController {
             }
         }
 
-        disposables += viewModel.textSearch <~ searchField.reactive.textValues.map { ($0 ?? "", Locale.current) }
+        disposables += viewModel.textSearch <~ searchField.reactive.textValues.map { ($0, Locale.current) }
 
         disposables += searchField.reactive.textValues
         .filter { $0 != "" }
@@ -316,7 +316,7 @@ class MainViewController: UIViewController {
         }
 
         disposables += NotificationCenter.default.reactive
-        .notifications(forName: .UIApplicationDidBecomeActive)
+        .notifications(forName: UIApplication.didBecomeActiveNotification)
         .combineLatest(with: viewModel.isRecognitionInProgress.signal)
         .filter { $1 }
         .observe(on: UIScheduler())
@@ -657,7 +657,7 @@ extension MainViewController: UICollectionViewDataSource {
             guard let viewModel = viewModel?.productsViewModel else { return cell }
             cell.productNameLabel.text = viewModel.productName(at: indexPath)
             cell.productImageView.sd_setImage(with: URL(string: viewModel.productImageUrl(at: indexPath)))
-            let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+            let oldPriceAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
             cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.productOldPrice(at: indexPath), attributes: oldPriceAttributes)
             cell.priceLabel.text = viewModel.productPrice(at: indexPath)
             cell.priceLabel.textColor = viewModel.productOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
@@ -737,7 +737,7 @@ extension MainViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryTableViewCell
-            let nameAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: viewModel?.isCategorySelected(at: indexPath) == true ? "Rubik-Medium" : "Rubik-Regular", size: 14)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0)]
+            let nameAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: viewModel?.isCategorySelected(at: indexPath) == true ? "Rubik-Medium" : "Rubik-Regular", size: 14)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0)]
             cell.categoryNameLabel.attributedText = NSAttributedString(string: viewModel?.categoryName(for: tableView, at: indexPath) ?? "", attributes: nameAttributes)
             return cell
         }

@@ -39,7 +39,7 @@ class SignInViewController: UIViewController {
         forgotPasswordTitle.mutableString.setString(NSLocalizedString("Forgot password?", comment: "Forgot password?"))
         forgotPasswordButton.setAttributedTitle(forgotPasswordTitle, for: .normal)
 
-        let placeholderAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
+        let placeholderAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
         emailField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Username", comment: "Username"), attributes: placeholderAttributes)
         passwordField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Password", comment: "Password"), attributes: placeholderAttributes)
 
@@ -64,8 +64,8 @@ class SignInViewController: UIViewController {
     private func bindViewModel() {
         guard let viewModel = viewModel, isViewLoaded else { return }
 
-        disposables += viewModel.username <~ emailField.reactive.continuousTextValues.map { $0 ?? "" }
-        disposables += viewModel.password <~ passwordField.reactive.continuousTextValues.map { $0 ?? "" }
+        disposables += viewModel.username <~ emailField.reactive.continuousTextValues.map { $0 }
+        disposables += viewModel.password <~ passwordField.reactive.continuousTextValues.map { $0 }
 
         logInButton.reactive.pressed = CocoaAction(viewModel.loginAction)
 

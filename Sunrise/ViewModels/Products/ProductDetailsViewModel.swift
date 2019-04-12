@@ -193,7 +193,7 @@ class ProductDetailsViewModel: BaseViewModel {
         }
 
         disposables += imageCount <~ activeAttributes.map { [weak self] _ in
-            SDWebImagePrefetcher.shared().prefetchURLs(self?.variantForActiveAttributes?.images?.compactMap({ URL(string: ($0.url)) }))
+            SDWebImagePrefetcher.shared.prefetchURLs(self?.variantForActiveAttributes?.images?.compactMap({ URL(string: ($0.url)) }))
             return self?.variantForActiveAttributes?.images?.count ?? 0
         }
 
@@ -208,7 +208,7 @@ class ProductDetailsViewModel: BaseViewModel {
         }
 
         disposables += oldPrice <~ activeAttributes.map { [weak self] _ -> NSAttributedString? in
-            let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 18)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+            let oldPriceAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Bold", size: 18)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
             guard let price = self?.priceForActiveAttributes, let _ = price.discounted?.value else { return nil }
 
             return NSAttributedString(string: price.value.description, attributes: oldPriceAttributes)
@@ -216,10 +216,10 @@ class ProductDetailsViewModel: BaseViewModel {
 
         disposables += isOnStock <~ activeAttributes.map { [unowned self] _ -> NSAttributedString? in
             if self.variantForActiveAttributes?.availability?.isOnStock == true {
-                let onStockAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.38, green: 0.65, blue: 0.08, alpha: 1.0)]
+                let onStockAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.38, green: 0.65, blue: 0.08, alpha: 1.0)]
                 return NSAttributedString(string: self.onStock, attributes: onStockAttributes)
             } else {
-                let notAvailableAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.82, green: 0.01, blue: 0.11, alpha: 1.0)]
+                let notAvailableAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.82, green: 0.01, blue: 0.11, alpha: 1.0)]
                 return NSAttributedString(string: self.notAvailable, attributes: notAvailableAttributes)
             }
         }

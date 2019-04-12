@@ -105,7 +105,7 @@ class CartViewModel: BaseViewModel {
         }
 
         disposables += NotificationCenter.default.reactive
-        .notifications(forName: .UIApplicationDidBecomeActive)
+        .notifications(forName: UIApplication.didBecomeActiveNotification)
         .observeValues { [unowned self] _ in
             self.refreshObserver.send(value: ())
         }
@@ -500,7 +500,7 @@ class CartViewModel: BaseViewModel {
                 method.detail = $0.description
                 return method
             } ?? []
-            if let activeShippingMethodId = cart.shippingInfo?.shippingMethod?.id, let index = shippingMethods.index(where: { $0.identifier == activeShippingMethodId }) {
+            if let activeShippingMethodId = cart.shippingInfo?.shippingMethod?.id, let index = shippingMethods.firstIndex(where: { $0.identifier == activeShippingMethodId }) {
                 let activeMethod = shippingMethods.remove(at: index)
                 shippingMethods.insert(activeMethod, at: 0)
                 completion(shippingMethods, [])

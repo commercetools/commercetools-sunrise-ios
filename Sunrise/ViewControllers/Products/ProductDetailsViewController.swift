@@ -271,7 +271,7 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductOverviewCell
                 cell.productNameLabel.text = viewModel.recommendationName(at: indexPath)
                 cell.productImageView.sd_setImage(with: URL(string: viewModel.recommendationImageUrl(at: indexPath)))
-                let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+                let oldPriceAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Bold", size: 12)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
                 cell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.recommendationOldPrice(at: indexPath), attributes: oldPriceAttributes)
                 cell.priceLabel.text = viewModel.recommendationPrice(at: indexPath)
                 cell.priceLabel.textColor = viewModel.recommendationOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)

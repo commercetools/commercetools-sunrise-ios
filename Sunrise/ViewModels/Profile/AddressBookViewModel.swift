@@ -81,7 +81,7 @@ class AddressBookViewModel: BaseViewModel {
                 self.addresses = profile.addresses.filter({ profile.billingAddressIds?.contains($0.id ?? "") == false })
                 self.defaultAddressId = profile.defaultShippingAddressId
                 // Default address should be the first in the list if it exists
-                if let index = self.addresses.index(where: { $0.id == self.defaultAddressId }), self.defaultAddressId != nil {
+                if let index = self.addresses.firstIndex(where: { $0.id == self.defaultAddressId }), self.defaultAddressId != nil {
                     let defaultAddress = self.addresses.remove(at: index)
                     self.addresses.insert(defaultAddress, at: 0)
                 }

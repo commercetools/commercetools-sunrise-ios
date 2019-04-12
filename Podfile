@@ -8,7 +8,7 @@ end
 
 target 'Sunrise' do
   common_pods
-  pod 'ReactiveCocoa', '~> 7.2'
+  pod 'ReactiveCocoa', '~> 9.0'
   pod 'CardIO'
   pod 'IQKeyboardManagerSwift'
   pod 'SDWebImage'

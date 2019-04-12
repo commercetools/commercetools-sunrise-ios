@@ -76,7 +76,7 @@ class MyReservationsViewModel: BaseViewModel {
                 self.reservations = orders.filter { $0.isReservation == true }
                 self.isLoading.value = false
 
-                if let pendingRow = self.reservations.index(where: { $0.id == self.pendingReservationDetailsId.value }) {
+                if let pendingRow = self.reservations.firstIndex(where: { $0.id == self.pendingReservationDetailsId.value }) {
                     self.pendingReservationDetailsId.value = nil
                     self.showReservationDetailsObserver.send(value: IndexPath(row: pendingRow, section: 0))
                 }

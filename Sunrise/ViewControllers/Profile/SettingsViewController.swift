@@ -123,7 +123,7 @@ class SettingsViewController: UIViewController {
     private var settingsAction: UIAlertAction {
         return UIAlertAction(title: viewModel?.settingsAction, style: .default) { [unowned self] _ in
             self.viewModel?.refreshObserver.send(value: ())
-            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         }
     }
 

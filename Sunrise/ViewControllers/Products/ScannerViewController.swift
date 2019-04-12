@@ -95,7 +95,7 @@ class ScannerViewController: UIViewController {
                 )
         if authorizationStatus == .denied {
             alertController.addAction(UIAlertAction(title: viewModel?.settingsAction, style: .cancel, handler: { _ in
-                if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(appSettingsURL)
                 }
                 SunriseTabBarController.currentlyActive?.selectedIndex = 0

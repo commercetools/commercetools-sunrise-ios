@@ -49,7 +49,7 @@ class VoiceSearchViewModel: BaseViewModel {
         super.init()
 
         disposables += NotificationCenter.default.reactive
-        .notifications(forName: .UIApplicationWillResignActive)
+        .notifications(forName: UIApplication.willResignActiveNotification)
         .observeValues { [weak self] _ in
             self?.dismissObserver.send(value: ())
         }
@@ -116,8 +116,8 @@ class VoiceSearchViewModel: BaseViewModel {
         let audioSession = AVAudioSession.sharedInstance()
 
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try audioSession.setMode(AVAudioSessionModeMeasurement)
+            try audioSession.setCategory(AVAudioSession.Category.playAndRecord)
+            try audioSession.setMode(AVAudioSession.Mode.measurement)
             try audioSession.setActive(true)
         } catch {
             alertMessageObserver.send(value: "\(error)")
@@ -178,7 +178,7 @@ class VoiceSearchViewModel: BaseViewModel {
         audioEngine.stop()
         audioRecorder?.stop()
         if !willPerformSearch {
-            try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         }
     }
 

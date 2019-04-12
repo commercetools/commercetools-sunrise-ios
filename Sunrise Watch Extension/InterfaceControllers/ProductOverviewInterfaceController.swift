@@ -47,7 +47,7 @@ class ProductOverviewInterfaceController: WKInterfaceController {
         productOldPriceLabel?.setAttributedText(NSAttributedString(string: interfaceModel.productOldPrice, attributes: oldPriceAttributes))
         productNameLabel?.setText(interfaceModel.productName)
         if let url = URL(string: interfaceModel.productImageUrl) {
-            SDWebImageManager.shared().loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
+            SDWebImageManager.shared.loadImage(with: url, options: [], progress: nil, completed: { [weak self] image, _, _, _, _, _ in
                 if let image = image {
                     self?.productImage.setImage(image)
                 }

@@ -21,7 +21,7 @@ class ReservationNotificationViewController: UIViewController, UNNotificationCon
     @IBOutlet weak var zipAndCityLabel: UILabel!
     @IBOutlet weak var openLine1Label: UILabel!
     @IBOutlet weak var openLine2Label: UILabel!
-    private let loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private let loadingIndicator = UIActivityIndicatorView(style: .gray)
     
     var viewModel: ReservationViewModel? {
         didSet {

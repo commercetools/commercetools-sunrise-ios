@@ -21,7 +21,7 @@ class StoreFinderViewModel: BaseViewModel {
 
     // Outputs
     let isLoading = MutableProperty(true)
-    let visibleMapRect = MutableProperty(MKMapRectNull)
+    let visibleMapRect = MutableProperty(MKMapRect.null)
     let isStoreDetailsVisible = MutableProperty(false)
     let storeLocations = MutableProperty([CLLocation]())
     let selectedStoreName = MutableProperty("")
@@ -113,12 +113,12 @@ class StoreFinderViewModel: BaseViewModel {
                 visibleLocations = $0.0.1.compactMap { $0.location }
             }
 
-            var zoomRect = MKMapRectNull
+            var zoomRect = MKMapRect.null
             let visibleRects = visibleLocations.map { location in
-                MKMapRect(origin: MKMapPointForCoordinate(location.coordinate), size: MKMapSize(width: 0.1, height: 0.1))
+                MKMapRect(origin: MKMapPoint(location.coordinate), size: MKMapSize(width: 0.1, height: 0.1))
             }
             visibleRects.forEach {
-                zoomRect = MKMapRectUnion(zoomRect, $0)
+                zoomRect = zoomRect.union($0)
             }
             return zoomRect
         }

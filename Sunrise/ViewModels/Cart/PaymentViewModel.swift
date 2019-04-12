@@ -107,7 +107,7 @@ class PaymentViewModel: BaseViewModel {
 
     private func savePayment() -> SignalProducer<Void, CTError> {
         return SignalProducer { [unowned self] observer, disposable in
-            if let outdatedCardIndex = CreditCardStore.sharedInstance.creditCards.index(where: { $0.id == self.creditCard?.id }) {
+            if let outdatedCardIndex = CreditCardStore.sharedInstance.creditCards.firstIndex(where: { $0.id == self.creditCard?.id }) {
                 CreditCardStore.sharedInstance.creditCards.remove(at: outdatedCardIndex)
             }
             let creditCard = CreditCard(id: self.creditCard?.id ?? UUID().uuidString, name: self.name.value ?? "", number: self.cardNumber.value ?? "", ccv: self.ccv.value ?? "", validMonth: self.expiryMonth.value ?? "", validYear: self.expiryYear.value ?? "", isDefault: self.creditCard?.isDefault ?? false)

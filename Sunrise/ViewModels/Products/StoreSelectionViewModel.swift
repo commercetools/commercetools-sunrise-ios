@@ -19,7 +19,7 @@ class StoreSelectionViewModel: BaseViewModel {
 
     // Outputs
     let isLoading = MutableProperty(true)
-    let visibleMapRect = MutableProperty(MKMapRectNull)
+    let visibleMapRect = MutableProperty(MKMapRect.null)
     let storeLocations = MutableProperty([CLLocation]())
     let productName: MutableProperty<String?> = MutableProperty(nil)
     let productImageUrl = MutableProperty("")
@@ -86,10 +86,10 @@ class StoreSelectionViewModel: BaseViewModel {
         disposables += isOnStock <~ selectedStore.map { [unowned self] store -> NSAttributedString? in
             guard let store = store else { return nil }
             if self.currentVariant?.availability?.channels?[store.id]?.isOnStock == true {
-                let onStockAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.38, green: 0.65, blue: 0.08, alpha: 1.0)]
+                let onStockAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.38, green: 0.65, blue: 0.08, alpha: 1.0)]
                 return NSAttributedString(string: self.onStock, attributes: onStockAttributes)
             } else {
-                let notAvailableAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.82, green: 0.01, blue: 0.11, alpha: 1.0)]
+                let notAvailableAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Regular", size: 12)!, .foregroundColor: UIColor(red: 0.82, green: 0.01, blue: 0.11, alpha: 1.0)]
                 return NSAttributedString(string: self.notAvailable, attributes: notAvailableAttributes)
             }
         }
@@ -112,12 +112,12 @@ class StoreSelectionViewModel: BaseViewModel {
                 visibleLocations = channels.compactMap { $0.location }
             }
 
-            var zoomRect = MKMapRectNull
+            var zoomRect = MKMapRect.null
             let visibleRects = visibleLocations.map { location in
-                MKMapRect(origin: MKMapPointForCoordinate(location.coordinate), size: MKMapSize(width: 0.1, height: 0.1))
+                MKMapRect(origin: MKMapPoint(location.coordinate), size: MKMapSize(width: 0.1, height: 0.1))
             }
             visibleRects.forEach {
-                zoomRect = MKMapRectUnion(zoomRect, $0)
+                zoomRect = zoomRect.union($0)
             }
             return zoomRect
         }
@@ -172,12 +172,5 @@ class StoreSelectionViewModel: BaseViewModel {
             }
             self?.isLoading.value = false
         }
-    }
-}
-
-extension CTError.FailureReason {
-    init(message: String?, details: String?) {
-        self.message = message
-        self.details = details
     }
 }

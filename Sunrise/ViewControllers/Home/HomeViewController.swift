@@ -43,8 +43,8 @@ extension HomeViewController: UITableViewDataSource {
                     viewController.viewModel = viewModel?.inlineProductOverviewViewModel(at: indexPath)
                     inlinePopViewControllers[indexPath] = viewController
                 }
-                addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                addChild(viewController)
+                viewController.didMove(toParent: self)
                 viewController.view.frame = cell.contentView.bounds
                 cell.contentView.addSubview(viewController.view)
                 return cell

@@ -15,8 +15,8 @@ If you want to try out Sunrise without building the project, you can use the fol
 ### Requirements
 
 - iOS 11.0+ / watchOS 4.0+
-- Xcode 10.1+
-- Swift 4.0
+- Xcode 10.2+
+- Swift 5.0
 
 ### Installing CocoaPods Dependencies
 
@@ -26,7 +26,7 @@ If you want to try out Sunrise without building the project, you can use the fol
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.5.3+ is required to build the latest Sunrise project.
+> CocoaPods 1.6.1+ is required to build the latest Sunrise project.
 
 Then, run the following command:
 

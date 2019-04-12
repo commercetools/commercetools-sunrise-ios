@@ -37,8 +37,8 @@ class MyStyleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        genderSegmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Rubik-Medium", size: 14)!, NSAttributedStringKey.foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0)], for: .normal)
-        genderSegmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Rubik-Medium", size: 14)!, NSAttributedStringKey.foregroundColor: UIColor.white], for: .selected)
+        genderSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Rubik-Medium", size: 14)!, NSAttributedString.Key.foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0)], for: .normal)
+        genderSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Rubik-Medium", size: 14)!, NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
 
         viewModel = MyStyleViewModel()
     }

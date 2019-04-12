@@ -42,7 +42,7 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableHeaderView = headerView
 
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -215,7 +215,7 @@ extension CartViewController: UITableViewDataSource {
         lineItemCell.priceLabel.textColor = viewModel.lineItemOldPrice(at: indexPath).isEmpty ? UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0) : UIColor(red: 0.93, green: 0.26, blue: 0.26, alpha: 1.0)
         lineItemCell.productImageView.sd_setImage(with: URL(string: viewModel.lineItemImageUrl(at: indexPath)), placeholderImage: UIImage(named: "transparent"))
         lineItemCell.oldAndActivePriceSpacingConstraint.constant = viewModel.lineItemOldPrice(at: indexPath).isEmpty ? 0 : 4
-        let oldPriceAttributes: [NSAttributedStringKey : Any] = [.font: UIFont(name: "Rubik-Bold", size: 14)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
+        let oldPriceAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Bold", size: 14)!, .foregroundColor: UIColor(red: 0.16, green: 0.20, blue: 0.25, alpha: 1.0), .strikethroughStyle: 1]
         lineItemCell.oldPriceLabel.attributedText = NSAttributedString(string: viewModel.lineItemOldPrice(at: indexPath), attributes: oldPriceAttributes)
         lineItemCell.wishListButton!.isSelected = viewModel.isLineItemInWishList(at: indexPath)
         disposables += lineItemCell.removeLineItemButton!.reactive.controlEvents(.touchUpInside)
@@ -233,7 +233,7 @@ extension CartViewController: UITableViewDataSource {
         return lineItemCell
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             viewModel?.deleteLineItemObserver.send(value: indexPath)
         }

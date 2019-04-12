@@ -67,7 +67,7 @@ class WishListViewModel: BaseViewModel {
         }
 
         disposables += NotificationCenter.default.reactive
-        .notifications(forName: .UIApplicationDidBecomeActive)
+        .notifications(forName: UIApplication.didBecomeActiveNotification)
         .observeValues { [unowned self] _ in
             self.refreshObserver.send(value: ())
         }

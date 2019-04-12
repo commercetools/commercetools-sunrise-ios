@@ -342,26 +342,26 @@ class CheckoutViewModel: BaseViewModel {
             Customer.profile { result in
                 if let customer = result.model, result.isSuccess {
                     var shippingAddresses = customer.addresses.filter({ customer.billingAddressIds?.contains($0.id ?? "") == false })
-                    if let defaultShippingAddressId = customer.defaultShippingAddressId, let defaultShippingAddress = customer.addresses.first(where: { $0.id == defaultShippingAddressId }), let index = shippingAddresses.index(where: { $0.id == defaultShippingAddressId }) {
+                    if let defaultShippingAddressId = customer.defaultShippingAddressId, let defaultShippingAddress = customer.addresses.first(where: { $0.id == defaultShippingAddressId }), let index = shippingAddresses.firstIndex(where: { $0.id == defaultShippingAddressId }) {
                         shippingAddresses.remove(at: index)
                         shippingAddresses.insert(defaultShippingAddress, at: 0)
                     }
 
                     var billingAddresses = customer.addresses.filter({ customer.shippingAddressIds?.contains($0.id ?? "") == false })
-                    if let defaultBillingAddressId = customer.defaultBillingAddressId, let defaultBillingAddress = customer.addresses.first(where: { $0.id == defaultBillingAddressId }), let index = billingAddresses.index(where: { $0.id == defaultBillingAddressId }) {
+                    if let defaultBillingAddressId = customer.defaultBillingAddressId, let defaultBillingAddress = customer.addresses.first(where: { $0.id == defaultBillingAddressId }), let index = billingAddresses.firstIndex(where: { $0.id == defaultBillingAddressId }) {
                         billingAddresses.remove(at: index)
                         billingAddresses.insert(defaultBillingAddress, at: 0)
                     }
 
                     if let shippingAddress = self.cart.value?.shippingAddress {
-                        if let index = shippingAddresses.index(where: { $0.id == shippingAddress.id }) {
+                        if let index = shippingAddresses.firstIndex(where: { $0.id == shippingAddress.id }) {
                             shippingAddresses.remove(at: index)
                         }
                         shippingAddresses.insert(shippingAddress, at: 0)
                     }
 
                     if let billingAddress = self.cart.value?.billingAddress {
-                        if let index = billingAddresses.index(where: { $0.id == billingAddress.id }) {
+                        if let index = billingAddresses.firstIndex(where: { $0.id == billingAddress.id }) {
                             billingAddresses.remove(at: index)
                         }
                         billingAddresses.insert(billingAddress, at: 0)

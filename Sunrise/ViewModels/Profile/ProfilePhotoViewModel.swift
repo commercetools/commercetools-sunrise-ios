@@ -196,7 +196,7 @@ class ProfilePhotoViewModel: NSObject {
     // MARK: - Uploading and downloading to / from an S3 bucket
     
     private func upload(image: UIImage?) {
-        guard let image = image, let data = UIImagePNGRepresentation(image) else { return }
+        guard let image = image, let data = image.pngData() else { return }
         isLoading.value = true
         Customer.profile { result in
             if let errors = result.errors as? [CTError], result.isFailure {

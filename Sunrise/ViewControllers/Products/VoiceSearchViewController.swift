@@ -35,7 +35,7 @@ class VoiceSearchViewController: UIViewController {
         super.viewWillAppear(animated)
 
         displayLink = CADisplayLink(target: self, selector: #selector(updateMeter))
-        displayLink?.add(to: .current, forMode: .commonModes)
+        displayLink?.add(to: .current, forMode: .common)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -89,7 +89,7 @@ class VoiceSearchViewController: UIViewController {
             )
             alertController.addAction(UIAlertAction(title: viewModel.okAction, style: .default, handler: { [weak self] _ in self?.dismiss(animated: true)}))
             alertController.addAction(UIAlertAction(title: viewModel.settingsAction, style: .cancel, handler: { [weak self] _ in
-                if let appSettingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(appSettingsURL)
                 }
                 self?.dismiss(animated: true)

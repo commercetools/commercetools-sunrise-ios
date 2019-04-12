@@ -169,7 +169,7 @@ class MainMenuInterfaceModel {
                 searchInterfaceModel = ProductOverviewInterfaceModel(type: type, mainMenuInterfaceModel: self)
                 searchInterfaceModel?.retrieveProductsObserver.send(value: ())
                 var recentSearches = self.recentSearches.value
-                if let index = recentSearches.index(of: term) {
+                if let index = recentSearches.firstIndex(of: term) {
                     recentSearches.remove(at: index)
                 }
                 recentSearches.append(term)
