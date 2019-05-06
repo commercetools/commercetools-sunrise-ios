@@ -10,7 +10,6 @@ import SDWebImage
 
 class MainViewModel: BaseViewModel {
 
-    // Due to https://bugs.swift.org/browse/SR-773
     typealias Category = Commercetools.Category
 
     // Inputs
@@ -27,6 +26,7 @@ class MainViewModel: BaseViewModel {
 
     let productsViewModel = ProductOverviewViewModel()
     weak var voiceSearchViewModel: VoiceSearchViewModel?
+    weak var imageSearchViewModel: ImageSearchViewModel?
 
     private let rootCategories = MutableProperty([Category]())
     private let activeCategory: MutableProperty<Category?> = MutableProperty(nil)
@@ -61,6 +61,12 @@ class MainViewModel: BaseViewModel {
     // MARK: - Lifecycle
 
     init(allCategories: [Category] = []) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            ImageSearch.perform(for: UIImage(named: "looks_we_love_banner")!) { result in
+                print(result)
+            }
+        }
+        
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 
