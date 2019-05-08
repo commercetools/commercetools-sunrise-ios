@@ -1,9 +1,11 @@
 //
-//  LiveViewCell.swift
-//  Sunrise
-//
-//  Created by Nikola Mladenovic on 5/14/19.
-//  Copyright © 2019 Commercetools. All rights reserved.
+// Copyright (c) 2019 Commercetools. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class LiveViewCell: UICollectionViewCell {
+    @IBOutlet weak var selectedIconImageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var liveView: UIView!
+}
