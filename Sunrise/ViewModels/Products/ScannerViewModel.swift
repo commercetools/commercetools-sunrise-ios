@@ -13,7 +13,7 @@ class ScannerViewModel: BaseViewModel {
     // Outputs
     let errorTitle = NSLocalizedString("Could not scan", comment: "Scanning error title")
     let capabilitiesError = NSLocalizedString("Your device is not capable of performing barcode scanning.", comment: "Capabilities scanning error")
-    let permissionError = NSLocalizedString("In order to scan products, please go to settings and grant the Camera permission.", comment: "Camera permissions error")
+    let permissionError = NSLocalizedString("In order to scan products, please go to settings and grant Camera permission.", comment: "Camera permissions error")
     let scannedProduct: MutableProperty<ProductProjection?>
     let isLoading = MutableProperty(false)
     let isCapturing = MutableProperty(false)

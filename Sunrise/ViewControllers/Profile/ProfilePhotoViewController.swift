@@ -140,14 +140,15 @@ class ProfilePhotoViewController: UIViewController {
     }
 }
 
-extension ProfilePhotoViewController: UICollectionViewDelegate {
+extension ProfilePhotoViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         guard scrollView == scrollView else { return nil }
         return imageView
     }
-    
+}
+
+extension ProfilePhotoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard collectionView == photosCollectionView else { return }
         viewModel?.didSelectItemObserver.send(value: indexPath)
     }
 }
