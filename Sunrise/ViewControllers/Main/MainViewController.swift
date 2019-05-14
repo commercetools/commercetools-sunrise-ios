@@ -84,12 +84,8 @@ class MainViewController: UIViewController {
         categoriesDropdownGradientView.layer.insertSublayer(categoriesDropdownGradientLayer, at: 0)
         subcategoriesTableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
 
-        let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
-        magnifyingGlassAttachment.image = #imageLiteral(resourceName: "search_field_icon")
         let placeholderAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
-        let searchPlaceholder = NSMutableAttributedString(attributedString: NSAttributedString(attachment: magnifyingGlassAttachment))
-        searchPlaceholder.append(NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes))
-        searchField.attributedPlaceholder = searchPlaceholder
+        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes)
 
         [searchSuggestionsTableView, subcategoriesTableView].forEach { $0.tableFooterView = UIView() }
         subcategoriesTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: subcategoriesTableView.bounds.width, height: 0.5))
