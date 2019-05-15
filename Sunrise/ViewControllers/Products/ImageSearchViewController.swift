@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import AVFoundation
 import ReactiveCocoa
 import ReactiveSwift
 import Result
@@ -11,15 +10,10 @@ import Result
 class ImageSearchViewController: UIViewController {
 
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var browseImageGalleryButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
 
     let imagePickerController = UIImagePickerController()
-    private var captureSession: AVCaptureSession?
-    private let videoCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-    private var previewLayer: AVCaptureVideoPreviewLayer?
     private var liveViewCell: LiveViewCell?
-    private let photoOutput = AVCapturePhotoOutput()
     private let disposables = CompositeDisposable()
 
     deinit {
@@ -69,7 +63,6 @@ class ImageSearchViewController: UIViewController {
         guard let viewModel = viewModel else { return }
 
         disposables += searchButton.reactive.isHidden <~ viewModel.isSearchButtonHidden
-        disposables += browseImageGalleryButton.reactive.isHidden <~ viewModel.isBrowseAllButtonHidden
 
         disposables += viewModel.shouldPresentPhotosAccessDeniedAlert.producer
         .filter { $0 }
@@ -85,40 +78,33 @@ class ImageSearchViewController: UIViewController {
             self?.startCaptureSessionAndPreview()
         }
 
-        disposables += viewModel.captureImageSignal
+        disposables += viewModel.reloadItemsSignal
         .observe(on: UIScheduler())
-        .observeValues { [unowned self] in
-            self.photoOutput.capturePhoto(with: AVCapturePhotoSettings(format: [AVVideoCodecKey:AVVideoCodecType.jpeg]), delegate: self)
-            self.startCaptureSessionAndPreview()
+        .observeValues { [weak self] in
+            self?.collectionView.reloadItems(at: $0)
         }
     }
 
     private func startCaptureSessionAndPreview() {
-        if captureSession == nil {
-            captureSession = AVCaptureSession()
-            setupCaptureSessionAndPreview()
-            DispatchQueue.main.async {
-                self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
-            }
-        }
+        guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer else { return }
+        captureSession.sessionPreset = .photo
 
-        if let captureSession = captureSession, !captureSession.isRunning {
+        if !captureSession.isRunning {
             captureSession.startRunning()
         }
 
-        guard let captureSession = captureSession, let liveViewCell = liveViewCell else { return }
-        guard previewLayer == nil || previewLayer!.superlayer == nil else { return }
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        guard let previewLayer = previewLayer else { return }
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        guard let liveViewCell = liveViewCell else { return }
         DispatchQueue.main.async {
+            previewLayer.removeFromSuperlayer()
             previewLayer.frame = liveViewCell.liveView.layer.bounds
             liveViewCell.liveView.layer.addSublayer(previewLayer)
         }
     }
 
     private func stopCaptureSession() {
-        if let captureSession = captureSession, captureSession.isRunning {
+        guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
+
+        if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == liveViewCell?.liveView.layer {
             captureSession.stopRunning()
         }
     }
@@ -132,40 +118,6 @@ class ImageSearchViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)
         })
-        present(alertController, animated: true)
-    }
-
-    private func setupCaptureSessionAndPreview() {
-        guard let videoCaptureDevice = videoCaptureDevice, let videoInput = try? AVCaptureDeviceInput(device: videoCaptureDevice),
-              let captureSession = captureSession, captureSession.canAddInput(videoInput) && captureSession.canAddOutput(photoOutput) else {
-            self.captureSession = nil
-            presentCaptureError()
-            return
-        }
-
-        captureSession.addInput(videoInput)
-        captureSession.addOutput(photoOutput)
-        captureSession.sessionPreset = .photo
-    }
-
-    private func presentCaptureError() {
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
-
-        let alertController = UIAlertController(
-                title: viewModel?.liveViewErrorTitle,
-                message: authorizationStatus == .denied ? viewModel?.cameraPermissionError : viewModel?.capabilitiesError,
-                preferredStyle: .alert
-        )
-        if authorizationStatus == .denied {
-            alertController.addAction(UIAlertAction(title: viewModel?.settingsAction, style: .cancel, handler: { _ in
-                if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(appSettingsURL)
-                }
-                NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
-            }))
-        }
-        alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default))
-
         present(alertController, animated: true)
     }
 
@@ -188,14 +140,12 @@ extension ImageSearchViewController: UICollectionViewDataSource {
             if liveViewCell == nil {
                 liveViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LiveViewCell", for: indexPath) as? LiveViewCell
             }
-            liveViewCell!.selectedIconImageView.isHidden = viewModel.isSelectedIndicatorHidden(at: indexPath)
-            liveViewCell!.imageView.isHidden = viewModel.capturedImage.value == nil
-            liveViewCell!.imageView.image = viewModel.capturedImage.value
             return liveViewCell!
         case .image:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
             cell.imageView.image = nil
             cell.selectedIconImageView.isHidden = viewModel.isSelectedIndicatorHidden(at: indexPath)
+            cell.selectedOverlayView.alpha = viewModel.isSelectedIndicatorHidden(at: indexPath) ? 0 : 0.8
             viewModel.image(at: indexPath, completion: { image in
                 let currentIndexPath = collectionView.indexPath(for: cell)
                 guard currentIndexPath == nil || currentIndexPath == indexPath else { return }
@@ -208,17 +158,8 @@ extension ImageSearchViewController: UICollectionViewDataSource {
 
 extension ImageSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let previouslySelectedIndexPath = viewModel?.selectedItemIndexPath.value
+        guard indexPath.item != 0 else { return }
         viewModel?.selectedItemIndexPath.value = indexPath
-        guard indexPath != previouslySelectedIndexPath else { return }
-        var indexPathsToReload = [IndexPath]()
-        if let previouslySelectedIndexPath = previouslySelectedIndexPath {
-            indexPathsToReload.append(previouslySelectedIndexPath)
-        }
-        if indexPath.row != 0 {
-            indexPathsToReload.append(indexPath)
-        }
-        collectionView.reloadItems(at: indexPathsToReload)
     }
 }
 
@@ -245,12 +186,4 @@ extension ImageSearchViewController: UIImagePickerControllerDelegate {
 
 extension ImageSearchViewController: UINavigationControllerDelegate {
 
-}
-
-extension ImageSearchViewController: AVCapturePhotoCaptureDelegate {
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        guard let data = photo.fileDataRepresentation() else { return }
-        viewModel?.capturedImage.value = UIImage(data: data)
-        collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
-    }
 }

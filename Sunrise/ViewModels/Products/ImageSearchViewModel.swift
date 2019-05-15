@@ -19,15 +19,15 @@ class ImageSearchViewModel: NSObject {
     let prefetchItemsObserver: Signal<[IndexPath], NoError>.Observer
     let cancelPrefetchingObserver: Signal<[IndexPath], NoError>.Observer
     let selectedItemIndexPath = MutableProperty<IndexPath?>(nil)
-    let capturedImage = MutableProperty<UIImage?>(nil)
 
     // Outputs
     let reloadCollectionViewSignal: Signal<Void, NoError>
+    let reloadItemsSignal: Signal<[IndexPath], NoError>
     let dismissSignal: Signal<Void, NoError>
     let captureImageSignal: Signal<Void, NoError>
     let shouldPresentPhotosAccessDeniedAlert = MutableProperty(false)
     let isSearchButtonHidden = MutableProperty(true)
-    let isBrowseAllButtonHidden = MutableProperty(true)
+
 
     private let reloadCollectionViewObserver: Signal<Void, NoError>.Observer
     private var imageManager: PHCachingImageManager?
@@ -65,6 +65,9 @@ class ImageSearchViewModel: NSObject {
         let (cancelPrefetchingSignal, cancelPrefetchingObserver) = Signal<[IndexPath], NoError>.pipe()
         self.cancelPrefetchingObserver = cancelPrefetchingObserver
 
+        let (reloadItemsSignal, reloadItemsObserver) = Signal<[IndexPath], NoError>.pipe()
+        self.reloadItemsSignal = reloadItemsSignal
+
         let (captureImageSignal, captureImageObserver) = Signal<Void, NoError>.pipe()
         self.captureImageSignal = captureImageSignal
 
@@ -87,21 +90,28 @@ class ImageSearchViewModel: NSObject {
         }
 
         disposables += selectedItemIndexPath.signal
-        .filter { $0?.item == 0 }
-        .observeValues { _ in
-            captureImageObserver.send(value: ())
-        }
-
-        disposables += selectedItemIndexPath.signal
-        .filter { $0?.item != 0 }
-        .observeValues { [weak self] _ in
-            self?.capturedImage.value = nil
+        .combinePrevious()
+        .skipRepeats { $0 == $1 }
+        .observeValues { [weak self] in
+            if let current = $1, $0 == $1 {
+                DispatchQueue.main.async {
+                    self?.selectedItemIndexPath.value = nil
+                    reloadItemsObserver.send(value: [current])
+                }
+            } else {
+                var indexPathsToReload = [IndexPath]()
+                if let previous = $0 {
+                    indexPathsToReload.append(previous)
+                }
+                if let current = $1 {
+                    indexPathsToReload.append(current)
+                }
+                reloadItemsObserver.send(value: indexPathsToReload)
+            }
         }
 
         disposables += selectedItemIndexPath <~ resetImageSelectionSignal.map { nil }
-        disposables += capturedImage <~ resetImageSelectionSignal.map { nil }
-        disposables += isSearchButtonHidden <~ selectedItemIndexPath.map { $0 == nil }
-        disposables += isBrowseAllButtonHidden <~ selectedItemIndexPath.map { $0 != nil }
+        disposables += isSearchButtonHidden <~ selectedItemIndexPath.map { $0 == nil || $0 == IndexPath(item: 0, section: 0) }
 
         PHPhotoLibrary.shared().register(self)
 
@@ -127,6 +137,7 @@ class ImageSearchViewModel: NSObject {
     }
 
     func requestAuthorizations() {
+        // TODO
     }
 
     // MARK: - Data Source
