@@ -34,18 +34,14 @@ class ImageFullScreenViewController: UIViewController {
         viewModel = ImageFullScreenViewModel()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.startCaptureSessionAndPreview()
-        }
+        self.startCaptureSessionAndPreview()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.stopCaptureSession()
-        }
+        self.stopCaptureSession()
 
         super.viewDidDisappear(animated)
     }
@@ -72,11 +68,12 @@ class ImageFullScreenViewController: UIViewController {
             captureSession.startRunning()
         }
 
-        DispatchQueue.main.async {
-            previewLayer.removeFromSuperlayer()
-            previewLayer.frame = self.liveView.layer.bounds
-            self.liveView.layer.addSublayer(previewLayer)
-        }
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        previewLayer.removeFromSuperlayer()
+        previewLayer.frame = self.liveView.layer.bounds
+        self.liveView.layer.addSublayer(previewLayer)
+        CATransaction.commit()
     }
 
     private func stopCaptureSession() {

@@ -323,6 +323,8 @@ class MainViewController: UIViewController {
             UIView.animate(withDuration: 0.3) {
                 self.voiceSearchView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+                guard self.productsCollectionView.alpha == 1 else { return }
+                self.updateFilterButton(isHidden: false)
             }
         }
 
@@ -352,6 +354,8 @@ class MainViewController: UIViewController {
                 self.imageSearchView.alpha = 0
                 self.imageSearchButton.isSelected = false
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+                guard self.productsCollectionView.alpha == 1 else { return }
+                self.updateFilterButton(isHidden: false)
             }
         }
     }
@@ -360,6 +364,7 @@ class MainViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
             self.voiceSearchView.alpha = 1
+            self.updateFilterButton(isHidden: true)
         }
     }
 
@@ -367,6 +372,7 @@ class MainViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
             self.imageSearchView.alpha = 1
+            self.updateFilterButton(isHidden: true)
         }
     }
 
@@ -481,10 +487,9 @@ class MainViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.checkAndPresentEmptyState()
             self.categorySelectionButton.alpha = 0
-            self.searchFilterButton.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
             self.searchFieldLineLeadingConstraint.constant = 54
-            self.searchFieldLineTrailingConstraint.constant = 10
+            self.updateFilterButton(isHidden: true)
             self.expandSearchButton.alpha = 1
             [self.productsCollectionView, self.categoriesCollectionView, self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 0 }
             self.searchView.layoutIfNeeded()
@@ -601,6 +606,12 @@ class MainViewController: UIViewController {
         })
     }
 
+    private func updateFilterButton(isHidden: Bool) {
+        searchFilterButton.alpha = isHidden ? 0 : 1
+        searchFieldLineTrailingConstraint.constant = isHidden ? 10 : 59
+        self.searchView.layoutIfNeeded()
+    }
+
     private func checkAndPresentEmptyState() {
         guard !searchField.isFirstResponder, viewModel?.isLoading.value == false, viewModel?.productsViewModel.isLoading.value == false else {
             emptyStateView.alpha = 0
@@ -625,8 +636,7 @@ class MainViewController: UIViewController {
             UIView.animate(withDuration: 0.3) {
                 self.productsCollectionView.alpha = 1
                 self.checkAndPresentEmptyState()
-                self.searchFilterButton.alpha = 1
-                self.searchFieldLineTrailingConstraint.constant = 59
+                self.updateFilterButton(isHidden: false)
                 SunriseTabBarController.currentlyActive?.backButton.alpha = 1
                 self.searchView.layoutIfNeeded()
             }

@@ -44,15 +44,11 @@ class ImageSearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.startCaptureSessionAndPreview()
-        }
+        self.startCaptureSessionAndPreview()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.stopCaptureSession()
-        }
+        self.stopCaptureSession()
 
         super.viewDidDisappear(animated)
     }
@@ -94,11 +90,12 @@ class ImageSearchViewController: UIViewController {
         }
 
         guard let liveViewCell = liveViewCell else { return }
-        DispatchQueue.main.async {
-            previewLayer.removeFromSuperlayer()
-            previewLayer.frame = liveViewCell.liveView.layer.bounds
-            liveViewCell.liveView.layer.addSublayer(previewLayer)
-        }
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        previewLayer.removeFromSuperlayer()
+        previewLayer.frame = liveViewCell.liveView.layer.bounds
+        liveViewCell.liveView.layer.addSublayer(previewLayer)
+        CATransaction.commit()
     }
 
     private func stopCaptureSession() {
