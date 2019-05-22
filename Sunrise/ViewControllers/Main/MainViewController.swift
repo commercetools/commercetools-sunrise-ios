@@ -187,6 +187,15 @@ class MainViewController: UIViewController {
             self?.searchField.rightView?.alpha = $0 == "" ? 0 : 1
         }
 
+        disposables += searchField.reactive.continuousTextValues
+        .skipRepeats()
+        .observeValues { [weak self] _ in
+            guard self?.expandSearchButton.alpha == 0 else { return }
+            UIView.animate(withDuration: 0.3) {
+                self?.collapseSearchOptions()
+            }
+        }
+
         disposables += clearSearchButton.reactive.controlEvents(.touchUpInside)
         .observeValues { [weak self] _ in
             self?.searchField.text = ""
@@ -320,7 +329,7 @@ class MainViewController: UIViewController {
         .filter { [unowned self] in self.voiceSearchView.alpha == 1 }
         .observe(on: UIScheduler())
         .observeValues { [unowned self] in
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 self.voiceSearchView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
                 guard self.productsCollectionView.alpha == 1 else { return }
@@ -350,7 +359,7 @@ class MainViewController: UIViewController {
         disposables += viewModel.dismissSignal
         .observe(on: UIScheduler())
         .observeValues { [unowned self] in
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 self.imageSearchView.alpha = 0
                 self.imageSearchButton.isSelected = false
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
@@ -361,7 +370,7 @@ class MainViewController: UIViewController {
     }
 
     private func presentVoiceSearchView() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.2) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
             self.voiceSearchView.alpha = 1
             self.updateFilterButton(isHidden: true)
@@ -369,7 +378,7 @@ class MainViewController: UIViewController {
     }
 
     private func presentImageSearchView() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.2) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
             self.imageSearchView.alpha = 1
             self.updateFilterButton(isHidden: true)
@@ -488,11 +497,9 @@ class MainViewController: UIViewController {
             self.checkAndPresentEmptyState()
             self.categorySelectionButton.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
-            self.searchFieldLineLeadingConstraint.constant = 54
             self.updateFilterButton(isHidden: true)
-            self.expandSearchButton.alpha = 1
-            [self.productsCollectionView, self.categoriesCollectionView, self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 0 }
-            self.searchView.layoutIfNeeded()
+            self.collapseSearchOptions()
+            [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
         }, completion: { _ in
             self.scrollViewDidScroll(self.searchSuggestionsTableView)
             self.categorySelectionButtonHeightConstraint.constant = 0
@@ -518,6 +525,7 @@ class MainViewController: UIViewController {
             if (sender.text ?? "").count == 0 {
                 self.scrollViewDidScroll(self.categoriesCollectionView)
                 self.categorySelectionButtonHeightConstraint.constant = 37
+                self.updateBackgroundSnapshot()
                 UIView.animate(withDuration: 0.3, animations: {
                     self.categoriesCollectionView.alpha = 1
                     self.categorySelectionButton.alpha = 1
@@ -528,16 +536,13 @@ class MainViewController: UIViewController {
         })
     }
 
-    @IBAction func expandSearch(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.3, animations: {
+    @IBAction func expandSearchOptions(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3) {
             sender.alpha = 0
+            [self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 1 }
             self.searchFieldLineLeadingConstraint.constant = 108
             self.searchView.layoutIfNeeded()
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.3) {
-                [self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 1 }
-            }
-        })
+        }
     }
     
     @IBAction func switchCategory(_ sender: UIButton) {
@@ -625,6 +630,13 @@ class MainViewController: UIViewController {
         guard filtersView.alpha == 0 else { return }
         filterButton.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
         searchFilterButton.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
+    }
+
+    private func collapseSearchOptions() {
+        self.expandSearchButton.alpha = 1
+        [self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 0 }
+        self.searchFieldLineLeadingConstraint.constant = 54
+        self.searchView.layoutIfNeeded()
     }
 
     private func presentSearchResults() {
