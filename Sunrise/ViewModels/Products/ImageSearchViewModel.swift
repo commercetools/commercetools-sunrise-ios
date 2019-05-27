@@ -19,15 +19,14 @@ class ImageSearchViewModel: NSObject {
     let prefetchItemsObserver: Signal<[IndexPath], NoError>.Observer
     let cancelPrefetchingObserver: Signal<[IndexPath], NoError>.Observer
     let selectedItemIndexPath = MutableProperty<IndexPath?>(nil)
+    let selectedImage = MutableProperty<UIImage?>(nil)
 
     // Outputs
     let reloadCollectionViewSignal: Signal<Void, NoError>
     let reloadItemsSignal: Signal<[IndexPath], NoError>
     let dismissSignal: Signal<Void, NoError>
-    let captureImageSignal: Signal<Void, NoError>
     let shouldPresentPhotosAccessDeniedAlert = MutableProperty(false)
     let isSearchButtonHidden = MutableProperty(true)
-
 
     private let reloadCollectionViewObserver: Signal<Void, NoError>.Observer
     private var imageManager: PHCachingImageManager?
@@ -44,11 +43,10 @@ class ImageSearchViewModel: NSObject {
     }()
 
     // Dialogue texts
-    let okAction = NSLocalizedString("OK", comment: "OK")
-    let settingsAction = NSLocalizedString("Settings", comment: "Settings")
-    let liveViewErrorTitle = NSLocalizedString("Could not initialize live view", comment: "Image search live view error title")
-    let cameraPermissionError = NSLocalizedString("In order to capture an image using live view, please go to settings and grant Camera permission.", comment: "Camera permissions error")
-    let capabilitiesError = NSLocalizedString("Your device is not capable of capturing an image using live view.", comment: "Capabilities live view error")
+    static let okAction = NSLocalizedString("OK", comment: "OK")
+    static let settingsAction = NSLocalizedString("Settings", comment: "Settings")
+    static let photosAccessDeniedTitle = NSLocalizedString("Cannot access photos", comment: "Cannot access photos")
+    static let photosAccessDeniedMessage = NSLocalizedString("Please enable access to photos for Sunrise app", comment: "Photos permission prompt")
 
     // MARK: Lifecycle
 
@@ -67,9 +65,6 @@ class ImageSearchViewModel: NSObject {
 
         let (reloadItemsSignal, reloadItemsObserver) = Signal<[IndexPath], NoError>.pipe()
         self.reloadItemsSignal = reloadItemsSignal
-
-        let (captureImageSignal, captureImageObserver) = Signal<Void, NoError>.pipe()
-        self.captureImageSignal = captureImageSignal
 
         super.init()
 
@@ -134,10 +129,6 @@ class ImageSearchViewModel: NSObject {
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
         disposables.dispose()
-    }
-
-    func requestAuthorizations() {
-        // TODO
     }
 
     // MARK: - Data Source

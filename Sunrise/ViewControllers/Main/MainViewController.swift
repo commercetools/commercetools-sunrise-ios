@@ -107,6 +107,8 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         if productsCollectionView.alpha == 1 {
             productsCollectionView.reloadData()
+        }
+        if productsCollectionView.alpha == 1 || voiceSearchButton.isSelected || imageSearchButton.isSelected {
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
         }
     }
@@ -166,6 +168,12 @@ class MainViewController: UIViewController {
 
             } else if self.filtersView.alpha == 1 {
                 self.filtersViewController?.closeFilters()
+
+            } else if self.voiceSearchButton.isSelected {
+                self.viewModel?.voiceSearchViewModel?.dismissObserver.send(value: ())
+
+            } else if self.imageSearchButton.isSelected {
+                self.viewModel?.imageSearchViewModel?.dismissObserver.send(value: ())
 
             } else if self.searchField.isFirstResponder {
                 self.searchField.text = ""
@@ -332,8 +340,11 @@ class MainViewController: UIViewController {
             UIView.animate(withDuration: 0.2) {
                 self.voiceSearchView.alpha = 0
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
-                guard self.productsCollectionView.alpha == 1 else { return }
-                self.updateFilterButton(isHidden: false)
+                if self.productsCollectionView.alpha == 1 {
+                    self.updateFilterButton(isHidden: false)
+                } else {
+                    SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+                }
             }
         }
 
@@ -363,8 +374,11 @@ class MainViewController: UIViewController {
                 self.imageSearchView.alpha = 0
                 self.imageSearchButton.isSelected = false
                 SunriseTabBarController.currentlyActive?.tabView.alpha = 1
-                guard self.productsCollectionView.alpha == 1 else { return }
-                self.updateFilterButton(isHidden: false)
+                if self.productsCollectionView.alpha == 1 {
+                    self.updateFilterButton(isHidden: false)
+                } else {
+                    SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+                }
             }
         }
     }
@@ -372,6 +386,7 @@ class MainViewController: UIViewController {
     private func presentVoiceSearchView() {
         UIView.animate(withDuration: 0.2) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+            SunriseTabBarController.currentlyActive?.backButton.alpha = 1
             self.voiceSearchView.alpha = 1
             self.updateFilterButton(isHidden: true)
         }
@@ -380,6 +395,7 @@ class MainViewController: UIViewController {
     private func presentImageSearchView() {
         UIView.animate(withDuration: 0.2) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+            SunriseTabBarController.currentlyActive?.backButton.alpha = 1
             self.imageSearchView.alpha = 1
             self.updateFilterButton(isHidden: true)
         }

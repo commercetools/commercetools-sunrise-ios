@@ -37,6 +37,7 @@ class ImageSearchViewController: UIViewController {
 
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
+        imagePickerController.allowsEditing = true
 
         viewModel = ImageSearchViewModel()
     }
@@ -49,6 +50,9 @@ class ImageSearchViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         self.stopCaptureSession()
+        if !(presentedViewController is ImageFullScreenViewController || presentedViewController is UIImagePickerController) {
+            viewModel?.dismissObserver.send(value: ())
+        }
 
         super.viewDidDisappear(animated)
     }
@@ -61,7 +65,8 @@ class ImageSearchViewController: UIViewController {
         disposables += searchButton.reactive.isHidden <~ viewModel.isSearchButtonHidden
 
         disposables += viewModel.shouldPresentPhotosAccessDeniedAlert.producer
-        .filter { $0 }
+        .combineLatest(with: reactive.trigger(for: #selector(viewDidAppear(_:))))
+        .filter { $0.0 }
         .observe(on: UIScheduler())
         .startWithValues { [unowned self] _ in
             self.presentPhotosAccessDeniedAlert()
@@ -76,8 +81,10 @@ class ImageSearchViewController: UIViewController {
 
         disposables += viewModel.reloadItemsSignal
         .observe(on: UIScheduler())
-        .observeValues { [weak self] in
-            self?.collectionView.reloadItems(at: $0)
+        .observeValues { [weak self] indexPaths in
+            UIView.performWithoutAnimation {
+                self?.collectionView.reloadItems(at: indexPaths)
+            }
         }
     }
 
@@ -107,12 +114,12 @@ class ImageSearchViewController: UIViewController {
     }
 
     private func presentPhotosAccessDeniedAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Cannot access photos", comment: "Cannot access photos"), message: NSLocalizedString("Please enable access to photos for Sunrise app", comment: "Photos permission prompt"), preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { [unowned self] _ in
+        let alertController = UIAlertController(title: ImageSearchViewModel.photosAccessDeniedTitle, message: ImageSearchViewModel.photosAccessDeniedMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: ImageSearchViewModel.settingsAction, style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         })
-        alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default) { [unowned self] _ in
+        alertController.addAction(UIAlertAction(title: ImageSearchViewModel.okAction, style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)
         })
         present(alertController, animated: true)
@@ -177,6 +184,8 @@ extension ImageSearchViewController: UIImagePickerControllerDelegate {
     }
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        viewModel?.selectedImage.value = info[.originalImage] as? UIImage
+        viewModel?.dismissObserver.send(value: ())
         picker.dismiss(animated: true)
     }
 }
