@@ -10,6 +10,7 @@ import SVProgressHUD
 class MainViewController: UIViewController {
 
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var imageSearchImageButton: UIButton!
     @IBOutlet weak var filtersView: UIView!
     @IBOutlet weak var voiceSearchView: UIView!
     @IBOutlet weak var imageSearchView: UIView!
@@ -94,6 +95,10 @@ class MainViewController: UIViewController {
         clearSearchButton.setImage(#imageLiteral(resourceName: "clear-button"), for: .normal)
         searchField.rightViewMode = .whileEditing
         searchField.rightView = clearSearchButton
+
+        imageSearchImageButton.layer.cornerRadius = 6
+        imageSearchImageButton.layer.borderWidth = 1
+        imageSearchImageButton.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1.0).cgColor
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -253,6 +258,7 @@ class MainViewController: UIViewController {
         }
 
         disposables += viewModel.textSearch <~ searchField.reactive.textValues.map { ($0, Locale.current) }
+        disposables += imageSearchImageButton.reactive.image(for: .normal) <~ viewModel.imageSearch
 
         disposables += searchField.reactive.textValues
         .filter { $0 != "" }
@@ -260,6 +266,15 @@ class MainViewController: UIViewController {
         .observe(on: UIScheduler())
         .observeValues { [weak self] _ in
             self?.searchSuggestionsTableView.reloadData()
+        }
+
+        disposables += viewModel.imageSearch.signal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] image in
+            UIView.animate(withDuration: 0.2) {
+                self?.searchField.alpha = image == nil ? 1 : 0
+                self?.imageSearchImageButton.alpha = image == nil ? 0 : 1
+            }
         }
 
         disposables += viewModel.presentProductDetailsSignal
@@ -381,6 +396,25 @@ class MainViewController: UIViewController {
                 }
             }
         }
+
+        disposables += viewModel.presentImageSearchViewSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            viewModel.resetImageSelectionObserver.send(value: ())
+            self.presentImageSearchView()
+        }
+
+        disposables += viewModel.performSearchSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.categorySelectionButton.alpha = 0
+            self.categorySelectionButtonHeightConstraint.constant = 0
+            [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
+            self.searchField.text = ""
+            self.viewModel?.productsViewModel.textSearch.value = ("", Locale.current)
+            self.viewModel?.productsViewModel.imageSearch.value = viewModel.selectedImage.value
+            self.presentSearchResults()
+        }
     }
 
     private func presentVoiceSearchView() {
@@ -397,6 +431,7 @@ class MainViewController: UIViewController {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
             self.imageSearchView.alpha = 1
+            self.imageSearchButton.isSelected = true
             self.updateFilterButton(isHidden: true)
         }
     }
@@ -422,6 +457,9 @@ class MainViewController: UIViewController {
             case let imageSearchViewController as ImageSearchViewController:
                 self.imageSearchViewController = imageSearchViewController
                 _ = imageSearchViewController.view
+            case let imageFullScreenViewController as ImageFullScreenViewController:
+                _ = imageFullScreenViewController.view
+                imageFullScreenViewController.viewModel = viewModel?.imageSearchViewModel?.imageFullScreenViewModel
             default:
                 return
         }
@@ -499,7 +537,6 @@ class MainViewController: UIViewController {
         if sender.isSelected {
             viewModel?.imageSearchViewModel?.dismissObserver.send(value: ())
         } else {
-            sender.isSelected = !sender.isSelected
             viewModel?.imageSearchViewModel?.resetImageSelectionObserver.send(value: ())
             presentImageSearchView()
         }
@@ -659,12 +696,14 @@ class MainViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.searchSuggestionsTableView.alpha = 0
             self.voiceSearchView.alpha = 0
+            self.imageSearchView.alpha = 0
+            self.imageSearchButton.isSelected = false
             SunriseTabBarController.currentlyActive?.tabView.alpha = 1
         }, completion: { _ in
             UIView.animate(withDuration: 0.3) {
                 self.productsCollectionView.alpha = 1
                 self.checkAndPresentEmptyState()
-                self.updateFilterButton(isHidden: false)
+                self.updateFilterButton(isHidden: self.imageSearchImageButton.alpha != 0)
                 SunriseTabBarController.currentlyActive?.backButton.alpha = 1
                 self.searchView.layoutIfNeeded()
             }

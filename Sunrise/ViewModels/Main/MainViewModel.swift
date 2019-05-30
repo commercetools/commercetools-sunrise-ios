@@ -61,12 +61,6 @@ class MainViewModel: BaseViewModel {
     // MARK: - Lifecycle
 
     init(allCategories: [Category] = []) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            ImageSearch.perform(for: UIImage(named: "looks_we_love_banner")!) { result in
-                print(result)
-            }
-        }
-        
         let (refreshSignal, refreshObserver) = Signal<Void, NoError>.pipe()
         self.refreshObserver = refreshObserver
 

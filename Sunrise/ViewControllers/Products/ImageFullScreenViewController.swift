@@ -14,6 +14,9 @@ class ImageFullScreenViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var takePhotoButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var chooseAnotherPictureButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
 
     private let photoOutput = AVCapturePhotoOutput()
     private let disposables = CompositeDisposable()
@@ -55,8 +58,9 @@ class ImageFullScreenViewController: UIViewController {
         disposables += imageView.reactive.isHidden <~ viewModel.capturedImage.map { $0 == nil }
         disposables += takePhotoButton.reactive.isHidden <~ viewModel.isTakePhotoButtonHidden
         disposables += searchButton.reactive.isHidden <~ viewModel.isSearchButtonHidden
-
-
+        disposables += removeButton.reactive.isHidden <~ viewModel.isRemoveButtonHidden
+        disposables += chooseAnotherPictureButton.reactive.isHidden <~ viewModel.isChooseAnotherPictureButtonHidden
+        disposables += dismissButton.reactive.image(for: .normal) <~ viewModel.dismissButtonImage
     }
 
     private func startCaptureSessionAndPreview() {
@@ -91,6 +95,23 @@ class ImageFullScreenViewController: UIViewController {
     }
 
     @IBAction func closeFullScreenView(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+
+    @IBAction func removeImage(_ sender: UIButton) {
+        NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
+        dismiss(animated: true)
+    }
+
+    @IBAction func chooseAnotherImage(_ sender: UIButton) {
+        AppRouting.resetMainViewControllerState {
+            self.viewModel?.presentImageSearchViewObserver?.send(value: ())
+        }
+        dismiss(animated: true)
+    }
+
+    @IBAction func performSearch(_ sender: UIButton) {
+        viewModel?.performSearchObserver?.send(value: ())
         dismiss(animated: true)
     }
 }

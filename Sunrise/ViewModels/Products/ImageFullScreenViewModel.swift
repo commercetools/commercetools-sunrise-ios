@@ -8,23 +8,46 @@ import Result
 class ImageFullScreenViewModel: BaseViewModel {
 
     // Inputs
-    let capturedImage = MutableProperty<UIImage?>(nil)
+    let capturedImage: MutableProperty<UIImage?>
+    var performSearchObserver: Signal<Void, NoError>.Observer? {
+        return imageSearchViewModel?.performSearchObserver
+    }
+    var presentImageSearchViewObserver: Signal<Void, NoError>.Observer? {
+        return imageSearchViewModel?.presentImageSearchViewObserver
+    }
 
     // Outputs
     let isTakePhotoButtonHidden = MutableProperty(false)
     let isSearchButtonHidden = MutableProperty(true)
+    let isRemoveButtonHidden = MutableProperty(true)
+    let isChooseAnotherPictureButtonHidden = MutableProperty(true)
+    let dismissButtonImage: MutableProperty<UIImage>
+
+    weak var imageSearchViewModel: ImageSearchViewModel? {
+        didSet {
+            guard let imageSearchViewModel = imageSearchViewModel else { return }
+            disposables += imageSearchViewModel.selectedImage <~ capturedImage
+        }
+    }
 
     private let disposables = CompositeDisposable()
 
     // MARK: Lifecycle
 
-    override init() {
+    init(image: UIImage? = nil) {
+        capturedImage = MutableProperty(image)
+        dismissButtonImage = MutableProperty(image == nil ? #imageLiteral(resourceName: "live_view_close_icon") : #imageLiteral(resourceName: "live_view_back_icon"))
 
         super.init()
 
+        guard image == nil else {
+            [isTakePhotoButtonHidden, isSearchButtonHidden].forEach { $0.value = true }
+            [isRemoveButtonHidden, isChooseAnotherPictureButtonHidden].forEach { $0.value = false }
+            return
+        }
+
         disposables += isTakePhotoButtonHidden <~ capturedImage.map { $0 != nil }
         disposables += isSearchButtonHidden <~ capturedImage.map { $0 == nil }
-
     }
 
     deinit {
