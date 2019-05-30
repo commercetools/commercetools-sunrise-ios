@@ -10,6 +10,9 @@ struct ImageSearch: MLEndpoint {
 
     static let path = "image-search"
 
+    private static let targetSize = CGSize(width: 224, height: 224)
+    private static let imageRenderer = UIGraphicsImageRenderer(size: targetSize)
+
     /**
         Initiates image search.
 
@@ -20,7 +23,11 @@ struct ImageSearch: MLEndpoint {
     */
     static func perform(for image: UIImage, limit: UInt? = nil, offset: UInt? = nil, result: @escaping (Result<QueryResponse<ResponseType>>) -> Void) {
         requestWithTokenAndPath(result, { token, path in
-            guard let data = image.jpegData(compressionQuality: 0.5) else {
+            let resizedImage = imageRenderer.image { context in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+
+            guard let data = resizedImage.jpegData(compressionQuality: 0.5) else {
                 result(.failure(nil, [CTError.generalError(reason: nil)]))
                 return
             }
@@ -44,10 +51,14 @@ struct ImageSearch: MLEndpoint {
 }
 
 struct ImageSearchProduct: Codable {
-    public let imageUrl: String?
-    public let product: ResourceIdentifier?
-    public let variantId: Int?
-    public let cosineDistance: Double?
+    public let staged: Bool?
+
+    public struct ProductVariant: Codable {
+        public let staged: Bool
+        public let product: ResourceIdentifier?
+        public let imageUrl: String?
+        public let variantId: Int?
+    }
 }
 
 extension Data {
