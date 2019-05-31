@@ -125,8 +125,19 @@ class ImageSearchViewController: UIViewController {
         present(alertController, animated: true)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let imageFullScreenViewController = segue.destination as? ImageFullScreenViewController {
+            _ = imageFullScreenViewController.view
+            imageFullScreenViewController.viewModel = viewModel?.imageFullScreenViewModel
+        }
+    }
+
     @IBAction func browseImageGallery(_ sender: UIButton) {
         present(imagePickerController, animated: true)
+    }
+
+    @IBAction func performSearch(_ sender: UIButton) {
+        viewModel?.performSearchObserver.send(value: ())
     }
 }
 
@@ -185,7 +196,7 @@ extension ImageSearchViewController: UIImagePickerControllerDelegate {
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         viewModel?.selectedImage.value = info[.originalImage] as? UIImage
-        viewModel?.dismissObserver.send(value: ())
+        viewModel?.performSearchObserver.send(value: ())
         picker.dismiss(animated: true)
     }
 }

@@ -52,6 +52,7 @@ struct ImageSearch: MLEndpoint {
 
 struct ImageSearchProduct: Codable {
     public let staged: Bool?
+    public let productVariants: [ProductVariant]
 
     public struct ProductVariant: Codable {
         public let staged: Bool

@@ -18,6 +18,8 @@ class ImageSearchViewModel: NSObject {
     let resetImageSelectionObserver: Signal<Void, NoError>.Observer
     let prefetchItemsObserver: Signal<[IndexPath], NoError>.Observer
     let cancelPrefetchingObserver: Signal<[IndexPath], NoError>.Observer
+    let performSearchObserver: Signal<Void, NoError>.Observer
+    let presentImageSearchViewObserver: Signal<Void, NoError>.Observer
     let selectedItemIndexPath = MutableProperty<IndexPath?>(nil)
     let selectedImage = MutableProperty<UIImage?>(nil)
 
@@ -25,8 +27,15 @@ class ImageSearchViewModel: NSObject {
     let reloadCollectionViewSignal: Signal<Void, NoError>
     let reloadItemsSignal: Signal<[IndexPath], NoError>
     let dismissSignal: Signal<Void, NoError>
+    let performSearchSignal: Signal<Void, NoError>
+    let presentImageSearchViewSignal: Signal<Void, NoError>
     let shouldPresentPhotosAccessDeniedAlert = MutableProperty(false)
     let isSearchButtonHidden = MutableProperty(true)
+    var imageFullScreenViewModel: ImageFullScreenViewModel? {
+        let viewModel = ImageFullScreenViewModel(image: selectedImage.value)
+        viewModel.imageSearchViewModel = self
+        return viewModel
+    }
 
     private let reloadCollectionViewObserver: Signal<Void, NoError>.Observer
     private var imageManager: PHCachingImageManager?
@@ -53,6 +62,8 @@ class ImageSearchViewModel: NSObject {
     override init() {
         (reloadCollectionViewSignal, reloadCollectionViewObserver) = Signal<Void, NoError>.pipe()
         (dismissSignal, dismissObserver) = Signal<Void, NoError>.pipe()
+        (performSearchSignal, performSearchObserver) = Signal<Void, NoError>.pipe()
+        (presentImageSearchViewSignal, presentImageSearchViewObserver) = Signal<Void, NoError>.pipe()
 
         let (resetImageSelectionSignal, resetImageSelectionObserver) = Signal<Void, NoError>.pipe()
         self.resetImageSelectionObserver = resetImageSelectionObserver
@@ -100,6 +111,17 @@ class ImageSearchViewModel: NSObject {
                 }
                 if let current = $1 {
                     indexPathsToReload.append(current)
+
+                    if let asset = self?.fetchResult?.object(at: current.row - 1) {
+                        let options = PHImageRequestOptions()
+                        options.deliveryMode = .highQualityFormat
+                        options.isNetworkAccessAllowed = true
+                        options.resizeMode = .exact
+                        let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+                        self?.imageManager?.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options, resultHandler: { (image, _) in
+                            self?.selectedImage.value = image
+                        })
+                    }
                 }
                 reloadItemsObserver.send(value: indexPathsToReload)
             }

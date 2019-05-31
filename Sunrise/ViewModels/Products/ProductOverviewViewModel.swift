@@ -16,6 +16,7 @@ class ProductOverviewViewModel: BaseViewModel {
     let clearProductsObserver: Signal<Void, NoError>.Observer
     let toggleWishListObserver: Signal<IndexPath, NoError>.Observer
     let textSearch = MutableProperty(("", Locale.current))
+    let imageSearch = MutableProperty<UIImage?>(nil)
     let userLocation: MutableProperty<CLLocation?> = MutableProperty(nil)
     let additionalFilterQuery = MutableProperty([String]())
     let hasReachedLowerHalfOfProducts = MutableProperty(false)
@@ -92,7 +93,7 @@ class ProductOverviewViewModel: BaseViewModel {
         .skipRepeats()
         .filter { $0 }
         .startWithValues { [weak self] _ in
-            if let productCount = self?.products.count, productCount > 0 {
+            if let productCount = self?.products.count, productCount > 0, self?.imageSearch.value == nil {
                 self?.queryForProductProjections(offset: UInt(productCount))
             }
         }
@@ -100,6 +101,7 @@ class ProductOverviewViewModel: BaseViewModel {
         disposables += NotificationCenter.default.reactive.notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
         .observeValues { [weak self] _ in
             self?.productRetrievalQueue.isSuspended = true
+            self?.imageSearch.value = nil
         }
 
         disposables += NotificationCenter.default.reactive.notifications(forName: Foundation.Notification.Name.Navigation.resetSearch)
@@ -134,6 +136,13 @@ class ProductOverviewViewModel: BaseViewModel {
         .observe(on: QueueScheduler(qos: .userInitiated))
         .startWithValues { [weak self] previous, current in
             self?.queryForProductProjections(offset: 0)
+        }
+
+        disposables += imageSearch.producer
+        .filter { $0 != nil }
+        .observe(on: QueueScheduler(qos: .userInitiated))
+        .startWithValues { [weak self] _ in
+            self?.queryForImageSearchProductProjections()
         }
 
         Customer.currentCurrency = Locale.current.currencyCode
@@ -320,6 +329,48 @@ class ProductOverviewViewModel: BaseViewModel {
                 }
                 self.isLoading.value = false
                 semaphore.signal()
+            }
+            _ = semaphore.wait(timeout: .distantFuture)
+        }
+    }
+
+    // MARK: - Commercetools image search via ML endpoint
+
+    private func queryForImageSearchProductProjections() {
+        guard let image = imageSearch.value else { return }
+        productRetrievalQueue.addOperation {
+            // TODO Add paging
+            let semaphore = DispatchSemaphore(value: 0)
+            self.isLoading.value = true
+            ImageSearch.perform(for: image, limit: 50) { result in
+                if let imageSearchProducts = result.model?.results, result.isSuccess {
+                    let productIds = imageSearchProducts.map { $0.productVariants.first?.product?.id ?? "" }
+                    var filterQuery = "id:"
+                    filterQuery.append(productIds.map({ "\"\($0)\"" }).joined(separator: ","))
+                    ProductProjection.search(limit: 50, filterQuery: [filterQuery]) { result in
+                        if var products = result.model?.results, result.isSuccess {
+                            products.sort { lhs, rhs -> Bool in
+                                (productIds.firstIndex(of: lhs.id) ?? 0) < (productIds.firstIndex(of: rhs.id) ?? 0)
+                            }
+                            DispatchQueue.main.async {
+                                if products.count > 0 && self.products.count > 0 {
+                                    self.scrollToBeginningObserver.send(value: ())
+                                }
+                                self.products = products
+                                self.filtersViewModel?.facets.value = result.model?.facets
+                            }
+                        } else if let errors = result.errors as? [CTError], result.isFailure {
+                            self.alertMessageObserver.send(value: self.alertMessage(for: errors))
+
+                        }
+                        self.isLoading.value = false
+                        semaphore.signal()
+                    }
+                } else if let errors = result.errors as? [CTError], result.isFailure {
+                    self.alertMessageObserver.send(value: self.alertMessage(for: errors))
+                    self.isLoading.value = false
+                    semaphore.signal()
+                }
             }
             _ = semaphore.wait(timeout: .distantFuture)
         }
