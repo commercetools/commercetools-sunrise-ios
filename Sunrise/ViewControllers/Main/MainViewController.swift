@@ -99,6 +99,7 @@ class MainViewController: UIViewController {
         imageSearchImageButton.layer.cornerRadius = 6
         imageSearchImageButton.layer.borderWidth = 1
         imageSearchImageButton.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1.0).cgColor
+        imageSearchImageButton.imageView?.contentMode = .scaleAspectFill
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -120,6 +121,9 @@ class MainViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+        if filtersView.alpha == 1 {
+            searchFilterButton.isSelected ? searchFilter(searchFilterButton) : filter(filterButton)
+        }
         super.viewWillDisappear(animated)
     }
 
@@ -336,9 +340,11 @@ class MainViewController: UIViewController {
         guard let viewModel = viewModel?.voiceSearchViewModel, voiceSearchViewController?.isViewLoaded == true, isViewLoaded else { return }
         
         disposables += voiceSearchButton.reactive.isSelected <~ viewModel.isRecognitionInProgress
+
         disposables += viewModel.performSearchSignal
         .observe(on: UIScheduler())
         .observeValues { [unowned self] searchParams in
+            self.viewModel?.productsViewModel.clearProductsObserver.send(value: ())
             self.categorySelectionButton.alpha = 0
             self.categorySelectionButtonHeightConstraint.constant = 0
             [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
@@ -407,11 +413,11 @@ class MainViewController: UIViewController {
         disposables += viewModel.performSearchSignal
         .observe(on: UIScheduler())
         .observeValues { [unowned self] in
+            self.viewModel?.productsViewModel.clearProductsObserver.send(value: ())
             self.categorySelectionButton.alpha = 0
             self.categorySelectionButtonHeightConstraint.constant = 0
             [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
             self.searchField.text = ""
-            self.viewModel?.productsViewModel.textSearch.value = ("", Locale.current)
             self.viewModel?.productsViewModel.imageSearch.value = viewModel.selectedImage.value
             self.presentSearchResults()
         }
@@ -459,7 +465,7 @@ class MainViewController: UIViewController {
                 _ = imageSearchViewController.view
             case let imageFullScreenViewController as ImageFullScreenViewController:
                 _ = imageFullScreenViewController.view
-                imageFullScreenViewController.viewModel = viewModel?.imageSearchViewModel?.imageFullScreenViewModel
+                imageFullScreenViewController.viewModel = viewModel?.imageSearchViewModel?.currentImageFullScreenViewModel
             default:
                 return
         }
@@ -526,6 +532,9 @@ class MainViewController: UIViewController {
         } else {
             viewModel?.voiceSearchViewModel?.startSpeechRecognitionObserver.send(value: ())
         }
+        if filtersView.alpha == 1 {
+            searchFilter(searchFilterButton)
+        }
     }
 
 
@@ -539,6 +548,9 @@ class MainViewController: UIViewController {
         } else {
             viewModel?.imageSearchViewModel?.resetImageSelectionObserver.send(value: ())
             presentImageSearchView()
+        }
+        if filtersView.alpha == 1 {
+            searchFilter(searchFilterButton)
         }
     }
     
@@ -671,7 +683,7 @@ class MainViewController: UIViewController {
     }
 
     private func checkAndPresentEmptyState() {
-        guard !searchField.isFirstResponder, viewModel?.isLoading.value == false, viewModel?.productsViewModel.isLoading.value == false else {
+        guard !searchField.isFirstResponder, !imageSearchButton.isSelected, !voiceSearchButton.isSelected, viewModel?.isLoading.value == false, viewModel?.productsViewModel.isLoading.value == false else {
             emptyStateView.alpha = 0
             return
         }
@@ -837,7 +849,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Update gradient layer based on the scroll view content offset
-        let yOffset = scrollView.contentOffset.y
+        var yOffset = scrollView.contentOffset.y
+        yOffset = yOffset < 0 ? 0 : yOffset
         if 0...57 ~= yOffset {
             gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 13 + yOffset)
         } else if yOffset > 57 && gradientLayer.bounds.height < 70 {

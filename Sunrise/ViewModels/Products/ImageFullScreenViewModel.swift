@@ -23,12 +23,7 @@ class ImageFullScreenViewModel: BaseViewModel {
     let isChooseAnotherPictureButtonHidden = MutableProperty(true)
     let dismissButtonImage: MutableProperty<UIImage>
 
-    weak var imageSearchViewModel: ImageSearchViewModel? {
-        didSet {
-            guard let imageSearchViewModel = imageSearchViewModel else { return }
-            disposables += imageSearchViewModel.selectedImage <~ capturedImage
-        }
-    }
+    weak var imageSearchViewModel: ImageSearchViewModel?
 
     private let disposables = CompositeDisposable()
 
@@ -48,6 +43,12 @@ class ImageFullScreenViewModel: BaseViewModel {
 
         disposables += isTakePhotoButtonHidden <~ capturedImage.map { $0 != nil }
         disposables += isSearchButtonHidden <~ capturedImage.map { $0 == nil }
+
+        disposables += capturedImage.signal
+        .filter { $0 != nil }
+        .observeValues { [weak self] in
+            self?.imageSearchViewModel?.selectedImage.value = $0
+        }
     }
 
     deinit {

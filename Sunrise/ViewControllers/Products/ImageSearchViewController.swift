@@ -11,9 +11,11 @@ class ImageSearchViewController: UIViewController {
 
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var gradientView: UIView!
 
     let imagePickerController = UIImagePickerController()
     private var liveViewCell: LiveViewCell?
+    private let gradientLayer = CAGradientLayer()
     private let disposables = CompositeDisposable()
 
     deinit {
@@ -38,6 +40,10 @@ class ImageSearchViewController: UIViewController {
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.allowsEditing = true
+
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0)
+        gradientView.layer.insertSublayer(gradientLayer, at: 0)
 
         viewModel = ImageSearchViewModel()
     }
@@ -128,7 +134,7 @@ class ImageSearchViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let imageFullScreenViewController = segue.destination as? ImageFullScreenViewController {
             _ = imageFullScreenViewController.view
-            imageFullScreenViewController.viewModel = viewModel?.imageFullScreenViewModel
+            imageFullScreenViewController.viewModel = viewModel?.liveViewFullScreenViewModel
         }
     }
 
@@ -175,6 +181,15 @@ extension ImageSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != 0 else { return }
         viewModel?.selectedItemIndexPath.value = indexPath
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Update gradient layer based on the scroll view content offset
+        var yOffset = scrollView.contentOffset.y
+        yOffset = yOffset < 0 ? 0 : yOffset
+        if 0...70 ~= yOffset {
+            gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: yOffset)
+        }
     }
 }
 

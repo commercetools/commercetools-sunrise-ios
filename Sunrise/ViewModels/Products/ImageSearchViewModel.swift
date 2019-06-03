@@ -31,8 +31,13 @@ class ImageSearchViewModel: NSObject {
     let presentImageSearchViewSignal: Signal<Void, NoError>
     let shouldPresentPhotosAccessDeniedAlert = MutableProperty(false)
     let isSearchButtonHidden = MutableProperty(true)
-    var imageFullScreenViewModel: ImageFullScreenViewModel? {
+    var currentImageFullScreenViewModel: ImageFullScreenViewModel? {
         let viewModel = ImageFullScreenViewModel(image: selectedImage.value)
+        viewModel.imageSearchViewModel = self
+        return viewModel
+    }
+    var liveViewFullScreenViewModel: ImageFullScreenViewModel? {
+        let viewModel = ImageFullScreenViewModel()
         viewModel.imageSearchViewModel = self
         return viewModel
     }

@@ -135,6 +135,7 @@ class ProductOverviewViewModel: BaseViewModel {
         .filter { $0.0 != "" }
         .observe(on: QueueScheduler(qos: .userInitiated))
         .startWithValues { [weak self] previous, current in
+            self?.imageSearch.value = nil
             self?.queryForProductProjections(offset: 0)
         }
 
@@ -142,6 +143,7 @@ class ProductOverviewViewModel: BaseViewModel {
         .filter { $0 != nil }
         .observe(on: QueueScheduler(qos: .userInitiated))
         .startWithValues { [weak self] _ in
+            self?.textSearch.value = ("", Locale.current)
             self?.queryForImageSearchProductProjections()
         }
 
