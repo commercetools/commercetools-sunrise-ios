@@ -19,6 +19,10 @@ class ImageFullScreenViewController: UIViewController {
     @IBOutlet weak var dismissButton: UIButton!
 
     private let photoOutput = AVCapturePhotoOutput()
+    private let videoOutput = AVCaptureVideoDataOutput()
+    private let capturePhotoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+    private let sampleBufferQueue = DispatchQueue.global(qos: .userInteractive)
+    private var isCapturing = false
     private let disposables = CompositeDisposable()
 
     deinit {
@@ -55,7 +59,6 @@ class ImageFullScreenViewController: UIViewController {
         guard let viewModel = viewModel else { return }
 
         disposables += imageView.reactive.image <~ viewModel.capturedImage
-        disposables += imageView.reactive.isHidden <~ viewModel.capturedImage.map { $0 == nil }
         disposables += takePhotoButton.reactive.isHidden <~ viewModel.isTakePhotoButtonHidden
         disposables += searchButton.reactive.isHidden <~ viewModel.isSearchButtonHidden
         disposables += removeButton.reactive.isHidden <~ viewModel.isRemoveButtonHidden
@@ -64,34 +67,64 @@ class ImageFullScreenViewController: UIViewController {
     }
 
     private func startCaptureSessionAndPreview() {
-        guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer, captureSession.canAddOutput(photoOutput) else { return }
-        captureSession.addOutput(photoOutput)
-        captureSession.sessionPreset = .photo
-
-        if !captureSession.isRunning {
-            captureSession.startRunning()
+        CaptureSessionManager.shared.sessionQueue.async {
+            guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer, captureSession.canAddOutput(self.photoOutput), captureSession.canAddOutput(self.videoOutput), captureSession.canSetSessionPreset(.photo) else { return }
+            
+            self.photoOutput.setPreparedPhotoSettingsArray([self.capturePhotoSettings])
+            self.videoOutput.alwaysDiscardsLateVideoFrames = true
+            self.videoOutput.setSampleBufferDelegate(self, queue: self.sampleBufferQueue)
+            
+            captureSession.beginConfiguration()
+            captureSession.addOutput(self.photoOutput)
+            captureSession.addOutput(self.videoOutput)
+            captureSession.sessionPreset = .photo
+            
+            guard let connection = self.videoOutput.connection(with: .video) else { return }
+            if connection.isVideoOrientationSupported {
+                connection.videoOrientation = .portrait
+            }
+            if connection.isVideoMirroringSupported {
+                connection.isVideoMirrored = false
+            }
+            
+            captureSession.commitConfiguration()
+            
+            if !captureSession.isRunning {
+                captureSession.startRunning()
+            }
+            
+            DispatchQueue.main.async {
+                CATransaction.begin()
+                CATransaction.setDisableActions(true)
+                previewLayer.removeFromSuperlayer()
+                previewLayer.frame = self.liveView.layer.bounds
+                self.liveView.layer.addSublayer(previewLayer)
+                CATransaction.commit()
+            }
         }
-
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        previewLayer.removeFromSuperlayer()
-        previewLayer.frame = self.liveView.layer.bounds
-        self.liveView.layer.addSublayer(previewLayer)
-        CATransaction.commit()
     }
 
     private func stopCaptureSession() {
-        guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
-
-        if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == liveView.layer {
-            captureSession.stopRunning()
+        CaptureSessionManager.shared.sessionQueue.async {
+            guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
+            
+            DispatchQueue.main.async {
+                if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == self.liveView.layer {
+                    CaptureSessionManager.shared.sessionQueue.async {
+                        captureSession.stopRunning()
+                    }
+                }
+            }
+            captureSession.removeOutput(self.photoOutput)
+            captureSession.removeOutput(self.videoOutput)
         }
-
-        captureSession.removeOutput(photoOutput)
     }
 
     @IBAction func takePhoto(_ sender: UIButton) {
-        photoOutput.capturePhoto(with: AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg]), delegate: self)
+        isCapturing = true
+        CaptureSessionManager.shared.sessionQueue.async {
+            self.photoOutput.capturePhoto(with: self.capturePhotoSettings, delegate: self)
+        }
     }
 
     @IBAction func closeFullScreenView(_ sender: UIButton) {
@@ -120,5 +153,16 @@ extension ImageFullScreenViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let data = photo.fileDataRepresentation() else { return }
         viewModel?.capturedImage.value = UIImage(data: data)
+    }
+}
+
+extension ImageFullScreenViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard isCapturing else { return }
+        DispatchQueue.main.async {
+            guard self.imageView.image == nil, let buffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+            let ciImage = CIImage(cvPixelBuffer: buffer)
+            self.imageView.image = UIImage(ciImage: ciImage)
+        }
     }
 }

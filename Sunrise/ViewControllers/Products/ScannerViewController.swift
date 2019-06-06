@@ -36,11 +36,18 @@ class ScannerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
-
-        captureSession.removeOutput(metadataOutput)
-        if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == previewView.layer {
-            captureSession.stopRunning()
+        CaptureSessionManager.shared.sessionQueue.async {
+            guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
+            
+            captureSession.removeOutput(self.metadataOutput)
+            
+            DispatchQueue.main.async {
+                if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == self.previewView.layer {
+                    CaptureSessionManager.shared.sessionQueue.async {
+                        captureSession.stopRunning()
+                    }
+                }
+            }
         }
     }
 
@@ -54,25 +61,29 @@ class ScannerViewController: UIViewController {
         Method used to setup video input from camera, add input and output to the session.
     */
     private func startCaptureSessionAndPreview() {
-        guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer, captureSession.canAddOutput(metadataOutput) else { return }
-
-        captureSession.addOutput(metadataOutput)
-
-        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
-
-        if !captureSession.isRunning {
-            captureSession.startRunning()
+        CaptureSessionManager.shared.sessionQueue.async {
+            guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer, captureSession.canAddOutput(self.metadataOutput) else { return }
+            
+            captureSession.addOutput(self.metadataOutput)
+            
+            self.metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            self.metadataOutput.metadataObjectTypes = self.metadataOutput.availableMetadataObjectTypes
+            
+            if !captureSession.isRunning {
+                captureSession.startRunning()
+            }
+            
+            DispatchQueue.main.async {
+                CATransaction.begin()
+                CATransaction.setDisableActions(true)
+                previewLayer.removeFromSuperlayer()
+                previewLayer.frame = self.previewView.layer.bounds
+                self.previewView.layer.addSublayer(previewLayer)
+                CATransaction.commit()
+            }
+            
+            self.viewModel?.isCapturing.value = true
         }
-
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        previewLayer.removeFromSuperlayer()
-        previewLayer.frame = previewView.layer.bounds
-        previewView.layer.addSublayer(previewLayer)
-        CATransaction.commit()
-
-        viewModel?.isCapturing.value = true
     }
 
     // MARK: - Bindings

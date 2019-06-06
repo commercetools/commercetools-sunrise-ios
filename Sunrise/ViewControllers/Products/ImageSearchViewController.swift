@@ -95,27 +95,37 @@ class ImageSearchViewController: UIViewController {
     }
 
     private func startCaptureSessionAndPreview() {
-        guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer else { return }
-        captureSession.sessionPreset = .photo
-
-        if !captureSession.isRunning {
-            captureSession.startRunning()
+        CaptureSessionManager.shared.sessionQueue.async {
+            guard let captureSession = CaptureSessionManager.shared.captureSession, let previewLayer = CaptureSessionManager.shared.previewLayer else { return }
+            captureSession.sessionPreset = .photo
+            
+            if !captureSession.isRunning {
+                captureSession.startRunning()
+            }
+            
+            DispatchQueue.main.async {
+                guard let liveViewCell = self.liveViewCell else { return }
+                CATransaction.begin()
+                CATransaction.setDisableActions(true)
+                previewLayer.removeFromSuperlayer()
+                previewLayer.frame = liveViewCell.liveView.layer.bounds
+                liveViewCell.liveView.layer.addSublayer(previewLayer)
+                CATransaction.commit()
+            }
         }
-
-        guard let liveViewCell = liveViewCell else { return }
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        previewLayer.removeFromSuperlayer()
-        previewLayer.frame = liveViewCell.liveView.layer.bounds
-        liveViewCell.liveView.layer.addSublayer(previewLayer)
-        CATransaction.commit()
     }
 
     private func stopCaptureSession() {
-        guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
-
-        if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == liveViewCell?.liveView.layer {
-            captureSession.stopRunning()
+        CaptureSessionManager.shared.sessionQueue.async {
+            guard let captureSession = CaptureSessionManager.shared.captureSession else { return }
+            
+            DispatchQueue.main.async {
+                if captureSession.isRunning, CaptureSessionManager.shared.previewLayer?.superlayer == self.liveViewCell?.liveView.layer {
+                    CaptureSessionManager.shared.sessionQueue.async {
+                        captureSession.stopRunning()
+                    }
+                }
+            }
         }
     }
 

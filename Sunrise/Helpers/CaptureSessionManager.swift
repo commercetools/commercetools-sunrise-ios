@@ -9,6 +9,9 @@ class CaptureSessionManager: NSObject {
     /// A shared instance of `CaptureSessionManager`, which should be used by view models.
     static let shared = CaptureSessionManager()
 
+    // Communicate with the session and other session objects on this queue.
+    let sessionQueue = DispatchQueue(label: "session queue")
+
     // MARK: - Properties
 
     private(set) var captureSession: AVCaptureSession? = AVCaptureSession()
