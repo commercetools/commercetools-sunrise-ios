@@ -61,12 +61,6 @@ class VoiceSearchViewController: UIViewController {
 
         recognizedTextLabel.reactive.text <~ viewModel.recognizedText
 
-        disposables += viewModel.dismissSignal
-        .observe(on: UIScheduler())
-        .observeValues({ [weak self] in
-            self?.dismiss(animated: true)
-        })
-
         disposables += viewModel.alertMessageSignal
         .observe(on: UIScheduler())
         .observeValues({ [weak self] alertMessage in

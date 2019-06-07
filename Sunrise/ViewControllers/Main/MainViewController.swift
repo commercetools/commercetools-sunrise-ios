@@ -10,8 +10,10 @@ import SVProgressHUD
 class MainViewController: UIViewController {
 
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var imageSearchImageButton: UIButton!
     @IBOutlet weak var filtersView: UIView!
     @IBOutlet weak var voiceSearchView: UIView!
+    @IBOutlet weak var imageSearchView: UIView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var categoriesDropdownGradientView: UIView!
     @IBOutlet weak var searchView: UIView!
@@ -32,6 +34,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var filterBackgroundTopImageView: UIImageView!
     @IBOutlet weak var voiceSearchButton: UIButton!
+    @IBOutlet weak var imageSearchButton: UIButton!
+    @IBOutlet weak var expandSearchButton: UIButton!
 
     @IBOutlet weak var searchViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewLeadingConstraint: NSLayoutConstraint!
@@ -43,9 +47,12 @@ class MainViewController: UIViewController {
     @IBOutlet weak var filterBackgroundTopConstraint: NSLayoutConstraint!
     @IBOutlet var searchFieldLineWidthActiveConstraint: NSLayoutConstraint!
     @IBOutlet var searchFieldLineWidthInactiveConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchFieldLineLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchFieldLineTrailingConstraint: NSLayoutConstraint!
 
     private weak var filtersViewController: FiltersViewController?
     private weak var voiceSearchViewController: VoiceSearchViewController?
+    private weak var imageSearchViewController: ImageSearchViewController?
     private let clearSearchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
     private let gradientLayer = CAGradientLayer()
     private let categoriesDropdownGradientLayer = CAGradientLayer()
@@ -78,12 +85,8 @@ class MainViewController: UIViewController {
         categoriesDropdownGradientView.layer.insertSublayer(categoriesDropdownGradientLayer, at: 0)
         subcategoriesTableView.contentInset = UIEdgeInsets(top: 17, left: 0, bottom: 0, right: 0)
 
-        let magnifyingGlassAttachment = NSTextAttachment(data: nil, ofType: nil)
-        magnifyingGlassAttachment.image = #imageLiteral(resourceName: "search_field_icon")
         let placeholderAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Rubik-Light", size: 14)!, .foregroundColor: UIColor(red: 0.34, green: 0.37, blue: 0.40, alpha: 1.0)]
-        let searchPlaceholder = NSMutableAttributedString(attributedString: NSAttributedString(attachment: magnifyingGlassAttachment))
-        searchPlaceholder.append(NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes))
-        searchField.attributedPlaceholder = searchPlaceholder
+        searchField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("search", comment: "search"), attributes: placeholderAttributes)
 
         [searchSuggestionsTableView, subcategoriesTableView].forEach { $0.tableFooterView = UIView() }
         subcategoriesTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: subcategoriesTableView.bounds.width, height: 0.5))
@@ -92,6 +95,11 @@ class MainViewController: UIViewController {
         clearSearchButton.setImage(#imageLiteral(resourceName: "clear-button"), for: .normal)
         searchField.rightViewMode = .whileEditing
         searchField.rightView = clearSearchButton
+
+        imageSearchImageButton.layer.cornerRadius = 6
+        imageSearchImageButton.layer.borderWidth = 1
+        imageSearchImageButton.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1.0).cgColor
+        imageSearchImageButton.imageView?.contentMode = .scaleAspectFill
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -105,12 +113,17 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         if productsCollectionView.alpha == 1 {
             productsCollectionView.reloadData()
+        }
+        if productsCollectionView.alpha == 1 || voiceSearchButton.isSelected || imageSearchButton.isSelected {
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+        if filtersView.alpha == 1 {
+            searchFilterButton.isSelected ? searchFilter(searchFilterButton) : filter(filterButton)
+        }
         super.viewWillDisappear(animated)
     }
 
@@ -165,6 +178,16 @@ class MainViewController: UIViewController {
             } else if self.filtersView.alpha == 1 {
                 self.filtersViewController?.closeFilters()
 
+            } else if self.voiceSearchButton.isSelected {
+                self.viewModel?.voiceSearchViewModel?.dismissObserver.send(value: ())
+
+            } else if self.imageSearchButton.isSelected {
+                self.viewModel?.imageSearchViewModel?.dismissObserver.send(value: ())
+
+            } else if self.searchField.isFirstResponder {
+                self.searchField.text = ""
+                self.searchField.resignFirstResponder()
+
             } else {
                 NotificationCenter.default.post(name: Foundation.Notification.Name.Navigation.resetSearch, object: nil, userInfo: nil)
             }
@@ -181,6 +204,15 @@ class MainViewController: UIViewController {
             self?.searchField.rightView?.alpha = $0 == "" ? 0 : 1
         }
 
+        disposables += searchField.reactive.continuousTextValues
+        .skipRepeats()
+        .observeValues { [weak self] _ in
+            guard self?.expandSearchButton.alpha == 0 else { return }
+            UIView.animate(withDuration: 0.3) {
+                self?.collapseSearchOptions()
+            }
+        }
+
         disposables += clearSearchButton.reactive.controlEvents(.touchUpInside)
         .observeValues { [weak self] _ in
             self?.searchField.text = ""
@@ -193,10 +225,12 @@ class MainViewController: UIViewController {
         disposables += observeAlertMessageSignal(viewModel: viewModel)
 
         viewModel.voiceSearchViewModel = voiceSearchViewController?.viewModel
+        viewModel.imageSearchViewModel = imageSearchViewController?.viewModel
 
         bindProductsViewModel()
         bindFiltersViewModel()
         bindVoiceSearchViewModel()
+        bindImageSearchViewModel()
     }
 
     func bindProductsViewModel() {
@@ -228,6 +262,7 @@ class MainViewController: UIViewController {
         }
 
         disposables += viewModel.textSearch <~ searchField.reactive.textValues.map { ($0, Locale.current) }
+        disposables += imageSearchImageButton.reactive.image(for: .normal) <~ viewModel.imageSearch
 
         disposables += searchField.reactive.textValues
         .filter { $0 != "" }
@@ -235,6 +270,15 @@ class MainViewController: UIViewController {
         .observe(on: UIScheduler())
         .observeValues { [weak self] _ in
             self?.searchSuggestionsTableView.reloadData()
+        }
+
+        disposables += viewModel.imageSearch.signal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] image in
+            UIView.animate(withDuration: 0.2) {
+                self?.searchField.alpha = image == nil ? 1 : 0
+                self?.imageSearchImageButton.alpha = image == nil ? 0 : 1
+            }
         }
 
         disposables += viewModel.presentProductDetailsSignal
@@ -296,9 +340,11 @@ class MainViewController: UIViewController {
         guard let viewModel = viewModel?.voiceSearchViewModel, voiceSearchViewController?.isViewLoaded == true, isViewLoaded else { return }
         
         disposables += voiceSearchButton.reactive.isSelected <~ viewModel.isRecognitionInProgress
+
         disposables += viewModel.performSearchSignal
         .observe(on: UIScheduler())
         .observeValues { [unowned self] searchParams in
+            self.viewModel?.productsViewModel.clearProductsObserver.send(value: ())
             self.categorySelectionButton.alpha = 0
             self.categorySelectionButtonHeightConstraint.constant = 0
             [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
@@ -309,10 +355,18 @@ class MainViewController: UIViewController {
         }
         
         disposables += viewModel.dismissSignal
+        .filter { [unowned self] in self.voiceSearchView.alpha == 1 }
         .observe(on: UIScheduler())
         .observeValues { [unowned self] in
-            self.voiceSearchView.alpha = 0
-            SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+            UIView.animate(withDuration: 0.2) {
+                self.voiceSearchView.alpha = 0
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+                if self.productsCollectionView.alpha == 1 {
+                    self.updateFilterButton(isHidden: false)
+                } else {
+                    SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+                }
+            }
         }
 
         disposables += NotificationCenter.default.reactive
@@ -331,10 +385,60 @@ class MainViewController: UIViewController {
         }
     }
 
+    func bindImageSearchViewModel() {
+        guard let viewModel = viewModel?.imageSearchViewModel, imageSearchViewController?.isViewLoaded == true, isViewLoaded else { return }
+
+        disposables += viewModel.dismissSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            UIView.animate(withDuration: 0.2) {
+                self.imageSearchView.alpha = 0
+                self.imageSearchButton.isSelected = false
+                SunriseTabBarController.currentlyActive?.tabView.alpha = 1
+                if self.productsCollectionView.alpha == 1 {
+                    self.updateFilterButton(isHidden: false)
+                } else {
+                    SunriseTabBarController.currentlyActive?.backButton.alpha = 0
+                }
+            }
+        }
+
+        disposables += viewModel.presentImageSearchViewSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            viewModel.resetImageSelectionObserver.send(value: ())
+            self.presentImageSearchView()
+        }
+
+        disposables += viewModel.performSearchSignal
+        .observe(on: UIScheduler())
+        .observeValues { [unowned self] in
+            self.viewModel?.productsViewModel.clearProductsObserver.send(value: ())
+            self.categorySelectionButton.alpha = 0
+            self.categorySelectionButtonHeightConstraint.constant = 0
+            [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
+            self.searchField.text = ""
+            self.viewModel?.productsViewModel.imageSearch.value = viewModel.selectedImage.value
+            self.presentSearchResults()
+        }
+    }
+
     private func presentVoiceSearchView() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.2) {
             SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+            SunriseTabBarController.currentlyActive?.backButton.alpha = 1
             self.voiceSearchView.alpha = 1
+            self.updateFilterButton(isHidden: true)
+        }
+    }
+
+    private func presentImageSearchView() {
+        UIView.animate(withDuration: 0.2) {
+            SunriseTabBarController.currentlyActive?.tabView.alpha = 0
+            SunriseTabBarController.currentlyActive?.backButton.alpha = 1
+            self.imageSearchView.alpha = 1
+            self.imageSearchButton.isSelected = true
+            self.updateFilterButton(isHidden: true)
         }
     }
 
@@ -356,6 +460,12 @@ class MainViewController: UIViewController {
             case let voiceSearchViewController as VoiceSearchViewController:
                 self.voiceSearchViewController = voiceSearchViewController
                 _ = voiceSearchViewController.view
+            case let imageSearchViewController as ImageSearchViewController:
+                self.imageSearchViewController = imageSearchViewController
+                _ = imageSearchViewController.view
+            case let imageFullScreenViewController as ImageFullScreenViewController:
+                _ = imageFullScreenViewController.view
+                imageFullScreenViewController.viewModel = viewModel?.imageSearchViewModel?.currentImageFullScreenViewModel
             default:
                 return
         }
@@ -414,27 +524,47 @@ class MainViewController: UIViewController {
     
     @IBAction func voiceSearch(_ sender: UIButton) {
         searchField.resignFirstResponder()
+        if imageSearchButton.isSelected {
+            imageSearch(imageSearchButton)
+        }
         if sender.isSelected {
             viewModel?.voiceSearchViewModel?.dismissObserver.send(value: ())
         } else {
             viewModel?.voiceSearchViewModel?.startSpeechRecognitionObserver.send(value: ())
         }
+        if filtersView.alpha == 1 {
+            searchFilter(searchFilterButton)
+        }
     }
 
+
+    @IBAction func imageSearch(_ sender: UIButton) {
+        searchField.resignFirstResponder()
+        if voiceSearchButton.isSelected {
+            voiceSearch(voiceSearchButton)
+        }
+        if sender.isSelected {
+            viewModel?.imageSearchViewModel?.dismissObserver.send(value: ())
+        } else {
+            viewModel?.imageSearchViewModel?.resetImageSelectionObserver.send(value: ())
+            presentImageSearchView()
+        }
+        if filtersView.alpha == 1 {
+            searchFilter(searchFilterButton)
+        }
+    }
+    
     @IBAction func searchEditingDidBegin(_ sender: UITextField) {
         viewModel?.productsViewModel.clearProductsObserver.send(value: ())
         viewModel?.voiceSearchViewModel?.dismissObserver.send(value: ())
+        viewModel?.imageSearchViewModel?.dismissObserver.send(value: ())
         UIView.animate(withDuration: 0.3, animations: {
             self.checkAndPresentEmptyState()
             self.categorySelectionButton.alpha = 0
-            self.searchFilterButton.alpha = 0
             SunriseTabBarController.currentlyActive?.backButton.alpha = 1
-            self.searchFieldLineCenterXConstraint.constant = 0
-            self.searchFieldLineWidthInactiveConstraint.isActive = false
-            self.searchFieldLineWidthActiveConstraint.isActive = true
-            self.searchFieldLineWidthActiveConstraint.constant = 0
+            self.updateFilterButton(isHidden: true)
+            self.collapseSearchOptions()
             [self.productsCollectionView, self.categoriesCollectionView].forEach { $0?.alpha = 0 }
-            self.searchView.layoutIfNeeded()
         }, completion: { _ in
             self.scrollViewDidScroll(self.searchSuggestionsTableView)
             self.categorySelectionButtonHeightConstraint.constant = 0
@@ -447,9 +577,10 @@ class MainViewController: UIViewController {
     @IBAction func searchEditingDidEnd(_ sender: UITextField) {
         UIView.animate(withDuration: 0.3, animations: {
             if (sender.text ?? "").isEmpty {
-                self.searchFieldLineWidthActiveConstraint.isActive = false
-                self.searchFieldLineWidthInactiveConstraint.isActive = true
-                self.searchFieldLineCenterXConstraint.constant = 0
+                self.searchFieldLineLeadingConstraint.constant = 108
+                self.searchFieldLineTrailingConstraint.constant = 10
+                [self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 1 }
+                self.expandSearchButton.alpha = 0
                 self.searchSuggestionsTableView.alpha = 0
                 self.searchFilterButton.alpha = 0
                 self.searchView.layoutIfNeeded()
@@ -459,12 +590,24 @@ class MainViewController: UIViewController {
             if (sender.text ?? "").count == 0 {
                 self.scrollViewDidScroll(self.categoriesCollectionView)
                 self.categorySelectionButtonHeightConstraint.constant = 37
-                UIView.animate(withDuration: 0.3) {
+                self.updateBackgroundSnapshot()
+                UIView.animate(withDuration: 0.3, animations: {
                     self.categoriesCollectionView.alpha = 1
                     self.categorySelectionButton.alpha = 1
-                }
+                }, completion: { _ in
+                    self.updateBackgroundSnapshot()
+                })
             }
         })
+    }
+
+    @IBAction func expandSearchOptions(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3) {
+            sender.alpha = 0
+            [self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 1 }
+            self.searchFieldLineLeadingConstraint.constant = 108
+            self.searchView.layoutIfNeeded()
+        }
     }
     
     @IBAction func switchCategory(_ sender: UIButton) {
@@ -533,8 +676,14 @@ class MainViewController: UIViewController {
         })
     }
 
+    private func updateFilterButton(isHidden: Bool) {
+        searchFilterButton.alpha = isHidden ? 0 : 1
+        searchFieldLineTrailingConstraint.constant = isHidden ? 10 : 59
+        self.searchView.layoutIfNeeded()
+    }
+
     private func checkAndPresentEmptyState() {
-        guard !searchField.isFirstResponder, viewModel?.isLoading.value == false, viewModel?.productsViewModel.isLoading.value == false else {
+        guard !searchField.isFirstResponder, !imageSearchButton.isSelected, !voiceSearchButton.isSelected, viewModel?.isLoading.value == false, viewModel?.productsViewModel.isLoading.value == false else {
             emptyStateView.alpha = 0
             return
         }
@@ -548,19 +697,26 @@ class MainViewController: UIViewController {
         searchFilterButton.isSelected = viewModel?.productsViewModel.filtersViewModel?.hasFiltersApplied == true
     }
 
+    private func collapseSearchOptions() {
+        self.expandSearchButton.alpha = 1
+        [self.voiceSearchButton, self.imageSearchButton].forEach { $0?.alpha = 0 }
+        self.searchFieldLineLeadingConstraint.constant = 54
+        self.searchView.layoutIfNeeded()
+    }
+
     private func presentSearchResults() {
         UIView.animate(withDuration: 0.3, animations: {
             self.searchSuggestionsTableView.alpha = 0
             self.voiceSearchView.alpha = 0
+            self.imageSearchView.alpha = 0
+            self.imageSearchButton.isSelected = false
             SunriseTabBarController.currentlyActive?.tabView.alpha = 1
         }, completion: { _ in
             UIView.animate(withDuration: 0.3) {
                 self.productsCollectionView.alpha = 1
                 self.checkAndPresentEmptyState()
-                self.searchFilterButton.alpha = 1
+                self.updateFilterButton(isHidden: self.imageSearchImageButton.alpha != 0)
                 SunriseTabBarController.currentlyActive?.backButton.alpha = 1
-                self.searchFieldLineWidthActiveConstraint.constant = -44
-                self.searchFieldLineCenterXConstraint.constant = -22
                 self.searchView.layoutIfNeeded()
             }
         })
@@ -693,7 +849,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Update gradient layer based on the scroll view content offset
-        let yOffset = scrollView.contentOffset.y
+        var yOffset = scrollView.contentOffset.y
+        yOffset = yOffset < 0 ? 0 : yOffset
         if 0...57 ~= yOffset {
             gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 13 + yOffset)
         } else if yOffset > 57 && gradientLayer.bounds.height < 70 {

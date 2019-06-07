@@ -97,7 +97,7 @@ class ProfilePhotoViewModel: NSObject {
             let asset = fetchResult.object(at: indexPath.row)
             let assetWidth = CGFloat(asset.pixelWidth) / UIScreen.main.scale
             let assetHeight = CGFloat(asset.pixelHeight) / UIScreen.main.scale
-            let size = CGSize(width:assetWidth, height: assetHeight)
+            let size = CGSize(width: assetWidth, height: assetHeight)
             let options = PHImageRequestOptions()
             options.deliveryMode = .highQualityFormat
             options.isNetworkAccessAllowed = true

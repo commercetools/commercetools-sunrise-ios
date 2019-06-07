@@ -126,28 +126,29 @@ class ProfilePhotoViewController: UIViewController {
             self?.present(alertController, animated: true, completion: nil)
         })
     }
-    
+
     private func presentPhotosAccessDeniedAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Cannot access photos", comment: "Cannot access photos"), message: NSLocalizedString("Please enable access to photos for Sunrise app", comment: "Photos permission prompt"), preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Settings"), style: .default) { [unowned self] _ in
+        let alertController = UIAlertController(title: ImageSearchViewModel.photosAccessDeniedTitle, message: ImageSearchViewModel.photosAccessDeniedMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: ImageSearchViewModel.settingsAction, style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         })
-        alertController.addAction(UIAlertAction(title: viewModel?.okAction, style: .default) { [unowned self] _ in
+        alertController.addAction(UIAlertAction(title: ImageSearchViewModel.okAction, style: .default) { [unowned self] _ in
             self.navigationController?.popViewController(animated: true)
         })
         present(alertController, animated: true)
     }
 }
 
-extension ProfilePhotoViewController: UICollectionViewDelegate {
+extension ProfilePhotoViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         guard scrollView == scrollView else { return nil }
         return imageView
     }
-    
+}
+
+extension ProfilePhotoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard collectionView == photosCollectionView else { return }
         viewModel?.didSelectItemObserver.send(value: indexPath)
     }
 }

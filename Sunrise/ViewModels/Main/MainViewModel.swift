@@ -10,7 +10,6 @@ import SDWebImage
 
 class MainViewModel: BaseViewModel {
 
-    // Due to https://bugs.swift.org/browse/SR-773
     typealias Category = Commercetools.Category
 
     // Inputs
@@ -27,6 +26,7 @@ class MainViewModel: BaseViewModel {
 
     let productsViewModel = ProductOverviewViewModel()
     weak var voiceSearchViewModel: VoiceSearchViewModel?
+    weak var imageSearchViewModel: ImageSearchViewModel?
 
     private let rootCategories = MutableProperty([Category]())
     private let activeCategory: MutableProperty<Category?> = MutableProperty(nil)
