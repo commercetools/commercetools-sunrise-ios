@@ -24,7 +24,9 @@ extension Attribute {
         switch (type.name, rawValue) {
         case ("boolean", .bool(let value)):
             return value ? NSLocalizedString("Yes", comment: "Yes") : NSLocalizedString("No", comment: "No")
-        case (let typeName, .string(let value)) where ["text", "enum"].contains(typeName):
+        case ("enum", .dictionary(let value)):
+            return value["label"]?.string
+        case ("text", .string(let value)):
             return value
         case ("ltext", .dictionary(let value)):
             return localizedString(from: value)
