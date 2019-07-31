@@ -71,6 +71,16 @@ extension Order {
         intent.suggestedInvocationPhrase = suggestedInvocationPhrase
         return intent
     }
+
+    var reserveIntent: ReserveProductIntent {
+        let intent = ReserveProductIntent()
+        let reservedProduct = lineItems.first
+        intent.previousReservationId = id
+        intent.lineItemName = reservedProduct?.name.localizedString
+        intent.storeName = reservedProduct?.distributionChannel?.obj?.name?.localizedString
+        intent.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "Reserve %@ for pickup at %@", intent.lineItemName ?? "", intent.storeName ?? "") as String
+        return intent
+    }
 }
 
 extension Order {

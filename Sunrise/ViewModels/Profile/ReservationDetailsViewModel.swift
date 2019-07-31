@@ -21,9 +21,17 @@ class ReservationDetailsViewModel: BaseViewModel {
     let storeOpeningHours: MutableProperty<String?>
     let storeLocation: MutableProperty<CLLocation?>
 
+    @available(iOS 12.0, *)
+    var reservationIntent: ReserveProductIntent {
+        return reservation.reserveIntent
+    }
+
+    private let reservation: Order
+
     // MARK: - Lifecycle
     
     init(reservation: Order) {
+        self.reservation = reservation
         let reservedProduct = reservation.lineItems.first
         productName = MutableProperty(reservedProduct?.name.localizedString)
         productImageUrl = MutableProperty(reservedProduct?.variant.images?.first?.url ?? "")

@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.1</string>
 	<key>CFBundleVersion</key>
-	<string>204</string>
+	<string>215</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
@@ -27,12 +27,14 @@
 			<key>IntentsRestrictedWhileLocked</key>
 			<array>
 				<string>OrderProductIntent</string>
+				<string>ReserveProductIntent</string>
 			</array>
 			<key>IntentsRestrictedWhileProtectedDataUnavailable</key>
 			<array/>
 			<key>IntentsSupported</key>
 			<array>
 				<string>OrderProductIntent</string>
+				<string>ReserveProductIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
