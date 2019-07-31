@@ -27,7 +27,7 @@ target 'SunriseIntents' do
   common_pods
 end
 
-target 'SunriseIntentsUI' do
+target 'SunriseOrderIntentUI' do
   common_pods
   pod 'ReactiveCocoa'
   pod 'SDWebImage'

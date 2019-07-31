@@ -229,8 +229,8 @@
 		21FB4B1421A587FC00F6BD80 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B1321A587FC00F6BD80 /* IntentHandler.swift */; };
 		21FB4B1C21A587FC00F6BD80 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FB4B1B21A587FC00F6BD80 /* IntentsUI.framework */; };
 		21FB4B1F21A587FC00F6BD80 /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B1E21A587FC00F6BD80 /* IntentViewController.swift */; };
-		21FB4B2221A587FC00F6BD80 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21FB4B2021A587FC00F6BD80 /* MainInterface.storyboard */; };
-		21FB4B2621A587FC00F6BD80 /* SunriseIntentsUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		21FB4B2221A587FC00F6BD80 /* MainInterface.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21FB4B2021A587FC00F6BD80 /* MainInterface.strings */; };
+		21FB4B2621A587FC00F6BD80 /* SunriseOrderIntentUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 21FB4B1A21A587FC00F6BD80 /* SunriseOrderIntentUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		21FB4B2921A587FC00F6BD80 /* SunriseIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		21FB4B3721A5E18000F6BD80 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */; };
 		21FB4B3821A5E18000F6BD80 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */; };
@@ -240,8 +240,8 @@
 		21FB4B4321A8388D00F6BD80 /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
 		21FB4B4421A8389200F6BD80 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		21FB4B4521A8389300F6BD80 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
+		4F0A6B4A8EF0829DEB6A3AE5 /* Pods_SunriseOrderIntentUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98C2E769CA172DBA1EC7AAF /* Pods_SunriseOrderIntentUI.framework */; };
 		59C0EA28597296088970E5CD /* Pods_Sunrise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */; };
-		697AD52024A2D205F6806C45 /* Pods_SunriseIntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2864677441C9143393CF57FF /* Pods_SunriseIntentsUI.framework */; };
 		6E7C5D46C6BA3A07C072AE5B /* Pods_SunriseIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9452F185DD88CD4C255337 /* Pods_SunriseIntents.framework */; };
 		8525A6F02B03D16848DE6E21 /* Pods_SunriseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */; };
 		C3E67B54573794A35CE64ACE /* Pods_Sunrise_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */; };
@@ -282,7 +282,7 @@
 			containerPortal = 21CDC48C1CE91D9B009D2638 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 21FB4B1921A587FC00F6BD80;
-			remoteInfo = SunriseIntentsUI;
+			remoteInfo = SunriseOrderIntentUI;
 		};
 		21FB4B2721A587FC00F6BD80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -323,7 +323,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				21FB4B2921A587FC00F6BD80 /* SunriseIntents.appex in Embed App Extensions */,
-				21FB4B2621A587FC00F6BD80 /* SunriseIntentsUI.appex in Embed App Extensions */,
+				21FB4B2621A587FC00F6BD80 /* SunriseOrderIntentUI.appex in Embed App Extensions */,
 				219992451DC9FAAB000E48FD /* ReservationNotification.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -338,6 +338,7 @@
 		17D1760D1D552D42D0C367DB /* Pods-Sunrise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug.xcconfig"; sourceTree = "<group>"; };
 		1A4BEC5580C7D7626C6247AC /* Pods-SunriseUITests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		1FBFF28843B465BB315D9FFC /* Pods-Sunrise.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release prod.xcconfig"; sourceTree = "<group>"; };
+		1FCF0AEB2044C57785F2D6B7 /* Pods-SunriseOrderIntentUI.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseOrderIntentUI.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseOrderIntentUI/Pods-SunriseOrderIntentUI.debug prod.xcconfig"; sourceTree = "<group>"; };
 		21004C39228EF8EF0091C0B6 /* ImageFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFullScreenViewController.swift; sourceTree = "<group>"; };
 		21004C3B228EFA7F0091C0B6 /* CaptureSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionManager.swift; sourceTree = "<group>"; };
 		21004C3D228F5A2B0091C0B6 /* LiveViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewCell.swift; sourceTree = "<group>"; };
@@ -469,7 +470,7 @@
 		217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOverviewCell.swift; sourceTree = "<group>"; };
 		217928A021090CA0005BDCDA /* cart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cart.json; sourceTree = "<group>"; };
 		217F535521B93C3E0022FE8C /* LineItemRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItemRowController.swift; sourceTree = "<group>"; };
-		2182E98021A86FF0005E8E60 /* SunriseIntentsUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunriseIntentsUI.entitlements; sourceTree = "<group>"; };
+		2182E98021A86FF0005E8E60 /* SunriseOrderIntentUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunriseOrderIntentUI.entitlements; sourceTree = "<group>"; };
 		2182E98321AB07BD005E8E60 /* IntentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewModel.swift; sourceTree = "<group>"; };
 		218948551F8BE2DE00F05933 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		218AF309206C51EF00C7F9E7 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -546,14 +547,14 @@
 		21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunriseIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		21FB4B1321A587FC00F6BD80 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		21FB4B1521A587FC00F6BD80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunriseIntentsUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		21FB4B1A21A587FC00F6BD80 /* SunriseOrderIntentUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunriseOrderIntentUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		21FB4B1B21A587FC00F6BD80 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		21FB4B1E21A587FC00F6BD80 /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
 		21FB4B2121A587FC00F6BD80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		21FB4B2321A587FC00F6BD80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21FB4B2321A587FC00F6BD80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		21FB4B3921A5E18000F6BD80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		21FB4B4121A7291C00F6BD80 /* SunriseIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunriseIntents.entitlements; sourceTree = "<group>"; };
-		2864677441C9143393CF57FF /* Pods_SunriseIntentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseIntentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22288662A9414B21D629CA88 /* Pods-SunriseOrderIntentUI.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseOrderIntentUI.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseOrderIntentUI/Pods-SunriseOrderIntentUI.release prod.xcconfig"; sourceTree = "<group>"; };
 		3158686D816936EC2245AA76 /* Pods-Sunrise.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.release staging.xcconfig"; sourceTree = "<group>"; };
 		391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AA6BB2954DAE3F04E3F733 /* Pods_SunriseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -562,9 +563,9 @@
 		461223BA27960B9E0A40A70E /* Pods_ReservationNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReservationNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE03700D7B2698868A8CE86 /* Pods-SunriseTests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release prod.xcconfig"; sourceTree = "<group>"; };
 		535FE8CACEAF978D38444AE6 /* Pods-ReservationNotification.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug prod.xcconfig"; sourceTree = "<group>"; };
-		5AD254E3739C72792309CEDF /* Pods-SunriseIntentsUI.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntentsUI.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntentsUI/Pods-SunriseIntentsUI.release prod.xcconfig"; sourceTree = "<group>"; };
 		5BE041370A3BD096E67F065F /* Pods-Sunrise.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise/Pods-Sunrise.debug prod.xcconfig"; sourceTree = "<group>"; };
 		5C6C4F0E0656BF7C533C83AE /* Pods-SunriseUITests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release prod.xcconfig"; sourceTree = "<group>"; };
+		5EE80AAF6E599C037B1A015E /* Pods-SunriseOrderIntentUI.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseOrderIntentUI.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseOrderIntentUI/Pods-SunriseOrderIntentUI.debug staging.xcconfig"; sourceTree = "<group>"; };
 		60004132A7EAFB397EE3ACD8 /* Pods-Sunrise Watch Extension.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.release prod.xcconfig"; sourceTree = "<group>"; };
 		6715A040D50D01AF2917482B /* Pods-SunriseUITests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release staging.xcconfig"; sourceTree = "<group>"; };
 		67F6F8A88507829B5FF61CD0 /* Pods-SunriseIntents.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntents.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntents/Pods-SunriseIntents.debug staging.xcconfig"; sourceTree = "<group>"; };
@@ -572,17 +573,16 @@
 		75C04D6F02B1AC2F2C0AC1EB /* Pods-SunriseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7A562E52A4EA825B9D79192B /* Pods_SunriseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8080A3FE3BC2FE4CAC9A3A23 /* Pods-SunriseUITests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug prod.xcconfig"; sourceTree = "<group>"; };
-		885C2049A6018DC7E729588D /* Pods-SunriseIntentsUI.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntentsUI.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntentsUI/Pods-SunriseIntentsUI.debug staging.xcconfig"; sourceTree = "<group>"; };
 		8C9452F185DD88CD4C255337 /* Pods_SunriseIntents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseIntents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5E8D230203D5E6313ED72F /* Pods-SunriseTests.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release staging.xcconfig"; sourceTree = "<group>"; };
 		8F8E56E096FD3BFA07010301 /* Pods-SunriseTests.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug staging.xcconfig"; sourceTree = "<group>"; };
 		9090A8EC74C3609FB1196CB5 /* Pods_Sunrise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sunrise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		90B426EFC3D1894AD1F33154 /* Pods-SunriseIntentsUI.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntentsUI.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntentsUI/Pods-SunriseIntentsUI.debug prod.xcconfig"; sourceTree = "<group>"; };
 		96F2175FEA6F10363AA161CE /* Pods-ReservationNotification.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.debug staging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.debug staging.xcconfig"; sourceTree = "<group>"; };
+		A8686ACF84EB8ABAE5D57758 /* Pods-SunriseOrderIntentUI.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseOrderIntentUI.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseOrderIntentUI/Pods-SunriseOrderIntentUI.release staging.xcconfig"; sourceTree = "<group>"; };
 		A8FC8B040717F832768D583E /* Pods-SunriseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseUITests/Pods-SunriseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A91DC6065974B510D4BD15D2 /* Pods-SunriseTests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug prod.xcconfig"; sourceTree = "<group>"; };
 		AE0E1AECBFB0B25D10221213 /* Pods-ReservationNotification.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReservationNotification.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-ReservationNotification/Pods-ReservationNotification.release staging.xcconfig"; sourceTree = "<group>"; };
-		B3AEF4253BFE422567D97567 /* Pods-SunriseIntentsUI.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseIntentsUI.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseIntentsUI/Pods-SunriseIntentsUI.release staging.xcconfig"; sourceTree = "<group>"; };
+		D98C2E769CA172DBA1EC7AAF /* Pods_SunriseOrderIntentUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SunriseOrderIntentUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E63198A54D318A4B3544D108 /* Pods-SunriseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F6AE90BED5587F739F4B8F59 /* Pods-Sunrise Watch Extension.release staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sunrise Watch Extension.release staging.xcconfig"; path = "Pods/Target Support Files/Pods-Sunrise Watch Extension/Pods-Sunrise Watch Extension.release staging.xcconfig"; sourceTree = "<group>"; };
 		F6C180AA6EF954F701F486C2 /* Pods-SunriseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SunriseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SunriseTests/Pods-SunriseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -637,7 +637,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21FB4B1C21A587FC00F6BD80 /* IntentsUI.framework in Frameworks */,
-				697AD52024A2D205F6806C45 /* Pods_SunriseIntentsUI.framework in Frameworks */,
+				4F0A6B4A8EF0829DEB6A3AE5 /* Pods_SunriseOrderIntentUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1105,7 +1105,7 @@
 				2163EBB21DE8C26C00803640 /* Sunrise Watch */,
 				2163EBC11DE8C26C00803640 /* Sunrise Watch Extension */,
 				21FB4B1221A587FC00F6BD80 /* SunriseIntents */,
-				21FB4B1D21A587FC00F6BD80 /* SunriseIntentsUI */,
+				21FB4B1D21A587FC00F6BD80 /* SunriseOrderIntentUI */,
 				21CDC4951CE91D9B009D2638 /* Products */,
 				35E540A469E198E7F3ACD078 /* Pods */,
 				A5930317FAADB466B9D2E3C1 /* Frameworks */,
@@ -1121,7 +1121,7 @@
 				2163EBB11DE8C26C00803640 /* Sunrise Watch.app */,
 				2163EBBD1DE8C26C00803640 /* Sunrise Watch Extension.appex */,
 				21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */,
-				21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */,
+				21FB4B1A21A587FC00F6BD80 /* SunriseOrderIntentUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1175,16 +1175,16 @@
 			path = SunriseIntents;
 			sourceTree = "<group>";
 		};
-		21FB4B1D21A587FC00F6BD80 /* SunriseIntentsUI */ = {
+		21FB4B1D21A587FC00F6BD80 /* SunriseOrderIntentUI */ = {
 			isa = PBXGroup;
 			children = (
-				2182E98021A86FF0005E8E60 /* SunriseIntentsUI.entitlements */,
+				2182E98021A86FF0005E8E60 /* SunriseOrderIntentUI.entitlements */,
 				21FB4B1E21A587FC00F6BD80 /* IntentViewController.swift */,
-				21FB4B2021A587FC00F6BD80 /* MainInterface.storyboard */,
+				21FB4B2021A587FC00F6BD80 /* MainInterface.strings */,
 				21FB4B2321A587FC00F6BD80 /* Info.plist */,
 				2182E98321AB07BD005E8E60 /* IntentViewModel.swift */,
 			);
-			path = SunriseIntentsUI;
+			path = SunriseOrderIntentUI;
 			sourceTree = "<group>";
 		};
 		35E540A469E198E7F3ACD078 /* Pods */ = {
@@ -1220,10 +1220,10 @@
 				67F6F8A88507829B5FF61CD0 /* Pods-SunriseIntents.debug staging.xcconfig */,
 				21127725A3FD84EDACCE2787 /* Pods-SunriseIntents.release prod.xcconfig */,
 				0BC7295C44E16267A5D0A524 /* Pods-SunriseIntents.release staging.xcconfig */,
-				90B426EFC3D1894AD1F33154 /* Pods-SunriseIntentsUI.debug prod.xcconfig */,
-				885C2049A6018DC7E729588D /* Pods-SunriseIntentsUI.debug staging.xcconfig */,
-				5AD254E3739C72792309CEDF /* Pods-SunriseIntentsUI.release prod.xcconfig */,
-				B3AEF4253BFE422567D97567 /* Pods-SunriseIntentsUI.release staging.xcconfig */,
+				1FCF0AEB2044C57785F2D6B7 /* Pods-SunriseOrderIntentUI.debug prod.xcconfig */,
+				5EE80AAF6E599C037B1A015E /* Pods-SunriseOrderIntentUI.debug staging.xcconfig */,
+				22288662A9414B21D629CA88 /* Pods-SunriseOrderIntentUI.release prod.xcconfig */,
+				A8686ACF84EB8ABAE5D57758 /* Pods-SunriseOrderIntentUI.release staging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1240,7 +1240,7 @@
 				391D946CC9E5F0C54B32B896 /* Pods_Sunrise_Watch_Extension.framework */,
 				21FB4B1B21A587FC00F6BD80 /* IntentsUI.framework */,
 				8C9452F185DD88CD4C255337 /* Pods_SunriseIntents.framework */,
-				2864677441C9143393CF57FF /* Pods_SunriseIntentsUI.framework */,
+				D98C2E769CA172DBA1EC7AAF /* Pods_SunriseOrderIntentUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1366,9 +1366,9 @@
 			productReference = 21FB4B1121A587FC00F6BD80 /* SunriseIntents.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		21FB4B1921A587FC00F6BD80 /* SunriseIntentsUI */ = {
+		21FB4B1921A587FC00F6BD80 /* SunriseOrderIntentUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21FB4B3221A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseIntentsUI" */;
+			buildConfigurationList = 21FB4B3221A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseOrderIntentUI" */;
 			buildPhases = (
 				D0E4FA8314BF4401D02F2351 /* [CP] Check Pods Manifest.lock */,
 				21FB4B1621A587FC00F6BD80 /* Sources */,
@@ -1379,9 +1379,9 @@
 			);
 			dependencies = (
 			);
-			name = SunriseIntentsUI;
-			productName = SunriseIntentsUI;
-			productReference = 21FB4B1A21A587FC00F6BD80 /* SunriseIntentsUI.appex */;
+			name = SunriseOrderIntentUI;
+			productName = SunriseOrderIntentUI;
+			productReference = 21FB4B1A21A587FC00F6BD80 /* SunriseOrderIntentUI.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1517,7 +1517,7 @@
 				2163EBB01DE8C26C00803640 /* Sunrise Watch */,
 				2163EBBC1DE8C26C00803640 /* Sunrise Watch Extension */,
 				21FB4B1021A587FC00F6BD80 /* SunriseIntents */,
-				21FB4B1921A587FC00F6BD80 /* SunriseIntentsUI */,
+				21FB4B1921A587FC00F6BD80 /* SunriseOrderIntentUI */,
 			);
 		};
 /* End PBXProject section */
@@ -1628,7 +1628,7 @@
 				2182E99C21AC8006005E8E60 /* Rubik-Regular.ttf in Resources */,
 				2182E99321AC8006005E8E60 /* Rubik-Black.ttf in Resources */,
 				2182E99721AC8006005E8E60 /* Rubik-Italic.ttf in Resources */,
-				21FB4B2221A587FC00F6BD80 /* MainInterface.storyboard in Resources */,
+				21FB4B2221A587FC00F6BD80 /* MainInterface.strings in Resources */,
 				2182E98E21AC8006005E8E60 /* Poppins-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1775,7 +1775,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SunriseIntentsUI-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SunriseOrderIntentUI-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2068,7 +2068,7 @@
 		};
 		21FB4B2521A587FC00F6BD80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 21FB4B1921A587FC00F6BD80 /* SunriseIntentsUI */;
+			target = 21FB4B1921A587FC00F6BD80 /* SunriseOrderIntentUI */;
 			targetProxy = 21FB4B2421A587FC00F6BD80 /* PBXContainerItemProxy */;
 		};
 		21FB4B2821A587FC00F6BD80 /* PBXTargetDependency */ = {
@@ -2160,13 +2160,13 @@
 			name = Profile.storyboard;
 			sourceTree = "<group>";
 		};
-		21FB4B2021A587FC00F6BD80 /* MainInterface.storyboard */ = {
+		21FB4B2021A587FC00F6BD80 /* MainInterface.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				21FB4B2121A587FC00F6BD80 /* Base */,
 				21123DE921B0BBFB00B86F91 /* de */,
 			);
-			name = MainInterface.storyboard;
+			name = MainInterface.strings;
 			sourceTree = "<group>";
 		};
 		21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */ = {
@@ -3515,7 +3515,7 @@
 		};
 		21FB4B2E21A587FC00F6BD80 /* Debug Prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90B426EFC3D1894AD1F33154 /* Pods-SunriseIntentsUI.debug prod.xcconfig */;
+			baseConfigurationReference = 1FCF0AEB2044C57785F2D6B7 /* Pods-SunriseOrderIntentUI.debug prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3546,7 +3546,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = SunriseIntentsUI/SunriseIntentsUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SunriseOrderIntentUI/SunriseOrderIntentUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3569,13 +3569,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				INFOPLIST_FILE = SunriseOrderIntentUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseOrderIntentUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -3589,7 +3589,7 @@
 		};
 		21FB4B2F21A587FC00F6BD80 /* Debug Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 885C2049A6018DC7E729588D /* Pods-SunriseIntentsUI.debug staging.xcconfig */;
+			baseConfigurationReference = 5EE80AAF6E599C037B1A015E /* Pods-SunriseOrderIntentUI.debug staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3620,7 +3620,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = SunriseIntentsUI/SunriseIntentsUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SunriseOrderIntentUI/SunriseOrderIntentUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3643,13 +3643,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				INFOPLIST_FILE = SunriseOrderIntentUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseOrderIntentUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -3663,7 +3663,7 @@
 		};
 		21FB4B3021A587FC00F6BD80 /* Release Prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AD254E3739C72792309CEDF /* Pods-SunriseIntentsUI.release prod.xcconfig */;
+			baseConfigurationReference = 22288662A9414B21D629CA88 /* Pods-SunriseOrderIntentUI.release prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3694,7 +3694,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = SunriseIntentsUI/SunriseIntentsUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SunriseOrderIntentUI/SunriseOrderIntentUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3711,12 +3711,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				INFOPLIST_FILE = SunriseOrderIntentUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseOrderIntentUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -3730,7 +3730,7 @@
 		};
 		21FB4B3121A587FC00F6BD80 /* Release Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3AEF4253BFE422567D97567 /* Pods-SunriseIntentsUI.release staging.xcconfig */;
+			baseConfigurationReference = A8686ACF84EB8ABAE5D57758 /* Pods-SunriseOrderIntentUI.release staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3761,7 +3761,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = SunriseIntentsUI/SunriseIntentsUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SunriseOrderIntentUI/SunriseOrderIntentUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3778,12 +3778,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SunriseIntentsUI/Info.plist;
+				INFOPLIST_FILE = SunriseOrderIntentUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseIntentsUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.commercetools.Sunrise.SunriseOrderIntentUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -3864,7 +3864,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = "Release Prod";
 		};
-		21FB4B3221A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseIntentsUI" */ = {
+		21FB4B3221A587FC00F6BD80 /* Build configuration list for PBXNativeTarget "SunriseOrderIntentUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21FB4B2E21A587FC00F6BD80 /* Debug Prod */,
