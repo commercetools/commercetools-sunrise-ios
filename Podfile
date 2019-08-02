@@ -33,6 +33,12 @@ target 'SunriseOrderIntentUI' do
   pod 'SDWebImage'
 end
 
+target 'SunriseReserveIntentUI' do
+  common_pods
+  pod 'ReactiveCocoa'
+  pod 'SDWebImage'
+end
+
 target 'Sunrise Watch Extension' do
   platform :watchos, '4.0'
   common_pods
