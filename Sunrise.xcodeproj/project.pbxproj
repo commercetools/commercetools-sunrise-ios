@@ -102,6 +102,12 @@
 		213B357622FB133B002A650A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213B357422FB133B002A650A /* MainInterface.storyboard */; };
 		213B357A22FB133B002A650A /* SunriseReserveIntentUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 213B356F22FB133B002A650A /* SunriseReserveIntentUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		213B358222FB1655002A650A /* IntentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B358122FB1655002A650A /* IntentViewModel.swift */; };
+		213B358322FB829E002A650A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE81F2AC37E98EA8580EA /* BaseViewModel.swift */; };
+		213B358422FB85B6002A650A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE9B158BE86C70C9F1F47 /* Common.swift */; };
+		213B358522FB8E5F002A650A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 21FB4B3A21A5E18000F6BD80 /* Intents.intentdefinition */; };
+		213B358622FB90DB002A650A /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE0E296C4DD7568F84DAE /* Money.swift */; };
+		213B358722FCBF74002A650A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BE92C5ABF938D2BC46655 /* Channel.swift */; };
+		213B358A22FCC13D002A650A /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210BEA292BFC7E26BF1DFFF1 /* Attribute.swift */; };
 		213B7C711F9F9EF8008B90B5 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B7C701F9F9EF8008B90B5 /* BrandCell.swift */; };
 		213B7C731F9FA01B008B90B5 /* SizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B7C721F9FA01B008B90B5 /* SizeCell.swift */; };
 		213B7C751F9FA75B008B90B5 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B7C741F9FA75B008B90B5 /* ColorCell.swift */; };
@@ -1957,8 +1963,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213B358722FCBF74002A650A /* Channel.swift in Sources */,
+				213B358622FB90DB002A650A /* Money.swift in Sources */,
+				213B358422FB85B6002A650A /* Common.swift in Sources */,
 				213B358222FB1655002A650A /* IntentViewModel.swift in Sources */,
 				213B357322FB133B002A650A /* IntentViewController.swift in Sources */,
+				213B358522FB8E5F002A650A /* Intents.intentdefinition in Sources */,
+				213B358A22FCC13D002A650A /* Attribute.swift in Sources */,
+				213B358322FB829E002A650A /* BaseViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
