@@ -18,7 +18,6 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
     private let disposables = CompositeDisposable()
     private static let kLineItemCellHeight = 198
     private var configureViewCompletion: ((Bool, Set<INParameter>, CGSize) -> Void)?
-    private var configureViewParameters: Set<INParameter>?
     
     deinit {
         disposables.dispose()
@@ -50,9 +49,14 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
         .startWithValues { [weak self] in
             self?.tableView.reloadData()
             let width = self?.extensionContext?.hostedViewMaximumAllowedSize.width ?? 320
-            self?.configureViewCompletion?(true, self?.configureViewParameters ?? Set(), CGSize(width: width, height: CGFloat(IntentViewController.kLineItemCellHeight * $0 + 114)))
+            self?.configureViewCompletion?(true, Set(), CGSize(width: width, height: CGFloat(IntentViewController.kLineItemCellHeight * $0 + 114)))
         }
         
+        disposables += viewModel.errorSignal
+        .observe(on: UIScheduler())
+        .observeValues { [weak self] in
+            self?.configureViewCompletion?(false, Set(), .zero)
+        }
     }
         
     // MARK: - INUIHostedViewControlling

@@ -68,9 +68,9 @@ class StoreSelectionViewModel: BaseViewModel {
         distanceFormatter.unitStyle = .abbreviated
 
         productName.value = product.name.localizedString
-        size.value = currentVariant?.attributes?.first(where: { $0.name == FiltersViewModel.kSizeAttributeName })?.valueLabel
-        if let colorValue = currentVariant?.attributes?.first(where: { $0.name == FiltersViewModel.kColorsAttributeName })?.valueKey {
-            productColor.value = FiltersViewModel.colorValues[colorValue]
+        size.value = currentVariant?.attributes?.first(where: { $0.name == Attribute.kSizeAttributeName })?.valueLabel
+        if let colorValue = currentVariant?.attributes?.first(where: { $0.name == Attribute.kColorsAttributeName })?.valueKey {
+            productColor.value = Attribute.colorValues[colorValue]
         }
         productImageUrl.value = currentVariant?.images?.first?.url ?? ""
         quantity.value = "x1"

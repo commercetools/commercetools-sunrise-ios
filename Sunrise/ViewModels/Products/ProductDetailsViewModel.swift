@@ -65,7 +65,7 @@ class ProductDetailsViewModel: BaseViewModel {
     private let disposables = CompositeDisposable()
 
     // Attributes configuration
-    private let selectableAttributes = [FiltersViewModel.kColorsAttributeName, FiltersViewModel.kSizeAttributeName]
+    private let selectableAttributes = [Attribute.kColorsAttributeName, Attribute.kSizeAttributeName]
     private var productDescriptionAttributes: [String] = {
         return Bundle.main.object(forInfoDictionaryKey: "Product description attributes") as? [String] ?? []
     }()
@@ -110,12 +110,12 @@ class ProductDetailsViewModel: BaseViewModel {
         }
         
         disposables += selectSizeSignal.observeValues { [unowned self] in
-            self.activeAttributes.value = self.activeAttributes.value.filter { $0.name != FiltersViewModel.kSizeAttributeName }
+            self.activeAttributes.value = self.activeAttributes.value.filter { $0.name != Attribute.kSizeAttributeName }
             self.activeAttributes.value.append(self.sizes[$0.item])
         }
 
         disposables += selectColorSignal.observeValues { [unowned self] in
-            self.activeAttributes.value = self.activeAttributes.value.filter { $0.name != FiltersViewModel.kColorsAttributeName }
+            self.activeAttributes.value = self.activeAttributes.value.filter { $0.name != Attribute.kColorsAttributeName }
             self.activeAttributes.value.append(self.colors[$0.item])
         }
 
@@ -184,10 +184,10 @@ class ProductDetailsViewModel: BaseViewModel {
         name.value = product?.name.localizedString ?? ""
 
         product?.displayVariants().forEach {
-            if let color = $0.attributes?.filter({ $0.name == FiltersViewModel.kColorsAttributeName }).first, !colors.contains(color) {
+            if let color = $0.attributes?.filter({ $0.name == Attribute.kColorsAttributeName }).first, !colors.contains(color) {
                 colors.append(color)
             }
-            if let size = $0.attributes?.filter({ $0.name == FiltersViewModel.kSizeAttributeName }).first, !sizes.contains(size) {
+            if let size = $0.attributes?.filter({ $0.name == Attribute.kSizeAttributeName }).first, !sizes.contains(size) {
                 sizes.append(size)
             }
         }
@@ -251,7 +251,7 @@ class ProductDetailsViewModel: BaseViewModel {
     }
 
     func color(at indexPath: IndexPath) -> UIColor? {
-        return FiltersViewModel.colorValues[colors[indexPath.item].valueKey ?? ""]
+        return Attribute.colorValues[colors[indexPath.item].valueKey ?? ""]
     }
 
     func isColorActive(at indexPath: IndexPath) -> Bool {
@@ -336,14 +336,14 @@ class ProductDetailsViewModel: BaseViewModel {
 
     private func updateActiveAttributes(for variantId: Int? = nil) {
         guard let variant = product?.allVariants.first(where: { $0.id == variantId }) ?? product?.displayVariant() else { return }
-        let colors = variant.attributes?.filter { $0.name == FiltersViewModel.kColorsAttributeName } ?? []
+        let colors = variant.attributes?.filter { $0.name == Attribute.kColorsAttributeName } ?? []
         var updatedActiveAttributes = [Attribute]()
         if let color = colors.first(where: { MyStyleViewModel.colorsSettings.contains($0.valueKey ?? "") }), isAuthenticated {
             updatedActiveAttributes.append(color)
         } else if let color = colors.first {
             updatedActiveAttributes.append(color)
         }
-        let sizes = variant.attributes?.filter { $0.name == FiltersViewModel.kSizeAttributeName } ?? []
+        let sizes = variant.attributes?.filter { $0.name == Attribute.kSizeAttributeName } ?? []
         if let size = sizes.first(where: { MyStyleViewModel.sizesSettings.contains($0.valueLabel ?? "") }), isAuthenticated {
             updatedActiveAttributes.append(size)
         } else if let size = sizes.first {

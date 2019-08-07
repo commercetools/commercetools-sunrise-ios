@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ebt-Qz-Wb8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ebt-Qz-Wb8">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1538,7 +1538,7 @@ make it your default.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="614"/>
                                 <subviews>
                                     <view tag="333" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qud-DP-ZRQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="680"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmk-K9-JeH">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="201.5"/>
@@ -1679,7 +1679,7 @@ Sat: 09:00 - 16:00</string>
                                             <constraint firstItem="Iid-HO-NQq" firstAttribute="top" secondItem="wRz-hH-PG8" secondAttribute="bottom" constant="16" id="aKG-DS-2ej"/>
                                             <constraint firstItem="gmk-K9-JeH" firstAttribute="leading" secondItem="qud-DP-ZRQ" secondAttribute="leading" id="bPI-3S-DbI"/>
                                             <constraint firstItem="Iid-HO-NQq" firstAttribute="leading" secondItem="qud-DP-ZRQ" secondAttribute="leading" constant="38" id="cEK-t1-Bl0"/>
-                                            <constraint firstAttribute="height" constant="600" id="ekF-1C-gdB"/>
+                                            <constraint firstAttribute="height" constant="680" id="ekF-1C-gdB"/>
                                             <constraint firstAttribute="trailing" secondItem="pEJ-M3-yq1" secondAttribute="trailing" id="jIz-rT-ugr"/>
                                             <constraint firstItem="wPE-n4-Z5c" firstAttribute="top" secondItem="pEJ-M3-yq1" secondAttribute="bottom" constant="-7" id="mvv-Bu-GLe"/>
                                             <constraint firstAttribute="trailing" secondItem="yaA-36-MDY" secondAttribute="trailing" constant="38" id="qcV-IB-DmC"/>
@@ -1717,6 +1717,7 @@ Sat: 09:00 - 16:00</string>
                         <outlet property="mapView" destination="wPE-n4-Z5c" id="urD-BT-CoZ"/>
                         <outlet property="productImageView" destination="BI5-HA-BJ7" id="iDQ-Tk-PFK"/>
                         <outlet property="productNameLabel" destination="8Md-Lt-nMp" id="i9Z-iX-3PZ"/>
+                        <outlet property="reservationSummaryView" destination="qud-DP-ZRQ" id="zBv-i5-ZpU"/>
                         <outlet property="storeAddressLabel" destination="yaA-36-MDY" id="suP-ha-pLT"/>
                         <outlet property="storeNameLabel" destination="Iid-HO-NQq" id="uwi-l6-kXH"/>
                         <outlet property="storeOpenHoursLabel" destination="Ild-0E-4Pv" id="w6e-bi-O8c"/>

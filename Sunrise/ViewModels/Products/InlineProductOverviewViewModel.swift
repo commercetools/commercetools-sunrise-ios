@@ -110,9 +110,9 @@ class InlineProductOverviewViewModel: BaseViewModel {
     private func queryForMyStyleProductProjections(sort: [String]?) {
         var filterQuery = [String]()
         if Commercetools.authState == .customerToken {
-            [(FiltersViewModel.kBrandAttributeName, MyStyleViewModel.brandsSettings),
-             (FiltersViewModel.kSizeAttributeName, MyStyleViewModel.sizesSettings),
-             (FiltersViewModel.kColorsAttributeName, MyStyleViewModel.colorsSettings)].forEach {
+            [(Attribute.kBrandAttributeName, MyStyleViewModel.brandsSettings),
+             (Attribute.kSizeAttributeName, MyStyleViewModel.sizesSettings),
+             (Attribute.kColorsAttributeName, MyStyleViewModel.colorsSettings)].forEach {
                 if !$1.isEmpty {
                     var filterValue = $1.reduce("", { "\($0),\"\($1)\"" })
                     filterValue.removeFirst()

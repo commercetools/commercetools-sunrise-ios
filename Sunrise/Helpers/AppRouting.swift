@@ -125,8 +125,8 @@ class AppRouting {
         resetMainViewControllerState {
             showMainTab()
             guard let mainViewController = mainViewController, let filtersViewModel = mainViewController.viewModel?.productsViewModel.filtersViewModel else { return }
-            filtersViewModel.activeColors.value = Set(filters[FiltersViewModel.kColorsAttributeName])
-            filtersViewModel.activeBrands.value = Set(filters[FiltersViewModel.kBrandAttributeName])
+            filtersViewModel.activeColors.value = Set(filters[Attribute.kColorsAttributeName])
+            filtersViewModel.activeBrands.value = Set(filters[Attribute.kBrandAttributeName])
             filtersViewModel.activeSizes.value = Set(filters["size"]) // Sunrise web is using different attribute for size filter, but values mostly match
             mainViewController.searchFilterButton.isSelected = filtersViewModel.hasFiltersApplied
             mainViewController.searchField.becomeFirstResponder()

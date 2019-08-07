@@ -17,6 +17,10 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
     @IBOutlet weak var storeAddressLabel: UILabel!
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var oldPriceLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+
+    @IBOutlet weak var oldAndActivePriceSpacingConstraint: NSLayoutConstraint!
 
     private let locationManager = CLLocationManager()
     private var configureViewCompletion: ((Bool, Set<INParameter>, CGSize) -> Void)?
@@ -54,11 +58,15 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
         disposables += storeAddressLabel.reactive.text <~ viewModel.storeAddress
         disposables += sizeLabel.reactive.text <~ viewModel.size
         disposables += quantityLabel.reactive.text <~ viewModel.quantity
+        disposables += priceLabel.reactive.attributedText <~ viewModel.price
+        disposables += oldPriceLabel.reactive.attributedText <~ viewModel.oldPrice
+        disposables += oldAndActivePriceSpacingConstraint.reactive.constant <~ viewModel.oldPrice.map { $0?.string.isEmpty != false ? 0 : 4 }
         
         disposables += viewModel.visibleMapRect.producer
+        .filter { $0 != nil }
         .observe(on: UIScheduler())
         .startWithValues { [weak self] visibleRegion in
-            self?.mapView.setVisibleMapRect(visibleRegion, edgePadding: UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60), animated: true)
+            self?.mapView.setVisibleMapRect(visibleRegion!, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), animated: true)
         }
         
         disposables += viewModel.channel.producer
@@ -70,6 +78,9 @@ class IntentViewController: UIViewController, INUIHostedViewControlling {
             let storeAnnotation =  MKPointAnnotation()
             storeAnnotation.coordinate = coordinate
             mapView.addAnnotation(storeAnnotation)
+            if mapView.userLocation.location == nil {
+                mapView.showAnnotations([storeAnnotation], animated: false)
+            }
         }
         
         disposables += viewModel.productColor.producer

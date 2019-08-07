@@ -180,7 +180,7 @@ class MyStyleViewModel: BaseViewModel {
     }
 
     func color(at indexPath: IndexPath) -> UIColor? {
-        return FiltersViewModel.colorValues[colors[indexPath.item].key]
+        return Attribute.colorValues[colors[indexPath.item].key]
     }
 
     func isColorActive(at indexPath: IndexPath) -> Bool {
@@ -206,9 +206,9 @@ class MyStyleViewModel: BaseViewModel {
     // MARK: Attributes extraction
 
     private func updateSettings(mainProductType: ProductType) {
-        colors = mainProductType.attributes.filter({ $0.name == FiltersViewModel.kColorsAttributeName }).first?.type.values ?? []
-        sizes = mainProductType.attributes.filter({ $0.name == FiltersViewModel.kSizeAttributeName }).first?.type.values ?? []
-        brands = mainProductType.attributes.filter({ $0.name == FiltersViewModel.kBrandAttributeName }).first?.type.values?.sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" } ?? []
+        colors = mainProductType.attributes.filter({ $0.name == Attribute.kColorsAttributeName }).first?.type.values ?? []
+        sizes = mainProductType.attributes.filter({ $0.name == Attribute.kSizeAttributeName }).first?.type.values ?? []
+        brands = mainProductType.attributes.filter({ $0.name == Attribute.kBrandAttributeName }).first?.type.values?.sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" } ?? []
     }
 
     // MARK: - Commercetools attributes querying

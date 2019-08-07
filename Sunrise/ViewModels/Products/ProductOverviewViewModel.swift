@@ -292,9 +292,9 @@ class ProductOverviewViewModel: BaseViewModel {
                 filterQuery.append("variants.price.centAmount:range (\(lower * 100) to \(upper == FiltersViewModel.kPriceMax ? "*" : (upper * 100).description))")
             }
 
-            [(FiltersViewModel.kBrandAttributeName, self.filtersViewModel?.activeBrands.value),
-             (FiltersViewModel.kSizeAttributeName, self.filtersViewModel?.activeSizes.value),
-             (FiltersViewModel.kColorsAttributeName, self.filtersViewModel?.activeColors.value)].forEach {
+            [(Attribute.kBrandAttributeName, self.filtersViewModel?.activeBrands.value),
+             (Attribute.kSizeAttributeName, self.filtersViewModel?.activeSizes.value),
+             (Attribute.kColorsAttributeName, self.filtersViewModel?.activeColors.value)].forEach {
                 if let activeValues = $1, activeValues.count > 0 {
                     var filterValue = activeValues.reduce("", { "\($0),\"\($1)\"" })
                     filterValue.removeFirst()

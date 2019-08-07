@@ -39,7 +39,6 @@ class FiltersViewModel: BaseViewModel {
     let activeColors = MutableProperty(Set<String>())
     let facets: MutableProperty<JsonValue?> = MutableProperty(nil)
 
-    static let colorValues: [String: UIColor] = ["black": UIColor.black, "grey": UIColor.gray, "beige": UIColor(red: 0.96, green: 0.96, blue: 0.86, alpha: 1.0), "white": .white, "blue": .blue, "brown": .brown, "turquoise": UIColor(red: 0.25, green: 0.88, blue: 0.82, alpha: 1.0), "petrol": UIColor(red: 0.09, green: 0.45, blue: 0.56, alpha: 1.0), "green": UIColor(red: 0.30, green: 0.57, blue: 0.01, alpha: 1.0), "red": .red, "purple": .purple, "pink": UIColor(red: 1.00, green: 0.75, blue: 0.80, alpha: 1.0), "orange": .orange, "yellow": .yellow, "oliv": UIColor(red: 0.50, green: 0.50, blue: 0.00, alpha: 1.0), "gold": UIColor(red: 1.00, green: 0.84, blue: 0.00, alpha: 1.0), "silver": UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0), "multicolored": UIColor(patternImage: #imageLiteral(resourceName: "multicolor"))]
 
     var mainProductType: ProductType?
     private var brands = [AttributeType.EnumValue]()
@@ -47,9 +46,6 @@ class FiltersViewModel: BaseViewModel {
     private var colors = [AttributeType.EnumValue]()
     private let disposables = CompositeDisposable()
 
-    static let kBrandAttributeName = "designer"
-    static let kColorsAttributeName = "color"
-    static let kSizeAttributeName = "commonSize"
     static let kPriceMin = 0
     static let kPriceMax = 1000
 
@@ -239,21 +235,21 @@ class FiltersViewModel: BaseViewModel {
     // MARK: Attributes extraction
 
     private func updateFilters() {
-        colors = mainProductType?.attributes.filter({ $0.name == FiltersViewModel.kColorsAttributeName }).first?.type.values ?? []
-        sizes = mainProductType?.attributes.filter({ $0.name == FiltersViewModel.kSizeAttributeName }).first?.type.values ?? []
-        brands = mainProductType?.attributes.filter({ $0.name == FiltersViewModel.kBrandAttributeName }).first?.type.values?.sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" } ?? []
+        colors = mainProductType?.attributes.filter({ $0.name == Attribute.kColorsAttributeName }).first?.type.values ?? []
+        sizes = mainProductType?.attributes.filter({ $0.name == Attribute.kSizeAttributeName }).first?.type.values ?? []
+        brands = mainProductType?.attributes.filter({ $0.name == Attribute.kBrandAttributeName }).first?.type.values?.sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" } ?? []
 
-        if let terms = facets.value?.dictionary?["variants.attributes.\(FiltersViewModel.kBrandAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
+        if let terms = facets.value?.dictionary?["variants.attributes.\(Attribute.kBrandAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
             brands = brands.filter({ terms.contains($0.key) }).sorted { $0.stringLabel?.lowercased() ?? "" < $1.stringLabel?.lowercased() ?? "" }
             activeBrands.value = activeBrands.value.filter { terms.contains($0) }
         }
 
-        if let terms = facets.value?.dictionary?["variants.attributes.\(FiltersViewModel.kSizeAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
+        if let terms = facets.value?.dictionary?["variants.attributes.\(Attribute.kSizeAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
             sizes = sizes.filter({ terms.contains($0.key) })
             activeSizes.value = activeSizes.value.filter { terms.contains($0) }
         }
 
-        if let terms = facets.value?.dictionary?["variants.attributes.\(FiltersViewModel.kColorsAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
+        if let terms = facets.value?.dictionary?["variants.attributes.\(Attribute.kColorsAttributeName).key"]?.dictionary?["terms"]?.array?.map({ $0.dictionary?["term"]?.string ?? "" }) {
             colors = colors.filter({ terms.contains($0.key) })
             activeColors.value = activeColors.value.filter { terms.contains($0) }
         }

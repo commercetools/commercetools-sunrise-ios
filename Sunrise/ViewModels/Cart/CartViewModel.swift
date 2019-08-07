@@ -134,7 +134,7 @@ class CartViewModel: BaseViewModel {
     }
 
     func lineItemSize(at indexPath: IndexPath) -> String {
-        return cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == FiltersViewModel.kSizeAttributeName }).first?.valueLabel ?? "N/A"
+        return cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == Attribute.kSizeAttributeName }).first?.valueLabel ?? "N/A"
     }
 
     func lineItemImageUrl(at indexPath: IndexPath) -> String {
@@ -166,8 +166,8 @@ class CartViewModel: BaseViewModel {
     }
 
     func lineItemColor(at indexPath: IndexPath) -> UIColor? {
-        guard let colorKey = cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == FiltersViewModel.kColorsAttributeName }).first?.valueKey else { return nil }
-        return FiltersViewModel.colorValues[colorKey]
+        guard let colorKey = cart.value?.lineItems[indexPath.row].variant.attributes?.filter({ $0.name == Attribute.kColorsAttributeName }).first?.valueKey else { return nil }
+        return Attribute.colorValues[colorKey]
     }
 
     func isLineItemInWishList(at indexPath: IndexPath) -> Bool {
