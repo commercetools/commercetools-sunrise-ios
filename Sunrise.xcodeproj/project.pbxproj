@@ -137,6 +137,23 @@
 		2171D0B31F9E52B10074C27D /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2171D0B21F9E52B10074C27D /* RangeSlider.swift */; };
 		217581B61CF4623E0067BE15 /* ProductOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217581B51CF4623E0067BE15 /* ProductOverviewCell.swift */; };
 		217928A121090CA0005BDCDA /* cart.json in Resources */ = {isa = PBXBuildFile; fileRef = 217928A021090CA0005BDCDA /* cart.json */; };
+		217C672D2304AFE700DCA3B7 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2D81F5F21E80006611E /* Poppins-Bold.ttf */; };
+		217C672E2304AFE700DCA3B7 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E31F5F21EA0006611E /* Poppins-Light.ttf */; };
+		217C672F2304AFE700DCA3B7 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2D91F5F21E90006611E /* Poppins-Medium.ttf */; };
+		217C67302304AFE700DCA3B7 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DF1F5F21E90006611E /* Poppins-Regular.ttf */; };
+		217C67312304AFE700DCA3B7 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DA1F5F21E90006611E /* Poppins-SemiBold.ttf */; };
+		217C67322304AFE700DCA3B7 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2D61F5F21E80006611E /* Rubik-Black.ttf */; };
+		217C67332304AFE700DCA3B7 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DD1F5F21E90006611E /* Rubik-BlackItalic.ttf */; };
+		217C67342304AFE700DCA3B7 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2D71F5F21E80006611E /* Rubik-Bold.ttf */; };
+		217C67352304AFE700DCA3B7 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E11F5F21EA0006611E /* Rubik-BoldItalic.ttf */; };
+		217C67362304AFE700DCA3B7 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E01F5F21E90006611E /* Rubik-Italic.ttf */; };
+		217C67372304AFE700DCA3B7 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DC1F5F21E90006611E /* Rubik-Light.ttf */; };
+		217C67382304AFE700DCA3B7 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E41F5F21EA0006611E /* Rubik-LightItalic.ttf */; };
+		217C67392304AFE700DCA3B7 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DB1F5F21E90006611E /* Rubik-Medium.ttf */; };
+		217C673A2304AFE700DCA3B7 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2E21F5F21EA0006611E /* Rubik-MediumItalic.ttf */; };
+		217C673B2304AFE700DCA3B7 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212EB2DE1F5F21E90006611E /* Rubik-Regular.ttf */; };
+		217C673C2304B00100DCA3B7 /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
+		217C673D2304B01E00DCA3B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CDC4A01CE91D9B009D2638 /* Assets.xcassets */; };
 		217F535621B93C3E0022FE8C /* LineItemRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217F535521B93C3E0022FE8C /* LineItemRowController.swift */; };
 		2182E98121A8701B005E8E60 /* CommercetoolsStagingConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAA1CEC69AF009A8CEB /* CommercetoolsStagingConfig.plist */; };
 		2182E98221A8701E005E8E60 /* CommercetoolsProdConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21A8EEAC1CEC69BA009A8CEB /* CommercetoolsProdConfig.plist */; };
@@ -1620,6 +1637,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				213B357622FB133B002A650A /* MainInterface.storyboard in Resources */,
+				217C67372304AFE700DCA3B7 /* Rubik-Light.ttf in Resources */,
+				217C67342304AFE700DCA3B7 /* Rubik-Bold.ttf in Resources */,
+				217C672F2304AFE700DCA3B7 /* Poppins-Medium.ttf in Resources */,
+				217C672E2304AFE700DCA3B7 /* Poppins-Light.ttf in Resources */,
+				217C67322304AFE700DCA3B7 /* Rubik-Black.ttf in Resources */,
+				217C67352304AFE700DCA3B7 /* Rubik-BoldItalic.ttf in Resources */,
+				217C673A2304AFE700DCA3B7 /* Rubik-MediumItalic.ttf in Resources */,
+				217C67382304AFE700DCA3B7 /* Rubik-LightItalic.ttf in Resources */,
+				217C673C2304B00100DCA3B7 /* CommercetoolsProdConfig.plist in Resources */,
+				217C673B2304AFE700DCA3B7 /* Rubik-Regular.ttf in Resources */,
+				217C67362304AFE700DCA3B7 /* Rubik-Italic.ttf in Resources */,
+				217C67312304AFE700DCA3B7 /* Poppins-SemiBold.ttf in Resources */,
+				217C672D2304AFE700DCA3B7 /* Poppins-Bold.ttf in Resources */,
+				217C67332304AFE700DCA3B7 /* Rubik-BlackItalic.ttf in Resources */,
+				217C67302304AFE700DCA3B7 /* Poppins-Regular.ttf in Resources */,
+				217C673D2304B01E00DCA3B7 /* Assets.xcassets in Resources */,
+				217C67392304AFE700DCA3B7 /* Rubik-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
