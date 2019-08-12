@@ -7,7 +7,7 @@
 	<key>INIntentDefinitionModelVersion</key>
 	<string>1.0</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>18G84</string>
+	<string>18G87</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
 	<string>10G8</string>
 	<key>INIntentDefinitionToolsVersion</key>
@@ -165,7 +165,7 @@
 		</dict>
 		<dict>
 			<key>INIntentCategory</key>
-			<string>order</string>
+			<string>request</string>
 			<key>INIntentDescription</key>
 			<string>Make a reservation</string>
 			<key>INIntentDescriptionID</key>
@@ -247,7 +247,7 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Thank you, your reservation has been placed. You'll get a notification once it's ready for pickup.</string>
+						<string>You'll get a notification, once your reservation is ready for pickup.</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>Vv35nJ</string>
 						<key>INIntentResponseCodeName</key>
@@ -282,7 +282,7 @@
 			<key>INIntentUserConfirmationRequired</key>
 			<true/>
 			<key>INIntentVerb</key>
-			<string>Order</string>
+			<string>Request</string>
 		</dict>
 	</array>
 </dict>
