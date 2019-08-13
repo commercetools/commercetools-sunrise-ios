@@ -21,7 +21,7 @@ struct ImageSearch: MLEndpoint {
         - parameter offset:                   An optional parameter to set the offset of the first returned result.
         - parameter result:                   The code to be executed after processing the response.
     */
-    static func perform(for image: UIImage, limit: UInt? = nil, offset: UInt? = nil, result: @escaping (Result<QueryResponse<ResponseType>>) -> Void) {
+    static func perform(for image: UIImage, limit: UInt? = nil, offset: UInt? = nil, staged: Bool? = nil, result: @escaping (Result<QueryResponse<ResponseType>>) -> Void) {
         requestWithTokenAndPath(result, { token, path in
             let resizedImage = imageRenderer.image { context in
                 image.draw(in: CGRect(origin: .zero, size: targetSize))
@@ -32,16 +32,19 @@ struct ImageSearch: MLEndpoint {
                 return
             }
 
-            var request = self.request(url: path, method: .post, queryItems: [], json: nil, headers: self.headers(token))
-            let boundary = NSUUID().uuidString
+            var queryItems = [URLQueryItem]()
+            if let limit = limit {
+                queryItems.append(URLQueryItem(name: "limit", value: "\(limit)"))
+            }
+            if let offset = offset {
+                queryItems.append(URLQueryItem(name: "offset", value: "\(offset)"))
+            }
+            if let staged = staged {
+                queryItems.append(URLQueryItem(name: "staged", value: staged ? "true" : "false"))
+            }
 
-            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-            var body = Data()
-            body.appendString("--\(boundary)\r\nContent-Disposition: form-data; name=\"image\"; filename=\"image.jpeg\"\r\nContent-Type: image/jpeg\r\n\r\n")
-            body.append(data)
-            body.appendString("\r\n--\(boundary)--\r\n")
-            request.httpBody = body
-            request.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
+            var request = self.request(url: path, method: .post, queryItems: queryItems, json: data, formParameters: nil, headers: self.headers(token))
+            request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
 
             perform(request: request) { (response: Result<QueryResponse<ResponseType>>) in
                 result(response)
