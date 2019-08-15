@@ -54,14 +54,12 @@ struct ImageSearch: MLEndpoint {
 }
 
 struct ImageSearchProduct: Codable {
-    public let staged: Bool?
-    public let productVariants: [ProductVariant]
+    public let imageUrl: String
+    public let productVariants: [ProductVariantMatch]
 
-    public struct ProductVariant: Codable {
-        public let staged: Bool
-        public let product: ResourceIdentifier?
-        public let imageUrl: String?
-        public let variantId: Int?
+    public struct ProductVariantMatch: Codable {
+        public let product: Reference<ProductProjection>
+        public let variantId: Int
     }
 }
 

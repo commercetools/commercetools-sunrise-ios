@@ -346,7 +346,7 @@ class ProductOverviewViewModel: BaseViewModel {
             self.isLoading.value = true
             ImageSearch.perform(for: image, limit: 50) { result in
                 if let imageSearchProducts = result.model?.results, result.isSuccess {
-                    let productIds = imageSearchProducts.map { $0.productVariants.first?.product?.id ?? "" }
+                    let productIds = imageSearchProducts.map { $0.productVariants.first?.product.id ?? "" }
                     var filterQuery = "id:"
                     filterQuery.append(productIds.map({ "\"\($0)\"" }).joined(separator: ","))
                     ProductProjection.search(limit: 50, filterQuery: [filterQuery]) { result in
