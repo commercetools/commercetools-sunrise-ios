@@ -28,8 +28,17 @@ class OrderNotificationController: WKUserNotificationInterfaceController {
     
     override func didReceive(_ notification: UNNotification, withCompletion completionHandler: @escaping (WKUserNotificationInterfaceType) -> Swift.Void) {
         if let orderId = notification.request.content.userInfo["orderId"] as? String {
-            Order.byId(orderId) { result in
-                if let order = result.model, result.isSuccess {
+            let query = """
+                        {
+                          me {
+                            order(id: "\(orderId)") {
+                              \(Order.reducedOrderQuery)
+                            }
+                          }
+                        }
+                        """
+            GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse>>>) in
+                if let order = result.model?.data.me.order, result.isSuccess {
                     let interfaceModel = OrderDetailsInterfaceModel(order: order)
                     DispatchQueue.main.async {
                         self.lineItemsLabel.setText(interfaceModel.items)

@@ -17,7 +17,7 @@ class RecentOrdersInterfaceModel {
     let numberOfRows: MutableProperty<Int>
     let isLoadMoreHidden = MutableProperty(true)
     
-    private var orders = [Order]()
+    private var orders = [ReducedOrder]()
     private var totalOrders: UInt = 0
     private let disposables = CompositeDisposable()
     
@@ -86,8 +86,23 @@ class RecentOrdersInterfaceModel {
         let offset = UInt(orders.count)
         guard offset == 0 || offset < totalOrders else { return }
         let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve recent orders")
-        Order.query(predicates: ["custom(fields(isReservation != true))"], sort: ["createdAt desc"], limit: limit, offset: offset) { result in
-            if let orders = result.model?.results, let total = result.model?.total, let offset = result.model?.offset, result.isSuccess {
+
+        let query = """
+                    {
+                      me {
+                        orders(where: "custom(fields(isReservation != true))", sort: ["createdAt desc"], limit: \(limit), offset: \(offset)) {
+                          offset
+                          count
+                          total
+                          results {
+                            \(Order.reducedOrderQuery)
+                          }
+                        }
+                      }
+                    }
+                    """
+        GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrdersResponse>>>) in
+            if let orders = result.model?.data.me.orders.results, let total = result.model?.data.me.orders.total, let offset = result.model?.data.me.orders.offset, result.isSuccess {
                 DispatchQueue.main.async {
                     guard offset == self.orders.count else { return }
                     self.orders += orders
@@ -95,13 +110,57 @@ class RecentOrdersInterfaceModel {
                     self.numberOfRows.value = self.orders.count
                     self.isLoadMoreHidden.value = self.orders.count >= total
                 }
-                
+
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 debugPrint(errors)
-                
+
             }
             self.isLoading.value = false
             ProcessInfo.processInfo.endActivity(activity)
         }
+    }
+}
+
+struct Me<T: Codable>: Codable {
+    let me: T
+}
+
+struct OrdersResponse: Codable {
+    let orders: QueryResponse<ReducedOrder>
+}
+
+struct OrderResponse: Codable {
+    let order: ReducedOrder
+}
+
+struct ReducedOrder: Codable {
+    let id: String
+    let orderNumber: String?
+    let orderState: OrderState
+    let shipmentState: ShipmentState?
+    let lineItems: [LineItem]
+    let shippingAddress: Address?
+    let totalPrice: Money
+    let taxedPrice: TaxedPrice?
+
+    struct LineItem: Codable {
+        let quantity: Int
+        let nameAllLocales: [LocalizedString]
+        var name: [String: String] {
+            var name = [String: String]()
+            nameAllLocales.forEach {
+                name[$0.locale] = $0.value
+            }
+            return name
+        }
+
+        struct LocalizedString: Codable {
+            let locale: String
+            let value: String
+        }
+    }
+
+    struct TaxedPrice: Codable {
+        let totalGross: Money
     }
 }

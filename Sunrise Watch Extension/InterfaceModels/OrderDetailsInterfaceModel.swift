@@ -39,11 +39,11 @@ class OrderDetailsInterfaceModel {
     let moreLineItems: String
     
     private let dateFormatter = DateFormatter()
-    private let order: Order
+    private let order: ReducedOrder
     
     // MARK: - Lifecycle
     
-    init(order: Order) {
+    init(order: ReducedOrder) {
         self.order = order
         dateFormatter.dateFormat = "EEE, MMM dd"
         expectedDelivery = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 2, to: Date())!)

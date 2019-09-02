@@ -224,10 +224,19 @@ class MainMenuInterfaceModel {
     func showOrderDetails(orderId: String) {
         isLoading.value = true
         let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve order")
-        Order.byId(orderId) { result in
-            if let order = result.model, result.isSuccess {
+        let query = """
+                    {
+                      me {
+                        order(id: "\(orderId)") {
+                          \(Order.reducedOrderQuery)
+                        }
+                      }
+                    }
+                    """
+        GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse>>>) in
+            if let order = result.model?.data.me.order, result.isSuccess {
                 self.presentOrderDetailsObserver.send(value: OrderDetailsInterfaceModel(order: order))
-                
+
             } else if let errors = result.errors as? [CTError], result.isFailure {
                 debugPrint(errors)
                 

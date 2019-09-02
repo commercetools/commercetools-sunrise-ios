@@ -92,3 +92,42 @@ extension Order {
         }
     }
 }
+
+extension Order {
+    static let reducedOrderQuery = """
+                                    totalPrice {
+                                      type
+                                      currencyCode
+                                      centAmount
+                                      fractionDigits
+                                    }
+                                    id
+                                    orderState
+                                    shipmentState
+                                    orderNumber
+                                    lineItems {
+                                      nameAllLocales {
+                                        locale
+                                        value
+                                      }
+                                      quantity
+                                    }
+                                    shippingAddress {
+                                      streetName
+                                      additionalStreetInfo
+                                      city
+                                      region
+                                      state
+                                      postalCode
+                                      country
+                                    }
+                                    taxedPrice {
+                                      totalGross {
+                                        type
+                                        currencyCode
+                                        centAmount
+                                        fractionDigits
+                                      }
+                                    }
+                                    """
+}
