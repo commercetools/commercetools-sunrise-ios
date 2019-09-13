@@ -64,15 +64,6 @@ extension Channel {
         }
         return "-"
     }
-    var imageUrl: String? {
-        return fields?["imageUrl"]?.string
-    }
-    var latitude: String? {
-        return fields?["latitude"]?.string
-    }
-    var longitude: String? {
-        return fields?["longitude"]?.string
-    }
 }
 
 extension Channel: Hashable {

@@ -245,6 +245,7 @@
 		21E0809F21751126005FFFBC /* OrderItemRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E0809E21751126005FFFBC /* OrderItemRowController.swift */; };
 		21E201DF2176160E0057E651 /* OrderDetailsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E201DE2176160E0057E651 /* OrderDetailsInterfaceController.swift */; };
 		21E201E1217616220057E651 /* OrderDetailsInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E201E0217616220057E651 /* OrderDetailsInterfaceModel.swift */; };
+		21E56DE52337DABB00467599 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E56DE42337DABB00467599 /* Models.swift */; };
 		21E7096020463DFD0059FAE4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E7095F20463DFD0059FAE4 /* SignInViewController.swift */; };
 		21E70962204842010059FAE4 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E70961204842010059FAE4 /* CheckoutViewModel.swift */; };
 		21E7096420484EB30059FAE4 /* CheckoutLineItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */; };
@@ -580,6 +581,7 @@
 		21E0809E21751126005FFFBC /* OrderItemRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemRowController.swift; sourceTree = "<group>"; };
 		21E201DE2176160E0057E651 /* OrderDetailsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsInterfaceController.swift; sourceTree = "<group>"; };
 		21E201E0217616220057E651 /* OrderDetailsInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsInterfaceModel.swift; sourceTree = "<group>"; };
+		21E56DE42337DABB00467599 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		21E7095F20463DFD0059FAE4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		21E70961204842010059FAE4 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
 		21E7096320484EB30059FAE4 /* CheckoutLineItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutLineItemCell.swift; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 		2163EBC11DE8C26C00803640 /* Sunrise Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				21E56DE32337DA8A00467599 /* Models */,
 				21C4966A1E7BFA8E00D8A699 /* Sunrise Watch Extension.entitlements */,
 				2163EBC41DE8C26C00803640 /* ExtensionDelegate.swift */,
 				2163EBC61DE8C26C00803640 /* Assets.xcassets */,
@@ -1234,6 +1237,14 @@
 				212B14EE1F6FE9320017D594 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		21E56DE32337DA8A00467599 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21E56DE42337DABB00467599 /* Models.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		21FB4B1221A587FC00F6BD80 /* SunriseIntents */ = {
@@ -2036,6 +2047,7 @@
 				21068CD01DF0610700035760 /* Channel.swift in Sources */,
 				211D1D041DF04C0800DDE3C3 /* ReservationNotificationController.swift in Sources */,
 				217F535621B93C3E0022FE8C /* LineItemRowController.swift in Sources */,
+				21E56DE52337DABB00467599 /* Models.swift in Sources */,
 				21BF5362219A17FF00561542 /* ProductDiscountNotificationController.swift in Sources */,
 				21AFE8121DF24B6C00D0F6EE /* ProductDetailsInterfaceModel.swift in Sources */,
 			);

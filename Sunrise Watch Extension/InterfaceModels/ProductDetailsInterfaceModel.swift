@@ -22,7 +22,7 @@ protocol ProductDetailsInterfaceModel: class {
     var isWishListButtonEnabled: MutableProperty<Bool> { get }
 }
 
-class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
+class ReducedProductDetailsInterfaceModel: ProductDetailsInterfaceModel {
 
     // Inputs
     var moveToCartAction: Action<Void, Void, CTError>!
@@ -59,12 +59,12 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
     let isWishListButtonEnabled = MutableProperty(true)
 
     private weak var mainMenuInterfaceModel: MainMenuInterfaceModel?
-    private let product: ProductProjection
+    private let product: ReducedProduct
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
 
-    init(product: ProductProjection, mainMenuInterfaceModel: MainMenuInterfaceModel? = nil) {
+    init(product: ReducedProduct, mainMenuInterfaceModel: MainMenuInterfaceModel? = nil) {
         self.product = product
         self.mainMenuInterfaceModel = mainMenuInterfaceModel
         
@@ -72,12 +72,12 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
         self.toggleWishListObserver = toggleWishListObserver
 
         moveToCartAction = Action(enabledIf: Property(value: true)) { [unowned self] _ in
-            return ProductProjectionDetailsInterfaceModel.addToCart(productId: self.product.id, variantId: self.product.displayVariant()?.id ?? self.product.masterVariant.id)
+            return ReducedProductDetailsInterfaceModel.addToCart(productId: self.product.id, variantId: self.product.displayVariant()?.id ?? self.product.allVariants.first!.id)
         }
         
         guard let mainMenuInterfaceModel = mainMenuInterfaceModel else { return }
         
-        disposables += isInWishList <~ mainMenuInterfaceModel.wishListLineItems.map { $0.contains(where: { $0.productId == product.id && $0.variantId == product.displayVariant()?.id ?? product.masterVariant.id }) == true }
+        disposables += isInWishList <~ mainMenuInterfaceModel.wishListLineItems.map { $0.contains(where: { $0.productId == product.id && $0.variantId == product.displayVariant()?.id ?? product.allVariants.first!.id }) == true }
         
         disposables += isWishListButtonEnabled <~ mainMenuInterfaceModel.isUpdatingWishList.map { !$0 }
         
@@ -85,7 +85,7 @@ class ProductProjectionDetailsInterfaceModel: ProductDetailsInterfaceModel {
         .observeValues { [unowned self] in
             self.isWishListButtonEnabled.value = false
             DispatchQueue.global(qos: .userInitiated).async {
-                mainMenuInterfaceModel.toggleWishListObserver.send(value: (self.product.id, self.product.displayVariant()?.id ?? self.product.masterVariant.id))
+                mainMenuInterfaceModel.toggleWishListObserver.send(value: (self.product.id, self.product.displayVariant()?.id ?? self.product.allVariants.first!.id))
             }
         }
     }

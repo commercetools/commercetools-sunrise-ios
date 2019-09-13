@@ -95,7 +95,7 @@ class RecentOrdersInterfaceModel {
                           count
                           total
                           results {
-                            \(Order.reducedOrderQuery)
+                            \(ReducedOrder.reducedOrderQuery)
                           }
                         }
                       }
@@ -118,49 +118,5 @@ class RecentOrdersInterfaceModel {
             self.isLoading.value = false
             ProcessInfo.processInfo.endActivity(activity)
         }
-    }
-}
-
-struct Me<T: Codable>: Codable {
-    let me: T
-}
-
-struct OrdersResponse: Codable {
-    let orders: QueryResponse<ReducedOrder>
-}
-
-struct OrderResponse: Codable {
-    let order: ReducedOrder
-}
-
-struct ReducedOrder: Codable {
-    let id: String
-    let orderNumber: String?
-    let orderState: OrderState
-    let shipmentState: ShipmentState?
-    let lineItems: [LineItem]
-    let shippingAddress: Address?
-    let totalPrice: Money
-    let taxedPrice: TaxedPrice?
-
-    struct LineItem: Codable {
-        let quantity: Int
-        let nameAllLocales: [LocalizedString]
-        var name: [String: String] {
-            var name = [String: String]()
-            nameAllLocales.forEach {
-                name[$0.locale] = $0.value
-            }
-            return name
-        }
-
-        struct LocalizedString: Codable {
-            let locale: String
-            let value: String
-        }
-    }
-
-    struct TaxedPrice: Codable {
-        let totalGross: Money
     }
 }

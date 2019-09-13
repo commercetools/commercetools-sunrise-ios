@@ -32,7 +32,7 @@ class OrderNotificationController: WKUserNotificationInterfaceController {
                         {
                           me {
                             order(id: "\(orderId)") {
-                              \(Order.reducedOrderQuery)
+                              \(ReducedOrder.reducedOrderQuery)
                             }
                           }
                         }

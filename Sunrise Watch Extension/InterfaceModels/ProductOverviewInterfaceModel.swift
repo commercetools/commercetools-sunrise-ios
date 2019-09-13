@@ -15,12 +15,12 @@ class ProductOverviewInterfaceModel {
     // Outputs
     let isLoading: MutableProperty<Bool>
     let numberOfRows: MutableProperty<Int>
-    let presentProductSignal: Signal<ProductProjectionDetailsInterfaceModel, NoError>
+    let presentProductSignal: Signal<ReducedProductDetailsInterfaceModel, NoError>
 
     let type: MainMenuInterfaceModel.ProductOverviewType
     private weak var mainMenuInterfaceModel: MainMenuInterfaceModel?
-    private let presentProductObserver: Signal<ProductProjectionDetailsInterfaceModel, NoError>.Observer
-    private var products = [ProductProjection]()
+    private let presentProductObserver: Signal<ReducedProductDetailsInterfaceModel, NoError>.Observer
+    private var products = [ReducedProduct]()
     private let disposables = CompositeDisposable()
 
     // MARK: - Lifecycle
@@ -35,7 +35,7 @@ class ProductOverviewInterfaceModel {
         let (retrieveProductsSignal, retrieveProductsObserver) = Signal<Void, NoError>.pipe()
         self.retrieveProductsObserver = retrieveProductsObserver
 
-        (presentProductSignal, presentProductObserver) = Signal<ProductProjectionDetailsInterfaceModel, NoError>.pipe()
+        (presentProductSignal, presentProductObserver) = Signal<ReducedProductDetailsInterfaceModel, NoError>.pipe()
         
         disposables += retrieveProductsSignal.observeValues { [unowned self] in
             self.retrieveProducts()
@@ -48,8 +48,8 @@ class ProductOverviewInterfaceModel {
 
     // MARK: - Data Source
 
-    func productDetailsInterfaceModel(for row: Int) -> ProductProjectionDetailsInterfaceModel {
-        return ProductProjectionDetailsInterfaceModel(product: products[row], mainMenuInterfaceModel: (WKExtension.shared().rootInterfaceController as? MainMenuInterfaceController)?.interfaceModel)
+    func productDetailsInterfaceModel(for row: Int) -> ReducedProductDetailsInterfaceModel {
+        return ReducedProductDetailsInterfaceModel(product: products[row], mainMenuInterfaceModel: (WKExtension.shared().rootInterfaceController as? MainMenuInterfaceController)?.interfaceModel)
     }
 
     // MARK: - Products retrieval
@@ -57,14 +57,14 @@ class ProductOverviewInterfaceModel {
     private func retrieveProducts() {
         isLoading.value = true
         var text: String? = nil
-        var sort: [String]? = nil
-        var filterQuery: [String]? = nil
+        var sort: String? = nil
+        var whereClause: String? = nil
         
         switch type {
             case .newProducts:
-                sort = ["createdAt desc"]
+                sort = "createdAt desc"
             case .onSale:
-                filterQuery = ["variants.prices.discounted:exists"]
+                whereClause = "masterData(current(variants(prices(discounted is defined))))"
             case .search(let term):
                 text = term
             default:
@@ -73,19 +73,59 @@ class ProductOverviewInterfaceModel {
         
         let activity = ProcessInfo.processInfo.beginActivity(options: [.background, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve products")
         mainMenuInterfaceModel?.activeWishList { _ in
-            ProductProjection.search(sort: sort, limit: 5, text: text, filterQuery: filterQuery) { result in
-                if let products = result.model?.results, result.isSuccess {
-                    DispatchQueue.main.async {
-                        self.products = products
-                        self.numberOfRows.value = self.products.count
+            if let text = text {
+                ProductProjection.search(limit: 5, text: text) { result in
+                    if let products = result.model?.results, result.isSuccess {
+                        DispatchQueue.main.async {
+                            self.products = products.map { ReducedProduct(productProjection: $0) }
+                            self.numberOfRows.value = self.products.count
+                        }
+
+                    } else if let errors = result.errors as? [CTError], result.isFailure {
+                        debugPrint(errors)
+
                     }
-                    
-                } else if let errors = result.errors as? [CTError], result.isFailure {
-                    debugPrint(errors)
-                    
+                    self.isLoading.value = false
+                    ProcessInfo.processInfo.endActivity(activity)
                 }
-                self.isLoading.value = false
-                ProcessInfo.processInfo.endActivity(activity)
+
+            } else {
+                var params = ""
+                if let whereClause = whereClause {
+                    params.append("where: \"\(whereClause)\" ")
+                }
+                if let sort = sort {
+                    params.append("sort: \"\(sort)\" ")
+                }
+                let query = """
+                            {
+                              products(\(params) limit: 5) {
+                                total
+                                count
+                                offset
+                                results {
+                                  \(ReducedProduct.reducedProductQuery)
+                                }
+                              }
+                            }
+                            \(ReducedProduct.moneyFragment)
+                            \(ReducedProduct.variantFragment)
+                            """
+                GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<ProductsResponse>>) in
+                    if let products = result.model?.data.products.results, result.isSuccess {
+                        DispatchQueue.main.async {
+                            self.products = products
+                            self.numberOfRows.value = self.products.count
+                        }
+
+                    } else if let errors = result.errors as? [CTError], result.isFailure {
+                        debugPrint(errors)
+
+                    }
+                    self.isLoading.value = false
+                    ProcessInfo.processInfo.endActivity(activity)
+
+                }
             }
         }
     }

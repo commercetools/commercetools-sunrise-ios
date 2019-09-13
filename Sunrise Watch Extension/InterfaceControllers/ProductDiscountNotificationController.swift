@@ -26,9 +26,16 @@ class ProductDiscountNotificationController: WKUserNotificationInterfaceControll
     
     override func didReceive(_ notification: UNNotification, withCompletion completionHandler: @escaping (WKUserNotificationInterfaceType) -> Swift.Void) {
         if let productId = notification.request.content.userInfo["productId"] as? String {
-            ProductProjection.byId(productId) { result in
-                if let product = result.model, result.isSuccess {
-                    let interfaceModel = ProductProjectionDetailsInterfaceModel(product: product)
+            let query = """
+                        {
+                          product(id: "\(productId)") {
+                            \(ReducedProduct.reducedProductQuery)
+                          }
+                        }
+                        """
+            GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<ProductResponse>>>) in
+                if let product = result.model?.data.me.product, result.isSuccess {
+                    let interfaceModel = ReducedProductDetailsInterfaceModel(product: product)
                     DispatchQueue.main.async {
                         self.productNameLabel.setText(interfaceModel.productName)
                         let priceAttributes: [NSAttributedString.Key : Any] = [.foregroundColor: interfaceModel.productOldPrice.isEmpty ? .white : UIColor(red: 0.94, green: 0.39, blue: 0.25, alpha: 1.0)]

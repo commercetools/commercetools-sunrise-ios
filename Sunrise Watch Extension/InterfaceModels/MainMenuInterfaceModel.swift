@@ -207,10 +207,17 @@ class MainMenuInterfaceModel {
         isLoading.value = true
         let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve product")
         activeWishList { _ in
-            ProductProjection.byId(productId) { result in
-                if let product = result.model, result.isSuccess {
-                    self.presentProductDetailsObserver.send(value: ProductProjectionDetailsInterfaceModel(product: product))
-                    
+            let query = #"""
+                        {
+                          product(id: "\(productId)") {
+                            \(ReducedProduct.reducedProductQuery)
+                          }
+                        }
+                        """#
+            GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<ProductResponse>>>) in
+                if let product = result.model?.data.me.product, result.isSuccess {
+                    self.presentProductDetailsObserver.send(value: ReducedProductDetailsInterfaceModel(product: product))
+
                 } else if let errors = result.errors as? [CTError], result.isFailure {
                     debugPrint(errors)
                     
@@ -228,7 +235,7 @@ class MainMenuInterfaceModel {
                     {
                       me {
                         order(id: "\(orderId)") {
-                          \(Order.reducedOrderQuery)
+                          \(ReducedOrder.reducedOrderQuery)
                         }
                       }
                     }
