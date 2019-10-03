@@ -37,7 +37,7 @@ class OrderNotificationController: WKUserNotificationInterfaceController {
                           }
                         }
                         """
-            GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse>>>) in
+            GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse<ReducedOrder>>>>) in
                 if let order = result.model?.data.me.order, result.isSuccess {
                     let interfaceModel = OrderDetailsInterfaceModel(order: order)
                     DispatchQueue.main.async {

@@ -240,7 +240,7 @@ class MainMenuInterfaceModel {
                       }
                     }
                     """
-        GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse>>>) in
+        GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse<ReducedOrder>>>>) in
             if let order = result.model?.data.me.order, result.isSuccess {
                 self.presentOrderDetailsObserver.send(value: OrderDetailsInterfaceModel(order: order))
 

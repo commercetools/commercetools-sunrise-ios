@@ -69,8 +69,17 @@ extension ExtensionDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
 
         if let reservationId = userInfo["reservation-id"] as? String, response.actionIdentifier == Notification.Action.getDirections {
-            Order.byId(reservationId, expansion: ["lineItems[0].distributionChannel"]) { result in
-                guard let reservation = result.model else { return }
+            let query = """
+                        {
+                          me {
+                            order(id: "\(reservationId)") {
+                              \(ReducedReservation.reducedReservationQuery)
+                            }
+                          }
+                        }
+                        """
+            GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<OrderResponse<ReducedReservation>>>>) in
+                guard let reservation = result.model?.data.me.order else { return }
                 let reservationInterfaceModel = ReservationDetailsInterfaceModel(reservation: reservation)
                 guard let storeLocation = reservationInterfaceModel.storeLocation else { return }
                 let destination = MKMapItem(placemark: MKPlacemark(coordinate: storeLocation.coordinate))

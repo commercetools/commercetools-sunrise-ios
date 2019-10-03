@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import CoreLocation
 import Commercetools
 
 /// Reduced models used for responses for GraphQL queries used by the watch app
@@ -15,8 +16,8 @@ struct OrdersResponse: Codable {
     let orders: QueryResponse<ReducedOrder>
 }
 
-struct OrderResponse: Codable {
-    let order: ReducedOrder
+struct OrderResponse<T: Codable>: Codable {
+    let order: T
 }
 
 struct ProductsResponse: Codable {
@@ -34,10 +35,10 @@ struct ReducedReservation: Codable {
     struct LineItem: Codable {
         let distributionChannel: ReducedChannel?
         let variant: ReducedVariant
-        let nameAllLocales: [LocalizedString]
+        let nameAllLocales: [LocalizedString]?
         var name: Commercetools.LocalizedString {
             var name = [String: String]()
-            nameAllLocales.forEach {
+            nameAllLocales?.forEach {
                 name[$0.locale] = $0.value
             }
             return name
@@ -57,15 +58,16 @@ struct ReducedReservation: Codable {
         }
 
         struct ReducedChannel: Codable {
-            let nameAllLocales: [LocalizedString]
+            let nameAllLocales: [LocalizedString]?
             var name: Commercetools.LocalizedString {
                 var name = [String: String]()
-                nameAllLocales.forEach {
+                nameAllLocales?.forEach {
                     name[$0.locale] = $0.value
                 }
                 return name
             }
             let address: Address?
+            let geoLocation: Point?
             let custom: Custom?
         }
 
@@ -77,11 +79,94 @@ struct ReducedReservation: Codable {
             let name: String
             let value: JsonValue
         }
+
+        struct Point: Codable {
+            let coordinates: [Double]
+            let type: String
+        }
+    }
+}
+
+extension ReducedReservation.LineItem.ReducedChannel {
+
+    // MARK: - Physical store properties
+
+    var streetAndNumberInfo: String {
+        if let street = address?.streetName, let number = address?.streetNumber {
+            return "\(street) \(number)"
+        }
+        return "-"
+    }
+    var zipAndCityInfo: String {
+        if let zip = address?.postalCode, let city = address?.city {
+            return "\(zip), \(city)"
+        }
+        return "-"
+    }
+    var openingTimes: String {
+        if let openingTimes = custom?.customFieldsRaw?.first(where: { $0.name == "openingTimes" })?.value.dictionary {
+            return localizedString(from: openingTimes) ?? "-"
+        }
+        return "-"
+    }
+    var location: CLLocation? {
+        if let geoLocation = geoLocation, geoLocation.coordinates.count == 2, geoLocation.type == "Point" {
+            return CLLocation(latitude: geoLocation.coordinates[1], longitude: geoLocation.coordinates[0])
+        }
+        return nil
+    }
+    func distance(from userLocation: CLLocation) -> Double? {
+        if let channelLocation = location {
+            return userLocation.distance(from: channelLocation)
+        }
+        return nil
     }
 }
 
 extension ReducedReservation {
-
+    static let reducedReservationQuery = """
+                                        totalPrice {
+                                          type
+                                          centAmount
+                                          currencyCode
+                                        }
+                                        lineItems {
+                                          distributionChannel {
+                                            nameAllLocales {
+                                              locale
+                                              value
+                                            }
+                                            address {
+                                              streetName
+                                              streetNumber
+                                              postalCode
+                                              city
+                                              country
+                                            }
+                                            geoLocation {
+                                              ... on Point {
+                                                coordinates
+                                                type
+                                              }
+                                            }
+                                            custom {
+                                              customFieldsRaw {
+                                                name
+                                                value
+                                              }
+                                            }
+                                          }
+                                          variant {
+                                            images {
+                                              url
+                                            }
+                                          }
+                                          nameAllLocales {
+                                            locale
+                                            value
+                                          }
+                                        }
+                                        """
 }
 
 struct ReducedOrder: Codable {
@@ -266,13 +351,13 @@ extension ReducedProduct {
                                     }
                                     """
 
-    static let moneyFragment = #"""
+    static let moneyFragment = """
                                 fragment Money on BaseMoney {
                                   currencyCode
                                   centAmount
                                 }
-                                """#
-    static let variantFragment = #"""
+                                """
+    static let variantFragment = """
                                 fragment Variant on ProductVariant {
                                   id
                                   sku
@@ -296,7 +381,7 @@ extension ReducedProduct {
                                     }
                                   }
                                 }
-                                """#
+                                """
 }
 
 extension ReducedProduct {
