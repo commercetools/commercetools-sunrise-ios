@@ -28,6 +28,18 @@ struct ProductResponse: Codable {
     let product: ReducedProduct
 }
 
+struct ShoppingListsResponse: Codable {
+    let shoppingLists: QueryResponse<ReducedShoppingList>
+}
+
+struct CreateShoppingListResponse: Codable {
+    let createMyShoppingList: ReducedShoppingList
+}
+
+struct UpdateShoppingListResponse: Codable {
+    let updateMyShoppingList: ReducedShoppingList
+}
+
 struct ReducedReservation: Codable {
     let lineItems: [LineItem]
     let totalPrice: Money
@@ -252,6 +264,7 @@ struct ReducedProduct: Codable {
 
     struct MasterData: Codable {
         let current: ProductInfo
+        let published: Bool
     }
 
     struct ProductInfo: Codable {
@@ -330,8 +343,8 @@ struct ReducedProduct: Codable {
         id = productProjection.id
         let nameAllLocales = productProjection.name.keys.map({ ReducedProduct.ProductInfo.LocalizedString(locale: $0, value: productProjection.name[$0]!) })
         let allVariants = productProjection.allVariants.map({ ReducedVariant(variant: $0) })
-        let currect = ReducedProduct.ProductInfo(allVariants: allVariants, nameAllLocales: nameAllLocales)
-        masterData = ReducedProduct.MasterData(current: currect)
+        let current = ReducedProduct.ProductInfo(allVariants: allVariants, nameAllLocales: nameAllLocales)
+        masterData = ReducedProduct.MasterData(current: current, published: true)
     }
 }
 
@@ -339,6 +352,7 @@ extension ReducedProduct {
     static let reducedProductQuery = """
                                     id
                                     masterData {
+                                      published
                                       current {
                                         nameAllLocales {
                                           locale
@@ -450,5 +464,82 @@ extension ReducedProduct.ReducedVariant {
             price = independentPrice
         }
         return price
+    }
+}
+
+struct ReducedShoppingList: Codable {
+    let id: String
+    let version: UInt
+    let lineItems: [ReducedLineItem]
+
+    struct ReducedLineItem: Codable {
+        let id: String
+        let productId: String
+        let variantId: Int?
+        let variant: ReducedProduct.ReducedVariant?
+        let nameAllLocales: [LocalizedString]?
+        var name: Commercetools.LocalizedString {
+            var name = [String: String]()
+            nameAllLocales?.forEach {
+                name[$0.locale] = $0.value
+            }
+            return name
+        }
+
+        struct LocalizedString: Codable {
+            let locale: String
+            let value: String
+        }
+    }
+}
+
+extension ReducedShoppingList {
+    static func reducedShoppingListQuery(includeExpansion: Bool = false) -> String {
+        return """
+                id
+                version
+                lineItems {
+                  id
+                  productId
+                  variantId
+                  \(includeExpansion ? "variant { ...Variant }" : "")
+                  nameAllLocales {
+                    locale
+                    value
+                  }
+                }
+                """
+    }
+
+    static func createShoppingListMutation(name: String) -> String {
+        return """
+                mutation CreateMyShoppingList {
+                  createMyShoppingList(draft: {
+                    name: [{
+                      locale: "en"
+                      value: "\(name)"
+                    }]
+                  }) {
+                    \(reducedShoppingListQuery(includeExpansion: false))
+                  }
+                }
+                """
+    }
+
+    static func updateLineItemsMutation(id: String, version: UInt, add: (productId: String, variantId: Int?)?, remove lineItemId: String?) -> String {
+        return """
+                mutation UpdateMyShoppingList {
+                  updateMyShoppingList(
+                    id: "\(id)"
+                    version: \(version)
+                    actions: [
+                      \(add?.productId != nil ? "{ addLineItem: { productId: \"\(add!.productId)\" \(add!.variantId != nil ? "variantId: \(add!.variantId!)" : "") } }" : "")
+                      \(lineItemId != nil ? "{ removeLineItem: { lineItemId: \"\(lineItemId!)\" } }" : "")
+                    ]
+                  ) {
+                    \(reducedShoppingListQuery(includeExpansion: true))
+                  }
+                }
+                """
     }
 }
