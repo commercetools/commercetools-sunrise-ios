@@ -2,7 +2,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 def common_pods
-  pod 'Commercetools'
+  pod 'Commercetools', :git => 'https://github.com/commercetools/commercetools-ios-sdk.git', :branch => 'master'
   pod 'ReactiveSwift'
 end
 
