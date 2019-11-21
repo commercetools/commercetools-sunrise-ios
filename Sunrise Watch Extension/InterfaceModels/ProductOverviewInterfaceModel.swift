@@ -114,7 +114,7 @@ class ProductOverviewInterfaceModel {
                 GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<ProductsResponse>>) in
                     if let products = result.model?.data.products.results, result.isSuccess {
                         DispatchQueue.main.async {
-                            self.products = products
+                            self.products = products.filter { $0.masterData.published }
                             self.numberOfRows.value = self.products.count
                         }
 

@@ -32,6 +32,8 @@ class ProductDiscountNotificationController: WKUserNotificationInterfaceControll
                             \(ReducedProduct.reducedProductQuery)
                           }
                         }
+                        \(ReducedProduct.moneyFragment)
+                        \(ReducedProduct.variantFragment)
                         """
             GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<ProductResponse>>>) in
                 if let product = result.model?.data.me.product, result.isSuccess {

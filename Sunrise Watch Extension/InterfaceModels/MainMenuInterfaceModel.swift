@@ -207,13 +207,15 @@ class MainMenuInterfaceModel {
         isLoading.value = true
         let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve product")
         activeWishList { _ in
-            let query = #"""
+            let query = """
                         {
                           product(id: "\(productId)") {
                             \(ReducedProduct.reducedProductQuery)
                           }
                         }
-                        """#
+                        \(ReducedProduct.variantFragment)
+                        \(ReducedProduct.moneyFragment)
+                        """
             GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<ProductResponse>>>) in
                 if let product = result.model?.data.me.product, result.isSuccess {
                     self.presentProductDetailsObserver.send(value: ReducedProductDetailsInterfaceModel(product: product))
@@ -255,7 +257,7 @@ class MainMenuInterfaceModel {
 
     // MARK: - Active WishList
 
-    func activeWishList(includeExpansion: Bool = false, completion: @escaping (ShoppingList?) -> Void) {
+    func activeWishList(includeExpansion: Bool = false, completion: @escaping (ReducedShoppingList?) -> Void) {
         let activity = ProcessInfo.processInfo.beginActivity(options: [.idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve active wish list")
         wishListShoppingList(activity: activity, includeExpansion: includeExpansion, completion: {
             self.sortWishListLineItems(lineItems: $0?.lineItems)
@@ -263,10 +265,26 @@ class MainMenuInterfaceModel {
         })
     }
 
-    private func wishListShoppingList(observer: Signal<Void, CTError>.Observer? = nil, activity: NSObjectProtocol, includeExpansion: Bool = false, completion: @escaping (ShoppingList?) -> Void) {
-        ShoppingList.query(predicates: ["name(en=\"\(ShoppingList.kWishlistShoppingListName)\")"], sort: ["lastModifiedAt desc"], expansion: includeExpansion ? kShoppingListVariantExpansion : [], limit: 1) { result in
-            if result.isSuccess, result.model?.count == 0 {
-                self.createWishListShoppingList(observer: observer, activity: activity, includeExpansion: includeExpansion, completion: completion)
+    private func wishListShoppingList(observer: Signal<Void, CTError>.Observer? = nil, activity: NSObjectProtocol, includeExpansion: Bool = false, completion: @escaping (ReducedShoppingList?) -> Void) {
+        let query = """
+                    {
+                      me {
+                        shoppingLists(where: "name(en=\\\"\(ShoppingList.kWishlistShoppingListName)\\\")", sort: ["lastModifiedAt desc"]) {
+                          offset
+                          count
+                          total
+                          results {
+                            \(ReducedShoppingList.reducedShoppingListQuery(includeExpansion: includeExpansion))
+                          }
+                        }
+                      }
+                    }
+                    \(includeExpansion ? ReducedProduct.variantFragment : "")
+                    \(includeExpansion ? ReducedProduct.moneyFragment : "")
+                    """
+        GraphQL.query(query) { (result: Commercetools.Result<GraphQLResponse<Me<ShoppingListsResponse>>>) in
+            if result.isSuccess, result.model?.data.me.shoppingLists.count == 0 {
+                self.createWishListShoppingList(observer: observer, activity: activity, completion: completion)
                 return
             }
             if let error = result.errors?.first as? CTError, result.isFailure {
@@ -274,19 +292,23 @@ class MainMenuInterfaceModel {
                 observer?.sendCompleted()
                 ProcessInfo.processInfo.endActivity(activity)
             }
-            completion(result.model?.results.first)
+            completion(result.model?.data.me.shoppingLists.results.first)
         }
     }
 
-    private func createWishListShoppingList<T>(observer: Signal<T, CTError>.Observer?, activity: NSObjectProtocol, includeExpansion: Bool = false, completion: @escaping (ShoppingList?) -> Void) {
-        let draft = ShoppingListDraft(name: ["en": ShoppingList.kWishlistShoppingListName])
-        ShoppingList.create(draft, expansion: includeExpansion ? kShoppingListVariantExpansion : []) { result in
+    private func createWishListShoppingList<T>(observer: Signal<T, CTError>.Observer?, activity: NSObjectProtocol, completion: @escaping (ReducedShoppingList?) -> Void) {
+        let mutation = """
+                        \(ReducedShoppingList.createShoppingListMutation(name: ShoppingList.kWishlistShoppingListName))
+                        \(ReducedProduct.variantFragment)
+                        \(ReducedProduct.moneyFragment)
+                        """
+        GraphQL.query(mutation) { (result: Commercetools.Result<GraphQLResponse<CreateShoppingListResponse>>) in
             if let error = result.errors?.first as? CTError, result.isFailure {
                 observer?.send(error: error)
                 observer?.sendCompleted()
                 ProcessInfo.processInfo.endActivity(activity)
             }
-            completion(result.model)
+            completion(result.model?.data.createMyShoppingList)
         }
     }
     
@@ -294,7 +316,7 @@ class MainMenuInterfaceModel {
         isUpdatingWishList.value = true
         let activity = ProcessInfo.processInfo.beginActivity(options: [.userInitiated, .idleSystemSleepDisabled, .suddenTerminationDisabled, .automaticTerminationDisabled], reason: "Retrieve wish list")
         let semaphore = DispatchSemaphore(value: 0)
-        var wishList: ShoppingList?
+        var wishList: ReducedShoppingList?
         wishListShoppingList(activity: activity, completion: {
             wishList = $0
             semaphore.signal()
@@ -306,22 +328,28 @@ class MainMenuInterfaceModel {
             return
         }
         var updatedLineItems = activeWishList.lineItems.map { $0.wishListLineItem }
-        let updateAction: ShoppingListUpdateAction
+        var removeLineItemId: String?
+        var addLineItem: (productId: String, variantId: Int?)?
         if let index = activeWishList.lineItems.firstIndex(where: { $0.productId == productId && $0.variantId == variantId }) {
-            updateAction = .removeLineItem(lineItemId: activeWishList.lineItems[index].id, quantity: nil)
+            removeLineItemId = activeWishList.lineItems[index].id
             // Optimistically update local wish list, while waiting on API response
             updatedLineItems.remove(at: index)
             wishListLineItems.value = updatedLineItems
         } else {
-            updateAction = .addLineItem(productId: productId, variantId: variantId, quantity: nil, addedAt: nil, custom: nil)
+            addLineItem = (productId: productId, variantId: variantId)
             // Optimistically update local wish list, while waiting on API response
             updatedLineItems.append(WishListLineItem(id: "", name: [:], productId: productId, variantId: variantId, variant: nil))
             wishListLineItems.value = updatedLineItems
         }
-        ShoppingList.update(activeWishList.id, actions: UpdateActions(version: activeWishList.version, actions: [updateAction])) { result in
-            if let list = result.model, result.isSuccess {
+        let mutation = """
+                        \(ReducedShoppingList.updateLineItemsMutation(id: activeWishList.id, version: activeWishList.version, add: addLineItem, remove: removeLineItemId))
+                        \(ReducedProduct.variantFragment)
+                        \(ReducedProduct.moneyFragment)
+                        """
+        GraphQL.query(mutation) { (result: Commercetools.Result<GraphQLResponse<UpdateShoppingListResponse>>) in
+            if let list = result.model?.data.updateMyShoppingList, result.isSuccess {
                 self.sortWishListLineItems(lineItems: list.lineItems)
-                
+
             } else if let error = result.errors?.first as? CTError, result.isFailure {
                 debugPrint(error)
             }
@@ -331,7 +359,7 @@ class MainMenuInterfaceModel {
     }
     
     /// Shows discounted line items first, then everything else, recently added first
-    private func sortWishListLineItems(lineItems: [ShoppingList.LineItem]?) {
+    private func sortWishListLineItems(lineItems: [ReducedShoppingList.ReducedLineItem]?) {
         let sortedWishListLineItems = (lineItems?.reversed().sorted(by: { $0.variant?.price()?.discounted?.value.centAmount ?? 0 > $1.variant?.price()?.discounted?.value.centAmount ?? 0 })) ?? []
         wishListLineItems.value = sortedWishListLineItems.map { $0.wishListLineItem }
     }
@@ -343,10 +371,10 @@ struct WishListLineItem {
     let name: LocalizedString
     let productId: String
     let variantId: Int?
-    let variant: ProductVariant?
+    let variant: ReducedProduct.ReducedVariant?
 }
 
-extension ShoppingList.LineItem {
+extension ReducedShoppingList.ReducedLineItem {
     var wishListLineItem: WishListLineItem {
         return WishListLineItem(id: id, name: name, productId: productId, variantId: variantId, variant: variant)
     }
