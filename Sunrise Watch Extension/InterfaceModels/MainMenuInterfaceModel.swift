@@ -297,11 +297,7 @@ class MainMenuInterfaceModel {
     }
 
     private func createWishListShoppingList<T>(observer: Signal<T, CTError>.Observer?, activity: NSObjectProtocol, completion: @escaping (ReducedShoppingList?) -> Void) {
-        let mutation = """
-                        \(ReducedShoppingList.createShoppingListMutation(name: ShoppingList.kWishlistShoppingListName))
-                        \(ReducedProduct.variantFragment)
-                        \(ReducedProduct.moneyFragment)
-                        """
+        let mutation = ReducedShoppingList.createShoppingListMutation(name: ShoppingList.kWishlistShoppingListName)
         GraphQL.query(mutation) { (result: Commercetools.Result<GraphQLResponse<CreateShoppingListResponse>>) in
             if let error = result.errors?.first as? CTError, result.isFailure {
                 observer?.send(error: error)
