@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>204</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Category cache expiration</key>
 	<integer>3600</integer>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -100,5 +100,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>
